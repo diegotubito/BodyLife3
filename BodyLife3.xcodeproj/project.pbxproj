@@ -7,26 +7,50 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		11EBD3082376494E00AB4BFF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD3072376494E00AB4BFF /* AppDelegate.swift */; };
-		11EBD30A2376494E00AB4BFF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD3092376494E00AB4BFF /* ViewController.swift */; };
-		11EBD30D2376494E00AB4BFF /* BodyLife3.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD30B2376494E00AB4BFF /* BodyLife3.xcdatamodeld */; };
-		11EBD30F2376494F00AB4BFF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11EBD30E2376494F00AB4BFF /* Assets.xcassets */; };
-		11EBD3122376494F00AB4BFF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11EBD3102376494F00AB4BFF /* Main.storyboard */; };
+		11EBD3212376499F00AB4BFF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD3202376499F00AB4BFF /* AppDelegate.swift */; };
+		11EBD3232376499F00AB4BFF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD3222376499F00AB4BFF /* ViewController.swift */; };
+		11EBD3262376499F00AB4BFF /* OSX_Version.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD3242376499F00AB4BFF /* OSX_Version.xcdatamodeld */; };
+		11EBD3282376499F00AB4BFF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11EBD3272376499F00AB4BFF /* Assets.xcassets */; };
+		11EBD32B2376499F00AB4BFF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11EBD3292376499F00AB4BFF /* Main.storyboard */; };
+		11EBD338237649BC00AB4BFF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD337237649BC00AB4BFF /* AppDelegate.swift */; };
+		11EBD33A237649BC00AB4BFF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD339237649BC00AB4BFF /* SceneDelegate.swift */; };
+		11EBD33C237649BC00AB4BFF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD33B237649BC00AB4BFF /* ViewController.swift */; };
+		11EBD33F237649BC00AB4BFF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11EBD33D237649BC00AB4BFF /* Main.storyboard */; };
+		11EBD342237649BC00AB4BFF /* iOS_Version.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD340237649BC00AB4BFF /* iOS_Version.xcdatamodeld */; };
+		11EBD344237649BD00AB4BFF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11EBD343237649BD00AB4BFF /* Assets.xcassets */; };
+		11EBD347237649BD00AB4BFF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11EBD345237649BD00AB4BFF /* LaunchScreen.storyboard */; };
+		11EBD34C23764A9600AB4BFF /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 11EBD32C2376499F00AB4BFF /* Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		11EBD3042376494E00AB4BFF /* BodyLife3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BodyLife3.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		11EBD3072376494E00AB4BFF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		11EBD3092376494E00AB4BFF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		11EBD30C2376494E00AB4BFF /* BodyLife3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BodyLife3.xcdatamodel; sourceTree = "<group>"; };
-		11EBD30E2376494F00AB4BFF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		11EBD3112376494F00AB4BFF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		11EBD3132376494F00AB4BFF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		11EBD3142376494F00AB4BFF /* BodyLife3.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BodyLife3.entitlements; sourceTree = "<group>"; };
+		11EBD31E2376499F00AB4BFF /* OSX-Version.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OSX-Version.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		11EBD3202376499F00AB4BFF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		11EBD3222376499F00AB4BFF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		11EBD3252376499F00AB4BFF /* OSX_Version.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = OSX_Version.xcdatamodel; sourceTree = "<group>"; };
+		11EBD3272376499F00AB4BFF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		11EBD32A2376499F00AB4BFF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		11EBD32C2376499F00AB4BFF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		11EBD32D2376499F00AB4BFF /* OSX_Version.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OSX_Version.entitlements; sourceTree = "<group>"; };
+		11EBD335237649BC00AB4BFF /* iOS-Version.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS-Version.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		11EBD337237649BC00AB4BFF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		11EBD339237649BC00AB4BFF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		11EBD33B237649BC00AB4BFF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		11EBD33E237649BC00AB4BFF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		11EBD341237649BC00AB4BFF /* iOS_Version.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iOS_Version.xcdatamodel; sourceTree = "<group>"; };
+		11EBD343237649BD00AB4BFF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		11EBD346237649BD00AB4BFF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		11EBD348237649BD00AB4BFF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		11EBD3012376494E00AB4BFF /* Frameworks */ = {
+		11EBD31B2376499F00AB4BFF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		11EBD332237649BC00AB4BFF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -39,7 +63,8 @@
 		11EBD2FB2376494E00AB4BFF = {
 			isa = PBXGroup;
 			children = (
-				11EBD3062376494E00AB4BFF /* BodyLife3 */,
+				11EBD31F2376499F00AB4BFF /* OSX-Version */,
+				11EBD336237649BC00AB4BFF /* iOS-Version */,
 				11EBD3052376494E00AB4BFF /* Products */,
 			);
 			sourceTree = "<group>";
@@ -47,43 +72,76 @@
 		11EBD3052376494E00AB4BFF /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				11EBD3042376494E00AB4BFF /* BodyLife3.app */,
+				11EBD31E2376499F00AB4BFF /* OSX-Version.app */,
+				11EBD335237649BC00AB4BFF /* iOS-Version.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		11EBD3062376494E00AB4BFF /* BodyLife3 */ = {
+		11EBD31F2376499F00AB4BFF /* OSX-Version */ = {
 			isa = PBXGroup;
 			children = (
-				11EBD3072376494E00AB4BFF /* AppDelegate.swift */,
-				11EBD3092376494E00AB4BFF /* ViewController.swift */,
-				11EBD30E2376494F00AB4BFF /* Assets.xcassets */,
-				11EBD3102376494F00AB4BFF /* Main.storyboard */,
-				11EBD3132376494F00AB4BFF /* Info.plist */,
-				11EBD3142376494F00AB4BFF /* BodyLife3.entitlements */,
-				11EBD30B2376494E00AB4BFF /* BodyLife3.xcdatamodeld */,
+				11EBD3202376499F00AB4BFF /* AppDelegate.swift */,
+				11EBD3222376499F00AB4BFF /* ViewController.swift */,
+				11EBD3272376499F00AB4BFF /* Assets.xcassets */,
+				11EBD3292376499F00AB4BFF /* Main.storyboard */,
+				11EBD32C2376499F00AB4BFF /* Info.plist */,
+				11EBD32D2376499F00AB4BFF /* OSX_Version.entitlements */,
+				11EBD3242376499F00AB4BFF /* OSX_Version.xcdatamodeld */,
 			);
-			path = BodyLife3;
+			path = "OSX-Version";
+			sourceTree = "<group>";
+		};
+		11EBD336237649BC00AB4BFF /* iOS-Version */ = {
+			isa = PBXGroup;
+			children = (
+				11EBD337237649BC00AB4BFF /* AppDelegate.swift */,
+				11EBD339237649BC00AB4BFF /* SceneDelegate.swift */,
+				11EBD33B237649BC00AB4BFF /* ViewController.swift */,
+				11EBD33D237649BC00AB4BFF /* Main.storyboard */,
+				11EBD343237649BD00AB4BFF /* Assets.xcassets */,
+				11EBD345237649BD00AB4BFF /* LaunchScreen.storyboard */,
+				11EBD348237649BD00AB4BFF /* Info.plist */,
+				11EBD340237649BC00AB4BFF /* iOS_Version.xcdatamodeld */,
+			);
+			path = "iOS-Version";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		11EBD3032376494E00AB4BFF /* BodyLife3 */ = {
+		11EBD31D2376499F00AB4BFF /* OSX-Version */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 11EBD3172376494F00AB4BFF /* Build configuration list for PBXNativeTarget "BodyLife3" */;
+			buildConfigurationList = 11EBD32E2376499F00AB4BFF /* Build configuration list for PBXNativeTarget "OSX-Version" */;
 			buildPhases = (
-				11EBD3002376494E00AB4BFF /* Sources */,
-				11EBD3012376494E00AB4BFF /* Frameworks */,
-				11EBD3022376494E00AB4BFF /* Resources */,
+				11EBD31A2376499F00AB4BFF /* Sources */,
+				11EBD31B2376499F00AB4BFF /* Frameworks */,
+				11EBD31C2376499F00AB4BFF /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = BodyLife3;
-			productName = BodyLife3;
-			productReference = 11EBD3042376494E00AB4BFF /* BodyLife3.app */;
+			name = "OSX-Version";
+			productName = "OSX-Version";
+			productReference = 11EBD31E2376499F00AB4BFF /* OSX-Version.app */;
+			productType = "com.apple.product-type.application";
+		};
+		11EBD334237649BC00AB4BFF /* iOS-Version */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 11EBD349237649BD00AB4BFF /* Build configuration list for PBXNativeTarget "iOS-Version" */;
+			buildPhases = (
+				11EBD331237649BC00AB4BFF /* Sources */,
+				11EBD332237649BC00AB4BFF /* Frameworks */,
+				11EBD333237649BC00AB4BFF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "iOS-Version";
+			productName = "iOS-Version";
+			productReference = 11EBD335237649BC00AB4BFF /* iOS-Version.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -96,7 +154,10 @@
 				LastUpgradeCheck = 1120;
 				ORGANIZATIONNAME = "David Diego Gomez";
 				TargetAttributes = {
-					11EBD3032376494E00AB4BFF = {
+					11EBD31D2376499F00AB4BFF = {
+						CreatedOnToolsVersion = 11.2;
+					};
+					11EBD334237649BC00AB4BFF = {
 						CreatedOnToolsVersion = 11.2;
 					};
 				};
@@ -114,43 +175,82 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				11EBD3032376494E00AB4BFF /* BodyLife3 */,
+				11EBD31D2376499F00AB4BFF /* OSX-Version */,
+				11EBD334237649BC00AB4BFF /* iOS-Version */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		11EBD3022376494E00AB4BFF /* Resources */ = {
+		11EBD31C2376499F00AB4BFF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				11EBD30F2376494F00AB4BFF /* Assets.xcassets in Resources */,
-				11EBD3122376494F00AB4BFF /* Main.storyboard in Resources */,
+				11EBD3282376499F00AB4BFF /* Assets.xcassets in Resources */,
+				11EBD32B2376499F00AB4BFF /* Main.storyboard in Resources */,
+				11EBD34C23764A9600AB4BFF /* Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		11EBD333237649BC00AB4BFF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				11EBD347237649BD00AB4BFF /* LaunchScreen.storyboard in Resources */,
+				11EBD344237649BD00AB4BFF /* Assets.xcassets in Resources */,
+				11EBD33F237649BC00AB4BFF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		11EBD3002376494E00AB4BFF /* Sources */ = {
+		11EBD31A2376499F00AB4BFF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				11EBD30D2376494E00AB4BFF /* BodyLife3.xcdatamodeld in Sources */,
-				11EBD30A2376494E00AB4BFF /* ViewController.swift in Sources */,
-				11EBD3082376494E00AB4BFF /* AppDelegate.swift in Sources */,
+				11EBD3232376499F00AB4BFF /* ViewController.swift in Sources */,
+				11EBD3212376499F00AB4BFF /* AppDelegate.swift in Sources */,
+				11EBD3262376499F00AB4BFF /* OSX_Version.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		11EBD331237649BC00AB4BFF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				11EBD342237649BC00AB4BFF /* iOS_Version.xcdatamodeld in Sources */,
+				11EBD33C237649BC00AB4BFF /* ViewController.swift in Sources */,
+				11EBD338237649BC00AB4BFF /* AppDelegate.swift in Sources */,
+				11EBD33A237649BC00AB4BFF /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		11EBD3102376494F00AB4BFF /* Main.storyboard */ = {
+		11EBD3292376499F00AB4BFF /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				11EBD3112376494F00AB4BFF /* Base */,
+				11EBD32A2376499F00AB4BFF /* Base */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		11EBD33D237649BC00AB4BFF /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				11EBD33E237649BC00AB4BFF /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		11EBD345237649BD00AB4BFF /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				11EBD346237649BD00AB4BFF /* Base */,
+			);
+			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -269,43 +369,88 @@
 			};
 			name = Release;
 		};
-		11EBD3182376494F00AB4BFF /* Debug */ = {
+		11EBD32F2376499F00AB4BFF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = BodyLife3/BodyLife3.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "OSX-Version/OSX_Version.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = S2BEC8V882;
 				ENABLE_HARDENED_RUNTIME = YES;
-				INFOPLIST_FILE = BodyLife3/Info.plist;
+				ENVIRONMENT = DEBUG;
+				INFOPLIST_FILE = "OSX-Version/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = DDG.BodyLife3;
+				PRODUCT_BUNDLE_IDENTIFIER = "DDG.OSX-Version";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
-		11EBD3192376494F00AB4BFF /* Release */ = {
+		11EBD3302376499F00AB4BFF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = BodyLife3/BodyLife3.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "OSX-Version/OSX_Version.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = S2BEC8V882;
 				ENABLE_HARDENED_RUNTIME = YES;
-				INFOPLIST_FILE = BodyLife3/Info.plist;
+				ENVIRONMENT = RELEASE;
+				INFOPLIST_FILE = "OSX-Version/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = DDG.BodyLife3;
+				PRODUCT_BUNDLE_IDENTIFIER = "DDG.OSX-Version";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		11EBD34A237649BD00AB4BFF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = S2BEC8V882;
+				ENVIRONMENT = DEBUG;
+				INFOPLIST_FILE = "iOS-Version/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "DDG.iOS-Version";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		11EBD34B237649BD00AB4BFF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = S2BEC8V882;
+				ENVIRONMENT = RELEASE;
+				INFOPLIST_FILE = "iOS-Version/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "DDG.iOS-Version";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -321,11 +466,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		11EBD3172376494F00AB4BFF /* Build configuration list for PBXNativeTarget "BodyLife3" */ = {
+		11EBD32E2376499F00AB4BFF /* Build configuration list for PBXNativeTarget "OSX-Version" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				11EBD3182376494F00AB4BFF /* Debug */,
-				11EBD3192376494F00AB4BFF /* Release */,
+				11EBD32F2376499F00AB4BFF /* Debug */,
+				11EBD3302376499F00AB4BFF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		11EBD349237649BD00AB4BFF /* Build configuration list for PBXNativeTarget "iOS-Version" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				11EBD34A237649BD00AB4BFF /* Debug */,
+				11EBD34B237649BD00AB4BFF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -333,13 +487,23 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		11EBD30B2376494E00AB4BFF /* BodyLife3.xcdatamodeld */ = {
+		11EBD3242376499F00AB4BFF /* OSX_Version.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				11EBD30C2376494E00AB4BFF /* BodyLife3.xcdatamodel */,
+				11EBD3252376499F00AB4BFF /* OSX_Version.xcdatamodel */,
 			);
-			currentVersion = 11EBD30C2376494E00AB4BFF /* BodyLife3.xcdatamodel */;
-			path = BodyLife3.xcdatamodeld;
+			currentVersion = 11EBD3252376499F00AB4BFF /* OSX_Version.xcdatamodel */;
+			path = OSX_Version.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		11EBD340237649BC00AB4BFF /* iOS_Version.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				11EBD341237649BC00AB4BFF /* iOS_Version.xcdatamodel */,
+			);
+			currentVersion = 11EBD341237649BC00AB4BFF /* iOS_Version.xcdatamodel */;
+			path = iOS_Version.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

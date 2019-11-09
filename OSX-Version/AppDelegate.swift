@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  BodyLife3
+//  OSX-Version
 //
 //  Created by David Diego Gomez on 08/11/2019.
 //  Copyright © 2019 David Diego Gomez. All rights reserved.
@@ -15,6 +15,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
+        let bundle = Bundle.main
+        let configPath = bundle.path(forResource: "Info", ofType: "plist")!
+        let config = NSDictionary(contentsOfFile: configPath)!
+        
+        let dict = NSMutableDictionary()
+        if let commonConfig = config["Common"] as? [AnyHashable: Any] {
+            
+            dict.addEntries(from: commonConfig)
+            
+        }
+        if let environment = bundle.infoDictionary!["ENVIRONMENT"] as? String {
+            print(environment)
+            if let environmentConfig = config[environment] as? [AnyHashable: Any] {
+                dict.addEntries(from: environmentConfig)
+            }
+        }
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -30,7 +46,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
          application to it. This property is optional since there are legitimate
          error conditions that could cause the creation of the store to fail.
         */
-        let container = NSPersistentContainer(name: "BodyLife3")
+        let container = NSPersistentContainer(name: "OSX_Version")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error {
                 // Replace this implementation with code to handle the error appropriately.
