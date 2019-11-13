@@ -1,0 +1,141 @@
+var express  = require('express');
+var router = express.Router()
+var firebase = require('firebase');
+var jwt = require('jsonwebtoken')
+var bodyParser = require('body-parser')
+
+router.use(bodyParser.urlencoded({extended: false}))
+router.use(bodyParser.json({limit:'10mb'}))
+
+
+var VerifyToken = require('./VerifyToken');
+
+//START FIREBASE INIT
+var productionAppConfig = {
+  apiKey: "AIzaSyCPtNcb96j1QdEVtWe9gxf4-k3w0x0BjZg",
+};
+var developmentAppConfig = {
+  apiKey: "AIzaSyD3hT5BLSqYRcybh_Hn5_ZzyKXFZUpuKxU",
+};
+// Initialize another app with a different config
+var production = firebase.initializeApp(productionAppConfig, "production");
+// Initialize another app with a different config
+var development = firebase.initializeApp(developmentAppConfig, "development");
+//END FIREBASE INIT
+
+
+router.post('/:target/login', function (req, res, next) {
+  //primero selecciono la base de dato con la que voy a trabajar
+  if (req.params.target == "production") {
+    firebase = production;
+  }  else if (req.params.target == "development") {
+    firebase = development;
+  }
+//fin de seleccion de base de dato
+   var username = req.body.email
+   var password = req.body.password
+
+  //auth
+    firebase.auth().signInWithEmailAndPassword(req.body.email, req.body.password)
+        //get back promise, log user object's email address
+        .then(function (user) {
+            console.log("Successfully login")
+          //  res.send(user);
+
+          var tokenData = {
+            username: username
+            // ANY DATA
+          }
+
+          var token = jwt.sign(tokenData, 'Secret Password', {
+             expiresIn: 60 * 60 * 24 // expires in 24 hours
+          })
+          console.log(token);
+
+          var resultData = {
+            token : token,
+            user : user
+            // ANY DATA
+          }
+          res.send(resultData)
+
+
+        })
+        //log error
+        .catch(function (error) {
+            console.log(error);
+            res.send(error);
+        })
+
+
+});
+
+router.post('/:target/refreshToken', function (req, res, next) {
+  //primero selecciono la base de dato con la que voy a trabajar
+  if (req.params.target == "production") {
+    firebase = production;
+  }  else if (req.params.target == "development") {
+    firebase = development;
+  }
+//fin de seleccion de base de dato
+   var username = req.body.email
+   var password = req.body.password
+console.log(username);
+  //auth
+
+  var tokenData = {
+    username: username
+    // ANY DATA
+  }
+
+  var token = jwt.sign(tokenData, 'Secret Password', {
+     expiresIn: 120 // expires in 24 hours
+  })
+  console.log(token);
+
+  var resultData = {
+    token : token
+    // ANY DATA
+  }
+  res.send(resultData)
+
+
+});
+
+router.get('/:target/currentUser',function(req,res, next){
+  //primero selecciono la base de dato con la que voy a trabajar
+  if (req.params.target == "production") {
+    firebase = production;
+  }  else if (req.params.target == "development") {
+    firebase = development;
+  }
+//fin de seleccion de base de dato
+
+    var user = firebase.auth().currentUser
+    res.send(user);
+})
+
+router.get('/:target/getToken',function(req,res, next){
+  //primero selecciono la base de dato con la que voy a trabajar
+  if (req.params.target == "production") {
+    firebase = production;
+  }  else if (req.params.target == "development") {
+    firebase = development;
+  }
+  //fin de seleccion de base de dato
+
+  firebase.auth().currentUser.getIdToken(/* forceRefresh */ true).then(function(idToken) {
+    // Send token to your backend via HTTPS
+    res.send(idToken);
+    // ...
+  }).catch(function(error) {
+    // Handle error
+    res.send(error);
+  });
+})
+
+router.get('/:target/me', VerifyToken, function(req, res, next) {
+  res.send(req.decoded);
+});
+
+module.exports = router;

@@ -15,22 +15,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
-        let bundle = Bundle.main
-        let configPath = bundle.path(forResource: "Info", ofType: "plist")!
-        let config = NSDictionary(contentsOfFile: configPath)!
+        Reachability.sharedInstance.suscribeConnectionChanged()
         
-        let dict = NSMutableDictionary()
-        if let commonConfig = config["Common"] as? [AnyHashable: Any] {
-            
-            dict.addEntries(from: commonConfig)
-            
-        }
-        if let environment = bundle.infoDictionary!["ENVIRONMENT"] as? String {
-            print(environment)
-            if let environmentConfig = config[environment] as? [AnyHashable: Any] {
-                dict.addEntries(from: environmentConfig)
-            }
-        }
+    }
+    
+    func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
+        return true
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

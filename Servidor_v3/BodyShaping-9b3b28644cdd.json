@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "bodyshaping-fc85e",
+  "private_key_id": "9b3b28644cdd862b08ee115f3544100da4f287c8",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCx2CKy6liOMkQP\nKZm1husYwY1yaW1IsHPNWTtDKNEz2jLahBiyVzPLCzL5sq+mcgdUdYgW3ODykbdu\ndV9pwkPFocBnfR0P1hSs2i9k6EUPMV5m16Ib1a/c8Izq2tU1abuIVXqRduievuET\n782Q266T7zoQ8N72JXdHubA9fcec85wGCiQdROCd+PNVWSDBzJ4/lRtVPkk5kuln\ny7Z0jWq+haHxzfe02r3esss/k3oDpBvEIG8At48+XropzgH+prrhZ5ZCRVEF5vDe\n3VWRd+kVLvRM2q8VQcmQqtQidRVN07diFKQ2YjvEpn5hPXb1dA4AvmFI66cSQIJV\n31+5SAa/AgMBAAECggEAKEyMLFOrBmnAf1kTYg11B3KQfT0DjQWi8ATIx4KfySqn\n/FkTiZH2BAwBHJDPeZ18KLjLQjcB6CV51ddV7A6fsdBh23F/3N9LZxG3zJtPTs6G\nkDJLoxgMVjnSDMPSrVxMqOuJrx2tP4+MTCq6P5lwGUiLtVwHgepieYfLtltimJ9A\nXq8WjaCwnzQs/VIzQ6rrEiDbYRGolGEvyPSqFOY58xn2GIBkfutX90paBcM/sq3e\n8bZDbzAvEP/WpUOjmsPbG5ULroj7vyGtLKH8QAiyvvQ2UK4HHi9idEINShTh7PJ/\nZm5iLeIbaRaUIVfA+GsZa0hTGHSm2H5e/l2TBgQLrQKBgQDbM/89LzFhrufsearQ\n4G2IipTiHpRtpKgW+DKhyrX00y0660dfneu2Bsvk8QSD/wgWRzh7AGrWhLoPnxlO\n/Dtja30BcR7IMl0tNruNQYuIRjqfw6IDnq/ft0yf/uBNhXjRZuGRwb4bLai0gxvv\nsoz65p+GWUDK/TsxyTqMv3+brQKBgQDPsso6U3XG1l4E5JtvNqxB4TxtwfeMiuoT\n8sQzvkovbyTFEhWYjuqRXp+w0pDmqOZKkdavr5iBk3zMuVS+WGw5FmUxrVfmjv2c\nNbV1OO/NxSwb+nsaC1i7Jck6WeWK5AHE+rqrBSngJiYCwYr/IElc0wz7JDbznDFK\nS959HjB5mwKBgDG52vXzRb2GIwCnHRPjRZXK8jlVfJBe4O7NARdo19whJ8qM4xUS\nywzw/8IA1uhmq1v6bhqhHptpYpf2nJQpbgOAt8vi8HuzySVfnC5QJyoT3Gqvw4oU\nrosOluhYtmN/msfOEe+xxsF9mx7P+z9l/stQE/IzPxqNVadWodyZ+IXFAoGACdpc\nd5nf+3fN7AOAUC1SzKlHuZk7CiLI6ftZTW8Yi9mE8Ahkl+EnxY+smbHTh+25Rw5W\nFe2JmZQKlpewKnt9XtPuJwYnJlvgMhnmKtJxpdxVtFoUnu6s3evz+N2s4wLgBp0y\nX8yV6PlGUlkmI+Y/NLUaZ4uXQ8VEHVcuDddxy0MCgYEAqSi/xD93ocAj++DZ50k/\nF/ZrmR06gNiLtnNdThjOEo718o2z/Ad4GnG8yeUt1sIhz2j5Ozo9oLQGfKySMgpu\n3uVlrH/MEeNYuE+s9GEhtTCvFvtOLAeBoREhf/O3rxzcyzvroffrmdkWjAnFyD8Y\nV9iZ9OgPGe9OKqAkqXl8xQI=\n-----END PRIVATE KEY-----\n",
+  "client_email": "darkside-bodylifecontrol@bodyshaping-fc85e.iam.gserviceaccount.com",
+  "client_id": "113019615083906421433",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/darkside-bodylifecontrol%40bodyshaping-fc85e.iam.gserviceaccount.com"
+}

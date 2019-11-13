@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="8N1-8O-FeI">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15505"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Login View Controller-->
+        <scene sceneID="R8X-qK-Mtb">
+            <objects>
+                <viewController storyboardIdentifier="LoginViewController" id="8N1-8O-FeI" customClass="LoginViewController" customModule="OSX_Version" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="BtW-Jh-UrO">
+                        <rect key="frame" x="0.0" y="0.0" width="733" height="319"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="285-Ix-IDP">
+                                <rect key="frame" x="301" y="43" width="132" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="16Z-bb-XDB"/>
+                                </constraints>
+                                <buttonCell key="cell" type="push" title="Iniciar Sesión" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Nq7-3C-YZj">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="onLoginPressed:" target="8N1-8O-FeI" id="olH-tj-aQr"/>
+                                </connections>
+                            </button>
+                            <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="32" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i3a-gn-SGO">
+                                <rect key="frame" x="217" y="99" width="300" height="122"/>
+                                <subviews>
+                                    <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sq3-C6-W3X">
+                                        <rect key="frame" x="0.0" y="77" width="300" height="45"/>
+                                        <subviews>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UWI-ka-3yL">
+                                                <rect key="frame" x="-2" y="29" width="51" height="16"/>
+                                                <textFieldCell key="cell" lineBreakMode="clipping" title="Usuario" id="WLQ-Iq-b9c">
+                                                    <font key="font" metaFont="system"/>
+                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="u8E-bu-NCb">
+                                                <rect key="frame" x="0.0" y="0.0" width="300" height="21"/>
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="C82-Eb-vLf">
+                                                    <font key="font" metaFont="system"/>
+                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                                <connections>
+                                                    <outlet property="delegate" destination="8N1-8O-FeI" id="uQ0-gp-hr6"/>
+                                                </connections>
+                                            </textField>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="u8E-bu-NCb" firstAttribute="leading" secondItem="Sq3-C6-W3X" secondAttribute="leading" id="8XA-bf-d9J"/>
+                                            <constraint firstAttribute="trailing" secondItem="u8E-bu-NCb" secondAttribute="trailing" id="ifw-E8-SGC"/>
+                                        </constraints>
+                                        <visibilityPriorities>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                        </visibilityPriorities>
+                                        <customSpacing>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                        </customSpacing>
+                                    </stackView>
+                                    <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wgx-gf-lbs">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="45"/>
+                                        <subviews>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2fg-q7-hHP">
+                                                <rect key="frame" x="-2" y="29" width="74" height="16"/>
+                                                <textFieldCell key="cell" lineBreakMode="clipping" title="Contraseña" id="pIT-CG-ruC">
+                                                    <font key="font" metaFont="system"/>
+                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                            <secureTextField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tsq-lI-448">
+                                                <rect key="frame" x="0.0" y="0.0" width="300" height="21"/>
+                                                <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" usesSingleLineMode="YES" id="LWj-oU-0uU">
+                                                    <font key="font" metaFont="system"/>
+                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    <allowedInputSourceLocales>
+                                                        <string>NSAllRomanInputSourcesLocaleIdentifier</string>
+                                                    </allowedInputSourceLocales>
+                                                </secureTextFieldCell>
+                                                <connections>
+                                                    <outlet property="delegate" destination="8N1-8O-FeI" id="f4a-ib-cEL"/>
+                                                </connections>
+                                            </secureTextField>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="tsq-lI-448" secondAttribute="trailing" id="Ud6-FN-nrb"/>
+                                            <constraint firstItem="tsq-lI-448" firstAttribute="leading" secondItem="Wgx-gf-lbs" secondAttribute="leading" id="q2s-Kf-8Xx"/>
+                                        </constraints>
+                                        <visibilityPriorities>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                        </visibilityPriorities>
+                                        <customSpacing>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                        </customSpacing>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="6fi-mS-8Xt"/>
+                                    <constraint firstAttribute="trailing" secondItem="Wgx-gf-lbs" secondAttribute="trailing" id="L54-Yj-Lk7"/>
+                                    <constraint firstItem="Sq3-C6-W3X" firstAttribute="leading" secondItem="i3a-gn-SGO" secondAttribute="leading" id="gK0-ev-NGQ"/>
+                                    <constraint firstItem="Wgx-gf-lbs" firstAttribute="leading" secondItem="i3a-gn-SGO" secondAttribute="leading" id="mX2-6e-q81"/>
+                                    <constraint firstAttribute="trailing" secondItem="Sq3-C6-W3X" secondAttribute="trailing" id="udK-EO-i2A"/>
+                                </constraints>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WIB-uY-768">
+                                <rect key="frame" x="231" y="281" width="271" height="22"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Ingresá tu usuario y contraseña" id="hSM-G2-EvN">
+                                    <font key="font" metaFont="system" size="19"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="766-6f-cuI">
+                                <rect key="frame" x="348" y="257" width="37" height="16"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="clt-Hm-AME">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="285-Ix-IDP" secondAttribute="bottom" constant="50" id="3F1-xq-QBA"/>
+                            <constraint firstItem="766-6f-cuI" firstAttribute="centerX" secondItem="BtW-Jh-UrO" secondAttribute="centerX" id="7kW-af-QIW"/>
+                            <constraint firstItem="285-Ix-IDP" firstAttribute="centerX" secondItem="BtW-Jh-UrO" secondAttribute="centerX" id="aba-bx-2he"/>
+                            <constraint firstItem="i3a-gn-SGO" firstAttribute="centerY" secondItem="BtW-Jh-UrO" secondAttribute="centerY" id="bom-SY-LNl"/>
+                            <constraint firstItem="WIB-uY-768" firstAttribute="top" secondItem="BtW-Jh-UrO" secondAttribute="top" constant="16" id="cyG-iC-tYL"/>
+                            <constraint firstItem="i3a-gn-SGO" firstAttribute="centerX" secondItem="BtW-Jh-UrO" secondAttribute="centerX" id="e0b-3z-HKu"/>
+                            <constraint firstItem="766-6f-cuI" firstAttribute="top" secondItem="WIB-uY-768" secondAttribute="bottom" constant="8" id="fxf-BR-71E"/>
+                            <constraint firstItem="WIB-uY-768" firstAttribute="centerX" secondItem="BtW-Jh-UrO" secondAttribute="centerX" id="olD-Eg-qWj"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="passwordTextField" destination="tsq-lI-448" id="lSE-ND-fYZ"/>
+                        <outlet property="resultLabel" destination="766-6f-cuI" id="33f-qc-Mez"/>
+                        <outlet property="userTextField" destination="u8E-bu-NCb" id="dcq-VU-3sN"/>
+                    </connections>
+                </viewController>
+                <customObject id="gmL-XU-FM2" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="279.5" y="114.5"/>
+        </scene>
+    </scenes>
+</document>

@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "core-gym",
+  "private_key_id": "d3f0052fab3d70fc431e0c2979e4f99e4ff7854b",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQC6z9Yf9Pj3l2FO\nxRem0avu76tYu1KteQaA7O+0E/Ms+CkwwD8Bofoe2odCpEP2/s9xc1BjS8bF55Qe\nDwx5OfM7hK4PPX+ZECe3WsDdg3njoOYWPdrFRLvJ3NSjjNK6RYowxVvBm+tuvDkW\nwOHVgTBLgWA+K9EV6BQl85lio1ffTzv7Tlp4Ok1mvaTzrpjA9JKUllgrR1iwIpa9\ngM5KTtB1XTF1OEwVnI3lMVfEp/f9Aur0ZTQe843rkyvEmL2dNBH5puoWLWpso2kN\nSLys1Hh9ur0ZJipu87nH9HJs1wYtuFf9xOwRRT1uVC/z8fxIY4y/USnMt3BnYUhW\n2ynGrNlFAgMBAAECggEADzCSFRl1WvscnEE2CfLs239Hu+3IrGFLBZWpF0fd/dnp\nzinQ6wrmzGEcHsTo39Rakrt7yFnOKPkKV/gE8ssi+25vkWlV5DYQ51Ls8WCyOwTc\ntedD+saldvr1Rp0kj0/TNjb98yarRImad2lUk5MvFZyd8kAxfpSseroteSdAoGAX\nJJ1cE8S3QEUqptB4mFpkh44vpzkA5o5CvaARG8laumK0FWf79dX+IgLrVrJ3HyLH\n37ZZ+rYLVrccP7pH30My5o99q6+rhWECLI8zoQ++d11M6u/+G195t3TuCWYg5y9J\n+e8lCOzWF4hHGGpWhVmrFOYpzl1Xfkq+YN/hWiSrqwKBgQDpMA5g4hZPD3gF11Qa\n/k195TX/7EMVk7tsLfpgIqnIzRs0c6O3hJy0zN84a6j/w46lBTZBdY56iOVgZXaV\novvr7EZXW2m+yIVBmzzc/7tQA2AUmo9PgiVbh02nvBZZZvxOtV6yao3NdTUlnJin\ntNZSqB1AMMbzvq58LdRJRSnLSwKBgQDNFlhas8iWY8518u27WUjKdwW/CpCbTXHT\nNFRULAawBx35s75TcrZMqhC02imQ9uYSno1zT62RBeQbIG5cE0bt5Xwa9LufKgmQ\n8HJuZFbG2rf4q7QiPVmiJSQre/z5rJVOz444bkyUEurSfBx1RFTtOwVwgXAdCzvz\n+u1z4IsDrwKBgQCwv782SkhUlsoHy2Yxq637DiC3IlLa6QZ4AgW0lrGQxX6obDqc\n4MSS+nL75gbMDmNxy5iLV1quoFMUlPOkikxfT9ElZ+GoPX9b8hnY/XHyPQy3sUuN\nHX3Jea4vxI5AJ6J42lqz67YeFIg7QQ4omBaXwluhixdSK6c/8tDk1KrQLwKBgQCS\naYhsQHtMOjaT5/kmTgh0WmJkz6MK7E/9ixdE/CVOF9ajhFm082kH9EV3B2SzVEBO\nPJkZIGH17bG6V/3RiAWUIsfl6p/jcjxgF/hprQJydoTuZ45y/z91TXS0ApFIoZf6\nKp0K1lufPp4b5HTglwbWUdOBTTb/1RxZAuPwXPaBiwKBgQC59ljQXYRv9V/PYhuI\nUfXuadiDmVq3Kdcdaj3QzeuIVndsdmlbT5W4yIMiabL4BvpAQ5BWj2GcO7lIAX0i\nC44SzVCPOw+jygu3VdY+mneN9wvkCoJ2+JkG9LaIIBpMRZA1uZKsdsJrjE1L6vi/\nukhKSSV7QSOQPMcOaaB77NtBcQ==\n-----END PRIVATE KEY-----\n",
+  "client_email": "oxigeno@core-gym.iam.gserviceaccount.com",
+  "client_id": "107136322067732234109",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/oxigeno%40core-gym.iam.gserviceaccount.com"
+}
