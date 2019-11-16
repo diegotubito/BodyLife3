@@ -8,6 +8,9 @@
 
 import Cocoa
 
+var MyConnectionStatus : Connect!
+
+
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
@@ -16,7 +19,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
         Reachability.sharedInstance.suscribeConnectionChanged()
-        
+    
+        Connect.ListenConnection()
+        Connect.StopListening()
     }
     
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
@@ -123,6 +128,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // If we got here, it is time to quit.
         return .terminateNow
     }
-
+    
+  
 }
+
+
 

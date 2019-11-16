@@ -43,23 +43,18 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
         super.viewDidLoad()
         setupWindow(width: Constants.ViewControllerSizes.Home.width, height: Constants.ViewControllerSizes.Home.height)
         
-        
+       
       
     }
     
     override func viewDidAppear() {
         super .viewDidAppear()
-
-         CheckLogin()
         
-        // setupListadoSocios()
+           // setupListadoSocios()
         // setupDetalleSocioSeleccionado()
     }
     // MARK: Do something
-    
-    
-   
-    
+     
     func displaySomething(viewModel: Home.Something.ViewModel) {
         //nameTextField.text = viewModel.name
     }

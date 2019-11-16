@@ -48,7 +48,7 @@ router.post('/:target/login', function (req, res, next) {
           }
 
           var token = jwt.sign(tokenData, 'Secret Password', {
-             expiresIn: 60 // expires in 24 hours
+             expiresIn: 60 * 60 * 24 // expires in 24 hours
           })
 
           var resultData = {
@@ -94,7 +94,7 @@ router.post('/:target/refreshToken', VerifyToken, function (req, res, next) {
   }
 
   var token = jwt.sign(tokenData, 'Secret Password', {
-     expiresIn: 120 // expires in 24 hours
+     expiresIn: 60 * 60 * 24 // expires in 24 hours
   })
 
   var resultData = {

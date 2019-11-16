@@ -741,6 +741,10 @@
                                     <action selector="newCustomerPressed:" target="XfG-lQ-9wD" id="UVa-er-Mn0"/>
                                 </connections>
                             </button>
+                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5RM-Ky-92e" customClass="MLConnectView" customModule="OSX_Version" customModuleProvider="target">
+                                <rect key="frame" x="577" y="156" width="163" height="96"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            </customView>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="X1y-Gn-erX" secondAttribute="bottom" id="0PE-Ql-Wa1"/>

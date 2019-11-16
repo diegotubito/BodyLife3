@@ -63,20 +63,30 @@ class BaseViewController : NSViewController {
     }
     
     func listenToNotification() {
-        NotificationCenter.default.addObserver(self, selector: #selector(reachable), name: Notification.Name.Reachability.reachable, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(nonReachable), name: Notification.Name.Reachability.notReachable, object: nil)
+           
+        NotificationCenter.default.addObserver(self, selector: #selector(disconnected), name: .notificationDisconnected, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(connected), name: .notificationConnected, object: nil)
+        
+        
     }
     
-    @objc func reachable() {
-        if noConnectionView != nil {
-            self.unlockBackground()
-            self.deleteErrorView()
-        }
+    deinit {
+        print("Notificacion Obs removed")
+        NotificationCenter.default.removeObserver(self)
     }
-    
-    @objc func nonReachable() {
-        showNoConnection(message: "Ups parece que estamos sin conexión.")
-    }
+  
+    @objc func connected() {
+        print("push connected")
+           if noConnectionView != nil {
+               self.unlockBackground()
+               self.deleteNoConnectionView()
+           }
+       }
+       
+       @objc func disconnected() {
+        print("push disconnected")
+        showNoConnection(message: Connect.messageString)
+       }
    
     func showNoConnection(message: String) {
         
@@ -129,10 +139,9 @@ class BaseViewController : NSViewController {
         }
     }
     
-    func deleteErrorView() {
-        if noConnectionView != nil {
-            noConnectionView.removeFromSuperview()
-        }
+    func deleteNoConnectionView() {
+        noConnectionView.removeFromSuperview()
+        noConnectionView = nil
     }
       
     func showLoading() {
