@@ -6,6 +6,7 @@
 //  Copyright © 2019 David Diego Gomez. All rights reserved.
 //
 
+
 struct FirebaseUserModel: Decodable {
     var token : String
     var username : String?
@@ -18,16 +19,11 @@ struct FirebaseUserModel: Decodable {
     var photoURL : String?
     var lastLoginAt : String?
     var createdAt : String?
-    var stsTokenManager = Token()
-    
-    struct Token : Decodable {
-        var accessToken : String!
-        var expirationTime : Double!
-    }
+   
 }
 
 
-struct TokenUserModel: Decodable {
+struct CurrentUserModel: Decodable {
     var token : String
     var username : String?
     var exp : Double?

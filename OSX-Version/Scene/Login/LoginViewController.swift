@@ -10,7 +10,8 @@ class LoginViewController: BaseViewController, LoginDisplayLogic {
     @IBOutlet weak var passwordTextField: NSSecureTextField!
     var interactor: LoginBusinessLogic?
     var router: (NSObjectProtocol & LoginRoutingLogic & LoginDataPassing)?
-    var didLogin : (() -> ())?
+    var didLogin : ((Data) -> ())?
+    var sameUserName : Bool!
     
     // MARK: Object lifecycle
     
@@ -57,7 +58,13 @@ class LoginViewController: BaseViewController, LoginDisplayLogic {
         
         setupWindow(width: Constants.ViewControllerSizes.Login.width, height: Constants.ViewControllerSizes.Login.height)
 
-        
+        if sameUserName {
+            let user = UserSaved.Load()
+            userTextField.stringValue = user?.email ?? ""
+            userTextField.resignFirstResponder()
+            passwordTextField.becomeFirstResponder()
+            userTextField.isEnabled = false
+        }
     }
     
     override func viewWillAppear() {
@@ -81,16 +88,19 @@ class LoginViewController: BaseViewController, LoginDisplayLogic {
         
         Login.Login.ViewModel) {
         //nameTextField.text = viewModel.name
-        hideLoading()
-        if viewModel.user == nil {
-            resultLabel.isHidden = false
-            resultLabel.stringValue = viewModel.errorMessage!
-            enableTextfields()
-        } else {
-            resultLabel.isHidden = true
-            didLogin?()
-            view.window?.close()
+        DispatchQueue.main.async {
+            self.hideLoading()
+                if viewModel.errorMessage != nil {
+                    self.resultLabel.isHidden = false
+                    self.resultLabel.stringValue = viewModel.errorMessage!
+                    self.enableTextfields()
+                } else {
+                    self.resultLabel.isHidden = true
+                    self.didLogin?(viewModel.data!)
+                    self.view.window?.close()
+                }
         }
+    
     }
     @IBAction func onLoginPressed(_ sender: Any) {
         disableTexfields()

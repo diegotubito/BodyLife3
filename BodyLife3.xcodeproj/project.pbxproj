@@ -18,12 +18,12 @@
 		110664E92378F1F100DC44F3 /* NewCustomerModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110664E32378F1F100DC44F3 /* NewCustomerModels.swift */; };
 		110664EA2378F1F100DC44F3 /* NewCustomerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110664E42378F1F100DC44F3 /* NewCustomerViewController.swift */; };
 		110664EB2378F1F100DC44F3 /* NewCustomerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110664E52378F1F100DC44F3 /* NewCustomerInteractor.swift */; };
-		1123377C237A3DE200F60078 /* Worker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1123377B237A3DE200F60078 /* Worker.swift */; };
 		1123377E237A3E6900F60078 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1123377D237A3E6900F60078 /* Request.swift */; };
 		11233781237AFC9100F60078 /* dateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11233780237AFC9100F60078 /* dateExtension.swift */; };
 		11233783237AFE9400F60078 /* stringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11233782237AFE9400F60078 /* stringExtension.swift */; };
 		11233785237AFEC000F60078 /* doubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11233784237AFEC000F60078 /* doubleExtension.swift */; };
 		11233787237B7AEB00F60078 /* CustomerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11233786237B7AEB00F60078 /* CustomerModel.swift */; };
+		119AE145237F78D90045960C /* ServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119AE144237F78D90045960C /* ServerManager.swift */; };
 		11EBD3212376499F00AB4BFF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD3202376499F00AB4BFF /* AppDelegate.swift */; };
 		11EBD3262376499F00AB4BFF /* OSX_Version.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD3242376499F00AB4BFF /* OSX_Version.xcdatamodeld */; };
 		11EBD3282376499F00AB4BFF /* AssetsOSX.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11EBD3272376499F00AB4BFF /* AssetsOSX.xcassets */; };
@@ -40,7 +40,7 @@
 		11EBD35B2376683300AB4BFF /* FirebaseUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD35A2376683300AB4BFF /* FirebaseUserModel.swift */; };
 		11EBD35E23766A3D00AB4BFF /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD35D23766A3D00AB4BFF /* Configuration.swift */; };
 		11EBD36023766B7800AB4BFF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD35F23766B7800AB4BFF /* Constants.swift */; };
-		11EBD36223766BF400AB4BFF /* UserSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD36123766BF400AB4BFF /* UserSessionManager.swift */; };
+		11EBD36223766BF400AB4BFF /* UserSaved.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD36123766BF400AB4BFF /* UserSaved.swift */; };
 		11EBD36423766CFE00AB4BFF /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD36323766CFE00AB4BFF /* NetworkManager.swift */; };
 		11EBD36623766D2500AB4BFF /* ErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD36523766D2500AB4BFF /* ErrorModel.swift */; };
 		11EBD37D2377130C00AB4BFF /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD3772377130C00AB4BFF /* HomePresenter.swift */; };
@@ -75,12 +75,12 @@
 		110664E32378F1F100DC44F3 /* NewCustomerModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCustomerModels.swift; sourceTree = "<group>"; };
 		110664E42378F1F100DC44F3 /* NewCustomerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCustomerViewController.swift; sourceTree = "<group>"; };
 		110664E52378F1F100DC44F3 /* NewCustomerInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCustomerInteractor.swift; sourceTree = "<group>"; };
-		1123377B237A3DE200F60078 /* Worker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Worker.swift; sourceTree = "<group>"; };
 		1123377D237A3E6900F60078 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		11233780237AFC9100F60078 /* dateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dateExtension.swift; sourceTree = "<group>"; };
 		11233782237AFE9400F60078 /* stringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = stringExtension.swift; sourceTree = "<group>"; };
 		11233784237AFEC000F60078 /* doubleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = doubleExtension.swift; sourceTree = "<group>"; };
 		11233786237B7AEB00F60078 /* CustomerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerModel.swift; sourceTree = "<group>"; };
+		119AE144237F78D90045960C /* ServerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerManager.swift; sourceTree = "<group>"; };
 		11EBD31E2376499F00AB4BFF /* OSX-Version.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OSX-Version.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		11EBD3202376499F00AB4BFF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		11EBD3252376499F00AB4BFF /* OSX_Version.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = OSX_Version.xcdatamodel; sourceTree = "<group>"; };
@@ -101,7 +101,7 @@
 		11EBD35A2376683300AB4BFF /* FirebaseUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseUserModel.swift; sourceTree = "<group>"; };
 		11EBD35D23766A3D00AB4BFF /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		11EBD35F23766B7800AB4BFF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		11EBD36123766BF400AB4BFF /* UserSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSessionManager.swift; sourceTree = "<group>"; };
+		11EBD36123766BF400AB4BFF /* UserSaved.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSaved.swift; sourceTree = "<group>"; };
 		11EBD36323766CFE00AB4BFF /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		11EBD36523766D2500AB4BFF /* ErrorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorModel.swift; sourceTree = "<group>"; };
 		11EBD3772377130C00AB4BFF /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
@@ -257,7 +257,6 @@
 				11EBD35723765D2000AB4BFF /* Util */,
 				11EBD35123765C1A00AB4BFF /* Service */,
 				11EBD35023765BFC00AB4BFF /* CustomView */,
-				11EBD34F23765BF300AB4BFF /* Worker */,
 				11EBD34E23765BF000AB4BFF /* Model */,
 			);
 			path = Common;
@@ -274,14 +273,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		11EBD34F23765BF300AB4BFF /* Worker */ = {
-			isa = PBXGroup;
-			children = (
-				1123377B237A3DE200F60078 /* Worker.swift */,
-			);
-			path = Worker;
-			sourceTree = "<group>";
-		};
 		11EBD35023765BFC00AB4BFF /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
@@ -295,8 +286,9 @@
 			isa = PBXGroup;
 			children = (
 				11EBD35823765F2D00AB4BFF /* Reachablility.swift */,
-				11EBD36123766BF400AB4BFF /* UserSessionManager.swift */,
+				11EBD36123766BF400AB4BFF /* UserSaved.swift */,
 				11EBD36323766CFE00AB4BFF /* NetworkManager.swift */,
+				119AE144237F78D90045960C /* ServerManager.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -580,6 +572,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				119AE145237F78D90045960C /* ServerManager.swift in Sources */,
 				11233783237AFE9400F60078 /* stringExtension.swift in Sources */,
 				11EBD38A237726A800AB4BFF /* LoginPresenter.swift in Sources */,
 				11EBD36623766D2500AB4BFF /* ErrorModel.swift in Sources */,
@@ -595,7 +588,7 @@
 				11233781237AFC9100F60078 /* dateExtension.swift in Sources */,
 				11EBD39623773E5800AB4BFF /* XibView.swift in Sources */,
 				11EBD3822377130C00AB4BFF /* HomeInteractor.swift in Sources */,
-				11EBD36223766BF400AB4BFF /* UserSessionManager.swift in Sources */,
+				11EBD36223766BF400AB4BFF /* UserSaved.swift in Sources */,
 				110664E82378F1F100DC44F3 /* NewCustomerRouter.swift in Sources */,
 				110664E92378F1F100DC44F3 /* NewCustomerModels.swift in Sources */,
 				11EBD3812377130C00AB4BFF /* HomeViewController.swift in Sources */,
@@ -609,7 +602,6 @@
 				110664EA2378F1F100DC44F3 /* NewCustomerViewController.swift in Sources */,
 				11EBD39423773B5C00AB4BFF /* BaseViewController.swift in Sources */,
 				11EBD3212376499F00AB4BFF /* AppDelegate.swift in Sources */,
-				1123377C237A3DE200F60078 /* Worker.swift in Sources */,
 				11EBD36023766B7800AB4BFF /* Constants.swift in Sources */,
 				11EBD38D237726A800AB4BFF /* LoginModels.swift in Sources */,
 				11EBD3262376499F00AB4BFF /* OSX_Version.xcdatamodeld in Sources */,

@@ -16,12 +16,19 @@ class LoginInteractor: LoginBusinessLogic, LoginDataStore {
     // MARK: Do something
     
     func doLogin(request: Login.Login.Request) {
-        worker = LoginWorker()
-        worker?.doLogin(request: request, completion: { (result, error) in
-            let response = Login.Login.Response(user: result?.user, error: error)
+       /* let worker = LoginWorker()
+        worker.doLogin(request: request) { (error) in
+            let response = Login.Login.Response(error: error)
             
             self.presenter?.presentLogin(response: response)
-        })
-      
+            
+        }
+        */
+        ServerManager.Login(userName: request.userName, password: request.password) { (data,error)  in
+            let respose = Login.Login.Response(error: error, data: data)
+            self.presenter?.presentLogin(response: respose)
+        }
+        
+        
     }
 }

@@ -1,17 +1,18 @@
 //
-//  Worker.swift
+//  ServerManager.swift
 //  OSX-Version
 //
-//  Created by David Diego Gomez on 11/11/2019.
+//  Created by David Diego Gomez on 15/11/2019.
 //  Copyright © 2019 David Diego Gomez. All rights reserved.
 //
 
+
 import Foundation
 
-class WorkerServer {
-    static let Shared = WorkerServer()
+class ServerManager {
+    static let Shared = ServerManager()
     
-    static func PostToDatabase<T:Decodable>(path: String, Request: PostRequest, completion: @escaping (T?, ServerError?) -> Void) {
+    static func Post(path: String, Request: PostRequest, onError: @escaping (ServerError?) -> Void) {
         
         let basicUrl = Configuration.URL.Database.write
         
@@ -19,17 +20,12 @@ class WorkerServer {
         let _services = NetwordManager()
         
         _services.post(url: url, body: Request.json) { (data, error) in
-            guard let data = data else {
-                completion(nil, error)
+            guard data != nil else {
+                onError(error)
                 return
             }
-            do {
-                let dataParsered = try JSONDecoder().decode(T.self, from: data)
-                completion(dataParsered, nil)
-            } catch {
-                completion(nil, ServerError.body_serialization_error)
-                return
-            }
+          
+            onError(nil)
         }
         
     }
@@ -50,7 +46,7 @@ class WorkerServer {
         }
     }
     
-    static func DeleteDataBase(path: String, completion: @escaping (Data?, ServerError?) -> Void) {
+    static func Remove(path: String, completion: @escaping (Data?, ServerError?) -> Void) {
         
         let basicUrl = Configuration.URL.Database.remove
         let url = basicUrl + path
@@ -62,7 +58,7 @@ class WorkerServer {
         
     }
     
-    static func UpdateDataBase(path: String, json: [String: Any], completion: @escaping (Data?, ServerError?) -> Void) {
+    static func Update(path: String, json: [String: Any], completion: @escaping (Data?, ServerError?) -> Void) {
         
         let basicUrl = Configuration.URL.Database.update
         let url = basicUrl + path
@@ -94,7 +90,7 @@ class WorkerServer {
         }
     }
     
-    static func GetCurrentUser(completion: @escaping (TokenUserModel?, ServerError?) -> Void) {
+    static func CurrentUser(completion: @escaping (CurrentUserModel?, ServerError?) -> Void) {
         let basicUrl = Configuration.URL.Auth.currentUser
         let url = basicUrl
         
@@ -105,8 +101,9 @@ class WorkerServer {
                 return
             }
             do {
-                let dataParsered = try JSONDecoder().decode(TokenUserModel.self, from: data)
-                completion(dataParsered, nil)
+                let currentUser = try JSONDecoder().decode(CurrentUserModel.self, from: data)
+                
+                completion(currentUser, nil)
             } catch {
                 completion(nil, ServerError.body_serialization_error)
                 return
@@ -114,30 +111,7 @@ class WorkerServer {
         }
     }
     
-    
-    
-     static func CurrentUser(completion: @escaping (TokenUserModel?, ServerError?) -> ()) {
-        let url = "http://127.0.0.1:3000/auth/v1/currentUser"
-        //HTTP Headers
-        
-        let _service = NetwordManager()
-      
-        _service.get(url: url) { (data, serverError) in
-            
-            guard let data = data else {
-                completion(nil, serverError)
-                return
-            }
-            do {
-                let tokenUserDecoded = try JSONDecoder().decode(TokenUserModel.self, from: data)
-                completion(tokenUserDecoded, nil)
-            } catch {
-                completion(nil, ServerError.body_serialization_error)
-            }
-        }
-    }
-    
-    static func RefreshToken(completion: @escaping (TokenUserModel?, ServerError?) -> ()) {
+    static func RefreshToken(onError: @escaping (ServerError?) -> ()) {
         let loginJSON = ["email"      : ""] as [String : Any]
           
           let url = "http://127.0.0.1:3000/auth/v1/development/refreshToken"
@@ -147,19 +121,46 @@ class WorkerServer {
           _service.post(url: url, body: loginJSON) { (data, serverError) in
              
             guard let data = data else {
-                completion(nil, serverError)
+                onError(serverError)
                 return
             }
             do {
             
-                let tokenUserDecoded = try JSONDecoder().decode(TokenUserModel.self, from: data)
-                UserSessionManager.UpdateUser(tokenUserDecoded)
-                completion(tokenUserDecoded, nil)
+                let tokenUserDecoded = try JSONDecoder().decode(CurrentUserModel.self, from: data)
+                var user = UserSaved.Load()
+                user?.token = tokenUserDecoded.token
+                user?.exp = tokenUserDecoded.exp
+                
+                UserSaved.Update(user!)
+                onError(nil)
             } catch {
-                completion(nil, ServerError.body_serialization_error)
+                onError(error as? ServerError)
             }
           }
       }
       
-   
+    static func Login(userName: String, password: String, response: @escaping (Data?, ServerError?) -> Void) {
+           
+           
+           let body = ["email"      : userName,
+                            "password"   : password] as [String : Any]
+           
+           let url = "http://127.0.0.1:3000/auth/v1/development/login"
+           
+        
+        let _service = NetwordManager()
+        _service.post(url: url, body: body) { (data, error) in
+            guard error == nil else {
+                response(nil, error)
+                return
+            }
+            
+            response(data, nil)
+           
+        }
+    }
+    
+    
+ 
 }
+

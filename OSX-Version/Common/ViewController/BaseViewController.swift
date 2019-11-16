@@ -12,8 +12,8 @@ import Cocoa
 class BaseViewController : NSViewController {
     var lockBackgroundView : NSView!
     var noConnectionView : ErrorMessageView!
-    var proportional : Proportion = Proportion() 
-    
+    var proportional : Proportion = Proportion()
+ 
     override func viewDidLoad() {
         super .viewDidLoad()
         DDBarLoader.color = Constants.Colors.Blue.saturatedBlue
@@ -144,30 +144,60 @@ class BaseViewController : NSViewController {
     }
     
        
-    func routeToLogin(didLogin: @escaping ()->())
+    func routeToLogin(sameUserName: Bool, didLogin: @escaping (Data)->())
     {
         let storyboard = NSStoryboard(name: "LoginStoryboard", bundle: nil)
          
         let destinationVC = storyboard.instantiateController(withIdentifier: "LoginViewController") as! LoginViewController
-        
-        destinationVC.didLogin = {
-            didLogin()
+    
+        destinationVC.sameUserName = sameUserName
+        destinationVC.didLogin = { data in
+            didLogin(data)
         }
-        self.presentAsSheet(destinationVC)
+        DispatchQueue.main.async {
+            self.presentAsSheet(destinationVC)
+        }
     }
     
-    func checkLogin() {
+    func CheckLogin() {
+        var needLogin = false
+        let semasphore = DispatchSemaphore(value: 0)
         
-        UserSessionManager.CheckLoginStatus { (user) in
-            if user == nil {
-                routeToLogin {
-                    self.checkLogin()
+        ServerManager.CurrentUser { (currentUser, serverError) in
+            
+            if serverError != nil {
+                if serverError! == ServerError.invalidToken || serverError == ServerError.tokenNotProvided {
+                    if serverError! == ServerError.invalidToken {
+                        print("token vencido: ", UserSaved.TokenExp()?.toString(formato: "dd-MM-yyyy HH:mm:ss") ?? "nil")
+                    }
+                    print("need new login:", ErrorHandler.Server(error: serverError!))
+                    needLogin = true
                 }
             } else {
-                view.window?.title = (user?.displayName) ?? "No Name"
+                UserSaved.SaveDate(date: currentUser?.exp)
+                print("token vigente: ", UserSaved.TokenExp()?.toString(formato: "dd-MM-yyyy HH:mm:ss") ?? "nil")
                 
             }
+            semasphore.signal()
         }
+        
+        _ = semasphore.wait(timeout: .distantFuture)
+        
+        if needLogin {
+            print("go to login")
+            GoToLogin(sameUserName: false)
+        }
+        
     }
     
+    @objc func GoToLogin(sameUserName: Bool) {
+        DispatchQueue.main.async {
+            self.routeToLogin(sameUserName: sameUserName) { data in
+                print("successfull")
+                UserSaved.Save(userData: data)
+                
+            }
+            
+        }
+    }
 }

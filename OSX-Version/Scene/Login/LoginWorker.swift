@@ -3,8 +3,8 @@ import Alamofire
 
 class LoginWorker {
     
-    
-    func doLogin(request: Login.Login.Request, completion: @escaping (Login.Login.Response?, AuthServiceError?) -> Void) {
+    /*
+    func doLogin(request: Login.Login.Request, completion: @escaping (ServerError?) -> Void) {
         
         
         let loginJSON = ["email"      : request.userName,
@@ -16,32 +16,12 @@ class LoginWorker {
             .responseData { response in
                 switch(response.result) {
                 case .success(_):
-                    guard let data = response.value else {
-                        completion(nil, AuthServiceError.empty_user_data)
-                        UserSessionManager.RemoveUserSession()
-                        return
+                        
+                    guard <#condition#> else {
+                        <#statements#>
                     }
-                    
-                    
-                    do {
-                        let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String : Any]
-                        let token = json["token"] as? String
-                        var userJson = json["user"] as? [String : Any]
-                        userJson?.updateValue(token!, forKey: "token")
-                        
-                        let dataTransformed = try JSONSerialization.data(withJSONObject: userJson!, options: [])
-                        
-                        let user = try JSONDecoder().decode(FirebaseUserModel.self, from: dataTransformed)
-                        UserSessionManager.SaveUserSession(userData: dataTransformed)
-                        var response = Login.Login.Response()
-                        response.user = user
-                        completion(response, nil)
-                        return
-                    } catch {
-                        UserSessionManager.RemoveUserSession()
-                        
                         if error.localizedDescription == "The data couldn’t be read because it isn’t in the correct format." {
-                            completion(nil, AuthServiceError.serializationError)
+                            completion(ServerError.body_serialization_error)
                             return
                         }
                         
@@ -50,29 +30,30 @@ class LoginWorker {
                         
                         switch code {
                         case "auth/wrong-password":
-                            completion(nil, AuthServiceError.auth_wrong_password)
+                            completion(ServerError.auth_wrong_password)
                             break
                         case "auth/too-many-requests":
-                            completion(nil, AuthServiceError.auth_too_many_wrong_password)
+                            completion(ServerError.auth_too_many_wrong_password)
                             break
                         case "auth/invalid-email" :
-                            completion(nil, AuthServiceError.auth_invalid_email)
+                            completion(ServerError.auth_invalid_email)
                             break
                         case "auth/user-not-found" :
-                            completion(nil, AuthServiceError.auth_user_not_found)
+                            completion(ServerError.auth_user_not_found)
                             break
                             
                         default:
-                            completion(nil, AuthServiceError.unknown_error)
+                            completion(ServerError.unknown_error)
                             break
                         }
                         
                         return
-                    }
+                    
                 case .failure(_):
-                    completion(nil, AuthServiceError.server_error)
+                    completion(ServerError.server_error)
                     break
                 }
         }
     }
+ */
 }

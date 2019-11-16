@@ -9,12 +9,12 @@ enum Login {
             var password : String
         }
         struct Response {
-            var user : FirebaseUserModel?
-            var error : AuthServiceError?
+            var error : ServerError?
+            var data : Data?
         }
         struct ViewModel {
-            var user : FirebaseUserModel?
             var errorMessage : String?
+            var data : Data?
         }
     }
 }

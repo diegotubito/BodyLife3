@@ -9,31 +9,35 @@
 import Foundation
 import Alamofire
 
-class UserSessionManager {
-    static let Shared = UserSessionManager()
+class UserSaved {
+    static let Shared = UserSaved()
     
-    static func SaveUserSession(userData: Data) {
+    static func Save(userData: Data) {
         
         UserDefaults.standard.set(userData, forKey: "user_session")
     }
     
-    static func RemoveUserSession() {
+    static func Remove() {
         
         UserDefaults.standard.set(nil, forKey: "user_session")
     }
     
-    static func UpdateUser(_ user: TokenUserModel) {
+    static func Update(_ newUserObj: FirebaseUserModel) {
+        guard let dateDouble = newUserObj.exp else {
+            return
+        }
+        
         if let data = UserDefaults.standard.object(forKey: "user_session") as? Data {
             var json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String : Any]
-            json?.updateValue(user.token, forKey: "token")
-            json?.updateValue(user.exp as Any, forKey: "exp")
+            json?.updateValue(newUserObj.token, forKey: "token")
+            json?.updateValue(dateDouble, forKey: "exp")
             let newData = (try? JSONSerialization.data(withJSONObject: json!, options: []))!
-            UserSessionManager.SaveUserSession(userData: newData)
+            UserSaved.Save(userData: newData)
         }
         
     }
     
-    static func LoadUserSession() -> FirebaseUserModel? {
+    static func Load() -> FirebaseUserModel? {
         var user : FirebaseUserModel?
         
         if let data = UserDefaults.standard.object(forKey: "user_session") as? Data {
@@ -42,32 +46,36 @@ class UserSessionManager {
         return user
     }
     
-    static func CheckLoginStatus(result: (FirebaseUserModel?) -> ()) {
-        if let user = LoadUserSession() {
-            result(user)
+    static func IsLogin(result: (Bool) -> ()) {
+        if Load() != nil {
+            result(true)
             return
         }
-        result(nil)
+        result(false)
     }
     
     static func GetToken() -> String {
-        let user = LoadUserSession()
+        let user = Load()
         
         return user?.token ?? ""
     }
     
     static func GetUID() -> String {
-        let user = LoadUserSession()
+        let user = Load()
         
         return user?.uid ?? ""
     }
     
-    static func GetTokenExpirationData() -> Date? {
-        let user = LoadUserSession()
-        if let fechaDouble = user?.exp {
-            let date = Date(timeIntervalSince1970: fechaDouble)
-            return date
-        }
-       return nil
+    static func TokenExp() -> Date? {
+        let user = Load()
+       
+        return user?.exp?.toDate()
+    }
+    
+    static func SaveDate(date: Double?) {
+        var user = Load()
+        user?.exp = date
+        Update(user!)
+        
     }
 }

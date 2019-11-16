@@ -48,23 +48,31 @@ router.post('/:target/login', function (req, res, next) {
           }
 
           var token = jwt.sign(tokenData, 'Secret Password', {
-             expiresIn: 60 * 60 * 24 // expires in 24 hours
+             expiresIn: 60 // expires in 24 hours
           })
-          console.log(token);
 
           var resultData = {
-            token : token,
-            user : user
+            username : user.username,
+            uid : user.uid,
+            displayName : user.displayName,
+            email: user.email,
+            email_verified : user.email_verified,
+            phoneNumber: user.phoneNumber,
+            photoURL : user.photoURL,
+            lastLoginAt : user.lastLoginAt,
+            createdAt : user.createdAt,
+            token: token
             // ANY DATA
           }
-          res.send(resultData)
+          console.log("Successfully");
+          res.send(resultData);
 
 
         })
         //log error
         .catch(function (error) {
             console.log(error);
-            res.send(error);
+            res.status(400).send(error);
         })
 
 
@@ -88,7 +96,6 @@ router.post('/:target/refreshToken', VerifyToken, function (req, res, next) {
   var token = jwt.sign(tokenData, 'Secret Password', {
      expiresIn: 120 // expires in 24 hours
   })
-  console.log(token);
 
   var resultData = {
     token : token,

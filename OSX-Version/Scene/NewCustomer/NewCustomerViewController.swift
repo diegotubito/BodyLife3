@@ -4,7 +4,7 @@ protocol NewCustomerDisplayLogic: class {
     func displaySaveNewCustomerResult(viewModel: NewCustomer.NewCustomer.ViewModel)
 }
 
-class NewCustomerViewController: NSViewController, NewCustomerDisplayLogic {
+class NewCustomerViewController: BaseViewController, NewCustomerDisplayLogic {
     var interactor: NewCustomerBusinessLogic?
     var router: (NSObjectProtocol & NewCustomerRoutingLogic & NewCustomerDataPassing)?
     
@@ -57,7 +57,7 @@ class NewCustomerViewController: NSViewController, NewCustomerDisplayLogic {
     //@IBOutlet weak var nameTextField: UITextField!
     
     func doSaveNewCustomer() {
-        let user = UserSessionManager.LoadUserSession()
+        let user = UserSaved.Load()
         let uid = (user?.uid)!
         let fechaDouble = Date().timeIntervalSince1970
         let fechaRounded = (fechaDouble * 1000)
@@ -74,11 +74,11 @@ class NewCustomerViewController: NSViewController, NewCustomerDisplayLogic {
     func displaySaveNewCustomerResult(viewModel: NewCustomer.NewCustomer.ViewModel) {
         //nameTextField.text = viewModel.name
         if let errorMessage = viewModel.errorMessage {
-            print(errorMessage)
+            if errorMessage == ServerError.invalidToken {
+                self.GoToLogin(sameUserName: true)
+            }
         } else {
             print("success")
-            let fecha = Date(timeIntervalSince1970: viewModel.userDecoded!.exp!)
-            print(fecha.toString(formato: "dd/MM/yyyy HH:mm:ss"))
         }
     }
     @IBAction func saveNewCustomerPressed(_ sender: Any) {

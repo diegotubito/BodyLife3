@@ -11,11 +11,9 @@ enum NewCustomer {
         }
         struct Response {
             var error : ServerError?
-            var userDecoded : TokenUserModel?
         }
         struct ViewModel {
-            var errorMessage : String?
-            var userDecoded : TokenUserModel?
+            var errorMessage : ServerError?
         }
     }
 }

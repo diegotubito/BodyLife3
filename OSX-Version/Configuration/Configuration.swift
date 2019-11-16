@@ -35,7 +35,7 @@ class Configuration {
         }
         
         struct Auth {
-            static let currentUser = "\(Configuration.server)auth/v1/\(Configuration.environment)/currentUser/"
+            static let currentUser = "\(Configuration.server)auth/v1/currentUser/"
             
         }
     }

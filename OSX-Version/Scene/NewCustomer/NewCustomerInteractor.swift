@@ -18,8 +18,8 @@ class NewCustomerInteractor: NewCustomerBusinessLogic, NewCustomerDataStore {
     func doSaveNewCustomer(request: PostRequest) {
         
         let path = "users:\(request.uid):briefData:\(request.childID)"
-        WorkerServer.PostToDatabase(path: path, Request: request) { (userDecoded: TokenUserModel?, error) in
-            let reponse = NewCustomer.NewCustomer.Response(error: error, userDecoded: userDecoded)
+        ServerManager.Post(path: path, Request: request) { (error) in
+            let reponse = NewCustomer.NewCustomer.Response(error: error)
             self.presenter?.presentSomething(response: reponse)
             
         }

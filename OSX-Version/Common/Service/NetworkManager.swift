@@ -38,9 +38,10 @@ class NetwordManager {
         //HTTP Headers
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
-        request.addValue(UserSessionManager.GetToken(), forHTTPHeaderField: "x-access-token")
+        request.addValue(UserSaved.GetToken(), forHTTPHeaderField: "x-access-token")
         //create dataTask using the session object to send data to the server
         let task = session.dataTask(with: request, completionHandler: { data, res, error in
+       
             guard error == nil else {
                 response(nil, ServerError.server_error)
                 return
@@ -59,6 +60,36 @@ class NetwordManager {
                     response(nil, ServerError.notFound)
                 } else if httpResponse.statusCode == 500 {
                     response(nil, ServerError.error500)
+                } else if httpResponse.statusCode == 400 {
+                    //Login Auth Error Codes
+                    do {
+                        let json = try JSONSerialization.jsonObject(with: data!, options: []) as! [String : Any]
+                        let code = json["code"] as? String
+                        
+                        switch code {
+                        case "auth/wrong-password":
+                            response(nil, ServerError.auth_wrong_password)
+                            break
+                        case "auth/too-many-requests":
+                            response(nil, ServerError.auth_too_many_wrong_password)
+                            break
+                        case "auth/invalid-email" :
+                            response(nil, ServerError.auth_invalid_email)
+                            break
+                        case "auth/user-not-found" :
+                            response(nil, ServerError.auth_user_not_found)
+                            break
+                            
+                        default:
+                            response(nil, ServerError.unknown_auth_error)
+                            break
+                        }
+                        
+                        
+                    } catch {
+                        response(nil, ServerError.body_serialization_error)
+                    }
+                     
                 } else {
                     response(nil, ServerError.unknown_error)
                 }
@@ -81,7 +112,7 @@ class NetwordManager {
         //HTTP Headers
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
-        request.addValue(UserSessionManager.GetToken(), forHTTPHeaderField: "x-access-token")
+        request.addValue(UserSaved.GetToken(), forHTTPHeaderField: "x-access-token")
         
         let task = session.dataTask(with: request as URLRequest, completionHandler: {data, res, error -> Void in
             
@@ -92,7 +123,7 @@ class NetwordManager {
             
             if let httpResponse = res as? HTTPURLResponse {
                 if httpResponse.statusCode == 200 {
-                    response(data, nil)
+                    response(data, error as? ServerError)
                 } else if httpResponse.statusCode == 401 {
                     response(nil, ServerError.invalidToken)
                 } else if httpResponse.statusCode == 403 {

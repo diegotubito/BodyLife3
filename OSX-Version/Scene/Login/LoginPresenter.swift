@@ -11,10 +11,10 @@ class LoginPresenter: LoginPresentationLogic {
     
     func presentLogin(response: Login.Login.Response) {
         var viewModel = Login.Login.ViewModel()
-        viewModel.user = response.user
         if let error = response.error {
-            viewModel.errorMessage = ErrorHandler.SessionErrorHandler(error: error)
+            viewModel.errorMessage = ErrorHandler.Server(error: error)
         }
+        viewModel.data = response.data
         viewController?.displayLoginResult(viewModel: viewModel)
     }
     

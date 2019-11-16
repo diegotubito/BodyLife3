@@ -12,13 +12,8 @@ class NewCustomerPresenter: NewCustomerPresentationLogic {
     func presentSomething(response: NewCustomer.NewCustomer.Response) {
         var viewModel = NewCustomer.NewCustomer.ViewModel()
         if let error = response.error {
-            viewModel.errorMessage = ErrorHandler.ServerErrorHandler(error: error)
+            viewModel.errorMessage = error
         }
-        
-        viewModel.userDecoded = response.userDecoded
-          
-        
-                
         viewController?.displaySaveNewCustomerResult(viewModel: viewModel)
         
     }

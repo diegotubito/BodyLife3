@@ -42,33 +42,31 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         setupWindow(width: Constants.ViewControllerSizes.Home.width, height: Constants.ViewControllerSizes.Home.height)
+        
+        
+      
     }
     
     override func viewDidAppear() {
         super .viewDidAppear()
-        checkLogin()
-        let uid = UserSessionManager.GetUID()
-        let path = "users:\(uid):briefData:1573601276348"
-        
-        let w = LoginWorker()
-        
-        WorkerServer.RefreshToken { (user, error) in
-            let date = UserSessionManager.GetTokenExpirationData()
-            print(date)
-        }
+
+         CheckLogin()
         
         // setupListadoSocios()
         // setupDetalleSocioSeleccionado()
     }
     // MARK: Do something
-     
+    
+    
+   
+    
     func displaySomething(viewModel: Home.Something.ViewModel) {
         //nameTextField.text = viewModel.name
     }
     @IBAction func closeSessionPressed(_ sender: Any) {
-        UserSessionManager.RemoveUserSession()
+        UserSaved.Remove()
         
-        checkLogin()
+        CheckLogin()
     }
     @IBAction func newCustomerPressed(_ sender: Any) {
         router?.routeToNewCustomer()

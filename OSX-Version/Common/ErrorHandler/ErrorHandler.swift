@@ -12,25 +12,7 @@ import Cocoa
 class ErrorHandler {
     static let Shared = ErrorHandler()
     
-    static func SessionErrorHandler(error: AuthServiceError) -> String {
-        switch error {
-        case .auth_wrong_password, .auth_user_not_found:
-            return "Nombre de usuario o clave incorrecta."
-        case .auth_too_many_wrong_password:
-            return "Demasiados intentos, probá más tarde."
-        case .auth_invalid_email:
-            return "Formato de usuario incorrecto."
-        case .server_error:
-            return "No se pudo establecer comunicación con el servidor."
-        case .serializationError:
-            return "Error de serialización."
-        default:
-            break
-        }
-        return "Error desconocido"
-    }
-    
-    static func ServerErrorHandler(error: ServerError) -> String {
+    static func Server(error: ServerError) -> String {
         switch error {
         case .server_error:
             return "No se pudo establecer comunicación con el servidor."
@@ -44,6 +26,13 @@ class ErrorHandler {
             return "Url no encontrada."
         case .error500 :
             return "Error 500"
+        case .auth_wrong_password, .auth_user_not_found:
+            return "Nombre de usuario o clave incorrecta."
+        case .auth_too_many_wrong_password:
+            return "Demasiados intentos, probá más tarde."
+        case .auth_invalid_email:
+            return "Formato de usuario incorrecto."
+            
         default:
             break
         }
