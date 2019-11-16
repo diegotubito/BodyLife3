@@ -70,7 +70,7 @@ router.post('/:target/login', function (req, res, next) {
 
 });
 
-router.post('/:target/refreshToken', function (req, res, next) {
+router.post('/:target/refreshToken', VerifyToken, function (req, res, next) {
   //primero selecciono la base de dato con la que voy a trabajar
   if (req.params.target == "production") {
     firebase = production;
@@ -80,9 +80,6 @@ router.post('/:target/refreshToken', function (req, res, next) {
 //fin de seleccion de base de dato
    var username = req.body.email
    var password = req.body.password
-console.log(username);
-  //auth
-
   var tokenData = {
     username: username
     // ANY DATA
@@ -94,15 +91,28 @@ console.log(username);
   console.log(token);
 
   var resultData = {
-    token : token
+    token : token,
     // ANY DATA
   }
-  res.send(resultData)
+  res.send(resultData);
 
 
 });
 
-router.get('/:target/currentUser',function(req,res, next){
+//MODULO PARA CHEQUEAR CONEXION
+router.get('/currentUser', VerifyToken, function(req, res){
+  var token = req.headers['x-access-token'];
+  var resultData = {
+    token : token,
+    exp : req.decoded.exp,
+    username : req.decoded.username
+    // ANY DATA
+  }
+  res.send(resultData);
+});
+
+
+router.get('/:target/currentFirebaseUser',function(req,res, next){
   //primero selecciono la base de dato con la que voy a trabajar
   if (req.params.target == "production") {
     firebase = production;
@@ -115,7 +125,7 @@ router.get('/:target/currentUser',function(req,res, next){
     res.send(user);
 })
 
-router.get('/:target/getToken',function(req,res, next){
+router.get('/:target/getFirebaseToken',function(req,res, next){
   //primero selecciono la base de dato con la que voy a trabajar
   if (req.params.target == "production") {
     firebase = production;

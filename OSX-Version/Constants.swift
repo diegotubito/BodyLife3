@@ -14,6 +14,10 @@ import Cocoa
 
 
 struct Constants {
+// MARK : USER DEFAULTS KEYS
+    enum UserDefaultKey : String {
+        case user_session = "user session"
+    }
 // MARK : DATE CONSTANTS
     struct DateConstants {
         static let MonthName = [1:"Enero".localized, 2:"Febrero".localized, 3:"Marzo".localized, 4:"Abril".localized, 5:"Mayo".localized, 6:"Junio".localized, 7:"Julio".localized, 8:"Agosto".localized, 9:"Septiembre".localized, 10:"Octubre".localized, 11:"Noviembre".localized, 12:"Diciembre".localized]

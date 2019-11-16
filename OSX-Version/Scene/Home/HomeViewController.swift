@@ -51,7 +51,11 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
         let path = "users:\(uid):briefData:1573601276348"
         
         let w = LoginWorker()
-        w.refreshToken()
+        
+        WorkerServer.RefreshToken { (user, error) in
+            let date = UserSessionManager.GetTokenExpirationData()
+            print(date)
+        }
         
         // setupListadoSocios()
         // setupDetalleSocioSeleccionado()

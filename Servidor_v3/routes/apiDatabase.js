@@ -30,12 +30,13 @@ var development = admin.initializeApp(developmentAppConfig, "development");
 
 //FIN DE LA INICIALIZACION
 
+
 //MODULO PARA CHEQUEAR CONEXION
-router.get('/comprobarConexion', VerifyToken, function(req, res){
-  res.send({ connection: 'ok' });
+router.get('/checkServerConnection', VerifyToken, function(req, res){
+  res.send(req.decoded);
 });
 
-router.get('/:target/comprobarConexionFirebase/:ruta', function(req, res, next) {
+router.get('/:target/checkFirebaseConnection/:ruta', function(req, res, next) {
   //primero selecciono la base de dato con la que voy a trabajar
   var baseDeDato = "";
   if (req.params.target == "production") {
@@ -119,7 +120,7 @@ router.post('/:target/write/:ruta',VerifyToken, function(req, res) {
       res.status(501).send(error);
 
     } else {
-      res.status(200).send(req.decoded);
+      res.status(200).send();
     }
 
   })

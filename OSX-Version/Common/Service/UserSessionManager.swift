@@ -22,26 +22,27 @@ class UserSessionManager {
         UserDefaults.standard.set(nil, forKey: "user_session")
     }
     
-    static func updateToken(_ token: String) {
+    static func UpdateUser(_ user: TokenUserModel) {
         if let data = UserDefaults.standard.object(forKey: "user_session") as? Data {
             var json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String : Any]
-            json?.updateValue(token, forKey: "token")
+            json?.updateValue(user.token, forKey: "token")
+            json?.updateValue(user.exp as Any, forKey: "exp")
             let newData = (try? JSONSerialization.data(withJSONObject: json!, options: []))!
             UserSessionManager.SaveUserSession(userData: newData)
         }
         
     }
     
-    static func LoadUserSession() -> UserSession? {
-        var user : UserSession?
+    static func LoadUserSession() -> FirebaseUserModel? {
+        var user : FirebaseUserModel?
         
         if let data = UserDefaults.standard.object(forKey: "user_session") as? Data {
-            user = try? JSONDecoder().decode(UserSession.self, from: data)
+            user = try? JSONDecoder().decode(FirebaseUserModel.self, from: data)
         }
         return user
     }
     
-    static func CheckLoginStatus(result: (UserSession?) -> ()) {
+    static func CheckLoginStatus(result: (FirebaseUserModel?) -> ()) {
         if let user = LoadUserSession() {
             result(user)
             return
@@ -59,5 +60,14 @@ class UserSessionManager {
         let user = LoadUserSession()
         
         return user?.uid ?? ""
+    }
+    
+    static func GetTokenExpirationData() -> Date? {
+        let user = LoadUserSession()
+        if let fechaDouble = user?.exp {
+            let date = Date(timeIntervalSince1970: fechaDouble)
+            return date
+        }
+       return nil
     }
 }

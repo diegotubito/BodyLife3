@@ -77,7 +77,7 @@ class NewCustomerViewController: NSViewController, NewCustomerDisplayLogic {
             print(errorMessage)
         } else {
             print("success")
-            let fecha = Date(timeIntervalSince1970: viewModel.userDecoded!.exp)
+            let fecha = Date(timeIntervalSince1970: viewModel.userDecoded!.exp!)
             print(fecha.toString(formato: "dd/MM/yyyy HH:mm:ss"))
         }
     }

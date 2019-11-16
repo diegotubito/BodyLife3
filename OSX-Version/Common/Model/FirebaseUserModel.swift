@@ -6,9 +6,10 @@
 //  Copyright © 2019 David Diego Gomez. All rights reserved.
 //
 
-struct UserSession: Decodable {
-    var token : String!
-    var expirationToken : Double?
+struct FirebaseUserModel: Decodable {
+    var token : String
+    var username : String?
+    var exp : Double?
     var uid : String!
     var displayName : String?
     var email : String?
@@ -26,8 +27,8 @@ struct UserSession: Decodable {
 }
 
 
-struct UserDecoded: Decodable {
-    var iat : Int
-    var username : String
-    var exp : Double
+struct TokenUserModel: Decodable {
+    var token : String
+    var username : String?
+    var exp : Double?
 }

@@ -16,7 +16,7 @@ struct ServerType {
 
 class Configuration {
     static let shared = Configuration()
-      
+    
     static var environment : String = "development"
     static var server : String = ServerType.local
     
@@ -33,6 +33,11 @@ class Configuration {
             static let update = "\(Configuration.server)database/v1/\(Configuration.environment)/update/"
             
         }
+        
+        struct Auth {
+            static let currentUser = "\(Configuration.server)auth/v1/\(Configuration.environment)/currentUser/"
+            
+        }
     }
-
+    
 }
