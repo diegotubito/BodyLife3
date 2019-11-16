@@ -32,8 +32,8 @@ var development = admin.initializeApp(developmentAppConfig, "development");
 
 
 //MODULO PARA CHEQUEAR CONEXION
-router.get('/checkServerConnection', VerifyToken, function(req, res){
-  res.send(req.decoded);
+router.get('/checkServerConnection', function(req, res){
+  res.send({"connection" : "ok"});
 });
 
 router.get('/:target/checkFirebaseConnection/:ruta', function(req, res, next) {

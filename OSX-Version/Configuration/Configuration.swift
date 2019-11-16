@@ -38,6 +38,12 @@ class Configuration {
             static let currentUser = "\(Configuration.server)auth/v1/currentUser/"
             
         }
+        
+        struct Check {
+            static let checkServer = "\(Configuration.server)database/v1/checkServerConnection/"
+             static let checkFirebase = "\(Configuration.server)database/v1/\(Configuration.environment)/checkFirebaseConnection/"
+            
+        }
     }
     
 }

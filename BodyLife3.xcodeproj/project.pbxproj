@@ -23,6 +23,9 @@
 		11233783237AFE9400F60078 /* stringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11233782237AFE9400F60078 /* stringExtension.swift */; };
 		11233785237AFEC000F60078 /* doubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11233784237AFEC000F60078 /* doubleExtension.swift */; };
 		11233787237B7AEB00F60078 /* CustomerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11233786237B7AEB00F60078 /* CustomerModel.swift */; };
+		11542D812380698F0011AB1D /* ConnectionStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11542D802380698F0011AB1D /* ConnectionStatus.swift */; };
+		11542D842380703F0011AB1D /* ConsoleCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11542D832380703F0011AB1D /* ConsoleCommand.swift */; };
+		11542D8D2380B0BE0011AB1D /* BaseConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11542D8C2380B0BE0011AB1D /* BaseConnect.swift */; };
 		119AE145237F78D90045960C /* ServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119AE144237F78D90045960C /* ServerManager.swift */; };
 		11EBD3212376499F00AB4BFF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD3202376499F00AB4BFF /* AppDelegate.swift */; };
 		11EBD3262376499F00AB4BFF /* OSX_Version.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD3242376499F00AB4BFF /* OSX_Version.xcdatamodeld */; };
@@ -80,6 +83,9 @@
 		11233782237AFE9400F60078 /* stringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = stringExtension.swift; sourceTree = "<group>"; };
 		11233784237AFEC000F60078 /* doubleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = doubleExtension.swift; sourceTree = "<group>"; };
 		11233786237B7AEB00F60078 /* CustomerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerModel.swift; sourceTree = "<group>"; };
+		11542D802380698F0011AB1D /* ConnectionStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionStatus.swift; sourceTree = "<group>"; };
+		11542D832380703F0011AB1D /* ConsoleCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleCommand.swift; sourceTree = "<group>"; };
+		11542D8C2380B0BE0011AB1D /* BaseConnect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseConnect.swift; sourceTree = "<group>"; };
 		119AE144237F78D90045960C /* ServerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerManager.swift; sourceTree = "<group>"; };
 		11EBD31E2376499F00AB4BFF /* OSX-Version.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OSX-Version.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		11EBD3202376499F00AB4BFF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -196,6 +202,31 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		11542D82238070300011AB1D /* ConsoleCommand */ = {
+			isa = PBXGroup;
+			children = (
+				11542D832380703F0011AB1D /* ConsoleCommand.swift */,
+			);
+			path = ConsoleCommand;
+			sourceTree = "<group>";
+		};
+		11542D852380705E0011AB1D /* ConnectionStatus */ = {
+			isa = PBXGroup;
+			children = (
+				11542D802380698F0011AB1D /* ConnectionStatus.swift */,
+				11542D8C2380B0BE0011AB1D /* BaseConnect.swift */,
+			);
+			path = ConnectionStatus;
+			sourceTree = "<group>";
+		};
+		11542D8B2380B0730011AB1D /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				11EBD35823765F2D00AB4BFF /* Reachablility.swift */,
+			);
+			path = Reachability;
+			sourceTree = "<group>";
+		};
 		11EBD2FB2376494E00AB4BFF = {
 			isa = PBXGroup;
 			children = (
@@ -285,7 +316,6 @@
 		11EBD35123765C1A00AB4BFF /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				11EBD35823765F2D00AB4BFF /* Reachablility.swift */,
 				11EBD36123766BF400AB4BFF /* UserSaved.swift */,
 				11EBD36323766CFE00AB4BFF /* NetworkManager.swift */,
 				119AE144237F78D90045960C /* ServerManager.swift */,
@@ -315,6 +345,9 @@
 		11EBD35723765D2000AB4BFF /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				11542D8B2380B0730011AB1D /* Reachability */,
+				11542D852380705E0011AB1D /* ConnectionStatus */,
+				11542D82238070300011AB1D /* ConsoleCommand */,
 				110664DA237852B100DC44F3 /* Loader */,
 				1123377F237AFC7D00F60078 /* Extensions */,
 			);
@@ -587,7 +620,9 @@
 				11EBD35E23766A3D00AB4BFF /* Configuration.swift in Sources */,
 				11233781237AFC9100F60078 /* dateExtension.swift in Sources */,
 				11EBD39623773E5800AB4BFF /* XibView.swift in Sources */,
+				11542D8D2380B0BE0011AB1D /* BaseConnect.swift in Sources */,
 				11EBD3822377130C00AB4BFF /* HomeInteractor.swift in Sources */,
+				11542D842380703F0011AB1D /* ConsoleCommand.swift in Sources */,
 				11EBD36223766BF400AB4BFF /* UserSaved.swift in Sources */,
 				110664E82378F1F100DC44F3 /* NewCustomerRouter.swift in Sources */,
 				110664E92378F1F100DC44F3 /* NewCustomerModels.swift in Sources */,
@@ -606,6 +641,7 @@
 				11EBD38D237726A800AB4BFF /* LoginModels.swift in Sources */,
 				11EBD3262376499F00AB4BFF /* OSX_Version.xcdatamodeld in Sources */,
 				11EBD38C237726A800AB4BFF /* LoginRouter.swift in Sources */,
+				11542D812380698F0011AB1D /* ConnectionStatus.swift in Sources */,
 				110664DC237852BD00DC44F3 /* Loader.swift in Sources */,
 				11EBD35923765F2D00AB4BFF /* Reachablility.swift in Sources */,
 				1123377E237A3E6900F60078 /* Request.swift in Sources */,
