@@ -8,6 +8,7 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
     var interactor: HomeBusinessLogic?
     var router: (NSObjectProtocol & HomeRoutingLogic & HomeDataPassing)?
     
+    @IBOutlet weak var imagePrueba: NSImageView!
     @IBOutlet weak var backgroundImage: NSImageView!
     // MARK: Object lifecycle
     
@@ -43,8 +44,20 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
         super.viewDidLoad()
         setupWindow(width: Constants.ViewControllerSizes.Home.width, height: Constants.ViewControllerSizes.Home.height)
         
-       
-      
+    
+      let net = NetwordManager()
+        let user = UserSaved.Load()
+        let uid = user?.uid
+        net.downloadPhoto(path: "users:\(uid!):customer:1574093116438.jpeg") { (imageData, error) in
+            if imageData != nil {
+                let image = NSImage(data: imageData!)
+                
+                DispatchQueue.main.async {
+                    self.imagePrueba.image = image
+                }
+                
+            }
+        }
     }
     
     override func viewDidAppear() {

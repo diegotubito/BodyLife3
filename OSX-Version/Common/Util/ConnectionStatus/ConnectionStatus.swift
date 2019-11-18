@@ -29,8 +29,8 @@ class Connect : BaseConnect {
     static let FirebaseEndpoint = Configuration.URL.Check.checkFirebase + "BodyLife:publico:conexion"
     
         
-    static var timerConstantShort : TimeInterval = 2
-    static var timerConstantLong : TimeInterval = 15
+    static var timerConstantShort : TimeInterval = 15
+    static var timerConstantLong : TimeInterval = 2
     
     static var messageString : String = ""
     
@@ -108,13 +108,11 @@ class Connect : BaseConnect {
     private static func Check(notConnected: @escaping (DisconnectReason?) -> ()) {
         // INTERNET CHECK
         var internetConnection = false
-        
         let internetSemasphore = DispatchSemaphore(value: 0)
         checkInternet { (result) in
             internetConnection = result
             internetSemasphore.signal()
         }
-        
         _ = internetSemasphore.wait(timeout: .distantFuture)
         if !internetConnection {
             notConnected(.internet)
@@ -123,34 +121,32 @@ class Connect : BaseConnect {
         
         // SERVER CHECK
         var serverConnection = false
-        
         let serverSemasphore = DispatchSemaphore(value: 0)
         checkServer { (result) in
             serverConnection = result
             serverSemasphore.signal()
         }
-        
         _ = serverSemasphore.wait(timeout: .distantFuture)
         if !serverConnection {
             notConnected(.server)
             return
         }
-        
+ 
         // FIREBASE CHECK
+        DispatchQueue.global().async {
         var firebaseConnection = false
-        
         let firebaseSemasphore = DispatchSemaphore(value: 0)
         checkFirebase { (result) in
             firebaseConnection = result
             firebaseSemasphore.signal()
         }
-        
         _ = firebaseSemasphore.wait(timeout: .distantFuture)
+            
         if !firebaseConnection {
             notConnected(.firebase)
             return
         }
-        
+        }
         notConnected(nil)
     }
     

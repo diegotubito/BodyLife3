@@ -2,6 +2,7 @@ var express  = require('express');
 var router = express.Router();
 
 const Storage = require('@google-cloud/storage');
+var VerifyToken = require('./VerifyToken');
 
 const CLOUD_BUCKET_PRODUCTION = "bodyshaping-fc85e.appspot.com"
 const storageProduction = Storage({
@@ -133,7 +134,7 @@ module.exports = {
   multer
 };
 
-router.post('/:target/uploadFile/:ruta',
+router.post('/:target/uploadFile/:ruta', VerifyToken,
     multer.single('image'),
     sendUploadToGCS,
     (req, res, next) => {
@@ -144,10 +145,10 @@ router.post('/:target/uploadFile/:ruta',
     // in cloud storage.
     if (req.file && req.file.cloudStoragePublicUrl) {
       data.imageUrl = req.file.cloudStoragePublicUrl;
-      console.log(req.file.originalname + " subido correctamente.")
 
-      res.send(JSON.stringify({ "Nombre de archivo: ": req.file.originalname,
-                                "Tamaño: ": req.file.uploadFile}));
+      res.send(JSON.stringify({ "filename" : req.file.originalname,
+                                "size" : req.file.size,
+                              "url":req.file.cloudStoragePublicUrl}));
                                 //si el valor es null, la fila se elimina.
 
     }
@@ -188,13 +189,11 @@ router.get('/:target/downloadFile/:ruta', (req, res) => {
   returnGcloudFileContents(req).then((gcloudFile) => {
     //console.log(`Returned letsencrypt key: ${gcloudFile.toString()}`);
     //res.send(gcloudFile.toString());
-    console.log("archivo bajado con exito: " + req.params.ruta);
     res.send(gcloudFile)
   }).catch((err) => {
     //  res.render('index', { title: 'el archivo no se encuentra' });
     //console.log(err);
-    console.log("el archivo no existe " + req.params.ruta);
-    res.sendStatus(500);
+    res.sendStatus(err);
   });
 });
 

@@ -30,7 +30,7 @@ class NewCustomerViewController: BaseViewController, NewCustomerDisplayLogic {
     var router: (NSObjectProtocol & NewCustomerRoutingLogic & NewCustomerDataPassing)?
     
     var thumbImageBase64 : String = ""
-    var image : NSImage = NSImage()
+    var imageToStorage : NSImage = NSImage()
     
     // MARK: Object lifecycle
     
@@ -111,7 +111,7 @@ class NewCustomerViewController: BaseViewController, NewCustomerDisplayLogic {
                         "email":emailTF.stringValue,
                         "thumbnailImage" : thumbImageBase64] as [String : Any]
         
-        let request = PostRequest(uid: uid, childID: childID, dni: dniTF.stringValue, json: fullJSON)
+        let request = PostRequest(uid: uid, childID: childID, dni: dniTF.stringValue, json: fullJSON, image: self.imageToStorage)
          
         
         return request
@@ -160,18 +160,17 @@ extension NewCustomerViewController: CameraViewControllerDelegate {
     func imagenCapturada(image: NSImage) {
         print("original image: \(String(describing: image.sizeInBytes))")
     
-        let mediumImage = image.crop(size: NSSize(width: image.height*0.5, height: image.height*0.5))
-         print("thumbnail image: \(String(describing: mediumImage?.sizeInBytes))")
-      
+        let medium = image.crop(size: NSSize(width: 150, height: 150))
+        print("medium image: \(String(describing: medium?.sizeInBytes))")
         
-        let thumb = image.crop(size: NSSize(width: 30, height: 30))
+        let thumb = image.crop(size: NSSize(width: 50, height: 50))
         print("thumbnail image: \(String(describing: thumb?.sizeInBytes))")
         
-        thumbImageBase64 = (thumb?.convertToBase64)!
-        self.image = mediumImage!
+        self.thumbImageBase64 = (thumb?.convertToBase64)!
+        self.imageToStorage = medium!
         
         DispatchQueue.main.async {
-            self.CustomerIconImageView.image = mediumImage
+            self.CustomerIconImageView.image = medium
         }
         
     }

@@ -35,6 +35,13 @@ class Configuration {
             
         }
         
+        struct Storage {
+            static let upload = "\(Configuration.server)storage/v1/\(Configuration.environment)/uploadFile/"
+            static let download = "\(Configuration.server)storage/v1/\(Configuration.environment)/downloadFile/"
+            static let deleteFile = "\(Configuration.server)storage/v1/\(Configuration.environment)/delete/"
+            
+        }
+        
         struct Auth {
             static let currentUser = "\(Configuration.server)auth/v1/currentUser/"
             static let login = "\(Configuration.server)auth/v1/\(Configuration.environment)/login/"

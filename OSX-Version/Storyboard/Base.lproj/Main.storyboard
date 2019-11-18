@@ -741,6 +741,11 @@
                                     <action selector="newCustomerPressed:" target="XfG-lQ-9wD" id="UVa-er-Mn0"/>
                                 </connections>
                             </button>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pnd-AA-Gqu">
+                                <rect key="frame" x="729" y="295" width="226" height="200"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" id="zOE-es-EtP"/>
+                            </imageView>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="X1y-Gn-erX" secondAttribute="bottom" id="0PE-Ql-Wa1"/>
@@ -757,6 +762,7 @@
                     </view>
                     <connections>
                         <outlet property="backgroundImage" destination="X1y-Gn-erX" id="i2c-dX-ogT"/>
+                        <outlet property="imagePrueba" destination="pnd-AA-Gqu" id="Dk7-Zc-8BH"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
