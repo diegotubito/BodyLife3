@@ -28,6 +28,7 @@ class Configuration {
         struct Database {
             static let write = "\(Configuration.server)database/v1/\(Configuration.environment)/write/"
             static let read = "\(Configuration.server)database/v1/\(Configuration.environment)/read/"
+            static let find = "\(Configuration.server)database/v1/\(Configuration.environment)/find/"
             static let transaction = "\(Configuration.server)database/v1/\(Configuration.environment)/transaction/"
             static let remove = "\(Configuration.server)database/v1/\(Configuration.environment)/remove/"
             static let update = "\(Configuration.server)database/v1/\(Configuration.environment)/update/"
@@ -36,6 +37,8 @@ class Configuration {
         
         struct Auth {
             static let currentUser = "\(Configuration.server)auth/v1/currentUser/"
+            static let login = "\(Configuration.server)auth/v1/\(Configuration.environment)/login/"
+            static let refreshToken = "\(Configuration.server)auth/v1/refreshToken/"
             
         }
         

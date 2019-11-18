@@ -26,7 +26,13 @@
 		11542D812380698F0011AB1D /* ConnectionStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11542D802380698F0011AB1D /* ConnectionStatus.swift */; };
 		11542D842380703F0011AB1D /* ConsoleCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11542D832380703F0011AB1D /* ConsoleCommand.swift */; };
 		11542D8D2380B0BE0011AB1D /* BaseConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11542D8C2380B0BE0011AB1D /* BaseConnect.swift */; };
+		1163932B2381975600D14B19 /* ValidationField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1163932A2381975600D14B19 /* ValidationField.swift */; };
+		1163932E2381AA0400D14B19 /* TextFieldValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1163932D2381AA0400D14B19 /* TextFieldValidation.swift */; };
+		1163933723820CA500D14B19 /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1163933623820CA500D14B19 /* CameraManager.swift */; };
+		1163933A238214AC00D14B19 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11639339238214AC00D14B19 /* CameraViewController.swift */; };
+		1163933C238229DE00D14B19 /* imageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1163933B238229DE00D14B19 /* imageExtension.swift */; };
 		119AE145237F78D90045960C /* ServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119AE144237F78D90045960C /* ServerManager.swift */; };
+		119C68622380BDC8009E9AA0 /* NewCustomerStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 119C68612380BDC8009E9AA0 /* NewCustomerStoryboard.storyboard */; };
 		11EBD3212376499F00AB4BFF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD3202376499F00AB4BFF /* AppDelegate.swift */; };
 		11EBD3262376499F00AB4BFF /* OSX_Version.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD3242376499F00AB4BFF /* OSX_Version.xcdatamodeld */; };
 		11EBD3282376499F00AB4BFF /* AssetsOSX.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11EBD3272376499F00AB4BFF /* AssetsOSX.xcassets */; };
@@ -86,7 +92,13 @@
 		11542D802380698F0011AB1D /* ConnectionStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionStatus.swift; sourceTree = "<group>"; };
 		11542D832380703F0011AB1D /* ConsoleCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleCommand.swift; sourceTree = "<group>"; };
 		11542D8C2380B0BE0011AB1D /* BaseConnect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseConnect.swift; sourceTree = "<group>"; };
+		1163932A2381975600D14B19 /* ValidationField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationField.swift; sourceTree = "<group>"; };
+		1163932D2381AA0400D14B19 /* TextFieldValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldValidation.swift; sourceTree = "<group>"; };
+		1163933623820CA500D14B19 /* CameraManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
+		11639339238214AC00D14B19 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		1163933B238229DE00D14B19 /* imageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imageExtension.swift; sourceTree = "<group>"; };
 		119AE144237F78D90045960C /* ServerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerManager.swift; sourceTree = "<group>"; };
+		119C68612380BDC8009E9AA0 /* NewCustomerStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewCustomerStoryboard.storyboard; sourceTree = "<group>"; };
 		11EBD31E2376499F00AB4BFF /* OSX-Version.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OSX-Version.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		11EBD3202376499F00AB4BFF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		11EBD3252376499F00AB4BFF /* OSX_Version.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = OSX_Version.xcdatamodel; sourceTree = "<group>"; };
@@ -181,6 +193,7 @@
 		110664EC2378F1FC00DC44F3 /* NewCustomer */ = {
 			isa = PBXGroup;
 			children = (
+				1163932C2381A9F000D14B19 /* TextFieldValidation */,
 				110664E02378F1F100DC44F3 /* NewCustomerPresenter.swift */,
 				110664E12378F1F100DC44F3 /* NewCustomerWorker.swift */,
 				110664E22378F1F100DC44F3 /* NewCustomerRouter.swift */,
@@ -198,6 +211,7 @@
 				11233780237AFC9100F60078 /* dateExtension.swift */,
 				11233784237AFEC000F60078 /* doubleExtension.swift */,
 				11233782237AFE9400F60078 /* stringExtension.swift */,
+				1163933B238229DE00D14B19 /* imageExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -225,6 +239,38 @@
 				11EBD35823765F2D00AB4BFF /* Reachablility.swift */,
 			);
 			path = Reachability;
+			sourceTree = "<group>";
+		};
+		116393292381973800D14B19 /* ValidationField */ = {
+			isa = PBXGroup;
+			children = (
+				1163932A2381975600D14B19 /* ValidationField.swift */,
+			);
+			path = ValidationField;
+			sourceTree = "<group>";
+		};
+		1163932C2381A9F000D14B19 /* TextFieldValidation */ = {
+			isa = PBXGroup;
+			children = (
+				1163932D2381AA0400D14B19 /* TextFieldValidation.swift */,
+			);
+			path = TextFieldValidation;
+			sourceTree = "<group>";
+		};
+		1163933523820C9100D14B19 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				1163933623820CA500D14B19 /* CameraManager.swift */,
+			);
+			path = Camera;
+			sourceTree = "<group>";
+		};
+		116393382382149F00D14B19 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				11639339238214AC00D14B19 /* CameraViewController.swift */,
+			);
+			path = Camera;
 			sourceTree = "<group>";
 		};
 		11EBD2FB2376494E00AB4BFF = {
@@ -328,6 +374,7 @@
 			children = (
 				11EBD3292376499F00AB4BFF /* Main.storyboard */,
 				11EBD39023772A4700AB4BFF /* LoginStoryboard.storyboard */,
+				119C68612380BDC8009E9AA0 /* NewCustomerStoryboard.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -335,6 +382,7 @@
 		11EBD35323765C9800AB4BFF /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				116393382382149F00D14B19 /* Camera */,
 				11EBD3832377269100AB4BFF /* Login */,
 				11EBD376237712E600AB4BFF /* Home */,
 				110664EC2378F1FC00DC44F3 /* NewCustomer */,
@@ -345,6 +393,8 @@
 		11EBD35723765D2000AB4BFF /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				1163933523820C9100D14B19 /* Camera */,
+				116393292381973800D14B19 /* ValidationField */,
 				11542D8B2380B0730011AB1D /* Reachability */,
 				11542D852380705E0011AB1D /* ConnectionStatus */,
 				11542D82238070300011AB1D /* ConsoleCommand */,
@@ -503,6 +553,7 @@
 				11EBD3282376499F00AB4BFF /* AssetsOSX.xcassets in Resources */,
 				11EBD39123772A4700AB4BFF /* LoginStoryboard.storyboard in Resources */,
 				11EBD32B2376499F00AB4BFF /* Main.storyboard in Resources */,
+				119C68622380BDC8009E9AA0 /* NewCustomerStoryboard.storyboard in Resources */,
 				11EBD34C23764A9600AB4BFF /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -608,6 +659,7 @@
 				119AE145237F78D90045960C /* ServerManager.swift in Sources */,
 				11233783237AFE9400F60078 /* stringExtension.swift in Sources */,
 				11EBD38A237726A800AB4BFF /* LoginPresenter.swift in Sources */,
+				1163933A238214AC00D14B19 /* CameraViewController.swift in Sources */,
 				11EBD36623766D2500AB4BFF /* ErrorModel.swift in Sources */,
 				11EBD38F237726A800AB4BFF /* LoginInteractor.swift in Sources */,
 				110664C523775C9000DC44F3 /* ErrorMessageView.swift in Sources */,
@@ -629,14 +681,18 @@
 				11EBD3812377130C00AB4BFF /* HomeViewController.swift in Sources */,
 				110664E72378F1F100DC44F3 /* NewCustomerWorker.swift in Sources */,
 				11EBD38E237726A800AB4BFF /* LoginViewController.swift in Sources */,
+				1163932E2381AA0400D14B19 /* TextFieldValidation.swift in Sources */,
+				1163932B2381975600D14B19 /* ValidationField.swift in Sources */,
 				11EBD35B2376683300AB4BFF /* FirebaseUserModel.swift in Sources */,
 				11EBD3802377130C00AB4BFF /* HomeModels.swift in Sources */,
 				11EBD37F2377130C00AB4BFF /* HomeRouter.swift in Sources */,
 				110664D82377ACBF00DC44F3 /* extensions.swift in Sources */,
+				1163933C238229DE00D14B19 /* imageExtension.swift in Sources */,
 				110664E62378F1F100DC44F3 /* NewCustomerPresenter.swift in Sources */,
 				110664EA2378F1F100DC44F3 /* NewCustomerViewController.swift in Sources */,
 				11EBD39423773B5C00AB4BFF /* BaseViewController.swift in Sources */,
 				11EBD3212376499F00AB4BFF /* AppDelegate.swift in Sources */,
+				1163933723820CA500D14B19 /* CameraManager.swift in Sources */,
 				11EBD36023766B7800AB4BFF /* Constants.swift in Sources */,
 				11EBD38D237726A800AB4BFF /* LoginModels.swift in Sources */,
 				11EBD3262376499F00AB4BFF /* OSX_Version.xcdatamodeld in Sources */,

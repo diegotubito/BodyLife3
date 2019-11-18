@@ -9,7 +9,14 @@
 import Foundation
 import Cocoa
 
+enum AlertButton: String, CaseIterable {
+    case ok = "OK"
+    case delete = "Borrar"
+    case cancel = "Cancelar"
+}
+
 class BaseViewController : NSViewController {
+    var AlertSheet : NSAlert!
     var lockBackgroundView : NSView!
     var noConnectionView : ErrorMessageView!
     var proportional : Proportion = Proportion()
@@ -204,9 +211,60 @@ class BaseViewController : NSViewController {
             self.routeToLogin(sameUserName: sameUserName) { data in
                 print("successfull")
                 UserSaved.Save(userData: data)
-                
+            }
+        }
+    }
+    
+    func ShowSheetAlert(title: String, message: String, buttons: [AlertButton]) {
+        DispatchQueue.main.async {
+            self.AlertSheet = NSAlert()
+            self.AlertSheet.messageText = title
+            self.AlertSheet.informativeText = message
+            
+            buttons.forEach { button in
+                self.AlertSheet.addButton(withTitle: button.rawValue)
             }
             
+            self.AlertSheet.alertStyle = .informational
+            
+            let result = self.AlertSheet.runModal()
+            switch result {
+            case NSApplication.ModalResponse.alertFirstButtonReturn:
+                self.alertFirstButton()
+                break
+            case NSApplication.ModalResponse.alertSecondButtonReturn:
+                self.alertSecondButton()
+                break
+            case NSApplication.ModalResponse.alertThirdButtonReturn:
+                self.alertThirdButton()
+                break
+            default:
+                print("There is no provision for further buttons")
+            }
         }
+        
+    }
+    
+    @objc func alertFirstButton() {
+    }
+    
+    @objc func alertSecondButton() {
+    }
+    
+    @objc func alertThirdButton() {
+    }
+    
+    func notificationMessage(messageID: String, title: String, subtitle: String, informativeText: String) {
+        // Create the notification and setup information
+        let notification = NSUserNotification()
+        notification.identifier = messageID
+        notification.title = title
+        notification.subtitle = subtitle
+        notification.informativeText = informativeText
+        notification.soundName = NSUserNotificationDefaultSoundName
+        notification.contentImage = #imageLiteral(resourceName: "logo_body_life")
+        // Manually display the notification
+        let notificationCenter = NSUserNotificationCenter.default
+        notificationCenter.deliver(notification)
     }
 }

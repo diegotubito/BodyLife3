@@ -49,10 +49,13 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
     
     override func viewDidAppear() {
         super .viewDidAppear()
-        
-           // setupListadoSocios()
+
+          // setupListadoSocios()
         // setupDetalleSocioSeleccionado()
+        CheckLogin()
     }
+    
+   
     // MARK: Do something
      
     func displaySomething(viewModel: Home.Something.ViewModel) {
@@ -69,3 +72,7 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
     
 }
 
+struct CustomerModel2: Decodable {
+    var childID : String
+    var createdAt : Double
+}

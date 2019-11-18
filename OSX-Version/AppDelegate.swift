@@ -21,7 +21,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         Reachability.sharedInstance.suscribeConnectionChanged()
     
         Connect.ListenConnection()
-        Connect.StopListening()
     }
     
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {

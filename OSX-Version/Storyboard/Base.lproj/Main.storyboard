@@ -741,10 +741,6 @@
                                     <action selector="newCustomerPressed:" target="XfG-lQ-9wD" id="UVa-er-Mn0"/>
                                 </connections>
                             </button>
-                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5RM-Ky-92e" customClass="MLConnectView" customModule="OSX_Version" customModuleProvider="target">
-                                <rect key="frame" x="577" y="156" width="163" height="96"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            </customView>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="X1y-Gn-erX" secondAttribute="bottom" id="0PE-Ql-Wa1"/>
@@ -766,47 +762,6 @@
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75" y="982"/>
-        </scene>
-        <!--New Customer View Controller-->
-        <scene sceneID="0cS-Ay-gRx">
-            <objects>
-                <viewController storyboardIdentifier="NewCustomerViewController" id="IAC-Se-aWQ" customClass="NewCustomerViewController" customModule="OSX_Version" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="Fxi-b9-76X">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <subviews>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="es3-dI-v8R">
-                                <rect key="frame" x="190" y="133" width="70" height="32"/>
-                                <buttonCell key="cell" type="push" title="Save" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="1gE-LF-aMs">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="saveNewCustomerPressed:" target="IAC-Se-aWQ" id="zye-ui-xgf"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="g5t-ee-m8I">
-                                <rect key="frame" x="181" y="1" width="89" height="32"/>
-                                <buttonCell key="cell" type="push" title="Remove" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="hma-Gv-qwW">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="removePressed:" target="IAC-Se-aWQ" id="auk-o6-Pq1"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="g5t-ee-m8I" firstAttribute="centerX" secondItem="Fxi-b9-76X" secondAttribute="centerX" id="Pyh-2u-cWd"/>
-                            <constraint firstAttribute="bottom" secondItem="g5t-ee-m8I" secondAttribute="bottom" constant="8" id="Yw2-Xb-pKG"/>
-                            <constraint firstItem="es3-dI-v8R" firstAttribute="centerY" secondItem="Fxi-b9-76X" secondAttribute="centerY" id="rEI-kW-Iha"/>
-                            <constraint firstItem="es3-dI-v8R" firstAttribute="centerX" secondItem="Fxi-b9-76X" secondAttribute="centerX" id="tdQ-pR-QUd"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <customObject id="mgj-qE-Shy" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1063" y="772"/>
         </scene>
     </scenes>
     <resources>

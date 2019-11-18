@@ -32,4 +32,6 @@ enum ServerError: Error {
     case auth_invalid_email
     case auth_user_not_found
     
+    case duplicated
+    
 }

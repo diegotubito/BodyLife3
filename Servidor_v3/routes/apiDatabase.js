@@ -99,6 +99,30 @@ router.get('/:target/read/:ruta', VerifyToken, function(req, res, next) {
 
 
 
+//OTROS MODULOS
+//devuelve un json, de la direccion requerida.
+/* GET socios/v1/read/... */
+router.get('/:target/find/:key/:value/:ruta', VerifyToken, function(req, res, next) {
+  //primero selecciono la base de dato con la que voy a trabajar
+  var baseDeDato = "";
+  if (req.params.target == "production") {
+    baseDeDato = production;
+  }  else if (req.params.target == "development") {
+    baseDeDato = development;
+  }
+//fin de seleccion de base de dato
+
+  var rutaAcondicionada = req.params.ruta.replace(/:/gi, "/");
+  let read_ref = baseDeDato.database().ref(rutaAcondicionada);
+  read_ref.orderByChild(req.params.key).equalTo(req.params.value).once("value", function(snapshot) {
+    res.send(snapshot.val());
+  });
+});
+
+
+
+
+
 /* POST socios/v1/write/... */
 router.post('/:target/write/:ruta',VerifyToken, function(req, res) {
   //primero selecciono la base de dato con la que voy a trabajar
@@ -179,6 +203,7 @@ router.post('/:target/remove/:ruta',VerifyToken, function(req, res) {
     }
 
   })
+
 });
 
 
