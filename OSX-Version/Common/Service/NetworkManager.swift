@@ -186,10 +186,11 @@ class NetwordManager {
     }
     
     
-    func cargarFoto(path: String, completion: @escaping (Data?, Error?) -> Void) {
-        let accion = "http://127.0.0.1:3000/storage/v1/principal/downloadFile/"
+    func downloadPhoto(path: String, completion: @escaping (Data?, Error?) -> Void) {
+        let accion : String = Configuration.URL.Storage.download
         
-        let url = URL(string: accion + path)
+         let url = URL(string: accion + path)
+     
         
         Alamofire.request(url!).responseData { (response) in
             
@@ -218,6 +219,52 @@ class NetwordManager {
             
         }
         
+    }
+    
+    func uploadPhoto(path: String, imageData: Data, nombre: String, tipo: String, completion:@escaping ([String : Any]?, ServerError?) -> Void ) {
+        let baseURL = Configuration.URL.Storage.upload
+        let url = URL(string: baseURL + path)
+        
+        let headers: HTTPHeaders = ["Content-type": "multipart/form-data",
+                                    "x-access-token" : UserSaved.GetToken()]
+        
+        
+        Alamofire.upload(multipartFormData: { (multipartFormData) in
+            multipartFormData.append(imageData, withName: "image", fileName: nombre + "." + tipo, mimeType: "image/jpeg")
+        }, usingThreshold: UInt64.init(), to: url!, method: .post, headers: headers) { (result) in
+            
+            switch result {
+            case .success(let upload, _, _):
+                upload.uploadProgress(closure: { (Progress) in
+                    print("upload progress: ", Progress.fractionCompleted)
+                })
+                upload.responseJSON { response in
+                    
+                    let json = response.result.value as? [String : Any]
+                    
+                    if let httpResponse = response.response {
+                        if httpResponse.statusCode == 200 {
+                            completion(json, nil)
+                        } else if httpResponse.statusCode == 401 {
+                            completion(nil, ServerError.invalidToken)
+                        } else if httpResponse.statusCode == 403 {
+                            completion(nil, ServerError.tokenNotProvided)
+                        } else if httpResponse.statusCode == 501 {
+                            completion(nil, ServerError.firebase_connection_error)
+                        } else if httpResponse.statusCode == 404 {
+                            completion(nil, ServerError.notFound)
+                        } else {
+                            completion(nil, ServerError.unknown_error)
+                        }
+                    }
+                }
+            case .failure(let error):
+                completion(nil, error as? ServerError)
+                print("Error in upload:", error.localizedDescription)
+                break
+            }
+            
+        }
     }
     
 }

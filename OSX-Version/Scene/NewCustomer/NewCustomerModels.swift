@@ -8,6 +8,7 @@ enum NewCustomer {
             var uid : String
             var childID : String
             var json : [String : Any]
+            var image : NSImage
         }
         struct Response {
             var error : ServerError?

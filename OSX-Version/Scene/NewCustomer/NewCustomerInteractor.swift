@@ -46,5 +46,19 @@ class NewCustomerInteractor: NewCustomerBusinessLogic, NewCustomerDataStore {
             self.presenter?.presentNewCustomerResult(response: reponse)
             
         }
+        
+        let pathImage = "users:\(request.uid):customer"
+        let net = NetwordManager()
+        if let imageData = request.image.tiffRepresentation {
+            net.uploadPhoto(path: pathImage, imageData: imageData, nombre: request.childID, tipo: "jpeg") { (jsonResponse, error) in
+                if jsonResponse != nil {
+                    print("se subio foto a storage")
+                    print(jsonResponse)
+                } else {
+                    print("no se puedo subir foto")
+                    print(error?.localizedDescription)
+                }
+            }
+        }
     }
 }
