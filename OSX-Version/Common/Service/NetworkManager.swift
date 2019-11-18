@@ -103,8 +103,14 @@ class NetwordManager {
         let urlTransformmed = URL(string: url)!
         
         //create the session object
-        let session = URLSession.shared
+        var session = URLSession.shared
+      
+        let sessionConfig = URLSessionConfiguration.default
+        sessionConfig.timeoutIntervalForRequest = 10
+        sessionConfig.timeoutIntervalForResource = 15.0
+        session = URLSession(configuration: sessionConfig)
         
+          
         //now create the Request object using the url object
         var request = URLRequest(url: urlTransformmed)
         request.httpMethod = "GET" //set http method as POST
@@ -113,6 +119,7 @@ class NetwordManager {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue(UserSaved.GetToken(), forHTTPHeaderField: "x-access-token")
+        
         
         let task = session.dataTask(with: request as URLRequest, completionHandler: {data, res, error -> Void in
             

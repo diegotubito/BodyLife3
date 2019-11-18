@@ -12,6 +12,20 @@ import Foundation
 class ServerManager {
     static let Shared = ServerManager()
     
+    static func jsonArray(json: [String: Any]) -> [[String: Any]] {
+        var result = [[String : Any]]()
+        
+        for (key, value) in json {
+            if let aux = value as? [String : Any] {
+                var aux2 = aux
+                aux2["key"] = key
+                result.append(aux2)
+            }
+        }
+        
+        return result
+    }
+    
     static func Post(path: String, Request: PostRequest, onError: @escaping (ServerError?) -> Void) {
         
         let basicUrl = Configuration.URL.Database.write
@@ -70,7 +84,7 @@ class ServerManager {
         
     }
     
-    static func Read<T:Decodable>(path: String, completion: @escaping (T?, ServerError?) -> Void) {
+    static func Read<T:Decodable>(path: String, completion: @escaping (T?, ServerError?) -> ()) {
         let basicUrl = Configuration.URL.Database.read
         let url = basicUrl + path
         
@@ -88,6 +102,29 @@ class ServerManager {
                 return
             }
         }
+    }
+    
+    static func FindByKey(path: String, key: String, value: String, completion: @escaping ([[String: Any]]?, ServerError?) -> ()) {
+        let basicUrl = Configuration.URL.Database.find
+        let url = basicUrl + "\(key)/\(value)/" + path
+        
+        let _service = NetwordManager()
+        _service.get(url: url) { (data, error) in
+            guard let data = data else {
+                completion(nil, error)
+                return
+            }
+            do {
+               
+                let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String : Any]
+                let array = jsonArray(json: json)
+                completion(array, nil)
+            } catch {
+                completion(nil, ServerError.body_serialization_error)
+                return
+            }
+        }
+        
     }
     
     static func CurrentUser(completion: @escaping (CurrentUserModel?, ServerError?) -> Void) {
@@ -114,7 +151,8 @@ class ServerManager {
     static func RefreshToken(onError: @escaping (ServerError?) -> ()) {
         let loginJSON = ["email"      : ""] as [String : Any]
           
-          let url = "http://127.0.0.1:3000/auth/v1/development/refreshToken"
+          let url = Configuration.URL.Auth.refreshToken
+              
           //HTTP Headers
           
           let _service = NetwordManager()
@@ -136,17 +174,15 @@ class ServerManager {
             } catch {
                 onError(error as? ServerError)
             }
-          }
-      }
-      
+        }
+    }
+    
     static func Login(userName: String, password: String, response: @escaping (Data?, ServerError?) -> Void) {
-           
-           
-           let body = ["email"      : userName,
-                            "password"   : password] as [String : Any]
-           
-           let url = "http://127.0.0.1:3000/auth/v1/development/login"
-           
+        
+        let body = ["email"      : userName,
+                    "password"   : password] as [String : Any]
+        let url = Configuration.URL.Auth.login
+        
         
         let _service = NetwordManager()
         _service.post(url: url, body: body) { (data, error) in
@@ -156,7 +192,7 @@ class ServerManager {
             }
             
             response(data, nil)
-           
+            
         }
     }
     

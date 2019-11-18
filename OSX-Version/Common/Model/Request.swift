@@ -11,5 +11,6 @@ import Foundation
 struct PostRequest {
     var uid : String
     var childID : String
+    var dni : String
     var json : [String : Any]
 }

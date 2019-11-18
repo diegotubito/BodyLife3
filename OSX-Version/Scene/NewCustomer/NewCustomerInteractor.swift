@@ -16,11 +16,34 @@ class NewCustomerInteractor: NewCustomerBusinessLogic, NewCustomerDataStore {
     // MARK: Do something
     
     func doSaveNewCustomer(request: PostRequest) {
+        var error : ServerError?
+        let user = UserSaved.Load()
+        let uid = user?.uid
+        let path = "users:\(uid!):briefData"
+        let semasphore = DispatchSemaphore(value: 0)
         
-        let path = "users:\(request.uid):briefData:\(request.childID)"
-        ServerManager.Post(path: path, Request: request) { (error) in
+        let worker = NewCustomerWorker()
+        worker.FindCustomer(path: path, key: "dni", value: request.dni) { (jsonArray, err) in
+            error = err
+            
+            if jsonArray?.count ?? 0 > 0 {
+                error = ServerError.duplicated
+            }
+            semasphore.signal()
+        }
+        
+        _ = semasphore.wait(timeout: .distantFuture)
+   
+        let response = NewCustomer.NewCustomer.Response(error: error)
+        if error != nil, error != ServerError.body_serialization_error {
+            self.presenter?.presentNewCustomerResult(response: response)
+            return
+        }
+        
+        let pathNewCustomer = "users:\(request.uid):briefData:\(request.childID)"
+        ServerManager.Post(path: pathNewCustomer, Request: request) { (error) in
             let reponse = NewCustomer.NewCustomer.Response(error: error)
-            self.presenter?.presentSomething(response: reponse)
+            self.presenter?.presentNewCustomerResult(response: reponse)
             
         }
     }

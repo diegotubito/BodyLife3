@@ -78,31 +78,24 @@ router.post('/:target/login', function (req, res, next) {
 
 });
 
-router.post('/:target/refreshToken', VerifyToken, function (req, res, next) {
-  //primero selecciono la base de dato con la que voy a trabajar
-  if (req.params.target == "production") {
-    firebase = production;
-  }  else if (req.params.target == "development") {
-    firebase = development;
-  }
-//fin de seleccion de base de dato
+router.post('/refreshToken', VerifyToken, function (req, res, next) {
+
    var username = req.body.email
    var password = req.body.password
-  var tokenData = {
-    username: username
-    // ANY DATA
-  }
+   var tokenData = {
+     username: username
+     // ANY DATA
+   }
 
-  var token = jwt.sign(tokenData, 'Secret Password', {
-     expiresIn: 60 * 60 * 24 // expires in 24 hours
-  })
+   var token = jwt.sign(tokenData, 'Secret Password', {
+      expiresIn: 60 * 60 * 24 // expires in 24 hours
+   })
 
-  var resultData = {
+   var resultData = {
     token : token,
     // ANY DATA
-  }
-  res.send(resultData);
-
+   }
+   res.send(resultData);
 
 });
 
