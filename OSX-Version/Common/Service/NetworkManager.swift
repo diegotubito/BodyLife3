@@ -185,42 +185,6 @@ class NetwordManager {
         
     }
     
-    
-    func downloadPhoto(path: String, completion: @escaping (Data?, Error?) -> Void) {
-        let accion : String = Configuration.URL.Storage.download
-        
-         let url = URL(string: accion + path)
-     
-        
-        Alamofire.request(url!).responseData { (response) in
-            
-            switch(response.result) {
-                
-            case .success(_):
-                
-                if response.result.value != nil{
-                    if let data = response.data {
-                        if NSImage(data: data) != nil {
-                            completion(data, response.result.error)
-                            return
-                        }
-                    }
-                }
-                completion(nil, response.result.error)
-                break
-                
-            case .failure(_):
-                completion(nil, response.result.error)
-                //  print(response.result.error ?? "error de lectura")
-                break
-                
-            }
-            
-            
-        }
-        
-    }
-    
     func uploadPhoto(path: String, imageData: Data, nombre: String, tipo: String, completion:@escaping ([String : Any]?, ServerError?) -> Void ) {
         let baseURL = Configuration.URL.Storage.upload
         let url = URL(string: baseURL + path)

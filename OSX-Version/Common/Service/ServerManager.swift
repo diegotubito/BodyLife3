@@ -7,10 +7,13 @@
 //
 
 
-import Foundation
+import Cocoa
 
 class ServerManager {
     static let Shared = ServerManager()
+    
+    static var imageCache = NSCache<AnyObject, AnyObject>()
+      
     
     static func jsonArray(json: [String: Any]) -> [[String: Any]] {
         var result = [[String : Any]]()
@@ -197,6 +200,49 @@ class ServerManager {
     }
     
     
- 
+    static func DownloadPicture(path: String, completion: @escaping (NSImage?, ServerError?) -> ()) {
+        let basicUrl = Configuration.URL.Storage.download
+        let url = basicUrl + path
+        
+        //if I have already loaded the image, there's no need to load it again.
+        if let imageFromCache = imageCache.object(forKey: url as AnyObject) as? NSImage {
+            //return the image previously loaded
+            print("loaded from cache")
+            completion(imageFromCache, nil)
+            return
+            
+        }
+        
+        
+        let _service = NetwordManager()
+        _service.get(url: url) { (imageData, error) in
+            
+            if error != nil {
+                completion(nil, error)
+                return
+            }
+            if imageData != nil {
+                if let image = NSImage(data: imageData!) {
+                    completion(image, nil)
+                        
+                    
+                    DispatchQueue.main.async {
+                        //save loaded image to cache for better performance
+                        print("saved to cache")
+                        let imageToCache = image
+                        self.imageCache.setObject(imageToCache, forKey: url as AnyObject)
+                        completion(imageToCache, nil)
+                        return
+                        
+                    }
+                    return
+                }
+            }
+            completion(nil, error)
+        }
+        
+    }
+    
+    
 }
 

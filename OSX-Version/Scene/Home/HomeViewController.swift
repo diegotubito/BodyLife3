@@ -45,23 +45,23 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
         setupWindow(width: Constants.ViewControllerSizes.Home.width, height: Constants.ViewControllerSizes.Home.height)
         
     
-      let net = NetwordManager()
-        let user = UserSaved.Load()
-        let uid = user?.uid
-        net.downloadPhoto(path: "users:\(uid!):customer:1574093116438.jpeg") { (imageData, error) in
-            if imageData != nil {
-                let image = NSImage(data: imageData!)
-                
-                DispatchQueue.main.async {
-                    self.imagePrueba.image = image
-                }
-                
-            }
-        }
+     
     }
     
     override func viewDidAppear() {
         super .viewDidAppear()
+        let user = UserSaved.Load()
+        let uid = user?.uid
+        let path = "users:\(uid!):customer:1574093116438.jpeg"
+        ServerManager.DownloadPicture(path: path) { (image, error) in
+            if error != nil {
+                print(ErrorHandler.Server(error: error!))
+            }
+             DispatchQueue.main.async {
+                self.imagePrueba.image = image
+            }
+            
+        }
 
           // setupListadoSocios()
         // setupDetalleSocioSeleccionado()

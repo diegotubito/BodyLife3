@@ -156,48 +156,28 @@ router.post('/:target/uploadFile/:ruta', VerifyToken,
   }
 );
 
-
-//function to return the contents of the google file
-var returnGcloudFileContents = (req) => {
-  return new Promise((resolve, reject) => {
-    //primero selecciono la base de dato con la que voy a trabajar
-    var bucketSeleccionado = "";
-    if (req.params.target == "production") {
-      bucketSeleccionado = bucketProduction;
-    }  else if (req.params.target == "development") {
-      bucketSeleccionado = bucketDevelopment;
-    }
-  //fin de seleccion de base de dato
-
-    var rutaAcondicionada = req.params.ruta.replace(/:/gi, "/");
-    console.log("Bajando archivo " + rutaAcondicionada);
-    var file = bucketSeleccionado.file(rutaAcondicionada);
-    file.download().then((fileData) => {
-        resolve(fileData[0]);
-      }).catch((err) => {
-        reject(`Attempt to access file returned error: ${err.code} - ${err.message}`);
-      });
-  });
-};
-
-//turn path into param, and pass it to the returnGcloudFileContents function
-//ejemplo:
-// http://127.0.0.1:3000/storage/v1/downloadFile/socios:0DxraVqcRosMfA8tdD6c.jpeg
-router.get('/:target/downloadFile/:ruta', (req, res) => {
+router.get('/:target/downloadFile/:ruta', VerifyToken, (req, res) => {
 
 
-  returnGcloudFileContents(req).then((gcloudFile) => {
-    //console.log(`Returned letsencrypt key: ${gcloudFile.toString()}`);
-    //res.send(gcloudFile.toString());
-    res.send(gcloudFile)
-  }).catch((err) => {
-    //  res.render('index', { title: 'el archivo no se encuentra' });
-    //console.log(err);
-    res.sendStatus(err);
-  });
+  //primero selecciono la base de dato con la que voy a trabajar
+  var bucketSeleccionado = "";
+  if (req.params.target == "production") {
+    bucketSeleccionado = bucketProduction;
+  }  else if (req.params.target == "development") {
+    bucketSeleccionado = bucketDevelopment;
+  }
+//fin de seleccion de base de dato
+
+  var rutaAcondicionada = req.params.ruta.replace(/:/gi, "/");
+  console.log("Bajando archivo " + rutaAcondicionada);
+  var file = bucketSeleccionado.file(rutaAcondicionada);
+  file.download().then((fileData) => {
+      res.status(200).send(fileData[0]);
+    }).catch((err) => {
+
+      res.status(err.code).send(err);
+    });
 });
-
-
 
 
 module.exports = router;
