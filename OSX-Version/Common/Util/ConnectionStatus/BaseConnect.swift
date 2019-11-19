@@ -33,7 +33,14 @@ class BaseConnect {
         
         let request: NSMutableURLRequest = NSMutableURLRequest(url: URL(string: url)!)
         request.httpMethod = "GET"
-        let session = URLSession.shared
+        var session = URLSession.shared
+        
+        let sessionConfig = URLSessionConfiguration.default
+        sessionConfig.timeoutIntervalForRequest = 5
+        sessionConfig.timeoutIntervalForResource = 15.0
+        session = URLSession(configuration: sessionConfig)
+        
+        
         let task = session.dataTask(with: request as URLRequest, completionHandler: {data, response, error -> Void in
             
             guard error == nil else {

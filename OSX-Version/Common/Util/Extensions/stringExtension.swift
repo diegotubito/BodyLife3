@@ -15,7 +15,7 @@ extension String {
         
         let decodedimage = NSImage(data: decodedData! as Data)
         
-        return decodedimage!
+        return decodedimage
         
     }
     

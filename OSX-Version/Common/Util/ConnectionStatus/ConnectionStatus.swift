@@ -52,21 +52,28 @@ class Connect : BaseConnect {
     
     static private var timer : Timer?
     
-    static func ListenConnection() {
-        if !fisrtTime { return }
-        fisrtTime = false
-        NotificationCenter.default.addObserver(self, selector: #selector(Connect.reachable), name: Notification.Name.Reachability.reachable, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(Connect.nonReachable), name: Notification.Name.Reachability.notReachable, object: nil)
-    
-        cerrarProcesoWWW()
-        
-        if Configuration.server == ServerType.local {
-            process = MLConsoleCommand.runProcess(name: pathEnDiscoServidor, arguments: [""])
+    static func StartListening() {
+        DispatchQueue.global().async {
+            self.Start()
         }
         
-        PeriodicChecking()
-        Connect.TimerConfiguration(time: Connect.timerConstantShort)
         
+    }
+    
+    static private func Start() {
+        if !fisrtTime { return }
+            fisrtTime = false
+            NotificationCenter.default.addObserver(self, selector: #selector(Connect.reachable), name: Notification.Name.Reachability.reachable, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(Connect.nonReachable), name: Notification.Name.Reachability.notReachable, object: nil)
+        
+            cerrarProcesoWWW()
+            
+            if Configuration.server == ServerType.local {
+                process = MLConsoleCommand.runProcess(name: pathEnDiscoServidor, arguments: [""])
+            }
+            
+            PeriodicChecking()
+            Connect.TimerConfiguration(time: Connect.timerConstantShort)
     }
     
     static func StopListening() {
@@ -133,7 +140,6 @@ class Connect : BaseConnect {
         }
  
         // FIREBASE CHECK
-        DispatchQueue.global().async {
         var firebaseConnection = false
         let firebaseSemasphore = DispatchSemaphore(value: 0)
         checkFirebase { (result) in
@@ -145,7 +151,6 @@ class Connect : BaseConnect {
         if !firebaseConnection {
             notConnected(.firebase)
             return
-        }
         }
         notConnected(nil)
     }

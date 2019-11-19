@@ -1,7 +1,7 @@
 import Cocoa
 
 protocol NewCustomerBusinessLogic {
-    func doSaveNewCustomer(request: PostRequest)
+    func doSaveNewCustomer(request: NewCustomer.NewCustomer.Request)
 }
 
 protocol NewCustomerDataStore {
@@ -15,11 +15,9 @@ class NewCustomerInteractor: NewCustomerBusinessLogic, NewCustomerDataStore {
     
     // MARK: Do something
     
-    func doSaveNewCustomer(request: PostRequest) {
+    func doSaveNewCustomer(request: NewCustomer.NewCustomer.Request) {
         var error : ServerError?
-        let user = UserSaved.Load()
-        let uid = user?.uid
-        let path = "users:\(uid!):briefData"
+        let path = "briefData"
         let semasphore = DispatchSemaphore(value: 0)
         
         let worker = NewCustomerWorker()
@@ -40,23 +38,21 @@ class NewCustomerInteractor: NewCustomerBusinessLogic, NewCustomerDataStore {
             return
         }
         
-        let pathNewCustomer = "users:\(request.uid):briefData:\(request.childID)"
+        let pathNewCustomer = "briefData:\(request.childID)"
         ServerManager.Post(path: pathNewCustomer, Request: request) { (error) in
             let reponse = NewCustomer.NewCustomer.Response(error: error)
             self.presenter?.presentNewCustomerResult(response: reponse)
             
         }
         
-        let pathImage = "users:\(request.uid):customer"
+        let pathImage = "customer"
         let net = NetwordManager()
         if let imageData = request.image.tiffRepresentation {
             net.uploadPhoto(path: pathImage, imageData: imageData, nombre: request.childID, tipo: "jpeg") { (jsonResponse, error) in
                 if jsonResponse != nil {
                     print("se subio foto a storage")
-                    print(jsonResponse)
                 } else {
                     print("no se puedo subir foto")
-                    print(error?.localizedDescription)
                 }
             }
         }

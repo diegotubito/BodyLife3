@@ -88,11 +88,12 @@ class NewCustomerViewController: BaseViewController, NewCustomerDisplayLogic {
     //@IBOutlet weak var nameTextField: UITextField!
     
     func doSaveNewCustomer() {
+        showLoading()
         let request = createRequest()
         interactor?.doSaveNewCustomer(request: request)
     }
     
-    func createRequest() -> PostRequest {
+    func createRequest() -> NewCustomer.NewCustomer.Request {
         let user = UserSaved.Load()
         let uid = (user?.uid)!
         let fechaDouble = Date().timeIntervalSince1970
@@ -111,7 +112,7 @@ class NewCustomerViewController: BaseViewController, NewCustomerDisplayLogic {
                         "email":emailTF.stringValue,
                         "thumbnailImage" : thumbImageBase64] as [String : Any]
         
-        let request = PostRequest(uid: uid, childID: childID, dni: dniTF.stringValue, json: fullJSON, image: self.imageToStorage)
+        let request = NewCustomer.NewCustomer.Request(childID: childID, dni: dniTF.stringValue, json: fullJSON, image: self.imageToStorage)
          
         
         return request
@@ -119,6 +120,9 @@ class NewCustomerViewController: BaseViewController, NewCustomerDisplayLogic {
     }
     
     func displaySaveNewCustomerResult(viewModel: NewCustomer.NewCustomer.ViewModel) {
+        DispatchQueue.main.async {
+            self.hideLoading()
+        }
         //nameTextField.text = viewModel.name
         if let error = viewModel.errorMessage {
             if error == ServerError.invalidToken {

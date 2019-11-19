@@ -20,7 +20,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Insert code here to initialize your application
         Reachability.sharedInstance.suscribeConnectionChanged()
     
-        Connect.ListenConnection()
+        Connect.StartListening()
+            
     }
     
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {

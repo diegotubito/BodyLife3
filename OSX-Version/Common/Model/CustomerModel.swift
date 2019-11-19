@@ -11,5 +11,9 @@ import Foundation
 struct CustomerModel: Decodable {
     var childID : String
     var createdAt : Double
+    var dni : String
+    var surname : String
+    var name : String
+    var thumbnailImage : String?
 }
 
