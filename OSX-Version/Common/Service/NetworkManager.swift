@@ -106,8 +106,8 @@ class NetwordManager {
         var session = URLSession.shared
       
         let sessionConfig = URLSessionConfiguration.default
-        sessionConfig.timeoutIntervalForRequest = 10
-        sessionConfig.timeoutIntervalForResource = 15.0
+        sessionConfig.timeoutIntervalForRequest = 5
+        sessionConfig.timeoutIntervalForResource = 5
         session = URLSession(configuration: sessionConfig)
         
           
@@ -182,42 +182,6 @@ class NetwordManager {
             
         }
         dataTask.resume()
-        
-    }
-    
-    
-    func downloadPhoto(path: String, completion: @escaping (Data?, Error?) -> Void) {
-        let accion : String = Configuration.URL.Storage.download
-        
-         let url = URL(string: accion + path)
-     
-        
-        Alamofire.request(url!).responseData { (response) in
-            
-            switch(response.result) {
-                
-            case .success(_):
-                
-                if response.result.value != nil{
-                    if let data = response.data {
-                        if NSImage(data: data) != nil {
-                            completion(data, response.result.error)
-                            return
-                        }
-                    }
-                }
-                completion(nil, response.result.error)
-                break
-                
-            case .failure(_):
-                completion(nil, response.result.error)
-                //  print(response.result.error ?? "error de lectura")
-                break
-                
-            }
-            
-            
-        }
         
     }
     

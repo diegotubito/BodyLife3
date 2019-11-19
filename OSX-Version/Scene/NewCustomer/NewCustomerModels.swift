@@ -5,8 +5,8 @@ enum NewCustomer {
     
     enum NewCustomer {
         struct Request {
-            var uid : String
             var childID : String
+            var dni : String
             var json : [String : Any]
             var image : NSImage
         }

@@ -42,7 +42,7 @@ class CameraViewController: NSViewController {
     
     
     override func viewDidLoad() {
-        
+        super .viewDidLoad()
         correrSessionCamara()
     }
     

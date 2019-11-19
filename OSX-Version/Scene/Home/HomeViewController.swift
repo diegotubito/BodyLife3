@@ -8,7 +8,8 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
     var interactor: HomeBusinessLogic?
     var router: (NSObjectProtocol & HomeRoutingLogic & HomeDataPassing)?
     
-    @IBOutlet weak var imagePrueba: NSImageView!
+   
+    @IBOutlet weak var CustomerList: NSView!
     @IBOutlet weak var backgroundImage: NSImageView!
     // MARK: Object lifecycle
     
@@ -45,28 +46,26 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
         setupWindow(width: Constants.ViewControllerSizes.Home.width, height: Constants.ViewControllerSizes.Home.height)
         
     
-      let net = NetwordManager()
-        let user = UserSaved.Load()
-        let uid = user?.uid
-        net.downloadPhoto(path: "users:\(uid!):customer:1574093116438.jpeg") { (imageData, error) in
-            if imageData != nil {
-                let image = NSImage(data: imageData!)
-                
-                DispatchQueue.main.async {
-                    self.imagePrueba.image = image
-                }
-                
-            }
-        }
+     
     }
     
     override func viewDidAppear() {
         super .viewDidAppear()
-
+        
+      loadData()
+    
           // setupListadoSocios()
         // setupDetalleSocioSeleccionado()
         CheckLogin()
     }
+    
+    func loadData() {
+        let listado = CustomerListView(frame: NSRect(x: 0, y: 0, width: CustomerList.frame.width, height: CustomerList.frame.height))
+        CustomerList.addSubview(listado)
+        listado.startLoading()
+        
+    }
+    
     
    
     // MARK: Do something

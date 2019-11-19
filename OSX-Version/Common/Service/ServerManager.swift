@@ -7,10 +7,15 @@
 //
 
 
-import Foundation
+import Cocoa
 
 class ServerManager {
+    static let uid = UserSaved.Load()?.uid
+            
     static let Shared = ServerManager()
+    
+    static var imageCache = NSCache<AnyObject, AnyObject>()
+      
     
     static func jsonArray(json: [String: Any]) -> [[String: Any]] {
         var result = [[String : Any]]()
@@ -26,11 +31,11 @@ class ServerManager {
         return result
     }
     
-    static func Post(path: String, Request: PostRequest, onError: @escaping (ServerError?) -> Void) {
+    static func Post(path: String, Request: NewCustomer.NewCustomer.Request, onError: @escaping (ServerError?) -> Void) {
         
         let basicUrl = Configuration.URL.Database.write
         
-        let url = basicUrl + path
+        let url = basicUrl + "users:\(uid!):" + path
         let _services = NetwordManager()
         
         _services.post(url: url, body: Request.json) { (data, error) in
@@ -46,7 +51,7 @@ class ServerManager {
     
     static func Transaction(path: String, key: String, value: Int, success: @escaping ()->(), fail: @escaping (ServerError?) -> Void) {
         let basicUrl = Configuration.URL.Database.transaction
-        let url = basicUrl + path + ":" + key
+        let url = basicUrl + "users:\(uid!):" + path + ":" + key
         let _services = NetwordManager()
         
         let body = ["valor": value]
@@ -63,7 +68,7 @@ class ServerManager {
     static func Remove(path: String, completion: @escaping (Data?, ServerError?) -> Void) {
         
         let basicUrl = Configuration.URL.Database.remove
-        let url = basicUrl + path
+        let url = basicUrl + "users:\(uid!):" + path
         
         let _services = NetwordManager()
         _services.post(url: url, body: nil) { (data, error) in
@@ -86,7 +91,7 @@ class ServerManager {
     
     static func Read<T:Decodable>(path: String, completion: @escaping (T?, ServerError?) -> ()) {
         let basicUrl = Configuration.URL.Database.read
-        let url = basicUrl + path
+        let url = basicUrl + "users:\(uid!):" + path
         
         let _service = NetwordManager()
         _service.get(url: url) { (data, error) in
@@ -106,7 +111,30 @@ class ServerManager {
     
     static func FindByKey(path: String, key: String, value: String, completion: @escaping ([[String: Any]]?, ServerError?) -> ()) {
         let basicUrl = Configuration.URL.Database.find
-        let url = basicUrl + "\(key)/\(value)/" + path
+        let url = basicUrl + "\(key)/\(value)/" + "users:\(uid!):" + path
+        
+        let _service = NetwordManager()
+        _service.get(url: url) { (data, error) in
+            guard let data = data else {
+                completion(nil, error)
+                return
+            }
+            do {
+               
+                let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String : Any]
+                let array = jsonArray(json: json)
+                completion(array, nil)
+            } catch {
+                completion(nil, ServerError.body_serialization_error)
+                return
+            }
+        }
+        
+    }
+    
+    static func ReadAll(path: String, completion: @escaping ([[String: Any]]?, ServerError?) -> ()) {
+        let basicUrl = Configuration.URL.Database.read
+        let url = basicUrl + "users:\(uid!):" + path
         
         let _service = NetwordManager()
         _service.get(url: url) { (data, error) in
@@ -197,6 +225,51 @@ class ServerManager {
     }
     
     
- 
+    static func DownloadPicture(path: String, completion: @escaping (NSImage?, ServerError?) -> ()) {
+       
+        let basicUrl = Configuration.URL.Storage.download
+        let uidPath = "users:\(uid!):"
+        let url = basicUrl + uidPath + path
+        
+        //if I have already loaded the image, there's no need to load it again.
+        if let imageFromCache = imageCache.object(forKey: url as AnyObject) as? NSImage {
+            //return the image previously loaded
+            print("loaded from cache")
+            completion(imageFromCache, nil)
+            return
+            
+        }
+        
+        
+        let _service = NetwordManager()
+        _service.get(url: url) { (imageData, error) in
+            
+            if error != nil {
+                completion(nil, error)
+                return
+            }
+            if imageData != nil {
+                if let image = NSImage(data: imageData!) {
+                    completion(image, nil)
+                        
+                    
+                    DispatchQueue.main.async {
+                        //save loaded image to cache for better performance
+                        print("saved to cache")
+                        let imageToCache = image
+                        self.imageCache.setObject(imageToCache, forKey: url as AnyObject)
+                        completion(imageToCache, nil)
+                        return
+                        
+                    }
+                    return
+                }
+            }
+            completion(nil, error)
+        }
+        
+    }
+    
+    
 }
 
