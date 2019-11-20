@@ -11,6 +11,7 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
    
     @IBOutlet weak var CustomerList: NSView!
     @IBOutlet weak var backgroundImage: NSImageView!
+    @IBOutlet weak var CustomerStatus: NSView!
     // MARK: Object lifecycle
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -62,14 +63,28 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
     func loadData() {
         let listado = CustomerListView(frame: NSRect(x: 0, y: 0, width: CustomerList.frame.width, height: CustomerList.frame.height))
         CustomerList.addSubview(listado)
+        
+        listado.onSelectedCustomer = { customer in
+            for i in self.CustomerStatus.subviews {
+                i.removeFromSuperview()
+            }
+            self.didSelectCustomer(customerSelected: customer)
+        }
         listado.startLoading()
+        
+       
         
     }
     
+    func didSelectCustomer(customerSelected: CustomerModel) {
+        let aux = CustomerStatusView(frame: CGRect(x: 0, y: 0, width: CustomerStatus.frame.width, height: CustomerStatus.frame.height))
+        aux.viewModel = CustomerStatusViewModel(withView: aux, receivedCustomer: customerSelected)
+        aux.start()
+        CustomerStatus.addSubview(aux)
+    }
     
-   
     // MARK: Do something
-     
+    
     func displaySomething(viewModel: Home.Something.ViewModel) {
         //nameTextField.text = viewModel.name
     }

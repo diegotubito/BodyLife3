@@ -17,4 +17,5 @@ enum NewCustomer {
             var errorMessage : ServerError?
         }
     }
+
 }

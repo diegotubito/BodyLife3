@@ -23,6 +23,7 @@ class CustomerListView: NSView {
     }
     
     var viewModel : CustomerListViewModelContract!
+    var onSelectedCustomer : ((CustomerModel) -> ())?
     
     override init(frame frameRect: NSRect) {
         super .init(frame: frameRect)
@@ -119,6 +120,7 @@ extension CustomerListView: NSTableViewDataSource, NSTableViewDelegate {
             if myTable == tableViewSocio {
                 let posicion = myTable.selectedRow
                 
+                self.onSelectedCustomer?(viewModel.model.registros[posicion])
             }
             
         }

@@ -100,6 +100,15 @@ struct Constants {
             static let whiteSmoke = NSColor(hex: 0xEFEFEF)
             static let iron = NSColor(hex: 0xD1D5D8)
             static let ironGray = NSColor(hex: 0x75706B)
+            
+            static let gray28 = NSColor(hex: 0x474747)
+            static let gray21 = NSColor(hex: 0x363636)
+            static let gray17 = NSColor(hex: 0x2B2B2B)
+            static let gray11 = NSColor(hex: 0x1C1C1C)
+            static let gray10 = NSColor(hex: 0x171717)
+            static let gray13 = NSColor(hex: 0x1E1E1E)
+                          
+            
         }
     }
     

@@ -747,6 +747,12 @@
                                     <constraint firstAttribute="width" constant="400" id="EfR-1C-2mw"/>
                                 </constraints>
                             </customView>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="2QZ-e9-dct">
+                                <rect key="frame" x="424" y="354" width="722" height="350"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="350" id="f23-t8-FtC"/>
+                                </constraints>
+                            </customView>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="X1y-Gn-erX" secondAttribute="bottom" id="0PE-Ql-Wa1"/>
@@ -758,14 +764,18 @@
                             <constraint firstItem="X1y-Gn-erX" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="SRg-EQ-l3B"/>
                             <constraint firstItem="j5Y-bK-bI8" firstAttribute="centerY" secondItem="m2S-Jp-Qdl" secondAttribute="centerY" id="Wcb-iC-nE1"/>
                             <constraint firstItem="X1y-Gn-erX" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="YDY-7Q-I9O"/>
+                            <constraint firstItem="Hyz-sR-HNl" firstAttribute="leading" secondItem="2QZ-e9-dct" secondAttribute="trailing" constant="8" id="ZUf-5x-g6a"/>
                             <constraint firstItem="1Gb-a3-pkK" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="16" id="a8i-ZO-dxt"/>
+                            <constraint firstItem="2QZ-e9-dct" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="16" id="bHj-w8-iPb"/>
                             <constraint firstAttribute="bottom" secondItem="1Gb-a3-pkK" secondAttribute="bottom" constant="16" id="bfF-lL-J0A"/>
+                            <constraint firstItem="2QZ-e9-dct" firstAttribute="leading" secondItem="1Gb-a3-pkK" secondAttribute="trailing" constant="8" id="bo9-jp-chk"/>
                             <constraint firstAttribute="trailing" secondItem="X1y-Gn-erX" secondAttribute="trailing" id="mFJ-be-yjB"/>
                             <constraint firstItem="1Gb-a3-pkK" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="16" id="w4Y-qV-UyR"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="CustomerList" destination="1Gb-a3-pkK" id="5yg-Jt-pl9"/>
+                        <outlet property="CustomerStatus" destination="2QZ-e9-dct" id="iLp-1J-P5I"/>
                         <outlet property="backgroundImage" destination="X1y-Gn-erX" id="i2c-dX-ogT"/>
                     </connections>
                 </viewController>
