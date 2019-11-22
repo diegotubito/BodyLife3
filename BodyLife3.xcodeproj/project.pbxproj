@@ -33,6 +33,7 @@
 		1147AB782384D23100D19AA9 /* CustomerStatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1147AB772384D23100D19AA9 /* CustomerStatusModel.swift */; };
 		1147AB7A2384D41900D19AA9 /* CustomerStatusViewModelContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1147AB792384D41900D19AA9 /* CustomerStatusViewModelContract.swift */; };
 		1147AB7C2384D49E00D19AA9 /* CustomerStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1147AB7B2384D49E00D19AA9 /* CustomerStatusViewModel.swift */; };
+		1147AB7E238611C200D19AA9 /* NSViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1147AB7D238611C200D19AA9 /* NSViewExtension.swift */; };
 		11542D812380698F0011AB1D /* ConnectionStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11542D802380698F0011AB1D /* ConnectionStatus.swift */; };
 		11542D842380703F0011AB1D /* ConsoleCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11542D832380703F0011AB1D /* ConsoleCommand.swift */; };
 		11542D8D2380B0BE0011AB1D /* BaseConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11542D8C2380B0BE0011AB1D /* BaseConnect.swift */; };
@@ -109,6 +110,7 @@
 		1147AB772384D23100D19AA9 /* CustomerStatusModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerStatusModel.swift; sourceTree = "<group>"; };
 		1147AB792384D41900D19AA9 /* CustomerStatusViewModelContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerStatusViewModelContract.swift; sourceTree = "<group>"; };
 		1147AB7B2384D49E00D19AA9 /* CustomerStatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerStatusViewModel.swift; sourceTree = "<group>"; };
+		1147AB7D238611C200D19AA9 /* NSViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSViewExtension.swift; sourceTree = "<group>"; };
 		11542D802380698F0011AB1D /* ConnectionStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionStatus.swift; sourceTree = "<group>"; };
 		11542D832380703F0011AB1D /* ConsoleCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleCommand.swift; sourceTree = "<group>"; };
 		11542D8C2380B0BE0011AB1D /* BaseConnect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseConnect.swift; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 				11233784237AFEC000F60078 /* doubleExtension.swift */,
 				11233782237AFE9400F60078 /* stringExtension.swift */,
 				1163933B238229DE00D14B19 /* imageExtension.swift */,
+				1147AB7D238611C200D19AA9 /* NSViewExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -239,6 +242,8 @@
 		1147AB3E2383648B00D19AA9 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				11EBD39523773E5800AB4BFF /* XibView.swift */,
+				110664C323775C6300DC44F3 /* ErrorMessageView */,
 				1147AB6E2384A9DA00D19AA9 /* CusomterDetail */,
 				1147AB3F2383649300D19AA9 /* CustomerList */,
 			);
@@ -444,7 +449,6 @@
 				11EBD39223773B3C00AB4BFF /* ViewController */,
 				11EBD35723765D2000AB4BFF /* Util */,
 				11EBD35123765C1A00AB4BFF /* Service */,
-				11EBD35023765BFC00AB4BFF /* CustomView */,
 				11EBD34E23765BF000AB4BFF /* Model */,
 			);
 			path = Common;
@@ -458,15 +462,6 @@
 				11233786237B7AEB00F60078 /* CustomerModel.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		11EBD35023765BFC00AB4BFF /* CustomView */ = {
-			isa = PBXGroup;
-			children = (
-				110664C323775C6300DC44F3 /* ErrorMessageView */,
-				11EBD39523773E5800AB4BFF /* XibView.swift */,
-			);
-			path = CustomView;
 			sourceTree = "<group>";
 		};
 		11EBD35123765C1A00AB4BFF /* Service */ = {
@@ -817,6 +812,7 @@
 				11EBD38D237726A800AB4BFF /* LoginModels.swift in Sources */,
 				11EBD3262376499F00AB4BFF /* OSX_Version.xcdatamodeld in Sources */,
 				11EBD38C237726A800AB4BFF /* LoginRouter.swift in Sources */,
+				1147AB7E238611C200D19AA9 /* NSViewExtension.swift in Sources */,
 				11542D812380698F0011AB1D /* ConnectionStatus.swift in Sources */,
 				110664DC237852BD00DC44F3 /* Loader.swift in Sources */,
 				11EBD35923765F2D00AB4BFF /* Reachablility.swift in Sources */,

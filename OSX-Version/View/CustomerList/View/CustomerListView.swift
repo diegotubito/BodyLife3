@@ -12,6 +12,8 @@ import Cocoa
 class CustomerListView: NSView {
     @IBOutlet var myView: NSView!
     
+    @IBOutlet weak var errorView: NSView!
+    @IBOutlet weak var myActivityIndicator: NSProgressIndicator!
     @IBOutlet var tableViewSocio: NSTableView!
     
     var needRedraw : Bool = false {
@@ -52,6 +54,11 @@ class CustomerListView: NSView {
         
         viewModel = CustomerListViewModel(withView: self)
         
+        errorView.wantsLayer = true
+        errorView.layer?.backgroundColor = NSColor.clear.cgColor
+        errorView.isHidden = true
+        errorView.layer?.zPosition = 100
+        
     }
     
     func startLoading() {
@@ -61,6 +68,18 @@ class CustomerListView: NSView {
 
 
 extension CustomerListView: CustomerListViewContract {
+    func showSuccess() {
+        reloadList()
+    }
+    
+    func showError() {
+        DispatchQueue.main.async {
+            self.errorView.isHidden = false
+            self.errorView.Blur()
+        }
+        
+    }
+    
     func reloadList() {
         DispatchQueue.main.async {
             self.tableViewSocio.reloadData()
@@ -68,10 +87,13 @@ extension CustomerListView: CustomerListViewContract {
     }
     
     func showLoading() {
-        
+        myActivityIndicator.startAnimation(nil)
     }
     
     func hideLoading() {
+        DispatchQueue.main.async {
+            self.myActivityIndicator.stopAnimation(nil)
+        }
         
     }
     

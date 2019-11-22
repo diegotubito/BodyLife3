@@ -748,10 +748,7 @@
                                 </constraints>
                             </customView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="2QZ-e9-dct">
-                                <rect key="frame" x="424" y="354" width="722" height="350"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="350" id="f23-t8-FtC"/>
-                                </constraints>
+                                <rect key="frame" x="424" y="452" width="722" height="252"/>
                             </customView>
                         </subviews>
                         <constraints>
@@ -759,6 +756,7 @@
                             <constraint firstAttribute="trailing" secondItem="1S1-yd-7uV" secondAttribute="trailing" constant="8" id="6KY-8u-KDh"/>
                             <constraint firstAttribute="trailing" secondItem="Hyz-sR-HNl" secondAttribute="trailing" constant="8" id="9q9-pl-ebX"/>
                             <constraint firstItem="j5Y-bK-bI8" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="GwV-m2-qVw"/>
+                            <constraint firstItem="2QZ-e9-dct" firstAttribute="height" secondItem="X1y-Gn-erX" secondAttribute="height" multiplier="0.35" id="HbF-m9-BLJ"/>
                             <constraint firstItem="1S1-yd-7uV" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="8" id="Mh0-g8-JGS"/>
                             <constraint firstItem="Hyz-sR-HNl" firstAttribute="top" secondItem="1S1-yd-7uV" secondAttribute="bottom" constant="16" id="Oe8-cd-uRH"/>
                             <constraint firstItem="X1y-Gn-erX" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="SRg-EQ-l3B"/>

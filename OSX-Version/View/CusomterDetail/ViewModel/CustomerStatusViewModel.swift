@@ -19,15 +19,25 @@ class CustomerStatusViewModel: CustomerStatusViewModelContract {
     }
     
     func loadData() {
+        _view.showLoading()
+        load()
+    }
+    
+    func load() {
         let path = "statusData:\(receivedCustomer.childID)"
         
-         ServerManager.Read(path: path) { (value:CustomerStatusModel?, error) in
+        ServerManager.Read(path: path) { (value:CustomerStatusModel.CustomerStatus?, error) in
+            self._view.hideLoading()
+            
+            if error != nil, error != ServerError.body_serialization_error {
+                self._view.showError(message: ErrorHandler.Server(error: error!))
+                return
+            }
+            
             DispatchQueue.main.async {
-                self._view.showData(value: value)
+                self._view.showSuccess(value: value)
             }
         }
     }
-    
-   
     
 }

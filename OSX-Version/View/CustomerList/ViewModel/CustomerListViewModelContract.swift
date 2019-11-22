@@ -17,7 +17,8 @@ protocol CustomerListViewModelContract {
 }
 
 protocol CustomerListViewContract {
-    func reloadList()
     func showLoading()
     func hideLoading()
+    func showSuccess()
+    func showError()
 }

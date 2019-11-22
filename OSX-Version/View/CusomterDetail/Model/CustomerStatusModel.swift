@@ -8,12 +8,16 @@
 
 import Cocoa
 
-struct CustomerStatusModel: Decodable {
-    var childID : String
-    var surname : String
-    var name : String
-    var balance : Double
-  //  var expirationDate : Double
-    var activities : String
+struct CustomerStatusModel {
+    var isWaiting : Bool = false
+    
+    struct CustomerStatus: Decodable {
+        var childID : String
+        var surname : String
+        var name : String
+        var balance : Double
+        //  var expirationDate : Double
+        var activities : String
+    }
     
 }

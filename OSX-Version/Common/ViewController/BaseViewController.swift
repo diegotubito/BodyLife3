@@ -118,10 +118,7 @@ class BaseViewController : NSViewController {
         let backgroundView = NSView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight))
         backgroundView.wantsLayer = true
          
-        let blurFilter = CIFilter(name: "CIGaussianBlur")
-        blurFilter?.setDefaults()
-        blurFilter?.setValue(5.0, forKey: kCIInputRadiusKey)
-        backgroundView.layer?.backgroundFilters?.append(blurFilter!)
+        backgroundView.Blur()
         
         
         lockBackgroundView = backgroundView

@@ -6,7 +6,7 @@ protocol LoginDisplayLogic: class {
 
 class LoginViewController: BaseViewController, LoginDisplayLogic {
     @IBOutlet weak var resultLabel: NSTextField!
-     @IBOutlet weak var userTextField: NSTextField!
+    @IBOutlet weak var userTextField: NSTextField!
     @IBOutlet weak var passwordTextField: NSSecureTextField!
     var interactor: LoginBusinessLogic?
     var router: (NSObjectProtocol & LoginRoutingLogic & LoginDataPassing)?

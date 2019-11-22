@@ -36,7 +36,7 @@ class BaseConnect {
         var session = URLSession.shared
         
         let sessionConfig = URLSessionConfiguration.default
-        sessionConfig.timeoutIntervalForRequest = 5
+        sessionConfig.timeoutIntervalForRequest = 10
         sessionConfig.timeoutIntervalForResource = 15.0
         session = URLSession(configuration: sessionConfig)
         

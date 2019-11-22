@@ -46,18 +46,21 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
         super.viewDidLoad()
         setupWindow(width: Constants.ViewControllerSizes.Home.width, height: Constants.ViewControllerSizes.Home.height)
         
-    
-     
+        NotificationCenter.default.addObserver(self, selector: #selector(didConnected), name: .notificationConnected, object: nil)
+
     }
     
     override func viewDidAppear() {
         super .viewDidAppear()
         
-      loadData()
+    }
     
-          // setupListadoSocios()
-        // setupDetalleSocioSeleccionado()
-        CheckLogin()
+    @objc func didConnected() {
+        DispatchQueue.main.async {
+            self.CheckLogin()
+            self.loadData()
+            
+        }
     }
     
     func loadData() {
@@ -71,9 +74,6 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
             self.didSelectCustomer(customerSelected: customer)
         }
         listado.startLoading()
-        
-       
-        
     }
     
     func didSelectCustomer(customerSelected: CustomerModel) {

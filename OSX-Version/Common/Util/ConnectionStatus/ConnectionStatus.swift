@@ -29,8 +29,8 @@ class Connect : BaseConnect {
     static let FirebaseEndpoint = Configuration.URL.Check.checkFirebase + "BodyLife:publico:conexion"
     
         
-    static var timerConstantShort : TimeInterval = 15
-    static var timerConstantLong : TimeInterval = 2
+    static var timerConstantShort : TimeInterval = 2
+    static var timerConstantLong : TimeInterval = 15
     
     static var messageString : String = ""
     
@@ -40,10 +40,8 @@ class Connect : BaseConnect {
                 
                 if isConnected ?? false {
                     NotificationCenter.default.post(name: .notificationConnected, object: nil)
-                    TimerConfiguration(time: timerConstantLong)
                 } else {
                     NotificationCenter.default.post(name: .notificationDisconnected, object: nil)
-                    TimerConfiguration(time: timerConstantShort)
                 }
                
             }
@@ -82,6 +80,7 @@ class Connect : BaseConnect {
     }
     
     @objc private static func PeriodicChecking() {
+        TimerConfiguration(time: timerConstantShort)
         Check { (disconnectedReason) in
             switch disconnectedReason {
             case .firebase:
@@ -97,6 +96,7 @@ class Connect : BaseConnect {
                 isConnected = false
                 break
             default:
+                TimerConfiguration(time: timerConstantLong)
                 isConnected = true
                 break
             }
@@ -114,6 +114,7 @@ class Connect : BaseConnect {
     
     private static func Check(notConnected: @escaping (DisconnectReason?) -> ()) {
         // INTERNET CHECK
+        print("checking internet")
         var internetConnection = false
         let internetSemasphore = DispatchSemaphore(value: 0)
         checkInternet { (result) in
@@ -127,6 +128,7 @@ class Connect : BaseConnect {
         }
         
         // SERVER CHECK
+            print("checking internet")
         var serverConnection = false
         let serverSemasphore = DispatchSemaphore(value: 0)
         checkServer { (result) in
@@ -140,6 +142,7 @@ class Connect : BaseConnect {
         }
  
         // FIREBASE CHECK
+            print("checking internet")
         var firebaseConnection = false
         let firebaseSemasphore = DispatchSemaphore(value: 0)
         checkFirebase { (result) in
