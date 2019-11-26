@@ -21,27 +21,26 @@ class CustomerListViewModel: CustomerListViewModelContract {
     
     func loadCustomers() {
         _view.showLoading()
-        DispatchQueue.global().async {
-            let path = "briefData"
-            ServerManager.ReadAll(path: path) { (array, error) in
-                
-                self._view.hideLoading()
-                if error != nil {
-                    self._view.showError()
-                    return
-                }
-                do {
-                    if array != nil {
-                        let data = try JSONSerialization.data(withJSONObject: array!, options: [])
-                        let registros = try JSONDecoder().decode([CustomerModel].self, from: data)
-                        let fileredArray = registros.sorted(by: { $0.createdAt > $1.createdAt })
-                        self.model.registros = fileredArray
-                        self._view.showSuccess()
-                    }
-                } catch {
-                    self._view.showError()
-                }
+        let path = "briefData"
+        ServerManager.ReadAll(path: path) { (array, error) in
+            
+            self._view.hideLoading()
+            if error != nil {
+                self._view.showError()
+                return
             }
+            do {
+                if array != nil {
+                    let data = try JSONSerialization.data(withJSONObject: array!, options: [])
+                    let registros = try JSONDecoder().decode([CustomerModel].self, from: data)
+                    let fileredArray = registros.sorted(by: { $0.createdAt > $1.createdAt })
+                    self.model.registros = fileredArray
+                    self._view.showSuccess()
+                }
+            } catch {
+                self._view.showError()
+            }
+            
             
         }
     }

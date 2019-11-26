@@ -741,39 +741,32 @@
                                     <action selector="newCustomerPressed:" target="XfG-lQ-9wD" id="UVa-er-Mn0"/>
                                 </connections>
                             </button>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="1Gb-a3-pkK">
-                                <rect key="frame" x="16" y="16" width="400" height="688"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="400" id="EfR-1C-2mw"/>
-                                </constraints>
-                            </customView>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="2QZ-e9-dct">
-                                <rect key="frame" x="424" y="452" width="722" height="252"/>
-                            </customView>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ekn-u5-woH">
+                                <rect key="frame" x="1176" y="585" width="81" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="RuE-nj-J8p">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="abirPageViewController:" target="XfG-lQ-9wD" id="odK-xd-7ks"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="X1y-Gn-erX" secondAttribute="bottom" id="0PE-Ql-Wa1"/>
                             <constraint firstAttribute="trailing" secondItem="1S1-yd-7uV" secondAttribute="trailing" constant="8" id="6KY-8u-KDh"/>
                             <constraint firstAttribute="trailing" secondItem="Hyz-sR-HNl" secondAttribute="trailing" constant="8" id="9q9-pl-ebX"/>
                             <constraint firstItem="j5Y-bK-bI8" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="GwV-m2-qVw"/>
-                            <constraint firstItem="2QZ-e9-dct" firstAttribute="height" secondItem="X1y-Gn-erX" secondAttribute="height" multiplier="0.35" id="HbF-m9-BLJ"/>
                             <constraint firstItem="1S1-yd-7uV" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="8" id="Mh0-g8-JGS"/>
                             <constraint firstItem="Hyz-sR-HNl" firstAttribute="top" secondItem="1S1-yd-7uV" secondAttribute="bottom" constant="16" id="Oe8-cd-uRH"/>
                             <constraint firstItem="X1y-Gn-erX" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="SRg-EQ-l3B"/>
                             <constraint firstItem="j5Y-bK-bI8" firstAttribute="centerY" secondItem="m2S-Jp-Qdl" secondAttribute="centerY" id="Wcb-iC-nE1"/>
                             <constraint firstItem="X1y-Gn-erX" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="YDY-7Q-I9O"/>
-                            <constraint firstItem="Hyz-sR-HNl" firstAttribute="leading" secondItem="2QZ-e9-dct" secondAttribute="trailing" constant="8" id="ZUf-5x-g6a"/>
-                            <constraint firstItem="1Gb-a3-pkK" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="16" id="a8i-ZO-dxt"/>
-                            <constraint firstItem="2QZ-e9-dct" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="16" id="bHj-w8-iPb"/>
-                            <constraint firstAttribute="bottom" secondItem="1Gb-a3-pkK" secondAttribute="bottom" constant="16" id="bfF-lL-J0A"/>
-                            <constraint firstItem="2QZ-e9-dct" firstAttribute="leading" secondItem="1Gb-a3-pkK" secondAttribute="trailing" constant="8" id="bo9-jp-chk"/>
                             <constraint firstAttribute="trailing" secondItem="X1y-Gn-erX" secondAttribute="trailing" id="mFJ-be-yjB"/>
-                            <constraint firstItem="1Gb-a3-pkK" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="16" id="w4Y-qV-UyR"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="CustomerList" destination="1Gb-a3-pkK" id="5yg-Jt-pl9"/>
-                        <outlet property="CustomerStatus" destination="2QZ-e9-dct" id="iLp-1J-P5I"/>
                         <outlet property="backgroundImage" destination="X1y-Gn-erX" id="i2c-dX-ogT"/>
                     </connections>
                 </viewController>

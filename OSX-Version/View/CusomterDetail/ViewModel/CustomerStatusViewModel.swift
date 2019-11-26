@@ -16,6 +16,7 @@ class CustomerStatusViewModel: CustomerStatusViewModelContract {
     required init(withView view: CustomerStatusViewContract, receivedCustomer: CustomerModel) {
         self._view = view
         self.receivedCustomer = receivedCustomer
+        self.model = CustomerStatusModel()
     }
     
     func loadData() {
@@ -26,14 +27,14 @@ class CustomerStatusViewModel: CustomerStatusViewModelContract {
     func load() {
         let path = "statusData:\(receivedCustomer.childID)"
         
-        ServerManager.Read(path: path) { (value:CustomerStatusModel.CustomerStatus?, error) in
+        ServerManager.Read(path: path) { (value:CustomerStatus?, error) in
             self._view.hideLoading()
             
             if error != nil, error != ServerError.body_serialization_error {
                 self._view.showError(message: ErrorHandler.Server(error: error!))
                 return
             }
-            
+            self.model.loadedStatus = value
             DispatchQueue.main.async {
                 self._view.showSuccess(value: value)
             }

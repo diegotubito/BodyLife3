@@ -9,9 +9,11 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
     var router: (NSObjectProtocol & HomeRoutingLogic & HomeDataPassing)?
     
    
-    @IBOutlet weak var CustomerList: NSView!
     @IBOutlet weak var backgroundImage: NSImageView!
-    @IBOutlet weak var CustomerStatus: NSView!
+    var customerStatusView: CustomerStatusView!
+    var customerListView : CustomerListView!
+    var sellActivityView : SellActivityCustomView!
+    
     // MARK: Object lifecycle
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -48,6 +50,12 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
         
         NotificationCenter.default.addObserver(self, selector: #selector(didConnected), name: .notificationConnected, object: nil)
 
+        createCustomerListView()
+        customerListView.isHidden = false
+        createCustomerStatusView()
+        customerStatusView.isHidden = true
+        createSellActivityCustomView()
+        sellActivityView.isHidden = true
     }
     
     override func viewDidAppear() {
@@ -57,30 +65,12 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
     
     @objc func didConnected() {
         DispatchQueue.main.async {
-            self.CheckLogin()
-            self.loadData()
+            self.customerListView.startLoading()
+            self.customerListView.onSelectedCustomer = { customer in
+                self.didSelectCustomer(customerSelected: customer)
+            }
             
         }
-    }
-    
-    func loadData() {
-        let listado = CustomerListView(frame: NSRect(x: 0, y: 0, width: CustomerList.frame.width, height: CustomerList.frame.height))
-        CustomerList.addSubview(listado)
-        
-        listado.onSelectedCustomer = { customer in
-            for i in self.CustomerStatus.subviews {
-                i.removeFromSuperview()
-            }
-            self.didSelectCustomer(customerSelected: customer)
-        }
-        listado.startLoading()
-    }
-    
-    func didSelectCustomer(customerSelected: CustomerModel) {
-        let aux = CustomerStatusView(frame: CGRect(x: 0, y: 0, width: CustomerStatus.frame.width, height: CustomerStatus.frame.height))
-        aux.viewModel = CustomerStatusViewModel(withView: aux, receivedCustomer: customerSelected)
-        aux.start()
-        CustomerStatus.addSubview(aux)
     }
     
     // MARK: Do something
@@ -88,9 +78,9 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
     func displaySomething(viewModel: Home.Something.ViewModel) {
         //nameTextField.text = viewModel.name
     }
+    
     @IBAction func closeSessionPressed(_ sender: Any) {
         UserSaved.Remove()
-        
         CheckLogin()
     }
     @IBAction func newCustomerPressed(_ sender: Any) {

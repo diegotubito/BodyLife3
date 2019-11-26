@@ -18,6 +18,6 @@ protocol CustomerStatusViewContract {
     func reloadList()
     func showLoading()
     func hideLoading()
-    func showSuccess(value: CustomerStatusModel.CustomerStatus?)
+    func showSuccess(value: CustomerStatus?)
     func showError(message: String)
 }

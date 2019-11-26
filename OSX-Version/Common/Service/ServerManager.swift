@@ -49,6 +49,24 @@ class ServerManager {
         
     }
     
+    static func Post(path: String, json: [String : Any], onError: @escaping (ServerError?) -> Void) {
+        
+        let basicUrl = Configuration.URL.Database.write
+        
+        let url = basicUrl + "users:\(uid!):" + path
+        let _services = NetwordManager()
+        
+        _services.post(url: url, body: json) { (data, error) in
+            guard data != nil else {
+                onError(error)
+                return
+            }
+          
+            onError(nil)
+        }
+        
+    }
+    
     static func Transaction(path: String, key: String, value: Int, success: @escaping ()->(), fail: @escaping (ServerError?) -> Void) {
         let basicUrl = Configuration.URL.Database.transaction
         let url = basicUrl + "users:\(uid!):" + path + ":" + key
@@ -80,8 +98,8 @@ class ServerManager {
     static func Update(path: String, json: [String: Any], completion: @escaping (Data?, ServerError?) -> Void) {
         
         let basicUrl = Configuration.URL.Database.update
-        let url = basicUrl + path
-        
+        let url = basicUrl + "users:\(uid!):" + path
+             
         let _services = NetwordManager()
         _services.post(url: url, body: json) { (data, error) in
             completion(data, error)
@@ -134,6 +152,7 @@ class ServerManager {
     
     static func ReadAll(path: String, completion: @escaping ([[String: Any]]?, ServerError?) -> ()) {
         let basicUrl = Configuration.URL.Database.read
+        if uid == nil {return}
         let url = basicUrl + "users:\(uid!):" + path
         
         let _service = NetwordManager()
@@ -154,6 +173,28 @@ class ServerManager {
         }
         
     }
+    
+    static func ReadJSON(path: String, completion: @escaping ([String: Any]?, ServerError?) -> ()) {
+           let basicUrl = Configuration.URL.Database.read
+           let url = basicUrl + "users:\(uid!):" + path
+           
+           let _service = NetwordManager()
+           _service.get(url: url) { (data, error) in
+               guard let data = data else {
+                   completion(nil, error)
+                   return
+               }
+               do {
+                  
+                   let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String : Any]
+                   completion(json, nil)
+               } catch {
+                   completion(nil, ServerError.body_serialization_error)
+                   return
+               }
+           }
+           
+       }
     
     static func CurrentUser(completion: @escaping (CurrentUserModel?, ServerError?) -> Void) {
         let basicUrl = Configuration.URL.Auth.currentUser

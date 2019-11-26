@@ -25,6 +25,8 @@ class CustomerStatusView: XibView {
     var viewModel : CustomerStatusViewModelContract!
     @IBOutlet weak var DayBox: NSBox!
     
+    var didPressSellActivityButton : (() -> ())?
+    
     override func commonInit() {
         super .commonInit()
         self.wantsLayer = true
@@ -57,18 +59,27 @@ class CustomerStatusView: XibView {
         self.DayBox.layer?.borderColor = NSColor.darkGray.cgColor
         
     }
+    @IBAction func SellActivityPressed(_ sender: Any) {
+        didPressSellActivityButton?()
+    }
 }
 
 
 extension CustomerStatusView : CustomerStatusViewContract{
-    func showSuccess(value: CustomerStatusModel.CustomerStatus?) {
+    func showSuccess(value: CustomerStatus?) {
         errorView.isHidden = true
         
         if let data = value {
+            let expirationDate = data.expiration.toDate()
+            let diff = expirationDate?.diasTranscurridos(fecha: Date())
+            let balance = data.balance
             titleLabel.stringValue = data.surname + ", " + data.name
-            subtitleLabel.stringValue = data.activities
+            subtitleLabel.stringValue = "actividades"
+            expirationDateLabel.stringValue = (data.expiration.toDate()?.toString(formato: "dd-MM-yyyy"))!
+            remainingDayLabel.stringValue = String(diff!)
+            saldoLabel.stringValue = balance.formatoMoneda(decimales: 2)
         } else {
-            titleLabel.stringValue = "No info"
+            titleLabel.stringValue = "El socio no tiene ningún carnet ingresado."
             subtitleLabel.stringValue = ""
             expirationDateLabel.stringValue = "?"
             saldoLabel.stringValue = "?"

@@ -1,6 +1,9 @@
 import Cocoa
 import AlamofireImage
 
+extension Notification.Name {
+    static let needLogin = Notification.Name("needLogin")
+}
 protocol NewCustomerDisplayLogic: class {
     func displaySaveNewCustomerResult(viewModel: NewCustomer.NewCustomer.ViewModel)
 }
@@ -80,7 +83,7 @@ class NewCustomerViewController: BaseViewController, NewCustomerDisplayLogic {
         CustomerIconImageView.layer?.cornerRadius = 20
         CustomerIconImageView.layer?.borderWidth = 2
         
-    
+        
     }
     
     // MARK: Do something
@@ -125,9 +128,7 @@ class NewCustomerViewController: BaseViewController, NewCustomerDisplayLogic {
         }
         //nameTextField.text = viewModel.name
         if let error = viewModel.errorMessage {
-            if error == ServerError.invalidToken {
-                self.GoToLogin(sameUserName: true)
-            } else if error == ServerError.duplicated {
+            if error == ServerError.duplicated {
                 ShowSheetAlert(title: "El DNI ya existe", message: "Es posible que el socio ya haya sido ingresado anteriormente.", buttons: [.ok])
                 
             } else {

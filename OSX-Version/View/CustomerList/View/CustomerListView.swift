@@ -62,8 +62,12 @@ class CustomerListView: NSView {
     }
     
     func startLoading() {
+//        errorView.isHidden = true
+        
         viewModel.loadCustomers()
     }
+    
+    
 }
 
 
@@ -141,7 +145,7 @@ extension CustomerListView: NSTableViewDataSource, NSTableViewDelegate {
             
             if myTable == tableViewSocio {
                 let posicion = myTable.selectedRow
-                
+                self.viewModel.model.selectedCustomer = viewModel.model.registros[posicion]
                 self.onSelectedCustomer?(viewModel.model.registros[posicion])
             }
             

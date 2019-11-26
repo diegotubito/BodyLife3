@@ -36,7 +36,7 @@ class Connect : BaseConnect {
     
     static var isConnected : Bool? {
         didSet {
-            if oldValue != isConnected {
+         //   if oldValue != isConnected {
                 
                 if isConnected ?? false {
                     NotificationCenter.default.post(name: .notificationConnected, object: nil)
@@ -44,7 +44,7 @@ class Connect : BaseConnect {
                     NotificationCenter.default.post(name: .notificationDisconnected, object: nil)
                 }
                
-            }
+        //    }
         }
     }
     
@@ -128,7 +128,7 @@ class Connect : BaseConnect {
         }
         
         // SERVER CHECK
-            print("checking internet")
+            print("checking server")
         var serverConnection = false
         let serverSemasphore = DispatchSemaphore(value: 0)
         checkServer { (result) in
@@ -142,7 +142,7 @@ class Connect : BaseConnect {
         }
  
         // FIREBASE CHECK
-            print("checking internet")
+            print("checking firebase")
         var firebaseConnection = false
         let firebaseSemasphore = DispatchSemaphore(value: 0)
         checkFirebase { (result) in
@@ -155,6 +155,23 @@ class Connect : BaseConnect {
             notConnected(.firebase)
             return
         }
+        
+        // USER SESSION
+              print("checking user session")
+        var userSessionOk = false
+        let userSessionSemasphore = DispatchSemaphore(value: 0)
+        
+        checkUserSession { (result) in
+            userSessionOk = result
+            userSessionSemasphore.signal()
+        }
+        _ = userSessionSemasphore.wait(timeout: .distantFuture)
+        
+        if !userSessionOk {
+            NotificationCenter.default.post(name: .needLogin, object: nil)
+            return
+        }
+        
         notConnected(nil)
     }
     
@@ -185,13 +202,35 @@ class Connect : BaseConnect {
         }
     }
     
+    private static func checkUserSession(result: @escaping (Bool) -> ()) {
+        ServerManager.CurrentUser { (currentUser, serverError) in
+            
+            if serverError != nil {
+                if serverError! == ServerError.invalidToken || serverError == ServerError.tokenNotProvided {
+                    if serverError! == ServerError.invalidToken {
+                        print("token vencido: ", UserSaved.TokenExp()?.toString(formato: "dd-MM-yyyy HH:mm:ss") ?? "nil")
+                    }
+                    print("need new login:", ErrorHandler.Server(error: serverError!))
+                    result(false)
+                }
+            } else {
+                UserSaved.SaveDate(date: currentUser?.exp)
+                print("token vigente: ", UserSaved.TokenExp()?.toString(formato: "dd-MM-yyyy HH:mm:ss") ?? "nil")
+                result(true)
+                
+            }
+        }
+    }
     
-      @objc static func reachable() {
+    
+    
+    
+    @objc static func reachable() {
         timer?.invalidate()
         PeriodicChecking()
         TimerConfiguration(time: timerConstantShort)
-      }
-      
+    }
+    
     @objc static func nonReachable() {
         timer?.invalidate()
         PeriodicChecking()

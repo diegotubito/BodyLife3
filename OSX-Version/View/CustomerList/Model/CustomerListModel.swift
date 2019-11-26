@@ -10,4 +10,5 @@ import Cocoa
 
 struct CustomerListModel {
     var registros = [CustomerModel]()
+    var selectedCustomer : CustomerModel?
 }

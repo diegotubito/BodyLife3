@@ -11,7 +11,7 @@ import Cocoa
 protocol CustomerListViewModelContract {
     init(withView view: CustomerListViewContract)
     
-    var model : CustomerListModel! {get}
+    var model : CustomerListModel! {get set}
     
     func loadCustomers()
 }

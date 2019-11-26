@@ -74,7 +74,7 @@ class BaseViewController : NSViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(disconnected), name: .notificationDisconnected, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(connected), name: .notificationConnected, object: nil)
         
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(GoToLogin), name: .needLogin, object: nil)
     }
     
     deinit {
@@ -83,18 +83,21 @@ class BaseViewController : NSViewController {
     }
   
     @objc func connected() {
-        print("push connected")
-           if noConnectionView != nil {
-               self.unlockBackground()
-               self.deleteNoConnectionView()
-           }
-       }
-       
-       @objc func disconnected() {
-        print("push disconnected")
-        showNoConnection(message: Connect.messageString)
-       }
-   
+        if noConnectionView != nil {
+            self.unlockBackground()
+            self.deleteNoConnectionView()
+        }
+    }
+    
+    @objc func disconnected() {
+        DispatchQueue.main.async {
+            self.unlockBackground()
+            self.deleteNoConnectionView()
+            self.showNoConnection(message: Connect.messageString)
+            
+        }
+    }
+    
     func showNoConnection(message: String) {
         
         lockBackground()
@@ -144,6 +147,7 @@ class BaseViewController : NSViewController {
     }
     
     func deleteNoConnectionView() {
+        if noConnectionView == nil {return}
         noConnectionView.removeFromSuperview()
         noConnectionView = nil
     }
@@ -198,13 +202,17 @@ class BaseViewController : NSViewController {
         
         if needLogin {
             print("go to login")
-            GoToLogin(sameUserName: false)
+            GoToLogin()
         }
         
     }
     
-    @objc func GoToLogin(sameUserName: Bool) {
+    @objc func GoToLogin() {
         DispatchQueue.main.async {
+            var sameUserName = false
+            if (UserSaved.Load()?.uid) != nil {
+                sameUserName = true
+            }
             self.routeToLogin(sameUserName: sameUserName) { data in
                 print("successfull")
                 UserSaved.Save(userData: data)

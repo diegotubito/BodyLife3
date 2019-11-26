@@ -17,3 +17,13 @@ struct CustomerModel: Decodable {
     var thumbnailImage : String?
 }
 
+struct CustomerStatus: Decodable {
+    var childID : String
+    var surname : String
+    var name : String
+    var balance : Double
+    var expiration : Double
+    var childIDLastActivity : String
+    var childIDLastPeriod : String
+    var childIDLastDiscount : String
+}
