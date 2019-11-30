@@ -9,6 +9,7 @@
 import Cocoa
 
 class SellActivityCustomView: XibView, SellActivityViewContract {
+    
     @IBOutlet weak var surname: NSTextField!
     @IBOutlet weak var amountTextField: NSTextField!
     @IBOutlet weak var toDate: NSDatePicker!
@@ -26,7 +27,7 @@ class SellActivityCustomView: XibView, SellActivityViewContract {
     @IBOutlet weak var dateLineSeparator: NSImageView!
     override func commonInit() {
         super .commonInit()
-        
+        disableDates()
         viewModel = SellActivityViewModel(withView: self)
         
         DispatchQueue.main.async {
@@ -38,6 +39,7 @@ class SellActivityCustomView: XibView, SellActivityViewContract {
         }
         DiscountPopUp.removeAllItems()
         DiscountPopUp.addItem(withTitle: "Ninguno")
+        
     }
     
     func addDateSeparator() {
@@ -51,7 +53,7 @@ class SellActivityCustomView: XibView, SellActivityViewContract {
     }
     
     func addSaveButton() {
-        saveButtonView = SaveButtonCustomView(frame: CGRect(x: self.frame.width / 2, y: 16, width: 75, height: 75))
+        saveButtonView = SaveButtonCustomView(frame: CGRect(x: (self.frame.width - 75) / 2, y: 16, width: 75, height: 75))
         saveButtonView.didButtonPressed = {
             self.savePressed()
         }
@@ -70,10 +72,12 @@ class SellActivityCustomView: XibView, SellActivityViewContract {
     @IBAction func discountPopUpAction(_ sender: NSPopUpButton) {
         _ = viewModel.validate()
         viewModel.setSelectedDiscount(row: sender.indexOfSelectedItem)
+
     }
     
+    
     @IBAction func fromDateDidChanged(_ sender: NSDatePicker) {
-        
+        viewModel.estimateToDate()
     }
     
     @IBAction func toDateDidChanged(_ sender: NSDatePicker) {
@@ -92,7 +96,40 @@ class SellActivityCustomView: XibView, SellActivityViewContract {
         tableViewActivity.deselectAll(nil)
         tableViewPeriodo.deselectAll(nil)
         self.viewModel.autoSelectActivity()
-        
+        setInitialFromDate()
+        self.viewModel.estimateToDate()
+    }
+    
+    func disableDates() {
+        fromDate.isEnabled = false
+        toDate.isEnabled = false
+    }
+    
+    func enableDates() {
+          fromDate.isEnabled = true
+          toDate.isEnabled = true
+      }
+    
+    func setToDate(date: Date) {
+        toDate.dateValue = date
+    }
+       
+    func setInitialFromDate() {
+        let expiration = viewModel.model!.selectedStatus?.expiration
+        guard let doubleDate = expiration else {
+            fromDate.dateValue = Date()
+            return
+        }
+        guard let date = doubleDate.toDate() else {
+            fromDate.dateValue = Date()
+            return
+        }
+        let diff = date.diasTranscurridos(fecha: Date())
+        if diff! > 10 {
+            fromDate.dateValue = Date()
+            return
+        }
+        fromDate.dateValue = date
     }
     
     func savePressed() {
@@ -114,7 +151,9 @@ class SellActivityCustomView: XibView, SellActivityViewContract {
     
     func reloadView() {
         DispatchQueue.main.async {
+            
             self.tableViewActivity.reloadData()
+            self.selectActivityManually(position: 0)
             
             self.DiscountPopUp.addItems(withTitles: self.viewModel.getDiscountTitles())
         }
@@ -173,9 +212,12 @@ class SellActivityCustomView: XibView, SellActivityViewContract {
     }
     
     func selectActivityManually(position: Int) {
-        let index = IndexSet(integer: position)
-        self.tableViewActivity.selectRowIndexes(index, byExtendingSelection: false)
-        self.tableViewActivity.scrollRowToVisible(position)
+        if position == -1 {return}
+        DispatchQueue.main.async {
+            let index = IndexSet(integer: position)
+            self.tableViewActivity.selectRowIndexes(index, byExtendingSelection: false)
+            self.tableViewActivity.scrollRowToVisible(position)
+        }
     }
     
 }
@@ -208,7 +250,7 @@ extension SellActivityCustomView: NSTableViewDataSource, NSTableViewDelegate {
     }
     
     func tableViewSelectionDidChange(_ notification: Notification) {
-         
+        
         if let myTable = notification.object as? NSTableView {
             if myTable == tableViewActivity {
                 viewModel.setSelectedActivity(row: myTable.selectedRow)

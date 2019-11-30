@@ -11,12 +11,10 @@ import Cocoa
 class CustomerStatusViewModel: CustomerStatusViewModelContract {
     var model: CustomerStatusModel!
     var _view : CustomerStatusViewContract!
-    var receivedCustomer : CustomerModel!
     
     required init(withView view: CustomerStatusViewContract, receivedCustomer: CustomerModel) {
         self._view = view
-        self.receivedCustomer = receivedCustomer
-        self.model = CustomerStatusModel()
+        self.model = CustomerStatusModel(receivedCustomer: receivedCustomer)
     }
     
     func loadData() {
@@ -25,7 +23,7 @@ class CustomerStatusViewModel: CustomerStatusViewModelContract {
     }
     
     func load() {
-        let path = "statusData:\(receivedCustomer.childID)"
+        let path = "statusData:\(model.receivedCustomer.childID)"
         
         ServerManager.Read(path: path) { (value:CustomerStatus?, error) in
             self._view.hideLoading()

@@ -91,7 +91,7 @@ extension NewCustomerViewController: NSTextFieldDelegate {
     }
     
     func ValidateDNI() -> Bool {
-        return ValidationField.IsValid(text: dniTF.stringValue, type: .Numeric, minChar: 8, maxChar: 11)
+        return ValidationField.IsValid(text: dniTF.stringValue, type: .Numeric, minChar: 1, maxChar: 11)
     }
     
     func ValidateApellido() -> Bool {

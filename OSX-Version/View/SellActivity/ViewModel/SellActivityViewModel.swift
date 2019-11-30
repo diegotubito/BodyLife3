@@ -9,6 +9,8 @@
 import Cocoa
 
 class SellActivityViewModel: SellActivityViewModelContract {
+ 
+    
     
     
     
@@ -147,8 +149,9 @@ class SellActivityViewModel: SellActivityViewModelContract {
             
             return
         }
-        
         model.selectedPeriod = model.periods[row]
+        estimateToDate()
+        
         _ = validate()
         
     }
@@ -161,14 +164,28 @@ class SellActivityViewModel: SellActivityViewModelContract {
         }
     }
     
+    func estimateToDate() {
+        
+        if model.selectedPeriod == nil {
+            _view.setToDate(date: Date())
+            return
+        }
+        let selectedPeriod = model.selectedPeriod
+        let days = selectedPeriod?.days
+        let fromDate = _view.getFromDate()
+        _view.setToDate(date: Calendar.current.date(byAdding: .day, value: days!, to: fromDate)!)
+     }
+    
     func validate() -> Bool {
         var result = true
         if model.selectedActivity == nil {
             result = false
         }
         if model.selectedPeriod == nil {
+            _view.disableDates()
             result = false
         }
+        _view.enableDates()
         let amount = _view.getAmount()
         if let amountDouble = Double(amount) {
             if amountDouble < 0 && amountDouble > 1000000 {

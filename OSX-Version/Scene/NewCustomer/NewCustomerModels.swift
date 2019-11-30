@@ -12,9 +12,11 @@ enum NewCustomer {
         }
         struct Response {
             var error : ServerError?
+            var json : [String : Any]
         }
         struct ViewModel {
             var errorMessage : ServerError?
+            var customer : CustomerModel?
         }
     }
 

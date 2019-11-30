@@ -22,6 +22,7 @@ protocol SellActivityViewModelContract {
     func save()
     func setCustomerStatus(selectedCustomer: CustomerModel, selectedStatus: CustomerStatus?)
     func autoSelectActivity()
+    func estimateToDate()
 }
 
 protocol SellActivityViewContract {
@@ -36,4 +37,7 @@ protocol SellActivityViewContract {
     func getToDate() -> Date
     func getAmount() -> String
     func selectActivityManually(position: Int)
+    func setToDate(date: Date)
+    func disableDates()
+    func enableDates()
 }

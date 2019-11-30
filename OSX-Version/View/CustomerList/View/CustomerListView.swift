@@ -15,7 +15,6 @@ class CustomerListView: NSView {
     @IBOutlet weak var errorView: NSView!
     @IBOutlet weak var myActivityIndicator: NSProgressIndicator!
     @IBOutlet var tableViewSocio: NSTableView!
-    
     var needRedraw : Bool = false {
         didSet {
             if needRedraw {
@@ -59,11 +58,21 @@ class CustomerListView: NSView {
         errorView.isHidden = true
         errorView.layer?.zPosition = 100
         
+        NotificationCenter.default.addObserver(self, selector: #selector(newCustomerNotificationHandler(notification:)), name: .newCustomer, object: nil)
+      }
+    
+    @objc func newCustomerNotificationHandler(notification: Notification) {
+        let obj = notification.object
+        if let customer = obj as? CustomerModel {
+            viewModel.model.registros.insert(customer, at: 0)
+            let index = IndexSet(integer: 0)
+            tableViewSocio.insertRows(at: index, withAnimation: .effectFade)
+            tableViewSocio.selectRowIndexes(index, byExtendingSelection: false)
+            tableViewSocio.scrollRowToVisible(0)
+        }
     }
     
     func startLoading() {
-//        errorView.isHidden = true
-        
         viewModel.loadCustomers()
     }
     
@@ -115,21 +124,24 @@ extension CustomerListView: NSTableViewDataSource, NSTableViewDelegate {
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView?{
       
         let cell : CustomerListCell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "defaultRow"), owner: self) as! CustomerListCell
+        
+        let customer = self.viewModel.model.registros[row]
     
-        let apellido = self.viewModel.model.registros[row].surname.capitalized
-        let nombre = self.viewModel.model.registros[row].name.capitalized
-        let createdAt = self.viewModel.model.registros[row].createdAt.toDate()
+        let apellido = customer.surname.capitalized
+        let nombre = customer.name.capitalized
+        let createdAt = customer.createdAt.toDate()
         let createdAtAgo = createdAt?.desdeHace(numericDates: true)
         cell.primerRenglonCell.stringValue = apellido + ", " + nombre
         cell.timeAgoCell.stringValue = createdAtAgo ?? ""
         
-        DispatchQueue.global().async {
-            let image64String = self.viewModel.model.registros[row].thumbnailImage
-            let image = image64String?.convertToImage
+        viewModel.loadImage(row: row, customer: customer) { (data) in
             DispatchQueue.main.async {
-                cell.fotoCell.image = image ?? #imageLiteral(resourceName: "empty")
+                if let imageString = data, let image = imageString.convertToImage {
+                    cell.fotoCell.image = image
+                } else {
+                    cell.fotoCell.image = #imageLiteral(resourceName: "empty")
+                }
             }
-            
         }
     
         let dni = self.viewModel.model.registros[row].dni
@@ -146,13 +158,13 @@ extension CustomerListView: NSTableViewDataSource, NSTableViewDelegate {
             if myTable == tableViewSocio {
                 let posicion = myTable.selectedRow
                 self.viewModel.model.selectedCustomer = viewModel.model.registros[posicion]
+                
                 self.onSelectedCustomer?(viewModel.model.registros[posicion])
             }
             
         }
         
     }
-    
     
     
     //estos dos bloques son para cambiar el color y estilo de la seleccion

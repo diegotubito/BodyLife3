@@ -721,18 +721,9 @@
                                 </constraints>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="logo_body_life" id="Xd2-cx-a0K"/>
                             </imageView>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1S1-yd-7uV">
-                                <rect key="frame" x="1155" y="684" width="123" height="32"/>
-                                <buttonCell key="cell" type="push" title="Cerrar Sesión" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="RsO-xo-dxD">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="closeSessionPressed:" target="XfG-lQ-9wD" id="Fep-vH-hyg"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Hyz-sR-HNl">
-                                <rect key="frame" x="1148" y="647" width="130" height="32"/>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hyz-sR-HNl">
+                                <rect key="frame" x="1136" y="13" width="130" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="New Customer" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="veG-p5-RWp">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -741,25 +732,21 @@
                                     <action selector="newCustomerPressed:" target="XfG-lQ-9wD" id="UVa-er-Mn0"/>
                                 </connections>
                             </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ekn-u5-woH">
-                                <rect key="frame" x="1176" y="585" width="81" height="32"/>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1S1-yd-7uV">
+                                <rect key="frame" x="484" y="13" width="123" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="RuE-nj-J8p">
+                                <buttonCell key="cell" type="push" title="Cerrar Sesión" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="RsO-xo-dxD">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="abirPageViewController:" target="XfG-lQ-9wD" id="odK-xd-7ks"/>
+                                    <action selector="closeSessionPressed:" target="XfG-lQ-9wD" id="Fep-vH-hyg"/>
                                 </connections>
                             </button>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="X1y-Gn-erX" secondAttribute="bottom" id="0PE-Ql-Wa1"/>
-                            <constraint firstAttribute="trailing" secondItem="1S1-yd-7uV" secondAttribute="trailing" constant="8" id="6KY-8u-KDh"/>
-                            <constraint firstAttribute="trailing" secondItem="Hyz-sR-HNl" secondAttribute="trailing" constant="8" id="9q9-pl-ebX"/>
                             <constraint firstItem="j5Y-bK-bI8" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="GwV-m2-qVw"/>
-                            <constraint firstItem="1S1-yd-7uV" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="8" id="Mh0-g8-JGS"/>
-                            <constraint firstItem="Hyz-sR-HNl" firstAttribute="top" secondItem="1S1-yd-7uV" secondAttribute="bottom" constant="16" id="Oe8-cd-uRH"/>
                             <constraint firstItem="X1y-Gn-erX" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="SRg-EQ-l3B"/>
                             <constraint firstItem="j5Y-bK-bI8" firstAttribute="centerY" secondItem="m2S-Jp-Qdl" secondAttribute="centerY" id="Wcb-iC-nE1"/>
                             <constraint firstItem="X1y-Gn-erX" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="YDY-7Q-I9O"/>

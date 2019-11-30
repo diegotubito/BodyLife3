@@ -21,7 +21,7 @@ class CustomerListViewModel: CustomerListViewModelContract {
     
     func loadCustomers() {
         _view.showLoading()
-        let path = "briefData"
+        let path = "briefInfo"
         ServerManager.ReadAll(path: path) { (array, error) in
             
             self._view.hideLoading()
@@ -45,6 +45,28 @@ class CustomerListViewModel: CustomerListViewModelContract {
         }
     }
     
+    func loadImage(row: Int, customer: CustomerModel, completion: @escaping (String?) -> ()) {
+        let path = "fullInfo:\(customer.childID)"
+        ServerManager.ReadJSON(path: path) { (data, error) in
+            
+            if error != nil {
+                print("error al cargar string image")
+                completion(nil)
+                return
+            }
+          
+            guard let data = data else {
+                print("error al cargar string image")
+                completion(nil)
+                return
+            }
+            
+            if let imageString = data["thumbnailImage"] as? String {
+                 completion(imageString)
+            }
+            
+        }
+    }
     
 }
 

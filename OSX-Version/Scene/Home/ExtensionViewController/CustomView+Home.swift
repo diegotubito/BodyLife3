@@ -18,7 +18,8 @@ extension HomeViewController {
         customerStatusView = CustomerStatusView(frame: CGRect(x: view.frame.width * 0.3, y: view.frame.height - 250, width: view.frame.width - (view.frame.width * 0.3), height: 250))
         view.addSubview(customerStatusView)
     }
-    
+   
+     
     func didSelectCustomer(customerSelected: CustomerModel) {
         
         DispatchQueue.main.async {

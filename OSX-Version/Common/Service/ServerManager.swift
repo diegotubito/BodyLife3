@@ -167,7 +167,7 @@ class ServerManager {
                 let array = jsonArray(json: json)
                 completion(array, nil)
             } catch {
-                completion(nil, ServerError.body_serialization_error)
+                completion([[:]], nil)
                 return
             }
         }

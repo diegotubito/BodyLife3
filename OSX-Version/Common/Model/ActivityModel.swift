@@ -27,6 +27,7 @@ struct PeriodModel: Decodable {
     var isEnabled : Bool
     var createdAt : Double
     var price : Double
+    var days : Int
 }
 
 struct DiscountModel: Decodable {

@@ -1,7 +1,7 @@
 import Cocoa
 
 protocol NewCustomerBusinessLogic {
-    func doSaveNewCustomer(request: NewCustomer.NewCustomer.Request)
+    func doSaveNewCustomer(requestBriefInfo: NewCustomer.NewCustomer.Request, requestFullInfo: NewCustomer.NewCustomer.Request)
 }
 
 protocol NewCustomerDataStore {
@@ -15,13 +15,13 @@ class NewCustomerInteractor: NewCustomerBusinessLogic, NewCustomerDataStore {
     
     // MARK: Do something
     
-    func doSaveNewCustomer(request: NewCustomer.NewCustomer.Request) {
+    func doSaveNewCustomer(requestBriefInfo: NewCustomer.NewCustomer.Request, requestFullInfo: NewCustomer.NewCustomer.Request) {
         var error : ServerError?
-        let path = "briefData"
+        let path = "fullInfo"
         let semasphore = DispatchSemaphore(value: 0)
         
         let worker = NewCustomerWorker()
-        worker.FindCustomer(path: path, key: "dni", value: request.dni) { (jsonArray, err) in
+        worker.FindCustomer(path: path, key: "dni", value: requestBriefInfo.dni) { (jsonArray, err) in
             error = err
             
             if jsonArray?.count ?? 0 > 0 {
@@ -32,23 +32,29 @@ class NewCustomerInteractor: NewCustomerBusinessLogic, NewCustomerDataStore {
         
         _ = semasphore.wait(timeout: .distantFuture)
    
-        let response = NewCustomer.NewCustomer.Response(error: error)
+        let response = NewCustomer.NewCustomer.Response(error: error, json: [:])
         if error != nil, error != ServerError.body_serialization_error {
             self.presenter?.presentNewCustomerResult(response: response)
             return
         }
         
-        let pathNewCustomer = "briefData:\(request.childID)"
-        ServerManager.Post(path: pathNewCustomer, Request: request) { (error) in
-            let reponse = NewCustomer.NewCustomer.Response(error: error)
-            self.presenter?.presentNewCustomerResult(response: reponse)
+        let pathNewCustomerFullInfo = "fullInfo:\(requestFullInfo.childID)"
+        ServerManager.Post(path: pathNewCustomerFullInfo, Request: requestFullInfo) { (error) in
             
         }
         
+        let pathNewCustomerBriefInfo = "briefInfo:\(requestBriefInfo.childID)"
+        ServerManager.Post(path: pathNewCustomerBriefInfo, Request: requestBriefInfo) { (error) in
+            let json = requestBriefInfo.json
+            let reponse = NewCustomer.NewCustomer.Response(error: error, json: json)
+            self.presenter?.presentNewCustomerResult(response: reponse)
+        }
+            
+        
         let pathImage = "customer"
         let net = NetwordManager()
-        if let imageData = request.image.tiffRepresentation {
-            net.uploadPhoto(path: pathImage, imageData: imageData, nombre: request.childID, tipo: "jpeg") { (jsonResponse, error) in
+        if let imageData = requestFullInfo.image.tiffRepresentation {
+            net.uploadPhoto(path: pathImage, imageData: imageData, nombre: requestFullInfo.childID, tipo: "jpeg") { (jsonResponse, error) in
                 if jsonResponse != nil {
                     print("se subio foto a storage")
                 } else {

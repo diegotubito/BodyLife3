@@ -53,6 +53,14 @@ class CustomerStatusView: XibView {
         viewModel.loadData()
     }
     
+    func initValues() {
+        subtitleLabel.stringValue = ""
+        expirationDateLabel.stringValue = ""
+        saldoLabel.stringValue = ""
+        remainingDayLabel.stringValue = ""
+        
+    }
+    
     func configureBoxDay() {
         self.DayBox.layer?.cornerRadius = self.DayBox.frame.height / 2
         self.DayBox.layer?.borderWidth = 1
@@ -71,19 +79,18 @@ extension CustomerStatusView : CustomerStatusViewContract{
         
         if let data = value {
             let expirationDate = data.expiration.toDate()
-            let diff = expirationDate?.diasTranscurridos(fecha: Date())
+            let diff = Date().diasTranscurridos(fecha: expirationDate!)
             let balance = data.balance
-            titleLabel.stringValue = data.surname + ", " + data.name
             subtitleLabel.stringValue = "actividades"
             expirationDateLabel.stringValue = (data.expiration.toDate()?.toString(formato: "dd-MM-yyyy"))!
             remainingDayLabel.stringValue = String(diff!)
             saldoLabel.stringValue = balance.formatoMoneda(decimales: 2)
         } else {
-            titleLabel.stringValue = "El socio no tiene ningún carnet ingresado."
             subtitleLabel.stringValue = ""
             expirationDateLabel.stringValue = "?"
             saldoLabel.stringValue = "?"
             remainingDayLabel.stringValue = "?"
+            
         }
     }
     
@@ -100,6 +107,7 @@ extension CustomerStatusView : CustomerStatusViewContract{
     
     func showLoading() {
         DispatchQueue.main.async {
+            self.initValues()
             self.activityIndicator.startAnimation(nil)
         }
     }

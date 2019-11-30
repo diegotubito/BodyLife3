@@ -51,6 +51,12 @@ extension Date {
         
     }
     
+    mutating func addDays(valor: Int) {
+        let myCalendar = Calendar(identifier: .gregorian)
+        self = myCalendar.date(byAdding: .day, value: valor, to: self)!
+        
+    }
+    
     func startDay() -> Int {
         let myCalendar = Calendar(identifier: .gregorian)
         return myCalendar.component(.weekday, from: self)

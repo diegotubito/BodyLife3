@@ -12,6 +12,7 @@ enum DisconnectReason: CaseIterable {
     case firebase
     case server
     case internet
+    case invalidToken
 }
 
 extension Notification.Name {
@@ -31,12 +32,12 @@ class Connect : BaseConnect {
         
     static var timerConstantShort : TimeInterval = 2
     static var timerConstantLong : TimeInterval = 15
-    
+    static var didSentNotification = false
     static var messageString : String = ""
     
     static var isConnected : Bool? {
         didSet {
-         //   if oldValue != isConnected {
+            if oldValue != isConnected {
                 
                 if isConnected ?? false {
                     NotificationCenter.default.post(name: .notificationConnected, object: nil)
@@ -44,11 +45,11 @@ class Connect : BaseConnect {
                     NotificationCenter.default.post(name: .notificationDisconnected, object: nil)
                 }
                
-        //    }
+            }
         }
     }
     
-    static private var timer : Timer?
+    static private var listenTimer : Timer?
     
     static func StartListening() {
         DispatchQueue.global().async {
@@ -75,7 +76,7 @@ class Connect : BaseConnect {
     }
     
     static func StopListening() {
-        timer?.invalidate()
+        listenTimer?.invalidate()
         NotificationCenter.default.removeObserver(self)
     }
     
@@ -95,6 +96,10 @@ class Connect : BaseConnect {
                 messageString = "Ups, parece que no tenemos internet"
                 isConnected = false
                 break
+            case .invalidToken:
+                messageString = "Tienes que autenticarte"
+                isConnected = false
+                return
             default:
                 TimerConfiguration(time: timerConstantLong)
                 isConnected = true
@@ -107,9 +112,9 @@ class Connect : BaseConnect {
   
     
     static private func TimerConfiguration(time: TimeInterval) {
-        timer?.invalidate()
+        listenTimer?.invalidate()
         
-        timer = Timer.scheduledTimer(timeInterval: time, target: self, selector: #selector(PeriodicChecking), userInfo: nil, repeats: true)
+        listenTimer = Timer.scheduledTimer(timeInterval: time, target: self, selector: #selector(PeriodicChecking), userInfo: nil, repeats: true)
     }
     
     private static func Check(notConnected: @escaping (DisconnectReason?) -> ()) {
@@ -168,7 +173,11 @@ class Connect : BaseConnect {
         _ = userSessionSemasphore.wait(timeout: .distantFuture)
         
         if !userSessionOk {
-            NotificationCenter.default.post(name: .needLogin, object: nil)
+            if !didSentNotification {
+                didSentNotification = true
+                NotificationCenter.default.post(name: .needLogin, object: nil)
+            }
+            notConnected(.invalidToken)
             return
         }
         
@@ -222,17 +231,14 @@ class Connect : BaseConnect {
         }
     }
     
-    
-    
-    
     @objc static func reachable() {
-        timer?.invalidate()
+        listenTimer?.invalidate()
         PeriodicChecking()
         TimerConfiguration(time: timerConstantShort)
     }
     
     @objc static func nonReachable() {
-        timer?.invalidate()
+        listenTimer?.invalidate()
         PeriodicChecking()
         TimerConfiguration(time: timerConstantLong)
     }

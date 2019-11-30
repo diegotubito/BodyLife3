@@ -7,13 +7,13 @@ protocol HomeDisplayLogic: class {
 class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate {
     var interactor: HomeBusinessLogic?
     var router: (NSObjectProtocol & HomeRoutingLogic & HomeDataPassing)?
-    
    
     @IBOutlet weak var backgroundImage: NSImageView!
     var customerStatusView: CustomerStatusView!
     var customerListView : CustomerListView!
     var sellActivityView : SellActivityCustomView!
-    
+    var timer : Timer!
+    var selectedCustomer : CustomerModel?
     // MARK: Object lifecycle
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -56,6 +56,10 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
         customerStatusView.isHidden = true
         createSellActivityCustomView()
         sellActivityView.isHidden = true
+        
+        self.timer = Timer.scheduledTimer(timeInterval: 0.0, target: self, selector: #selector(self.loadStatus), userInfo: nil, repeats: false)
+        
+        
     }
     
     override func viewDidAppear() {
@@ -67,11 +71,24 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
         DispatchQueue.main.async {
             self.customerListView.startLoading()
             self.customerListView.onSelectedCustomer = { customer in
-                self.didSelectCustomer(customerSelected: customer)
+                self.selectedCustomer = customer
+                self.timer.invalidate()
+                self.customerStatusView.showLoading()
+                self.customerStatusView.titleLabel.stringValue = customer.surname + ", " + customer.name
+                
+                self.timer = Timer.scheduledTimer(timeInterval: 0.25, target: self, selector: #selector(self.loadStatus), userInfo: nil, repeats: false)
             }
             
         }
     }
+    
+    @objc func loadStatus() {
+        if selectedCustomer == nil {return}
+        self.didSelectCustomer(customerSelected: selectedCustomer!)
+        
+    }
+    
+
     
     // MARK: Do something
     

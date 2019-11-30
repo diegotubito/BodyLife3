@@ -3,6 +3,7 @@ import AlamofireImage
 
 extension Notification.Name {
     static let needLogin = Notification.Name("needLogin")
+    static let newCustomer = Notification.Name("newCustomer")
 }
 protocol NewCustomerDisplayLogic: class {
     func displaySaveNewCustomerResult(viewModel: NewCustomer.NewCustomer.ViewModel)
@@ -92,14 +93,37 @@ class NewCustomerViewController: BaseViewController, NewCustomerDisplayLogic {
     
     func doSaveNewCustomer() {
         showLoading()
-        let request = createRequest()
-        interactor?.doSaveNewCustomer(request: request)
+        let date = Date()
+        let requestBriefInfo = createRequestBriefInfo(withDate: date)
+        let requestFullInfo = createRequestFullInfo(withDate: date)
+        interactor?.doSaveNewCustomer(requestBriefInfo: requestBriefInfo, requestFullInfo: requestFullInfo)
     }
     
-    func createRequest() -> NewCustomer.NewCustomer.Request {
+    func createRequestBriefInfo(withDate: Date) -> NewCustomer.NewCustomer.Request {
         let user = UserSaved.Load()
         let uid = (user?.uid)!
-        let fechaDouble = Date().timeIntervalSince1970
+        let fechaDouble = withDate.timeIntervalSince1970
+        let fechaRounded = (fechaDouble * 1000)
+        let childID = String(Int(fechaRounded))
+        
+        let fullJSON = ["childID" : childID,
+                        "createdAt" : fechaDouble,
+                        "dni": dniTF.stringValue,
+                        "surname" : apellidoTF.stringValue,
+                        "name": nombreTF.stringValue,
+                        "uid":uid] as [String : Any]
+        
+        let request = NewCustomer.NewCustomer.Request(childID: childID, dni: dniTF.stringValue, json: fullJSON, image: self.imageToStorage)
+         
+        
+        return request
+        
+    }
+    
+    func createRequestFullInfo(withDate: Date) -> NewCustomer.NewCustomer.Request {
+        let user = UserSaved.Load()
+        let uid = (user?.uid)!
+        let fechaDouble = withDate.timeIntervalSince1970
         let fechaRounded = (fechaDouble * 1000)
         let childID = String(Int(fechaRounded))
         
@@ -113,7 +137,8 @@ class NewCustomerViewController: BaseViewController, NewCustomerDisplayLogic {
                         "secondaryPhone":telefonoSecundarioTF.stringValue,
                         "socialSecurity":obraSocialTF.stringValue,
                         "email":emailTF.stringValue,
-                        "thumbnailImage" : thumbImageBase64] as [String : Any]
+                        "thumbnailImage" : thumbImageBase64,
+                        "uid":uid] as [String : Any]
         
         let request = NewCustomer.NewCustomer.Request(childID: childID, dni: dniTF.stringValue, json: fullJSON, image: self.imageToStorage)
          
@@ -138,16 +163,20 @@ class NewCustomerViewController: BaseViewController, NewCustomerDisplayLogic {
         } else {
           
             DispatchQueue.main.async {
-                 
-                self.notificationMessage(messageID: self.dniTF.stringValue,
-                                         title: "Nuevo Socio",
-                                         subtitle: self.apellidoTF.stringValue + ", " + self.nombreTF.stringValue,
-                                         informativeText: "Sigamos sumando.")
-                 self.view.window?.close()
-                
+                self.view.window?.close()
+                self.sendNotifications(customer: viewModel.customer!)
             }
         }
     }
+    
+    func sendNotifications(customer: CustomerModel) {
+        self.notificationMessage(messageID: customer.dni,
+                                 title: "Nuevo Socio",
+                                 subtitle: customer.surname + ", " + customer.name,
+                                 informativeText: "Sigamos sumando.")
+        NotificationCenter.default.post(name: .newCustomer, object: customer)
+    }
+    
     @IBAction func saveNewCustomerPressed(_ sender: Any) {
         self.doSaveNewCustomer()
     }
