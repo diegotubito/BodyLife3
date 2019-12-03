@@ -21,16 +21,16 @@ class XibView: NSView {
         commonInit()
     }
     
-    func showErrorConnection() {
+    func showErrorConnectionView() {
         errorNoConnection = NSImageView(frame: NSRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
         errorNoConnection.image = #imageLiteral(resourceName: "NoConnection")
         errorNoConnection.wantsLayer = true
         errorNoConnection.Blur()
         self.addSubview(errorNoConnection)
-        
+    
     }
     
-    func removeErrorView() {
+    func removeErrorConnectionView() {
         if errorNoConnection != nil {
             errorNoConnection.removeFromSuperview()
         }

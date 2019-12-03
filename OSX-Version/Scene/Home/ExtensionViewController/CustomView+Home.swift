@@ -26,7 +26,7 @@ extension HomeViewController {
             self.customerStatusView.didPressSellActivityButton = {
                 //open sell activities custom view
                 self.sellActivityView.animateMode = .fadeIn
-                self.sellActivityView.removeErrorView()
+                self.sellActivityView.removeErrorConnectionView()
                 let selectedCustomer = self.customerListView.viewModel.model.selectedCustomer
                 let loadedStatus = self.customerStatusView.viewModel.model.loadedStatus
                 self.sellActivityView.viewModel.setCustomerStatus(selectedCustomer: selectedCustomer!, selectedStatus: loadedStatus)
@@ -36,7 +36,7 @@ extension HomeViewController {
                 self.customerStatusView.animateMode = .fadeIn
             }
             if self.sellActivityView.isHidden == false {
-                self.sellActivityView.animateMode = .fadeOut
+                self.sellActivityView.animateMode = .none
             }
             
             self.customerStatusView.viewModel = CustomerStatusViewModel(withView: self.customerStatusView, receivedCustomer: customerSelected)

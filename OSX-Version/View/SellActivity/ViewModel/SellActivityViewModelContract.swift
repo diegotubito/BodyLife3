@@ -40,4 +40,7 @@ protocol SellActivityViewContract {
     func setToDate(date: Date)
     func disableDates()
     func enableDates()
+    func showAmount(value: Double)
+    func showError(_ message: String)
+    func showSuccess()
 }

@@ -21,7 +21,7 @@ struct CustomerStatus: Decodable {
     var childID : String
     var surname : String
     var name : String
-    var balance : Double
+    var transaction : Double
     var expiration : Double
     var childIDLastActivity : String
     var childIDLastPeriod : String

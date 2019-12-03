@@ -127,6 +127,8 @@ class NewCustomerViewController: BaseViewController, NewCustomerDisplayLogic {
         let fechaRounded = (fechaDouble * 1000)
         let childID = String(Int(fechaRounded))
         
+        let images = ["thumbnailImage" : thumbImageBase64]
+        
         let fullJSON = ["childID" : childID,
                         "createdAt" : fechaDouble,
                         "dni": dniTF.stringValue,
@@ -137,7 +139,7 @@ class NewCustomerViewController: BaseViewController, NewCustomerDisplayLogic {
                         "secondaryPhone":telefonoSecundarioTF.stringValue,
                         "socialSecurity":obraSocialTF.stringValue,
                         "email":emailTF.stringValue,
-                        "thumbnailImage" : thumbImageBase64,
+                        "images" : images,
                         "uid":uid] as [String : Any]
         
         let request = NewCustomer.NewCustomer.Request(childID: childID, dni: dniTF.stringValue, json: fullJSON, image: self.imageToStorage)

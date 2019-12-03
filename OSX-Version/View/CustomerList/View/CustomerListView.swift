@@ -59,9 +59,16 @@ class CustomerListView: NSView {
         errorView.layer?.zPosition = 100
         
         NotificationCenter.default.addObserver(self, selector: #selector(newCustomerNotificationHandler(notification:)), name: .newCustomer, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(newSellNotificationHandler(notification:)), name: .newSell, object: nil)
       }
     
+    @objc func newSellNotificationHandler(notification: Notification) {
+        let row = tableViewSocio.selectedRow
+        self.onSelectedCustomer?(viewModel.model.registros[row])
+    }
+    
     @objc func newCustomerNotificationHandler(notification: Notification) {
+        errorView.isHidden = true
         let obj = notification.object
         if let customer = obj as? CustomerModel {
             viewModel.model.registros.insert(customer, at: 0)

@@ -9,13 +9,9 @@
 import Cocoa
 
 class SellActivityViewModel: SellActivityViewModelContract {
- 
-    
-    
-    
-    
     var model: SellActivityModel!
     var _view : SellActivityViewContract!
+    var childIDNew : String?
     
     required init(withView view: SellActivityViewContract) {
         _view = view
@@ -59,41 +55,91 @@ class SellActivityViewModel: SellActivityViewModelContract {
         }
     }
     
-    func save() {
-        let childIDCustomer = model.selectedCustomer.childID
+    private func createNewChildID() -> String {
         let fechaDouble = Date().timeIntervalSince1970
         let fechaRounded = (fechaDouble * 1000)
-        let childID = String(Int(fechaRounded))
+        let result = String(Int(fechaRounded))
+        
+        return result
+    }
+    
+    func save() {
+        let childIDCustomer = model.selectedCustomer.childID
+        let childIDNew = createNewChildID()
+        let statusJSON = prepareStatus(childID: childIDNew)
+        let sellJSON = prepareSell(childID: childIDNew)
+        let statusPath = "statusData:\(childIDCustomer)"
+        let statusPathSell = "statusData:\(childIDCustomer):sells"
+        let statusPathTransaction = "statusData:\(childIDCustomer)"
+        let pathSell = "sells"
+        var error : ServerError?
+        let semasphore = DispatchSemaphore(value: 0)
+        saveNewMembership(datos: sellJSON, path: statusPathSell) { (err) in
+            error = err
+            semasphore.signal()
+        }
+        _ = semasphore.wait(timeout: .distantFuture)
+        if error != nil {
+            _view.showError("No se pudo guardar la venta en Status.")
+            return
+        }
+        
+        saveNewMembership(datos: sellJSON, path: pathSell) { (err) in
+            error = err
+            semasphore.signal()
+        }
+        _ = semasphore.wait(timeout: .distantFuture)
+        if error != nil {
+            _view.showError("No se pudo guardar la venta.")
+            return
+        }
+        
+        saveNewMembership(datos: statusJSON, path: statusPath) { (err) in
+            error = err
+            semasphore.signal()
+        }
+        _ = semasphore.wait(timeout: .distantFuture)
+        if error != nil {
+            _view.showError("No se pudo actualizar el Status del socio.")
+            return
+        }
+     
+        let amountToPay = estimateAmount()
+        let amountPaid = Double(_view.getAmount())!
+        let balance = amountPaid - amountToPay
+        saveNewTransaction(path: statusPathTransaction, value: balance)
+        
+        _view.showSuccess()
+    }
+    
+    func saveNewMembership(datos: [String: Any], path: String, completion: @escaping (ServerError?) -> ()) {
+        ServerManager.Update(path: path, json: datos) { (data, error) in
+            completion(error)
+        }
+    }
+    
+    func saveNewTransaction(path: String, value: Double) {
+        ServerManager.Transaction(path: path, key: "transaction", value: value, success: {
+            print("transaction made")
+        }) { (error) in
+        }
+    }
+    
+    func prepareStatus(childID: String) -> [String : Any] {
+        let childIDCustomer = model.selectedCustomer.childID
         let surname = model.selectedCustomer.surname
         let name = model.selectedCustomer.name
         let childIDLastActivity = (model.selectedActivity?.childID)!
         let childIDLastPeriod = (model.selectedPeriod?.childID)!
         let childIDLastDiscount = (model.selectedDiscount?.childID) ?? ""
-        
-        let sell = prepareSell(childID: childID)
-        
         let status = ["surname" : surname,
                       "name": name,
-                      "balance": 0,
-                      "expiration": Date().timeIntervalSince1970,
+                      "expiration": _view.getToDate().timeIntervalSince1970,
                       "childID": childIDCustomer,
                       "childIDLastActivity": childIDLastActivity,
                       "childIDLastPeriod": childIDLastPeriod,
                       "childIDLastDiscount":childIDLastDiscount] as [String : Any]
-        
-        saveNewMembership(datos: status, path: "statusData:\(childIDCustomer)")
-        saveNewMembership(datos: sell, path: "statusData:\(childIDCustomer):sells")
-        saveNewMembership(datos: sell, path: "sells")
-    }
-    
-    func saveNewMembership(datos: [String: Any], path: String) {
-        ServerManager.Update(path: path, json: datos) { (data, error) in
-            guard error == nil else {
-                print("error")
-                return
-            }
-            print("succes")
-        }
+        return status
     }
     
     func prepareSell(childID: String) -> [String : Any] {
@@ -102,10 +148,9 @@ class SellActivityViewModel: SellActivityViewModelContract {
         let childIDActivity = model.selectedActivity?.childID
         let childIDPeriod = model.selectedPeriod?.childID
         let childIDDiscount = model.selectedDiscount?.childID
-        let price = model.selectedPeriod?.price
+        let price = estimateAmount()
         let discount = model.selectedDiscount?.multiplier
         let childIDCustomer = model.selectedCustomer.childID
-        
         let sell = [childID:["childID" : childID,
                              "childIDCustomer" : childIDCustomer,
                              "createdAt" : Date().timeIntervalSince1970,
@@ -131,7 +176,7 @@ class SellActivityViewModel: SellActivityViewModelContract {
             model.filteredPeriods = [PeriodModel]()
             _view.reloadPeriod()
             _ = validate()
-            
+            estimateAmountAndShow()
             return
         }
         model.selectedActivity = model.activities[row]
@@ -140,17 +185,19 @@ class SellActivityViewModel: SellActivityViewModelContract {
         
         _view.reloadPeriod()
         _ = validate()
+        estimateAmountAndShow()
     }
     
     func setSelectedPeriod(row: Int) {
         if row == -1 {
             model.selectedPeriod = nil
             _ = validate()
-            
+            estimateAmountAndShow()
             return
         }
         model.selectedPeriod = model.periods[row]
         estimateToDate()
+        estimateAmountAndShow()
         
         _ = validate()
         
@@ -162,6 +209,26 @@ class SellActivityViewModel: SellActivityViewModelContract {
         } else {
             model.selectedDiscount = model.discounts[row - 1]
         }
+        estimateAmountAndShow()
+    }
+    
+    private func estimateAmountAndShow() {
+        
+        let amount = estimateAmount()
+        _view.showAmount(value: amount)
+    }
+    
+    func estimateAmount() -> Double {
+        var amount : Double = 0
+        
+        if let period = model.selectedPeriod, model.selectedActivity != nil {
+            amount = period.price
+        }
+        if let discount = model.selectedDiscount {
+            amount = amount * discount.multiplier
+        }
+        
+        return amount
     }
     
     func estimateToDate() {
@@ -174,7 +241,7 @@ class SellActivityViewModel: SellActivityViewModelContract {
         let days = selectedPeriod?.days
         let fromDate = _view.getFromDate()
         _view.setToDate(date: Calendar.current.date(byAdding: .day, value: days!, to: fromDate)!)
-     }
+    }
     
     func validate() -> Bool {
         var result = true

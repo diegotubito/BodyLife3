@@ -80,7 +80,7 @@ extension CustomerStatusView : CustomerStatusViewContract{
         if let data = value {
             let expirationDate = data.expiration.toDate()
             let diff = Date().diasTranscurridos(fecha: expirationDate!)
-            let balance = data.balance
+            let balance = data.transaction
             subtitleLabel.stringValue = "actividades"
             expirationDateLabel.stringValue = (data.expiration.toDate()?.toString(formato: "dd-MM-yyyy"))!
             remainingDayLabel.stringValue = String(diff!)

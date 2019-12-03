@@ -11,11 +11,12 @@ import Cocoa
 
 extension String {
     var convertToImage: NSImage? {
-        let decodedData = NSData(base64Encoded: self, options: NSData.Base64DecodingOptions(rawValue: 0) )
-        
-        let decodedimage = NSImage(data: decodedData! as Data)
-        
-        return decodedimage
+        if let decodedData = NSData(base64Encoded: self, options: NSData.Base64DecodingOptions(rawValue: 0) ) {
+            if let decodedimage = NSImage(data: decodedData as Data) {
+                return decodedimage
+            }
+        }
+        return nil
         
     }
     

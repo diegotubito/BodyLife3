@@ -8,8 +8,11 @@
 
 import Cocoa
 
+extension Notification.Name {
+    static let newSell = Notification.Name("newSell")
+}
+
 class SellActivityCustomView: XibView, SellActivityViewContract {
-    
     @IBOutlet weak var surname: NSTextField!
     @IBOutlet weak var amountTextField: NSTextField!
     @IBOutlet weak var toDate: NSDatePicker!
@@ -39,7 +42,6 @@ class SellActivityCustomView: XibView, SellActivityViewContract {
         }
         DiscountPopUp.removeAllItems()
         DiscountPopUp.addItem(withTitle: "Ninguno")
-        
     }
     
     func addDateSeparator() {
@@ -61,7 +63,6 @@ class SellActivityCustomView: XibView, SellActivityViewContract {
     }
     
     func addXButton() {
-        
         self.xButtonView = XButtonCustomView(frame: CGRect(x: self.titleView.frame.width - 16 - 40, y: self.titleView.frame.height / 2 - 20, width: 40, height: 40))
         self.titleView.addSubview(self.xButtonView)
         self.xButtonView.didButtonPressed = {
@@ -72,9 +73,7 @@ class SellActivityCustomView: XibView, SellActivityViewContract {
     @IBAction func discountPopUpAction(_ sender: NSPopUpButton) {
         _ = viewModel.validate()
         viewModel.setSelectedDiscount(row: sender.indexOfSelectedItem)
-
     }
-    
     
     @IBAction func fromDateDidChanged(_ sender: NSDatePicker) {
         viewModel.estimateToDate()
@@ -144,20 +143,16 @@ class SellActivityCustomView: XibView, SellActivityViewContract {
     
     func showMembershipError() {
         DispatchQueue.main.async {
-            self.showErrorConnection()
+            self.showErrorConnectionView()
         }
-        
     }
     
     func reloadView() {
         DispatchQueue.main.async {
-            
             self.tableViewActivity.reloadData()
             self.selectActivityManually(position: 0)
-            
             self.DiscountPopUp.addItems(withTitles: self.viewModel.getDiscountTitles())
         }
-        
     }
     
     func reloadPeriod() {
@@ -220,8 +215,19 @@ class SellActivityCustomView: XibView, SellActivityViewContract {
         }
     }
     
+    func showAmount(value: Double) {
+        self.amountTextField.stringValue = String(value.rounded(toPlaces: 2))
+    }
+    
+    func showError(_ message: String) {
+        print(message)
+    }
+    
+    func showSuccess() {
+        NotificationCenter.default.post(name: .newSell, object: nil)
+        animateMode = .fadeOut
+    }
 }
-
 
 extension SellActivityCustomView: NSTableViewDataSource, NSTableViewDelegate {
     func numberOfRows(in tableView: NSTableView) -> Int {
@@ -250,7 +256,6 @@ extension SellActivityCustomView: NSTableViewDataSource, NSTableViewDelegate {
     }
     
     func tableViewSelectionDidChange(_ notification: Notification) {
-        
         if let myTable = notification.object as? NSTableView {
             if myTable == tableViewActivity {
                 viewModel.setSelectedActivity(row: myTable.selectedRow)
@@ -262,21 +267,16 @@ extension SellActivityCustomView: NSTableViewDataSource, NSTableViewDelegate {
     
     //estos dos bloques son para cambiar el color y estilo de la seleccion
     class MyNSTableRowView: NSTableRowView {
-        
         override func drawSelection(in dirtyRect: NSRect) {
             if self.selectionHighlightStyle != .none {
                 let selectionRect = NSInsetRect(self.bounds, 0, 0)
-                
                 Constants.Colors.Blue.blueWhale.setFill()
                 let selectionPath = NSBezierPath.init(roundedRect: selectionRect, xRadius: 10, yRadius: 10)
                 selectionPath.fill()
                 selectionPath.stroke()
-                
             }
-            
         }
     }
-    
     
     func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
         return MyNSTableRowView()

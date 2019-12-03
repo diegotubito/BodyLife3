@@ -169,11 +169,12 @@ router.post('/:target/transaction/:ruta',VerifyToken, function(req, res) {
 
   //este bloque es para la transaccion y la fecha de modificacion
   ref.transaction(function(currentValue) {
-
-    res.send();
-    //ref.child("fechaModificacion").set(req.body["fechaModificacion"]) //actualizo la fecha
-    return (currentValue || 0.0) + req.body["valor"]; // el valor puede ser positivo o negativo
+  //ref.child("fechaModificacion").set(req.body["fechaModificacion"]) //actualizo la fecha
+  return (currentValue || 0) + req.body["transaction"]; // el valor puede ser positivo o negativo
+  }, function(error, committed, ss) {
+    res.send(committed);
   });
+
 
 });
 

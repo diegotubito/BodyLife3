@@ -67,12 +67,12 @@ class ServerManager {
         
     }
     
-    static func Transaction(path: String, key: String, value: Int, success: @escaping ()->(), fail: @escaping (ServerError?) -> Void) {
+    static func Transaction(path: String, key: String, value: Double, success: @escaping ()->(), fail: @escaping (ServerError?) -> Void) {
         let basicUrl = Configuration.URL.Database.transaction
         let url = basicUrl + "users:\(uid!):" + path + ":" + key
         let _services = NetwordManager()
         
-        let body = ["valor": value]
+        let body = ["transaction": value]
         
         _services.post(url: url, body: body) { (data, error) in
             guard error == nil else {
