@@ -234,13 +234,13 @@ class SellActivityViewModel: SellActivityViewModelContract {
     func estimateToDate() {
         
         if model.selectedPeriod == nil {
-            _view.setToDate(date: Date())
+            _view.setToDate(date: _view.getFromDate())
             return
         }
         let selectedPeriod = model.selectedPeriod
         let days = selectedPeriod?.days
-        let fromDate = _view.getFromDate()
-        _view.setToDate(date: Calendar.current.date(byAdding: .day, value: days!, to: fromDate)!)
+        let toDate = _view.getFromDate()
+        _view.setToDate(date: Calendar.current.date(byAdding: .day, value: days!, to: toDate)!)
     }
     
     func validate() -> Bool {
@@ -251,8 +251,10 @@ class SellActivityViewModel: SellActivityViewModelContract {
         if model.selectedPeriod == nil {
             _view.disableDates()
             result = false
+        }else {
+            _view.enableDates()
         }
-        _view.enableDates()
+        
         let amount = _view.getAmount()
         if let amountDouble = Double(amount) {
             if amountDouble < 0 && amountDouble > 1000000 {

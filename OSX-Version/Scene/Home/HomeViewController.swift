@@ -71,6 +71,7 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
         DispatchQueue.main.async {
             self.customerListView.startLoading()
             self.customerListView.onSelectedCustomer = { customer in
+                self.sellActivityView.animateMode = .fadeOut
                 self.selectedCustomer = customer
                 self.timer.invalidate()
                 self.customerStatusView.showLoading()

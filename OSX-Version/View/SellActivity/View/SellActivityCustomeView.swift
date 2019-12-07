@@ -42,6 +42,8 @@ class SellActivityCustomView: XibView, SellActivityViewContract {
         }
         DiscountPopUp.removeAllItems()
         DiscountPopUp.addItem(withTitle: "Ninguno")
+        toDate.dateValue = Date()
+        fromDate.dateValue = Date()
     }
     
     func addDateSeparator() {
@@ -76,10 +78,10 @@ class SellActivityCustomView: XibView, SellActivityViewContract {
     }
     
     @IBAction func fromDateDidChanged(_ sender: NSDatePicker) {
-        viewModel.estimateToDate()
     }
     
     @IBAction func toDateDidChanged(_ sender: NSDatePicker) {
+        viewModel.estimateToDate()
     }
     
     func startLoading() {
@@ -105,7 +107,7 @@ class SellActivityCustomView: XibView, SellActivityViewContract {
     }
     
     func enableDates() {
-          fromDate.isEnabled = true
+ //         fromDate.isEnabled = true
           toDate.isEnabled = true
       }
     
@@ -115,20 +117,18 @@ class SellActivityCustomView: XibView, SellActivityViewContract {
        
     func setInitialFromDate() {
         let expiration = viewModel.model!.selectedStatus?.expiration
-        guard let doubleDate = expiration else {
+        guard let doubleDate = expiration, let date = doubleDate.toDate() else {
             fromDate.dateValue = Date()
             return
         }
-        guard let date = doubleDate.toDate() else {
-            fromDate.dateValue = Date()
-            return
-        }
+        
         let diff = date.diasTranscurridos(fecha: Date())
         if diff! > 10 {
             fromDate.dateValue = Date()
             return
         }
         fromDate.dateValue = date
+        toDate.dateValue = date
     }
     
     func savePressed() {
@@ -261,6 +261,7 @@ extension SellActivityCustomView: NSTableViewDataSource, NSTableViewDelegate {
                 viewModel.setSelectedActivity(row: myTable.selectedRow)
             } else if myTable == tableViewPeriodo {
                 viewModel.setSelectedPeriod(row: myTable.selectedRow)
+                viewModel.estimateToDate()
             }
         }
     }
