@@ -23,7 +23,7 @@ class CustomerStatusViewModel: CustomerStatusViewModelContract {
     }
     
     func load() {
-        let path = "statusData:\(model.receivedCustomer.childID)"
+        let path = "\(Paths.customerStatus):\(model.receivedCustomer.childID)"
         
         ServerManager.Read(path: path) { (value:CustomerStatus?, error) in
             self._view.hideLoading()

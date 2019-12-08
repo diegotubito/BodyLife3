@@ -460,13 +460,13 @@
                     </customSpacing>
                 </stackView>
                 <stackView distribution="fillEqually" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B6F-Xf-WTf">
-                    <rect key="frame" x="16" y="125" width="276" height="73"/>
+                    <rect key="frame" x="16" y="113" width="276" height="85"/>
                     <subviews>
                         <stackView distribution="fillEqually" orientation="horizontal" alignment="top" spacing="96" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CgK-cC-mkA">
-                            <rect key="frame" x="0.0" y="57" width="270" height="16"/>
+                            <rect key="frame" x="0.0" y="65" width="270" height="20"/>
                             <subviews>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0ZX-58-rUG">
-                                    <rect key="frame" x="-2" y="0.0" width="91" height="16"/>
+                                    <rect key="frame" x="-2" y="4" width="91" height="16"/>
                                     <textFieldCell key="cell" lineBreakMode="clipping" title="Días restantes" id="hcy-ee-WdO">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -474,9 +474,9 @@
                                     </textFieldCell>
                                 </textField>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0qJ-4o-j8Z">
-                                    <rect key="frame" x="181" y="0.0" width="91" height="16"/>
+                                    <rect key="frame" x="181" y="0.0" width="91" height="20"/>
                                     <textFieldCell key="cell" lineBreakMode="clipping" title="5" id="d7c-CR-pfO">
-                                        <font key="font" metaFont="system"/>
+                                        <font key="font" metaFont="system" size="17"/>
                                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
@@ -492,10 +492,10 @@
                             </customSpacing>
                         </stackView>
                         <stackView distribution="fillEqually" orientation="horizontal" alignment="top" spacing="85" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CA2-MU-viZ">
-                            <rect key="frame" x="0.0" y="33" width="275" height="16"/>
+                            <rect key="frame" x="0.0" y="37" width="275" height="20"/>
                             <subviews>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9Ki-oS-izw">
-                                    <rect key="frame" x="-2" y="0.0" width="99" height="16"/>
+                                    <rect key="frame" x="-2" y="4" width="99" height="16"/>
                                     <textFieldCell key="cell" lineBreakMode="clipping" title="Días agregados" id="U2q-GR-I4l">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -503,9 +503,9 @@
                                     </textFieldCell>
                                 </textField>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vcV-Ne-aOQ">
-                                    <rect key="frame" x="178" y="0.0" width="99" height="16"/>
+                                    <rect key="frame" x="178" y="0.0" width="99" height="20"/>
                                     <textFieldCell key="cell" lineBreakMode="clipping" title="30" id="e0f-ii-bqm">
-                                        <font key="font" metaFont="system"/>
+                                        <font key="font" metaFont="system" size="17"/>
                                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
@@ -521,17 +521,17 @@
                             </customSpacing>
                         </stackView>
                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wtb-XC-jsL">
-                            <rect key="frame" x="0.0" y="24" width="276" height="1"/>
+                            <rect key="frame" x="0.0" y="28" width="276" height="1"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="0ih-nw-ux4"/>
                             </constraints>
                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="hEA-ZL-hLr"/>
                         </imageView>
                         <stackView distribution="fillEqually" orientation="horizontal" alignment="top" spacing="78" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9iN-fr-7TR">
-                            <rect key="frame" x="0.0" y="0.0" width="276" height="16"/>
+                            <rect key="frame" x="0.0" y="0.0" width="276" height="20"/>
                             <subviews>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gUP-EA-3dC">
-                                    <rect key="frame" x="-2" y="0.0" width="103" height="16"/>
+                                    <rect key="frame" x="-2" y="4" width="103" height="16"/>
                                     <textFieldCell key="cell" lineBreakMode="clipping" title="Días disponibles" id="Yxk-gW-RaI">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -539,9 +539,9 @@
                                     </textFieldCell>
                                 </textField>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qNK-pg-mTi">
-                                    <rect key="frame" x="175" y="0.0" width="103" height="16"/>
+                                    <rect key="frame" x="175" y="0.0" width="103" height="20"/>
                                     <textFieldCell key="cell" lineBreakMode="clipping" title="26" id="EZA-3g-l6D">
-                                        <font key="font" metaFont="system"/>
+                                        <font key="font" metaFont="system" size="17"/>
                                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>

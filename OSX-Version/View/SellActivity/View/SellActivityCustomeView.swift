@@ -78,10 +78,17 @@ class SellActivityCustomView: XibView, SellActivityViewContract {
     }
     
     @IBAction func fromDateDidChanged(_ sender: NSDatePicker) {
+        let diff = Date().diasTranscurridos(fecha: sender.dateValue)
+        if diff! > 3 {
+            setInitialFromDate()
+            viewModel.estimateToDate()
+            return
+        }
+        viewModel.estimateToDate()
     }
     
     @IBAction func toDateDidChanged(_ sender: NSDatePicker) {
-        viewModel.estimateToDate()
+        
     }
     
     func startLoading() {
@@ -107,8 +114,8 @@ class SellActivityCustomView: XibView, SellActivityViewContract {
     }
     
     func enableDates() {
- //         fromDate.isEnabled = true
-          toDate.isEnabled = true
+          fromDate.isEnabled = true
+ //         toDate.isEnabled = true
       }
     
     func setToDate(date: Date) {

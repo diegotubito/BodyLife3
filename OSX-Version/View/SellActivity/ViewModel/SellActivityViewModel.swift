@@ -19,7 +19,7 @@ class SellActivityViewModel: SellActivityViewModelContract {
     }
     
     func loadMembership() {
-        let path = "configuration:membership"
+        let path = Paths.productService
         _view.showLoading()
         ServerManager.ReadJSON(path: path) { (json, error) in
             self._view.hideLoading()
@@ -32,15 +32,15 @@ class SellActivityViewModel: SellActivityViewModelContract {
                 return
             }
             do {
-                if let activitiesJSON = json["activity"] as? [String : Any] {
-                    let activitiesArray = ServerManager.jsonArray(json: activitiesJSON)
-                    let dataActivity = try JSONSerialization.data(withJSONObject: activitiesArray, options: [])
-                    self.model.activities = try JSONDecoder().decode([ActivityModel].self, from: dataActivity)
+                if let activityTypesJSON = json["type"] as? [String : Any] {
+                    let activityTypeArray = ServerManager.jsonArray(json: activityTypesJSON)
+                    let dataActivityType = try JSONSerialization.data(withJSONObject: activityTypeArray, options: [])
+                    self.model.type = try JSONDecoder().decode([ServiceTypeModel].self, from: dataActivityType)
                 }
-                if let periodJSON = json["period"] as? [String : Any] {
-                    let periodArray = ServerManager.jsonArray(json: periodJSON)
-                    let dataPeriod = try JSONSerialization.data(withJSONObject: periodArray, options: [])
-                    self.model.periods = try JSONDecoder().decode([PeriodModel].self, from: dataPeriod)
+                if let activityJSON = json["activity"] as? [String : Any] {
+                    let activityArray = ServerManager.jsonArray(json: activityJSON)
+                    let dataActivity = try JSONSerialization.data(withJSONObject: activityArray, options: [])
+                    self.model.activity = try JSONDecoder().decode([ActivityModel].self, from: dataActivity)
                 }
                 if let discountJSON = json["discount"] as? [String : Any] {
                     let discountArray = ServerManager.jsonArray(json: discountJSON)
@@ -68,9 +68,9 @@ class SellActivityViewModel: SellActivityViewModelContract {
         let childIDNew = createNewChildID()
         let statusJSON = prepareStatus(childID: childIDNew)
         let sellJSON = prepareSell(childID: childIDNew)
-        let statusPath = "statusData:\(childIDCustomer)"
-        let statusPathSell = "statusData:\(childIDCustomer):sells"
-        let statusPathTransaction = "statusData:\(childIDCustomer)"
+        let statusPath = "\(Paths.customerStatus):\(childIDCustomer)"
+        let statusPathSell = "\(Paths.fullPersonalData):\(childIDCustomer):sells"
+        let statusPathTransaction = "\(Paths.customerStatus):\(childIDCustomer)"
         let pathSell = "sells"
         var error : ServerError?
         let semasphore = DispatchSemaphore(value: 0)
@@ -129,8 +129,8 @@ class SellActivityViewModel: SellActivityViewModelContract {
         let childIDCustomer = model.selectedCustomer.childID
         let surname = model.selectedCustomer.surname
         let name = model.selectedCustomer.name
-        let childIDLastActivity = (model.selectedActivity?.childID)!
-        let childIDLastPeriod = (model.selectedPeriod?.childID)!
+        let childIDLastActivity = (model.selectedActivityType?.childID)!
+        let childIDLastPeriod = (model.selectedActivity?.childID)!
         let childIDLastDiscount = (model.selectedDiscount?.childID) ?? ""
         let status = ["surname" : surname,
                       "name": name,
@@ -145,8 +145,8 @@ class SellActivityViewModel: SellActivityViewModelContract {
     func prepareSell(childID: String) -> [String : Any] {
         let fromDate = _view.getFromDate()
         let toDate = _view.getToDate()
-        let childIDActivity = model.selectedActivity?.childID
-        let childIDPeriod = model.selectedPeriod?.childID
+        let childIDActivity = model.selectedActivityType?.childID
+        let childIDPeriod = model.selectedActivity?.childID
         let childIDDiscount = model.selectedDiscount?.childID
         let price = estimateAmount()
         let discount = model.selectedDiscount?.multiplier
@@ -166,22 +166,22 @@ class SellActivityViewModel: SellActivityViewModelContract {
         return sell
     }
     
-    func getActivities() -> [ActivityModel] {
-        return model.activities
+    func getActivities() -> [ServiceTypeModel] {
+        return model.type
     }
     
     func setSelectedActivity(row: Int) {
         if row == -1 {
-            model.selectedActivity = nil
-            model.filteredPeriods = [PeriodModel]()
+            model.selectedActivityType = nil
+            model.filteredPeriods = [ActivityModel]()
             _view.reloadPeriod()
             _ = validate()
             estimateAmountAndShow()
             return
         }
-        model.selectedActivity = model.activities[row]
+        model.selectedActivityType = model.type[row]
         
-        model.filteredPeriods = model.periods.filter({$0.childIDActivity == model.selectedActivity!.childID})
+        model.filteredPeriods = model.activity.filter({$0.childIDType == model.selectedActivityType!.childID})
         
         _view.reloadPeriod()
         _ = validate()
@@ -190,12 +190,12 @@ class SellActivityViewModel: SellActivityViewModelContract {
     
     func setSelectedPeriod(row: Int) {
         if row == -1 {
-            model.selectedPeriod = nil
+            model.selectedActivity = nil
             _ = validate()
             estimateAmountAndShow()
             return
         }
-        model.selectedPeriod = model.periods[row]
+        model.selectedActivity = model.activity[row]
         estimateToDate()
         estimateAmountAndShow()
         
@@ -221,7 +221,7 @@ class SellActivityViewModel: SellActivityViewModelContract {
     func estimateAmount() -> Double {
         var amount : Double = 0
         
-        if let period = model.selectedPeriod, model.selectedActivity != nil {
+        if let period = model.selectedActivity, model.selectedActivityType != nil {
             amount = period.price
         }
         if let discount = model.selectedDiscount {
@@ -233,11 +233,11 @@ class SellActivityViewModel: SellActivityViewModelContract {
     
     func estimateToDate() {
         
-        if model.selectedPeriod == nil {
+        if model.selectedActivity == nil {
             _view.setToDate(date: _view.getFromDate())
             return
         }
-        let selectedPeriod = model.selectedPeriod
+        let selectedPeriod = model.selectedActivity
         let days = selectedPeriod?.days
         let toDate = _view.getFromDate()
         _view.setToDate(date: Calendar.current.date(byAdding: .day, value: days!, to: toDate)!)
@@ -245,10 +245,10 @@ class SellActivityViewModel: SellActivityViewModelContract {
     
     func validate() -> Bool {
         var result = true
-        if model.selectedActivity == nil {
+        if model.selectedActivityType == nil {
             result = false
         }
-        if model.selectedPeriod == nil {
+        if model.selectedActivity == nil {
             _view.disableDates()
             result = false
         }else {
@@ -273,7 +273,7 @@ class SellActivityViewModel: SellActivityViewModelContract {
         return result
     }
     
-    func getFilteredPeriods() -> [PeriodModel] {
+    func getFilteredPeriods() -> [ActivityModel] {
         return model.filteredPeriods
     }
     
@@ -288,9 +288,9 @@ class SellActivityViewModel: SellActivityViewModelContract {
     }
     
     func autoSelectActivity() {
-        for (x,i) in (model!.activities).enumerated() {
+        for (x,i) in (model!.type).enumerated() {
             if i.childID == model.selectedStatus?.childIDLastActivity {
-                model.selectedActivity = i
+                model.selectedActivityType = i
                 _view.selectActivityManually(position: x)
             }
         }

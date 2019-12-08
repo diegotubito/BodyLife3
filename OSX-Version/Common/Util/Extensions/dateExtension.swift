@@ -45,7 +45,7 @@ extension Date {
 }
 
 extension Date {
-    mutating func sumarMes(valor: Int) {
+    mutating func addMonths(valor: Int) {
         let myCalendar = Calendar(identifier: .gregorian)
         self = myCalendar.date(byAdding: .month, value: valor, to: self)!
         

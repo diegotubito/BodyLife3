@@ -14,6 +14,15 @@ struct ServerType {
     static let keroku = "flaskdfjalskdjf/"
 }
 
+struct Paths {
+    static let customerBrief = "customerBrief"
+    static let customerFull = "customerFull"
+    static let customerStatus = "customerStatus"
+    static let fullPersonalData = "customerFull:personal"
+    static let customerOriginalImage = "customer"
+    static let productService = "product:service"
+}
+
 class Configuration {
     static let shared = Configuration()
     

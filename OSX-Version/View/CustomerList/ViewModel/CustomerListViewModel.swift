@@ -21,7 +21,7 @@ class CustomerListViewModel: CustomerListViewModelContract {
     
     func loadCustomers() {
         _view.showLoading()
-        let path = "briefInfo"
+        let path = Paths.customerBrief
         ServerManager.ReadAll(path: path) { (array, error) in
             
             self._view.hideLoading()
@@ -46,7 +46,7 @@ class CustomerListViewModel: CustomerListViewModelContract {
     }
     
     func loadImage(row: Int, customer: CustomerModel, completion: @escaping (String?) -> ()) {
-        let path = "fullInfo:\(customer.childID):images"
+        let path = "\(Paths.fullPersonalData):\(customer.childID):images"
         ServerManager.ReadJSON(path: path) { (data, error) in
             
             if error != nil {

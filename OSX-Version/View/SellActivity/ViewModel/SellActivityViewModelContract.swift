@@ -12,8 +12,8 @@ protocol SellActivityViewModelContract {
     init (withView view: SellActivityViewContract)
     var model : SellActivityModel! {get}
     func loadMembership()
-    func getActivities() -> [ActivityModel]
-    func getFilteredPeriods() -> [PeriodModel]
+    func getActivities() -> [ServiceTypeModel]
+    func getFilteredPeriods() -> [ActivityModel]
     func setSelectedActivity(row: Int)
     func setSelectedPeriod(row: Int)
     func setSelectedDiscount(row: Int)

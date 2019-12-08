@@ -17,7 +17,7 @@ class NewCustomerInteractor: NewCustomerBusinessLogic, NewCustomerDataStore {
     
     func doSaveNewCustomer(requestBriefInfo: NewCustomer.NewCustomer.Request, requestFullInfo: NewCustomer.NewCustomer.Request) {
         var error : ServerError?
-        let path = "fullInfo"
+        let path = "\(Paths.fullPersonalData)"
         let semasphore = DispatchSemaphore(value: 0)
         
         let worker = NewCustomerWorker()
@@ -38,12 +38,12 @@ class NewCustomerInteractor: NewCustomerBusinessLogic, NewCustomerDataStore {
             return
         }
         
-        let pathNewCustomerFullInfo = "fullInfo:\(requestFullInfo.childID)"
+        let pathNewCustomerFullInfo = "\(Paths.fullPersonalData):\(requestFullInfo.childID)"
         ServerManager.Post(path: pathNewCustomerFullInfo, Request: requestFullInfo) { (error) in
             
         }
         
-        let pathNewCustomerBriefInfo = "briefInfo:\(requestBriefInfo.childID)"
+        let pathNewCustomerBriefInfo = "\(Paths.customerBrief):\(requestBriefInfo.childID)"
         ServerManager.Post(path: pathNewCustomerBriefInfo, Request: requestBriefInfo) { (error) in
             let json = requestBriefInfo.json
             let reponse = NewCustomer.NewCustomer.Response(error: error, json: json)
@@ -51,7 +51,7 @@ class NewCustomerInteractor: NewCustomerBusinessLogic, NewCustomerDataStore {
         }
             
         
-        let pathImage = "customer"
+        let pathImage = Paths.customerOriginalImage
         let net = NetwordManager()
         if let imageData = requestFullInfo.image.tiffRepresentation {
             net.uploadPhoto(path: pathImage, imageData: imageData, nombre: requestFullInfo.childID, tipo: "jpeg") { (jsonResponse, error) in

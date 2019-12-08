@@ -9,20 +9,20 @@
 import Cocoa
 
 struct MembershipModel {
-    var activities : [ActivityModel]
-    var periods : [PeriodModel]
+    var activities : [ServiceTypeModel]
+    var periods : [ActivityModel]
 }
 
-struct ActivityModel : Decodable {
+struct ServiceTypeModel : Decodable {
     var childID : String
     var name : String
     var isEnabled : Bool
     var createdAt : Double
 }
 
-struct PeriodModel: Decodable {
+struct ActivityModel: Decodable {
     var childID : String
-    var childIDActivity : String
+    var childIDType : String
     var name : String
     var isEnabled : Bool
     var createdAt : Double
