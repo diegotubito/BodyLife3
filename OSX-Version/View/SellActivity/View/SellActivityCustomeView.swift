@@ -34,7 +34,6 @@ class SellActivityCustomView: XibView, SellActivityViewContract {
         viewModel = SellActivityViewModel(withView: self)
         
         DispatchQueue.main.async {
-            self.addDateSeparator()
             self.addSaveButton()
             self.setupTitleView()
             self.addXButton()
@@ -44,11 +43,6 @@ class SellActivityCustomView: XibView, SellActivityViewContract {
         DiscountPopUp.addItem(withTitle: "Ninguno")
         toDate.dateValue = Date()
         fromDate.dateValue = Date()
-    }
-    
-    func addDateSeparator() {
-        dateLineSeparator.wantsLayer = true
-        dateLineSeparator.layer?.backgroundColor = NSColor.darkGray.cgColor
     }
     
     func setupTitleView() {
