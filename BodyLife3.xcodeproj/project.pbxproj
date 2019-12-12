@@ -89,6 +89,11 @@
 		11EBD39123772A4700AB4BFF /* LoginStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11EBD39023772A4700AB4BFF /* LoginStoryboard.storyboard */; };
 		11EBD39423773B5C00AB4BFF /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD39323773B5C00AB4BFF /* BaseViewController.swift */; };
 		11EBD39623773E5800AB4BFF /* XibView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD39523773E5800AB4BFF /* XibView.swift */; };
+		11EEF0F0239D4A42007C9821 /* PaymentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11EEF0EF239D4A42007C9821 /* PaymentView.xib */; };
+		11EEF0F2239D4A83007C9821 /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EEF0F1239D4A83007C9821 /* PaymentView.swift */; };
+		11EEF0F4239D4A91007C9821 /* PaymentViewModelContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EEF0F3239D4A91007C9821 /* PaymentViewModelContract.swift */; };
+		11EEF0F6239D4A98007C9821 /* PaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EEF0F5239D4A98007C9821 /* PaymentViewModel.swift */; };
+		11EEF0F8239D4AA1007C9821 /* PaymentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EEF0F7239D4AA1007C9821 /* PaymentModel.swift */; };
 		2ABA738BFDEEDE4B72CB4E78 /* Pods_iOS_Version.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52A4534649349619BA649948 /* Pods_iOS_Version.framework */; };
 		9728405405EDD888F1A5FA9E /* Pods_OSX_Version.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A275C83DBDFBB96C4DDC5217 /* Pods_OSX_Version.framework */; };
 /* End PBXBuildFile section */
@@ -181,6 +186,11 @@
 		11EBD39023772A4700AB4BFF /* LoginStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LoginStoryboard.storyboard; sourceTree = "<group>"; };
 		11EBD39323773B5C00AB4BFF /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		11EBD39523773E5800AB4BFF /* XibView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XibView.swift; sourceTree = "<group>"; };
+		11EEF0EF239D4A42007C9821 /* PaymentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaymentView.xib; sourceTree = "<group>"; };
+		11EEF0F1239D4A83007C9821 /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
+		11EEF0F3239D4A91007C9821 /* PaymentViewModelContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewModelContract.swift; sourceTree = "<group>"; };
+		11EEF0F5239D4A98007C9821 /* PaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewModel.swift; sourceTree = "<group>"; };
+		11EEF0F7239D4AA1007C9821 /* PaymentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentModel.swift; sourceTree = "<group>"; };
 		52A4534649349619BA649948 /* Pods_iOS_Version.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_Version.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		71B63D69B5ED4786AC5BED32 /* Pods-iOS-Version.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-Version.release.xcconfig"; path = "Target Support Files/Pods-iOS-Version/Pods-iOS-Version.release.xcconfig"; sourceTree = "<group>"; };
 		9C4105662467CD1C8664861B /* Pods-OSX-Version.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OSX-Version.release.xcconfig"; path = "Target Support Files/Pods-OSX-Version/Pods-OSX-Version.release.xcconfig"; sourceTree = "<group>"; };
@@ -325,6 +335,7 @@
 		1147AB3E2383648B00D19AA9 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				11EEF0EB239D49FB007C9821 /* Payment */,
 				111DE56A2389F550002F4216 /* Buttons */,
 				1178BA8B2388C638000C3FB6 /* SellActivity */,
 				11EBD39523773E5800AB4BFF /* XibView.swift */,
@@ -648,6 +659,42 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
+		11EEF0EB239D49FB007C9821 /* Payment */ = {
+			isa = PBXGroup;
+			children = (
+				11EEF0EE239D4A1E007C9821 /* Model */,
+				11EEF0ED239D4A1A007C9821 /* ViewModel */,
+				11EEF0EC239D4A15007C9821 /* View */,
+			);
+			path = Payment;
+			sourceTree = "<group>";
+		};
+		11EEF0EC239D4A15007C9821 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				11EEF0EF239D4A42007C9821 /* PaymentView.xib */,
+				11EEF0F1239D4A83007C9821 /* PaymentView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		11EEF0ED239D4A1A007C9821 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				11EEF0F3239D4A91007C9821 /* PaymentViewModelContract.swift */,
+				11EEF0F5239D4A98007C9821 /* PaymentViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		11EEF0EE239D4A1E007C9821 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				11EEF0F7239D4AA1007C9821 /* PaymentModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		6F7B820AB411A8A428CC45DB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -760,6 +807,7 @@
 				11EBD32B2376499F00AB4BFF /* Main.storyboard in Resources */,
 				119C68622380BDC8009E9AA0 /* NewCustomerStoryboard.storyboard in Resources */,
 				111DE572238A01BF002F4216 /* XButtonCustomView.xib in Resources */,
+				11EEF0F0239D4A42007C9821 /* PaymentView.xib in Resources */,
 				11EBD34C23764A9600AB4BFF /* Info.plist in Resources */,
 				1147AB732384AA2D00D19AA9 /* CustomerStatusView.xib in Resources */,
 			);
@@ -866,6 +914,7 @@
 				119AE145237F78D90045960C /* ServerManager.swift in Sources */,
 				11233783237AFE9400F60078 /* stringExtension.swift in Sources */,
 				111DE5692389C623002F4216 /* CustomView+Home.swift in Sources */,
+				11EEF0F4239D4A91007C9821 /* PaymentViewModelContract.swift in Sources */,
 				1147AB7A2384D41900D19AA9 /* CustomerStatusViewModelContract.swift in Sources */,
 				11EBD38A237726A800AB4BFF /* LoginPresenter.swift in Sources */,
 				111DE56D2389F567002F4216 /* SaveButtonCustomView.swift in Sources */,
@@ -879,6 +928,7 @@
 				110664EB2378F1F100DC44F3 /* NewCustomerInteractor.swift in Sources */,
 				11233785237AFEC000F60078 /* doubleExtension.swift in Sources */,
 				111DE56623899CCF002F4216 /* SellActivityCustomeView.swift in Sources */,
+				11EEF0F6239D4A98007C9821 /* PaymentViewModel.swift in Sources */,
 				11233787237B7AEB00F60078 /* CustomerModel.swift in Sources */,
 				111DE574238A01CA002F4216 /* XButtonCustomView.swift in Sources */,
 				111DE579238A1CF0002F4216 /* SellActivityModel.swift in Sources */,
@@ -896,6 +946,7 @@
 				110664E82378F1F100DC44F3 /* NewCustomerRouter.swift in Sources */,
 				110664E92378F1F100DC44F3 /* NewCustomerModels.swift in Sources */,
 				1147AB7C2384D49E00D19AA9 /* CustomerStatusViewModel.swift in Sources */,
+				11EEF0F2239D4A83007C9821 /* PaymentView.swift in Sources */,
 				1147AB4A2383654C00D19AA9 /* CustomerListView.swift in Sources */,
 				11EBD3812377130C00AB4BFF /* HomeViewController.swift in Sources */,
 				1147AB782384D23100D19AA9 /* CustomerStatusModel.swift in Sources */,
@@ -908,6 +959,7 @@
 				11EBD37F2377130C00AB4BFF /* HomeRouter.swift in Sources */,
 				110664D82377ACBF00DC44F3 /* extensions.swift in Sources */,
 				111DE580238A1FB5002F4216 /* ServiceTypeModel.swift in Sources */,
+				11EEF0F8239D4AA1007C9821 /* PaymentModel.swift in Sources */,
 				1147AB44238364D900D19AA9 /* CustomerListModel.swift in Sources */,
 				1163933C238229DE00D14B19 /* imageExtension.swift in Sources */,
 				110664E62378F1F100DC44F3 /* NewCustomerPresenter.swift in Sources */,

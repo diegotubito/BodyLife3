@@ -26,6 +26,7 @@ class CustomerStatusView: XibView {
     @IBOutlet weak var DayBox: NSBox!
     
     var didPressSellActivityButton : (() -> ())?
+    var didPressPaymentButton : (() -> ())?
     
     override func commonInit() {
         super .commonInit()
@@ -69,6 +70,10 @@ class CustomerStatusView: XibView {
     }
     @IBAction func SellActivityPressed(_ sender: Any) {
         didPressSellActivityButton?()
+    }
+    @IBAction func PaymentButtonPressed(_ sender: Any) {
+        print("ddd")
+        didPressPaymentButton?()
     }
 }
 

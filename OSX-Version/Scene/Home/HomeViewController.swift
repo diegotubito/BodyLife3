@@ -12,6 +12,7 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
     var customerStatusView: CustomerStatusView!
     var customerListView : CustomerListView!
     var sellActivityView : SellActivityCustomView!
+    var paymentView : PaymentView!
     var timer : Timer!
     var selectedCustomer : CustomerModel?
     // MARK: Object lifecycle
@@ -56,6 +57,8 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
         customerStatusView.isHidden = true
         createSellActivityCustomView()
         sellActivityView.isHidden = true
+        createPaymentView()
+        paymentView.isHidden = true
         
         self.timer = Timer.scheduledTimer(timeInterval: 0.0, target: self, selector: #selector(self.loadStatus), userInfo: nil, repeats: false)
         

@@ -9,6 +9,11 @@
 import Cocoa
 
 extension HomeViewController {
+    func createPaymentView() {
+        paymentView = PaymentView(frame: CGRect(x: view.frame.width * 0.3, y: view.frame.height - 250, width: view.frame.width - (view.frame.width * 0.3), height: 250))
+        view.addSubview(paymentView)
+    }
+    
     func createCustomerListView() {
         customerListView = CustomerListView(frame: NSRect(x: 0, y: 0, width: view.frame.width * 0.3, height: view.frame.height))
         view.addSubview(customerListView)
@@ -32,11 +37,19 @@ extension HomeViewController {
                 self.sellActivityView.viewModel.setCustomerStatus(selectedCustomer: selectedCustomer!, selectedStatus: loadedStatus)
                 self.sellActivityView.startLoading()
             }
+            self.customerStatusView.didPressPaymentButton = {
+                self.paymentView.isHidden = false
+                self.paymentView.animateMode = .fadeIn
+            }
+            
             if self.customerStatusView.isHidden {
                 self.customerStatusView.animateMode = .fadeIn
             }
             if self.sellActivityView.isHidden == false {
                 self.sellActivityView.animateMode = .none
+            }
+            if !self.paymentView.isHidden {
+                self.paymentView.animateMode = .fadeOut
             }
             
             self.customerStatusView.viewModel = CustomerStatusViewModel(withView: self.customerStatusView, receivedCustomer: customerSelected)
