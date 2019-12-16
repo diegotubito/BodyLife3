@@ -14,7 +14,7 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
     var sellActivityView : SellActivityCustomView!
     var sellRegisterView : RegisterListView!
     var paymentView : PaymentView!
-    var timer : Timer!
+    var timerForDelayCustomerSelection : Timer!
     var selectedCustomer : CustomerModel?
     // MARK: Object lifecycle
     
@@ -52,19 +52,9 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
         
         NotificationCenter.default.addObserver(self, selector: #selector(didConnected), name: .notificationConnected, object: nil)
         
-        createCustomerListView()
-        customerListView.isHidden = false
-        createCustomerStatusView()
-        customerStatusView.isHidden = true
-        createRegisterView()
-        sellRegisterView.isHidden = true
+        createCustomViews()
         
-        createSellActivityCustomView()
-        sellActivityView.isHidden = true
-        createPaymentView()
-        paymentView.isHidden = true
-        
-        self.timer = Timer.scheduledTimer(timeInterval: 0.0, target: self, selector: #selector(self.loadStatus), userInfo: nil, repeats: false)
+        self.timerForDelayCustomerSelection = Timer.scheduledTimer(timeInterval: 0.0, target: self, selector: #selector(self.loadStatus), userInfo: nil, repeats: false)
     }
     
     override func viewDidAppear() {

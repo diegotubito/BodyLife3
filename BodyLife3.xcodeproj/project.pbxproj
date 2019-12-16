@@ -47,6 +47,7 @@
 		114A540D23A5A99F00F2746A /* RegisterListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114A540C23A5A99F00F2746A /* RegisterListViewModel.swift */; };
 		114A540F23A5A9AC00F2746A /* RegisterListViewModelContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114A540E23A5A9AC00F2746A /* RegisterListViewModelContract.swift */; };
 		114A541123A5A9B900F2746A /* RegisterListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114A541023A5A9B900F2746A /* RegisterListModel.swift */; };
+		114A541323A7C8F200F2746A /* Observers+HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114A541223A7C8F200F2746A /* Observers+HomeViewController.swift */; };
 		11542D812380698F0011AB1D /* ConnectionStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11542D802380698F0011AB1D /* ConnectionStatus.swift */; };
 		11542D842380703F0011AB1D /* ConsoleCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11542D832380703F0011AB1D /* ConsoleCommand.swift */; };
 		11542D8D2380B0BE0011AB1D /* BaseConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11542D8C2380B0BE0011AB1D /* BaseConnect.swift */; };
@@ -146,6 +147,7 @@
 		114A540C23A5A99F00F2746A /* RegisterListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterListViewModel.swift; sourceTree = "<group>"; };
 		114A540E23A5A9AC00F2746A /* RegisterListViewModelContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterListViewModelContract.swift; sourceTree = "<group>"; };
 		114A541023A5A9B900F2746A /* RegisterListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterListModel.swift; sourceTree = "<group>"; };
+		114A541223A7C8F200F2746A /* Observers+HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Observers+HomeViewController.swift"; sourceTree = "<group>"; };
 		11542D802380698F0011AB1D /* ConnectionStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionStatus.swift; sourceTree = "<group>"; };
 		11542D832380703F0011AB1D /* ConsoleCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleCommand.swift; sourceTree = "<group>"; };
 		11542D8C2380B0BE0011AB1D /* BaseConnect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseConnect.swift; sourceTree = "<group>"; };
@@ -274,6 +276,7 @@
 			isa = PBXGroup;
 			children = (
 				111DE5682389C623002F4216 /* CustomView+Home.swift */,
+				114A541223A7C8F200F2746A /* Observers+HomeViewController.swift */,
 			);
 			path = ExtensionViewController;
 			sourceTree = "<group>";
@@ -1033,6 +1036,7 @@
 				11EBD35923765F2D00AB4BFF /* Reachablility.swift in Sources */,
 				11EBD37E2377130C00AB4BFF /* HomeWorker.swift in Sources */,
 				11EBD37D2377130C00AB4BFF /* HomePresenter.swift in Sources */,
+				114A541323A7C8F200F2746A /* Observers+HomeViewController.swift in Sources */,
 				1147AB712384AA0600D19AA9 /* CustomerStatusView.swift in Sources */,
 				114A540D23A5A99F00F2746A /* RegisterListViewModel.swift in Sources */,
 			);
