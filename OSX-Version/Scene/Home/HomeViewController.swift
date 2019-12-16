@@ -7,11 +7,12 @@ protocol HomeDisplayLogic: class {
 class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate {
     var interactor: HomeBusinessLogic?
     var router: (NSObjectProtocol & HomeRoutingLogic & HomeDataPassing)?
-   
+    
     @IBOutlet weak var backgroundImage: NSImageView!
     var customerStatusView: CustomerStatusView!
     var customerListView : CustomerListView!
     var sellActivityView : SellActivityCustomView!
+    var sellRegisterView : RegisterListView!
     var paymentView : PaymentView!
     var timer : Timer!
     var selectedCustomer : CustomerModel?
@@ -50,19 +51,20 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
         setupWindow(width: Constants.ViewControllerSizes.Home.width, height: Constants.ViewControllerSizes.Home.height)
         
         NotificationCenter.default.addObserver(self, selector: #selector(didConnected), name: .notificationConnected, object: nil)
-
+        
         createCustomerListView()
         customerListView.isHidden = false
         createCustomerStatusView()
         customerStatusView.isHidden = true
+        createRegisterView()
+        sellRegisterView.isHidden = true
+        
         createSellActivityCustomView()
         sellActivityView.isHidden = true
         createPaymentView()
         paymentView.isHidden = true
         
         self.timer = Timer.scheduledTimer(timeInterval: 0.0, target: self, selector: #selector(self.loadStatus), userInfo: nil, repeats: false)
-        
-        
     }
     
     override func viewDidAppear() {
@@ -73,16 +75,7 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
     @objc func didConnected() {
         DispatchQueue.main.async {
             self.customerListView.startLoading()
-            self.customerListView.onSelectedCustomer = { customer in
-                self.sellActivityView.animateMode = .fadeOut
-                self.selectedCustomer = customer
-                self.timer.invalidate()
-                self.customerStatusView.showLoading()
-                self.customerStatusView.titleLabel.stringValue = customer.surname + ", " + customer.name
-                
-                self.timer = Timer.scheduledTimer(timeInterval: 0.25, target: self, selector: #selector(self.loadStatus), userInfo: nil, repeats: false)
-            }
-            
+            self.addObservers()
         }
     }
     
@@ -91,8 +84,6 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
         self.didSelectCustomer(customerSelected: selectedCustomer!)
         
     }
-    
-
     
     // MARK: Do something
     

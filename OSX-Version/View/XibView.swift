@@ -44,14 +44,6 @@ class XibView: NSView {
             if let myView = topLevelObjects?.first(where: { $0 is NSView } ) as? NSView {
                 myView.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
                 addSubview(myView)
-                
-                self.wantsLayer = true
-                self.layer?.backgroundColor = NSColor.white.cgColor
-                
-                
-                self.wantsLayer = true
-                self.layer?.backgroundColor = Constants.Colors.Gray.gray10.cgColor
-                self.layer?.borderColor = NSColor.gray.cgColor
             }
         }
         

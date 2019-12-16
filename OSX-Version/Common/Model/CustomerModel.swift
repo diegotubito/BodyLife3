@@ -27,3 +27,25 @@ struct CustomerStatus: Decodable {
     var childIDLastPeriod : String
     var childIDLastDiscount : String
 }
+
+struct SellRegisterModel: Decodable {
+    var childID : String
+    var childIDCustomer : String
+    var childIDDiscount : String
+    var childIDActivity : String
+    var childIDPeriod : String
+    var createdAt : Double
+    var discount : Double
+    var fromDate : Double
+    var toDate : Double
+    var price : Double
+    var displayName : String
+    var payments : [PaymentModel]?
+}
+
+struct PaymentModel: Decodable {
+    var childID : String
+    var childIDCustomer : String
+    var childIDSell : String
+    var total : Double
+}

@@ -143,6 +143,7 @@ class SellActivityViewModel: SellActivityViewModelContract {
     }
     
     func prepareSell(childID: String) -> [String : Any] {
+        let displayName = model.selectedActivity!.name + ", " + model.selectedActivityType!.name
         let fromDate = _view.getFromDate()
         let toDate = _view.getToDate()
         let childIDActivity = model.selectedActivityType?.childID
@@ -160,7 +161,8 @@ class SellActivityViewModel: SellActivityViewModelContract {
                              "childIDActivity" : childIDActivity!,
                              "childIDPeriod" : childIDPeriod!,
                              "childIDDiscount" : childIDDiscount ?? "",
-                             "discount" : discount ?? 1.0]]
+                             "discount" : discount ?? 1.0,
+                             "displayName" : displayName]]
             as [String : Any]
         
         return sell

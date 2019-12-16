@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="15505" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="15702" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15702"/>
         <capability name="System colors introduced in macOS 10.14" minToolsVersion="10.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,7 +23,7 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customView misplaced="YES" id="c22-O7-iKe">
+        <customView id="c22-O7-iKe">
             <rect key="frame" x="0.0" y="0.0" width="700" height="245"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
@@ -163,31 +163,14 @@
                                 <action selector="SellActivityPressed:" target="-2" id="YvA-xN-q0B"/>
                             </connections>
                         </button>
-                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lnJ-7q-6h8">
-                            <rect key="frame" x="313" y="10" width="75" height="19"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="75" id="DZ4-Pq-Hhn"/>
-                                <constraint firstAttribute="height" constant="18" id="hrS-oI-FFu"/>
-                            </constraints>
-                            <buttonCell key="cell" type="recessed" title="Cobro" bezelStyle="recessed" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="9fr-b2-jhO">
-                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
-                                <font key="font" metaFont="systemBold" size="12"/>
-                            </buttonCell>
-                            <connections>
-                                <action selector="PaymentButtonPressed:" target="-2" id="SpS-rO-YW3"/>
-                            </connections>
-                        </button>
                     </subviews>
                     <constraints>
                         <constraint firstItem="jdk-KK-FLE" firstAttribute="centerY" secondItem="BwV-uf-wSG" secondAttribute="centerY" id="060-tG-6ld"/>
                         <constraint firstItem="NbD-P7-V87" firstAttribute="centerX" secondItem="khW-NR-44A" secondAttribute="centerX" id="1L3-7T-TTg"/>
                         <constraint firstItem="qVv-Px-vIw" firstAttribute="centerY" secondItem="BwV-uf-wSG" secondAttribute="centerY" id="3NQ-aE-cW1"/>
                         <constraint firstItem="qVv-Px-vIw" firstAttribute="top" secondItem="KzM-r5-hA5" secondAttribute="bottom" id="5yz-0K-t5h"/>
-                        <constraint firstItem="lnJ-7q-6h8" firstAttribute="centerX" secondItem="S25-mF-RC4" secondAttribute="centerX" id="FcD-Ai-mUK"/>
                         <constraint firstItem="qVv-Px-vIw" firstAttribute="centerX" secondItem="BwV-uf-wSG" secondAttribute="centerX" id="G3Q-wK-uaQ"/>
-                        <constraint firstItem="lnJ-7q-6h8" firstAttribute="top" secondItem="qVv-Px-vIw" secondAttribute="bottom" constant="8" id="IWS-ZW-KnC"/>
                         <constraint firstItem="jdk-KK-FLE" firstAttribute="height" secondItem="BwV-uf-wSG" secondAttribute="height" multiplier="0.66" id="N0Z-4X-2vg"/>
-                        <constraint firstAttribute="bottom" secondItem="lnJ-7q-6h8" secondAttribute="bottom" constant="11" id="NcC-hs-53O"/>
                         <constraint firstItem="S25-mF-RC4" firstAttribute="leading" secondItem="BwV-uf-wSG" secondAttribute="leading" constant="16" id="Ptd-pw-tSy"/>
                         <constraint firstItem="S25-mF-RC4" firstAttribute="centerY" secondItem="BwV-uf-wSG" secondAttribute="centerY" id="Q7r-Hf-I53"/>
                         <constraint firstItem="qVv-Px-vIw" firstAttribute="height" secondItem="BwV-uf-wSG" secondAttribute="height" multiplier="0.33" id="XJ1-dF-Rei"/>
@@ -210,14 +193,6 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="M4W-XL-5Bp">
-                    <rect key="frame" x="596" y="16" width="90" height="19"/>
-                    <textFieldCell key="cell" lineBreakMode="clipping" title="Ver detalle..." id="KIQ-P9-KGG">
-                        <font key="font" metaFont="system" size="15"/>
-                        <color key="textColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1Ut-3d-WPT">
                     <rect key="frame" x="14" y="174" width="34" height="20"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" title="- - -" id="KXg-AC-Q0S">
@@ -236,9 +211,7 @@
             </subviews>
             <constraints>
                 <constraint firstItem="1Ut-3d-WPT" firstAttribute="top" secondItem="2wd-pp-b16" secondAttribute="bottom" constant="8" id="3yq-MS-zzy"/>
-                <constraint firstAttribute="trailing" secondItem="M4W-XL-5Bp" secondAttribute="trailing" constant="16" id="5RR-WB-xXQ"/>
                 <constraint firstItem="CwU-P6-vvy" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="16" id="5t6-x1-ARu"/>
-                <constraint firstAttribute="bottom" secondItem="M4W-XL-5Bp" secondAttribute="bottom" constant="16" id="9om-f6-EQ2"/>
                 <constraint firstItem="BwV-uf-wSG" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="ADY-K8-xo7"/>
                 <constraint firstItem="BwV-uf-wSG" firstAttribute="height" secondItem="c22-O7-iKe" secondAttribute="height" multiplier="0.45" id="PCW-P9-WOL"/>
                 <constraint firstItem="CwU-P6-vvy" firstAttribute="centerX" secondItem="c22-O7-iKe" secondAttribute="centerX" id="Rs7-PI-LMA"/>

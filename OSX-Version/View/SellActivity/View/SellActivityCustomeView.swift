@@ -30,6 +30,8 @@ class SellActivityCustomView: XibView, SellActivityViewContract {
     @IBOutlet weak var dateLineSeparator: NSImageView!
     override func commonInit() {
         super .commonInit()
+        self.wantsLayer = true
+        self.layer?.backgroundColor = Constants.Colors.Gray.gray10.cgColor
         disableDates()
         viewModel = SellActivityViewModel(withView: self)
         

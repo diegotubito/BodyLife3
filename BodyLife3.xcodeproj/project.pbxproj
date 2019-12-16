@@ -44,6 +44,9 @@
 		1147AB7A2384D41900D19AA9 /* CustomerStatusViewModelContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1147AB792384D41900D19AA9 /* CustomerStatusViewModelContract.swift */; };
 		1147AB7C2384D49E00D19AA9 /* CustomerStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1147AB7B2384D49E00D19AA9 /* CustomerStatusViewModel.swift */; };
 		1147AB7E238611C200D19AA9 /* NSViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1147AB7D238611C200D19AA9 /* NSViewExtension.swift */; };
+		114A540D23A5A99F00F2746A /* RegisterListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114A540C23A5A99F00F2746A /* RegisterListViewModel.swift */; };
+		114A540F23A5A9AC00F2746A /* RegisterListViewModelContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114A540E23A5A9AC00F2746A /* RegisterListViewModelContract.swift */; };
+		114A541123A5A9B900F2746A /* RegisterListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114A541023A5A9B900F2746A /* RegisterListModel.swift */; };
 		11542D812380698F0011AB1D /* ConnectionStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11542D802380698F0011AB1D /* ConnectionStatus.swift */; };
 		11542D842380703F0011AB1D /* ConsoleCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11542D832380703F0011AB1D /* ConsoleCommand.swift */; };
 		11542D8D2380B0BE0011AB1D /* BaseConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11542D8C2380B0BE0011AB1D /* BaseConnect.swift */; };
@@ -52,6 +55,9 @@
 		1163933723820CA500D14B19 /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1163933623820CA500D14B19 /* CameraManager.swift */; };
 		1163933A238214AC00D14B19 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11639339238214AC00D14B19 /* CameraViewController.swift */; };
 		1163933C238229DE00D14B19 /* imageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1163933B238229DE00D14B19 /* imageExtension.swift */; };
+		116CEB6123A1E2D40081D356 /* RegisterListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 116CEB6023A1E2D40081D356 /* RegisterListView.xib */; };
+		116CEB6323A1E2F30081D356 /* RegisterListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CEB6223A1E2F30081D356 /* RegisterListView.swift */; };
+		116CEB6623A3115E0081D356 /* SellRegisterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CEB6523A3115E0081D356 /* SellRegisterCell.swift */; };
 		1178BA8D2388C669000C3FB6 /* SellActivityCustomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1178BA8C2388C669000C3FB6 /* SellActivityCustomView.xib */; };
 		119AE145237F78D90045960C /* ServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119AE144237F78D90045960C /* ServerManager.swift */; };
 		119C68622380BDC8009E9AA0 /* NewCustomerStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 119C68612380BDC8009E9AA0 /* NewCustomerStoryboard.storyboard */; };
@@ -137,6 +143,9 @@
 		1147AB792384D41900D19AA9 /* CustomerStatusViewModelContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerStatusViewModelContract.swift; sourceTree = "<group>"; };
 		1147AB7B2384D49E00D19AA9 /* CustomerStatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerStatusViewModel.swift; sourceTree = "<group>"; };
 		1147AB7D238611C200D19AA9 /* NSViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSViewExtension.swift; sourceTree = "<group>"; };
+		114A540C23A5A99F00F2746A /* RegisterListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterListViewModel.swift; sourceTree = "<group>"; };
+		114A540E23A5A9AC00F2746A /* RegisterListViewModelContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterListViewModelContract.swift; sourceTree = "<group>"; };
+		114A541023A5A9B900F2746A /* RegisterListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterListModel.swift; sourceTree = "<group>"; };
 		11542D802380698F0011AB1D /* ConnectionStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionStatus.swift; sourceTree = "<group>"; };
 		11542D832380703F0011AB1D /* ConsoleCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleCommand.swift; sourceTree = "<group>"; };
 		11542D8C2380B0BE0011AB1D /* BaseConnect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseConnect.swift; sourceTree = "<group>"; };
@@ -145,6 +154,9 @@
 		1163933623820CA500D14B19 /* CameraManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
 		11639339238214AC00D14B19 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		1163933B238229DE00D14B19 /* imageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imageExtension.swift; sourceTree = "<group>"; };
+		116CEB6023A1E2D40081D356 /* RegisterListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegisterListView.xib; sourceTree = "<group>"; };
+		116CEB6223A1E2F30081D356 /* RegisterListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterListView.swift; sourceTree = "<group>"; };
+		116CEB6523A3115E0081D356 /* SellRegisterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellRegisterCell.swift; sourceTree = "<group>"; };
 		1178BA8C2388C669000C3FB6 /* SellActivityCustomView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SellActivityCustomView.xib; sourceTree = "<group>"; };
 		119AE144237F78D90045960C /* ServerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerManager.swift; sourceTree = "<group>"; };
 		119C68612380BDC8009E9AA0 /* NewCustomerStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewCustomerStoryboard.storyboard; sourceTree = "<group>"; };
@@ -335,6 +347,7 @@
 		1147AB3E2383648B00D19AA9 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				116CEB5F23A1E2BE0081D356 /* RegisterList */,
 				11EEF0EB239D49FB007C9821 /* Payment */,
 				111DE56A2389F550002F4216 /* Buttons */,
 				1178BA8B2388C638000C3FB6 /* SellActivity */,
@@ -427,6 +440,33 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		114A540923A5A95600F2746A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				116CEB6023A1E2D40081D356 /* RegisterListView.xib */,
+				116CEB6523A3115E0081D356 /* SellRegisterCell.swift */,
+				116CEB6223A1E2F30081D356 /* RegisterListView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		114A540A23A5A95C00F2746A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				114A540C23A5A99F00F2746A /* RegisterListViewModel.swift */,
+				114A540E23A5A9AC00F2746A /* RegisterListViewModelContract.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		114A540B23A5A96200F2746A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				114A541023A5A9B900F2746A /* RegisterListModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		11542D82238070300011AB1D /* ConsoleCommand */ = {
 			isa = PBXGroup;
 			children = (
@@ -482,6 +522,16 @@
 				11639339238214AC00D14B19 /* CameraViewController.swift */,
 			);
 			path = Camera;
+			sourceTree = "<group>";
+		};
+		116CEB5F23A1E2BE0081D356 /* RegisterList */ = {
+			isa = PBXGroup;
+			children = (
+				114A540B23A5A96200F2746A /* Model */,
+				114A540A23A5A95C00F2746A /* ViewModel */,
+				114A540923A5A95600F2746A /* View */,
+			);
+			path = RegisterList;
 			sourceTree = "<group>";
 		};
 		1178BA8B2388C638000C3FB6 /* SellActivity */ = {
@@ -803,6 +853,7 @@
 				1147AB4F2383678700D19AA9 /* CustomerListCell.xib in Resources */,
 				11EBD39123772A4700AB4BFF /* LoginStoryboard.storyboard in Resources */,
 				111DE56F2389F5A3002F4216 /* SaveButtonCustomView.xib in Resources */,
+				116CEB6123A1E2D40081D356 /* RegisterListView.xib in Resources */,
 				1178BA8D2388C669000C3FB6 /* SellActivityCustomView.xib in Resources */,
 				11EBD32B2376499F00AB4BFF /* Main.storyboard in Resources */,
 				119C68622380BDC8009E9AA0 /* NewCustomerStoryboard.storyboard in Resources */,
@@ -912,14 +963,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				119AE145237F78D90045960C /* ServerManager.swift in Sources */,
+				114A540F23A5A9AC00F2746A /* RegisterListViewModelContract.swift in Sources */,
 				11233783237AFE9400F60078 /* stringExtension.swift in Sources */,
 				111DE5692389C623002F4216 /* CustomView+Home.swift in Sources */,
 				11EEF0F4239D4A91007C9821 /* PaymentViewModelContract.swift in Sources */,
 				1147AB7A2384D41900D19AA9 /* CustomerStatusViewModelContract.swift in Sources */,
 				11EBD38A237726A800AB4BFF /* LoginPresenter.swift in Sources */,
 				111DE56D2389F567002F4216 /* SaveButtonCustomView.swift in Sources */,
+				116CEB6323A1E2F30081D356 /* RegisterListView.swift in Sources */,
 				111DE57D238A1D24002F4216 /* SellActivityViewModelContract.swift in Sources */,
 				1163933A238214AC00D14B19 /* CameraViewController.swift in Sources */,
+				116CEB6623A3115E0081D356 /* SellRegisterCell.swift in Sources */,
 				11EBD36623766D2500AB4BFF /* ErrorModel.swift in Sources */,
 				11EBD38F237726A800AB4BFF /* LoginInteractor.swift in Sources */,
 				1147AB462383652F00D19AA9 /* CustomerListViewModelContract.swift in Sources */,
@@ -932,6 +986,7 @@
 				11233787237B7AEB00F60078 /* CustomerModel.swift in Sources */,
 				111DE574238A01CA002F4216 /* XButtonCustomView.swift in Sources */,
 				111DE579238A1CF0002F4216 /* SellActivityModel.swift in Sources */,
+				114A541123A5A9B900F2746A /* RegisterListModel.swift in Sources */,
 				11EBD36423766CFE00AB4BFF /* NetworkManager.swift in Sources */,
 				11EBD38B237726A800AB4BFF /* LoginWorker.swift in Sources */,
 				110664DF2378718800DC44F3 /* ErrorHandler.swift in Sources */,
@@ -979,6 +1034,7 @@
 				11EBD37E2377130C00AB4BFF /* HomeWorker.swift in Sources */,
 				11EBD37D2377130C00AB4BFF /* HomePresenter.swift in Sources */,
 				1147AB712384AA0600D19AA9 /* CustomerStatusView.swift in Sources */,
+				114A540D23A5A99F00F2746A /* RegisterListViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

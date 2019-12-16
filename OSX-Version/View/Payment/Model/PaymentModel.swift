@@ -9,6 +9,3 @@
 import Foundation
 import Cocoa
 
-class PaymentModel {
-    
-}
