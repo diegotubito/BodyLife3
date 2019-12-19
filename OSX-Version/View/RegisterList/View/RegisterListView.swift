@@ -12,7 +12,7 @@ class RegisterListView: XibView , RegisterListViewContract{
     
     @IBOutlet weak var tableView: NSTableView!
     var viewModel : RegisterListViewModelContract!
-    @IBOutlet weak var myActivityIndicator: NSProgressIndicator!
+    var myActivityIndicator: NSProgressIndicator!
     
     override func commonInit() {
         super .commonInit()
@@ -22,19 +22,33 @@ class RegisterListView: XibView , RegisterListViewContract{
         self.wantsLayer = true
         self.layer?.backgroundColor = Constants.Colors.Gray.gray10.cgColor
         viewModel = RegisterListViewModel(withView: self)
-        
+
+        createActivityIndicator()
+    }
+    
+    func createActivityIndicator() {
+        myActivityIndicator = NSProgressIndicator(frame: NSRect(x:self.frame.width/2 - 8, y: self.frame.height-16, width: 16, height: 16))
+        myActivityIndicator.style = .spinning
+        myActivityIndicator.isDisplayedWhenStopped = false
+         self.addSubview(myActivityIndicator)
     }
     
     func showError(value: String) {
-        
+        DispatchQueue.main.async {
+            self.showErrorConnectionView()
+        }
     }
     
     func showLoading() {
-        
+        DispatchQueue.main.async {
+            self.myActivityIndicator.startAnimation(nil)
+        }
     }
     
     func hideLoading() {
-        
+        DispatchQueue.main.async {
+            self.myActivityIndicator.stopAnimation(nil)
+        }
     }
     
     func displayData() {

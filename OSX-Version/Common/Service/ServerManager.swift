@@ -181,7 +181,7 @@ class ServerManager {
            let _service = NetwordManager()
            _service.get(url: url) { (data, error) in
                guard let data = data else {
-                   completion(nil, error)
+                   completion(nil, nil)
                    return
                }
                do {

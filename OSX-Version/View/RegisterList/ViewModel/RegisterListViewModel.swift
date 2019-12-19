@@ -9,10 +9,6 @@
 import Cocoa
 
 class RegisterListViewModel: RegisterListViewModelContract {
-    
-    
-    
-    
     var _view : RegisterListViewContract!
     var model : RegisterListModel!
     
@@ -26,7 +22,8 @@ class RegisterListViewModel: RegisterListViewModelContract {
         model.registers.removeAll()
         let path = Paths.customerFull + ":personal:\(model.selectedCustomer.childID):sells"
         ServerManager.ReadJSON(path: path) { (json, error) in
-            
+            self._view.hideLoading()
+        
             guard let json = json else {
                 self._view.displayData()
                 return
@@ -47,7 +44,7 @@ class RegisterListViewModel: RegisterListViewModelContract {
                 self._view.displayData()
                 
             } catch {
-                print(error.localizedDescription)
+                self._view.showError(value: error.localizedDescription)
             }
         }
     }

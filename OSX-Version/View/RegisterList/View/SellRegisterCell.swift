@@ -15,8 +15,6 @@ class SellRegisterCell: NSTableCellView {
     @IBOutlet weak var labelTotalPayment: NSTextField!
     @IBOutlet weak var labelSaldo: NSTextField!
           
-    @IBOutlet weak var activity: NSProgressIndicator!
-    
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
 

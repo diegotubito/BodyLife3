@@ -16,13 +16,13 @@
             <rect key="frame" x="0.0" y="0.0" width="795" height="329"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <scrollView autohidesScrollers="YES" horizontalLineScroll="98" horizontalPageScroll="10" verticalLineScroll="98" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MJa-6N-FZC">
+                <scrollView autohidesScrollers="YES" horizontalLineScroll="32" horizontalPageScroll="10" verticalLineScroll="32" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MJa-6N-FZC">
                     <rect key="frame" x="0.0" y="0.0" width="795" height="329"/>
                     <clipView key="contentView" drawsBackground="NO" id="s7Z-5j-h0J">
                         <rect key="frame" x="1" y="1" width="793" height="327"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="96" rowSizeStyle="automatic" viewBased="YES" id="gQX-RC-7Ga">
+                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="30" rowSizeStyle="automatic" viewBased="YES" id="gQX-RC-7Ga">
                                 <rect key="frame" x="0.0" y="0.0" width="793" height="327"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
@@ -31,7 +31,7 @@
                                 <tableColumns>
                                     <tableColumn identifier="defaultRow" width="790" minWidth="10" maxWidth="3.4028234663852886e+38" id="Min-dm-1G9">
                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
-                                            <font key="font" metaFont="label" size="11"/>
+                                            <font key="font" metaFont="controlContent" size="11"/>
                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </tableHeaderCell>
@@ -171,25 +171,13 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
-                <progressIndicator wantsLayer="YES" maxValue="100" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="lmX-Ej-FHn">
-                    <rect key="frame" x="383" y="299" width="30" height="30"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="30" id="Thy-HP-kO9"/>
-                        <constraint firstAttribute="height" constant="30" id="Wrw-oK-LEK"/>
-                    </constraints>
-                </progressIndicator>
             </subviews>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="MJa-6N-FZC" secondAttribute="bottom" id="026-OT-QRr"/>
                 <constraint firstAttribute="trailing" secondItem="MJa-6N-FZC" secondAttribute="trailing" id="Byk-zX-j4e"/>
                 <constraint firstItem="MJa-6N-FZC" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="ODz-0d-f0c"/>
-                <constraint firstItem="lmX-Ej-FHn" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="djH-dS-mNE"/>
-                <constraint firstItem="lmX-Ej-FHn" firstAttribute="centerX" secondItem="c22-O7-iKe" secondAttribute="centerX" id="iCK-Lv-82m"/>
                 <constraint firstItem="MJa-6N-FZC" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="tNr-9u-Z8p"/>
             </constraints>
-            <connections>
-                <outlet property="activity" destination="lmX-Ej-FHn" id="saK-hl-ckd"/>
-            </connections>
             <point key="canvasLocation" x="170.5" y="60.5"/>
         </customView>
     </objects>
