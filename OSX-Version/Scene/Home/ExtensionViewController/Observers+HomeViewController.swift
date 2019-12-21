@@ -80,10 +80,10 @@ extension HomeViewController {
             self.hideSellActivityView()
             self.hidePaymentView()
             self.showStatusCustomer()
-            self.showSellRegister()
-            
             self.customerStatusView.viewModel = CustomerStatusViewModel(withView: self.customerStatusView, receivedCustomer: customerSelected)
             self.customerStatusView.start()
+            self.showSellRegister()
+            self.sellRegisterView.viewModel.loadData()
         }
     }
 }

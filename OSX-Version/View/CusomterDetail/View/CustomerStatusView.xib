@@ -202,10 +202,10 @@
                     </textFieldCell>
                 </textField>
                 <progressIndicator wantsLayer="YES" maxValue="100" displayedWhenStopped="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="CwU-P6-vvy">
-                    <rect key="frame" x="335" y="199" width="30" height="30"/>
+                    <rect key="frame" x="342" y="213" width="16" height="16"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="30" id="DRO-J5-ppr"/>
-                        <constraint firstAttribute="width" constant="30" id="amt-7W-SoQ"/>
+                        <constraint firstAttribute="height" constant="16" id="DRO-J5-ppr"/>
+                        <constraint firstAttribute="width" constant="16" id="amt-7W-SoQ"/>
                     </constraints>
                 </progressIndicator>
             </subviews>

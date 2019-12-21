@@ -32,6 +32,26 @@ struct Constants {
 
     }
     
+// MARK: BORDERS
+    struct Borders {
+        struct CustomerList {
+            static let color = Colors.Gray.gray28.cgColor
+            static let width : CGFloat = 2
+        }
+        struct Status {
+            static let color = Colors.Gray.gray28.cgColor
+            static let width : CGFloat = 2
+        }
+        struct RegisterList {
+            static let color = Colors.Gray.gray28.cgColor
+            static let width : CGFloat = 2
+        }
+        struct SellActivity {
+            static let color = Colors.Gray.gray28.cgColor
+            static let width: CGFloat = 2
+        }
+    }
+    
 // MARK: VIEWCONTROLLER SIZES
     
     struct ViewControllerSizes {

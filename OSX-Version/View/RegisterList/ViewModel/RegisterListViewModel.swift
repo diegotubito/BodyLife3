@@ -51,7 +51,8 @@ class RegisterListViewModel: RegisterListViewModelContract {
     
     func setSelectedCustomer(customer: CustomerModel) {
         model.selectedCustomer = customer
-        loadData()
+        model.registers.removeAll()
+        _view.displayData()
     }
     
     func getRegisters() -> [SellRegisterModel] {

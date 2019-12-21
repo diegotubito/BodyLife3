@@ -31,6 +31,8 @@ class SellActivityCustomView: XibView, SellActivityViewContract {
     override func commonInit() {
         super .commonInit()
         self.wantsLayer = true
+        self.layer?.borderWidth = Constants.Borders.SellActivity.width
+        self.layer?.borderColor = Constants.Borders.SellActivity.color
         self.layer?.backgroundColor = Constants.Colors.Gray.gray10.cgColor
         disableDates()
         viewModel = SellActivityViewModel(withView: self)

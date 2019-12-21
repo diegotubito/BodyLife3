@@ -54,6 +54,10 @@ class CustomerListView: NSView {
         viewModel = CustomerListViewModel(withView: self)
         
         errorView.wantsLayer = true
+        self.wantsLayer = true
+        self.layer?.borderWidth = Constants.Borders.CustomerList.width
+        self.layer?.borderColor = Constants.Borders.CustomerList.color
+        
         errorView.layer?.backgroundColor = NSColor.clear.cgColor
         errorView.isHidden = true
         errorView.layer?.zPosition = 100
