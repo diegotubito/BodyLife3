@@ -22,25 +22,14 @@ class SellRegisterCell: NSTableCellView {
     }
     
     func displayCell(register: SellRegisterModel) {
-        let price = register.price
-        let totalPayment : Double = calcTotalPayment(payments: register.payments)
-        let saldo = totalPayment - price
+        let totalPayment = register.totalPayment ?? 0
+        let balance = register.balance ?? 0
         
-       
         labelCreatedAt.stringValue = (register.createdAt.toDate()?.toString(formato: "dd-MM-yyy HH:mm"))! + "hs."
         labelDisplayName.stringValue = register.displayName
         labelPrice.stringValue = register.price.formatoMoneda(decimales: 2)
         labelTotalPayment.stringValue = totalPayment.formatoMoneda(decimales: 2)
-        labelSaldo.stringValue = saldo.formatoMoneda(decimales: 2)
+        labelSaldo.stringValue = balance.formatoMoneda(decimales: 2)
     }
-    
-    func calcTotalPayment(payments: [PaymentModel]?) -> Double {
-        if payments == nil {return 0}
-        var total : Double = 0
-        for i in payments! {
-            total += i.total
-        }
-        
-        return total
-    }
+   
 }

@@ -33,7 +33,7 @@ class CustomerStatusView: XibView {
         self.wantsLayer = true
         self.layer?.borderWidth = Constants.Borders.Status.width
         self.layer?.borderColor = Constants.Borders.Status.color
-        self.layer?.backgroundColor = Constants.Colors.Gray.gray10.cgColor
+        //self.layer?.backgroundColor = Constants.Colors.Gray.gray10.cgColor
         
         innerBackground.wantsLayer = true
         innerBackground.layer?.backgroundColor = Constants.Colors.Blue.chambray.withAlphaComponent(0.15).cgColor

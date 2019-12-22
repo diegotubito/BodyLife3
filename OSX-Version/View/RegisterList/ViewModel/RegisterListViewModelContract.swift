@@ -13,6 +13,8 @@ protocol RegisterListViewModelContract {
     func loadData()
     func setSelectedCustomer(customer: CustomerModel)
     func getRegisters() -> [SellRegisterModel]
+    func setSelectedRegister(_ selectedRegister: SellRegisterModel?)
+    func getSelectedRegister() -> SellRegisterModel?
 
 }
 
@@ -22,4 +24,5 @@ protocol RegisterListViewContract {
     func showLoading()
     func hideLoading()
     func setSelectedCustomer(customer: CustomerModel)
+    func updateButtonState()
 }

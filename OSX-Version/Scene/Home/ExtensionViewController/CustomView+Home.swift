@@ -10,6 +10,9 @@ import Cocoa
 
 extension HomeViewController {
     func createCustomViews() {
+        
+        createUpperView()
+        
         createCustomerListView()
         customerListView.isHidden = false
       
@@ -24,6 +27,24 @@ extension HomeViewController {
         
         createPaymentView()
         paymentView.isHidden = true
+        
+        createBottomView()
+    }
+    
+    func createUpperView() {
+        let upperView = NSView(frame: CGRect(x: 0, y: 0, width: containerUpperBar.frame.width, height: containerUpperBar.frame.height))
+        containerUpperBar.addSubview(upperView)
+        
+        containerUpperBar.wantsLayer = true
+        containerUpperBar.layer?.backgroundColor = Constants.Colors.Gray.almondFrost.cgColor
+    }
+    
+    func createBottomView() {
+        let bottomView = NSView(frame: CGRect(x: 0, y: 0, width: containerBottomBar.frame.width, height: containerBottomBar.frame.height))
+        containerBottomBar.addSubview(bottomView)
+        
+        containerBottomBar.wantsLayer = true
+    //    containerBottomBar.layer?.backgroundColor = Constants.Colors.Gray.gray21.cgColor
     }
     
     func createPaymentView() {
@@ -32,13 +53,15 @@ extension HomeViewController {
     }
     
     func createCustomerListView() {
-        customerListView = CustomerListView(frame: NSRect(x: 0, y: 0, width: view.frame.width * 0.3, height: view.frame.height))
-        view.addSubview(customerListView)
+        customerListView = CustomerListView(frame: NSRect(x: 0, y: 0, width: containerCustomerList.frame.width, height: containerCustomerList.frame.height))
+        containerCustomerList.addSubview(customerListView)
+        containerCustomerList.wantsLayer = true
+        containerCustomerList.layer?.backgroundColor = NSColor.clear.cgColor
     }
     
     func createCustomerStatusView() {
-        customerStatusView = CustomerStatusView(frame: CGRect(x: view.frame.width * 0.3, y: view.frame.height - 250, width: view.frame.width - (view.frame.width * 0.3), height: 250))
-        view.addSubview(customerStatusView)
+        customerStatusView = CustomerStatusView(frame: CGRect(x: 0, y: 0, width: containerStatus.frame.width, height: containerStatus.frame.height))
+        containerStatus.addSubview(customerStatusView)
     }
     
     func createSellActivityCustomView() {
@@ -51,8 +74,8 @@ extension HomeViewController {
     
     func createRegisterView() {
         
-        sellRegisterView = RegisterListView(frame: CGRect(x: view.frame.width * 0.3, y: 250, width: view.frame.width - (view.frame.width * 0.3), height: 250))
-        self.view.addSubview(sellRegisterView)
+        sellRegisterView = RegisterListView(frame: CGRect(x: 0, y: 0, width: containerSellRegisters.frame.width, height: containerSellRegisters.frame.height))
+        self.containerSellRegisters.addSubview(sellRegisterView)
         
     }
     

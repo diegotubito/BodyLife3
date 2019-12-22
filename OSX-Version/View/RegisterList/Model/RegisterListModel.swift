@@ -11,4 +11,7 @@ import Cocoa
 class RegisterListModel {
     var registers = [SellRegisterModel]()
     var selectedCustomer : CustomerModel!
+    var selectedSellRegister : SellRegisterModel!
+
+  
 }

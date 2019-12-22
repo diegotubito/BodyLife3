@@ -20,7 +20,6 @@ class CustomerListCell: NSTableCellView {
     
     override func draw(_ dirtyRect: NSRect) {
         self.wantsLayer = true
-        //   self.layer?.backgroundColor = BLDefaults.colors.fondoBarraSuperior.cgColor
         
         fotoCell.wantsLayer = true
         fotoCell.layer?.cornerRadius = (fotoCell.layer?.frame.width)! / 2

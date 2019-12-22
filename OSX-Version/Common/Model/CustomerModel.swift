@@ -41,6 +41,9 @@ struct SellRegisterModel: Decodable {
     var price : Double
     var displayName : String
     var payments : [PaymentModel]?
+    
+    var balance : Double?
+    var totalPayment : Double?
 }
 
 struct PaymentModel: Decodable {

@@ -9,10 +9,6 @@
 import Foundation
 import Cocoa
 
-
-
-
-
 struct Constants {
 // MARK : USER DEFAULTS KEYS
     enum UserDefaultKey : String {
@@ -36,19 +32,19 @@ struct Constants {
     struct Borders {
         struct CustomerList {
             static let color = Colors.Gray.gray28.cgColor
-            static let width : CGFloat = 2
+            static let width : CGFloat = 1
         }
         struct Status {
             static let color = Colors.Gray.gray28.cgColor
-            static let width : CGFloat = 2
+            static let width : CGFloat = 1
         }
         struct RegisterList {
             static let color = Colors.Gray.gray28.cgColor
-            static let width : CGFloat = 2
+            static let width : CGFloat = 1
         }
         struct SellActivity {
             static let color = Colors.Gray.gray28.cgColor
-            static let width: CGFloat = 2
+            static let width: CGFloat = 1
         }
     }
     
@@ -56,7 +52,7 @@ struct Constants {
     
     struct ViewControllerSizes {
         struct Home {
-            static let width : CGFloat = 0.8
+            static let width : CGFloat = 0.7
             static let height : CGFloat = 0.7
         }
         struct Login {

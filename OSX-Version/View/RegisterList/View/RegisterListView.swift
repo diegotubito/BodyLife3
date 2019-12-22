@@ -10,6 +10,8 @@ import Cocoa
 
 class RegisterListView: XibView , RegisterListViewContract{
     
+    @IBOutlet weak var agregarCobroOutlet: NSButton!
+    @IBOutlet weak var anularButtonOutlet: NSButton!
     @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var myIndicator : NSProgressIndicator!
     var viewModel : RegisterListViewModelContract!
@@ -20,7 +22,7 @@ class RegisterListView: XibView , RegisterListViewContract{
         tableView.delegate = self
         tableView.dataSource = self
         self.wantsLayer = true
-        self.layer?.backgroundColor = Constants.Colors.Gray.gray10.cgColor
+   //     self.layer?.backgroundColor = Constants.Colors.Gray.gray10.cgColor
         self.layer?.borderWidth = Constants.Borders.RegisterList.width
         self.layer?.borderColor = Constants.Borders.RegisterList.color
         viewModel = RegisterListViewModel(withView: self)
@@ -54,6 +56,32 @@ class RegisterListView: XibView , RegisterListViewContract{
         viewModel.setSelectedCustomer(customer: customer)
     }
     
+    func updateButtonState() {
+        anularButtonOutlet.isEnabled = false
+        agregarCobroOutlet.isEnabled = false
+        
+        guard let selection = viewModel.getSelectedRegister() else {
+            return
+        }
+       
+        let createdAt = selection.createdAt.toDate()
+        let today = Calendar.current.component(.day, from: Date())
+        let createdDay = Calendar.current.component(.day, from: createdAt!)
+            
+        if selection.balance ?? 0 < 0 {
+            agregarCobroOutlet.isEnabled = true
+        }
+        if createdDay == today {
+            anularButtonOutlet.isEnabled = true
+        }
+        
+    }
+    @IBAction func anularDidPressed(_ sender: Any) {
+        
+    }
+    @IBAction func cobroDidPressed(_ sender: Any) {
+    }
+    
 }
 
 
@@ -72,8 +100,12 @@ extension RegisterListView: NSTableViewDataSource, NSTableViewDelegate {
     
     func tableViewSelectionDidChange(_ notification: Notification) {
         if let myTable = notification.object as? NSTableView {
-            
-            
+            if myTable.selectedRow == -1 {
+                viewModel.setSelectedRegister(nil)
+                return
+            }
+            let selectedRegister = viewModel.getRegisters()[myTable.selectedRow]
+            viewModel.setSelectedRegister(selectedRegister)
             
         }
         

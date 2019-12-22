@@ -19,6 +19,7 @@ class RegisterListViewModel: RegisterListViewModelContract {
     
     func loadData() {
         _view.showLoading()
+        setSelectedRegister(nil)
         model.registers.removeAll()
         let path = Paths.customerFull + ":personal:\(model.selectedCustomer.childID):sells"
         ServerManager.ReadJSON(path: path) { (json, error) in
@@ -41,6 +42,7 @@ class RegisterListViewModel: RegisterListViewModelContract {
                 let data = try JSONSerialization.data(withJSONObject: jsonArray, options: [])
                 let registers = try JSONDecoder().decode([SellRegisterModel].self, from: data)
                 self.model.registers = registers
+                self.calcExtras()
                 self._view.displayData()
                 
             } catch {
@@ -48,6 +50,27 @@ class RegisterListViewModel: RegisterListViewModelContract {
             }
         }
     }
+    
+    private func calcExtras() {
+        for (x,register) in model.registers.enumerated() {
+            let price = register.price
+            let totalPayments = calcTotalPayment(payments: register.payments)
+            let saldo = totalPayments - price
+            
+            model.registers[x].totalPayment = totalPayments
+            model.registers[x].balance = saldo
+        }
+    }
+    
+    private func calcTotalPayment(payments: [PaymentModel]?) -> Double {
+           if payments == nil {return 0}
+           var total : Double = 0
+           for i in payments! {
+               total += i.total
+           }
+           
+           return total
+       }
     
     func setSelectedCustomer(customer: CustomerModel) {
         model.selectedCustomer = customer
@@ -59,4 +82,14 @@ class RegisterListViewModel: RegisterListViewModelContract {
         return model.registers
     }
     
+    func setSelectedRegister(_ selectedRegister: SellRegisterModel?) {
+        model.selectedSellRegister = selectedRegister
+        _view.updateButtonState()
+    }
+    
+    func getSelectedRegister() -> SellRegisterModel? {
+        return model.selectedSellRegister
+    }
+    
+   
 }

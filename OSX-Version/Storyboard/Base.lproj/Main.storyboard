@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15702"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -707,54 +707,82 @@
                 <viewController id="XfG-lQ-9wD" customClass="HomeViewController" customModule="OSX_Version" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
                         <rect key="frame" x="0.0" y="0.0" width="1280" height="720"/>
-                        <autoresizingMask key="autoresizingMask"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="X1y-Gn-erX">
-                                <rect key="frame" x="0.0" y="0.0" width="1280" height="720"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="3d_cubes" id="7H6-dA-Ffr"/>
-                            </imageView>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="j5Y-bK-bI8">
-                                <rect key="frame" x="540" y="260" width="200" height="200"/>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="Y6C-Pr-GNv">
+                                <rect key="frame" x="0.0" y="690" width="1280" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="DUw-ot-g54"/>
-                                    <constraint firstAttribute="width" constant="200" id="NJg-bh-sHY"/>
+                                    <constraint firstAttribute="height" constant="30" id="xBg-Mn-Ma1"/>
                                 </constraints>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="logo_body_life" id="Xd2-cx-a0K"/>
-                            </imageView>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hyz-sR-HNl">
-                                <rect key="frame" x="1136" y="13" width="130" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" title="New Customer" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="veG-p5-RWp">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="newCustomerPressed:" target="XfG-lQ-9wD" id="UVa-er-Mn0"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1S1-yd-7uV">
-                                <rect key="frame" x="484" y="13" width="123" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" title="Cerrar Sesión" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="RsO-xo-dxD">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="closeSessionPressed:" target="XfG-lQ-9wD" id="Fep-vH-hyg"/>
-                                </connections>
-                            </button>
+                            </customView>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="vJS-25-cay">
+                                <rect key="frame" x="0.0" y="0.0" width="1280" height="20"/>
+                                <subviews>
+                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hyz-sR-HNl">
+                                        <rect key="frame" x="283" y="-22" width="130" height="32"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="push" title="New Customer" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="veG-p5-RWp">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="newCustomerPressed:" target="XfG-lQ-9wD" id="UVa-er-Mn0"/>
+                                        </connections>
+                                    </button>
+                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1S1-yd-7uV">
+                                        <rect key="frame" x="714" y="-23" width="123" height="32"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="push" title="Cerrar Sesión" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="RsO-xo-dxD">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="closeSessionPressed:" target="XfG-lQ-9wD" id="Fep-vH-hyg"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="6QP-Zw-s8k"/>
+                                </constraints>
+                            </customView>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="xeN-qp-oFe">
+                                <rect key="frame" x="0.0" y="20" width="350" height="670"/>
+                            </customView>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="0fS-Ye-Kdk">
+                                <rect key="frame" x="350" y="452" width="930" height="238"/>
+                            </customView>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="Htk-LD-AMV">
+                                <rect key="frame" x="350" y="20" width="930" height="432"/>
+                            </customView>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="X1y-Gn-erX" secondAttribute="bottom" id="0PE-Ql-Wa1"/>
-                            <constraint firstItem="j5Y-bK-bI8" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="GwV-m2-qVw"/>
-                            <constraint firstItem="X1y-Gn-erX" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="SRg-EQ-l3B"/>
-                            <constraint firstItem="j5Y-bK-bI8" firstAttribute="centerY" secondItem="m2S-Jp-Qdl" secondAttribute="centerY" id="Wcb-iC-nE1"/>
-                            <constraint firstItem="X1y-Gn-erX" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="YDY-7Q-I9O"/>
-                            <constraint firstAttribute="trailing" secondItem="X1y-Gn-erX" secondAttribute="trailing" id="mFJ-be-yjB"/>
+                            <constraint firstAttribute="bottom" secondItem="vJS-25-cay" secondAttribute="bottom" id="363-0I-Kd1"/>
+                            <constraint firstItem="vJS-25-cay" firstAttribute="top" secondItem="Htk-LD-AMV" secondAttribute="bottom" id="AFh-bT-Bu0"/>
+                            <constraint firstAttribute="trailing" secondItem="0fS-Ye-Kdk" secondAttribute="trailing" id="AxR-US-99E"/>
+                            <constraint firstItem="Htk-LD-AMV" firstAttribute="leading" secondItem="xeN-qp-oFe" secondAttribute="trailing" id="E3n-GC-6pC"/>
+                            <constraint firstItem="xeN-qp-oFe" firstAttribute="top" secondItem="Y6C-Pr-GNv" secondAttribute="bottom" id="JtF-dQ-P8w"/>
+                            <constraint firstItem="Y6C-Pr-GNv" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="PTU-Bp-3GL"/>
+                            <constraint firstAttribute="trailing" secondItem="vJS-25-cay" secondAttribute="trailing" id="Rt5-Ez-ciT"/>
+                            <constraint firstItem="0fS-Ye-Kdk" firstAttribute="top" secondItem="Y6C-Pr-GNv" secondAttribute="bottom" id="U2t-Ps-byn"/>
+                            <constraint firstItem="xeN-qp-oFe" firstAttribute="width" secondItem="m2S-Jp-Qdl" secondAttribute="width" multiplier="0.273438" id="WDq-Vj-cwJ"/>
+                            <constraint firstItem="0fS-Ye-Kdk" firstAttribute="leading" secondItem="xeN-qp-oFe" secondAttribute="trailing" id="XoN-8l-sWp"/>
+                            <constraint firstAttribute="trailing" secondItem="Y6C-Pr-GNv" secondAttribute="trailing" id="cLG-AI-Ybu"/>
+                            <constraint firstItem="vJS-25-cay" firstAttribute="top" secondItem="xeN-qp-oFe" secondAttribute="bottom" id="fb3-sC-zII"/>
+                            <constraint firstAttribute="trailing" secondItem="Htk-LD-AMV" secondAttribute="trailing" id="hOy-Q3-e2M"/>
+                            <constraint firstItem="Htk-LD-AMV" firstAttribute="top" secondItem="0fS-Ye-Kdk" secondAttribute="bottom" id="i1d-3F-bkC"/>
+                            <constraint firstItem="vJS-25-cay" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="kMH-Em-kqG"/>
+                            <constraint firstItem="xeN-qp-oFe" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="lFB-KO-hzf"/>
+                            <constraint firstItem="0fS-Ye-Kdk" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="350" id="nwv-6W-vJN"/>
+                            <constraint firstItem="Htk-LD-AMV" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="268" id="qP2-PK-Rfl"/>
+                            <constraint firstItem="Y6C-Pr-GNv" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="w5h-T8-7wr"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="backgroundImage" destination="X1y-Gn-erX" id="i2c-dX-ogT"/>
+                        <outlet property="containerBottomBar" destination="vJS-25-cay" id="mNA-ah-rJd"/>
+                        <outlet property="containerCustomerList" destination="xeN-qp-oFe" id="wWZ-Pj-sSw"/>
+                        <outlet property="containerSellRegisters" destination="Htk-LD-AMV" id="dk4-O6-HfV"/>
+                        <outlet property="containerStatus" destination="0fS-Ye-Kdk" id="lvC-xI-kXo"/>
+                        <outlet property="containerUpperBar" destination="Y6C-Pr-GNv" id="Sv0-Al-zIe"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -762,8 +790,4 @@
             <point key="canvasLocation" x="75" y="982"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="3d_cubes" width="1280" height="720"/>
-        <image name="logo_body_life" width="1000" height="1000"/>
-    </resources>
 </document>
