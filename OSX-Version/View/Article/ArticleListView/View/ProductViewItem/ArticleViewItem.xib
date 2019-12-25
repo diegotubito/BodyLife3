@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="15702" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15702"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="ArticleViewItem" customModule="OSX_Version" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="833" height="272"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yEO-tN-X2L">
+                    <rect key="frame" x="6" y="127" width="282" height="19"/>
+                    <textFieldCell key="cell" alignment="center" title="long long text that should be placed" id="xuS-rE-dYU">
+                        <font key="font" metaFont="system" size="15"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uoY-Hk-Rhm">
+                    <rect key="frame" x="294" y="14" width="245" height="244"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="uoY-Hk-Rhm" secondAttribute="height" multiplier="1:1" id="Bkc-yV-0SW"/>
+                    </constraints>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSActionTemplate" id="UIV-9r-dNk"/>
+                </imageView>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AKu-2l-gPb">
+                    <rect key="frame" x="545" y="126" width="282" height="20"/>
+                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Label" id="LaQ-KL-o0W">
+                        <font key="font" metaFont="system" size="17"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <constraints>
+                <constraint firstItem="uoY-Hk-Rhm" firstAttribute="leading" secondItem="yEO-tN-X2L" secondAttribute="trailing" constant="8" id="5G7-Vb-8dI"/>
+                <constraint firstItem="AKu-2l-gPb" firstAttribute="centerY" secondItem="uoY-Hk-Rhm" secondAttribute="centerY" id="7ou-eg-4Qn"/>
+                <constraint firstAttribute="trailing" secondItem="AKu-2l-gPb" secondAttribute="trailing" constant="8" id="8zg-Ou-NsO"/>
+                <constraint firstItem="yEO-tN-X2L" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="8" id="Jar-Gg-QfI"/>
+                <constraint firstItem="AKu-2l-gPb" firstAttribute="leading" secondItem="uoY-Hk-Rhm" secondAttribute="trailing" constant="8" id="KYG-Q2-CdQ"/>
+                <constraint firstItem="yEO-tN-X2L" firstAttribute="centerY" secondItem="uoY-Hk-Rhm" secondAttribute="centerY" id="YMH-zX-0du"/>
+                <constraint firstItem="uoY-Hk-Rhm" firstAttribute="centerY" secondItem="Hz6-mo-xeY" secondAttribute="centerY" id="Yn7-uk-puP"/>
+                <constraint firstItem="uoY-Hk-Rhm" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="bbh-cc-Gtx"/>
+                <constraint firstItem="uoY-Hk-Rhm" firstAttribute="height" secondItem="Hz6-mo-xeY" secondAttribute="height" multiplier="0.9" id="hgC-pn-Sui"/>
+            </constraints>
+            <point key="canvasLocation" x="139" y="154"/>
+        </customView>
+        <customObject id="YYE-4I-5jN" customClass="ArticleViewItem" customModule="OSX_Version" customModuleProvider="target">
+            <connections>
+                <outlet property="productIcon" destination="uoY-Hk-Rhm" id="EFF-Cr-Bwn"/>
+                <outlet property="productName" destination="yEO-tN-X2L" id="cYz-E7-ltd"/>
+                <outlet property="productPrice" destination="AKu-2l-gPb" id="g2H-TE-niZ"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="fTt-xr-tJK"/>
+            </connections>
+        </customObject>
+    </objects>
+    <resources>
+        <image name="NSActionTemplate" width="14" height="14"/>
+    </resources>
+</document>

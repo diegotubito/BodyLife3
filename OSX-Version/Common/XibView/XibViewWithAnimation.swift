@@ -1,13 +1,14 @@
 //
-//  BaseCustomView.swift
+//  XibViewWithAnimation.swift
 //  OSX-Version
 //
-//  Created by David Diego Gomez on 09/11/2019.
+//  Created by David Diego Gomez on 23/12/2019.
 //  Copyright © 2019 David Diego Gomez. All rights reserved.
 //
+
 import Cocoa
 
-class XibView: NSView {
+class XibViewWithAnimation: NSView {
     var xibName : String?
     var errorNoConnection : NSImageView!
 
@@ -112,7 +113,7 @@ class XibView: NSView {
 }
 
 
-extension XibView: CAAnimationDelegate {
+extension XibViewWithAnimation: CAAnimationDelegate {
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
         guard let name = anim.value(forKey: "name") as? String else {
             return

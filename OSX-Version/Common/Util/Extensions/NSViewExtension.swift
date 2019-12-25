@@ -15,4 +15,11 @@ extension NSView {
         blurFilter?.setValue(5.0, forKey: kCIInputRadiusKey)
         self.layer?.backgroundFilters?.append(blurFilter!)
     }
+    
+    func Blur(intensity: CGFloat) {
+        let blurFilter = CIFilter(name: "CIGaussianBlur")
+        blurFilter?.setDefaults()
+        blurFilter?.setValue(intensity, forKey: kCIInputRadiusKey)
+        self.layer?.backgroundFilters?.append(blurFilter!)
+    }
 }

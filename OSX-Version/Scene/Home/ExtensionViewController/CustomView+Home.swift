@@ -29,6 +29,16 @@ extension HomeViewController {
         paymentView.isHidden = true
         
         createBottomView()
+        createProductSellView()
+    }
+    
+    func createProductSellView() {
+        sellProductView = ArticleSellView(frame: CGRect(x: -395, y: 0, width: 400, height: 400))
+        sellProductView.destiny = CGPoint(x: 200, y: 0)
+        sellProductView.closeWhenBackgroundIsTouch = true
+        view.addSubview(sellProductView)
+    
+        
     }
     
     func createUpperView() {

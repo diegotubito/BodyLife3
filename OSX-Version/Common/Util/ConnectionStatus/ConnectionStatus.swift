@@ -207,7 +207,7 @@ class Connect : BaseConnect {
         runServerStatus(url: FirebaseEndpoint, success: {
             result(true)
         }) {
-            result(false)
+             result(false)
         }
     }
     

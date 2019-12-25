@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class CustomerStatusView: XibView {
+class CustomerStatusView: XibViewWithAnimation {
     
     @IBOutlet weak var titleLabel: NSTextField!
     
@@ -26,7 +26,7 @@ class CustomerStatusView: XibView {
     @IBOutlet weak var DayBox: NSBox!
     
     var didPressSellActivityButton : (() -> ())?
-    var didPressPaymentButton : (() -> ())?
+    var didPressSellProductButton : (() -> ())?
     
     override func commonInit() {
         super .commonInit()
@@ -74,10 +74,10 @@ class CustomerStatusView: XibView {
     @IBAction func SellActivityPressed(_ sender: Any) {
         didPressSellActivityButton?()
     }
-    @IBAction func PaymentButtonPressed(_ sender: Any) {
-        print("ddd")
-        didPressPaymentButton?()
+    @IBAction func SellProductPressed(_ sender: Any) {
+        didPressSellProductButton?()
     }
+    
 }
 
 

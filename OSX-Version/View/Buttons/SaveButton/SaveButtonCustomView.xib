@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="15505" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="15702" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15702"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="SaveButtonCustomView" customModule="OSX_Version" customModuleProvider="target">
             <connections>
                 <outlet property="buttonView" destination="aWG-bq-l1J" id="Bcw-HS-KYI"/>
+                <outlet property="myIndicator" destination="2Fc-lR-Ecn" id="fbI-7H-niY"/>
                 <outlet property="myView" destination="c22-O7-iKe" id="GMA-aS-hzs"/>
+                <outlet property="titleLabel" destination="a7J-O8-cbK" id="ihp-or-GXo"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
@@ -28,10 +30,15 @@
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
                         </textField>
+                        <progressIndicator wantsLayer="YES" maxValue="100" displayedWhenStopped="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="2Fc-lR-Ecn">
+                            <rect key="frame" x="131" y="99" width="16" height="16"/>
+                        </progressIndicator>
                     </subviews>
                     <constraints>
                         <constraint firstItem="a7J-O8-cbK" firstAttribute="centerX" secondItem="aWG-bq-l1J" secondAttribute="centerX" id="7fd-C0-jB2"/>
+                        <constraint firstItem="2Fc-lR-Ecn" firstAttribute="centerX" secondItem="aWG-bq-l1J" secondAttribute="centerX" id="WSd-c4-429"/>
                         <constraint firstItem="a7J-O8-cbK" firstAttribute="centerY" secondItem="aWG-bq-l1J" secondAttribute="centerY" id="by8-JS-obi"/>
+                        <constraint firstItem="2Fc-lR-Ecn" firstAttribute="centerY" secondItem="aWG-bq-l1J" secondAttribute="centerY" id="xar-rt-E8N"/>
                     </constraints>
                 </customView>
             </subviews>

@@ -13,13 +13,12 @@ extension HomeViewController {
     
     func addObservers() {
         customerListOberserver()
-        activityButtonObserver()
-        paymentButtonObserver()
+        buttonObserverProductSell()
+        buttonObserverActivitySell()
     }
     
     func customerListOberserver() {
         self.customerListView.onSelectedCustomer = { customer in
-            self.sellActivityView.animateMode = .fadeOut
             self.selectedCustomer = customer
             self.timerForDelayCustomerSelection.invalidate()
             self.customerStatusView.showLoading()
@@ -32,7 +31,7 @@ extension HomeViewController {
         }
     }
     
-    func activityButtonObserver() {
+    func buttonObserverActivitySell() {
         self.customerStatusView.didPressSellActivityButton = {
             //open sell activities custom view
             self.sellActivityView.animateMode = .fadeIn
@@ -44,10 +43,11 @@ extension HomeViewController {
         }
     }
     
-    func paymentButtonObserver() {
-        self.customerStatusView.didPressPaymentButton = {
-            self.paymentView.isHidden = false
-            self.paymentView.animateMode = .fadeIn
+    func buttonObserverProductSell() {
+        self.customerStatusView.didPressSellProductButton = {
+            print("product sell")
+            self.sellProductView.selectedCustomer = (self.selectedCustomer)!
+            self.sellProductView.showView()
         }
     }
     
@@ -59,13 +59,13 @@ extension HomeViewController {
     
     func showSellRegister() {
         if self.sellRegisterView.isHidden {
-            self.sellRegisterView.animateMode = .fadeIn
+            self.sellRegisterView.animateMode = .leftIn
         }
     }
     
     func hideSellActivityView() {
         if !self.sellActivityView.isHidden {
-            self.sellActivityView.animateMode = .none
+            self.sellActivityView.animateMode = .rightOut
         }
     }
     

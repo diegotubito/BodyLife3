@@ -31,13 +31,13 @@ struct CustomerStatus: Decodable {
 struct SellRegisterModel: Decodable {
     var childID : String
     var childIDCustomer : String
-    var childIDDiscount : String
-    var childIDActivity : String
-    var childIDPeriod : String
+    var childIDDiscount : String?
+    var childIDActivity : String?
+    var childIDPeriod : String?
     var createdAt : Double
-    var discount : Double
-    var fromDate : Double
-    var toDate : Double
+    var discount : Double?
+    var fromDate : Double?
+    var toDate : Double?
     var price : Double
     var displayName : String
     var payments : [PaymentModel]?

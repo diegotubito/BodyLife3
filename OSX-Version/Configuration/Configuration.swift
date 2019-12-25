@@ -15,12 +15,14 @@ struct ServerType {
 }
 
 struct Paths {
+    static let sells = "sells"
     static let customerBrief = "customerBrief"
     static let customerFull = "customerFull"
     static let customerStatus = "customerStatus"
     static let fullPersonalData = "customerFull:personal"
     static let customerOriginalImage = "customer"
     static let productService = "product:service"
+    static let productArticle = "product:article"
 }
 
 class Configuration {

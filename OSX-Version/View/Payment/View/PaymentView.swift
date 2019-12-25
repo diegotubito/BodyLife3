@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class PaymentView: XibView, PaymentViewContract {
+class PaymentView: XibViewWithAnimation, PaymentViewContract {
     override func commonInit() {
         super .commonInit()
         

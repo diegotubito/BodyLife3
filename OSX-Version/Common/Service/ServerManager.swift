@@ -11,11 +11,19 @@ import Cocoa
 
 class ServerManager {
     static let uid = UserSaved.Load()?.uid
-            
+    
     static let Shared = ServerManager()
     
     static var imageCache = NSCache<AnyObject, AnyObject>()
-      
+    
+    static func createNewChildID() -> String {
+        let fechaDouble = Date().timeIntervalSince1970
+        let fechaRounded = (fechaDouble * 1000)
+        let result = String(Int(fechaRounded))
+        
+        return result
+    }
+    
     
     static func jsonArray(json: [String: Any]) -> [[String: Any]] {
         var result = [[String : Any]]()
@@ -43,7 +51,7 @@ class ServerManager {
                 onError(error)
                 return
             }
-          
+            
             onError(nil)
         }
         
@@ -61,7 +69,7 @@ class ServerManager {
                 onError(error)
                 return
             }
-          
+            
             onError(nil)
         }
         
@@ -99,7 +107,7 @@ class ServerManager {
         
         let basicUrl = Configuration.URL.Database.update
         let url = basicUrl + "users:\(uid!):" + path
-             
+        
         let _services = NetwordManager()
         _services.post(url: url, body: json) { (data, error) in
             completion(data, error)
@@ -138,7 +146,7 @@ class ServerManager {
                 return
             }
             do {
-               
+                
                 let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String : Any]
                 let array = jsonArray(json: json)
                 completion(array, nil)
@@ -162,7 +170,7 @@ class ServerManager {
                 return
             }
             do {
-               
+                
                 let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String : Any]
                 let array = jsonArray(json: json)
                 completion(array, nil)
@@ -175,26 +183,26 @@ class ServerManager {
     }
     
     static func ReadJSON(path: String, completion: @escaping ([String: Any]?, ServerError?) -> ()) {
-           let basicUrl = Configuration.URL.Database.read
-           let url = basicUrl + "users:\(uid!):" + path
-           
-           let _service = NetwordManager()
-           _service.get(url: url) { (data, error) in
-               guard let data = data else {
-                   completion(nil, nil)
-                   return
-               }
-               do {
-                  
-                   let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String : Any]
-                   completion(json, nil)
-               } catch {
-                   completion(nil, ServerError.body_serialization_error)
-                   return
-               }
-           }
-           
-       }
+        let basicUrl = Configuration.URL.Database.read
+        let url = basicUrl + "users:\(uid!):" + path
+        
+        let _service = NetwordManager()
+        _service.get(url: url) { (data, error) in
+            guard let data = data else {
+                completion(nil, nil)
+                return
+            }
+            do {
+                
+                let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String : Any]
+                completion(json, nil)
+            } catch {
+                completion(nil, ServerError.body_serialization_error)
+                return
+            }
+        }
+        
+    }
     
     static func CurrentUser(completion: @escaping (CurrentUserModel?, ServerError?) -> Void) {
         let basicUrl = Configuration.URL.Auth.currentUser
@@ -219,20 +227,20 @@ class ServerManager {
     
     static func RefreshToken(onError: @escaping (ServerError?) -> ()) {
         let loginJSON = ["email"      : ""] as [String : Any]
-          
-          let url = Configuration.URL.Auth.refreshToken
-              
-          //HTTP Headers
-          
-          let _service = NetwordManager()
-          _service.post(url: url, body: loginJSON) { (data, serverError) in
-             
+        
+        let url = Configuration.URL.Auth.refreshToken
+        
+        //HTTP Headers
+        
+        let _service = NetwordManager()
+        _service.post(url: url, body: loginJSON) { (data, serverError) in
+            
             guard let data = data else {
                 onError(serverError)
                 return
             }
             do {
-            
+                
                 let tokenUserDecoded = try JSONDecoder().decode(CurrentUserModel.self, from: data)
                 var user = UserSaved.Load()
                 user?.token = tokenUserDecoded.token
@@ -267,7 +275,7 @@ class ServerManager {
     
     
     static func DownloadPicture(path: String, completion: @escaping (NSImage?, ServerError?) -> ()) {
-       
+        
         let basicUrl = Configuration.URL.Storage.download
         let uidPath = "users:\(uid!):"
         let url = basicUrl + uidPath + path
@@ -292,7 +300,7 @@ class ServerManager {
             if imageData != nil {
                 if let image = NSImage(data: imageData!) {
                     completion(image, nil)
-                        
+                    
                     
                     DispatchQueue.main.async {
                         //save loaded image to cache for better performance

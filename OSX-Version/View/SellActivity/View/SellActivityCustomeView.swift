@@ -12,7 +12,7 @@ extension Notification.Name {
     static let newSell = Notification.Name("newSell")
 }
 
-class SellActivityCustomView: XibView, SellActivityViewContract {
+class SellActivityCustomView: XibViewWithAnimation, SellActivityViewContract {
     @IBOutlet weak var surname: NSTextField!
     @IBOutlet weak var amountTextField: NSTextField!
     @IBOutlet weak var toDate: NSDatePicker!
@@ -56,7 +56,7 @@ class SellActivityCustomView: XibView, SellActivityViewContract {
     
     func addSaveButton() {
         saveButtonView = SaveButtonCustomView(frame: CGRect(x: (self.frame.width - 75) / 2, y: 16, width: 75, height: 75))
-        saveButtonView.didButtonPressed = {
+        saveButtonView.onButtonPressed = {
             self.savePressed()
         }
         self.addSubview(saveButtonView)

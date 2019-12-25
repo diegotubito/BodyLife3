@@ -10,8 +10,20 @@ import Cocoa
 
 class SaveButtonCustomView: NSView {
     @IBOutlet weak var myView : NSView!
+    @IBOutlet weak var titleLabel: NSTextField!
     @IBOutlet weak var buttonView: NSView!
-    var didButtonPressed : (() -> ())?
+    @IBOutlet weak var myIndicator: NSProgressIndicator!
+    var onButtonPressed : (() -> ())?
+    var isEnabled = true {
+        didSet {
+            self.alphaValue = isEnabled ? 1.0 : 0.3
+        }
+    }
+    var title : String! {
+        didSet {
+            titleLabel.stringValue = title
+        }
+    }
     
     override init(frame frameRect: NSRect) {
         super .init(frame: frameRect)
@@ -42,6 +54,20 @@ class SaveButtonCustomView: NSView {
     }
     
     @objc func buttonPressed() {
-        didButtonPressed?()
+        if isEnabled {
+            onButtonPressed?()
+        }
     }
+    
+    func showLoading() {
+        titleLabel.stringValue = ""
+        myIndicator.startAnimation(nil)
+  
+    }
+    
+    func hideLoading() {
+        titleLabel.stringValue = title
+        myIndicator.stopAnimation(nil)
+    }
+    
 }

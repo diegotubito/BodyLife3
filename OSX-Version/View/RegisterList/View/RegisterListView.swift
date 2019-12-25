@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class RegisterListView: XibView , RegisterListViewContract{
+class RegisterListView: XibViewWithAnimation , RegisterListViewContract{
     
     @IBOutlet weak var agregarCobroOutlet: NSButton!
     @IBOutlet weak var anularButtonOutlet: NSButton!

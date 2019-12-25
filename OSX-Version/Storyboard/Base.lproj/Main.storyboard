@@ -710,46 +710,53 @@
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="Y6C-Pr-GNv">
-                                <rect key="frame" x="0.0" y="690" width="1280" height="30"/>
+                                <rect key="frame" x="0.0" y="680" width="1280" height="40"/>
+                                <subviews>
+                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="9AY-9h-Rjr">
+                                        <rect key="frame" x="16" y="4" width="33" height="33"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="33" id="7tR-7k-lDI"/>
+                                            <constraint firstAttribute="width" constant="33" id="eoe-P2-EqX"/>
+                                        </constraints>
+                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSUser" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="0u0-1k-cHA">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="newCustomerPressed:" target="XfG-lQ-9wD" id="HGo-0a-jd8"/>
+                                        </connections>
+                                    </button>
+                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="Kec-wk-swp">
+                                        <rect key="frame" x="1231" y="4" width="33" height="33"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="33" id="SLO-6t-ijH"/>
+                                            <constraint firstAttribute="height" constant="33" id="caY-HR-6uL"/>
+                                        </constraints>
+                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSAdvanced" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="1KC-cN-yON">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                    </button>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="xBg-Mn-Ma1"/>
+                                    <constraint firstItem="9AY-9h-Rjr" firstAttribute="leading" secondItem="Y6C-Pr-GNv" secondAttribute="leading" constant="16" id="28c-pc-z5b"/>
+                                    <constraint firstAttribute="trailing" secondItem="Kec-wk-swp" secondAttribute="trailing" constant="16" id="9P1-m4-2aV"/>
+                                    <constraint firstItem="9AY-9h-Rjr" firstAttribute="centerY" secondItem="Y6C-Pr-GNv" secondAttribute="centerY" id="AOL-qY-63e"/>
+                                    <constraint firstItem="Kec-wk-swp" firstAttribute="centerY" secondItem="Y6C-Pr-GNv" secondAttribute="centerY" id="hAy-he-GmQ"/>
+                                    <constraint firstAttribute="height" constant="40" id="xBg-Mn-Ma1"/>
                                 </constraints>
                             </customView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="vJS-25-cay">
                                 <rect key="frame" x="0.0" y="0.0" width="1280" height="20"/>
-                                <subviews>
-                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hyz-sR-HNl">
-                                        <rect key="frame" x="283" y="-22" width="130" height="32"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="push" title="New Customer" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="veG-p5-RWp">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="newCustomerPressed:" target="XfG-lQ-9wD" id="UVa-er-Mn0"/>
-                                        </connections>
-                                    </button>
-                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1S1-yd-7uV">
-                                        <rect key="frame" x="714" y="-23" width="123" height="32"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="push" title="Cerrar Sesión" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="RsO-xo-dxD">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="closeSessionPressed:" target="XfG-lQ-9wD" id="Fep-vH-hyg"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="6QP-Zw-s8k"/>
                                 </constraints>
                             </customView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="xeN-qp-oFe">
-                                <rect key="frame" x="0.0" y="20" width="350" height="670"/>
+                                <rect key="frame" x="0.0" y="20" width="350" height="660"/>
                             </customView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="0fS-Ye-Kdk">
-                                <rect key="frame" x="350" y="452" width="930" height="238"/>
+                                <rect key="frame" x="350" y="452" width="930" height="228"/>
                             </customView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="Htk-LD-AMV">
                                 <rect key="frame" x="350" y="20" width="930" height="432"/>
@@ -790,4 +797,8 @@
             <point key="canvasLocation" x="75" y="982"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="NSAdvanced" width="32" height="32"/>
+        <image name="NSUser" width="32" height="32"/>
+    </resources>
 </document>

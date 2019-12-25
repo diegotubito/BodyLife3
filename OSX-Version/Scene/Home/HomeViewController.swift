@@ -13,12 +13,12 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
     @IBOutlet weak var containerCustomerList: NSView!
     @IBOutlet weak var containerSellRegisters: NSView!
     @IBOutlet weak var containerStatus: NSView!
-    @IBOutlet weak var backgroundImage: NSImageView!
     var customerStatusView: CustomerStatusView!
     var customerListView : CustomerListView!
     var sellActivityView : SellActivityCustomView!
     var sellRegisterView : RegisterListView!
     var paymentView : PaymentView!
+    var sellProductView : ArticleSellView!
     var timerForDelayCustomerSelection : Timer!
     var selectedCustomer : CustomerModel?
     // MARK: Object lifecycle

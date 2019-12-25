@@ -30,6 +30,18 @@ struct ActivityModel: Decodable {
     var days : Int
 }
 
+struct ArticleModel: Decodable {
+    var childID : String
+    var name : String
+    var isEnabled : Bool
+    var createdAt : Double
+    var price : Double
+    var stock : Int
+    var minStock : Int
+    var maxStock : Int
+    var sellCount: Int
+}
+
 struct DiscountModel: Decodable {
     var childID  : String
     var name : String

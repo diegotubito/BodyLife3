@@ -41,8 +41,11 @@ class RegisterListViewModel: RegisterListViewModelContract {
             do {
                 let data = try JSONSerialization.data(withJSONObject: jsonArray, options: [])
                 let registers = try JSONDecoder().decode([SellRegisterModel].self, from: data)
-                self.model.registers = registers
+                let sortedRegisters = registers.sorted(by: { $0.createdAt > $1.createdAt })
+                self.model.registers = sortedRegisters
                 self.calcExtras()
+                
+                
                 self._view.displayData()
                 
             } catch {

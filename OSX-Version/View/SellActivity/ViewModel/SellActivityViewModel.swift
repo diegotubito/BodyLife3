@@ -55,23 +55,15 @@ class SellActivityViewModel: SellActivityViewModelContract {
         }
     }
     
-    private func createNewChildID() -> String {
-        let fechaDouble = Date().timeIntervalSince1970
-        let fechaRounded = (fechaDouble * 1000)
-        let result = String(Int(fechaRounded))
-        
-        return result
-    }
-    
     func save() {
         let childIDCustomer = model.selectedCustomer.childID
-        let childIDNew = createNewChildID()
+        let childIDNew = ServerManager.createNewChildID()
         let statusJSON = prepareStatus(childID: childIDNew)
         let sellJSON = prepareSell(childID: childIDNew)
         let statusPath = "\(Paths.customerStatus):\(childIDCustomer)"
         let statusPathSell = "\(Paths.fullPersonalData):\(childIDCustomer):sells"
         let statusPathTransaction = "\(Paths.customerStatus):\(childIDCustomer)"
-        let pathSell = "sells"
+        let pathSell = Paths.sells
         var error : ServerError?
         let semasphore = DispatchSemaphore(value: 0)
         saveNewMembership(datos: sellJSON, path: statusPathSell) { (err) in
