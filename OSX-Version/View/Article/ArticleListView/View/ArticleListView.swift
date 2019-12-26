@@ -8,6 +8,11 @@
 
 import Cocoa
 
+extension Notification.Name {
+    static let notificationArticleDidChanged = Notification.Name("notificationArticleDidChanged")
+}
+
+
 struct ExampleItemModel {
     var title : String
 }
@@ -19,7 +24,13 @@ class ArticleListView : GenericCollectionView<ArticleViewItem, ArticleModel> {
         super .commonInit()
         viewModel = ArticleListViewModel(withView: self)
         viewModel.loadProducts()
-        numberOfVisibleItems = 4
+        numberOfVisibleItems = 5
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(articleDidChangeHandler), name: .notificationArticleDidChanged, object: nil)
+    }
+    
+    @objc func articleDidChangeHandler() {
+        viewModel.loadProducts()
     }
 }
 

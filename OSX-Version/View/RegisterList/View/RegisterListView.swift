@@ -67,19 +67,32 @@ class RegisterListView: XibViewWithAnimation , RegisterListViewContract{
         let createdAt = selection.createdAt.toDate()
         let today = Calendar.current.component(.day, from: Date())
         let createdDay = Calendar.current.component(.day, from: createdAt!)
+        let selectedRegister = viewModel.getSelectedRegister()
             
-        if selection.balance ?? 0 < 0 {
+        if selection.balance ?? 0 < 0, (selectedRegister?.isEnabled)! {
             agregarCobroOutlet.isEnabled = true
         }
-        if createdDay == today {
+        if createdDay == today, (selectedRegister?.isEnabled)! {
             anularButtonOutlet.isEnabled = true
         }
         
     }
     @IBAction func anularDidPressed(_ sender: Any) {
-        
+        viewModel.cancelRegister()
     }
     @IBAction func cobroDidPressed(_ sender: Any) {
+    }
+    
+    func cancelError() {
+        
+    }
+    
+    func cancelSuccess() {
+        let row = tableView.selectedRow
+        viewModel.setIsEnabled(row: row)
+        tableView.removeRows(at: IndexSet(integer: row), withAnimation: .effectFade)
+        tableView.insertRows(at: IndexSet(integer: row), withAnimation: .effectGap)
+        NotificationCenter.default.post(.init(name: .notificationArticleDidChanged))
     }
     
 }
@@ -93,10 +106,16 @@ extension RegisterListView: NSTableViewDataSource, NSTableViewDelegate {
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView?{
         
         let cell : SellRegisterCell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "defaultRow"), owner: self) as! SellRegisterCell
-        cell.displayCell(register: viewModel.getRegisters()[row])
+        let registers = viewModel.getRegisters()
+        if row <= registers.count{
+            cell.displayCell(register: viewModel.getRegisters()[row])
+        } else {
+            print("safe exit")
+        }
         return cell
         
     }
+    
     
     func tableViewSelectionDidChange(_ notification: Notification) {
         if let myTable = notification.object as? NSTableView {

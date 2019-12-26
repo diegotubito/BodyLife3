@@ -19,7 +19,7 @@ class GenericCollectionItem<U>: NSCollectionViewItem {
         // Do view setup here.
         view.wantsLayer = true
         view.layer?.borderWidth = 0
-        view.layer?.borderColor = NSColor.clear.cgColor
+        view.layer?.borderColor = NSColor.red.cgColor
         view.layer?.cornerRadius = 15
     }
     static var identifier : String {
@@ -53,7 +53,7 @@ class GenericCollectionView<T: GenericCollectionItem<U>, U>: XibView, NSCollecti
     
     func createScrollView() {
         createCollection()
-        
+      
         scrollView = NSScrollView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
         scrollView.documentView = collectionView
         self.addSubview(scrollView)
@@ -61,7 +61,10 @@ class GenericCollectionView<T: GenericCollectionItem<U>, U>: XibView, NSCollecti
     
     private func createCollection() {
         let layout = NSCollectionViewFlowLayout()
+    
         collectionView = NSCollectionView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
+        collectionView.wantsLayer = true
+        collectionView.backgroundColors = [NSColor.clear]
         collectionView.collectionViewLayout = layout
         collectionView.isSelectable = true
         collectionView.allowsMultipleSelection = false

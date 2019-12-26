@@ -22,9 +22,26 @@ class ArticleSellView: XibViewBlurBackground {
     
     override func commonInit() {
         super .commonInit()
+    
+        createBackgroundGradient()
+
         createProductListView()
         addAcceptButton()
         addObservers()
+    }
+    
+    func createBackgroundGradient() {
+        self.layer?.backgroundColor = NSColor.black.cgColor
+        let gradient = CAGradientLayer()
+        gradient.locations = [0, 0.5, 1]
+        gradient.colors = [NSColor(hex: 0x020707).cgColor,
+                           NSColor(hex: 0x1A3B78).withAlphaComponent(0.7).cgColor,
+                           NSColor(hex: 0x020707).cgColor]
+        gradient.frame = self.bounds
+        gradient.startPoint = CGPoint(x: 0.5, y: 0)
+        gradient.endPoint = CGPoint(x: 0.5, y: 1)
+        
+        self.layer?.addSublayer(gradient)
     }
     
     func addAcceptButton() {
@@ -50,8 +67,9 @@ class ArticleSellView: XibViewBlurBackground {
     }
     
     func createProductListView() {
-        let alto = self.frame.height * 0.7
+        let alto = self.frame.height * 0.8
         productListView = ArticleListView(frame: CGRect(x: 16, y: self.frame.height - alto - 16, width: self.frame.width - 32, height: alto))
+        productListView.collectionView.layer?.backgroundColor = NSColor.clear.cgColor
         self.addSubview(productListView)
     }
     
@@ -72,7 +90,7 @@ class ArticleSellView: XibViewBlurBackground {
                 self.buttonAccept.hideLoading()
                 if success {
                     NotificationCenter.default.post(name: .newSell, object: nil)
-                    self.productListView.viewModel.loadProducts()
+                    NotificationCenter.default.post(.init(name: .notificationArticleDidChanged))
                 }
             }
         }

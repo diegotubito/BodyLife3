@@ -23,8 +23,8 @@ struct CustomerStatus: Decodable {
     var name : String
     var transaction : Double
     var expiration : Double
+    var childIDLastType : String
     var childIDLastActivity : String
-    var childIDLastPeriod : String
     var childIDLastDiscount : String
 }
 
@@ -33,6 +33,7 @@ struct SellRegisterModel: Decodable {
     var childIDCustomer : String
     var childIDDiscount : String?
     var childIDActivity : String?
+    var childIDArticle : String?
     var childIDPeriod : String?
     var createdAt : Double
     var discount : Double?
@@ -40,6 +41,7 @@ struct SellRegisterModel: Decodable {
     var toDate : Double?
     var price : Double
     var displayName : String
+    var isEnabled : Bool
     var payments : [PaymentModel]?
     
     var balance : Double?

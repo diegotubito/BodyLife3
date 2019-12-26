@@ -9,7 +9,12 @@
 import Cocoa
 
 class ArticleViewItem: GenericCollectionItem<ArticleModel> {
+    var colorStockWarning = NSColor.yellow
+    var colorStockEmpty = Constants.Colors.Red.ematita
+    var colorStockOK = Constants.Colors.Green.fern
     
+    @IBOutlet weak var stockBrackground: NSView!
+    @IBOutlet weak var stockLabel: NSTextField!
     @IBOutlet weak var productIcon : NSImageView!
     @IBOutlet weak var productName : NSTextField!
     @IBOutlet weak var productPrice : NSTextField!
@@ -19,17 +24,36 @@ class ArticleViewItem: GenericCollectionItem<ArticleModel> {
             productName.stringValue = item.name
             productPrice.stringValue = item.price.formatoMoneda(decimales: 2)
             productIcon.image = #imageLiteral(resourceName: "coca2")
+            stockLabel.stringValue = String(item.stock)
+            stockBrackground.layer?.backgroundColor = determinateColor().cgColor
         }
+    }
+    
+    private func determinateColor() -> NSColor {
+        if item.stock <= 0 {
+            return colorStockEmpty
+        }
+        if item.stock < item.minStock {
+            return colorStockWarning
+        }
+        
+        return colorStockOK
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
+   
         productName.maximumNumberOfLines = 3
         productName.lineBreakMode = .byWordWrapping
         selectionBorderColor = NSColor.cyan.withAlphaComponent(0.3)
-        selectionBackgroundColor = NSColor.cyan.withAlphaComponent(0.3)
+        selectionBackgroundColor = Constants.Colors.Blue.blueWhale
         selectionBorderWidth = 0
+        stockBrackground.wantsLayer = true
+        stockBrackground.layer?.cornerRadius = 10
+        stockBrackground.layer?.backgroundColor = Constants.Colors.Red.ematita.cgColor
+        stockLabel.textColor = NSColor.black
+        
     }
     
 }

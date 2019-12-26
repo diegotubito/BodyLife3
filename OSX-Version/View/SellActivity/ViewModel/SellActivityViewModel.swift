@@ -66,6 +66,9 @@ class SellActivityViewModel: SellActivityViewModelContract {
         let pathSell = Paths.sells
         var error : ServerError?
         let semasphore = DispatchSemaphore(value: 0)
+        
+        updateSellcountForActivity((model.selectedActivity?.childID)!)
+        
         saveNewMembership(datos: sellJSON, path: statusPathSell) { (err) in
             error = err
             semasphore.signal()
@@ -95,13 +98,21 @@ class SellActivityViewModel: SellActivityViewModelContract {
             _view.showError("No se pudo actualizar el Status del socio.")
             return
         }
-     
+        
         let amountToPay = estimateAmount()
         let amountPaid = Double(_view.getAmount())!
         let balance = amountPaid - amountToPay
         saveNewTransaction(path: statusPathTransaction, value: balance)
         
         _view.showSuccess()
+    }
+    
+    private func updateSellcountForActivity(_ childIDActivity: String) {
+        let pathArticleSellCount = "\(Paths.productService):activity:\(childIDActivity)"
+        ServerManager.Transaction(path: pathArticleSellCount, key: "sellCount", value: 1, success: {
+        }) { (err) in
+            
+        }
     }
     
     func saveNewMembership(datos: [String: Any], path: String, completion: @escaping (ServerError?) -> ()) {
@@ -121,15 +132,15 @@ class SellActivityViewModel: SellActivityViewModelContract {
         let childIDCustomer = model.selectedCustomer.childID
         let surname = model.selectedCustomer.surname
         let name = model.selectedCustomer.name
-        let childIDLastActivity = (model.selectedActivityType?.childID)!
-        let childIDLastPeriod = (model.selectedActivity?.childID)!
+        let childIDLastType = (model.selectedActivityType?.childID)!
+        let childIDLastActivity = (model.selectedActivity?.childID)!
         let childIDLastDiscount = (model.selectedDiscount?.childID) ?? ""
         let status = ["surname" : surname,
                       "name": name,
                       "expiration": _view.getToDate().timeIntervalSince1970,
                       "childID": childIDCustomer,
+                      "childIDLastType": childIDLastType,
                       "childIDLastActivity": childIDLastActivity,
-                      "childIDLastPeriod": childIDLastPeriod,
                       "childIDLastDiscount":childIDLastDiscount] as [String : Any]
         return status
     }
@@ -138,8 +149,8 @@ class SellActivityViewModel: SellActivityViewModelContract {
         let displayName = model.selectedActivity!.name + ", " + model.selectedActivityType!.name
         let fromDate = _view.getFromDate()
         let toDate = _view.getToDate()
-        let childIDActivity = model.selectedActivityType?.childID
-        let childIDPeriod = model.selectedActivity?.childID
+        let childIDLastType = model.selectedActivityType?.childID
+        let childIDActivity = model.selectedActivity?.childID
         let childIDDiscount = model.selectedDiscount?.childID
         let price = estimateAmount()
         let discount = model.selectedDiscount?.multiplier
@@ -150,8 +161,9 @@ class SellActivityViewModel: SellActivityViewModelContract {
                              "fromDate" : fromDate.timeIntervalSince1970,
                              "toDate" : toDate.timeIntervalSince1970,
                              "price" : price,
+                             "isEnabled" : true,
+                             "childIDLastType" : childIDLastType!,
                              "childIDActivity" : childIDActivity!,
-                             "childIDPeriod" : childIDPeriod!,
                              "childIDDiscount" : childIDDiscount ?? "",
                              "discount" : discount ?? 1.0,
                              "displayName" : displayName]]

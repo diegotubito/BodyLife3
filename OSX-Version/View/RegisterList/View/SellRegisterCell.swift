@@ -30,6 +30,9 @@ class SellRegisterCell: NSTableCellView {
         labelPrice.stringValue = register.price.formatoMoneda(decimales: 2)
         labelTotalPayment.stringValue = totalPayment.formatoMoneda(decimales: 2)
         labelSaldo.stringValue = balance.formatoMoneda(decimales: 2)
+        
+        alphaValue = register.isEnabled ? 1.0 : 0.3
+        labelSaldo.textColor = balance < 0 ? Constants.Colors.Red.ematita : NSColor.lightGray
     }
    
 }

@@ -172,10 +172,13 @@ class NewCustomerViewController: BaseViewController, NewCustomerDisplayLogic {
     }
     
     func sendNotifications(customer: CustomerModel) {
-        self.notificationMessage(messageID: customer.dni,
-                                 title: "Nuevo Socio",
-                                 subtitle: customer.surname + ", " + customer.name,
-                                 informativeText: "Sigamos sumando.")
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime(uptimeNanoseconds: 3)) {
+            self.notificationMessage(messageID: customer.dni,
+            title: "Nuevo Socio",
+            subtitle: customer.surname + ", " + customer.name,
+            informativeText: "Sigamos sumando.")
+        }
+        
         NotificationCenter.default.post(name: .newCustomer, object: customer)
     }
     

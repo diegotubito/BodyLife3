@@ -11,10 +11,12 @@ import Cocoa
 protocol RegisterListViewModelContract {
     init(withView view: RegisterListViewContract)
     func loadData()
+    func cancelRegister()
     func setSelectedCustomer(customer: CustomerModel)
     func getRegisters() -> [SellRegisterModel]
     func setSelectedRegister(_ selectedRegister: SellRegisterModel?)
     func getSelectedRegister() -> SellRegisterModel?
+    func setIsEnabled(row: Int)
 
 }
 
@@ -25,4 +27,6 @@ protocol RegisterListViewContract {
     func hideLoading()
     func setSelectedCustomer(customer: CustomerModel)
     func updateButtonState()
+    func cancelSuccess()
+    func cancelError()
 }
