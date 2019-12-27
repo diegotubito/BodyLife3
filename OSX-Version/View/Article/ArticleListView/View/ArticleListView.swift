@@ -9,7 +9,7 @@
 import Cocoa
 
 extension Notification.Name {
-    static let notificationArticleDidChanged = Notification.Name("notificationArticleDidChanged")
+    static let needUpdateArticleList = Notification.Name("needUpdateArticleList")
 }
 
 
@@ -26,17 +26,19 @@ class ArticleListView : GenericCollectionView<ArticleViewItem, ArticleModel> {
         viewModel.loadProducts()
         numberOfVisibleItems = 5
         
-        NotificationCenter.default.addObserver(self, selector: #selector(articleDidChangeHandler), name: .notificationArticleDidChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(articleDidChangeHandler), name: .needUpdateArticleList, object: nil)
     }
     
     @objc func articleDidChangeHandler() {
         viewModel.loadProducts()
     }
+
 }
+
 
 extension ArticleListView : ArticletListViewContract {
     func showError() {
-        showErrorConnectionView()
+       
     }
     func showLoading() {
       
@@ -51,6 +53,7 @@ extension ArticleListView : ArticletListViewContract {
         DispatchQueue.main.async {
             self.collectionView.reloadData()
         }
+        
     }
 }
 

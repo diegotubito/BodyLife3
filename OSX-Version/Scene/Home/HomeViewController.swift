@@ -62,20 +62,26 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
         
         
         self.timerForDelayCustomerSelection = Timer.scheduledTimer(timeInterval: 0.0, target: self, selector: #selector(self.loadStatus), userInfo: nil, repeats: false)
+        
+        
     }
     
     override func viewWillAppear() {
    
         super.viewWillAppear()
         self.view.window?.delegate = self
+        
+        DispatchQueue.main.async {
+            self.createCustomViews()
+            self.addObservers()
+            self.customerListView.startLoading()
+        }
  
     }
     
     override func viewDidAppear() {
         super .viewDidAppear()
         print("Window: DidAppear")
-        
-        self.createCustomViews()
         self.view.window?.styleMask.remove(.resizable)
        createBackgroundGradient()
       }
@@ -85,11 +91,11 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
     }
     
     @objc func didConnected() {
-        DispatchQueue.main.async {
-            self.customerListView.startLoading()
-            self.addObservers()
-        }
+        self.customerListView.startLoading()
+      
     }
+    
+    
     
     @objc func loadStatus() {
         if selectedCustomer == nil {return}

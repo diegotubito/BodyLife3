@@ -12,7 +12,6 @@ import Cocoa
 class CustomerListView: NSView {
     @IBOutlet var myView: NSView!
     
-    @IBOutlet weak var errorView: NSView!
     @IBOutlet weak var myActivityIndicator: NSProgressIndicator!
     @IBOutlet var tableViewSocio: NSTableView!
     var needRedraw : Bool = false {
@@ -53,17 +52,12 @@ class CustomerListView: NSView {
         
         viewModel = CustomerListViewModel(withView: self)
         
-        errorView.wantsLayer = true
         self.wantsLayer = true
         self.layer?.borderWidth = Constants.Borders.CustomerList.width
         self.layer?.borderColor = Constants.Borders.CustomerList.color
         
-        errorView.layer?.backgroundColor = NSColor.clear.cgColor
-        errorView.isHidden = true
-        errorView.layer?.zPosition = 100
-        
         NotificationCenter.default.addObserver(self, selector: #selector(newCustomerNotificationHandler(notification:)), name: .newCustomer, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(newSellNotificationHandler(notification:)), name: .newSell, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(newSellNotificationHandler(notification:)), name: .needUpdateCustomerList, object: nil)
       }
     
     @objc func newSellNotificationHandler(notification: Notification) {
@@ -72,7 +66,6 @@ class CustomerListView: NSView {
     }
     
     @objc func newCustomerNotificationHandler(notification: Notification) {
-        errorView.isHidden = true
         let obj = notification.object
         if let customer = obj as? CustomerModel {
             viewModel.model.registros.insert(customer, at: 0)
@@ -97,10 +90,6 @@ extension CustomerListView: CustomerListViewContract {
     }
     
     func showError() {
-        DispatchQueue.main.async {
-            self.errorView.isHidden = false
-            self.errorView.Blur()
-        }
         
     }
     

@@ -100,9 +100,7 @@ class SellActivityViewModel: SellActivityViewModelContract {
         }
         
         let amountToPay = estimateAmount()
-        let amountPaid = Double(_view.getAmount())!
-        let balance = amountPaid - amountToPay
-        saveNewTransaction(path: statusPathTransaction, value: balance)
+        saveNewTransaction(path: statusPathTransaction, value: -amountToPay)
         
         _view.showSuccess()
     }
@@ -122,7 +120,7 @@ class SellActivityViewModel: SellActivityViewModelContract {
     }
     
     func saveNewTransaction(path: String, value: Double) {
-        ServerManager.Transaction(path: path, key: "transaction", value: value, success: {
+        ServerManager.Transaction(path: path, key: "balance", value: value, success: {
             print("transaction made")
         }) { (error) in
         }
@@ -182,7 +180,6 @@ class SellActivityViewModel: SellActivityViewModelContract {
             model.filteredPeriods = [ActivityModel]()
             _view.reloadPeriod()
             _ = validate()
-            estimateAmountAndShow()
             return
         }
         model.selectedActivityType = model.type[row]
@@ -191,19 +188,16 @@ class SellActivityViewModel: SellActivityViewModelContract {
         
         _view.reloadPeriod()
         _ = validate()
-        estimateAmountAndShow()
     }
     
     func setSelectedPeriod(row: Int) {
         if row == -1 {
             model.selectedActivity = nil
             _ = validate()
-            estimateAmountAndShow()
             return
         }
         model.selectedActivity = model.activity[row]
         estimateToDate()
-        estimateAmountAndShow()
         
         _ = validate()
         
@@ -215,13 +209,6 @@ class SellActivityViewModel: SellActivityViewModelContract {
         } else {
             model.selectedDiscount = model.discounts[row - 1]
         }
-        estimateAmountAndShow()
-    }
-    
-    private func estimateAmountAndShow() {
-        
-        let amount = estimateAmount()
-        _view.showAmount(value: amount)
     }
     
     func estimateAmount() -> Double {
@@ -259,15 +246,6 @@ class SellActivityViewModel: SellActivityViewModelContract {
             result = false
         }else {
             _view.enableDates()
-        }
-        
-        let amount = _view.getAmount()
-        if let amountDouble = Double(amount) {
-            if amountDouble < 0 && amountDouble > 1000000 {
-                result = false
-            }
-        } else {
-            result = false
         }
         
         if result {

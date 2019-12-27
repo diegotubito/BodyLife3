@@ -8,7 +8,6 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="CustomerListView" customModule="OSX_Version" customModuleProvider="target">
             <connections>
-                <outlet property="errorView" destination="LxT-Lq-bHF" id="iJT-Wq-rQY"/>
                 <outlet property="myActivityIndicator" destination="Ujk-tX-Ifh" id="S9p-fT-ASR"/>
                 <outlet property="myView" destination="c22-O7-iKe" id="nzT-ht-Obm"/>
                 <outlet property="tableViewSocio" destination="5ls-lw-LaS" id="gBW-HY-TiD"/>
@@ -20,23 +19,6 @@
             <rect key="frame" x="0.0" y="0.0" width="431" height="582"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <customView translatesAutoresizingMaskIntoConstraints="NO" id="LxT-Lq-bHF">
-                    <rect key="frame" x="0.0" y="0.0" width="431" height="582"/>
-                    <subviews>
-                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FpA-79-1Wz">
-                            <rect key="frame" x="141" y="216" width="150" height="150"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="150" id="7H2-cM-ZhU"/>
-                                <constraint firstAttribute="height" constant="150" id="vXP-h2-wHy"/>
-                            </constraints>
-                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="gatito" id="BcQ-Hf-xvl"/>
-                        </imageView>
-                    </subviews>
-                    <constraints>
-                        <constraint firstItem="FpA-79-1Wz" firstAttribute="centerX" secondItem="LxT-Lq-bHF" secondAttribute="centerX" id="TPG-N4-CEy"/>
-                        <constraint firstItem="FpA-79-1Wz" firstAttribute="centerY" secondItem="LxT-Lq-bHF" secondAttribute="centerY" id="jhg-h6-akt"/>
-                    </constraints>
-                </customView>
                 <scrollView borderType="line" autohidesScrollers="YES" horizontalLineScroll="82" horizontalPageScroll="10" verticalLineScroll="82" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OEe-KW-Qei">
                     <rect key="frame" x="0.0" y="0.0" width="431" height="582"/>
                     <clipView key="contentView" drawsBackground="NO" id="RVD-Uf-O4T">
@@ -278,13 +260,9 @@
             </subviews>
             <constraints>
                 <constraint firstItem="Ujk-tX-Ifh" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="16" id="32e-hf-myM"/>
-                <constraint firstAttribute="bottom" secondItem="LxT-Lq-bHF" secondAttribute="bottom" id="7XY-Y5-5p9"/>
                 <constraint firstItem="OEe-KW-Qei" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="T5N-uw-Qjy"/>
                 <constraint firstAttribute="bottom" secondItem="OEe-KW-Qei" secondAttribute="bottom" id="agr-yO-8Bj"/>
-                <constraint firstAttribute="trailing" secondItem="LxT-Lq-bHF" secondAttribute="trailing" id="anh-dN-0gV"/>
-                <constraint firstItem="LxT-Lq-bHF" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="c1U-cX-57j"/>
                 <constraint firstItem="OEe-KW-Qei" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="g6F-jO-Z0n"/>
-                <constraint firstItem="LxT-Lq-bHF" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="rHS-sC-8a9"/>
                 <constraint firstItem="Ujk-tX-Ifh" firstAttribute="centerX" secondItem="c22-O7-iKe" secondAttribute="centerX" id="ufg-f8-u7f"/>
                 <constraint firstAttribute="trailing" secondItem="OEe-KW-Qei" secondAttribute="trailing" id="uuG-PL-fVG"/>
             </constraints>

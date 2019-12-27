@@ -59,7 +59,6 @@
 		1166AF3523B27F880047C7AE /* ArticleViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1166AF3323B27F880047C7AE /* ArticleViewItem.swift */; };
 		1166AF3623B27F880047C7AE /* ArticleViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1166AF3423B27F880047C7AE /* ArticleViewItem.xib */; };
 		1166AF3C23B296090047C7AE /* ArticleSellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1166AF3B23B296090047C7AE /* ArticleSellView.swift */; };
-		1166AF3E23B43E650047C7AE /* prueba.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1166AF3D23B43E650047C7AE /* prueba.xib */; };
 		116CEB6123A1E2D40081D356 /* RegisterListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 116CEB6023A1E2D40081D356 /* RegisterListView.xib */; };
 		116CEB6323A1E2F30081D356 /* RegisterListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CEB6223A1E2F30081D356 /* RegisterListView.swift */; };
 		116CEB6623A3115E0081D356 /* SellRegisterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CEB6523A3115E0081D356 /* SellRegisterCell.swift */; };
@@ -170,7 +169,6 @@
 		1166AF3323B27F880047C7AE /* ArticleViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewItem.swift; sourceTree = "<group>"; };
 		1166AF3423B27F880047C7AE /* ArticleViewItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticleViewItem.xib; sourceTree = "<group>"; };
 		1166AF3B23B296090047C7AE /* ArticleSellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleSellView.swift; sourceTree = "<group>"; };
-		1166AF3D23B43E650047C7AE /* prueba.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = prueba.xib; sourceTree = "<group>"; };
 		116CEB6023A1E2D40081D356 /* RegisterListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegisterListView.xib; sourceTree = "<group>"; };
 		116CEB6223A1E2F30081D356 /* RegisterListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterListView.swift; sourceTree = "<group>"; };
 		116CEB6523A3115E0081D356 /* SellRegisterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellRegisterCell.swift; sourceTree = "<group>"; };
@@ -645,7 +643,6 @@
 			isa = PBXGroup;
 			children = (
 				11A8ED0223B1442700F15B9A /* GenericCollectionView.swift */,
-				1166AF3D23B43E650047C7AE /* prueba.xib */,
 			);
 			path = GenericCollectionView;
 			sourceTree = "<group>";
@@ -957,7 +954,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				110664C723775D6000DC44F3 /* ErrorMessageView.xib in Resources */,
-				1166AF3E23B43E650047C7AE /* prueba.xib in Resources */,
 				11EBD3282376499F00AB4BFF /* AssetsOSX.xcassets in Resources */,
 				1147AB4F2383678700D19AA9 /* CustomerListCell.xib in Resources */,
 				11EBD39123772A4700AB4BFF /* LoginStoryboard.storyboard in Resources */,

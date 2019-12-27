@@ -9,8 +9,7 @@ import Cocoa
 
 class XibView: NSView {
     var xibName : String?
-    var errorNoConnection : NSImageView!
-
+ 
     override init(frame frameRect: NSRect) {
         super .init(frame: frameRect)
         commonInit()
@@ -20,22 +19,7 @@ class XibView: NSView {
         super .init(coder: coder)
         commonInit()
     }
-    
-    func showErrorConnectionView() {
-        errorNoConnection = NSImageView(frame: NSRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
-        errorNoConnection.image = #imageLiteral(resourceName: "NoConnection")
-        errorNoConnection.wantsLayer = true
-        errorNoConnection.Blur()
-        self.addSubview(errorNoConnection)
-    
-    }
-    
-    func removeErrorConnectionView() {
-        if errorNoConnection != nil {
-            errorNoConnection.removeFromSuperview()
-        }
-    }
-    
+
     internal func commonInit() {
         let xibName = self.xibName ?? String(describing: type(of: self))
         

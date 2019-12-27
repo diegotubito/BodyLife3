@@ -65,7 +65,7 @@ class RegisterListViewModel: RegisterListViewModelContract {
         }
     }
     
-    private func calcTotalPayment(payments: [PaymentModel]?) -> Double {
+    private func calcTotalPayment(payments: [Payment]?) -> Double {
         if payments == nil {return 0}
         var total : Double = 0
         for i in payments! {
@@ -137,7 +137,10 @@ class RegisterListViewModel: RegisterListViewModelContract {
         }
         
         let pathStatus = "\(Paths.customerStatus):\(model.selectedCustomer.childID)"
-        ServerManager.Transaction(path: pathStatus, key: "transaction", value: model.selectedSellRegister.price, success: {
+        let paid = calcTotalPayments()
+        let price = model.selectedSellRegister.price
+        let balance = price - paid
+        ServerManager.Transaction(path: pathStatus, key: "balance", value: balance, success: {
             semasphore.signal()
         }) { (err) in
             error = err
@@ -149,6 +152,16 @@ class RegisterListViewModel: RegisterListViewModelContract {
         }
         
         completion(true)
+    }
+    
+    private func calcTotalPayments() -> Double {
+        var result : Double = 0
+        let payments = model.selectedSellRegister.payments
+        if payments == nil {return 0}
+        for i in payments! {
+            result += i.total
+        }
+        return result
     }
     
     private func updateStockAndSellcount(_ childIDArticle: String) {

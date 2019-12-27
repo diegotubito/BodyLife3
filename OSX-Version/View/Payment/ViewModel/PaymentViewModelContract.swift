@@ -10,8 +10,18 @@ import Cocoa
 
 protocol PaymentViewModelContract {
     init(withView view : PaymentViewContract)
+    var model : PaymentModel! {get}
+    func setSelectedInfo(_ customer: CustomerModel, _ register: SellRegisterModel)
+    func saveNewPayment()
+ 
+
 }
 
 protocol PaymentViewContract {
-    
+    func displayInfo()
+    func showSuccess()
+    func showError()
+    func showLoading()
+    func hideLoading()
+    func getAmountString() -> String
 }

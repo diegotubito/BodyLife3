@@ -15,6 +15,7 @@ class RegisterListView: XibViewWithAnimation , RegisterListViewContract{
     @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var myIndicator : NSProgressIndicator!
     var viewModel : RegisterListViewModelContract!
+    var onAddPayment : (() -> ())?
       
     override func commonInit() {
         super .commonInit()
@@ -81,6 +82,7 @@ class RegisterListView: XibViewWithAnimation , RegisterListViewContract{
         viewModel.cancelRegister()
     }
     @IBAction func cobroDidPressed(_ sender: Any) {
+        onAddPayment?()
     }
     
     func cancelError() {
@@ -92,7 +94,7 @@ class RegisterListView: XibViewWithAnimation , RegisterListViewContract{
         viewModel.setIsEnabled(row: row)
         tableView.removeRows(at: IndexSet(integer: row), withAnimation: .effectFade)
         tableView.insertRows(at: IndexSet(integer: row), withAnimation: .effectGap)
-        NotificationCenter.default.post(.init(name: .notificationArticleDidChanged))
+        NotificationCenter.default.post(.init(name: .notificationUpdateStatus))
     }
     
 }

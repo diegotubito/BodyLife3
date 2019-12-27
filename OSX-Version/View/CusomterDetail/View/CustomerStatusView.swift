@@ -8,6 +8,12 @@
 
 import Cocoa
 
+
+extension Notification.Name {
+    static let notificationUpdateStatus = Notification.Name("notificationUpdateStatus")
+}
+
+
 class CustomerStatusView: XibViewWithAnimation {
     
     @IBOutlet weak var titleLabel: NSTextField!
@@ -51,6 +57,11 @@ class CustomerStatusView: XibViewWithAnimation {
         self.DayBox.wantsLayer = true
         
       
+        NotificationCenter.default.addObserver(self, selector: #selector(updateDataFromNotification), name: .notificationUpdateStatus, object: nil)
+    }
+    
+    @objc func updateDataFromNotification() {
+        start()
     }
     
     func start() {
@@ -88,7 +99,7 @@ extension CustomerStatusView : CustomerStatusViewContract{
         if let data = value {
             let expirationDate = data.expiration.toDate()
             let diff = Date().diasTranscurridos(fecha: expirationDate!)
-            let balance = data.transaction
+            let balance = data.balance
             subtitleLabel.stringValue = "actividades"
             expirationDateLabel.stringValue = (data.expiration.toDate()?.toString(formato: "dd-MM-yyyy"))!
             remainingDayLabel.stringValue = String(diff!)

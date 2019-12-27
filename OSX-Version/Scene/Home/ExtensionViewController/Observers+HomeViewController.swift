@@ -15,6 +15,7 @@ extension HomeViewController {
         customerListOberserver()
         buttonObserverProductSell()
         buttonObserverActivitySell()
+        buttonObserverPayment()
     }
     
     func customerListOberserver() {
@@ -34,20 +35,24 @@ extension HomeViewController {
     func buttonObserverActivitySell() {
         self.customerStatusView.didPressSellActivityButton = {
             //open sell activities custom view
-            self.sellActivityView.animateMode = .fadeIn
-            self.sellActivityView.removeErrorConnectionView()
             let selectedCustomer = self.customerListView.viewModel.model.selectedCustomer
             let loadedStatus = self.customerStatusView.viewModel.model.loadedStatus
             self.sellActivityView.viewModel.setCustomerStatus(selectedCustomer: selectedCustomer!, selectedStatus: loadedStatus)
-            self.sellActivityView.startLoading()
+            self.sellActivityView.showView()
         }
     }
     
     func buttonObserverProductSell() {
         self.customerStatusView.didPressSellProductButton = {
-            print("product sell")
             self.sellProductView.selectedCustomer = (self.selectedCustomer)!
             self.sellProductView.showView()
+        }
+    }
+    
+    func buttonObserverPayment() {
+        self.sellRegisterView.onAddPayment = {
+            self.paymentView.viewmodel.setSelectedInfo(self.selectedCustomer!, self.sellRegisterView.viewModel.getSelectedRegister()!)
+            self.paymentView.showView()
         }
     }
     
@@ -62,23 +67,10 @@ extension HomeViewController {
             self.sellRegisterView.animateMode = .leftIn
         }
     }
-    
-    func hideSellActivityView() {
-        if !self.sellActivityView.isHidden {
-            self.sellActivityView.animateMode = .rightOut
-        }
-    }
-    
-    func hidePaymentView() {
-        if !self.paymentView.isHidden {
-            self.paymentView.animateMode = .fadeOut
-        }
-    }
+
     
     func didSelectCustomer(customerSelected: CustomerModel) {
         DispatchQueue.main.async {
-            self.hideSellActivityView()
-            self.hidePaymentView()
             self.showStatusCustomer()
             self.customerStatusView.viewModel = CustomerStatusViewModel(withView: self.customerStatusView, receivedCustomer: customerSelected)
             self.customerStatusView.start()

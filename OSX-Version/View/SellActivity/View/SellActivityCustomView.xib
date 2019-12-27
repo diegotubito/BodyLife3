@@ -9,13 +9,13 @@
             <connections>
                 <outlet property="DiscountPopUp" destination="cFJ-ty-q5m" id="ZAP-sA-inl"/>
                 <outlet property="activityIndicator" destination="v1q-fV-A5w" id="cn0-p6-qdb"/>
-                <outlet property="amountTextField" destination="UBe-6G-Eo3" id="JRD-jc-zsT"/>
+                <outlet property="activityScrollView" destination="4zI-CO-T5z" id="e8e-Xg-THS"/>
                 <outlet property="fromDate" destination="vlK-1t-dxz" id="6pH-Fk-Ead"/>
                 <outlet property="periodIndicator" destination="HqF-OU-af5" id="Rsr-mY-g3f"/>
+                <outlet property="saveButtonView" destination="BvM-Eb-Idf" id="NRD-1m-ZnH"/>
                 <outlet property="surname" destination="jdB-UD-hew" id="Nbi-xe-1sg"/>
                 <outlet property="tableViewActivity" destination="tkr-B8-8tf" id="eyn-hx-ekS"/>
                 <outlet property="tableViewPeriodo" destination="Y86-hn-8LV" id="U0A-kY-mDD"/>
-                <outlet property="titleView" destination="1F9-8o-TcX" id="Onc-7A-HqT"/>
                 <outlet property="toDate" destination="fda-Gq-OpT" id="Jew-P7-zHa"/>
             </connections>
         </customObject>
@@ -43,7 +43,7 @@
                                         <tableColumns>
                                             <tableColumn identifier="idenActividad" width="265" minWidth="40" maxWidth="1000" id="mpt-9v-kWO">
                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Actividades">
-                                                    <font key="font" metaFont="controlContent" size="11"/>
+                                                    <font key="font" metaFont="label" size="11"/>
                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                 </tableHeaderCell>
@@ -129,7 +129,7 @@
                                         <tableColumns>
                                             <tableColumn identifier="idenPeriodo" width="265" minWidth="40" maxWidth="1000" id="r7g-fa-7Qf">
                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Período">
-                                                    <font key="font" metaFont="controlContent" size="11"/>
+                                                    <font key="font" metaFont="label" size="11"/>
                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                 </tableHeaderCell>
@@ -217,10 +217,10 @@
                     </constraints>
                 </customView>
                 <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="16" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mg9-LY-FM6">
-                    <rect key="frame" x="588" y="342" width="214" height="209"/>
+                    <rect key="frame" x="588" y="403" width="214" height="148"/>
                     <subviews>
                         <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="3" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H6s-f6-XpJ">
-                            <rect key="frame" x="0.0" y="169" width="214" height="40"/>
+                            <rect key="frame" x="0.0" y="108" width="214" height="40"/>
                             <subviews>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RSF-Ny-sdL">
                                     <rect key="frame" x="-2" y="24" width="149" height="16"/>
@@ -261,11 +261,11 @@
                                 <real value="3.4028234663852886e+38"/>
                             </customSpacing>
                         </stackView>
-                        <stackView distribution="fill" orientation="vertical" alignment="trailing" spacing="3" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XAb-zd-dxo">
-                            <rect key="frame" x="0.0" y="118" width="214" height="35"/>
+                        <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="3" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XAb-zd-dxo">
+                            <rect key="frame" x="0.0" y="57" width="214" height="35"/>
                             <subviews>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DkG-57-1aU">
-                                    <rect key="frame" x="146" y="19" width="70" height="16"/>
+                                    <rect key="frame" x="-2" y="19" width="70" height="16"/>
                                     <textFieldCell key="cell" lineBreakMode="clipping" title="Descuento" id="R6I-CA-mgE">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -273,7 +273,7 @@
                                     </textFieldCell>
                                 </textField>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ifk-jK-g5Q">
-                                    <rect key="frame" x="181" y="0.0" width="35" height="16"/>
+                                    <rect key="frame" x="-2" y="0.0" width="35" height="16"/>
                                     <textFieldCell key="cell" lineBreakMode="clipping" title="$100" id="DzN-je-UGX">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -290,11 +290,11 @@
                                 <real value="3.4028234663852886e+38"/>
                             </customSpacing>
                         </stackView>
-                        <stackView distribution="fill" orientation="vertical" alignment="trailing" spacing="3" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IOZ-EC-oT9">
-                            <rect key="frame" x="0.0" y="67" width="214" height="35"/>
+                        <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="3" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IOZ-EC-oT9">
+                            <rect key="frame" x="0.0" y="0.0" width="214" height="41"/>
                             <subviews>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8HS-Tw-Tkm">
-                                    <rect key="frame" x="158" y="19" width="58" height="16"/>
+                                    <rect key="frame" x="-2" y="25" width="58" height="16"/>
                                     <textFieldCell key="cell" lineBreakMode="clipping" title="A Cobrar" id="int-fd-KB4">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -302,42 +302,10 @@
                                     </textFieldCell>
                                 </textField>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IR4-DG-eHL">
-                                    <rect key="frame" x="160" y="0.0" width="56" height="16"/>
+                                    <rect key="frame" x="-2" y="0.0" width="78" height="22"/>
                                     <textFieldCell key="cell" lineBreakMode="clipping" title="$800.00" id="def-wY-lun">
-                                        <font key="font" metaFont="system"/>
-                                        <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                    </textFieldCell>
-                                </textField>
-                            </subviews>
-                            <visibilityPriorities>
-                                <integer value="1000"/>
-                                <integer value="1000"/>
-                            </visibilityPriorities>
-                            <customSpacing>
-                                <real value="3.4028234663852886e+38"/>
-                                <real value="3.4028234663852886e+38"/>
-                            </customSpacing>
-                        </stackView>
-                        <stackView distribution="fill" orientation="vertical" alignment="trailing" spacing="3" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oi5-Qm-AVt">
-                            <rect key="frame" x="0.0" y="0.0" width="214" height="51"/>
-                            <subviews>
-                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dXY-YU-KFY">
-                                    <rect key="frame" x="159" y="35" width="57" height="16"/>
-                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Cobrado" id="Bk5-1t-NHD">
-                                        <font key="font" metaFont="system"/>
-                                        <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </textFieldCell>
-                                </textField>
-                                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UBe-6G-Eo3">
-                                    <rect key="frame" x="64" y="0.0" width="150" height="32"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="150" id="2kM-0B-1dL"/>
-                                    </constraints>
-                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" alignment="right" drawsBackground="YES" id="Wgr-Wk-XCi">
-                                        <font key="font" metaFont="system" size="23"/>
-                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <font key="font" metaFont="system" size="19"/>
+                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
@@ -354,22 +322,18 @@
                     </subviews>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="XAb-zd-dxo" secondAttribute="trailing" id="1bB-mu-S5f"/>
-                        <constraint firstAttribute="trailing" secondItem="oi5-Qm-AVt" secondAttribute="trailing" id="Ff3-P9-QeG"/>
                         <constraint firstItem="IOZ-EC-oT9" firstAttribute="leading" secondItem="mg9-LY-FM6" secondAttribute="leading" id="NxR-JY-won"/>
                         <constraint firstAttribute="trailing" secondItem="IOZ-EC-oT9" secondAttribute="trailing" id="V5l-p9-azG"/>
                         <constraint firstItem="XAb-zd-dxo" firstAttribute="leading" secondItem="mg9-LY-FM6" secondAttribute="leading" id="YwY-fs-Qyk"/>
                         <constraint firstItem="H6s-f6-XpJ" firstAttribute="leading" secondItem="mg9-LY-FM6" secondAttribute="leading" id="ajQ-g3-7Bj"/>
                         <constraint firstAttribute="trailing" secondItem="H6s-f6-XpJ" secondAttribute="trailing" id="eER-Y7-kiH"/>
-                        <constraint firstItem="oi5-Qm-AVt" firstAttribute="leading" secondItem="mg9-LY-FM6" secondAttribute="leading" id="xsh-TJ-psn"/>
                     </constraints>
                     <visibilityPriorities>
                         <integer value="1000"/>
                         <integer value="1000"/>
                         <integer value="1000"/>
-                        <integer value="1000"/>
                     </visibilityPriorities>
                     <customSpacing>
-                        <real value="3.4028234663852886e+38"/>
                         <real value="3.4028234663852886e+38"/>
                         <real value="3.4028234663852886e+38"/>
                         <real value="3.4028234663852886e+38"/>
@@ -458,12 +422,21 @@
                         <real value="3.4028234663852886e+38"/>
                     </customSpacing>
                 </stackView>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="BvM-Eb-Idf" customClass="SaveButtonCustomView" customModule="OSX_Version" customModuleProvider="target">
+                    <rect key="frame" x="359" y="8" width="100" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="WH5-k0-oCh"/>
+                        <constraint firstAttribute="width" constant="100" id="cED-2P-wco"/>
+                    </constraints>
+                </customView>
             </subviews>
             <constraints>
                 <constraint firstItem="1Ab-xv-jOu" firstAttribute="top" secondItem="Uf7-cP-765" secondAttribute="bottom" constant="32" id="0Fc-Ox-lJb"/>
+                <constraint firstItem="BvM-Eb-Idf" firstAttribute="centerX" secondItem="c22-O7-iKe" secondAttribute="centerX" id="0LX-9R-CxS"/>
                 <constraint firstItem="IG4-oQ-fRi" firstAttribute="leading" secondItem="Uf7-cP-765" secondAttribute="trailing" constant="16" id="1Ev-d9-wmO"/>
                 <constraint firstItem="IG4-oQ-fRi" firstAttribute="width" secondItem="c22-O7-iKe" secondAttribute="width" multiplier="0.33" id="351-Xx-05K"/>
                 <constraint firstItem="Uf7-cP-765" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="16" id="3Q7-ZR-qs7"/>
+                <constraint firstAttribute="bottom" secondItem="BvM-Eb-Idf" secondAttribute="bottom" constant="8" id="9tA-xU-HGw"/>
                 <constraint firstItem="IG4-oQ-fRi" firstAttribute="centerY" secondItem="Uf7-cP-765" secondAttribute="centerY" id="R5j-yX-Cat"/>
                 <constraint firstAttribute="trailing" secondItem="1F9-8o-TcX" secondAttribute="trailing" id="dvE-cA-Ral"/>
                 <constraint firstItem="mg9-LY-FM6" firstAttribute="top" secondItem="1F9-8o-TcX" secondAttribute="bottom" constant="16" id="fHQ-8H-R83"/>

@@ -14,6 +14,7 @@ class SellRegisterCell: NSTableCellView {
     @IBOutlet weak var labelPrice: NSTextField!
     @IBOutlet weak var labelTotalPayment: NSTextField!
     @IBOutlet weak var labelSaldo: NSTextField!
+    @IBOutlet weak var imageTypeOfRegister : NSImageView!
           
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
@@ -33,6 +34,9 @@ class SellRegisterCell: NSTableCellView {
         
         alphaValue = register.isEnabled ? 1.0 : 0.3
         labelSaldo.textColor = balance < 0 ? Constants.Colors.Red.ematita : NSColor.lightGray
+        let articleImage = #imageLiteral(resourceName: "beverages-supplier")
+        let activityImage = #imageLiteral(resourceName: "carrito")
+        imageTypeOfRegister.image = register.childIDArticle != nil ? articleImage : activityImage
     }
    
 }

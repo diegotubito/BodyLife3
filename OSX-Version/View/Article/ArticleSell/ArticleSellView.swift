@@ -22,13 +22,15 @@ class ArticleSellView: XibViewBlurBackground {
     
     override func commonInit() {
         super .commonInit()
-    
+       
         createBackgroundGradient()
 
         createProductListView()
         addAcceptButton()
         addObservers()
+        
     }
+    
     
     func createBackgroundGradient() {
         self.layer?.backgroundColor = NSColor.black.cgColor
@@ -77,7 +79,7 @@ class ArticleSellView: XibViewBlurBackground {
         super .showView()
         productListView.collectionView.deselectAll(nil)
         selectedItem = nil
- 
+        productListView.scrollView.becomeFirstResponder()
         productListView.collectionView.reloadData()
     }
     
@@ -89,8 +91,8 @@ class ArticleSellView: XibViewBlurBackground {
                 self.hideView()
                 self.buttonAccept.hideLoading()
                 if success {
-                    NotificationCenter.default.post(name: .newSell, object: nil)
-                    NotificationCenter.default.post(.init(name: .notificationArticleDidChanged))
+                    NotificationCenter.default.post(name: .needUpdateCustomerList, object: nil)
+                    NotificationCenter.default.post(.init(name: .needUpdateArticleList))
                 }
             }
         }
@@ -137,8 +139,7 @@ class ArticleSellView: XibViewBlurBackground {
         }
         
         let pathStatus = "\(Paths.customerStatus):\(selectedCustomer.childID)"
-        ServerManager.Transaction(path: pathStatus, key: "transaction", value: -(selectedItem?.price)!, success: {
-            print("transaction made")
+        ServerManager.Transaction(path: pathStatus, key: "balance", value: -(selectedItem?.price)!, success: {
             semasphore.signal()
         }) { (err) in
             error = err

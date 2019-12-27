@@ -9,12 +9,11 @@
 import Cocoa
 
 extension Notification.Name {
-    static let newSell = Notification.Name("newSell")
+    static let needUpdateCustomerList = Notification.Name("needUpdateCustomerList")
 }
 
-class SellActivityCustomView: XibViewWithAnimation, SellActivityViewContract {
+class SellActivityCustomView: XibViewBlurBackground, SellActivityViewContract {
     @IBOutlet weak var surname: NSTextField!
-    @IBOutlet weak var amountTextField: NSTextField!
     @IBOutlet weak var toDate: NSDatePicker!
     @IBOutlet weak var fromDate: NSDatePicker!
     @IBOutlet weak var periodIndicator: NSProgressIndicator!
@@ -22,57 +21,62 @@ class SellActivityCustomView: XibViewWithAnimation, SellActivityViewContract {
     @IBOutlet weak var DiscountPopUp: NSPopUpButton!
     @IBOutlet weak var tableViewActivity: NSTableView!
     @IBOutlet weak var tableViewPeriodo: NSTableView!
-    @IBOutlet weak var titleView: NSView!
-    var saveButtonView: SaveButtonCustomView!
-    var xButtonView : XButtonCustomView!
+     @IBOutlet weak var saveButtonView: SaveButtonCustomView!
     var viewModel : SellActivityViewModelContract!
     
-    @IBOutlet weak var dateLineSeparator: NSImageView!
+    @IBOutlet weak var activityScrollView: NSScrollView!
     override func commonInit() {
         super .commonInit()
-        self.wantsLayer = true
-        self.layer?.borderWidth = Constants.Borders.SellActivity.width
-        self.layer?.borderColor = Constants.Borders.SellActivity.color
-        self.layer?.backgroundColor = Constants.Colors.Gray.gray10.cgColor
-        disableDates()
+        addGestureToBackground()
+        createBackgroundGradient()
+        saveButtonView.title = "Guardar"
+          disableDates()
         viewModel = SellActivityViewModel(withView: self)
         
-        DispatchQueue.main.async {
-            self.addSaveButton()
-            self.setupTitleView()
-            self.addXButton()
-            _ = self.viewModel.validate()
-        }
+           
         DiscountPopUp.removeAllItems()
         DiscountPopUp.addItem(withTitle: "Ninguno")
         toDate.dateValue = Date()
         fromDate.dateValue = Date()
+        
+        buttonSaveObserver()
     }
     
-    func setupTitleView() {
-        titleView.wantsLayer = true
-        titleView.layer?.backgroundColor = NSColor.black.withAlphaComponent(0.3).cgColor
+    override func showView() {
+        super .showView()
+        self.activityScrollView.becomeFirstResponder()
+        self.startLoading()
+        
     }
     
-    func addSaveButton() {
-        saveButtonView = SaveButtonCustomView(frame: CGRect(x: (self.frame.width - 75) / 2, y: 16, width: 75, height: 75))
-        saveButtonView.onButtonPressed = {
-            self.savePressed()
-        }
-        self.addSubview(saveButtonView)
-    }
+    func buttonSaveObserver() {
+          saveButtonView.onButtonPressed = {
+            if self.viewModel.validate() {
+                self.viewModel.save()
+                
+            }
+          }
+          
+      }
     
-    func addXButton() {
-        self.xButtonView = XButtonCustomView(frame: CGRect(x: self.titleView.frame.width - 16 - 40, y: self.titleView.frame.height / 2 - 20, width: 40, height: 40))
-        self.titleView.addSubview(self.xButtonView)
-        self.xButtonView.didButtonPressed = {
-            self.cancelPressed()
-        }
+    func createBackgroundGradient() {
+        self.layer?.backgroundColor = NSColor.black.cgColor
+        let gradient = CAGradientLayer()
+        gradient.locations = [0, 0.5, 1]
+        gradient.colors = [NSColor(hex: 0x020707).cgColor,
+                           NSColor(hex: 0x1A3B78).withAlphaComponent(0.7).cgColor,
+                           NSColor(hex: 0x020707).cgColor]
+        gradient.frame = self.bounds
+        gradient.startPoint = CGPoint(x: 0.5, y: 0)
+        gradient.endPoint = CGPoint(x: 0.5, y: 1)
+        
+        self.layer?.addSublayer(gradient)
     }
     
     @IBAction func discountPopUpAction(_ sender: NSPopUpButton) {
         _ = viewModel.validate()
         viewModel.setSelectedDiscount(row: sender.indexOfSelectedItem)
+     
     }
     
     @IBAction func fromDateDidChanged(_ sender: NSDatePicker) {
@@ -98,7 +102,6 @@ class SellActivityCustomView: XibViewWithAnimation, SellActivityViewContract {
         let nameString = viewModel.model.selectedCustomer.name
         let surnameString = viewModel.model.selectedCustomer.surname
         surname.stringValue = surnameString + ", " + nameString
-        amountTextField.stringValue = ""
         tableViewActivity.deselectAll(nil)
         tableViewPeriodo.deselectAll(nil)
         self.viewModel.autoSelectActivity()
@@ -112,14 +115,14 @@ class SellActivityCustomView: XibViewWithAnimation, SellActivityViewContract {
     }
     
     func enableDates() {
-          fromDate.isEnabled = true
- //         toDate.isEnabled = true
-      }
+        fromDate.isEnabled = true
+        //         toDate.isEnabled = true
+    }
     
     func setToDate(date: Date) {
         toDate.dateValue = date
     }
-       
+    
     func setInitialFromDate() {
         let expiration = viewModel.model!.selectedStatus?.expiration
         guard let doubleDate = expiration, let date = doubleDate.toDate() else {
@@ -136,20 +139,12 @@ class SellActivityCustomView: XibViewWithAnimation, SellActivityViewContract {
         toDate.dateValue = date
     }
     
-    func savePressed() {
-        if viewModel.validate() {
-            viewModel.save()
-        }
-    }
-    
-    func cancelPressed() {
-        animateMode = .fadeOut
+     func cancelPressed() {
+        self.hideView()
     }
     
     func showMembershipError() {
-        DispatchQueue.main.async {
-            self.showErrorConnectionView()
-        }
+       
     }
     
     func reloadView() {
@@ -207,10 +202,6 @@ class SellActivityCustomView: XibViewWithAnimation, SellActivityViewContract {
         return toDate!.dateValue
     }
     
-    func getAmount() -> String {
-        return amountTextField.stringValue
-    }
-    
     func selectActivityManually(position: Int) {
         if position == -1 {return}
         DispatchQueue.main.async {
@@ -219,18 +210,14 @@ class SellActivityCustomView: XibViewWithAnimation, SellActivityViewContract {
             self.tableViewActivity.scrollRowToVisible(position)
         }
     }
-    
-    func showAmount(value: Double) {
-        self.amountTextField.stringValue = String(value.rounded(toPlaces: 2))
-    }
-    
+      
     func showError(_ message: String) {
         print(message)
     }
     
     func showSuccess() {
-        NotificationCenter.default.post(name: .newSell, object: nil)
-        animateMode = .fadeOut
+        NotificationCenter.default.post(name: .needUpdateCustomerList, object: nil)
+        self.hideView()
     }
 }
 

@@ -15,7 +15,7 @@ extension HomeViewController {
         
         createCustomerListView()
         customerListView.isHidden = false
-      
+        
         createCustomerStatusView()
         customerStatusView.isHidden = true
         
@@ -23,16 +23,12 @@ extension HomeViewController {
         sellRegisterView.isHidden = true
         
         createSellActivityCustomView()
-        sellActivityView.isHidden = true
-        
-        createPaymentView()
-        paymentView.isHidden = true
-        
         createBottomView()
-        createProductSellView()
+        createArticleSellView()
+        createPaymentView()
     }
     
-    func createProductSellView() {
+    func createArticleSellView() {
         let ancho = view.frame.width * 0.40
         let alto = view.frame.height * 0.5
         sellProductView = ArticleSellView(frame: CGRect(x: -ancho + 5, y: 0, width: ancho, height: alto))
@@ -40,14 +36,11 @@ extension HomeViewController {
         sellProductView.closeWhenBackgroundIsTouch = true
         sellProductView.layer?.cornerRadius = 10
         view.addSubview(sellProductView)
-    
-        
+
     }
     
+    
     func createUpperView() {
-        let upperView = NSView(frame: CGRect(x: 0, y: 0, width: containerUpperBar.frame.width, height: containerUpperBar.frame.height))
-        containerUpperBar.addSubview(upperView)
-        
         containerUpperBar.wantsLayer = true
         containerUpperBar.layer?.backgroundColor = Constants.Colors.Gray.almondFrost.cgColor
     }
@@ -57,12 +50,7 @@ extension HomeViewController {
         containerBottomBar.addSubview(bottomView)
         
         containerBottomBar.wantsLayer = true
-    //    containerBottomBar.layer?.backgroundColor = Constants.Colors.Gray.gray21.cgColor
-    }
-    
-    func createPaymentView() {
-        paymentView = PaymentView(frame: CGRect(x: view.frame.width * 0.3, y: view.frame.height - 250, width: view.frame.width - (view.frame.width * 0.3), height: 250))
-        view.addSubview(paymentView)
+        //    containerBottomBar.layer?.backgroundColor = Constants.Colors.Gray.gray21.cgColor
     }
     
     func createCustomerListView() {
@@ -78,11 +66,25 @@ extension HomeViewController {
     }
     
     func createSellActivityCustomView() {
-        self.customerStatusView.animateMode = .fadeOut
-        
-        sellActivityView = SellActivityCustomView(frame: CGRect(x: view.frame.width * 0.3, y: 0, width: view.frame.width - (view.frame.width * 0.3), height: view.frame.height))
+        let ancho = view.frame.width * 0.6
+        let alto = view.frame.height * 0.6
+        sellActivityView = SellActivityCustomView(frame: CGRect(x: self.view.frame.width - 5, y: 0, width: ancho, height: alto))
+        sellActivityView.destiny = CGPoint(x: self.view.frame.width - ancho, y: 0)
+        sellActivityView.closeWhenBackgroundIsTouch = true
+        sellActivityView.layer?.cornerRadius = 10
         self.view.addSubview(sellActivityView)
         
+        
+    }
+    
+    func createPaymentView() {
+        let ancho = view.frame.width * 0.4
+        let alto = view.frame.height * 0.5
+        paymentView = PaymentView(frame: CGRect(x: self.view.frame.width - 5, y: 0, width: ancho, height: alto))
+        paymentView.destiny = CGPoint(x: self.view.frame.width - ancho, y: 0)
+        paymentView.closeWhenBackgroundIsTouch = true
+        paymentView.layer?.cornerRadius = 10
+        view.addSubview(paymentView)
     }
     
     func createRegisterView() {

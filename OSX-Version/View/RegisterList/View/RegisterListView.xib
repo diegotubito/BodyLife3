@@ -34,7 +34,7 @@
                                 <tableColumns>
                                     <tableColumn identifier="defaultRow" width="790" minWidth="10" maxWidth="3.4028234663852886e+38" id="Min-dm-1G9">
                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
-                                            <font key="font" metaFont="system" size="11"/>
+                                            <font key="font" metaFont="controlContent" size="11"/>
                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </tableHeaderCell>
@@ -49,8 +49,16 @@
                                                 <rect key="frame" x="1" y="1" width="790" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <subviews>
+                                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YVd-wf-jUW">
+                                                        <rect key="frame" x="16" y="5" width="20" height="20"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="20" id="DPq-Pa-hnD"/>
+                                                            <constraint firstAttribute="height" constant="20" id="grB-dE-FZY"/>
+                                                        </constraints>
+                                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="logo_body_life" id="gIV-TW-jYF"/>
+                                                    </imageView>
                                                     <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xqd-dD-fOu">
-                                                        <rect key="frame" x="44" y="8" width="692" height="15"/>
+                                                        <rect key="frame" x="44" y="8" width="738" height="15"/>
                                                         <subviews>
                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JyL-6b-VT1">
                                                                 <rect key="frame" x="-2" y="0.0" width="154" height="15"/>
@@ -58,48 +66,48 @@
                                                                     <constraint firstAttribute="width" constant="150" id="Rds-jC-f1L"/>
                                                                 </constraints>
                                                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="ZCZ-bw-Y6G">
-                                                                    <font key="font" metaFont="system" size="12"/>
+                                                                    <font key="font" metaFont="cellTitle"/>
                                                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                 </textFieldCell>
                                                             </textField>
                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jYd-1X-vnX">
-                                                                <rect key="frame" x="148" y="0.0" width="246" height="15"/>
+                                                                <rect key="frame" x="148" y="0.0" width="292" height="15"/>
                                                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="8up-vp-Om3">
-                                                                    <font key="font" metaFont="system" size="12"/>
+                                                                    <font key="font" metaFont="cellTitle"/>
                                                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                 </textFieldCell>
                                                             </textField>
                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="t9v-SQ-6Hc">
-                                                                <rect key="frame" x="390" y="0.0" width="104" height="15"/>
+                                                                <rect key="frame" x="436" y="0.0" width="104" height="15"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="100" id="cQc-4x-ag3"/>
                                                                 </constraints>
                                                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Label" id="ghd-Ub-eBe">
-                                                                    <font key="font" metaFont="system" size="12"/>
+                                                                    <font key="font" metaFont="cellTitle"/>
                                                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                 </textFieldCell>
                                                             </textField>
                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XKr-Qn-yZe">
-                                                                <rect key="frame" x="490" y="0.0" width="104" height="15"/>
+                                                                <rect key="frame" x="536" y="0.0" width="104" height="15"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="100" id="2U7-Mm-wfv"/>
                                                                 </constraints>
                                                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Label" id="bzs-bb-zYz">
-                                                                    <font key="font" metaFont="system" size="12"/>
+                                                                    <font key="font" metaFont="cellTitle"/>
                                                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                 </textFieldCell>
                                                             </textField>
                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="U8t-FB-psE">
-                                                                <rect key="frame" x="590" y="0.0" width="104" height="15"/>
+                                                                <rect key="frame" x="636" y="0.0" width="104" height="15"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="100" id="03d-Ue-rA8"/>
                                                                 </constraints>
                                                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Label" id="qVh-7b-n5t">
-                                                                    <font key="font" metaFont="system" size="12"/>
+                                                                    <font key="font" metaFont="cellTitle"/>
                                                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                 </textFieldCell>
@@ -120,33 +128,16 @@
                                                             <real value="3.4028234663852886e+38"/>
                                                         </customSpacing>
                                                     </stackView>
-                                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YVd-wf-jUW">
-                                                        <rect key="frame" x="16" y="5" width="20" height="20"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="20" id="DPq-Pa-hnD"/>
-                                                            <constraint firstAttribute="height" constant="20" id="grB-dE-FZY"/>
-                                                        </constraints>
-                                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="logo_body_life" id="gIV-TW-jYF"/>
-                                                    </imageView>
-                                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5ag-8e-rQf">
-                                                        <rect key="frame" x="744" y="0.0" width="30" height="30"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="30" id="Ct6-qN-hQk"/>
-                                                            <constraint firstAttribute="height" constant="30" id="oSi-lY-xsA"/>
-                                                        </constraints>
-                                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="logo_body_life" id="8tG-5X-5fO"/>
-                                                    </imageView>
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstItem="YVd-wf-jUW" firstAttribute="leading" secondItem="DpR-7H-piO" secondAttribute="leading" constant="16" id="4Xu-GU-INp"/>
                                                     <constraint firstItem="Xqd-dD-fOu" firstAttribute="centerY" secondItem="DpR-7H-piO" secondAttribute="centerY" id="6BW-su-XIF"/>
-                                                    <constraint firstItem="5ag-8e-rQf" firstAttribute="leading" secondItem="Xqd-dD-fOu" secondAttribute="trailing" constant="8" id="7JO-jS-fXq"/>
-                                                    <constraint firstItem="5ag-8e-rQf" firstAttribute="centerY" secondItem="YVd-wf-jUW" secondAttribute="centerY" id="86U-gN-gAN"/>
-                                                    <constraint firstAttribute="trailing" secondItem="5ag-8e-rQf" secondAttribute="trailing" constant="16" id="9Cs-k8-JeO"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Xqd-dD-fOu" secondAttribute="trailing" constant="8" id="KhM-1t-LmP"/>
                                                     <constraint firstItem="YVd-wf-jUW" firstAttribute="centerY" secondItem="DpR-7H-piO" secondAttribute="centerY" id="O6w-kV-ghi"/>
                                                     <constraint firstItem="Xqd-dD-fOu" firstAttribute="leading" secondItem="YVd-wf-jUW" secondAttribute="trailing" constant="8" id="v6f-tN-q9i"/>
                                                 </constraints>
                                                 <connections>
+                                                    <outlet property="imageTypeOfRegister" destination="YVd-wf-jUW" id="03m-1L-h65"/>
                                                     <outlet property="labelCreatedAt" destination="JyL-6b-VT1" id="7tD-2G-CYf"/>
                                                     <outlet property="labelDisplayName" destination="jYd-1X-vnX" id="R4H-2Y-9tW"/>
                                                     <outlet property="labelPrice" destination="t9v-SQ-6Hc" id="J8L-A9-4bf"/>

@@ -35,12 +35,10 @@ protocol SellActivityViewContract {
     func disableSaveButton()
     func getFromDate() -> Date
     func getToDate() -> Date
-    func getAmount() -> String
     func selectActivityManually(position: Int)
     func setToDate(date: Date)
     func disableDates()
     func enableDates()
-    func showAmount(value: Double)
     func showError(_ message: String)
     func showSuccess()
 }
