@@ -77,18 +77,14 @@ class XibViewBlurBackground: XibView {
         self.layer?.add(animation, forKey: nil)
         
     }
-    
-    @objc func mainViewTouched() {
-        print("container View Touched")
-    }
+ 
     @objc func backgroundTouched() {
-        print("background touched")
         if closeWhenBackgroundIsTouch {
             hideView()
         }
     }
     
-    func addBackgroundGesture() {
+    private func addBackgroundGesture() {
         let clickGesture = NSClickGestureRecognizer(target: self, action: #selector(backgroundTouched))
         backgroundView.addGestureRecognizer(clickGesture)
         

@@ -9,11 +9,11 @@
 import Cocoa
 
 struct SellActivityModel {
-    var filteredPeriods = [ActivityModel]()
+    var filteredActivities = [ActivityModel]()
     var activity = [ActivityModel]()
     var type = [ServiceTypeModel]()
     var discounts = [DiscountModel]()
-    var selectedActivityType : ServiceTypeModel?
+    var selectedType : ServiceTypeModel?
     var selectedActivity : ActivityModel?
     var selectedDiscount : DiscountModel?
     

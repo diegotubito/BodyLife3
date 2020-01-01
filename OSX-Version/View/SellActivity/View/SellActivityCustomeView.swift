@@ -10,54 +10,76 @@ import Cocoa
 
 extension Notification.Name {
     static let needUpdateCustomerList = Notification.Name("needUpdateCustomerList")
+    static let needUpdateProductService = Notification.Name("needUpdateProductService")
 }
 
 class SellActivityCustomView: XibViewBlurBackground, SellActivityViewContract {
+    @IBOutlet var mainView: NSView!
     @IBOutlet weak var surname: NSTextField!
     @IBOutlet weak var toDate: NSDatePicker!
     @IBOutlet weak var fromDate: NSDatePicker!
     @IBOutlet weak var periodIndicator: NSProgressIndicator!
     @IBOutlet weak var activityIndicator: NSProgressIndicator!
     @IBOutlet weak var DiscountPopUp: NSPopUpButton!
+    @IBOutlet weak var tableViewType: NSTableView!
     @IBOutlet weak var tableViewActivity: NSTableView!
-    @IBOutlet weak var tableViewPeriodo: NSTableView!
-     @IBOutlet weak var saveButtonView: SaveButtonCustomView!
+    @IBOutlet weak var saveButtonView: SaveButtonCustomView!
     var viewModel : SellActivityViewModelContract!
     
-    @IBOutlet weak var activityScrollView: NSScrollView!
+    @IBOutlet weak var amountToPay: NSTextField!
+    @IBOutlet weak var totalDiscount: NSTextField!
+    @IBOutlet weak var scrollViewType: NSScrollView!
     override func commonInit() {
         super .commonInit()
         addGestureToBackground()
         createBackgroundGradient()
         saveButtonView.title = "Guardar"
-          disableDates()
+        disableDates()
         viewModel = SellActivityViewModel(withView: self)
         
-           
+        
         DiscountPopUp.removeAllItems()
         DiscountPopUp.addItem(withTitle: "Ninguno")
         toDate.dateValue = Date()
         fromDate.dateValue = Date()
         
         buttonSaveObserver()
-    }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(loadDataHandler), name: .needUpdateProductService, object: nil)
+     }
     
     override func showView() {
         super .showView()
-        self.activityScrollView.becomeFirstResponder()
-        self.startLoading()
-        
+        self.setInitialFromDate()
+        self.tableViewType.reloadData()
+        self.tableViewActivity.reloadData()
+        self.viewModel.autoSelectType()
+        self.viewModel.autoSelectActivity()
+        self.viewModel.autoSelectDiscount()
     }
     
+ 
+    @objc func loadDataHandler() {
+        self.startLoading()
+    }
+    
+    override func hideView() {
+        super .hideView()
+ 
+      //  self.viewModel.model.selectedDiscount = nil
+        self.viewModel.model.selectedActivity = nil
+        self.viewModel.model.selectedType = nil
+        
+        tableViewType.deselectAll(nil)
+        tableViewActivity.deselectAll(nil)
+    }
     func buttonSaveObserver() {
-          saveButtonView.onButtonPressed = {
+        saveButtonView.onButtonPressed = {
             if self.viewModel.validate() {
                 self.viewModel.save()
-                
             }
-          }
-          
-      }
+        }
+    }
     
     func createBackgroundGradient() {
         self.layer?.backgroundColor = NSColor.black.cgColor
@@ -76,7 +98,8 @@ class SellActivityCustomView: XibViewBlurBackground, SellActivityViewContract {
     @IBAction func discountPopUpAction(_ sender: NSPopUpButton) {
         _ = viewModel.validate()
         viewModel.setSelectedDiscount(row: sender.indexOfSelectedItem)
-     
+        viewModel.calculateAmountToPay()
+        
     }
     
     @IBAction func fromDateDidChanged(_ sender: NSDatePicker) {
@@ -94,19 +117,15 @@ class SellActivityCustomView: XibViewBlurBackground, SellActivityViewContract {
     }
     
     func startLoading() {
-        setInitialValues()
         viewModel.loadMembership()
     }
     
-    private func setInitialValues() {
+    private func showCustomerInfo() {
+        if viewModel.model.selectedCustomer == nil {return}
         let nameString = viewModel.model.selectedCustomer.name
         let surnameString = viewModel.model.selectedCustomer.surname
         surname.stringValue = surnameString + ", " + nameString
-        tableViewActivity.deselectAll(nil)
-        tableViewPeriodo.deselectAll(nil)
-        self.viewModel.autoSelectActivity()
-        setInitialFromDate()
-        self.viewModel.estimateToDate()
+        
     }
     
     func disableDates() {
@@ -139,25 +158,24 @@ class SellActivityCustomView: XibViewBlurBackground, SellActivityViewContract {
         toDate.dateValue = date
     }
     
-     func cancelPressed() {
+    func cancelPressed() {
         self.hideView()
     }
     
     func showMembershipError() {
-       
+        
     }
     
-    func reloadView() {
+    func reloadTableViewType() {
         DispatchQueue.main.async {
-            self.tableViewActivity.reloadData()
-            self.selectActivityManually(position: 0)
+            self.tableViewType.reloadData()
             self.DiscountPopUp.addItems(withTitles: self.viewModel.getDiscountTitles())
         }
     }
     
-    func reloadPeriod() {
+    func reloadTableViewActivity() {
         DispatchQueue.main.async {
-            self.tableViewPeriodo.reloadData()
+            self.tableViewActivity.reloadData()
         }
         
     }
@@ -202,45 +220,87 @@ class SellActivityCustomView: XibViewBlurBackground, SellActivityViewContract {
         return toDate!.dateValue
     }
     
+    func selectTypeManually(position: Int) {
+        if position == -1 {return}
+        let index = IndexSet(integer: position)
+        
+        self.tableViewType.selectRowIndexes(index, byExtendingSelection: false)
+        self.tableViewType.scrollRowToVisible(position)
+        //  self.tableViewType.reloadData()
+   
+        self.viewModel.setSelectedType(row: position)
+    }
+    
     func selectActivityManually(position: Int) {
         if position == -1 {return}
-        DispatchQueue.main.async {
-            let index = IndexSet(integer: position)
-            self.tableViewActivity.selectRowIndexes(index, byExtendingSelection: false)
-            self.tableViewActivity.scrollRowToVisible(position)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+             let index = IndexSet(integer: position)
+                       self.tableViewActivity.selectRowIndexes(index, byExtendingSelection: false)
+                       self.tableViewActivity.scrollRowToVisible(position)
+                       _ = self.viewModel.validate()
+                       self.viewModel.setSelectedActivity(row: position)
         }
+           
     }
-      
+    
+    func selectDiscountManually(position: Int) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.viewModel.setSelectedDiscount(row: position)
+            self.DiscountPopUp.selectItem(at: position)
+            _ = self.viewModel.validate()
+            self.viewModel.calculateAmountToPay()
+        }
+        
+    }
+    
     func showError(_ message: String) {
         print(message)
     }
     
+    func showSuccessSaving() {
+        DispatchQueue.main.async {
+            NotificationCenter.default.post(name: .needUpdateCustomerList, object: nil)
+            self.hideView()
+        }
+    }
+    
     func showSuccess() {
-        NotificationCenter.default.post(name: .needUpdateCustomerList, object: nil)
-        self.hideView()
+        showCustomerInfo()
+        
+        DispatchQueue.main.async {
+            self.DiscountPopUp.addItems(withTitles: self.viewModel.getDiscountTitles())
+            self.viewModel.calculateAmountToPay()
+            self.setInitialFromDate()
+                
+        }
+    }
+    
+    func displayAmountToPay(discount: Double, payment: Double) {
+        totalDiscount.stringValue = discount.formatoMoneda(decimales: 2)
+        amountToPay.stringValue = payment.formatoMoneda(decimales: 2)
     }
 }
 
 extension SellActivityCustomView: NSTableViewDataSource, NSTableViewDelegate {
     func numberOfRows(in tableView: NSTableView) -> Int {
         if viewModel == nil {return 0}
-        if tableView == tableViewActivity {
-            return viewModel.getActivities().count
+        if tableView == tableViewType {
+            return viewModel.getTypes().count
         } else {
-            return viewModel.getFilteredPeriods().count
+            return viewModel.getFilteredActivities().count
         }
     }
     
     func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
         let identificador = (tableColumn?.identifier.rawValue)!
-        if tableView == tableViewActivity {
+        if tableView == tableViewType {
             if identificador == "idenActividad" {
-                let activity = viewModel.getActivities()[row]
+                let activity = viewModel.getTypes()[row]
                 return activity.name
             }
-        } else if tableView == tableViewPeriodo {
+        } else if tableView == tableViewActivity {
             if identificador == "idenPeriodo" {
-                let period = viewModel.getFilteredPeriods()[row]
+                let period = viewModel.getFilteredActivities()[row]
                 return period.name
             }
         }
@@ -249,11 +309,10 @@ extension SellActivityCustomView: NSTableViewDataSource, NSTableViewDelegate {
     
     func tableViewSelectionDidChange(_ notification: Notification) {
         if let myTable = notification.object as? NSTableView {
-            if myTable == tableViewActivity {
+            if myTable == tableViewType {
+                viewModel.setSelectedType(row: myTable.selectedRow)
+            } else if myTable == tableViewActivity {
                 viewModel.setSelectedActivity(row: myTable.selectedRow)
-            } else if myTable == tableViewPeriodo {
-                viewModel.setSelectedPeriod(row: myTable.selectedRow)
-                viewModel.estimateToDate()
             }
         }
     }

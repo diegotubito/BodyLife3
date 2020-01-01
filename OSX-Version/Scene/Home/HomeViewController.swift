@@ -91,8 +91,12 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
     }
     
     @objc func didConnected() {
-        self.customerListView.startLoading()
-      
+        if self.customerListView.viewModel.model.selectedCustomer == nil {
+            self.customerListView.startLoading()
+            NotificationCenter.default.post(.init(name: .needUpdateArticleList))
+            NotificationCenter.default.post(.init(name: .needUpdateProductService))
+            print("pre data loaded")
+        }
     }
     
     

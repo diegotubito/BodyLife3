@@ -9,6 +9,7 @@
 import Cocoa
 
 class SellActivityViewModel: SellActivityViewModelContract {
+   
     var model: SellActivityModel!
     var _view : SellActivityViewContract!
     var childIDNew : String?
@@ -47,8 +48,7 @@ class SellActivityViewModel: SellActivityViewModelContract {
                     let dataDiscount = try JSONSerialization.data(withJSONObject: discountArray, options: [])
                     self.model.discounts = try JSONDecoder().decode([DiscountModel].self, from: dataDiscount)                    
                 }
-                self._view.reloadView()
-                
+                self._view.showSuccess()
             } catch {
                 self._view.showMembershipError()
             }
@@ -102,7 +102,7 @@ class SellActivityViewModel: SellActivityViewModelContract {
         let amountToPay = estimateAmount()
         saveNewTransaction(path: statusPathTransaction, value: -amountToPay)
         
-        _view.showSuccess()
+        _view.showSuccessSaving()
     }
     
     private func updateSellcountForActivity(_ childIDActivity: String) {
@@ -130,7 +130,7 @@ class SellActivityViewModel: SellActivityViewModelContract {
         let childIDCustomer = model.selectedCustomer.childID
         let surname = model.selectedCustomer.surname
         let name = model.selectedCustomer.name
-        let childIDLastType = (model.selectedActivityType?.childID)!
+        let childIDLastType = (model.selectedType?.childID)!
         let childIDLastActivity = (model.selectedActivity?.childID)!
         let childIDLastDiscount = (model.selectedDiscount?.childID) ?? ""
         let status = ["surname" : surname,
@@ -144,12 +144,12 @@ class SellActivityViewModel: SellActivityViewModelContract {
     }
     
     func prepareSell(childID: String) -> [String : Any] {
-        let displayName = model.selectedActivity!.name + ", " + model.selectedActivityType!.name
+        let displayName = model.selectedActivity!.name + ", " + model.selectedType!.name
         let fromDate = _view.getFromDate()
         let toDate = _view.getToDate()
-        let childIDLastType = model.selectedActivityType?.childID
-        let childIDActivity = model.selectedActivity?.childID
-        let childIDDiscount = model.selectedDiscount?.childID
+        let childIDLastType = model.selectedType?.childID
+        let childIDLastActivity = model.selectedActivity?.childID
+        let childIDLastDiscount = model.selectedDiscount?.childID
         let price = estimateAmount()
         let discount = model.selectedDiscount?.multiplier
         let childIDCustomer = model.selectedCustomer.childID
@@ -161,8 +161,8 @@ class SellActivityViewModel: SellActivityViewModelContract {
                              "price" : price,
                              "isEnabled" : true,
                              "childIDLastType" : childIDLastType!,
-                             "childIDActivity" : childIDActivity!,
-                             "childIDDiscount" : childIDDiscount ?? "",
+                             "childIDLastActivity" : childIDLastActivity!,
+                             "childIDLastDiscount" : childIDLastDiscount ?? "",
                              "discount" : discount ?? 1.0,
                              "displayName" : displayName]]
             as [String : Any]
@@ -170,27 +170,28 @@ class SellActivityViewModel: SellActivityViewModelContract {
         return sell
     }
     
-    func getActivities() -> [ServiceTypeModel] {
+    func getTypes() -> [ServiceTypeModel] {
         return model.type
     }
     
-    func setSelectedActivity(row: Int) {
+    func setSelectedType(row: Int) {
         if row == -1 {
-            model.selectedActivityType = nil
-            model.filteredPeriods = [ActivityModel]()
-            _view.reloadPeriod()
+            model.selectedType = nil
+            model.filteredActivities = [ActivityModel]()
+            _view.reloadTableViewActivity()
             _ = validate()
             return
         }
-        model.selectedActivityType = model.type[row]
+        model.selectedType = model.type[row]
         
-        model.filteredPeriods = model.activity.filter({$0.childIDType == model.selectedActivityType!.childID})
+        model.filteredActivities = model.activity.filter({$0.childIDType == model.selectedType!.childID})
         
-        _view.reloadPeriod()
+        _view.reloadTableViewActivity()
+        calculateAmountToPay()
         _ = validate()
     }
     
-    func setSelectedPeriod(row: Int) {
+    func setSelectedActivity(row: Int) {
         if row == -1 {
             model.selectedActivity = nil
             _ = validate()
@@ -198,6 +199,7 @@ class SellActivityViewModel: SellActivityViewModelContract {
         }
         model.selectedActivity = model.activity[row]
         estimateToDate()
+        calculateAmountToPay()
         
         _ = validate()
         
@@ -214,7 +216,7 @@ class SellActivityViewModel: SellActivityViewModelContract {
     func estimateAmount() -> Double {
         var amount : Double = 0
         
-        if let period = model.selectedActivity, model.selectedActivityType != nil {
+        if let period = model.selectedActivity, model.selectedType != nil {
             amount = period.price
         }
         if let discount = model.selectedDiscount {
@@ -238,7 +240,7 @@ class SellActivityViewModel: SellActivityViewModelContract {
     
     func validate() -> Bool {
         var result = true
-        if model.selectedActivityType == nil {
+        if model.selectedType == nil {
             result = false
         }
         if model.selectedActivity == nil {
@@ -257,8 +259,8 @@ class SellActivityViewModel: SellActivityViewModelContract {
         return result
     }
     
-    func getFilteredPeriods() -> [ActivityModel] {
-        return model.filteredPeriods
+    func getFilteredActivities() -> [ActivityModel] {
+        return model.filteredActivities
     }
     
     func getDiscountTitles() -> [String] {
@@ -271,13 +273,44 @@ class SellActivityViewModel: SellActivityViewModelContract {
         model.selectedCustomer = selectedCustomer
     }
     
-    func autoSelectActivity() {
+    func autoSelectType() {
+        model.selectedType = nil
         for (x,i) in (model!.type).enumerated() {
+            if i.childID == model.selectedStatus?.childIDLastType {
+                _view.selectTypeManually(position: x)
+                
+            }
+        }
+    }
+    
+    func autoSelectActivity() {
+        model.selectedActivity = nil
+        for (x,i) in (model!.activity).enumerated() {
             if i.childID == model.selectedStatus?.childIDLastActivity {
-                model.selectedActivityType = i
                 _view.selectActivityManually(position: x)
             }
         }
+    }
+    
+    func autoSelectDiscount() {
+        model.selectedDiscount = nil
+        for (x,i) in (model!.discounts).enumerated() {
+            if i.childID == model.selectedStatus?.childIDLastDiscount {
+                _view.selectDiscountManually(position: x)
+            }
+        }
+    }
+    
+    func calculateAmountToPay() {
+        var multiplier : Double = 1
+        if let val = model.selectedDiscount?.multiplier {
+            multiplier = val
+        }
+        let price = model.selectedActivity == nil ? 0 : model.selectedActivity?.price
+         
+        let totalDiscount = price! - (multiplier * price!)
+        let totalToPay = price! - totalDiscount
+        _view.displayAmountToPay(discount: totalDiscount, payment: totalToPay)
     }
     
 }
