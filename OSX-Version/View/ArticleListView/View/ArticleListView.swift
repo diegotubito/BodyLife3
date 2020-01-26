@@ -22,6 +22,7 @@ class ArticleListView : GenericCollectionView<ArticleViewItem, ArticleModel> {
       
     override func commonInit() {
         super .commonInit()
+        
         viewModel = ArticleListViewModel(withView: self)
         viewModel.loadProducts()
         numberOfVisibleItems = 5

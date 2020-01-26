@@ -70,12 +70,6 @@ class PaymentView: XibViewBlurBackground, PaymentViewContract {
         self.layer?.addSublayer(gradient)
     }
     
-    override func addGestureToBackground() {
-        let click = NSClickGestureRecognizer(target: self, action: #selector(backgroundTouchedHandler))
-        myBackground.addGestureRecognizer(click)
-        
-    }
-    
     @IBAction func textfieldDIdChanged(_ sender: Any) {
         
     }

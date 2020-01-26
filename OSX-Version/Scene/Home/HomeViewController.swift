@@ -15,7 +15,7 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
     @IBOutlet weak var containerStatus: NSView!
     var customerStatusView: CustomerStatusView!
     var customerListView : CustomerListView!
-    var sellActivityView : SellActivityCustomView!
+    var sellActivityView : ActivitySaleView!
     var sellRegisterView : RegisterListView!
     var paymentView : PaymentView!
     var sellProductView : ArticleSellView!

@@ -73,6 +73,11 @@
 		11A8ECFE23B1207500F15B9A /* XibViewWithAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A8ECFD23B1207500F15B9A /* XibViewWithAnimation.swift */; };
 		11A8ED0023B1208600F15B9A /* XibViewWithBlurBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A8ECFF23B1208600F15B9A /* XibViewWithBlurBackground.swift */; };
 		11A8ED0323B1442700F15B9A /* GenericCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A8ED0223B1442700F15B9A /* GenericCollectionView.swift */; };
+		11AC546023DDE4B40033A27D /* ActivitySaleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AC545F23DDE4B40033A27D /* ActivitySaleModel.swift */; };
+		11AC546223DDE4E30033A27D /* ActivitySaleViewModelContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AC546123DDE4E30033A27D /* ActivitySaleViewModelContract.swift */; };
+		11AC546423DDE4F30033A27D /* ActivitySaleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AC546323DDE4F30033A27D /* ActivitySaleViewModel.swift */; };
+		11AC546623DDE5250033A27D /* AcitvitySaleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AC546523DDE5250033A27D /* AcitvitySaleView.swift */; };
+		11AC546823DDE64E0033A27D /* ActivitySaleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11AC546723DDE64E0033A27D /* ActivitySaleView.xib */; };
 		11EBD3212376499F00AB4BFF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD3202376499F00AB4BFF /* AppDelegate.swift */; };
 		11EBD3262376499F00AB4BFF /* OSX_Version.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD3242376499F00AB4BFF /* OSX_Version.xcdatamodeld */; };
 		11EBD3282376499F00AB4BFF /* AssetsOSX.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11EBD3272376499F00AB4BFF /* AssetsOSX.xcassets */; };
@@ -184,6 +189,11 @@
 		11A8ECFD23B1207500F15B9A /* XibViewWithAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XibViewWithAnimation.swift; sourceTree = "<group>"; };
 		11A8ECFF23B1208600F15B9A /* XibViewWithBlurBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XibViewWithBlurBackground.swift; sourceTree = "<group>"; };
 		11A8ED0223B1442700F15B9A /* GenericCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericCollectionView.swift; sourceTree = "<group>"; };
+		11AC545F23DDE4B40033A27D /* ActivitySaleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitySaleModel.swift; sourceTree = "<group>"; };
+		11AC546123DDE4E30033A27D /* ActivitySaleViewModelContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitySaleViewModelContract.swift; sourceTree = "<group>"; };
+		11AC546323DDE4F30033A27D /* ActivitySaleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitySaleViewModel.swift; sourceTree = "<group>"; };
+		11AC546523DDE5250033A27D /* AcitvitySaleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcitvitySaleView.swift; sourceTree = "<group>"; };
+		11AC546723DDE64E0033A27D /* ActivitySaleView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivitySaleView.xib; sourceTree = "<group>"; };
 		11EBD31E2376499F00AB4BFF /* OSX-Version.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OSX-Version.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		11EBD3202376499F00AB4BFF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		11EBD3252376499F00AB4BFF /* OSX_Version.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = OSX_Version.xcdatamodel; sourceTree = "<group>"; };
@@ -372,11 +382,11 @@
 		1147AB3E2383648B00D19AA9 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				1166AF3923B295D40047C7AE /* Article */,
+				1166AF3923B295D40047C7AE /* Sales */,
+				11A8ECEF23B0E6F700F15B9A /* ArticleListView */,
 				116CEB5F23A1E2BE0081D356 /* RegisterList */,
 				11EEF0EB239D49FB007C9821 /* Payment */,
 				111DE56A2389F550002F4216 /* Buttons */,
-				1178BA8B2388C638000C3FB6 /* SellActivity */,
 				110664C323775C6300DC44F3 /* ErrorMessageView */,
 				1147AB6E2384A9DA00D19AA9 /* CusomterDetail */,
 				1147AB3F2383649300D19AA9 /* CustomerList */,
@@ -558,13 +568,14 @@
 			path = ProductViewItem;
 			sourceTree = "<group>";
 		};
-		1166AF3923B295D40047C7AE /* Article */ = {
+		1166AF3923B295D40047C7AE /* Sales */ = {
 			isa = PBXGroup;
 			children = (
+				11AC545B23DDE4160033A27D /* ActivitySale */,
+				1178BA8B2388C638000C3FB6 /* SellActivity */,
 				1166AF3A23B295EA0047C7AE /* ArticleSell */,
-				11A8ECEF23B0E6F700F15B9A /* ArticleListView */,
 			);
-			path = Article;
+			path = Sales;
 			sourceTree = "<group>";
 		};
 		1166AF3A23B295EA0047C7AE /* ArticleSell */ = {
@@ -655,6 +666,42 @@
 				11A8ED0223B1442700F15B9A /* GenericCollectionView.swift */,
 			);
 			path = GenericCollectionView;
+			sourceTree = "<group>";
+		};
+		11AC545B23DDE4160033A27D /* ActivitySale */ = {
+			isa = PBXGroup;
+			children = (
+				11AC545C23DDE4820033A27D /* Model */,
+				11AC545E23DDE48D0033A27D /* ViewModel */,
+				11AC545D23DDE4890033A27D /* View */,
+			);
+			path = ActivitySale;
+			sourceTree = "<group>";
+		};
+		11AC545C23DDE4820033A27D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				11AC545F23DDE4B40033A27D /* ActivitySaleModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		11AC545D23DDE4890033A27D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				11AC546523DDE5250033A27D /* AcitvitySaleView.swift */,
+				11AC546723DDE64E0033A27D /* ActivitySaleView.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		11AC545E23DDE48D0033A27D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				11AC546123DDE4E30033A27D /* ActivitySaleViewModelContract.swift */,
+				11AC546323DDE4F30033A27D /* ActivitySaleViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		11EBD2FB2376494E00AB4BFF = {
@@ -973,6 +1020,7 @@
 				1178BA8D2388C669000C3FB6 /* SellActivityCustomView.xib in Resources */,
 				11EBD32B2376499F00AB4BFF /* Main.storyboard in Resources */,
 				119C68622380BDC8009E9AA0 /* NewCustomerStoryboard.storyboard in Resources */,
+				11AC546823DDE64E0033A27D /* ActivitySaleView.xib in Resources */,
 				111DE572238A01BF002F4216 /* XButtonCustomView.xib in Resources */,
 				11EEF0F0239D4A42007C9821 /* PaymentView.xib in Resources */,
 				11EBD34C23764A9600AB4BFF /* Info.plist in Resources */,
@@ -1096,6 +1144,7 @@
 				1147AB462383652F00D19AA9 /* CustomerListViewModelContract.swift in Sources */,
 				1147AB482383653A00D19AA9 /* CustomerListViewModel.swift in Sources */,
 				110664C523775C9000DC44F3 /* ErrorMessageView.swift in Sources */,
+				11AC546423DDE4F30033A27D /* ActivitySaleViewModel.swift in Sources */,
 				110664EB2378F1F100DC44F3 /* NewCustomerInteractor.swift in Sources */,
 				11233785237AFEC000F60078 /* doubleExtension.swift in Sources */,
 				111DE56623899CCF002F4216 /* SellActivityCustomeView.swift in Sources */,
@@ -1116,6 +1165,7 @@
 				11542D842380703F0011AB1D /* ConsoleCommand.swift in Sources */,
 				11EBD36223766BF400AB4BFF /* UserSaved.swift in Sources */,
 				110664E82378F1F100DC44F3 /* NewCustomerRouter.swift in Sources */,
+				11AC546623DDE5250033A27D /* AcitvitySaleView.swift in Sources */,
 				110664E92378F1F100DC44F3 /* NewCustomerModels.swift in Sources */,
 				1147AB7C2384D49E00D19AA9 /* CustomerStatusViewModel.swift in Sources */,
 				11EEF0F2239D4A83007C9821 /* PaymentView.swift in Sources */,
@@ -1131,8 +1181,10 @@
 				11A8B44E23BE22B8007A5251 /* GenericTableView.swift in Sources */,
 				1163932B2381975600D14B19 /* ValidationField.swift in Sources */,
 				11EBD35B2376683300AB4BFF /* FirebaseUserModel.swift in Sources */,
+				11AC546223DDE4E30033A27D /* ActivitySaleViewModelContract.swift in Sources */,
 				11EBD3802377130C00AB4BFF /* HomeModels.swift in Sources */,
 				11EBD37F2377130C00AB4BFF /* HomeRouter.swift in Sources */,
+				11AC546023DDE4B40033A27D /* ActivitySaleModel.swift in Sources */,
 				110664D82377ACBF00DC44F3 /* extensions.swift in Sources */,
 				1166AF3523B27F880047C7AE /* ArticleViewItem.swift in Sources */,
 				111DE580238A1FB5002F4216 /* ProductModel.swift in Sources */,

@@ -25,10 +25,8 @@ class XibViewBlurBackground: XibView {
     }
     
     func addGestureToBackground() {
-        let backgroundView = NSView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
-        self.addSubview(backgroundView, positioned: .below, relativeTo: self)
         let click = NSClickGestureRecognizer(target: self, action: #selector(backgroundTouchedHandler))
-        backgroundView.addGestureRecognizer(click)
+        self.addGestureRecognizer(click)
     }
     
     @objc func backgroundTouchedHandler() {
