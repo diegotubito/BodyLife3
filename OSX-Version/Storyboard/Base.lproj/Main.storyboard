@@ -748,6 +748,19 @@
                             </customView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="vJS-25-cay">
                                 <rect key="frame" x="0.0" y="0.0" width="1280" height="20"/>
+                                <subviews>
+                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LN8-Ta-JZZ">
+                                        <rect key="frame" x="384" y="-8" width="81" height="32"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="0k0-T4-3Cg">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="addGenericButtob:" target="XfG-lQ-9wD" id="DFA-XO-r7R"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="6QP-Zw-s8k"/>
                                 </constraints>

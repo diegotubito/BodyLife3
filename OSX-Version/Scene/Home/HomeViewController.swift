@@ -64,6 +64,20 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
         self.timerForDelayCustomerSelection = Timer.scheduledTimer(timeInterval: 0.0, target: self, selector: #selector(self.loadStatus), userInfo: nil, repeats: false)
         
         
+           
+    }
+    
+    @IBAction func addGenericButtob(_ sender: Any) {
+        addGeneric()
+    }
+    func addGeneric() {
+           //text tableview generic
+               let generic = GenericTableView(frame: NSRect(x: 0, y: 0, width: 400, height: 400))
+        generic.wantsLayer = true
+        generic.layer?.backgroundColor = NSColor.white.cgColor
+               view.addSubview(generic)
+
+        
     }
     
     override func viewWillAppear() {

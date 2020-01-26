@@ -100,7 +100,9 @@ extension CustomerListView: CustomerListViewContract {
     }
     
     func showLoading() {
-        myActivityIndicator.startAnimation(nil)
+        DispatchQueue.main.async {
+            self.myActivityIndicator.startAnimation(nil)
+        }
     }
     
     func hideLoading() {
