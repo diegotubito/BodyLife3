@@ -31,7 +31,6 @@ class SellActivityCustomView: XibViewBlurBackground, SellActivityViewContract {
     @IBOutlet weak var scrollViewType: NSScrollView!
     override func commonInit() {
         super .commonInit()
-        addGestureToBackground()
         createBackgroundGradient()
         saveButtonView.title = "Guardar"
         disableDates()

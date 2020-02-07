@@ -13,10 +13,6 @@ extension Notification.Name {
 }
 
 
-struct ExampleItemModel {
-    var title : String
-}
-
 class ArticleListView : GenericCollectionView<ArticleViewItem, ArticleModel> {
     var viewModel : ArticleListViewModelContract!
       

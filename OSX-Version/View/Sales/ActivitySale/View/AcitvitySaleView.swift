@@ -9,8 +9,8 @@
 import Cocoa
 
 class ActivitySaleView : XibViewBlurBackground, ActivitySaleViewContract {
-    @IBOutlet var containerView: NSView!
     
+    @IBOutlet weak var backgroundClickableView: NSView!
     var viewModel : ActivitySaleViewModelContract!
     
     override func commonInit() {
@@ -18,15 +18,12 @@ class ActivitySaleView : XibViewBlurBackground, ActivitySaleViewContract {
         
         viewModel = ActivitySaleViewModel(withView: self)
         
-        containerView.wantsLayer = true
-        containerView.layer?.backgroundColor = NSColor.orange.cgColor
-        
-     //   addObserver()
+        addObserver()
     }
     
     private func addObserver() {
         let clickGesture = NSClickGestureRecognizer(target: self, action: #selector(backTouched))
-        containerView.addGestureRecognizer(clickGesture)
+        backgroundClickableView.addGestureRecognizer(clickGesture)
     }
     
    

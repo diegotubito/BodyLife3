@@ -67,7 +67,7 @@ extension HomeViewController {
     
     func createSellActivityCustomView() {
         let ancho = view.frame.width * 0.6
-        let alto = view.frame.height * 0.6
+        let alto = view.frame.height * 0.8
         sellActivityView = ActivitySaleView(frame: CGRect(x: self.view.frame.width - 5, y: 0, width: ancho, height: alto))
         sellActivityView.destiny = CGPoint(x: self.view.frame.width - ancho, y: 0)
         sellActivityView.closeWhenBackgroundIsTouch = true

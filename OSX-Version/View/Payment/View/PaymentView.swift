@@ -20,7 +20,6 @@ class PaymentView: XibViewBlurBackground, PaymentViewContract {
         super .commonInit()
         viewmodel = PaymentViewModel(withView: self)
         saveButtonOutlet.title = "Guardar"
-        addGestureToBackground()
         titleLineSeparator.wantsLayer = true
         titleLineSeparator.layer?.backgroundColor = Constants.Colors.Gray.gray21.cgColor
         
