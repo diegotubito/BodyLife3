@@ -11,4 +11,14 @@ import Foundation
 struct ActivitySaleModel {
     var selectedStatus : CustomerStatus?
     var selectedCustomer : CustomerModel!
+    
+    var fromDate = Date()
+    var endDate = Date()
+    
+    var activities = [ActivityModel]()
+    var types = [ServiceTypeModel]()
+    var discounts = [DiscountModel]()
+    var selectedType : ServiceTypeModel?
+    var selectedActivity : ActivityModel?
+    var selectedDiscount : DiscountModel?
 }

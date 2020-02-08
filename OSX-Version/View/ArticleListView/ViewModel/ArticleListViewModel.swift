@@ -34,6 +34,7 @@ class ArticleListViewModel : ArticleListViewModelContract {
             
             let jsonArray = ServerManager.jsonArray(json: json)
             do {
+                //this block sometime cause a crush
                 let data = try JSONSerialization.data(withJSONObject: jsonArray, options: [])
                 let articles = try JSONDecoder().decode([ArticleModel].self, from: data)
                

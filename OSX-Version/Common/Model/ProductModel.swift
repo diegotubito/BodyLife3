@@ -49,4 +49,5 @@ struct DiscountModel: Decodable {
     var expiration : Double
     var multiplier : Double
     var createdAt : Double
+    var isRemovable : Bool
 }

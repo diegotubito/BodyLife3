@@ -36,10 +36,11 @@ struct SellRegisterModel: Decodable {
     var childIDArticle : String?
     var childIDPeriod : String?
     var createdAt : Double
-    var discount : Double?
+    var discount : Double
     var fromDate : Double?
     var toDate : Double?
     var price : Double
+    var amountToPay : Double
     var displayName : String
     var isEnabled : Bool
     var payments : [Payment]?

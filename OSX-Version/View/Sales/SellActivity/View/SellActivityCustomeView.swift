@@ -72,6 +72,7 @@ class SellActivityCustomView: XibViewBlurBackground, SellActivityViewContract {
         tableViewType.deselectAll(nil)
         tableViewActivity.deselectAll(nil)
     }
+    
     func buttonSaveObserver() {
         saveButtonView.onButtonPressed = {
             if self.viewModel.validate() {

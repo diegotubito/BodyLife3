@@ -22,6 +22,9 @@ struct Paths {
     static let customerStatus = "customerStatus"
     static let fullPersonalData = "customerFull:personal"
     static let customerOriginalImage = "customer"
+    static let productActivity = "product:service:activity"
+    static let productDiscount = "product:service:discount"
+    static let productType = "product:service:type"
     static let productService = "product:service"
     static let productArticle = "product:article"
 }
