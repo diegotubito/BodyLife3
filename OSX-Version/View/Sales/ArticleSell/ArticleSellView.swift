@@ -165,6 +165,8 @@ class ArticleSellView: XibViewBlurBackground {
         json.updateValue(Date().timeIntervalSince1970, forKey: "createdAt")
         json.updateValue(true, forKey: "isEnabled")
         json.updateValue((selectedItem?.price)!, forKey: "price")
+        json.updateValue(0, forKey: "discount")
+        json.updateValue((selectedItem?.price)!, forKey: "amountToPay")
         json.updateValue((selectedItem?.name)!, forKey: "displayName")
         
         let result = [childID : json]

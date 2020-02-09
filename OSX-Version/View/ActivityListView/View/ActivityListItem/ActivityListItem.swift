@@ -20,7 +20,9 @@ class ActivityListItem: GenericCollectionItem<ActivityModel> {
        override func viewDidLoad() {
            super .viewDidLoad()
         view.wantsLayer = true
-        view.layer?.backgroundColor = NSColor.white.cgColor
+        selectionBorderColor = NSColor.white
+        selectionBorderWidth = 3
+       
        }
     
 }

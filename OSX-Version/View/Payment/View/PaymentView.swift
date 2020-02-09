@@ -32,9 +32,9 @@ class PaymentView: XibViewBlurBackground, PaymentViewContract {
     func displayInfo() {
         let register = viewmodel.model.selectedSellRegister
         let sellName = register!.displayName
-        let price = register?.price
+        let amountToPay = register?.amountToPay ?? 0
         let paid = calcTotalPayments()
-        let balance = price! - paid
+        let balance = amountToPay - paid
         infoLabel.stringValue = sellName + ". Total a pagar: \(balance.formatoMoneda(decimales: 2))"
         amountTextField.stringValue = String(balance)
         

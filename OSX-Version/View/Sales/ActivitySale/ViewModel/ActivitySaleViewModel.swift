@@ -10,7 +10,6 @@ import Cocoa
 
 class ActivitySaleViewModel : ActivitySaleViewModelContract {
    
-    
     var model: ActivitySaleModel!
     var _view : ActivitySaleViewContract!
     
@@ -27,6 +26,7 @@ class ActivitySaleViewModel : ActivitySaleViewModelContract {
     func loadServices() {
         let path = Paths.productService
         _view.showLoading()
+       
         ServerManager.ReadJSON(path: path) { (json, error) in
             self._view.hideLoading()
             if error != nil {
@@ -58,6 +58,7 @@ class ActivitySaleViewModel : ActivitySaleViewModelContract {
                 self._view.showError("Error en serializacion producto servicios")
             }
         }
+ 
     }
     
     func getActivities() -> [ActivityModel] {
@@ -127,6 +128,7 @@ class ActivitySaleViewModel : ActivitySaleViewModelContract {
         let childIDLastDiscount = model.selectedStatus?.childIDLastDiscount
         let availableDiscounts = getDiscounts()
         let lastDiscount = availableDiscounts.filter({$0.childID == childIDLastDiscount})
+        if lastDiscount.count == 0 {return}
         if lastDiscount.count == 1 {
             _view.setPopupDiscountByTitle(lastDiscount[0].name)
             model.selectedDiscount = lastDiscount[0]
@@ -165,6 +167,28 @@ class ActivitySaleViewModel : ActivitySaleViewModelContract {
         let price = model.selectedActivity?.price ?? 0.0
         let discount = multiplier * price
         return (price, discount)
+    }
+    
+    func getRemainingDays() -> String {
+        var expDate = model.selectedStatus?.expiration.toDate() ?? Date()
+        if let activity = model.selectedActivity {
+            expDate.addDays(valor: activity.days)
+        }
+        let days = expDate.diasTranscurridos(fecha: Date()) ?? 0
+        return String(-days)
+    }
+    
+    func getExpirationDate() -> String {
+        var expDate = model.selectedStatus?.expiration.toDate()
+        if let activity = model.selectedActivity {
+            if expDate == nil {
+                expDate = Date()
+            }
+            expDate?.addDays(valor: activity.days)
+        }
+        let result = expDate?.toString(formato: "dd/MM/yyyy")
+        return result ?? "-"
+        
     }
 }
 

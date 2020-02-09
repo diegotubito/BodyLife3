@@ -8,8 +8,16 @@
 
 import Cocoa
 
+extension Notification.Name {
+    static let needUpdateCustomerList = Notification.Name("needUpdateCustomerList")
+    static let needUpdateProductService = Notification.Name("needUpdateProductService")
+}
+
 class ActivitySaleView : XibViewBlurBackground {
+    @IBOutlet weak var myIndicator: NSProgressIndicator!
     @IBOutlet weak var saveButtonView: SaveButtonCustomView!
+    @IBOutlet weak var expirationLabel: NSTextField!
+    @IBOutlet weak var daysLabel: NSTextField!
     @IBOutlet weak var priceLabel: NSTextField!
     @IBOutlet weak var discountLabel: NSTextField!
     @IBOutlet weak var totalLabel: NSTextField!
@@ -34,6 +42,22 @@ class ActivitySaleView : XibViewBlurBackground {
         viewModel.loadServices()
         
         addObserver()
+        
+        createBackgroundGradient()
+    }
+    
+    func createBackgroundGradient() {
+        self.layer?.backgroundColor = NSColor.black.cgColor
+        let gradient = CAGradientLayer()
+        gradient.locations = [0, 0.5, 1]
+        gradient.colors = [NSColor(hex: 0x020707).cgColor,
+                           NSColor(hex: 0x1A3B78).withAlphaComponent(0.7).cgColor,
+                           NSColor(hex: 0x020707).cgColor]
+        gradient.frame = self.bounds
+        gradient.startPoint = CGPoint(x: 0.5, y: 0)
+        gradient.endPoint = CGPoint(x: 0.5, y: 1)
+        
+        self.layer?.addSublayer(gradient)
     }
     
     private func addObserver() {
@@ -145,6 +169,12 @@ class ActivitySaleView : XibViewBlurBackground {
     }
     
     private func updateTotal() {
+      
+        
+        expirationLabel.stringValue = viewModel.getExpirationDate()
+        daysLabel.stringValue = viewModel.getRemainingDays()
+        
+        
         let (price, discount) = viewModel.getTotals()
         priceLabel.stringValue = price.formatoMoneda(decimales: 2, simbolo: "$")
         discountLabel.stringValue = discount.formatoMoneda(decimales: 2, simbolo: "$")
@@ -187,13 +217,13 @@ extension ActivitySaleView: ActivitySaleViewContract {
     
     func showLoading() {
         DispatchQueue.main.async {
-            
+            self.myIndicator.startAnimation(nil)
         }
     }
     
     func hideLoading() {
         DispatchQueue.main.async {
-            
+            self.myIndicator.stopAnimation(nil)
         }
     }
     

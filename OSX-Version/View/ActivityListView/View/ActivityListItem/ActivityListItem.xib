@@ -16,18 +16,30 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="272"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
+                <box boxType="custom" cornerRadius="20" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="NQC-i3-lpi">
+                    <rect key="frame" x="0.0" y="0.0" width="480" height="272"/>
+                    <view key="contentView" id="Fe9-7B-Cfg">
+                        <rect key="frame" x="1" y="1" width="478" height="270"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    </view>
+                    <color key="fillColor" name="selectedTextBackgroundColor" catalog="System" colorSpace="catalog"/>
+                </box>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zam-By-9H2">
-                    <rect key="frame" x="204" y="119" width="73" height="34"/>
+                    <rect key="frame" x="211" y="123" width="59" height="27"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="VcS-pa-55V">
-                        <font key="font" metaFont="system" size="29"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <font key="font" metaFont="system" size="23"/>
+                        <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
             </subviews>
             <constraints>
-                <constraint firstItem="zam-By-9H2" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="C6f-8g-6qy"/>
-                <constraint firstItem="zam-By-9H2" firstAttribute="centerY" secondItem="Hz6-mo-xeY" secondAttribute="centerY" id="ZnH-fA-wYr"/>
+                <constraint firstItem="NQC-i3-lpi" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="3fm-kc-aHO"/>
+                <constraint firstAttribute="bottom" secondItem="NQC-i3-lpi" secondAttribute="bottom" id="Oc4-kV-9mt"/>
+                <constraint firstItem="zam-By-9H2" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="ZgU-X0-uzs"/>
+                <constraint firstItem="NQC-i3-lpi" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="eaQ-hs-Lpw"/>
+                <constraint firstAttribute="trailing" secondItem="NQC-i3-lpi" secondAttribute="trailing" id="iDd-CL-NPa"/>
+                <constraint firstItem="zam-By-9H2" firstAttribute="centerY" secondItem="Hz6-mo-xeY" secondAttribute="centerY" id="q7B-xj-KHf"/>
             </constraints>
             <point key="canvasLocation" x="86" y="154"/>
         </customView>

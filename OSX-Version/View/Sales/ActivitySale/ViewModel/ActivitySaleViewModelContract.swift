@@ -26,6 +26,8 @@ protocol ActivitySaleViewModelContract {
     func getTotals() -> (price: Double, discount: Double)
     func validate() -> Bool
     func save()
+    func getRemainingDays() -> String
+    func getExpirationDate() -> String
 }
 
 protocol ActivitySaleViewContract {

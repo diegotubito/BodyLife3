@@ -18,15 +18,11 @@
 		110664E92378F1F100DC44F3 /* NewCustomerModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110664E32378F1F100DC44F3 /* NewCustomerModels.swift */; };
 		110664EA2378F1F100DC44F3 /* NewCustomerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110664E42378F1F100DC44F3 /* NewCustomerViewController.swift */; };
 		110664EB2378F1F100DC44F3 /* NewCustomerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110664E52378F1F100DC44F3 /* NewCustomerInteractor.swift */; };
-		111DE56623899CCF002F4216 /* SellActivityCustomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111DE56523899CCF002F4216 /* SellActivityCustomeView.swift */; };
 		111DE5692389C623002F4216 /* CustomView+Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111DE5682389C623002F4216 /* CustomView+Home.swift */; };
 		111DE56D2389F567002F4216 /* SaveButtonCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111DE56C2389F567002F4216 /* SaveButtonCustomView.swift */; };
 		111DE56F2389F5A3002F4216 /* SaveButtonCustomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 111DE56E2389F5A3002F4216 /* SaveButtonCustomView.xib */; };
 		111DE572238A01BF002F4216 /* XButtonCustomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 111DE571238A01BF002F4216 /* XButtonCustomView.xib */; };
 		111DE574238A01CA002F4216 /* XButtonCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111DE573238A01CA002F4216 /* XButtonCustomView.swift */; };
-		111DE579238A1CF0002F4216 /* SellActivityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111DE578238A1CF0002F4216 /* SellActivityModel.swift */; };
-		111DE57B238A1D19002F4216 /* SellActivityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111DE57A238A1D19002F4216 /* SellActivityViewModel.swift */; };
-		111DE57D238A1D24002F4216 /* SellActivityViewModelContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111DE57C238A1D24002F4216 /* SellActivityViewModelContract.swift */; };
 		111DE580238A1FB5002F4216 /* ProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111DE57F238A1FB5002F4216 /* ProductModel.swift */; };
 		11233781237AFC9100F60078 /* dateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11233780237AFC9100F60078 /* dateExtension.swift */; };
 		11233783237AFE9400F60078 /* stringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11233782237AFE9400F60078 /* stringExtension.swift */; };
@@ -68,7 +64,6 @@
 		116CEB6123A1E2D40081D356 /* RegisterListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 116CEB6023A1E2D40081D356 /* RegisterListView.xib */; };
 		116CEB6323A1E2F30081D356 /* RegisterListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CEB6223A1E2F30081D356 /* RegisterListView.swift */; };
 		116CEB6623A3115E0081D356 /* SellRegisterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CEB6523A3115E0081D356 /* SellRegisterCell.swift */; };
-		1178BA8D2388C669000C3FB6 /* SellActivityCustomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1178BA8C2388C669000C3FB6 /* SellActivityCustomView.xib */; };
 		119AE145237F78D90045960C /* ServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119AE144237F78D90045960C /* ServerManager.swift */; };
 		119C68622380BDC8009E9AA0 /* NewCustomerStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 119C68612380BDC8009E9AA0 /* NewCustomerStoryboard.storyboard */; };
 		11A8B44E23BE22B8007A5251 /* GenericTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A8B44D23BE22B8007A5251 /* GenericTableView.swift */; };
@@ -140,15 +135,11 @@
 		110664E32378F1F100DC44F3 /* NewCustomerModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCustomerModels.swift; sourceTree = "<group>"; };
 		110664E42378F1F100DC44F3 /* NewCustomerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCustomerViewController.swift; sourceTree = "<group>"; };
 		110664E52378F1F100DC44F3 /* NewCustomerInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCustomerInteractor.swift; sourceTree = "<group>"; };
-		111DE56523899CCF002F4216 /* SellActivityCustomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellActivityCustomeView.swift; sourceTree = "<group>"; };
 		111DE5682389C623002F4216 /* CustomView+Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomView+Home.swift"; sourceTree = "<group>"; };
 		111DE56C2389F567002F4216 /* SaveButtonCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveButtonCustomView.swift; sourceTree = "<group>"; };
 		111DE56E2389F5A3002F4216 /* SaveButtonCustomView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SaveButtonCustomView.xib; sourceTree = "<group>"; };
 		111DE571238A01BF002F4216 /* XButtonCustomView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = XButtonCustomView.xib; sourceTree = "<group>"; };
 		111DE573238A01CA002F4216 /* XButtonCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XButtonCustomView.swift; sourceTree = "<group>"; };
-		111DE578238A1CF0002F4216 /* SellActivityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellActivityModel.swift; sourceTree = "<group>"; };
-		111DE57A238A1D19002F4216 /* SellActivityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellActivityViewModel.swift; sourceTree = "<group>"; };
-		111DE57C238A1D24002F4216 /* SellActivityViewModelContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellActivityViewModelContract.swift; sourceTree = "<group>"; };
 		111DE57F238A1FB5002F4216 /* ProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductModel.swift; sourceTree = "<group>"; };
 		11233780237AFC9100F60078 /* dateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dateExtension.swift; sourceTree = "<group>"; };
 		11233782237AFE9400F60078 /* stringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = stringExtension.swift; sourceTree = "<group>"; };
@@ -190,7 +181,6 @@
 		116CEB6023A1E2D40081D356 /* RegisterListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegisterListView.xib; sourceTree = "<group>"; };
 		116CEB6223A1E2F30081D356 /* RegisterListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterListView.swift; sourceTree = "<group>"; };
 		116CEB6523A3115E0081D356 /* SellRegisterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellRegisterCell.swift; sourceTree = "<group>"; };
-		1178BA8C2388C669000C3FB6 /* SellActivityCustomView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SellActivityCustomView.xib; sourceTree = "<group>"; };
 		119AE144237F78D90045960C /* ServerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerManager.swift; sourceTree = "<group>"; };
 		119C68612380BDC8009E9AA0 /* NewCustomerStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewCustomerStoryboard.storyboard; sourceTree = "<group>"; };
 		11A8B44D23BE22B8007A5251 /* GenericTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericTableView.swift; sourceTree = "<group>"; };
@@ -350,32 +340,6 @@
 				111DE573238A01CA002F4216 /* XButtonCustomView.swift */,
 			);
 			path = XButton;
-			sourceTree = "<group>";
-		};
-		111DE575238A1CD1002F4216 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				1178BA8C2388C669000C3FB6 /* SellActivityCustomView.xib */,
-				111DE56523899CCF002F4216 /* SellActivityCustomeView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		111DE576238A1CD8002F4216 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				111DE57A238A1D19002F4216 /* SellActivityViewModel.swift */,
-				111DE57C238A1D24002F4216 /* SellActivityViewModelContract.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		111DE577238A1CDF002F4216 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				111DE578238A1CF0002F4216 /* SellActivityModel.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		1123377F237AFC7D00F60078 /* Extensions */ = {
@@ -585,7 +549,6 @@
 			isa = PBXGroup;
 			children = (
 				11AC545B23DDE4160033A27D /* ActivitySale */,
-				1178BA8B2388C638000C3FB6 /* SellActivity */,
 				1166AF3A23B295EA0047C7AE /* ArticleSell */,
 			);
 			path = Sales;
@@ -652,16 +615,6 @@
 				114A540923A5A95600F2746A /* View */,
 			);
 			path = RegisterList;
-			sourceTree = "<group>";
-		};
-		1178BA8B2388C638000C3FB6 /* SellActivity */ = {
-			isa = PBXGroup;
-			children = (
-				111DE577238A1CDF002F4216 /* Model */,
-				111DE576238A1CD8002F4216 /* ViewModel */,
-				111DE575238A1CD1002F4216 /* View */,
-			);
-			path = SellActivity;
 			sourceTree = "<group>";
 		};
 		11A8B44C23BE228C007A5251 /* GenericTableView */ = {
@@ -1075,7 +1028,6 @@
 				11EBD39123772A4700AB4BFF /* LoginStoryboard.storyboard in Resources */,
 				111DE56F2389F5A3002F4216 /* SaveButtonCustomView.xib in Resources */,
 				116CEB6123A1E2D40081D356 /* RegisterListView.xib in Resources */,
-				1178BA8D2388C669000C3FB6 /* SellActivityCustomView.xib in Resources */,
 				11EBD32B2376499F00AB4BFF /* Main.storyboard in Resources */,
 				119C68622380BDC8009E9AA0 /* NewCustomerStoryboard.storyboard in Resources */,
 				11AC546823DDE64E0033A27D /* ActivitySaleView.xib in Resources */,
@@ -1196,7 +1148,6 @@
 				111DE56D2389F567002F4216 /* SaveButtonCustomView.swift in Sources */,
 				116CE96523EDCDEF00688C0B /* ActivityListViewModelContract.swift in Sources */,
 				116CEB6323A1E2F30081D356 /* RegisterListView.swift in Sources */,
-				111DE57D238A1D24002F4216 /* SellActivityViewModelContract.swift in Sources */,
 				1163933A238214AC00D14B19 /* CameraViewController.swift in Sources */,
 				116CEB6623A3115E0081D356 /* SellRegisterCell.swift in Sources */,
 				11EBD36623766D2500AB4BFF /* ErrorModel.swift in Sources */,
@@ -1208,16 +1159,13 @@
 				11AC546423DDE4F30033A27D /* ActivitySaleViewModel.swift in Sources */,
 				110664EB2378F1F100DC44F3 /* NewCustomerInteractor.swift in Sources */,
 				11233785237AFEC000F60078 /* doubleExtension.swift in Sources */,
-				111DE56623899CCF002F4216 /* SellActivityCustomeView.swift in Sources */,
 				11EEF0F6239D4A98007C9821 /* PaymentViewModel.swift in Sources */,
 				11233787237B7AEB00F60078 /* CustomerModel.swift in Sources */,
 				111DE574238A01CA002F4216 /* XButtonCustomView.swift in Sources */,
-				111DE579238A1CF0002F4216 /* SellActivityModel.swift in Sources */,
 				114A541123A5A9B900F2746A /* RegisterListModel.swift in Sources */,
 				11EBD36423766CFE00AB4BFF /* NetworkManager.swift in Sources */,
 				11EBD38B237726A800AB4BFF /* LoginWorker.swift in Sources */,
 				110664DF2378718800DC44F3 /* ErrorHandler.swift in Sources */,
-				111DE57B238A1D19002F4216 /* SellActivityViewModel.swift in Sources */,
 				11EBD35E23766A3D00AB4BFF /* Configuration.swift in Sources */,
 				11233781237AFC9100F60078 /* dateExtension.swift in Sources */,
 				11EBD39623773E5800AB4BFF /* XibView.swift in Sources */,

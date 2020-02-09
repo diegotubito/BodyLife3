@@ -26,7 +26,7 @@ class ActivityListView : GenericCollectionView<ActivityListItem, ActivityModel> 
     
     override func collectionView(_ collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> NSSize {
         
-           return NSSize(width: 100, height: 100)
+           return NSSize(width: 80, height: 80)
     }
     
 }
