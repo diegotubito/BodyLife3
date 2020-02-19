@@ -82,7 +82,7 @@ class PaymentViewModel: PaymentViewModelContract {
         let data = ["childID" : newChildID,
                     "childIDCustomer" : childIDCustomer,
                     "childIDSell" : childIDRegister,
-                    "createAt" : Date().timeIntervalSince1970,
+                    "createAt" : Date().timeIntervalSinceReferenceDate,
                     "isEnabled" : true,
                     "total" : Double(self._view.getAmountString())!] as [String : Any]
         

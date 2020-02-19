@@ -65,7 +65,7 @@ class RegisterListView: XibViewWithAnimation , RegisterListViewContract{
             return
         }
        
-        let createdAt = selection.createdAt.toDate()
+        let createdAt = selection.createdAt.toDate
         let today = Calendar.current.component(.day, from: Date())
         let createdDay = Calendar.current.component(.day, from: createdAt!)
         let selectedRegister = viewModel.getSelectedRegister()

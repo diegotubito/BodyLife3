@@ -44,6 +44,9 @@ struct SellRegisterModel: Decodable {
     var displayName : String
     var isEnabled : Bool
     var payments : [Payment]?
+    var queryByDMY : String
+    var queryByMY : String
+    var queryByY : String
     
     var balance : Double?
     var totalPayment : Double?

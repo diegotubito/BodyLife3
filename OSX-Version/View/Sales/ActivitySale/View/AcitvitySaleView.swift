@@ -169,12 +169,8 @@ class ActivitySaleView : XibViewBlurBackground {
     }
     
     private func updateTotal() {
-      
-        
         expirationLabel.stringValue = viewModel.getExpirationDate()
         daysLabel.stringValue = viewModel.getRemainingDays()
-        
-        
         let (price, discount) = viewModel.getTotals()
         priceLabel.stringValue = price.formatoMoneda(decimales: 2, simbolo: "$")
         discountLabel.stringValue = discount.formatoMoneda(decimales: 2, simbolo: "$")

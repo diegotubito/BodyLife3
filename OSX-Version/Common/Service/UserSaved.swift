@@ -69,7 +69,7 @@ class UserSaved {
     static func TokenExp() -> Date? {
         let user = Load()
        
-        return user?.exp?.toDate()
+        return user?.exp?.toDate
     }
     
     static func SaveDate(date: Double?) {

@@ -9,6 +9,7 @@
 import Cocoa
 
 var MyConnectionStatus : Connect!
+var DateReference = "01-01-2020 00:00:00".toDate(formato: "dd-MM-yyyy HH:mm:ss")!
 
 
 @NSApplicationMain
@@ -131,6 +132,3 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
   
 }
-
-
-

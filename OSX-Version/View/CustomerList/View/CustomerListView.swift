@@ -131,7 +131,7 @@ extension CustomerListView: NSTableViewDataSource, NSTableViewDelegate {
     
         let apellido = customer.surname.capitalized
         let nombre = customer.name.capitalized
-        let createdAt = customer.createdAt.toDate()
+        let createdAt = customer.createdAt.toDate
         let createdAtAgo = createdAt?.desdeHace(numericDates: true)
         cell.primerRenglonCell.stringValue = apellido + ", " + nombre
         cell.timeAgoCell.stringValue = createdAtAgo ?? ""

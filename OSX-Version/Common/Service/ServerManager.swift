@@ -17,7 +17,7 @@ class ServerManager {
     static var imageCache = NSCache<AnyObject, AnyObject>()
     
     static func createNewChildID() -> String {
-        let fechaDouble = Date().timeIntervalSince1970
+        let fechaDouble = Date().timeIntervalSinceReferenceDate
         let fechaRounded = (fechaDouble * 1000)
         let result = String(Int(fechaRounded))
         

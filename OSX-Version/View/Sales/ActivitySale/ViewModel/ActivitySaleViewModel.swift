@@ -152,7 +152,7 @@ class ActivitySaleViewModel : ActivitySaleViewModelContract {
         if selectedStatus?.expiration == nil {
             return Date()
         }
-        let expirationDate = selectedStatus?.expiration.toDate() ?? Date()
+        let expirationDate = selectedStatus?.expiration.toDate ?? Date()
         let dueToDays = expirationDate.diasTranscurridos(fecha: Date()) ?? 0
         if dueToDays > 15 {
             return Date()
@@ -162,15 +162,14 @@ class ActivitySaleViewModel : ActivitySaleViewModelContract {
     
     
     func getTotals() -> (price: Double, discount: Double) {
-        var amount : Double = 0
-        let multiplier = model.selectedDiscount?.multiplier ?? 1.0
+        let multiplier = model.selectedDiscount?.multiplier ?? 0.0
         let price = model.selectedActivity?.price ?? 0.0
         let discount = multiplier * price
         return (price, discount)
     }
     
     func getRemainingDays() -> String {
-        var expDate = model.selectedStatus?.expiration.toDate() ?? Date()
+        var expDate = model.selectedStatus?.expiration.toDate ?? Date()
         if let activity = model.selectedActivity {
             expDate.addDays(valor: activity.days)
         }
@@ -179,7 +178,7 @@ class ActivitySaleViewModel : ActivitySaleViewModelContract {
     }
     
     func getExpirationDate() -> String {
-        var expDate = model.selectedStatus?.expiration.toDate()
+        var expDate = model.selectedStatus?.expiration.toDate
         if let activity = model.selectedActivity {
             if expDate == nil {
                 expDate = Date()
@@ -274,11 +273,11 @@ extension ActivitySaleViewModel {
         let surname = model.selectedCustomer.surname
         let name = model.selectedCustomer.name
         let childIDLastType = (model.selectedType?.childID)!
-        let childIDLastActivity = (model.selectedActivity?.childID)!
-        let childIDLastDiscount = (model.selectedDiscount?.childID)!
+        let childIDLastActivity = (model.selectedActivity?.childID) ?? ""
+        let childIDLastDiscount = (model.selectedDiscount?.childID) ?? ""
         let status = ["surname" : surname,
                       "name": name,
-                      "expiration": _view.getToDate().timeIntervalSince1970,
+                      "expiration": _view.getToDate().timeIntervalSinceReferenceDate,
                       "childID": childIDCustomer,
                       "childIDLastType": childIDLastType,
                       "childIDLastActivity": childIDLastActivity,
@@ -297,13 +296,16 @@ extension ActivitySaleViewModel {
         let childIDCustomer = model.selectedCustomer.childID
         let sell = [childID:["childID" : childID,
                              "childIDCustomer" : childIDCustomer,
-                             "createdAt" : Date().timeIntervalSince1970,
-                             "fromDate" : fromDate.timeIntervalSince1970,
-                             "toDate" : toDate.timeIntervalSince1970,
+                             "createdAt" : Date().timeIntervalSinceReferenceDate,
+                             "fromDate" : fromDate.timeIntervalSinceReferenceDate,
+                             "toDate" : toDate.timeIntervalSinceReferenceDate,
                              "price" : price,
                              "discount" : discount,
                              "amountToPay" : (price - discount),
                              "isEnabled" : true,
+                             "queryByDMY" : Date().queryByDMY,
+                             "queryByMY" : Date().queryByMY,
+                             "queryByY" : Date().queryByY,
                              "childIDLastType" : childIDLastType!,
                              "childIDLastActivity" : childIDLastActivity!,
                              "childIDLastDiscount" : childIDLastDiscount ?? "",

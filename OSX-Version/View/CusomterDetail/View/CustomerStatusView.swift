@@ -97,11 +97,11 @@ extension CustomerStatusView : CustomerStatusViewContract{
         errorView.isHidden = true
         
         if let data = value {
-            let expirationDate = data.expiration.toDate()
+            let expirationDate = data.expiration.toDate
             let diff = Date().diasTranscurridos(fecha: expirationDate!)
             let balance = data.balance
             subtitleLabel.stringValue = "actividades"
-            expirationDateLabel.stringValue = (data.expiration.toDate()?.toString(formato: "dd-MM-yyyy"))!
+            expirationDateLabel.stringValue = (data.expiration.toDate?.toString(formato: "dd-MM-yyyy"))!
             remainingDayLabel.stringValue = String(diff!)
             saldoLabel.stringValue = balance.formatoMoneda(decimales: 2)
         } else {

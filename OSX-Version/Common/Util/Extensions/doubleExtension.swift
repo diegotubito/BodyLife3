@@ -9,9 +9,8 @@
 import Foundation
 
 extension Double {
-    func toDate() -> Date? {
-        let date = Date(timeIntervalSince1970: self)
-        return date
+    var toDate : Date? {
+        return Date(timeInterval: self, since: DateReference)
     }
 }
 

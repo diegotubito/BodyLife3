@@ -102,7 +102,7 @@ class NewCustomerViewController: BaseViewController, NewCustomerDisplayLogic {
     func createRequestBriefInfo(withDate: Date) -> NewCustomer.NewCustomer.Request {
         let user = UserSaved.Load()
         let uid = (user?.uid)!
-        let fechaDouble = withDate.timeIntervalSince1970
+        let fechaDouble = withDate.timeIntervalSinceReferenceDate
         let fechaRounded = (fechaDouble * 1000)
         let childID = String(Int(fechaRounded))
         
@@ -123,7 +123,7 @@ class NewCustomerViewController: BaseViewController, NewCustomerDisplayLogic {
     func createRequestFullInfo(withDate: Date) -> NewCustomer.NewCustomer.Request {
         let user = UserSaved.Load()
         let uid = (user?.uid)!
-        let fechaDouble = withDate.timeIntervalSince1970
+        let fechaDouble = withDate.timeIntervalSinceReferenceDate
         let fechaRounded = (fechaDouble * 1000)
         let childID = String(Int(fechaRounded))
         

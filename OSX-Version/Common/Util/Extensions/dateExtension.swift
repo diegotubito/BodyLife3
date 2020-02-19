@@ -22,16 +22,19 @@ struct DateFormat {
 }
 
 extension Date {
-    func getMilisecondsFromDateUntilNow() -> Double {
-        var hoy = self.toString(formato: DateFormat.fecha)
-        hoy.append(" 00:00:00")
-        
-        let date = hoy.toDate(formato: DateFormat.fechaConHora)
-        
-        let mili = Date().timeIntervalSince(date!)
-        
-        let miliDouble = Double(mili)
-        return miliDouble
+    var timeIntervalSinceReferenceDate : Double {
+        return self.timeIntervalSince(DateReference)
+    }
+    
+    var queryByDMY : String {
+        return self.toString(formato: "dd-MM-yyyy")
+    }
+    
+    var queryByMY : String {
+        return self.toString(formato: "MM-yyyy")
+    }
+    var queryByY : String {
+        return self.toString(formato: "yyyy")
     }
 }
 
@@ -72,20 +75,20 @@ extension Date {
         let days = myCalendar.dateComponents([.day], from: interval.start, to: interval.end).day!
         return days
     }
-    var dia : Int {
+    var day : Int {
         let calendar = Calendar.current
         let dia = calendar.component(.day, from: self)
         
         return dia
     }
-    var mes : Int {
+    var month : Int {
         let calendar = Calendar.current
         let mes = calendar.component(.month, from: self)
         
         return mes
     }
     
-    var año : Int {
+    var year : Int {
         let calendar = Calendar.current
         let mes = calendar.component(.year, from: self)
         
@@ -101,7 +104,7 @@ extension Date {
     }
     
     
-    var nombreDelMes : String {
+    var monthName : String {
         let calendar = Calendar.current
         let mes = calendar.component(.month, from: self)
         
@@ -110,7 +113,7 @@ extension Date {
         return nombre ?? "error"
     }
     
-    var nombreDelDia : String {
+    var dayName : String {
         let calendar = Calendar.current
         let dia = calendar.component(.weekday, from: self)
         

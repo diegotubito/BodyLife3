@@ -26,7 +26,7 @@ class SellRegisterCell: NSTableCellView {
         let totalPayment = register.totalPayment ?? 0
         let balance = register.balance ?? 0
         
-        labelCreatedAt.stringValue = (register.createdAt.toDate()?.toString(formato: "dd-MM-yyy HH:mm"))! + "hs."
+        labelCreatedAt.stringValue = (register.createdAt.toDate?.toString(formato: "dd-MM-yyy HH:mm"))! + "hs."
         labelDisplayName.stringValue = register.displayName
         labelPrice.stringValue = register.amountToPay.formatoMoneda(decimales: 2)
         labelTotalPayment.stringValue = totalPayment.formatoMoneda(decimales: 2)
