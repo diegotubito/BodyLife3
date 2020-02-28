@@ -172,9 +172,9 @@ class ActivitySaleView : XibViewBlurBackground {
         expirationLabel.stringValue = viewModel.getExpirationDate()
         daysLabel.stringValue = viewModel.getRemainingDays()
         let (price, discount) = viewModel.getTotals()
-        priceLabel.stringValue = price.formatoMoneda(decimales: 2, simbolo: "$")
-        discountLabel.stringValue = discount.formatoMoneda(decimales: 2, simbolo: "$")
-        totalLabel.stringValue = (price - discount).formatoMoneda(decimales: 2, simbolo: "$")
+        priceLabel.stringValue = price.currencyFormat(decimal: 2)
+        discountLabel.stringValue = discount.currencyFormat(decimal: 2)
+        totalLabel.stringValue = (price - discount).currencyFormat(decimal: 2)
         
         viewModel.validate() ? enableSaveButton() : disableSaveButton()
     }

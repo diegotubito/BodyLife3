@@ -35,7 +35,7 @@ class PaymentView: XibViewBlurBackground, PaymentViewContract {
         let amountToPay = register?.amountToPay ?? 0
         let paid = calcTotalPayments()
         let balance = amountToPay - paid
-        infoLabel.stringValue = sellName + ". Total a pagar: \(balance.formatoMoneda(decimales: 2))"
+        infoLabel.stringValue = sellName + ". Total a pagar: \(balance.currencyFormat(decimal: 2))"
         amountTextField.stringValue = String(balance)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -50,7 +50,7 @@ class PaymentView: XibViewBlurBackground, PaymentViewContract {
         let payments = viewmodel.model.selectedSellRegister.payments
         if payments == nil {return 0}
         for i in payments! {
-            result += i.total
+            result += i.amount
         }
         return result
     }

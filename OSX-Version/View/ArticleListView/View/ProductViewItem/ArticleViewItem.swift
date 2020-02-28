@@ -22,7 +22,7 @@ class ArticleViewItem: GenericCollectionItem<ArticleModel> {
     override var item : ArticleModel! {
         didSet {
             productName.stringValue = item.name
-            productPrice.stringValue = item.price.formatoMoneda(decimales: 2)
+            productPrice.stringValue = item.price.currencyFormat(decimal: 2)
             productIcon.image = #imageLiteral(resourceName: "coca2")
             stockLabel.stringValue = String(item.stock)
             stockBrackground.layer?.backgroundColor = determinateColor().cgColor

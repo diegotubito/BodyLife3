@@ -84,7 +84,7 @@ class PaymentViewModel: PaymentViewModelContract {
                     "childIDSell" : childIDRegister,
                     "createAt" : Date().timeIntervalSinceReferenceDate,
                     "isEnabled" : true,
-                    "total" : Double(self._view.getAmountString())!] as [String : Any]
+                    "amount" : Double(self._view.getAmountString())!] as [String : Any]
         
         
         let json = [newChildID : data]

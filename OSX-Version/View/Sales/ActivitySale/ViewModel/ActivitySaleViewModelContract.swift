@@ -23,7 +23,7 @@ protocol ActivitySaleViewModelContract {
     func setSelectedActivity(_ value: ActivityModel?)
     func getSelectedActivity() -> ActivityModel?
     func getProperFromDate() -> Date
-    func getTotals() -> (price: Double, discount: Double)
+    func getTotals() -> (amount: Double, amountDiscounted: Double)
     func validate() -> Bool
     func save()
     func getRemainingDays() -> String

@@ -28,9 +28,9 @@ class SellRegisterCell: NSTableCellView {
         
         labelCreatedAt.stringValue = (register.createdAt.toDate?.toString(formato: "dd-MM-yyy HH:mm"))! + "hs."
         labelDisplayName.stringValue = register.displayName
-        labelPrice.stringValue = register.amountToPay.formatoMoneda(decimales: 2)
-        labelTotalPayment.stringValue = totalPayment.formatoMoneda(decimales: 2)
-        labelSaldo.stringValue = balance.formatoMoneda(decimales: 2)
+        labelPrice.stringValue = register.amountToPay.currencyFormat(decimal: 2)
+        labelTotalPayment.stringValue = totalPayment.currencyFormat(decimal: 2)
+        labelSaldo.stringValue = balance.currencyFormat(decimal: 2)
         
         alphaValue = register.isEnabled ? 1.0 : 0.3
         labelSaldo.textColor = balance < 0 ? Constants.Colors.Red.ematita : NSColor.lightGray

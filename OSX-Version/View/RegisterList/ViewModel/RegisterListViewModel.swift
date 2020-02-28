@@ -69,7 +69,7 @@ class RegisterListViewModel: RegisterListViewModelContract {
         if payments == nil {return 0}
         var total : Double = 0
         for i in payments! {
-            total += i.total
+            total += i.amount
         }
         
         return total
@@ -114,7 +114,7 @@ class RegisterListViewModel: RegisterListViewModelContract {
         }
         
         
-        let pathSell = "\(Paths.sells):\(model.selectedSellRegister.childID)"
+        let pathSell = "\(Paths.registers):\(model.selectedSellRegister.childID)"
         ServerManager.Update(path: pathSell, json: json) { (data, err) in
             error = err
             semasphore.signal()
@@ -138,8 +138,8 @@ class RegisterListViewModel: RegisterListViewModelContract {
         
         let pathStatus = "\(Paths.customerStatus):\(model.selectedCustomer.childID)"
         let paid = calcTotalPayments()
-        let price = model.selectedSellRegister.price
-        let balance = price - paid
+        let amount = model.selectedSellRegister.amount
+        let balance = amount - paid
         ServerManager.Transaction(path: pathStatus, key: "balance", value: balance, success: {
             semasphore.signal()
         }) { (err) in
@@ -159,7 +159,7 @@ class RegisterListViewModel: RegisterListViewModelContract {
         let payments = model.selectedSellRegister.payments
         if payments == nil {return 0}
         for i in payments! {
-            result += i.total
+            result += i.amount
         }
         return result
     }

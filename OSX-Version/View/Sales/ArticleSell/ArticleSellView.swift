@@ -116,7 +116,7 @@ class ArticleSellView: XibViewBlurBackground {
             error = err
         }
         
-        let path = Paths.sells
+        let path = Paths.registers
         ServerManager.Update(path: path, json: request) { (data, err) in
             error = err
             semasphore.signal()
@@ -166,9 +166,10 @@ class ArticleSellView: XibViewBlurBackground {
         json.updateValue(Date().queryByDMY, forKey: "queryByDMY")
         json.updateValue(Date().queryByMY, forKey: "queryByMY")
         json.updateValue(Date().queryByY, forKey: "queryByY")
+        json.updateValue(RegisterType.income, forKey: "registerType")
         json.updateValue(true, forKey: "isEnabled")
-        json.updateValue((selectedItem?.price)!, forKey: "price")
-        json.updateValue(0, forKey: "discount")
+        json.updateValue((selectedItem?.price)!, forKey: "amount")
+        json.updateValue(0, forKey: "amountDiscounted")
         json.updateValue((selectedItem?.price)!, forKey: "amountToPay")
         json.updateValue((selectedItem?.name)!, forKey: "displayName")
         

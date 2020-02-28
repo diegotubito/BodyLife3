@@ -161,7 +161,7 @@ class ActivitySaleViewModel : ActivitySaleViewModelContract {
     }
     
     
-    func getTotals() -> (price: Double, discount: Double) {
+    func getTotals() -> (amount: Double, amountDiscounted: Double) {
         let multiplier = model.selectedDiscount?.multiplier ?? 0.0
         let price = model.selectedActivity?.price ?? 0.0
         let discount = multiplier * price
@@ -204,7 +204,7 @@ extension ActivitySaleViewModel {
         let statusPath = "\(Paths.customerStatus):\(childIDCustomer)"
         let statusPathSell = "\(Paths.fullPersonalData):\(childIDCustomer):sells"
         let statusPathTransaction = "\(Paths.customerStatus):\(childIDCustomer)"
-        let pathSell = Paths.sells
+        let pathSell = Paths.registers
         var error : ServerError?
         let semasphore = DispatchSemaphore(value: 0)
         
@@ -289,26 +289,21 @@ extension ActivitySaleViewModel {
         let displayName = model.selectedActivity!.name + ", " + model.selectedType!.name
         let fromDate = _view.getFromDate()
         let toDate = _view.getToDate()
-        let childIDLastType = model.selectedType?.childID
-        let childIDLastActivity = model.selectedActivity?.childID
-        let childIDLastDiscount = model.selectedDiscount?.childID
-        let (price, discount) = getTotals()
+        let (amount, amountDiscounted) = getTotals()
         let childIDCustomer = model.selectedCustomer.childID
         let sell = [childID:["childID" : childID,
                              "childIDCustomer" : childIDCustomer,
                              "createdAt" : Date().timeIntervalSinceReferenceDate,
                              "fromDate" : fromDate.timeIntervalSinceReferenceDate,
                              "toDate" : toDate.timeIntervalSinceReferenceDate,
-                             "price" : price,
-                             "discount" : discount,
-                             "amountToPay" : (price - discount),
+                             "amount" : amount,
+                             "registerType" : RegisterType.income,
+                             "amountDiscounted" : amountDiscounted,
+                             "amountToPay" : (amount - amountDiscounted),
                              "isEnabled" : true,
                              "queryByDMY" : Date().queryByDMY,
                              "queryByMY" : Date().queryByMY,
                              "queryByY" : Date().queryByY,
-                             "childIDLastType" : childIDLastType!,
-                             "childIDLastActivity" : childIDLastActivity!,
-                             "childIDLastDiscount" : childIDLastDiscount ?? "",
                              "displayName" : displayName]]
             as [String : Any]
         

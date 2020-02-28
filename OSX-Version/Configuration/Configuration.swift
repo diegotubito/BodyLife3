@@ -16,6 +16,7 @@ struct ServerType {
 
 struct Paths {
     static let sells = "sells"
+    static let registers = "registers"
     static let payments = "payments"
     static let customerBrief = "customerBrief"
     static let customerFull = "customerFull"

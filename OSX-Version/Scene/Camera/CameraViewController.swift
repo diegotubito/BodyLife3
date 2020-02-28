@@ -76,13 +76,14 @@ class CameraViewController: NSViewController {
         
         session.sessionPreset = AVCaptureSession.Preset.photo
         
-        if let device : [AVCaptureDevice] = AVCaptureDevice.devices() {
-            print("device found = ",device.count)
-            print(device)
+        let device = AVCaptureDevice.DiscoverySession.init(deviceTypes: [.builtInWideAngleCamera], mediaType: nil, position: .front)
+        
+        
+        print("device found = ",device.devices.count)
+        print(device.devices)
             
-            let device_input : AVCaptureDeviceInput = try! AVCaptureDeviceInput(device: device[0])
-            
-            
+          let device_input : AVCaptureDeviceInput = try! AVCaptureDeviceInput(device: device.devices[0])
+             
             let previewLayer:AVCaptureVideoPreviewLayer = AVCaptureVideoPreviewLayer(session: session)
             
             output = AVCaptureStillImageOutput()
@@ -103,7 +104,7 @@ class CameraViewController: NSViewController {
                 session.addOutput(output)
             }
             
-        }
+        
         session.startRunning()
         
     }

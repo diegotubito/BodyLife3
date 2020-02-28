@@ -103,7 +103,7 @@ extension CustomerStatusView : CustomerStatusViewContract{
             subtitleLabel.stringValue = "actividades"
             expirationDateLabel.stringValue = (data.expiration.toDate?.toString(formato: "dd-MM-yyyy"))!
             remainingDayLabel.stringValue = String(diff!)
-            saldoLabel.stringValue = balance.formatoMoneda(decimales: 2)
+            saldoLabel.stringValue = balance.currencyFormat(decimal: 2)
         } else {
             subtitleLabel.stringValue = ""
             expirationDateLabel.stringValue = "?"
