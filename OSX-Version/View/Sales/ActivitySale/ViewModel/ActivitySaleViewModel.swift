@@ -18,7 +18,7 @@ class ActivitySaleViewModel : ActivitySaleViewModelContract {
         model = ActivitySaleModel()
     }
     
-    func setCustomerStatus(selectedCustomer: CustomerModel, selectedStatus: CustomerStatus?) {
+    func setCustomerStatus(selectedCustomer: BriefCustomer, selectedStatus: CustomerStatus?) {
         model.selectedStatus = selectedStatus
         model.selectedCustomer = selectedCustomer
     }

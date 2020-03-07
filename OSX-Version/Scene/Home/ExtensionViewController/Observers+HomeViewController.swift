@@ -69,7 +69,7 @@ extension HomeViewController {
     }
 
     
-    func didSelectCustomer(customerSelected: CustomerModel) {
+    func didSelectCustomer(customerSelected: BriefCustomer) {
         DispatchQueue.main.async {
             self.showStatusCustomer()
             self.customerStatusView.viewModel = CustomerStatusViewModel(withView: self.customerStatusView, receivedCustomer: customerSelected)

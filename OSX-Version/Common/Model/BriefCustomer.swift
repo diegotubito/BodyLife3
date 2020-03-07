@@ -13,7 +13,7 @@ struct RegisterType {
     static let expense = "EXPENSE"
 }
 
-struct CustomerModel: Decodable {
+struct BriefCustomer: Decodable {
     var childID : String
     var createdAt : Double
     var dni : String

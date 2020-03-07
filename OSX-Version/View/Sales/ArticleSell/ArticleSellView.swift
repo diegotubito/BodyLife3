@@ -11,7 +11,7 @@ import Cocoa
 class ArticleSellView: XibViewBlurBackground {
     var productListView : ArticleListView!
     var buttonAccept : SaveButtonCustomView!
-    var selectedCustomer : CustomerModel!
+    var selectedCustomer : BriefCustomer!
     var myActivityIndicator : NSProgressIndicator!
      
     var selectedItem : ArticleModel? {

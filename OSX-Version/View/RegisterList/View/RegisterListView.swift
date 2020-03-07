@@ -53,7 +53,7 @@ class RegisterListView: XibViewWithAnimation , RegisterListViewContract{
         }
     }
     
-    func setSelectedCustomer(customer: CustomerModel) {
+    func setSelectedCustomer(customer: BriefCustomer) {
         viewModel.setSelectedCustomer(customer: customer)
     }
     

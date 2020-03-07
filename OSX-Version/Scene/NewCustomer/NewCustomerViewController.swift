@@ -171,7 +171,7 @@ class NewCustomerViewController: BaseViewController, NewCustomerDisplayLogic {
         }
     }
     
-    func sendNotifications(customer: CustomerModel) {
+    func sendNotifications(customer: BriefCustomer) {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime(uptimeNanoseconds: 3)) {
             self.notificationMessage(messageID: customer.dni,
             title: "Nuevo Socio",

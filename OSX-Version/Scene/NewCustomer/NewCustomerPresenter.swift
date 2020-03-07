@@ -21,10 +21,10 @@ class NewCustomerPresenter: NewCustomerPresentationLogic {
         
     }
     
-    func parseCustomer(json: [String : Any]) -> CustomerModel? {
+    func parseCustomer(json: [String : Any]) -> BriefCustomer? {
         do {
             let data = try JSONSerialization.data(withJSONObject: json, options: [])
-            let customer = try JSONDecoder().decode(CustomerModel.self, from: data)
+            let customer = try JSONDecoder().decode(BriefCustomer.self, from: data)
             return customer
         } catch {
             return nil

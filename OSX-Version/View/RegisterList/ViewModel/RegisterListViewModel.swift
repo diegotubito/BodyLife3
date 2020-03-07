@@ -75,7 +75,7 @@ class RegisterListViewModel: RegisterListViewModelContract {
         return total
     }
     
-    func setSelectedCustomer(customer: CustomerModel) {
+    func setSelectedCustomer(customer: BriefCustomer) {
         model.selectedCustomer = customer
         model.registers.removeAll()
         _view.displayData()

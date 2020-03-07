@@ -9,6 +9,6 @@
 import Cocoa
 
 struct CustomerListModel {
-    var registros = [CustomerModel]()
-    var selectedCustomer : CustomerModel?
+    var registros = [BriefCustomer]()
+    var selectedCustomer : BriefCustomer?
 }

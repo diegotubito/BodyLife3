@@ -10,7 +10,7 @@ import Foundation
 
 struct ActivitySaleModel {
     var selectedStatus : CustomerStatus?
-    var selectedCustomer : CustomerModel!
+    var selectedCustomer : BriefCustomer!
     
     var fromDate = Date()
     var endDate = Date()

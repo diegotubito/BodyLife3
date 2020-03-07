@@ -10,6 +10,6 @@ import Foundation
 import Cocoa
 
 class PaymentModel {
-    var selectedCustomer : CustomerModel!
+    var selectedCustomer : BriefCustomer!
     var selectedSellRegister : SellRegisterModel!
 }

@@ -27,7 +27,7 @@
 		11233781237AFC9100F60078 /* dateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11233780237AFC9100F60078 /* dateExtension.swift */; };
 		11233783237AFE9400F60078 /* stringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11233782237AFE9400F60078 /* stringExtension.swift */; };
 		11233785237AFEC000F60078 /* doubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11233784237AFEC000F60078 /* doubleExtension.swift */; };
-		11233787237B7AEB00F60078 /* CustomerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11233786237B7AEB00F60078 /* CustomerModel.swift */; };
+		11233787237B7AEB00F60078 /* BriefCustomer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11233786237B7AEB00F60078 /* BriefCustomer.swift */; };
 		1147AB44238364D900D19AA9 /* CustomerListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1147AB43238364D900D19AA9 /* CustomerListModel.swift */; };
 		1147AB462383652F00D19AA9 /* CustomerListViewModelContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1147AB452383652F00D19AA9 /* CustomerListViewModelContract.swift */; };
 		1147AB482383653A00D19AA9 /* CustomerListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1147AB472383653A00D19AA9 /* CustomerListViewModel.swift */; };
@@ -144,7 +144,7 @@
 		11233780237AFC9100F60078 /* dateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dateExtension.swift; sourceTree = "<group>"; };
 		11233782237AFE9400F60078 /* stringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = stringExtension.swift; sourceTree = "<group>"; };
 		11233784237AFEC000F60078 /* doubleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = doubleExtension.swift; sourceTree = "<group>"; };
-		11233786237B7AEB00F60078 /* CustomerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerModel.swift; sourceTree = "<group>"; };
+		11233786237B7AEB00F60078 /* BriefCustomer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BriefCustomer.swift; sourceTree = "<group>"; };
 		1147AB43238364D900D19AA9 /* CustomerListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerListModel.swift; sourceTree = "<group>"; };
 		1147AB452383652F00D19AA9 /* CustomerListViewModelContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerListViewModelContract.swift; sourceTree = "<group>"; };
 		1147AB472383653A00D19AA9 /* CustomerListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerListViewModel.swift; sourceTree = "<group>"; };
@@ -790,7 +790,7 @@
 				11EBD35A2376683300AB4BFF /* FirebaseUserModel.swift */,
 				111DE57F238A1FB5002F4216 /* ProductModel.swift */,
 				11EBD36523766D2500AB4BFF /* ErrorModel.swift */,
-				11233786237B7AEB00F60078 /* CustomerModel.swift */,
+				11233786237B7AEB00F60078 /* BriefCustomer.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1160,7 +1160,7 @@
 				110664EB2378F1F100DC44F3 /* NewCustomerInteractor.swift in Sources */,
 				11233785237AFEC000F60078 /* doubleExtension.swift in Sources */,
 				11EEF0F6239D4A98007C9821 /* PaymentViewModel.swift in Sources */,
-				11233787237B7AEB00F60078 /* CustomerModel.swift in Sources */,
+				11233787237B7AEB00F60078 /* BriefCustomer.swift in Sources */,
 				111DE574238A01CA002F4216 /* XButtonCustomView.swift in Sources */,
 				114A541123A5A9B900F2746A /* RegisterListModel.swift in Sources */,
 				11EBD36423766CFE00AB4BFF /* NetworkManager.swift in Sources */,

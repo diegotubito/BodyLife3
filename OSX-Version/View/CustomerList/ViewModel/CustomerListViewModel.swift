@@ -32,7 +32,7 @@ class CustomerListViewModel: CustomerListViewModelContract {
             do {
                 if array?.count != nil {
                     let data = try JSONSerialization.data(withJSONObject: array!, options: [])
-                    let registros = try JSONDecoder().decode([CustomerModel].self, from: data)
+                    let registros = try JSONDecoder().decode([BriefCustomer].self, from: data)
                     let fileredArray = registros.sorted(by: { $0.createdAt > $1.createdAt })
                     self.model.registros = fileredArray
                     self._view.showSuccess()
@@ -45,7 +45,7 @@ class CustomerListViewModel: CustomerListViewModelContract {
         }
     }
     
-    func loadImage(row: Int, customer: CustomerModel, completion: @escaping (String?) -> ()) {
+    func loadImage(row: Int, customer: BriefCustomer, completion: @escaping (String?) -> ()) {
         let path = "\(Paths.fullPersonalData):\(customer.childID):images"
         ServerManager.ReadJSON(path: path) { (data, error) in
             

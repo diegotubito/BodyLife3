@@ -14,7 +14,7 @@ protocol CustomerListViewModelContract {
     var model : CustomerListModel! {get set}
     
     func loadCustomers()
-    func loadImage(row: Int, customer: CustomerModel, completion: @escaping (String?) -> ())
+    func loadImage(row: Int, customer: BriefCustomer, completion: @escaping (String?) -> ())
 }
 
 protocol CustomerListViewContract {

@@ -12,7 +12,7 @@ class CustomerStatusViewModel: CustomerStatusViewModelContract {
     var model: CustomerStatusModel!
     var _view : CustomerStatusViewContract!
     
-    required init(withView view: CustomerStatusViewContract, receivedCustomer: CustomerModel) {
+    required init(withView view: CustomerStatusViewContract, receivedCustomer: BriefCustomer) {
         self._view = view
         self.model = CustomerStatusModel(receivedCustomer: receivedCustomer)
     }

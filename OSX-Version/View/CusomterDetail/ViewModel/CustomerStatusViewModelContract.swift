@@ -9,7 +9,7 @@
 import Cocoa
 
 protocol CustomerStatusViewModelContract {
-    init(withView view: CustomerStatusViewContract, receivedCustomer: CustomerModel)
+    init(withView view: CustomerStatusViewContract, receivedCustomer: BriefCustomer)
     var model : CustomerStatusModel! {get}
     func loadData()
 }

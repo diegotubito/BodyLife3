@@ -16,7 +16,7 @@ enum NewCustomer {
         }
         struct ViewModel {
             var errorMessage : ServerError?
-            var customer : CustomerModel?
+            var customer : BriefCustomer?
         }
     }
 

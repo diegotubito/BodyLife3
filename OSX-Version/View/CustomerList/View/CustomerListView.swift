@@ -23,7 +23,7 @@ class CustomerListView: NSView {
     }
     
     var viewModel : CustomerListViewModelContract!
-    var onSelectedCustomer : ((CustomerModel) -> ())?
+    var onSelectedCustomer : ((BriefCustomer) -> ())?
     
     override init(frame frameRect: NSRect) {
         super .init(frame: frameRect)
@@ -67,7 +67,7 @@ class CustomerListView: NSView {
     
     @objc func newCustomerNotificationHandler(notification: Notification) {
         let obj = notification.object
-        if let customer = obj as? CustomerModel {
+        if let customer = obj as? BriefCustomer {
             viewModel.model.registros.insert(customer, at: 0)
             let index = IndexSet(integer: 0)
             tableViewSocio.insertRows(at: index, withAnimation: .effectFade)

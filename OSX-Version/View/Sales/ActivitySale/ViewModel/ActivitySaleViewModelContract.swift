@@ -11,7 +11,7 @@ import Cocoa
 protocol ActivitySaleViewModelContract {
     init(withView view: ActivitySaleViewContract)
     
-    func setCustomerStatus(selectedCustomer: CustomerModel, selectedStatus: CustomerStatus?)
+    func setCustomerStatus(selectedCustomer: BriefCustomer, selectedStatus: CustomerStatus?)
     func loadServices()
     func getActivities() -> [ActivityModel]
     func getTypes() -> [ServiceTypeModel]
