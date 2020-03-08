@@ -9,12 +9,18 @@
 import Foundation
 import Cocoa
 
+struct OperationCategory {
+    static let income = "INCOME"
+    static let expense = "EXPENSE"
+}
+
 struct ServerType {
     static let local = "http://127.0.0.1:3000/"
     static let keroku = "flaskdfjalskdjf/"
 }
 
 struct Paths {
+    static let expenseType = "configuration:expense:type"
     static let sells = "sells"
     static let registers = "registers"
     static let payments = "payments"

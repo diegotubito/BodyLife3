@@ -130,6 +130,9 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
         UserSaved.Remove()
         CheckLogin()
     }
+    @IBAction func newExpensePressed(_ sender: Any) {
+        router?.routeToNewExpense()
+    }
     @IBAction func newCustomerPressed(_ sender: Any) {
         router?.routeToNewCustomer()
     }
