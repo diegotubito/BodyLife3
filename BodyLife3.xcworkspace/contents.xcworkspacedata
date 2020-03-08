@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:/Users/daviddiegogomez/MyApps/iOS/BodyLife3/OSX-Version/Storyboard/Expense.storyboard">
+   </FileRef>
+   <FileRef
       location = "group:BodyLife3.xcodeproj">
    </FileRef>
    <FileRef

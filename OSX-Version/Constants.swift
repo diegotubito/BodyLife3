@@ -128,4 +128,9 @@ struct Constants {
         }
     }
     
+//    MARK: MAX
+    struct Max {
+        static let inputAmountNumber : Double = 999999
+    }
+    
 }
