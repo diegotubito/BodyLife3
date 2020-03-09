@@ -168,7 +168,7 @@ class ExpenseViewController: BaseViewController, ExpenseDisplayLogic {
         let operationCategory = OperationCategory.expense
         let displayName = selectedSecondaryType.name
         let displayTypeName = selectedBaseType.name
-        let amount = amountTextField.doubleValue
+        let amount = -amountTextField.doubleValue
         let queryByY = today.toString(formato: "yyyy")
         let queryByMY = today.toString(formato: "MM-yyyy")
         let queryByDMY = today.toString(formato: "dd-MM-yyyy")
