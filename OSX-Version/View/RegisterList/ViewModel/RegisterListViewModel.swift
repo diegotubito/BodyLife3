@@ -56,7 +56,7 @@ class RegisterListViewModel: RegisterListViewModelContract {
     
     private func calcExtras() {
         for (x,register) in model.registers.enumerated() {
-            let amountToPay = register.amountToPay
+            let amountToPay = register.amount
             let totalPayments = calcTotalPayment(payments: register.payments)
             let saldo = totalPayments - amountToPay
             

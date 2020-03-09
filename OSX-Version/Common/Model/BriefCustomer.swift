@@ -40,7 +40,7 @@ struct SellRegisterModel: Decodable {
     var fromDate : Double?
     var toDate : Double?
     var amount : Double
-    var amountToPay : Double
+    var price : Double
     var displayName : String
     var isEnabled : Bool
     var payments : [Payment]?

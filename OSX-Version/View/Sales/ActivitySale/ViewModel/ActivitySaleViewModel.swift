@@ -289,17 +289,17 @@ extension ActivitySaleViewModel {
         let displayName = model.selectedActivity!.name + ", " + model.selectedType!.name
         let fromDate = _view.getFromDate()
         let toDate = _view.getToDate()
-        let (amount, amountDiscounted) = getTotals()
+        let (price, amountDiscounted) = getTotals()
         let childIDCustomer = model.selectedCustomer.childID
         let sell = [childID:["childID" : childID,
                              "childIDCustomer" : childIDCustomer,
                              "createdAt" : Date().timeIntervalSinceReferenceDate,
                              "fromDate" : fromDate.timeIntervalSinceReferenceDate,
                              "toDate" : toDate.timeIntervalSinceReferenceDate,
-                             "amount" : amount,
+                             "price" : price,
                              "operationCategory" : OperationCategory.income,
                              "amountDiscounted" : amountDiscounted,
-                             "amountToPay" : (amount - amountDiscounted),
+                             "amount" : (price - amountDiscounted),
                              "isEnabled" : true,
                              "queryByDMY" : Date().queryByDMY,
                              "queryByMY" : Date().queryByMY,
