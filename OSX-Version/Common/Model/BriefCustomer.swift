@@ -8,11 +8,6 @@
 
 import Foundation
 
-struct RegisterType {
-    static let income = "INCOME"
-    static let expense = "EXPENSE"
-}
-
 struct BriefCustomer: Decodable {
     var childID : String
     var createdAt : Double
@@ -49,7 +44,7 @@ struct SellRegisterModel: Decodable {
     var displayName : String
     var isEnabled : Bool
     var payments : [Payment]?
-    var registerType : String
+    var operationCategory : String
     var queryByDMY : String
     var queryByMY : String
     var queryByY : String

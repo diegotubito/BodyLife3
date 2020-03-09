@@ -166,7 +166,7 @@ class ArticleSellView: XibViewBlurBackground {
         json.updateValue(Date().queryByDMY, forKey: "queryByDMY")
         json.updateValue(Date().queryByMY, forKey: "queryByMY")
         json.updateValue(Date().queryByY, forKey: "queryByY")
-        json.updateValue(RegisterType.income, forKey: "registerType")
+        json.updateValue(OperationCategory.income, forKey: "operationCategory")
         json.updateValue(true, forKey: "isEnabled")
         json.updateValue((selectedItem?.price)!, forKey: "amount")
         json.updateValue(0, forKey: "amountDiscounted")

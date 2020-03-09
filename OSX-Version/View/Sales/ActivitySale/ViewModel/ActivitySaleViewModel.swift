@@ -297,7 +297,7 @@ extension ActivitySaleViewModel {
                              "fromDate" : fromDate.timeIntervalSinceReferenceDate,
                              "toDate" : toDate.timeIntervalSinceReferenceDate,
                              "amount" : amount,
-                             "registerType" : RegisterType.income,
+                             "operationCategory" : OperationCategory.income,
                              "amountDiscounted" : amountDiscounted,
                              "amountToPay" : (amount - amountDiscounted),
                              "isEnabled" : true,
