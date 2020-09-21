@@ -63,6 +63,13 @@ class CameraManager: NSObject {
     func correrSessionCamara() {
         session.sessionPreset = AVCaptureSession.Preset.photo
         
+        guard let device = AVCaptureDevice.default(.builtInWideAngleCamera, for: AVMediaType.video, position: .front) else {
+            fatalError("no front camera. but don't all iOS 10 devices have them?")
+            return
+        }
+            
+            
+        
         if let device : [AVCaptureDevice] = AVCaptureDevice.devices() {
             print("device found = ",device.count)
             print(device)

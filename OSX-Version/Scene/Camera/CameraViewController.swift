@@ -75,7 +75,9 @@ class CameraViewController: NSViewController {
         previewCam.wantsLayer = true
         
         session.sessionPreset = AVCaptureSession.Preset.photo
-        
+        if let devices : [AVCaptureDevice] = AVCaptureDevice.devices() {
+            print(devices)
+        }
         let device = AVCaptureDevice.DiscoverySession.init(deviceTypes: [.builtInWideAngleCamera], mediaType: nil, position: .front)
         
         

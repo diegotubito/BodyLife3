@@ -24,6 +24,7 @@
 		111DE572238A01BF002F4216 /* XButtonCustomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 111DE571238A01BF002F4216 /* XButtonCustomView.xib */; };
 		111DE574238A01CA002F4216 /* XButtonCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111DE573238A01CA002F4216 /* XButtonCustomView.swift */; };
 		111DE580238A1FB5002F4216 /* ProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111DE57F238A1FB5002F4216 /* ProductModel.swift */; };
+		111EF6B5244BDFCC003E5D61 /* Movement.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 111EF6B4244BDFCC003E5D61 /* Movement.storyboard */; };
 		11233781237AFC9100F60078 /* dateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11233780237AFC9100F60078 /* dateExtension.swift */; };
 		11233783237AFE9400F60078 /* stringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11233782237AFE9400F60078 /* stringExtension.swift */; };
 		11233785237AFEC000F60078 /* doubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11233784237AFEC000F60078 /* doubleExtension.swift */; };
@@ -141,6 +142,7 @@
 		111DE571238A01BF002F4216 /* XButtonCustomView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = XButtonCustomView.xib; sourceTree = "<group>"; };
 		111DE573238A01CA002F4216 /* XButtonCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XButtonCustomView.swift; sourceTree = "<group>"; };
 		111DE57F238A1FB5002F4216 /* ProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductModel.swift; sourceTree = "<group>"; };
+		111EF6B4244BDFCC003E5D61 /* Movement.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Movement.storyboard; sourceTree = "<group>"; };
 		11233780237AFC9100F60078 /* dateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dateExtension.swift; sourceTree = "<group>"; };
 		11233782237AFE9400F60078 /* stringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = stringExtension.swift; sourceTree = "<group>"; };
 		11233784237AFEC000F60078 /* doubleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = doubleExtension.swift; sourceTree = "<group>"; };
@@ -797,6 +799,7 @@
 				11EBD39023772A4700AB4BFF /* LoginStoryboard.storyboard */,
 				119C68612380BDC8009E9AA0 /* NewCustomerStoryboard.storyboard */,
 				114C541F241401B5000CC75A /* Expense.storyboard */,
+				111EF6B4244BDFCC003E5D61 /* Movement.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -990,6 +993,7 @@
 				11EBD39123772A4700AB4BFF /* LoginStoryboard.storyboard in Resources */,
 				111DE56F2389F5A3002F4216 /* SaveButtonCustomView.xib in Resources */,
 				116CEB6123A1E2D40081D356 /* RegisterListView.xib in Resources */,
+				111EF6B5244BDFCC003E5D61 /* Movement.storyboard in Resources */,
 				11EBD32B2376499F00AB4BFF /* Main.storyboard in Resources */,
 				119C68622380BDC8009E9AA0 /* NewCustomerStoryboard.storyboard in Resources */,
 				11AC546823DDE64E0033A27D /* ActivitySaleView.xib in Resources */,

@@ -36,5 +36,7 @@
 	<string>$(ENVIRONMENT)</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Need to use camera for Customer Profile</string>
+	<key></key>
+	<string></string>
 </dict>
 </plist>
