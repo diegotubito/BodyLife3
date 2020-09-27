@@ -22,7 +22,7 @@ class SellRegisterCell: NSTableCellView {
         // Drawing code here.
     }
     
-    func displayCell(register: SellRegisterModel) {
+    func displayCell(register: SellModel.Register) {
         let totalPayment = register.totalPayment ?? 0
         let balance = register.balance ?? 0
         

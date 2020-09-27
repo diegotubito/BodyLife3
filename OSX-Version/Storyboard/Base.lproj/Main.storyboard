@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16096"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17156"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -751,14 +752,30 @@
                                             <action selector="newExpensePressed:" target="XfG-lQ-9wD" id="8IF-uu-uH4"/>
                                         </connections>
                                     </button>
+                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="o29-Ts-AjV">
+                                        <rect key="frame" x="114" y="4" width="33" height="33"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="33" id="xfd-49-09c"/>
+                                            <constraint firstAttribute="width" constant="33" id="ysA-FM-S3J"/>
+                                        </constraints>
+                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSBonjour" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="CsR-zW-OHf">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="movementsPressed:" target="XfG-lQ-9wD" id="wbQ-7N-pcz"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="9AY-9h-Rjr" firstAttribute="leading" secondItem="Y6C-Pr-GNv" secondAttribute="leading" constant="16" id="28c-pc-z5b"/>
+                                    <constraint firstItem="o29-Ts-AjV" firstAttribute="centerY" secondItem="Y6C-Pr-GNv" secondAttribute="centerY" id="5pl-yR-QVc"/>
                                     <constraint firstAttribute="trailing" secondItem="Kec-wk-swp" secondAttribute="trailing" constant="16" id="9P1-m4-2aV"/>
                                     <constraint firstItem="9AY-9h-Rjr" firstAttribute="centerY" secondItem="Y6C-Pr-GNv" secondAttribute="centerY" id="AOL-qY-63e"/>
                                     <constraint firstItem="rtW-ah-ZyP" firstAttribute="leading" secondItem="9AY-9h-Rjr" secondAttribute="trailing" constant="16" id="Jg1-tt-MXa"/>
                                     <constraint firstItem="rtW-ah-ZyP" firstAttribute="centerY" secondItem="Y6C-Pr-GNv" secondAttribute="centerY" id="dhN-Ru-x7s"/>
                                     <constraint firstItem="Kec-wk-swp" firstAttribute="centerY" secondItem="Y6C-Pr-GNv" secondAttribute="centerY" id="hAy-he-GmQ"/>
+                                    <constraint firstItem="o29-Ts-AjV" firstAttribute="leading" secondItem="rtW-ah-ZyP" secondAttribute="trailing" constant="16" id="mxE-ip-PP6"/>
                                     <constraint firstAttribute="height" constant="40" id="xBg-Mn-Ma1"/>
                                 </constraints>
                             </customView>
@@ -828,6 +845,7 @@
     </scenes>
     <resources>
         <image name="NSAdvanced" width="32" height="32"/>
+        <image name="NSBonjour" width="32" height="32"/>
         <image name="NSInvalidDataFreestandingTemplate" width="14" height="14"/>
         <image name="NSUser" width="32" height="32"/>
     </resources>

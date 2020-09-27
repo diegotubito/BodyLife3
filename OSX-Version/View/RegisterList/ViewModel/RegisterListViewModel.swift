@@ -40,7 +40,7 @@ class RegisterListViewModel: RegisterListViewModelContract {
             
             do {
                 let data = try JSONSerialization.data(withJSONObject: jsonArray, options: [])
-                let registers = try JSONDecoder().decode([SellRegisterModel].self, from: data)
+                let registers = try JSONDecoder().decode([SellModel.Register].self, from: data)
                 let sortedRegisters = registers.sorted(by: { $0.createdAt > $1.createdAt })
                 self.model.registers = sortedRegisters
                 self.calcExtras()
@@ -81,16 +81,16 @@ class RegisterListViewModel: RegisterListViewModelContract {
         _view.displayData()
     }
     
-    func getRegisters() -> [SellRegisterModel] {
+    func getRegisters() -> [SellModel.Register] {
         return model.registers
     }
     
-    func setSelectedRegister(_ selectedRegister: SellRegisterModel?) {
+    func setSelectedRegister(_ selectedRegister: SellModel.Register?) {
         model.selectedSellRegister = selectedRegister
         _view.updateButtonState()
     }
     
-    func getSelectedRegister() -> SellRegisterModel? {
+    func getSelectedRegister() -> SellModel.Register? {
         return model.selectedSellRegister
     }
     

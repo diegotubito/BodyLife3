@@ -11,5 +11,5 @@ import Cocoa
 
 class PaymentModel {
     var selectedCustomer : BriefCustomer!
-    var selectedSellRegister : SellRegisterModel!
+    var selectedSellRegister : SellModel.Register!
 }

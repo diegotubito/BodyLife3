@@ -9,9 +9,9 @@
 import Cocoa
 
 class RegisterListModel {
-    var registers = [SellRegisterModel]()
+    var registers = [SellModel.Register]()
     var selectedCustomer : BriefCustomer!
-    var selectedSellRegister : SellRegisterModel!
+    var selectedSellRegister : SellModel.Register!
 
   
 }

@@ -13,9 +13,9 @@ protocol RegisterListViewModelContract {
     func loadData()
     func cancelRegister()
     func setSelectedCustomer(customer: BriefCustomer)
-    func getRegisters() -> [SellRegisterModel]
-    func setSelectedRegister(_ selectedRegister: SellRegisterModel?)
-    func getSelectedRegister() -> SellRegisterModel?
+    func getRegisters() -> [SellModel.Register]
+    func setSelectedRegister(_ selectedRegister: SellModel.Register?)
+    func getSelectedRegister() -> SellModel.Register?
     func setIsEnabled(row: Int)
 
 }

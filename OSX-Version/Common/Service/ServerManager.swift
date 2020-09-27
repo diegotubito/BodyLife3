@@ -277,7 +277,7 @@ class ServerManager {
     static func DownloadPicture(path: String, completion: @escaping (NSImage?, ServerError?) -> ()) {
         
         let basicUrl = Configuration.URL.Storage.download
-        let uidPath = "users:\(uid!):"
+        let uidPath = "socios:\(uid!):"
         let url = basicUrl + uidPath + path
         
         //if I have already loaded the image, there's no need to load it again.

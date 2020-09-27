@@ -36,6 +36,7 @@ class CustomerListViewModel: CustomerListViewModelContract {
                     let fileredArray = registros.sorted(by: { $0.createdAt > $1.createdAt })
                     self.model.registros = fileredArray
                     self._view.showSuccess()
+                    
                 }
             } catch {
                 self._view.showError()
@@ -67,6 +68,5 @@ class CustomerListViewModel: CustomerListViewModelContract {
             
         }
     }
-    
 }
 

@@ -32,6 +32,15 @@ class HomeRouter: NSObject, HomeRoutingLogic, HomeDataPassing {
         navigateToSomewhere(source: viewController!, destination: destinationVC)
     }
     
+    func routeToMovements()
+    {
+        let storyboard = NSStoryboard(name: "Movement", bundle: nil)
+        
+        let destinationVC = storyboard.instantiateController(withIdentifier: "NewCustomerViewController") as! NSViewController
+        
+        navigateToSomewhere(source: viewController!, destination: destinationVC)
+    }
+    
     
     // MARK: Navigation
     

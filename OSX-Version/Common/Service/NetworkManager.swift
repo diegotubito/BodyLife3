@@ -81,6 +81,7 @@ class NetwordManager {
                             break
                             
                         default:
+                            print(error?.localizedDescription)
                             response(nil, ServerError.unknown_auth_error)
                             break
                         }

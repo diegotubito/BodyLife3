@@ -17,7 +17,7 @@ class PaymentViewModel: PaymentViewModelContract {
         model = PaymentModel()
     }
     
-    func setSelectedInfo(_ customer: BriefCustomer, _ register: SellRegisterModel) {
+    func setSelectedInfo(_ customer: BriefCustomer, _ register: SellModel.Register) {
         model.selectedCustomer = customer
         model.selectedSellRegister = register
         _view.displayInfo()

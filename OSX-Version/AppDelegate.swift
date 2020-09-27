@@ -22,6 +22,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         Reachability.sharedInstance.suscribeConnectionChanged()
     
         Connect.StartListening()
+        
+//        ImportDatabase.Customer.SaveFirebaseCustomersToMongoDB()
+//        ImportDatabase.Carnet.SaveFirebaseCarnetToMongoDB()
             
     }
     

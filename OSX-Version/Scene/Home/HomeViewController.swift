@@ -63,10 +63,12 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
         
         self.timerForDelayCustomerSelection = Timer.scheduledTimer(timeInterval: 0.0, target: self, selector: #selector(self.loadStatus), userInfo: nil, repeats: false)
         
+      
         
            
     }
     
+   
     @IBAction func addGenericButtob(_ sender: Any) {
         addGeneric()
     }
@@ -137,6 +139,9 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
         router?.routeToNewCustomer()
     }
     
+    @IBAction func movementsPressed(_ sender: Any) {
+        
+    }
     func createBackgroundGradient() {
         self.view.layer?.backgroundColor = NSColor.black.cgColor
         let gradient = CAGradientLayer()

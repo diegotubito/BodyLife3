@@ -41,6 +41,11 @@
 		1147AB7A2384D41900D19AA9 /* CustomerStatusViewModelContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1147AB792384D41900D19AA9 /* CustomerStatusViewModelContract.swift */; };
 		1147AB7C2384D49E00D19AA9 /* CustomerStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1147AB7B2384D49E00D19AA9 /* CustomerStatusViewModel.swift */; };
 		1147AB7E238611C200D19AA9 /* NSViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1147AB7D238611C200D19AA9 /* NSViewExtension.swift */; };
+		11498E4F251FFEC600E4D679 /* bodyshaping.json in Resources */ = {isa = PBXBuildFile; fileRef = 11498E4E251FFEC600E4D679 /* bodyshaping.json */; };
+		11498E582520069700E4D679 /* importDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11498E572520069700E4D679 /* importDatabase.swift */; };
+		11498E5B25203B9A00E4D679 /* MapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11498E5A25203B9A00E4D679 /* MapManager.swift */; };
+		11498E602520975000E4D679 /* ImportCustomer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11498E5F2520975000E4D679 /* ImportCustomer.swift */; };
+		11498E632520979000E4D679 /* ImportVentaCarnet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11498E622520979000E4D679 /* ImportVentaCarnet.swift */; };
 		114A540D23A5A99F00F2746A /* RegisterListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114A540C23A5A99F00F2746A /* RegisterListViewModel.swift */; };
 		114A540F23A5A9AC00F2746A /* RegisterListViewModelContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114A540E23A5A9AC00F2746A /* RegisterListViewModelContract.swift */; };
 		114A541123A5A9B900F2746A /* RegisterListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114A541023A5A9B900F2746A /* RegisterListModel.swift */; };
@@ -159,6 +164,11 @@
 		1147AB792384D41900D19AA9 /* CustomerStatusViewModelContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerStatusViewModelContract.swift; sourceTree = "<group>"; };
 		1147AB7B2384D49E00D19AA9 /* CustomerStatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerStatusViewModel.swift; sourceTree = "<group>"; };
 		1147AB7D238611C200D19AA9 /* NSViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSViewExtension.swift; sourceTree = "<group>"; };
+		11498E4E251FFEC600E4D679 /* bodyshaping.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bodyshaping.json; sourceTree = "<group>"; };
+		11498E572520069700E4D679 /* importDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = importDatabase.swift; sourceTree = "<group>"; };
+		11498E5A25203B9A00E4D679 /* MapManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapManager.swift; sourceTree = "<group>"; };
+		11498E5F2520975000E4D679 /* ImportCustomer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportCustomer.swift; sourceTree = "<group>"; };
+		11498E622520979000E4D679 /* ImportVentaCarnet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportVentaCarnet.swift; sourceTree = "<group>"; };
 		114A540C23A5A99F00F2746A /* RegisterListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterListViewModel.swift; sourceTree = "<group>"; };
 		114A540E23A5A9AC00F2746A /* RegisterListViewModelContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterListViewModelContract.swift; sourceTree = "<group>"; };
 		114A541023A5A9B900F2746A /* RegisterListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterListModel.swift; sourceTree = "<group>"; };
@@ -332,6 +342,13 @@
 			path = XButton;
 			sourceTree = "<group>";
 		};
+		112021752518316C002B61B5 /* Movements */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Movements;
+			sourceTree = "<group>";
+		};
 		1123377F237AFC7D00F60078 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -440,6 +457,16 @@
 				1147AB772384D23100D19AA9 /* CustomerStatusModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		11498E5D2520973B00E4D679 /* ImportDatabase */ = {
+			isa = PBXGroup;
+			children = (
+				11498E572520069700E4D679 /* importDatabase.swift */,
+				11498E622520979000E4D679 /* ImportVentaCarnet.swift */,
+				11498E5F2520975000E4D679 /* ImportCustomer.swift */,
+			);
+			path = ImportDatabase;
 			sourceTree = "<group>";
 		};
 		114A540923A5A95600F2746A /* View */ = {
@@ -747,6 +774,7 @@
 				11EBD35323765C9800AB4BFF /* Scene */,
 				11EBD35223765C9200AB4BFF /* Storyboard */,
 				11EBD3272376499F00AB4BFF /* AssetsOSX.xcassets */,
+				11498E4E251FFEC600E4D679 /* bodyshaping.json */,
 				11EBD32C2376499F00AB4BFF /* Info.plist */,
 				11EBD3242376499F00AB4BFF /* OSX_Version.xcdatamodeld */,
 				110664D92377C38100DC44F3 /* OSX-VersionDebug.entitlements */,
@@ -766,6 +794,8 @@
 				11EBD35723765D2000AB4BFF /* Util */,
 				11EBD35123765C1A00AB4BFF /* Service */,
 				11EBD34E23765BF000AB4BFF /* Model */,
+				11498E5D2520973B00E4D679 /* ImportDatabase */,
+				11498E5A25203B9A00E4D679 /* MapManager.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -807,6 +837,7 @@
 		11EBD35323765C9800AB4BFF /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				112021752518316C002B61B5 /* Movements */,
 				114C54082413FE19000CC75A /* Expense */,
 				116393382382149F00D14B19 /* Camera */,
 				11EBD3832377269100AB4BFF /* Login */,
@@ -986,6 +1017,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11498E4F251FFEC600E4D679 /* bodyshaping.json in Resources */,
 				110664C723775D6000DC44F3 /* ErrorMessageView.xib in Resources */,
 				114C5420241401B5000CC75A /* Expense.storyboard in Resources */,
 				11EBD3282376499F00AB4BFF /* AssetsOSX.xcassets in Resources */,
@@ -1073,6 +1105,7 @@
 				1147AB462383652F00D19AA9 /* CustomerListViewModelContract.swift in Sources */,
 				1147AB482383653A00D19AA9 /* CustomerListViewModel.swift in Sources */,
 				110664C523775C9000DC44F3 /* ErrorMessageView.swift in Sources */,
+				11498E5B25203B9A00E4D679 /* MapManager.swift in Sources */,
 				114C54192413FF66000CC75A /* ExpenseInteractor.swift in Sources */,
 				11AC546423DDE4F30033A27D /* ActivitySaleViewModel.swift in Sources */,
 				110664EB2378F1F100DC44F3 /* NewCustomerInteractor.swift in Sources */,
@@ -1096,6 +1129,7 @@
 				110664E82378F1F100DC44F3 /* NewCustomerRouter.swift in Sources */,
 				11AC546623DDE5250033A27D /* AcitvitySaleView.swift in Sources */,
 				110664E92378F1F100DC44F3 /* NewCustomerModels.swift in Sources */,
+				11498E632520979000E4D679 /* ImportVentaCarnet.swift in Sources */,
 				1147AB7C2384D49E00D19AA9 /* CustomerStatusViewModel.swift in Sources */,
 				11EEF0F2239D4A83007C9821 /* PaymentView.swift in Sources */,
 				1147AB4A2383654C00D19AA9 /* CustomerListView.swift in Sources */,
@@ -1110,6 +1144,7 @@
 				116CE96123EDCDAF00688C0B /* ActivityListModel.swift in Sources */,
 				11A8B44E23BE22B8007A5251 /* GenericTableView.swift in Sources */,
 				114C54222415822A000CC75A /* ExpenseModel.swift in Sources */,
+				11498E602520975000E4D679 /* ImportCustomer.swift in Sources */,
 				114C54152413FF66000CC75A /* ExpenseModels.swift in Sources */,
 				1163932B2381975600D14B19 /* ValidationField.swift in Sources */,
 				11EBD35B2376683300AB4BFF /* FirebaseUserModel.swift in Sources */,
@@ -1120,6 +1155,7 @@
 				11AC546023DDE4B40033A27D /* ActivitySaleModel.swift in Sources */,
 				116CE96723EDCDF800688C0B /* ActivityListView.swift in Sources */,
 				110664D82377ACBF00DC44F3 /* extensions.swift in Sources */,
+				11498E582520069700E4D679 /* importDatabase.swift in Sources */,
 				1166AF3523B27F880047C7AE /* ArticleViewItem.swift in Sources */,
 				111DE580238A1FB5002F4216 /* ProductModel.swift in Sources */,
 				11EEF0F8239D4AA1007C9821 /* PaymentModel.swift in Sources */,
