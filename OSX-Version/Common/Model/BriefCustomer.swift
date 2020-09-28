@@ -49,7 +49,7 @@ class CustomerModel {
         var latitude: Double
     }
     
-    struct Request : Encodable, Decodable {
+    struct Customer : Encodable, Decodable {
         var _id: String
         var uid : String
         var timestamp : Double

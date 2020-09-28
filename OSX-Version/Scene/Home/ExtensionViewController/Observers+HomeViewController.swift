@@ -20,15 +20,15 @@ extension HomeViewController {
     
     func customerListOberserver() {
         self.customerListView.onSelectedCustomer = { customer in
-            self.selectedCustomer = customer
-            self.timerForDelayCustomerSelection.invalidate()
-            self.customerStatusView.showLoading()
-            self.customerStatusView.titleLabel.stringValue = customer.surname + ", " + customer.name
-            self.sellRegisterView.setSelectedCustomer(customer: customer)
-            self.timerForDelayCustomerSelection = Timer.scheduledTimer(timeInterval: 0.25, target: self, selector: #selector(self.loadStatus), userInfo: nil, repeats: false)
-            if self.sellRegisterView.isHidden {
-                self.sellRegisterView.animateMode = .fadeIn
-            }
+//            self.selectedCustomer = customer
+//            self.timerForDelayCustomerSelection.invalidate()
+//            self.customerStatusView.showLoading()
+//            self.customerStatusView.titleLabel.stringValue = customer.surname + ", " + customer.name
+//            self.sellRegisterView.setSelectedCustomer(customer: customer)
+//            self.timerForDelayCustomerSelection = Timer.scheduledTimer(timeInterval: 0.25, target: self, selector: #selector(self.loadStatus), userInfo: nil, repeats: false)
+//            if self.sellRegisterView.isHidden {
+//                self.sellRegisterView.animateMode = .fadeIn
+//            }
         }
     }
     
@@ -37,7 +37,7 @@ extension HomeViewController {
             //open sell activities custom view
             let selectedCustomer = self.customerListView.viewModel.model.selectedCustomer
             let loadedStatus = self.customerStatusView.viewModel.model.loadedStatus
-            self.sellActivityView.viewModel.setCustomerStatus(selectedCustomer: selectedCustomer!, selectedStatus: loadedStatus)
+//            self.sellActivityView.viewModel.setCustomerStatus(selectedCustomer: selectedCustomer!, selectedStatus: loadedStatus)
             self.sellActivityView.showView()
         }
     }

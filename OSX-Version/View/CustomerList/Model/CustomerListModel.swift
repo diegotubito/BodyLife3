@@ -9,14 +9,13 @@
 import Cocoa
 
 struct CustomerListModel {
-    var registros = [BriefCustomer]()
-    var selectedCustomer : BriefCustomer?
-    
-    var response : Response?
+    var selectedCustomer : CustomerModel.Customer?
+    var customers = [CustomerModel.Customer]()
+    var response : Response!
     
     struct Response :Decodable {
         var response : String
-        var customers : [CustomerModel.Request]
+        var customers : [CustomerModel.Customer]
         var total_amount : Int
     }
 }

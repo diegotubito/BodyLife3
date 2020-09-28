@@ -12,6 +12,10 @@ extension Double {
     var toDate : Date? {
         return Date(timeInterval: self, since: DateReference)
     }
+    
+    var toDate1970 : Date {
+        return Date(timeIntervalSince1970: self)
+    }
 }
 
 extension Double {

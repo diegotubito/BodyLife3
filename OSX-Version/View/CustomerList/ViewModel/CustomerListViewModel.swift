@@ -19,11 +19,13 @@ class CustomerListViewModel: CustomerListViewModelContract {
         self.model = CustomerListModel()
     }
     
-    func loadCustomers() {
+    func loadCustomers(offset: Int) {
+        print("loading...")
         _view.showLoading()
-        let url = "http://127.0.0.1:2999/v1/customer?offset=0&limit=10"
+        let url = "http://127.0.0.1:2999/v1/customer?offset=\(offset)&limit=30"
         let _services = NetwordManager()
         _services.get(url: url, response: { (data, error) in
+            self._view.hideLoading()
             guard error == nil, let data = data else {
                 self._view.showError()
                 return
@@ -32,6 +34,13 @@ class CustomerListViewModel: CustomerListViewModelContract {
             do {
                 let response = try JSONDecoder().decode(CustomerListModel.Response.self, from: data) 
                 self.model.response = response
+                for i in response.customers {
+                    if self.model.customers.contains(where: {$0._id == i._id}) {
+                        print("repedito: \(i.lastName) + \(i.firstName)")
+                    } else {
+                        self.model.customers.append(i)
+                    }
+                }
                 self._view.showSuccess()
             } catch {
                 print(error)
@@ -41,8 +50,8 @@ class CustomerListViewModel: CustomerListViewModelContract {
         })
     }
     
-    func loadImage(row: Int, customer: BriefCustomer, completion: @escaping (String?) -> ()) {
-        let path = "\(Paths.fullPersonalData):\(customer.childID):images"
+    func loadImage(row: Int, customer: CustomerModel.Customer, completion: @escaping (String?) -> ()) {
+        let path = "\(Paths.fullPersonalData):\(customer.thumbnailImage ?? ""):images"
         ServerManager.ReadJSON(path: path) { (data, error) in
             
             if error != nil {

@@ -13,8 +13,8 @@ protocol CustomerListViewModelContract {
     
     var model : CustomerListModel! {get set}
     
-    func loadCustomers()
-    func loadImage(row: Int, customer: BriefCustomer, completion: @escaping (String?) -> ())
+    func loadCustomers(offset: Int)
+    func loadImage(row: Int, customer: CustomerModel.Customer, completion: @escaping (String?) -> ())
     func getTotalItems() -> Int
 }
 

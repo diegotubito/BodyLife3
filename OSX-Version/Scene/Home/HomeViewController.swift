@@ -90,7 +90,7 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
         DispatchQueue.main.async {
             self.createCustomViews()
             self.addObservers()
-            self.customerListView.startLoading()
+            
         }
  
     }

@@ -23,7 +23,7 @@ class CustomerListView: NSView {
     }
     
     var viewModel : CustomerListViewModelContract!
-    var onSelectedCustomer : ((BriefCustomer) -> ())?
+    var onSelectedCustomer : ((CustomerModel.Customer) -> ())?
     
     override init(frame frameRect: NSRect) {
         super .init(frame: frameRect)
@@ -62,13 +62,13 @@ class CustomerListView: NSView {
     
     @objc func newSellNotificationHandler(notification: Notification) {
         let row = tableViewSocio.selectedRow
-        self.onSelectedCustomer?(viewModel.model.registros[row])
+        self.onSelectedCustomer?(viewModel.model.customers[row] )
     }
     
     @objc func newCustomerNotificationHandler(notification: Notification) {
         let obj = notification.object
-        if let customer = obj as? BriefCustomer {
-            viewModel.model.registros.insert(customer, at: 0)
+        if let customer = obj as? CustomerModel.Customer {
+            viewModel.model.customers.insert(customer, at: 0)
             let index = IndexSet(integer: 0)
             tableViewSocio.insertRows(at: index, withAnimation: .effectFade)
             tableViewSocio.selectRowIndexes(index, byExtendingSelection: false)
@@ -77,7 +77,7 @@ class CustomerListView: NSView {
     }
     
     func startLoading() {
-        viewModel.loadCustomers()
+        viewModel.loadCustomers(offset: 0)
     }
     
     
@@ -120,21 +120,32 @@ extension CustomerListView: NSTableViewDataSource, NSTableViewDelegate {
    
     func numberOfRows(in tableView: NSTableView) -> Int {
         if viewModel == nil {return 0}
-        return self.viewModel.model.registros.count
+        return self.viewModel.model.customers.count
+    }
+    
+    func tableView(_ tableView: NSTableView,
+            willDisplayCell cell: Any,
+                        for tableColumn: NSTableColumn?,
+                        row: Int){
+        print("")
+    }
+    
+    func tableView(_ tableView: NSTableView, mouseDownInHeaderOf tableColumn: NSTableColumn) {
+        print("sadf")
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView?{
       
         let cell : CustomerListCell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "defaultRow"), owner: self) as! CustomerListCell
         
-        let customer = self.viewModel.model.registros[row]
-    
-        let apellido = customer.surname.capitalized
-        let nombre = customer.name.capitalized
-        let createdAt = customer.createdAt.toDate
-        let createdAtAgo = createdAt?.desdeHace(numericDates: true)
+        let customer = self.viewModel.model.customers[row]
+        
+        let apellido = customer.lastName.capitalized
+        let nombre = customer.firstName.capitalized
+        let createdAt = customer.timestamp.toDate1970
+        let createdAtAgo = createdAt.desdeHace(numericDates: true)
         cell.primerRenglonCell.stringValue = apellido + ", " + nombre
-        cell.timeAgoCell.stringValue = createdAtAgo ?? ""
+        cell.timeAgoCell.stringValue = createdAtAgo
         
         viewModel.loadImage(row: row, customer: customer) { (data) in
             DispatchQueue.main.async {
@@ -146,31 +157,29 @@ extension CustomerListView: NSTableViewDataSource, NSTableViewDelegate {
             }
         }
     
-        let dni = self.viewModel.model.registros[row].dni
         cell.segundoRenglonCell.stringValue = nombre
         
+
+        let count = viewModel.model.customers.count
+        if row == (count - 1){
+            if count < viewModel.getTotalItems() {
+                viewModel.loadCustomers(offset: count)
+            }
+        }
         
          return cell
         
     }
-    
-    func tableView(_ tableView: NSTableView, willDisplayCell cell: Any, for tableColumn: NSTableColumn?, row: Int) {
-//        let count = viewModel.model.registros.count
-//        if row == (count - 1){
-//            if count < viewModel.getTotalItems() {
-//                viewModel.LoadMatches(offset: items.count)
-//            }
-//        }
-    }
+  
     
     func tableViewSelectionDidChange(_ notification: Notification) {
         if let myTable = notification.object as? NSTableView {
             
             if myTable == tableViewSocio {
                 let posicion = myTable.selectedRow
-                self.viewModel.model.selectedCustomer = viewModel.model.registros[posicion]
+                self.viewModel.model.selectedCustomer = viewModel.model.customers[posicion]
                 
-                self.onSelectedCustomer?(viewModel.model.registros[posicion])
+                self.onSelectedCustomer?(viewModel.model.customers[posicion])
             }
             
         }
