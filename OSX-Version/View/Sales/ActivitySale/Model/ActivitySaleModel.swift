@@ -15,10 +15,10 @@ struct ActivitySaleModel {
     var fromDate = Date()
     var endDate = Date()
     
-    var activities = [ActivityModel]()
+    var activities = [ActivityModel.Register]()
     var types = [ServiceTypeModel]()
-    var discounts = [DiscountModel]()
+    var discounts = [DiscountModel.Register]()
     var selectedType : ServiceTypeModel?
-    var selectedActivity : ActivityModel?
-    var selectedDiscount : DiscountModel?
+    var selectedActivity : ActivityModel.Register?
+    var selectedDiscount : DiscountModel.Register?
 }

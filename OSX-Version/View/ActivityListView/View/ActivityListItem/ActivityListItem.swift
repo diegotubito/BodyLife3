@@ -8,10 +8,10 @@
 
 import Cocoa
 
-class ActivityListItem: GenericCollectionItem<ActivityModel> {
+class ActivityListItem: GenericCollectionItem<ActivityModel.Register> {
     @IBOutlet weak var titleLabel: NSTextField!
        
-       override var item : ActivityModel! {
+    override var item : ActivityModel.Register! {
            didSet {
             titleLabel.stringValue = String(item.days)
            }

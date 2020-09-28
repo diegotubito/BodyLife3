@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class ArticleViewItem: GenericCollectionItem<ArticleModel> {
+class ArticleViewItem: GenericCollectionItem<ArticleModel.Register> {
     var colorStockWarning = NSColor.yellow
     var colorStockEmpty = Constants.Colors.Red.ematita
     var colorStockOK = Constants.Colors.Green.fern
@@ -19,7 +19,7 @@ class ArticleViewItem: GenericCollectionItem<ArticleModel> {
     @IBOutlet weak var productName : NSTextField!
     @IBOutlet weak var productPrice : NSTextField!
     
-    override var item : ArticleModel! {
+    override var item : ArticleModel.Register! {
         didSet {
             productName.stringValue = item.name
             productPrice.stringValue = item.price.currencyFormat(decimal: 2)

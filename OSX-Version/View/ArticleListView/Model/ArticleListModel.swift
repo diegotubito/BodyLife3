@@ -9,5 +9,5 @@
 import Foundation
 
 struct ArticleListModel {
-    var products = [ArticleModel]()
+    var products = [ArticleModel.Register]()
 }

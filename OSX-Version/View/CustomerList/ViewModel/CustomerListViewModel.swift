@@ -21,29 +21,24 @@ class CustomerListViewModel: CustomerListViewModelContract {
     
     func loadCustomers() {
         _view.showLoading()
-        let path = Paths.customerBrief
-        ServerManager.ReadAll(path: path) { (array, error) in
-            
-            self._view.hideLoading()
-            if error != nil {
+        let url = "http://127.0.0.1:2999/v1/customer?offset=0&limit=10"
+        let _services = NetwordManager()
+        _services.get(url: url, response: { (data, error) in
+            guard error == nil, let data = data else {
                 self._view.showError()
                 return
             }
+            
             do {
-                if array?.count != nil {
-                    let data = try JSONSerialization.data(withJSONObject: array!, options: [])
-                    let registros = try JSONDecoder().decode([BriefCustomer].self, from: data)
-                    let fileredArray = registros.sorted(by: { $0.createdAt > $1.createdAt })
-                    self.model.registros = fileredArray
-                    self._view.showSuccess()
-                    
-                }
+                let response = try JSONDecoder().decode(CustomerListModel.Response.self, from: data) 
+                self.model.response = response
+                self._view.showSuccess()
             } catch {
+                print(error)
                 self._view.showError()
             }
-            
-            
-        }
+
+        })
     }
     
     func loadImage(row: Int, customer: BriefCustomer, completion: @escaping (String?) -> ()) {
@@ -67,6 +62,11 @@ class CustomerListViewModel: CustomerListViewModelContract {
             }
             
         }
+    }
+    
+    
+    func getTotalItems() -> Int {
+        return model.response?.total_amount ?? 0
     }
 }
 

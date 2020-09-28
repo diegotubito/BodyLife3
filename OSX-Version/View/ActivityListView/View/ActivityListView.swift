@@ -8,11 +8,11 @@
 
 import Cocoa
 
-class ActivityListView : GenericCollectionView<ActivityListItem, ActivityModel> {
+class ActivityListView : GenericCollectionView<ActivityListItem, ActivityModel.Register> {
     
     var viewModel : ActivityListViewModelContract!
     
-    var didSelectActivity : ((ActivityModel?) -> Void)?
+    var didSelectActivity : ((ActivityModel.Register?) -> Void)?
     
     override func commonInit() {
         super .commonInit()

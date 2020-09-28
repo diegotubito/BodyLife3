@@ -23,9 +23,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
         Connect.StartListening()
         
-//        ImportDatabase.Customer.SaveFirebaseCustomersToMongoDB()
-//        ImportDatabase.Carnet.SaveFirebaseCarnetToMongoDB()
-            
+//        ImportDatabase.Discount.MigrateToMongoDB()
+//        ImportDatabase.Activity.MigrateToMongoDB()
+//        ImportDatabase.Period.MigrateToMongoDB()
+//        ImportDatabase.Article.MigrateToMongoDB()
+        
+//        ImportDatabase.Customer.MigrateToMongoDB()
+//        ImportDatabase.Carnet.MigrateToMongoDB()
+//        ImportDatabase.VentaArticulo.MigrateToMongoDB()
+ 
     }
     
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {

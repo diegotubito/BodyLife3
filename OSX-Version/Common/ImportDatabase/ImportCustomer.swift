@@ -11,6 +11,8 @@ import Foundation
 extension ImportDatabase {
     class Customer {
         
+        
+        
         static private func getCustomers() -> [CustomerModel.Full]? {
             guard let json = ImportDatabase.loadBodyLife() else {
                 return nil
@@ -47,17 +49,18 @@ extension ImportDatabase {
             for i in oldSocios {
                 let date = i.fechaIngreso.toDate(formato: "dd-MM-yyyy HH:mm:ss")
                 let dateDouble = date?.timeIntervalSince1970 ?? Date().timeIntervalSince1970
-                
-                let newCustomer = CustomerModel.Full(uid: i.childID,
+                let _id = ImportDatabase.codeUID(i.childID)
+                let newCustomer = CustomerModel.Full(_id: _id,
+                                                     uid: i.childID,
                                                      timestamp: dateDouble,
                                                      dni: i.dni,
-                                                     lastName: i.apellido.condenseWhitespace(),
-                                                     firstName: i.nombre.condenseWhitespace(),
+                                                     lastName: i.apellido.condenseWhitespace().capitalized,
+                                                     firstName: i.nombre.condenseWhitespace().capitalized,
                                                      thumbnailImage: i.childID,
-                                                     street: i.direccion.condenseWhitespace(),
-                                                     locality: i.localidad.condenseWhitespace(),
-                                                     state: "Buenos Aires",
-                                                     country: "Argentina",
+                                                     street: i.direccion.condenseWhitespace().capitalized,
+                                                     locality: i.localidad.condenseWhitespace().capitalized,
+                                                     state: "Buenos Aires".capitalized,
+                                                     country: "Argentina".capitalized,
                                                      email: i.correo,
                                                      phoneNumber: i.telefono,
                                                      user: "SUPER_ROLE",
@@ -70,7 +73,7 @@ extension ImportDatabase {
             
         }
         
-        static private func getParameters(_ customer: CustomerModel.Full) -> [String : Any] {
+        static private func encodeRegister(_ customer: CustomerModel.Full) -> [String : Any] {
             let data = try? JSONEncoder().encode(customer)
             let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String : Any]
             return json!
@@ -87,7 +90,7 @@ extension ImportDatabase {
             return address
         }
         
-        static func SaveFirebaseCustomersToMongoDB() {
+        static func MigrateToMongoDB() {
             guard let customers = ImportDatabase.Customer.getCustomers() else {
                 return
             }
@@ -97,7 +100,7 @@ extension ImportDatabase {
             for (x,customer) in customers.enumerated() {
                 let semasphore = DispatchSemaphore(value: 0)
                 
-                let body = getParameters(customer)
+                let body = encodeRegister(customer)
                 _services.post(url: url, body: body) { (data, error) in
                     guard data != nil else {
                         print("no se guardo \(customer.dni) error")

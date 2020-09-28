@@ -46,12 +46,12 @@ class ActivitySaleViewModel : ActivitySaleViewModelContract {
                 if let activityJSON = json["activity"] as? [String : Any] {
                     let activityArray = ServerManager.jsonArray(json: activityJSON)
                     let dataActivity = try JSONSerialization.data(withJSONObject: activityArray, options: [])
-                    self.model.activities = try JSONDecoder().decode([ActivityModel].self, from: dataActivity)
+                    self.model.activities = try JSONDecoder().decode([ActivityModel.Register].self, from: dataActivity)
                 }
                 if let discountJSON = json["discount"] as? [String : Any] {
                     let discountArray = ServerManager.jsonArray(json: discountJSON)
                     let dataDiscount = try JSONSerialization.data(withJSONObject: discountArray, options: [])
-                    self.model.discounts = try JSONDecoder().decode([DiscountModel].self, from: dataDiscount)
+                    self.model.discounts = try JSONDecoder().decode([DiscountModel.Register].self, from: dataDiscount)
                 }
                 self._view.showSuccess()
             } catch {
@@ -61,7 +61,7 @@ class ActivitySaleViewModel : ActivitySaleViewModelContract {
  
     }
     
-    func getActivities() -> [ActivityModel] {
+    func getActivities() -> [ActivityModel.Register] {
         
         guard let selectedType = model.selectedType else {
             return []
@@ -87,7 +87,7 @@ class ActivitySaleViewModel : ActivitySaleViewModelContract {
         return sorted
     }
     
-    func getDiscounts() -> [DiscountModel] {
+    func getDiscounts() -> [DiscountModel.Register] {
         let discounts = model.discounts
         let enabled = discounts.filter { (discount) -> Bool in
             return discount.isEnabled
@@ -138,12 +138,12 @@ class ActivitySaleViewModel : ActivitySaleViewModelContract {
         _view.setPopupDiscountByTitle(availableDiscounts[0].name)
     }
     
-    func setSelectedActivity(_ value: ActivityModel?) {
+    func setSelectedActivity(_ value: ActivityModel.Register?) {
         model.selectedActivity = value
         _view.adjustDates()
     }
     
-    func getSelectedActivity() -> ActivityModel? {
+    func getSelectedActivity() -> ActivityModel.Register? {
         return model.selectedActivity
     }
     

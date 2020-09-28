@@ -36,7 +36,7 @@ class ArticleListViewModel : ArticleListViewModelContract {
             do {
                 //this block sometime cause a crush
                 let data = try JSONSerialization.data(withJSONObject: jsonArray, options: [])
-                let articles = try JSONDecoder().decode([ArticleModel].self, from: data)
+                let articles = try JSONDecoder().decode([ArticleModel.Register].self, from: data)
                
                 self.model.products = articles
                 self.filterAndSort()
@@ -57,7 +57,7 @@ class ArticleListViewModel : ArticleListViewModelContract {
         model.products = sorted
     }
     
-    func getProducts() -> [ArticleModel] {
+    func getProducts() -> [ArticleModel.Register] {
         
         return model.products
     }

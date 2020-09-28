@@ -14,7 +14,7 @@ class ArticleSellView: XibViewBlurBackground {
     var selectedCustomer : BriefCustomer!
     var myActivityIndicator : NSProgressIndicator!
      
-    var selectedItem : ArticleModel? {
+    var selectedItem : ArticleModel.Register? {
         didSet {
             buttonAccept.isEnabled = selectedItem != nil ? true : false
         }

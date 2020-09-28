@@ -154,6 +154,15 @@ extension CustomerListView: NSTableViewDataSource, NSTableViewDelegate {
         
     }
     
+    func tableView(_ tableView: NSTableView, willDisplayCell cell: Any, for tableColumn: NSTableColumn?, row: Int) {
+//        let count = viewModel.model.registros.count
+//        if row == (count - 1){
+//            if count < viewModel.getTotalItems() {
+//                viewModel.LoadMatches(offset: items.count)
+//            }
+//        }
+    }
+    
     func tableViewSelectionDidChange(_ notification: Notification) {
         if let myTable = notification.object as? NSTableView {
             

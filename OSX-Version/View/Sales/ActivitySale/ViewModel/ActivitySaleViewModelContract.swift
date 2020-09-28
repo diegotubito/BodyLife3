@@ -13,15 +13,15 @@ protocol ActivitySaleViewModelContract {
     
     func setCustomerStatus(selectedCustomer: BriefCustomer, selectedStatus: CustomerStatus?)
     func loadServices()
-    func getActivities() -> [ActivityModel]
+    func getActivities() -> [ActivityModel.Register]
     func getTypes() -> [ServiceTypeModel]
-    func getDiscounts() -> [DiscountModel]
+    func getDiscounts() -> [DiscountModel.Register]
     func selectTypeAutomatically()
     func selectDiscountAutomatically()
     func selectType(_ value: Int)
     func selectDiscount(_ value: Int)
-    func setSelectedActivity(_ value: ActivityModel?)
-    func getSelectedActivity() -> ActivityModel?
+    func setSelectedActivity(_ value: ActivityModel.Register?)
+    func getSelectedActivity() -> ActivityModel.Register?
     func getProperFromDate() -> Date
     func getTotals() -> (amount: Double, amountDiscounted: Double)
     func validate() -> Bool

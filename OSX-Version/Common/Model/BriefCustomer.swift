@@ -30,7 +30,8 @@ class CustomerModel {
         var childIDUsuario: String?
         var childID: String
     }
-    struct Full : Encodable {
+    struct Full : Encodable, Decodable {
+        var _id: String
         var uid : String
         var timestamp : Double
         var dni : String
@@ -47,6 +48,30 @@ class CustomerModel {
         var longitude: Double
         var latitude: Double
     }
+    
+    struct Request : Encodable, Decodable {
+        var _id: String
+        var uid : String
+        var timestamp : Double
+        var dni : String
+        var lastName : String
+        var firstName : String
+        var thumbnailImage : String?
+        var email : String
+        var phoneNumber : String
+        var user: String
+    }
+    
+    struct Location : Decodable {
+        var coordindates : [Double]
+        var street : String
+        var locality : String
+        var state : String
+        var country : String
+    }
+    
+    
+    
 }
 struct BriefCustomer: Decodable {
     var childID : String
@@ -70,14 +95,46 @@ struct CustomerStatus: Decodable {
 }
 
 class SellModel {
+    
+    struct OldArticulo: Decodable {
+        var childID : String
+        var descripcionProducto : String
+        var precio : Double?
+        var childIDSocio : String
+        var childIDProducto : String
+        var fechaCreacion : String
+        var esAnulado : Bool
+        var precioCompra : Double
+        var precioVenta : Double
+        var childIDDescuento : String?
+    }
+    
     struct Old : Decodable {
         var childID : String
         var precio : Double
         var childIDSocio : String
+        var childIDActividad : String
+        var childIDDescuento : String?
+        var childIDPeriodo : String
         var fechaCreacion : String
         var esAnulado : Bool
         var fechaInicial : String
         var fechaVencimiento : String
+    }
+    
+    struct NewRegister: Encodable, Decodable {
+        var _id: String
+        var customerId : String
+        var discountId : String?
+        var activityId : String?
+        var articleId : String?
+        var periodId : String?
+        var timestamp : Double
+        var fromDate : Double?
+        var toDate : Double?
+        var quantity : Int?
+        var isEnabled : Bool
+        var operationCategory : String
     }
     
     struct Register: Encodable, Decodable {

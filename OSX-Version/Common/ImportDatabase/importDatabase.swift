@@ -27,12 +27,30 @@ class JSONFile {
         return nil
         
     }
+    
+   
 }
 
 class ImportDatabase : JSONFile{
     
     static let instance = ImportDatabase()
     
+    static func codeUID(_ value: String) -> String {
+        if value.isEmpty {
+            return "000000000000000000000000"
+        }
+        let str = value
+        let data = Data(str.utf8)
+        let hexString = data.map{ String(format:"%02x", $0) }.joined()
+        var rounded = hexString.prefix(24)
+        if rounded.count < 24 {
+            let dif = (24 - rounded.count)
+            for x in 0...(dif - 1) {
+                rounded.append("0")
+            }
+        }
+        return String(rounded)
+    }
 }
 
 
