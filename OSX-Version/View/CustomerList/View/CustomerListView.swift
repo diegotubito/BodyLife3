@@ -79,10 +79,7 @@ class CustomerListView: NSView {
     func startLoading() {
         viewModel.loadCustomers(offset: 0)
     }
-    
-    
 }
-
 
 extension CustomerListView: CustomerListViewContract {
     func showSuccess() {
@@ -109,12 +106,8 @@ extension CustomerListView: CustomerListViewContract {
         DispatchQueue.main.async {
             self.myActivityIndicator.stopAnimation(nil)
         }
-        
     }
-    
-    
 }
-
 
 extension CustomerListView: NSTableViewDataSource, NSTableViewDelegate {
    
@@ -122,18 +115,7 @@ extension CustomerListView: NSTableViewDataSource, NSTableViewDelegate {
         if viewModel == nil {return 0}
         return self.viewModel.model.customers.count
     }
-    
-    func tableView(_ tableView: NSTableView,
-            willDisplayCell cell: Any,
-                        for tableColumn: NSTableColumn?,
-                        row: Int){
-        print("")
-    }
-    
-    func tableView(_ tableView: NSTableView, mouseDownInHeaderOf tableColumn: NSTableColumn) {
-        print("sadf")
-    }
-    
+   
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView?{
       
         let cell : CustomerListCell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "defaultRow"), owner: self) as! CustomerListCell
@@ -146,20 +128,26 @@ extension CustomerListView: NSTableViewDataSource, NSTableViewDelegate {
         let createdAtAgo = createdAt.desdeHace(numericDates: true)
         cell.primerRenglonCell.stringValue = apellido + ", " + nombre
         cell.timeAgoCell.stringValue = createdAtAgo
-        
-        viewModel.loadImage(row: row, customer: customer) { (data) in
-            DispatchQueue.main.async {
-                if let imageString = data, let image = imageString.convertToImage {
-                    cell.fotoCell.image = image
-                } else {
-                    cell.fotoCell.image = #imageLiteral(resourceName: "empty")
-                }
-            }
+        cell.counterLabel.stringValue = String(row + 1)
+        if let image = customer.thumbnailImage?.convertToImage {
+            cell.fotoCell.image = image
+        } else {
+            cell.fotoCell.image = #imageLiteral(resourceName: "empty")
         }
-    
-        cell.segundoRenglonCell.stringValue = nombre
+//        viewModel.loadImage(row: row, customer: customer) { (data) in
+//            DispatchQueue.main.async {
+//                if let imageString = data, let image = imageString.convertToImage {
+//                    cell.fotoCell.image = image
+//                } else {
+//                    cell.fotoCell.image = #imageLiteral(resourceName: "empty")
+//                }
+//            }
+//        }
         
-
+       
+    
+        cell.segundoRenglonCell.stringValue = "DNI: \(customer.dni)"
+    
         let count = viewModel.model.customers.count
         if row == (count - 1){
             if count < viewModel.getTotalItems() {
@@ -167,8 +155,7 @@ extension CustomerListView: NSTableViewDataSource, NSTableViewDelegate {
             }
         }
         
-         return cell
-        
+        return cell
     }
   
     
@@ -181,11 +168,8 @@ extension CustomerListView: NSTableViewDataSource, NSTableViewDelegate {
                 
                 self.onSelectedCustomer?(viewModel.model.customers[posicion])
             }
-            
         }
-        
     }
-    
     
     //estos dos bloques son para cambiar el color y estilo de la seleccion
     class MyNSTableRowView: NSTableRowView {
@@ -203,7 +187,6 @@ extension CustomerListView: NSTableViewDataSource, NSTableViewDelegate {
             
         }
     }
-    
     
     func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
         return MyNSTableRowView()

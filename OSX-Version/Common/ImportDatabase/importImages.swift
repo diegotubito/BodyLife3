@@ -1,15 +1,16 @@
 //
-//  ImportCustomer.swift
+//  importImages.swift
 //  OSX-Version
 //
-//  Created by David Diego Gomez on 27/09/2020.
+//  Created by David Diego Gomez on 29/09/2020.
 //  Copyright © 2020 David Diego Gomez. All rights reserved.
 //
 
 import Foundation
+import Cocoa
 
 extension ImportDatabase {
-    class Customer {
+    class Image {
         
         
         
@@ -49,8 +50,9 @@ extension ImportDatabase {
             for i in oldSocios {
                 let date = i.fechaIngreso.toDate(formato: "dd-MM-yyyy HH:mm:ss")
                 let dateDouble = date?.timeIntervalSince1970 ?? Date().timeIntervalSince1970
-                let dob = i.fechaNacimiento.toDate(formato: "dd-MM-yyyy")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970
                 let _id = ImportDatabase.codeUID(i.childID)
+                let dob = i.fechaNacimiento.toDate(formato: "dd-MM-yyyy")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970
+      
                 let newCustomer = CustomerModel.Full(_id: _id,
                                                      uid: i.childID,
                                                      timestamp: dateDouble,
@@ -93,49 +95,88 @@ extension ImportDatabase {
         }
         
         static func MigrateToMongoDB() {
-            guard let customers = ImportDatabase.Customer.getCustomers() else {
+            guard let customers = ImportDatabase.Image.getCustomers() else {
                 return
             }
-            let url = "http://127.0.0.1:2999/v1/customer"
-            let _services = NetwordManager()
-            var notAdded = 0
-            for (x,customer) in customers.enumerated() {
-                let semasphore = DispatchSemaphore(value: 0)
-                
-                let body = encodeRegister(customer)
-                _services.post(url: url, body: body) { (data, error) in
-                    guard data != nil else {
-                        print("no se guardo \(customer.dni) error")
-                        print(body)
-                        notAdded += 1
-                        print("not added \(notAdded)")
-                        semasphore.signal()
-                        return
+            var counter = 0
+            var notLoaded = 0
+            for customer in customers {
+                let imageSemasphore = DispatchSemaphore(value: 0
+                )
+                ImportDatabase.Image.downloadImage(childID: customer.uid) { (thumb, big, err) in
+                    if err != nil {
+                        imageSemasphore.signal()
+                    } else {
+
+                        ImportDatabase.Image.updateCustomer(uid: customer._id, thumbnail: thumb ?? "") { (success) in
+                            if success {
+                                counter += 1
+                                print("\(counter)/\(customers.count)")
+                            } else {
+                                notLoaded += 1
+                                print("not updated \(notLoaded)")
+                            }
+                            imageSemasphore.signal()
+                        }
+                        
                     }
-                    semasphore.signal()
                 }
+                _ = imageSemasphore.wait(timeout: .distantFuture)
                 
-                _ = semasphore.wait(timeout: .distantFuture)
-                print("\(x + 1)/\(customers.count)")
             }
-            print("not added \(notAdded)")
         }
         
-        
-        static func downloadImage() {
-            let url = "http://127.0.0.1:2999/v1/downloadImage?filename=socios/-0JEaB5GvklUIoBcxhGo.jpeg"
+        static func updateCustomer(uid: String, thumbnail: String, completion: @escaping (Bool) -> ()) {
+            let url = "http://127.0.0.1:2999/v1/customer"
             let _services = NetwordManager()
             
+            if thumbnail.isEmpty {
+                completion(false)
+                return
+            }
+       
+            let body = ["uid": uid,
+                        "thumbnailImage": thumbnail]
+            
+            _services.update(url: url, body: body) { (data, error) in
+                if error != nil {
+                    completion(false)
+                    return
+                }
+                let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any]
+                
+                if let c = json?["customer"] as? [String: Any] {
+                    completion(true)
+                } else {
+                    completion(false)
+                }
+            }
+        }
+        
+        static func downloadImage(childID: String, completion: @escaping (String?, String?, Error?) -> ()) {
+            let url = "http://127.0.0.1:2999/v1/downloadImage?filename=socios/\(childID).jpeg"
+            let _services = NetwordManager()
+
             _services.downloadImageFromUrl(url: url) { (image) in
-                print("success")
+                guard let image = image else {
+                    completion(nil, nil, nil)
+                    return
+                }
+                
+                let thumb = image.crop(size: NSSize(width: 50, height: 50))
+                let thumbBase64 = thumb?.convertToBase64
+                
+                let medium = image.crop(size: NSSize(width: 150, height: 150))
+                let mediumBase64 = medium?.convertToBase64
+                
+                completion(thumbBase64, mediumBase64, nil)
             } fail: { (err) in
-                print("error")
+                completion(nil, nil, err)
             }
 
         }
+
     }
     
-    
-  
     
 }

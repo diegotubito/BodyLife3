@@ -22,7 +22,7 @@ class CustomerListViewModel: CustomerListViewModelContract {
     func loadCustomers(offset: Int) {
         print("loading...")
         _view.showLoading()
-        let url = "http://127.0.0.1:2999/v1/customer?offset=\(offset)&limit=30"
+        let url = "http://127.0.0.1:2999/v1/customer?offset=\(offset)&limit=50"
         let _services = NetwordManager()
         _services.get(url: url, response: { (data, error) in
             self._view.hideLoading()
@@ -59,20 +59,16 @@ class CustomerListViewModel: CustomerListViewModelContract {
                 completion(nil)
                 return
             }
-          
             guard let data = data else {
                 print("error al cargar string image")
                 completion(nil)
                 return
             }
-            
             if let imageString = data["thumbnailImage"] as? String {
                  completion(imageString)
             }
-            
         }
     }
-    
     
     func getTotalItems() -> Int {
         return model.response?.total_amount ?? 0

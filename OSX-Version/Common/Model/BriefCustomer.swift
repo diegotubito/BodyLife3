@@ -47,6 +47,7 @@ class CustomerModel {
         var user: String
         var longitude: Double
         var latitude: Double
+        var dob: Double
     }
     
     struct Customer : Encodable, Decodable {

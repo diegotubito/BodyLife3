@@ -31,6 +31,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 //        ImportDatabase.Customer.MigrateToMongoDB()
 //        ImportDatabase.Carnet.MigrateToMongoDB()
 //        ImportDatabase.VentaArticulo.MigrateToMongoDB()
+//        ImportDatabase.Image.MigrateToMongoDB()
  
     }
     

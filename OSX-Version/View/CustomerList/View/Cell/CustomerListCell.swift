@@ -11,7 +11,8 @@ import Cocoa
 class CustomerListCell: NSTableCellView {
     @IBOutlet weak var primerRenglonCell: NSTextField!
     @IBOutlet weak var timeAgoCell: NSTextField!
-    
+    @IBOutlet weak var counterLabel: NSTextField!
+ 
     @IBOutlet weak var segundoRenglonCell: NSTextField!
     @IBOutlet weak var tercerRenglonCell: NSTextField!
     @IBOutlet weak var fotoCell: NSButton!
