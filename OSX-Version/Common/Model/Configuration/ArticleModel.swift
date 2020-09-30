@@ -35,6 +35,7 @@ class ArticleModel {
         var isEnabled : Bool
         var createdAt : Double
         var price : Double
+        var priceList: Double
         var stock : Int
         var minStock : Int
         var maxStock : Int

@@ -12,7 +12,7 @@ class CustomerStatusViewModel: CustomerStatusViewModelContract {
     var model: CustomerStatusModel!
     var _view : CustomerStatusViewContract!
     
-    required init(withView view: CustomerStatusViewContract, receivedCustomer: BriefCustomer) {
+    required init(withView view: CustomerStatusViewContract, receivedCustomer: CustomerModel.Customer) {
         self._view = view
         self.model = CustomerStatusModel(receivedCustomer: receivedCustomer)
     }
@@ -23,7 +23,7 @@ class CustomerStatusViewModel: CustomerStatusViewModelContract {
     }
     
     func load() {
-        let path = "\(Paths.customerStatus):\(model.receivedCustomer.childID)"
+        let path = "\(Paths.customerStatus):\(model.receivedCustomer.uid)"
         
         ServerManager.Read(path: path) { (value:CustomerStatus?, error) in
             self._view.hideLoading()

@@ -22,21 +22,25 @@ class SellRegisterCell: NSTableCellView {
         // Drawing code here.
     }
     
-    func displayCell(register: SellModel.Register) {
-        let totalPayment = register.totalPayment ?? 0
-        let balance = register.balance ?? 0
-        
-        labelCreatedAt.stringValue = (register.createdAt.toDate?.toString(formato: "dd-MM-yyy HH:mm"))! + "hs."
-        labelDisplayName.stringValue = register.displayName
-        labelPrice.stringValue = register.amount.currencyFormat(decimal: 2)
+    func displayCell(sell: RegisterListModel.ViewModel?) {
+        guard let sell = sell else {
+            return
+        }
+        let totalPayment = sell.totalPayment ?? 0
+        let balance = sell.balance ?? 0
+        let timestamp = sell.timestamp.toDate1970.toString(formato: "dd-MM-yyyy - HH:mm")
+        labelCreatedAt.stringValue = timestamp + "HS."
+        let labelName = sell.operationCategory == "articulo" ? (sell.article?.description ?? "mmm") : sell.activity?.description ?? "Activitidad sin descripción"
+        labelDisplayName.stringValue = labelName
+        labelPrice.stringValue = sell.price.currencyFormat(decimal: 2)
         labelTotalPayment.stringValue = totalPayment.currencyFormat(decimal: 2)
         labelSaldo.stringValue = balance.currencyFormat(decimal: 2)
         
-        alphaValue = register.isEnabled ? 1.0 : 0.3
+        alphaValue = sell.isEnabled ? 1.0 : 0.3
         labelSaldo.textColor = balance < 0 ? Constants.Colors.Red.ematita : NSColor.lightGray
         let articleImage = #imageLiteral(resourceName: "beverages-supplier")
         let activityImage = #imageLiteral(resourceName: "carrito")
-        imageTypeOfRegister.image = register.childIDArticle != nil ? articleImage : activityImage
+        imageTypeOfRegister.image = sell.operationCategory == "articulo" ? articleImage : activityImage
     }
    
 }

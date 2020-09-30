@@ -56,17 +56,20 @@ extension ImportDatabase {
                 let article = ImportDatabase.codeUID(i.childIDProducto)
                 
                 let newRegister = SellModel.NewRegister(_id: _id,
-                                                        customerId: customerId,
-                                                        discountId: dicountID,
-                                                        activityId: nil,
-                                                        articleId: article,
-                                                        periodId: nil,
+                                                        customer: customerId,
+                                                        discount: dicountID,
+                                                        activity: nil,
+                                                        article: article,
+                                                        period: nil,
                                                         timestamp: createdAt,
                                                         fromDate: nil,
                                                         toDate: nil,
-                                                        quantity: nil,
+                                                        quantity: i.cantidadVendida,
                                                         isEnabled: true,
-                                                        operationCategory: "articulo")
+                                                        operationCategory: "articulo",
+                                                        price: i.precioVenta,
+                                                        priceList: i.precioCompra,
+                                                        description: i.descripcionProducto)
                 
                 result.append(newRegister)
             }
@@ -92,7 +95,7 @@ extension ImportDatabase {
                 let body = ImportDatabase.VentaArticulo.encodeRegister(articulo)
                 _services.post(url: url, body: body) { (data, error) in
                     guard data != nil else {
-                        print("no se guardo \(articulo.customerId) error")
+                        print("no se guardo \(articulo.customer) error")
                         print(body)
                         notAdded += 1
                         print("not added \(notAdded)")

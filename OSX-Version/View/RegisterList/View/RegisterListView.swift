@@ -53,7 +53,7 @@ class RegisterListView: XibViewWithAnimation , RegisterListViewContract{
         }
     }
     
-    func setSelectedCustomer(customer: BriefCustomer) {
+    func setSelectedCustomer(customer: CustomerModel.Customer) {
         viewModel.setSelectedCustomer(customer: customer)
     }
     
@@ -65,7 +65,7 @@ class RegisterListView: XibViewWithAnimation , RegisterListViewContract{
             return
         }
        
-        let createdAt = selection.createdAt.toDate
+        let createdAt = selection.timestamp.toDate
         let today = Calendar.current.component(.day, from: Date())
         let createdDay = Calendar.current.component(.day, from: createdAt!)
         let selectedRegister = viewModel.getSelectedRegister()
@@ -102,15 +102,17 @@ class RegisterListView: XibViewWithAnimation , RegisterListViewContract{
 
 extension RegisterListView: NSTableViewDataSource, NSTableViewDelegate {
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return viewModel.getRegisters().count
+        return viewModel.getRegisters()?.sells.count ?? 0
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView?{
         
         let cell : SellRegisterCell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "defaultRow"), owner: self) as! SellRegisterCell
-        let registers = viewModel.getRegisters()
-        if row <= registers.count{
-            cell.displayCell(register: viewModel.getRegisters()[row])
+        let sells = viewModel
+            .getRegisters()?.sells
+        let count = sells?.count ?? 0
+        if row <= count{
+            cell.displayCell(sell: sells?[row])
         } else {
             print("safe exit")
         }
@@ -125,7 +127,9 @@ extension RegisterListView: NSTableViewDataSource, NSTableViewDelegate {
                 viewModel.setSelectedRegister(nil)
                 return
             }
-            let selectedRegister = viewModel.getRegisters()[myTable.selectedRow]
+            
+            let sells = viewModel.getRegisters()?.sells
+            let selectedRegister = sells?[myTable.selectedRow]
             viewModel.setSelectedRegister(selectedRegister)
             
         }

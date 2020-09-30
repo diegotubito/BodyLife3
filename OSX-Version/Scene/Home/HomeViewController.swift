@@ -20,7 +20,7 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
     var paymentView : PaymentView!
     var sellProductView : ArticleSellView!
     var timerForDelayCustomerSelection : Timer!
-    var selectedCustomer : BriefCustomer?
+    var selectedCustomer : CustomerModel.Customer?
     // MARK: Object lifecycle
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {

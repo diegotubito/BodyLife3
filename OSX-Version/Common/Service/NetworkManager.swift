@@ -191,8 +191,8 @@ class NetwordManager {
         var session = URLSession.shared
       
         let sessionConfig = URLSessionConfiguration.default
-        sessionConfig.timeoutIntervalForRequest = 5
-        sessionConfig.timeoutIntervalForResource = 5
+        sessionConfig.timeoutIntervalForRequest = 20
+        sessionConfig.timeoutIntervalForResource = 20
         session = URLSession(configuration: sessionConfig)
         
           

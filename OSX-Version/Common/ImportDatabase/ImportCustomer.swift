@@ -67,7 +67,9 @@ extension ImportDatabase {
                                                      user: "SUPER_ROLE",
                                                      longitude: 0.0,
                                                      latitude: 0.0,
-                                                     dob: dob)
+                                                     dob: dob,
+                                                     genero: i.genero,
+                                                     obraSocial: i.obraSocial ?? "")
                 customers.append(newCustomer)
             }
             

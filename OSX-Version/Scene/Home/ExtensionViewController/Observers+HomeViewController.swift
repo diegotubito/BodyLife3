@@ -20,15 +20,15 @@ extension HomeViewController {
     
     func customerListOberserver() {
         self.customerListView.onSelectedCustomer = { customer in
-//            self.selectedCustomer = customer
-//            self.timerForDelayCustomerSelection.invalidate()
-//            self.customerStatusView.showLoading()
-//            self.customerStatusView.titleLabel.stringValue = customer.surname + ", " + customer.name
-//            self.sellRegisterView.setSelectedCustomer(customer: customer)
-//            self.timerForDelayCustomerSelection = Timer.scheduledTimer(timeInterval: 0.25, target: self, selector: #selector(self.loadStatus), userInfo: nil, repeats: false)
-//            if self.sellRegisterView.isHidden {
-//                self.sellRegisterView.animateMode = .fadeIn
-//            }
+            self.selectedCustomer = customer
+            self.timerForDelayCustomerSelection.invalidate()
+            self.customerStatusView.showLoading()
+            self.customerStatusView.titleLabel.stringValue = customer.lastName + ", " + customer.firstName
+            self.sellRegisterView.setSelectedCustomer(customer: customer)
+            self.timerForDelayCustomerSelection = Timer.scheduledTimer(timeInterval: 0.25, target: self, selector: #selector(self.loadStatus), userInfo: nil, repeats: false)
+            if self.sellRegisterView.isHidden {
+                self.sellRegisterView.animateMode = .fadeIn
+            }
         }
     }
     
@@ -51,8 +51,8 @@ extension HomeViewController {
     
     func buttonObserverPayment() {
         self.sellRegisterView.onAddPayment = {
-            self.paymentView.viewmodel.setSelectedInfo(self.selectedCustomer!, self.sellRegisterView.viewModel.getSelectedRegister()!)
-            self.paymentView.showView()
+//            self.paymentView.viewmodel.setSelectedInfo(self.selectedCustomer!, self.sellRegisterView.viewModel.getSelectedRegister()!)
+//            self.paymentView.showView()
         }
     }
     
@@ -69,7 +69,7 @@ extension HomeViewController {
     }
 
     
-    func didSelectCustomer(customerSelected: BriefCustomer) {
+    func didSelectCustomer(customerSelected: CustomerModel.Customer) {
         DispatchQueue.main.async {
             self.showStatusCustomer()
             self.customerStatusView.viewModel = CustomerStatusViewModel(withView: self.customerStatusView, receivedCustomer: customerSelected)

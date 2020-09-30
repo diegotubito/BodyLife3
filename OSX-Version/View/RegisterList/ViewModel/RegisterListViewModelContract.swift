@@ -12,10 +12,10 @@ protocol RegisterListViewModelContract {
     init(withView view: RegisterListViewContract)
     func loadData()
     func cancelRegister()
-    func setSelectedCustomer(customer: BriefCustomer)
-    func getRegisters() -> [SellModel.Register]
-    func setSelectedRegister(_ selectedRegister: SellModel.Register?)
-    func getSelectedRegister() -> SellModel.Register?
+    func setSelectedCustomer(customer: CustomerModel.Customer)
+    func getRegisters() -> RegisterListModel.Response?
+    func setSelectedRegister(_ selectedRegister: RegisterListModel.ViewModel?)
+    func getSelectedRegister() -> RegisterListModel.ViewModel?
     func setIsEnabled(row: Int)
 
 }
@@ -25,7 +25,7 @@ protocol RegisterListViewContract {
     func showError(value: String)
     func showLoading()
     func hideLoading()
-    func setSelectedCustomer(customer: BriefCustomer)
+    func setSelectedCustomer(customer: CustomerModel.Customer)
     func updateButtonState()
     func cancelSuccess()
     func cancelError()

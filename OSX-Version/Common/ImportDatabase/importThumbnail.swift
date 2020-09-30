@@ -10,7 +10,7 @@ import Foundation
 import Cocoa
 
 extension ImportDatabase {
-    class Image {
+    class Thumbnail {
         
         
         
@@ -69,7 +69,9 @@ extension ImportDatabase {
                                                      user: "SUPER_ROLE",
                                                      longitude: 0.0,
                                                      latitude: 0.0,
-                                                     dob: dob)
+                                                     dob: dob,
+                                                     genero: i.genero,
+                                                     obraSocial: i.obraSocial ?? "")
                 customers.append(newCustomer)
             }
             
@@ -95,7 +97,7 @@ extension ImportDatabase {
         }
         
         static func MigrateToMongoDB() {
-            guard let customers = ImportDatabase.Image.getCustomers() else {
+            guard let customers = ImportDatabase.Thumbnail.getCustomers() else {
                 return
             }
             var counter = 0
@@ -103,12 +105,12 @@ extension ImportDatabase {
             for customer in customers {
                 let imageSemasphore = DispatchSemaphore(value: 0
                 )
-                ImportDatabase.Image.downloadImage(childID: customer.uid) { (thumb, big, err) in
+                ImportDatabase.Thumbnail.downloadImage(childID: customer.uid) { (thumb, big, err) in
                     if err != nil {
                         imageSemasphore.signal()
                     } else {
 
-                        ImportDatabase.Image.updateCustomer(uid: customer._id, thumbnail: thumb ?? "") { (success) in
+                        ImportDatabase.Thumbnail.saveNewThumbnail(uid: customer.uid, thumbnail: thumb ?? "") { (success) in
                             if success {
                                 counter += 1
                                 print("\(counter)/\(customers.count)")
@@ -122,6 +124,34 @@ extension ImportDatabase {
                     }
                 }
                 _ = imageSemasphore.wait(timeout: .distantFuture)
+                
+            }
+        }
+        
+        static func saveNewThumbnail(uid: String, thumbnail: String, completion: @escaping (Bool) -> ()) {
+            let url = "http://127.0.0.1:2999/v1/thumbnail"
+            let _services = NetwordManager()
+            
+            if thumbnail.isEmpty {
+                completion(false)
+                return
+            }
+       
+            let body = ["uid": uid,
+                        "thumbnailImage": thumbnail,
+                        "isEnabled" : true] as [String : Any]
+            
+            _services.post(url: url, body: body) { (data, error) in
+                if error != nil {
+                    completion(false)
+                    return
+                }
+                guard data != nil else {
+                    completion(false)
+                    return
+                }
+                
+                completion(true)
                 
             }
         }

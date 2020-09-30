@@ -60,17 +60,20 @@ extension ImportDatabase {
                 
                 
                 let newRegister = SellModel.NewRegister(_id: _id,
-                                                        customerId: customerId,
-                                                        discountId: dicountID,
-                                                        activityId: activityID,
-                                                        articleId: nil,
-                                                        periodId: periodID,
+                                                        customer: customerId,
+                                                        discount: dicountID,
+                                                        activity: activityID,
+                                                        article: nil,
+                                                        period: periodID,
                                                         timestamp: createdAt,
                                                         fromDate: fromDate,
                                                         toDate: toDate,
                                                         quantity: nil,
                                                         isEnabled: true,
-                                                        operationCategory: "activity")
+                                                        operationCategory: "activity",
+                                                        price: i.precio,
+                                                        priceList: nil,
+                                                        description: i.descripcionActividad + " - " + i.descripcionPeriodo)
                 
                 result.append(newRegister)
             }
@@ -96,7 +99,7 @@ extension ImportDatabase {
                 let body = ImportDatabase.Carnet.encodeRegister(carnet)
                 _services.post(url: url, body: body) { (data, error) in
                     guard data != nil else {
-                        print("no se guardo \(carnet.customerId) error")
+                        print("no se guardo \(carnet.customer) error")
                         print(body)
                         notAdded += 1
                         print("not added \(notAdded)")

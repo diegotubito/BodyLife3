@@ -129,20 +129,20 @@ extension CustomerListView: NSTableViewDataSource, NSTableViewDelegate {
         cell.primerRenglonCell.stringValue = apellido + ", " + nombre
         cell.timeAgoCell.stringValue = createdAtAgo
         cell.counterLabel.stringValue = String(row + 1)
-        if let image = customer.thumbnailImage?.convertToImage {
-            cell.fotoCell.image = image
-        } else {
-            cell.fotoCell.image = #imageLiteral(resourceName: "empty")
+      
+        cell.showLoading()
+        cell.fotoCell.image = #imageLiteral(resourceName: "empty")
+        
+        self.viewModel.loadImage(row: row, customer: customer) { (image, correctRow) in
+            DispatchQueue.main.async {
+                cell.hideLoading()
+                if image != nil  {
+                    
+                    cell.fotoCell.image = image
+                }
+            }
         }
-//        viewModel.loadImage(row: row, customer: customer) { (data) in
-//            DispatchQueue.main.async {
-//                if let imageString = data, let image = imageString.convertToImage {
-//                    cell.fotoCell.image = image
-//                } else {
-//                    cell.fotoCell.image = #imageLiteral(resourceName: "empty")
-//                }
-//            }
-//        }
+        
         
        
     

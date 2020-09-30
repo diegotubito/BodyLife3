@@ -48,6 +48,8 @@ class CustomerModel {
         var longitude: Double
         var latitude: Double
         var dob: Double
+        var genero: String
+        var obraSocial : String
     }
     
     struct Customer : Encodable, Decodable {
@@ -96,18 +98,36 @@ struct CustomerStatus: Decodable {
 }
 
 class SellModel {
+    struct Response : Decodable {
+        var response : String
+        var sells : [Request]
+        var count : Int
+    }
+    
+    struct Request: Decodable {
+        var _id: String
+        var isEnabled : Bool
+        var fromDate : Double?
+        var toDate : Double?
+        var timestamp: Double
+        var operationCategory : String
+        var customer : CustomerModel.Customer
+        var activity: ActivityModel.NewRegister?
+        var discount: DiscountModel.NewRegister?
+        var period : PeriodModel.NewRegister?
+    }
     
     struct OldArticulo: Decodable {
         var childID : String
         var descripcionProducto : String
-        var precio : Double?
         var childIDSocio : String
         var childIDProducto : String
         var fechaCreacion : String
         var esAnulado : Bool
-        var precioCompra : Double
+        var precioCompra : Double?
         var precioVenta : Double
         var childIDDescuento : String?
+        var cantidadVendida : Int
     }
     
     struct Old : Decodable {
@@ -121,21 +141,26 @@ class SellModel {
         var esAnulado : Bool
         var fechaInicial : String
         var fechaVencimiento : String
+        var descripcionActividad: String
+        var descripcionPeriodo: String
     }
     
     struct NewRegister: Encodable, Decodable {
         var _id: String
-        var customerId : String
-        var discountId : String?
-        var activityId : String?
-        var articleId : String?
-        var periodId : String?
+        var customer : String?
+        var discount : String?
+        var activity : String?
+        var article : String?
+        var period : String?
         var timestamp : Double
         var fromDate : Double?
         var toDate : Double?
         var quantity : Int?
         var isEnabled : Bool
         var operationCategory : String
+        var price: Double?
+        var priceList: Double?
+        var description: String
     }
     
     struct Register: Encodable, Decodable {

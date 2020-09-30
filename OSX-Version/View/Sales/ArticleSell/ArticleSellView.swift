@@ -11,7 +11,7 @@ import Cocoa
 class ArticleSellView: XibViewBlurBackground {
     var productListView : ArticleListView!
     var buttonAccept : SaveButtonCustomView!
-    var selectedCustomer : BriefCustomer!
+    var selectedCustomer : CustomerModel.Customer!
     var myActivityIndicator : NSProgressIndicator!
      
     var selectedItem : ArticleModel.Register? {
@@ -127,7 +127,7 @@ class ArticleSellView: XibViewBlurBackground {
             return
         }
         
-        let pathStatusSell = "\(Paths.fullPersonalData):\(selectedCustomer.childID):sells"
+        let pathStatusSell = "\(Paths.fullPersonalData):\(selectedCustomer.uid):sells"
         ServerManager.Update(path: pathStatusSell, json: request) { (data, err) in
             error = err
             semasphore.signal()
@@ -138,7 +138,7 @@ class ArticleSellView: XibViewBlurBackground {
             return
         }
         
-        let pathStatus = "\(Paths.customerStatus):\(selectedCustomer.childID)"
+        let pathStatus = "\(Paths.customerStatus):\(selectedCustomer.uid)"
         ServerManager.Transaction(path: pathStatus, key: "balance", value: -(selectedItem?.price)!, success: {
             semasphore.signal()
         }) { (err) in
@@ -160,7 +160,7 @@ class ArticleSellView: XibViewBlurBackground {
         var json = [String : Any]()
         let childID = ServerManager.createNewChildID()
         json.updateValue(childID, forKey: "childID")
-        json.updateValue(selectedCustomer.childID, forKey: "childIDCustomer")
+        json.updateValue(selectedCustomer.uid, forKey: "childIDCustomer")
         json.updateValue((selectedItem?.childID)!, forKey: "childIDArticle")
         json.updateValue(Date().timeIntervalSinceReferenceDate, forKey: "createdAt")
         json.updateValue(Date().queryByDMY, forKey: "queryByDMY")

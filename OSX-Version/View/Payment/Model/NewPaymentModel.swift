@@ -9,7 +9,7 @@
 import Foundation
 import Cocoa
 
-class PaymentModel {
-    var selectedCustomer : BriefCustomer!
+class NewPaymentModel {
+    var selectedCustomer : CustomerModel.Customer!
     var selectedSellRegister : SellModel.Register!
 }

@@ -10,7 +10,8 @@
 import Cocoa
 
 class CustomerListViewModel: CustomerListViewModelContract {
-    
+    var imageCache = NSCache<AnyObject, AnyObject>()
+  
     var model: CustomerListModel!
     var _view : CustomerListViewContract!
     
@@ -20,7 +21,6 @@ class CustomerListViewModel: CustomerListViewModelContract {
     }
     
     func loadCustomers(offset: Int) {
-        print("loading...")
         _view.showLoading()
         let url = "http://127.0.0.1:2999/v1/customer?offset=\(offset)&limit=50"
         let _services = NetwordManager()
@@ -43,31 +43,43 @@ class CustomerListViewModel: CustomerListViewModelContract {
                 }
                 self._view.showSuccess()
             } catch {
-                print(error)
                 self._view.showError()
             }
 
         })
     }
     
-    func loadImage(row: Int, customer: CustomerModel.Customer, completion: @escaping (String?) -> ()) {
-        let path = "\(Paths.fullPersonalData):\(customer.thumbnailImage ?? ""):images"
-        ServerManager.ReadJSON(path: path) { (data, error) in
-            
-            if error != nil {
-                print("error al cargar string image")
-                completion(nil)
-                return
-            }
-            guard let data = data else {
-                print("error al cargar string image")
-                completion(nil)
-                return
-            }
-            if let imageString = data["thumbnailImage"] as? String {
-                 completion(imageString)
-            }
+    func loadImage(row: Int, customer: CustomerModel.Customer, completion: @escaping (NSImage?, Int) -> ()) {
+        let url = "http://127.0.0.1:2999/v1/thumbnail?uid=\(customer.uid)"
+        
+        //if I have already loaded the image, there's no need to load it again.
+        if let imageFromCache = imageCache.object(forKey: url as AnyObject) as? NSImage {
+            //return the image previously loaded
+            print("loaded from cache")
+            completion(imageFromCache, row)
+            return
         }
+        
+        let _services = NetwordManager()
+        _services.get(url: url, response: { (data, error) in
+            guard error == nil, let data = data else {
+                completion(nil, row)
+                return
+            }
+            
+            do {
+                let response = try JSONDecoder().decode(ThumbnailModel.Response.self, from: data)
+                if response.thumbnails.count > 0 {
+                    let image = response.thumbnails[0].thumbnailImage.convertToImage
+                    self.imageCache.setObject(image!, forKey: url as AnyObject)
+                    completion(image, row)
+                } else {
+                    completion(nil, row)
+                }
+            } catch {
+                completion(nil, row)
+            }
+      })
     }
     
     func getTotalItems() -> Int {

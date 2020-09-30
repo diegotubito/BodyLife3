@@ -9,6 +9,7 @@
 import Cocoa
 
 class RegisterListViewModel: RegisterListViewModelContract {
+    
     var _view : RegisterListViewContract!
     var model : RegisterListModel!
     
@@ -20,48 +21,46 @@ class RegisterListViewModel: RegisterListViewModelContract {
     func loadData() {
         _view.showLoading()
         setSelectedRegister(nil)
-        model.registers.removeAll()
-        let path = Paths.customerFull + ":personal:\(model.selectedCustomer.childID):sells"
-        ServerManager.ReadJSON(path: path) { (json, error) in
+        
+        let uid = ImportDatabase.codeUID(model.selectedCustomer.uid)
+        
+        let url = "http://127.0.0.1:2999/v1/sell?customer=\(uid)"
+        
+        let _service = NetwordManager()
+        _service.get(url: url) { (data, error) in
             self._view.hideLoading()
-            
-            guard let json = json else {
-                self._view.displayData()
+            guard let data = data else {
+               
                 return
             }
-            
-            var jsonArray = ServerManager.jsonArray(json: json)
-            for (x,register) in jsonArray.enumerated() {
-                if let payments = register["payments"] {
-                    let paymentJSONArray = ServerManager.jsonArray(json: payments as! [String : Any])
-                    jsonArray[x]["payments"] = paymentJSONArray
-                }
-            }
-            
             do {
-                let data = try JSONSerialization.data(withJSONObject: jsonArray, options: [])
-                let registers = try JSONDecoder().decode([SellModel.Register].self, from: data)
-                let sortedRegisters = registers.sorted(by: { $0.createdAt > $1.createdAt })
-                self.model.registers = sortedRegisters
+            
+                let response = try JSONDecoder().decode(RegisterListModel.Response.self, from: data)
+                self.model.response = response
                 self.calcExtras()
-                
-                
                 self._view.displayData()
-                
             } catch {
-                self._view.showError(value: error.localizedDescription)
+                print("could not decode")
+                return
             }
         }
+        
     }
     
     private func calcExtras() {
-        for (x,register) in model.registers.enumerated() {
-            let amountToPay = register.amount
-            let totalPayments = calcTotalPayment(payments: register.payments)
-            let saldo = totalPayments - amountToPay
+        guard let sells = model.response?.sells else {
+            return
+        }
+        let sorted = sells.sorted(by: {$0.timestamp > $1.timestamp})
+        model.response?.sells = sorted
+        for (x,sell) in sorted.enumerated() {
+            let amountToPay = sell.price
+//            let totalPayments = calcTotalPayment(payments: register.payments)
+            let totalPayments : Double = 0
+            let balance = totalPayments - amountToPay
             
-            model.registers[x].totalPayment = totalPayments
-            model.registers[x].balance = saldo
+            model.response?.sells[x].totalPayment = totalPayments
+            model.response?.sells[x].balance = balance
         }
     }
     
@@ -75,22 +74,22 @@ class RegisterListViewModel: RegisterListViewModelContract {
         return total
     }
     
-    func setSelectedCustomer(customer: BriefCustomer) {
+    func setSelectedCustomer(customer: CustomerModel.Customer) {
         model.selectedCustomer = customer
-        model.registers.removeAll()
+        model.response = nil
         _view.displayData()
     }
     
-    func getRegisters() -> [SellModel.Register] {
-        return model.registers
+    func getRegisters() -> RegisterListModel.Response? {
+        return model.response
     }
     
-    func setSelectedRegister(_ selectedRegister: SellModel.Register?) {
+    func setSelectedRegister(_ selectedRegister: RegisterListModel.ViewModel?) {
         model.selectedSellRegister = selectedRegister
         _view.updateButtonState()
     }
     
-    func getSelectedRegister() -> SellModel.Register? {
+    func getSelectedRegister() -> RegisterListModel.ViewModel? {
         return model.selectedSellRegister
     }
     
@@ -102,7 +101,7 @@ class RegisterListViewModel: RegisterListViewModelContract {
     }
     
     func cancel(completion: (Bool) -> ()) {
-        let json = ["isEnabled" : false]
+       /* let json = ["isEnabled" : false]
         var error : ServerError?
         let semasphore = DispatchSemaphore(value: 0)
         
@@ -125,7 +124,7 @@ class RegisterListViewModel: RegisterListViewModelContract {
             return
         }
         
-        let pathCustomerSell = "\(Paths.fullPersonalData):\(model.selectedCustomer.childID):sells:\(model.selectedSellRegister.childID)"
+        let pathCustomerSell = "\(Paths.fullPersonalData):\(model.selectedCustomer.uid):sells:\(model.selectedSellRegister.childID)"
         ServerManager.Update(path: pathCustomerSell, json: json) { (data, err) in
             error = err
             semasphore.signal()
@@ -136,7 +135,7 @@ class RegisterListViewModel: RegisterListViewModelContract {
             return
         }
         
-        let pathStatus = "\(Paths.customerStatus):\(model.selectedCustomer.childID)"
+        let pathStatus = "\(Paths.customerStatus):\(model.selectedCustomer.uid)"
         let paid = calcTotalPayments()
         let amount = model.selectedSellRegister.amount
         let balance = amount - paid
@@ -150,18 +149,22 @@ class RegisterListViewModel: RegisterListViewModelContract {
             completion(false)
             return
         }
-        
+        */
         completion(true)
+ 
+ 
     }
     
     private func calcTotalPayments() -> Double {
-        var result : Double = 0
-        let payments = model.selectedSellRegister.payments
+     /*   var result : Double = 0
+        let payments = model.selectedSellRegister.pay
         if payments == nil {return 0}
-        for i in payments! {
+        for i in payments {
             result += i.amount
         }
         return result
+ */
+        return 0.0
     }
     
     private func updateStockAndSellcount(_ childIDArticle: String) {
@@ -188,6 +191,6 @@ class RegisterListViewModel: RegisterListViewModelContract {
     }
     
     func setIsEnabled(row: Int) {
-        model.registers[row].isEnabled = false
+        model.response?.sells[row].isEnabled = false
     }
 }

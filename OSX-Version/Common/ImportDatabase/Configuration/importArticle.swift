@@ -49,7 +49,7 @@ extension ImportDatabase {
             for i in oldRegisters {
                 let createdAt = i.fechaCreacion.toDate(formato: "dd-MM-yyyy HH:mm:ss")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970
                 let _id = ImportDatabase.codeUID(i.childID)
-               
+            
                 let newRegister = ArticleModel.NewRegister(_id: _id,
                                                            description: i.descripcion,
                                                            isEnabled: !i.esOculto,

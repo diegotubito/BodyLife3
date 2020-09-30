@@ -78,7 +78,7 @@
 		116CEB6123A1E2D40081D356 /* RegisterListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 116CEB6023A1E2D40081D356 /* RegisterListView.xib */; };
 		116CEB6323A1E2F30081D356 /* RegisterListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CEB6223A1E2F30081D356 /* RegisterListView.swift */; };
 		116CEB6623A3115E0081D356 /* SellRegisterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CEB6523A3115E0081D356 /* SellRegisterCell.swift */; };
-		1183D1842522F77200BDDBFC /* importImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1183D1832522F77200BDDBFC /* importImages.swift */; };
+		1183D1842522F77200BDDBFC /* importThumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1183D1832522F77200BDDBFC /* importThumbnail.swift */; };
 		119AE145237F78D90045960C /* ServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119AE144237F78D90045960C /* ServerManager.swift */; };
 		119C68622380BDC8009E9AA0 /* NewCustomerStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 119C68612380BDC8009E9AA0 /* NewCustomerStoryboard.storyboard */; };
 		11A8B44E23BE22B8007A5251 /* GenericTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A8B44D23BE22B8007A5251 /* GenericTableView.swift */; };
@@ -103,6 +103,9 @@
 		11D3D88225216F0A0008CFD0 /* importVentaArticulo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D3D88125216F0A0008CFD0 /* importVentaArticulo.swift */; };
 		11D3D8852521780B0008CFD0 /* ArticleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D3D8842521780B0008CFD0 /* ArticleModel.swift */; };
 		11D3D888252179E80008CFD0 /* importArticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D3D887252179E80008CFD0 /* importArticle.swift */; };
+		11D615762523F4C3005B5D81 /* ThumbnailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D615752523F4C3005B5D81 /* ThumbnailModel.swift */; };
+		11D615792524E83C005B5D81 /* ImportPagoCarnet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D615782524E83B005B5D81 /* ImportPagoCarnet.swift */; };
+		11D6157C2524E9EC005B5D81 /* PaymentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D6157B2524E9EC005B5D81 /* PaymentModel.swift */; };
 		11EBD3212376499F00AB4BFF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD3202376499F00AB4BFF /* AppDelegate.swift */; };
 		11EBD3262376499F00AB4BFF /* OSX_Version.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD3242376499F00AB4BFF /* OSX_Version.xcdatamodeld */; };
 		11EBD3282376499F00AB4BFF /* AssetsOSX.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11EBD3272376499F00AB4BFF /* AssetsOSX.xcassets */; };
@@ -134,7 +137,7 @@
 		11EEF0F2239D4A83007C9821 /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EEF0F1239D4A83007C9821 /* PaymentView.swift */; };
 		11EEF0F4239D4A91007C9821 /* PaymentViewModelContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EEF0F3239D4A91007C9821 /* PaymentViewModelContract.swift */; };
 		11EEF0F6239D4A98007C9821 /* PaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EEF0F5239D4A98007C9821 /* PaymentViewModel.swift */; };
-		11EEF0F8239D4AA1007C9821 /* PaymentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EEF0F7239D4AA1007C9821 /* PaymentModel.swift */; };
+		11EEF0F8239D4AA1007C9821 /* NewPaymentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EEF0F7239D4AA1007C9821 /* NewPaymentModel.swift */; };
 		5FE3DFDF421744DA0084410C /* Pods_OSX_Version.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DD05D16FCB3BBCB58D25AF1 /* Pods_OSX_Version.framework */; };
 /* End PBXBuildFile section */
 
@@ -211,7 +214,7 @@
 		116CEB6023A1E2D40081D356 /* RegisterListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegisterListView.xib; sourceTree = "<group>"; };
 		116CEB6223A1E2F30081D356 /* RegisterListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterListView.swift; sourceTree = "<group>"; };
 		116CEB6523A3115E0081D356 /* SellRegisterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellRegisterCell.swift; sourceTree = "<group>"; };
-		1183D1832522F77200BDDBFC /* importImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = importImages.swift; sourceTree = "<group>"; };
+		1183D1832522F77200BDDBFC /* importThumbnail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = importThumbnail.swift; sourceTree = "<group>"; };
 		119AE144237F78D90045960C /* ServerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerManager.swift; sourceTree = "<group>"; };
 		119C68612380BDC8009E9AA0 /* NewCustomerStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewCustomerStoryboard.storyboard; sourceTree = "<group>"; };
 		11A8B44D23BE22B8007A5251 /* GenericTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericTableView.swift; sourceTree = "<group>"; };
@@ -236,6 +239,9 @@
 		11D3D88125216F0A0008CFD0 /* importVentaArticulo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = importVentaArticulo.swift; sourceTree = "<group>"; };
 		11D3D8842521780B0008CFD0 /* ArticleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleModel.swift; sourceTree = "<group>"; };
 		11D3D887252179E80008CFD0 /* importArticle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = importArticle.swift; sourceTree = "<group>"; };
+		11D615752523F4C3005B5D81 /* ThumbnailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailModel.swift; sourceTree = "<group>"; };
+		11D615782524E83B005B5D81 /* ImportPagoCarnet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportPagoCarnet.swift; sourceTree = "<group>"; };
+		11D6157B2524E9EC005B5D81 /* PaymentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentModel.swift; sourceTree = "<group>"; };
 		11EBD31E2376499F00AB4BFF /* OSX-Version.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OSX-Version.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		11EBD3202376499F00AB4BFF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		11EBD3252376499F00AB4BFF /* OSX_Version.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = OSX_Version.xcdatamodel; sourceTree = "<group>"; };
@@ -269,7 +275,7 @@
 		11EEF0F1239D4A83007C9821 /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
 		11EEF0F3239D4A91007C9821 /* PaymentViewModelContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewModelContract.swift; sourceTree = "<group>"; };
 		11EEF0F5239D4A98007C9821 /* PaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewModel.swift; sourceTree = "<group>"; };
-		11EEF0F7239D4AA1007C9821 /* PaymentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentModel.swift; sourceTree = "<group>"; };
+		11EEF0F7239D4AA1007C9821 /* NewPaymentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPaymentModel.swift; sourceTree = "<group>"; };
 		14FC6D7A37E45495D3C3DD3B /* Pods-OSX-Version.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OSX-Version.release.xcconfig"; path = "Target Support Files/Pods-OSX-Version/Pods-OSX-Version.release.xcconfig"; sourceTree = "<group>"; };
 		2DD05D16FCB3BBCB58D25AF1 /* Pods_OSX_Version.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OSX_Version.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CED88F90963C7E66B8F88063 /* Pods-OSX-Version.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OSX-Version.debug.xcconfig"; path = "Target Support Files/Pods-OSX-Version/Pods-OSX-Version.debug.xcconfig"; sourceTree = "<group>"; };
@@ -486,8 +492,9 @@
 				11498E572520069700E4D679 /* importDatabase.swift */,
 				11498E622520979000E4D679 /* ImportVentaCarnet.swift */,
 				11D3D88125216F0A0008CFD0 /* importVentaArticulo.swift */,
+				11D615782524E83B005B5D81 /* ImportPagoCarnet.swift */,
 				11498E5F2520975000E4D679 /* ImportCustomer.swift */,
-				1183D1832522F77200BDDBFC /* importImages.swift */,
+				1183D1832522F77200BDDBFC /* importThumbnail.swift */,
 			);
 			path = ImportDatabase;
 			sourceTree = "<group>";
@@ -850,10 +857,12 @@
 			children = (
 				11D3D86E252127EE0008CFD0 /* Configuration */,
 				11EBD35A2376683300AB4BFF /* FirebaseUserModel.swift */,
+				11D6157B2524E9EC005B5D81 /* PaymentModel.swift */,
 				111DE57F238A1FB5002F4216 /* ProductModel.swift */,
 				11EBD36523766D2500AB4BFF /* ErrorModel.swift */,
 				11233786237B7AEB00F60078 /* BriefCustomer.swift */,
 				114C54212415822A000CC75A /* ExpenseModel.swift */,
+				11D615752523F4C3005B5D81 /* ThumbnailModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -981,7 +990,7 @@
 		11EEF0EE239D4A1E007C9821 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				11EEF0F7239D4AA1007C9821 /* PaymentModel.swift */,
+				11EEF0F7239D4AA1007C9821 /* NewPaymentModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1134,6 +1143,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				119AE145237F78D90045960C /* ServerManager.swift in Sources */,
+				11D615792524E83C005B5D81 /* ImportPagoCarnet.swift in Sources */,
 				114A540F23A5A9AC00F2746A /* RegisterListViewModelContract.swift in Sources */,
 				11233783237AFE9400F60078 /* stringExtension.swift in Sources */,
 				11D3D888252179E80008CFD0 /* importArticle.swift in Sources */,
@@ -1195,11 +1205,12 @@
 				116CE96123EDCDAF00688C0B /* ActivityListModel.swift in Sources */,
 				11A8B44E23BE22B8007A5251 /* GenericTableView.swift in Sources */,
 				114C54222415822A000CC75A /* ExpenseModel.swift in Sources */,
+				11D615762523F4C3005B5D81 /* ThumbnailModel.swift in Sources */,
 				11D3D87C25214C290008CFD0 /* PeriodModel.swift in Sources */,
 				11498E602520975000E4D679 /* ImportCustomer.swift in Sources */,
 				11D3D86B252127BD0008CFD0 /* importDiscount.swift in Sources */,
 				114C54152413FF66000CC75A /* ExpenseModels.swift in Sources */,
-				1183D1842522F77200BDDBFC /* importImages.swift in Sources */,
+				1183D1842522F77200BDDBFC /* importThumbnail.swift in Sources */,
 				1163932B2381975600D14B19 /* ValidationField.swift in Sources */,
 				11EBD35B2376683300AB4BFF /* FirebaseUserModel.swift in Sources */,
 				116CE96323EDCDCD00688C0B /* ActivityListViewModel.swift in Sources */,
@@ -1212,7 +1223,7 @@
 				11498E582520069700E4D679 /* importDatabase.swift in Sources */,
 				1166AF3523B27F880047C7AE /* ArticleViewItem.swift in Sources */,
 				111DE580238A1FB5002F4216 /* ProductModel.swift in Sources */,
-				11EEF0F8239D4AA1007C9821 /* PaymentModel.swift in Sources */,
+				11EEF0F8239D4AA1007C9821 /* NewPaymentModel.swift in Sources */,
 				1147AB44238364D900D19AA9 /* CustomerListModel.swift in Sources */,
 				1163933C238229DE00D14B19 /* imageExtension.swift in Sources */,
 				11D3D87725213A770008CFD0 /* ActivityModel.swift in Sources */,
@@ -1223,6 +1234,7 @@
 				11EBD39423773B5C00AB4BFF /* BaseViewController.swift in Sources */,
 				114C54112413FF66000CC75A /* ExpenseWorker.swift in Sources */,
 				11EBD3212376499F00AB4BFF /* AppDelegate.swift in Sources */,
+				11D6157C2524E9EC005B5D81 /* PaymentModel.swift in Sources */,
 				1163933723820CA500D14B19 /* CameraManager.swift in Sources */,
 				1147AB4D2383676D00D19AA9 /* CustomerListCell.swift in Sources */,
 				114C540F2413FF66000CC75A /* ExpensePresenter.swift in Sources */,

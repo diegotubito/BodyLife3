@@ -55,21 +55,33 @@
                                                             <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cnq-pR-nQk">
                                                                 <rect key="frame" x="0.0" y="15" width="50" height="50"/>
                                                                 <subviews>
-                                                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="5v1-EQ-p8L">
+                                                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="Rxc-Ky-iAG">
                                                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="overlaps" alignment="center" imageScaling="axesIndependently" inset="2" id="oh6-IA-spB">
-                                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                                            <font key="font" metaFont="system"/>
-                                                                        </buttonCell>
-                                                                    </button>
+                                                                        <subviews>
+                                                                            <button translatesAutoresizingMaskIntoConstraints="NO" id="5v1-EQ-p8L">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="overlaps" alignment="center" imageScaling="axesIndependently" inset="2" id="oh6-IA-spB">
+                                                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                                    <font key="font" metaFont="system"/>
+                                                                                </buttonCell>
+                                                                            </button>
+                                                                            <progressIndicator wantsLayer="YES" maxValue="100" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="UDN-pZ-LwG">
+                                                                                <rect key="frame" x="17" y="17" width="16" height="16"/>
+                                                                            </progressIndicator>
+                                                                        </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstItem="UDN-pZ-LwG" firstAttribute="centerX" secondItem="Rxc-Ky-iAG" secondAttribute="centerX" id="2mK-a1-K1X"/>
+                                                                            <constraint firstItem="5v1-EQ-p8L" firstAttribute="top" secondItem="Rxc-Ky-iAG" secondAttribute="top" id="N3j-jC-uxm"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="5v1-EQ-p8L" secondAttribute="bottom" id="OUE-4R-YJY"/>
+                                                                            <constraint firstItem="5v1-EQ-p8L" firstAttribute="leading" secondItem="Rxc-Ky-iAG" secondAttribute="leading" id="lFN-mJ-XHv"/>
+                                                                            <constraint firstItem="UDN-pZ-LwG" firstAttribute="centerY" secondItem="Rxc-Ky-iAG" secondAttribute="centerY" id="t9g-Wp-nkO"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="5v1-EQ-p8L" secondAttribute="trailing" id="uqT-3F-gj0"/>
+                                                                        </constraints>
+                                                                    </customView>
                                                                 </subviews>
                                                                 <constraints>
-                                                                    <constraint firstItem="5v1-EQ-p8L" firstAttribute="top" secondItem="cnq-pR-nQk" secondAttribute="top" id="DFC-iB-rRT"/>
                                                                     <constraint firstAttribute="width" constant="50" id="O2G-dh-OEV"/>
-                                                                    <constraint firstItem="5v1-EQ-p8L" firstAttribute="leading" secondItem="cnq-pR-nQk" secondAttribute="leading" id="dQW-Uf-rN0"/>
                                                                     <constraint firstAttribute="height" constant="50" id="koV-Nr-uof"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="5v1-EQ-p8L" secondAttribute="trailing" id="mrX-pp-4ZN"/>
-                                                                    <constraint firstAttribute="bottom" secondItem="5v1-EQ-p8L" secondAttribute="bottom" id="w7K-Nv-4vc"/>
                                                                 </constraints>
                                                                 <visibilityPriorities>
                                                                     <integer value="1000"/>
@@ -236,6 +248,7 @@
                                                 <connections>
                                                     <outlet property="counterLabel" destination="hQx-91-EAF" id="OXw-J3-by7"/>
                                                     <outlet property="fotoCell" destination="5v1-EQ-p8L" id="8ck-4h-Ng6"/>
+                                                    <outlet property="imageIndicator" destination="UDN-pZ-LwG" id="0Wo-dG-572"/>
                                                     <outlet property="primerRenglonCell" destination="RXu-Kf-imR" id="XcK-0F-Qtu"/>
                                                     <outlet property="segundoRenglonCell" destination="6uC-dD-aox" id="N9i-lG-3RL"/>
                                                     <outlet property="separateLine" destination="xYx-Cm-tG8" id="QAa-n6-eCA"/>

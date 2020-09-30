@@ -10,14 +10,14 @@ import Cocoa
 
 class PaymentViewModel: PaymentViewModelContract {
     var _view : PaymentViewContract!
-    var model : PaymentModel!
+    var model : NewPaymentModel!
     
     required init(withView view: PaymentViewContract) {
         _view = view
-        model = PaymentModel()
+        model = NewPaymentModel()
     }
     
-    func setSelectedInfo(_ customer: BriefCustomer, _ register: SellModel.Register) {
+    func setSelectedInfo(_ customer: CustomerModel.Customer, _ register: SellModel.Register) {
         model.selectedCustomer = customer
         model.selectedSellRegister = register
         _view.displayInfo()
@@ -25,7 +25,7 @@ class PaymentViewModel: PaymentViewModelContract {
    
     func saveNewPayment() {
         _view.showLoading()
-        let childIDCustomer = model.selectedCustomer.childID
+        let childIDCustomer = model.selectedCustomer.uid
         let childIDRegister = model.selectedSellRegister.childID
         let price = Double(_view.getAmountString())!
         var error : ServerError?
@@ -75,7 +75,7 @@ class PaymentViewModel: PaymentViewModelContract {
     }
     
     func createRequest() -> [String:Any] {
-        let childIDCustomer = model.selectedCustomer.childID
+        let childIDCustomer = model.selectedCustomer.uid
         let childIDRegister = model.selectedSellRegister.childID
          
         let newChildID = ServerManager.createNewChildID()

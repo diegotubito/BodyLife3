@@ -10,5 +10,5 @@ import Cocoa
 
 struct CustomerStatusModel {
     var loadedStatus : CustomerStatus?
-    var receivedCustomer : BriefCustomer
+    var receivedCustomer : CustomerModel.Customer
 }

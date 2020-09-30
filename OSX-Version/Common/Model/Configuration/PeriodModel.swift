@@ -28,7 +28,7 @@ class PeriodModel {
         var description : String
         var isEnabled : Bool
         var timestamp : Double
-        var activityId : String
+        var activity : String
         var price : Double
         var days : Int
     }

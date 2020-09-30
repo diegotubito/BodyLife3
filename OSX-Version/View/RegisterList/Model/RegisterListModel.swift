@@ -9,9 +9,33 @@
 import Cocoa
 
 class RegisterListModel {
-    var registers = [SellModel.Register]()
-    var selectedCustomer : BriefCustomer!
-    var selectedSellRegister : SellModel.Register!
+    var response : Response?
+    var selectedCustomer : CustomerModel.Customer!
+    var selectedSellRegister : RegisterListModel.ViewModel?!
 
+    
+    struct Response : Decodable {
+        var response : String
+        var sells : [ViewModel]
+        var count : Int
+    }
   
+    struct ViewModel : Decodable{
+        var _id: String
+        var isEnabled : Bool
+        var fromDate : Double?
+        var toDate : Double?
+        var timestamp: Double
+        var operationCategory : String
+        var price : Double
+        var priceList : Double
+        var customer : CustomerModel.Customer
+        var activity: ActivityModel.NewRegister?
+        var discount: DiscountModel.NewRegister?
+        var period : PeriodModel.NewRegister?
+        var article : ArticleModel.NewRegister?
+        
+        var balance : Double?
+        var totalPayment : Double?
+    }
 }
