@@ -25,7 +25,7 @@ class RegisterListViewModel: RegisterListViewModelContract {
         let uid = ImportDatabase.codeUID(model.selectedCustomer.uid)
         
         let url = "http://127.0.0.1:2999/v1/sell?customer=\(uid)"
-        
+        self.model.response = nil
         let _service = NetwordManager()
         _service.get(url: url) { (data, error) in
             self._view.hideLoading()
@@ -37,7 +37,34 @@ class RegisterListViewModel: RegisterListViewModelContract {
             
                 let response = try JSONDecoder().decode(RegisterListModel.Response.self, from: data)
                 self.model.response = response
-                self.calcExtras()
+                
+                
+                self.loadPayments()
+            } catch {
+                print("could not decode")
+                return
+            }
+        }
+        
+    }
+    
+    func loadPayments() {
+        _view.showLoading()
+        
+        let uid = ImportDatabase.codeUID(model.selectedCustomer.uid)
+        
+        let url = "http://127.0.0.1:2999/v1/payment?customer=\(uid)"
+        
+        let _service = NetwordManager()
+        _service.get(url: url) { (data, error) in
+            self._view.hideLoading()
+            guard let data = data else {
+               
+                return
+            }
+            do {
+                let response = try JSONDecoder().decode(PaymentModel.ViewModel.self, from: data)
+                self.calcExtras(payments: response.payments)
                 self._view.displayData()
             } catch {
                 print("could not decode")
@@ -47,7 +74,7 @@ class RegisterListViewModel: RegisterListViewModelContract {
         
     }
     
-    private func calcExtras() {
+    private func calcExtras(payments: [PaymentModel.ViewModel.AUX]) {
         guard let sells = model.response?.sells else {
             return
         }
@@ -55,8 +82,9 @@ class RegisterListViewModel: RegisterListViewModelContract {
         model.response?.sells = sorted
         for (x,sell) in sorted.enumerated() {
             let amountToPay = sell.price
-//            let totalPayments = calcTotalPayment(payments: register.payments)
-            let totalPayments : Double = 0
+            let correctPayments = payments.filter({$0.self.sell._id == sell._id})
+    
+            let totalPayments = calcTotalPayment(payments: correctPayments)
             let balance = totalPayments - amountToPay
             
             model.response?.sells[x].totalPayment = totalPayments
@@ -64,11 +92,10 @@ class RegisterListViewModel: RegisterListViewModelContract {
         }
     }
     
-    private func calcTotalPayment(payments: [Payment]?) -> Double {
-        if payments == nil {return 0}
+    private func calcTotalPayment(payments: [PaymentModel.ViewModel.AUX]) -> Double {
         var total : Double = 0
-        for i in payments! {
-            total += i.amount
+        for i in payments {
+            total += i.paidAmount
         }
         
         return total
@@ -86,7 +113,9 @@ class RegisterListViewModel: RegisterListViewModelContract {
     
     func setSelectedRegister(_ selectedRegister: RegisterListModel.ViewModel?) {
         model.selectedSellRegister = selectedRegister
-        _view.updateButtonState()
+        DispatchQueue.main.async {
+            self._view.updateButtonState()
+        }
     }
     
     func getSelectedRegister() -> RegisterListModel.ViewModel? {

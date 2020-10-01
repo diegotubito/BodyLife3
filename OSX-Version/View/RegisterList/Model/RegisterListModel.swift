@@ -12,7 +12,7 @@ class RegisterListModel {
     var response : Response?
     var selectedCustomer : CustomerModel.Customer!
     var selectedSellRegister : RegisterListModel.ViewModel?!
-
+   
     
     struct Response : Decodable {
         var response : String
@@ -34,8 +34,10 @@ class RegisterListModel {
         var discount: DiscountModel.NewRegister?
         var period : PeriodModel.NewRegister?
         var article : ArticleModel.NewRegister?
-        
+  
         var balance : Double?
         var totalPayment : Double?
+        
+        var payments : [PaymentModel.ViewModel]?
     }
 }

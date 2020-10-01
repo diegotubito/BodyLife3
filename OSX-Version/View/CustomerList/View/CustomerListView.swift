@@ -14,26 +14,17 @@ class CustomerListView: NSView {
     
     @IBOutlet weak var myActivityIndicator: NSProgressIndicator!
     @IBOutlet var tableViewSocio: NSTableView!
-    var needRedraw : Bool = false {
-        didSet {
-            if needRedraw {
-                tableViewSocio.reloadData()
-            }
-        }
-    }
     
     var viewModel : CustomerListViewModelContract!
     var onSelectedCustomer : ((CustomerModel.Customer) -> ())?
     
     override init(frame frameRect: NSRect) {
         super .init(frame: frameRect)
-        
         inicializar()
     }
     
     required init?(coder decoder: NSCoder) {
         super .init(coder: decoder)
-        
         inicializar()
     }
     
@@ -42,7 +33,6 @@ class CustomerListView: NSView {
     }
     
     func inicializar() {
-        
         Bundle.main.loadNibNamed("CustomerListCell", owner: self, topLevelObjects: nil)
         myView.frame = self.frame
         addSubview(myView)
@@ -83,17 +73,15 @@ class CustomerListView: NSView {
 
 extension CustomerListView: CustomerListViewContract {
     func showSuccess() {
-        reloadList()
+        DispatchQueue.main.async {
+            self.tableViewSocio.beginUpdates()
+            self.tableViewSocio.reloadData()
+            self.tableViewSocio.endUpdates()
+        }
     }
     
     func showError() {
         
-    }
-    
-    func reloadList() {
-        DispatchQueue.main.async {
-            self.tableViewSocio.reloadData()
-        }
     }
     
     func showLoading() {
@@ -129,27 +117,12 @@ extension CustomerListView: NSTableViewDataSource, NSTableViewDelegate {
         cell.primerRenglonCell.stringValue = apellido + ", " + nombre
         cell.timeAgoCell.stringValue = createdAtAgo
         cell.counterLabel.stringValue = String(row + 1)
-      
-        cell.showLoading()
-        cell.fotoCell.image = #imageLiteral(resourceName: "empty")
-        
-        self.viewModel.loadImage(row: row, customer: customer) { (image, correctRow) in
-            DispatchQueue.main.async {
-                cell.hideLoading()
-                if image != nil  {
-                    
-                    cell.fotoCell.image = image
-                }
-            }
-        }
-        
-        
-       
-    
+        cell.loadImage(row: row, customer: customer)
         cell.segundoRenglonCell.stringValue = "DNI: \(customer.dni)"
     
         let count = viewModel.model.customers.count
         if row == (count - 1){
+            print("loading...")
             if count < viewModel.getTotalItems() {
                 viewModel.loadCustomers(offset: count)
             }
@@ -162,11 +135,12 @@ extension CustomerListView: NSTableViewDataSource, NSTableViewDelegate {
     func tableViewSelectionDidChange(_ notification: Notification) {
         if let myTable = notification.object as? NSTableView {
             
-            if myTable == tableViewSocio {
+             if myTable == tableViewSocio {
                 let posicion = myTable.selectedRow
                 self.viewModel.model.selectedCustomer = viewModel.model.customers[posicion]
-                
-                self.onSelectedCustomer?(viewModel.model.customers[posicion])
+                if viewModel.model.selectedCustomer != nil {
+                    self.onSelectedCustomer?(viewModel.model.selectedCustomer!)
+                }
             }
         }
     }

@@ -48,11 +48,18 @@ class PaymentModel {
     }
     
     struct ViewModel : Decodable {
-        var _id : String
-        var customer : String
-        var sell : String
-        var isEnabled : Bool
-        var timestamp : String
-        var paidAmount : Double
+        var payments : [AUX]
+        var count : Int
+        
+        
+        struct AUX: Decodable {
+            var _id : String
+            var customer : CustomerModel.Customer
+            var sell : SellModel.NewRegister
+            var isEnabled : Bool
+            var timestamp : Double
+            var paidAmount : Double
+            var operationCategory : String
+        }
     }
 }

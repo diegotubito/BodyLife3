@@ -19,33 +19,33 @@ extension HomeViewController {
     }
     
     func customerListOberserver() {
-        self.customerListView.onSelectedCustomer = { customer in
-            self.selectedCustomer = customer
-            self.timerForDelayCustomerSelection.invalidate()
-            self.customerStatusView.showLoading()
-            self.customerStatusView.titleLabel.stringValue = customer.lastName + ", " + customer.firstName
-            self.sellRegisterView.setSelectedCustomer(customer: customer)
-            self.timerForDelayCustomerSelection = Timer.scheduledTimer(timeInterval: 0.25, target: self, selector: #selector(self.loadStatus), userInfo: nil, repeats: false)
-            if self.sellRegisterView.isHidden {
-                self.sellRegisterView.animateMode = .fadeIn
+        self.customerListView.onSelectedCustomer = { [weak self] customer in
+            self?.selectedCustomer = customer
+            self?.timerForDelayCustomerSelection.invalidate()
+            self?.customerStatusView.showLoading()
+            self?.customerStatusView.titleLabel.stringValue = customer.lastName + ", " + customer.firstName
+            self?.sellRegisterView.setSelectedCustomer(customer: customer)
+            self?.timerForDelayCustomerSelection = Timer.scheduledTimer(timeInterval: 0.25, target: self, selector: #selector(self?.loadStatus), userInfo: nil, repeats: false)
+            if ((self?.sellRegisterView.isHidden) != nil) {
+                self?.sellRegisterView.animateMode = .fadeIn
             }
         }
     }
     
     func buttonObserverActivitySell() {
-        self.customerStatusView.didPressSellActivityButton = {
+        self.customerStatusView.didPressSellActivityButton = { [weak self] in
             //open sell activities custom view
-            let selectedCustomer = self.customerListView.viewModel.model.selectedCustomer
-            let loadedStatus = self.customerStatusView.viewModel.model.loadedStatus
+            let selectedCustomer = self?.customerListView.viewModel.model.selectedCustomer
+            let loadedStatus = self?.customerStatusView.viewModel.model.loadedStatus
 //            self.sellActivityView.viewModel.setCustomerStatus(selectedCustomer: selectedCustomer!, selectedStatus: loadedStatus)
-            self.sellActivityView.showView()
+            self?.sellActivityView.showView()
         }
     }
     
     func buttonObserverProductSell() {
-        self.customerStatusView.didPressSellProductButton = {
-            self.sellProductView.selectedCustomer = (self.selectedCustomer)!
-            self.sellProductView.showView()
+        self.customerStatusView.didPressSellProductButton = { [weak self] in
+            self?.sellProductView.selectedCustomer = (self?.selectedCustomer)!
+            self?.sellProductView.showView()
         }
     }
     
@@ -56,7 +56,7 @@ extension HomeViewController {
         }
     }
     
-    func showStatusCustomer() {
+    func showStatusCustomer() { 
         if self.customerStatusView.isHidden {
             self.customerStatusView.animateMode = .fadeIn
         }

@@ -21,7 +21,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Insert code here to initialize your application
         Reachability.sharedInstance.suscribeConnectionChanged()
     
-//        Connect.StartListening()
+        Connect.StartListening()
         
 //        ImportDatabase.Discount.MigrateToMongoDB()
 //        ImportDatabase.Activity.MigrateToMongoDB()
@@ -33,7 +33,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 //        ImportDatabase.VentaArticulo.MigrateToMongoDB()
 //        ImportDatabase.Thumbnail.MigrateToMongoDB()
         
-        ImportDatabase.PagoCarnet.MigrateToMongoDB()
+//        ImportDatabase.PagoCarnet.MigrateToMongoDB()
  
     }
     
