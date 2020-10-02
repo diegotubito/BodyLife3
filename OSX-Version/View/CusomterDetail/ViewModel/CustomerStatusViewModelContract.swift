@@ -11,13 +11,7 @@ import Cocoa
 protocol CustomerStatusViewModelContract {
     init(withView view: CustomerStatusViewContract, receivedCustomer: CustomerModel.Customer)
     var model : CustomerStatusModel! {get}
-    func loadData()
 }
 
 protocol CustomerStatusViewContract {
-    func reloadList()
-    func showLoading()
-    func hideLoading()
-    func showSuccess(value: CustomerStatus?)
-    func showError(message: String)
 }

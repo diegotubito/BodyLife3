@@ -117,12 +117,22 @@ extension CustomerListView: NSTableViewDataSource, NSTableViewDelegate {
         cell.primerRenglonCell.stringValue = apellido + ", " + nombre
         cell.timeAgoCell.stringValue = createdAtAgo
         cell.counterLabel.stringValue = String(row + 1)
-        cell.loadImage(row: row, customer: customer)
-        cell.segundoRenglonCell.stringValue = "DNI: \(customer.dni)"
-    
+        cell.segundoRenglonCell.stringValue = "Cel: \(customer.phoneNumber)"
+        
+        cell.fotoCell.image = nil
+        cell.showLoading()
+        let loadedImage = viewModel.model.images.filter({$0._id == customer._id})
+        if loadedImage.count > 0 {
+            cell.hideLoading()
+            if let image = loadedImage[0].image {
+                cell.fotoCell.image = image
+            } else {
+                cell.fotoCell.image = #imageLiteral(resourceName: "empty")
+            }
+        }
+        
         let count = viewModel.model.customers.count
-        if row == (count - 1){
-            print("loading...")
+        if row == (count - 1) - 25 {
             if count < viewModel.getTotalItems() {
                 viewModel.loadCustomers(offset: count)
             }
@@ -130,7 +140,15 @@ extension CustomerListView: NSTableViewDataSource, NSTableViewDelegate {
         
         return cell
     }
-  
+    
+    func reloadCell(row: Int) {
+        DispatchQueue.main.async {
+            let indexSet = IndexSet(integer: row)
+            let indexSetColumn = IndexSet(integer: 0)
+            self.tableViewSocio.reloadData(forRowIndexes: indexSet, columnIndexes: indexSetColumn)
+        }
+    }
+    
     
     func tableViewSelectionDidChange(_ notification: Notification) {
         if let myTable = notification.object as? NSTableView {

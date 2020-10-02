@@ -60,12 +60,11 @@ class CustomerStatusView: XibViewWithAnimation {
         NotificationCenter.default.addObserver(self, selector: #selector(updateDataFromNotification), name: .notificationUpdateStatus, object: nil)
     }
     
-    @objc func updateDataFromNotification() {
-        start()
-    }
-    
-    func start() {
-        viewModel.loadData()
+    @objc func updateDataFromNotification(notification: Notification) {
+        let userInfo = notification.object as? CustomerStatusModel.StatusInfo
+        DispatchQueue.main.async {
+            self.showData(statusInfo: userInfo)
+        }
     }
     
     func initValues() {
@@ -88,29 +87,28 @@ class CustomerStatusView: XibViewWithAnimation {
     @IBAction func SellProductPressed(_ sender: Any) {
         didPressSellProductButton?()
     }
-    
 }
 
 
 extension CustomerStatusView : CustomerStatusViewContract{
-    func showSuccess(value: CustomerStatus?) {
+    func showData(statusInfo: CustomerStatusModel.StatusInfo?) {
         errorView.isHidden = true
-        
-        if let data = value {
-            let expirationDate = data.expiration.toDate
-            let diff = Date().diasTranscurridos(fecha: expirationDate!)
-            let balance = data.balance
-            subtitleLabel.stringValue = "actividades"
-            expirationDateLabel.stringValue = (data.expiration.toDate?.toString(formato: "dd-MM-yyyy"))!
-            remainingDayLabel.stringValue = String(diff!)
-            saldoLabel.stringValue = balance.currencyFormat(decimal: 2)
-        } else {
+        hideLoading()
+        guard let statusInfo = statusInfo else {
             subtitleLabel.stringValue = ""
             expirationDateLabel.stringValue = "?"
             saldoLabel.stringValue = "?"
             remainingDayLabel.stringValue = "?"
-            
+            return
         }
+        let expiration = statusInfo.expiration.toString(formato: "dd-MM-yyyy")
+        let balance = statusInfo.balance.currencyFormat(decimal: 2)
+        
+        let diff = Date().diasTranscurridos(fecha: statusInfo.expiration)
+        subtitleLabel.stringValue = "actividades"
+        expirationDateLabel.stringValue = expiration
+        remainingDayLabel.stringValue = String(diff!)
+        saldoLabel.stringValue = balance
     }
     
     func showError(message: String) {

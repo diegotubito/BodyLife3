@@ -73,8 +73,8 @@ extension HomeViewController {
         DispatchQueue.main.async {
             self.showStatusCustomer()
             self.customerStatusView.viewModel = CustomerStatusViewModel(withView: self.customerStatusView, receivedCustomer: customerSelected)
-            self.customerStatusView.start()
             self.showSellRegister()
+            self.customerStatusView.showLoading()
             self.sellRegisterView.viewModel.loadData()
         }
     }

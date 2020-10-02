@@ -47,15 +47,15 @@ class BaseViewController : NSViewController {
     }
     
     private func adjustWindowSize() {
-        let (screenWidth, screenHeight) = getScreenSize()
-        let windowWidth : CGFloat = screenWidth * proportional.width
-        let windowHeight : CGFloat = screenHeight * proportional.height
-        
-        let newRect = NSRect(x: screenWidth/2 - windowWidth/2, y: screenHeight/2 - windowHeight/2, width: windowWidth, height: windowHeight)
-        let newSize = NSSize(width: windowWidth, height: windowHeight)
-        
-        view.setFrameSize(newSize)
-        view.window?.setFrame(newRect, display: false)
+//        let (screenWidth, screenHeight) = getScreenSize()
+//        let windowWidth : CGFloat = screenWidth * proportional.width
+//        let windowHeight : CGFloat = screenHeight * proportional.height
+//
+//        let newRect = NSRect(x: screenWidth/2 - windowWidth/2, y: screenHeight/2 - windowHeight/2, width: windowWidth, height: windowHeight)
+//        let newSize = NSSize(width: windowWidth, height: windowHeight)
+//
+//        view.setFrameSize(newSize)
+//        view.window?.setFrame(newRect, display: false)
     }
     
     func getScreenSize() -> (CGFloat, CGFloat){

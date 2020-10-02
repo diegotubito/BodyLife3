@@ -7,16 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F8D0371A-8CA8-4926-A10F-3C32C99B5498"
+            uuid = "3C130B35-8FBA-4A57-ACEA-9287ADB99ADC"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "OSX-Version/Scene/Home/ExtensionViewController/Observers+HomeViewController.swift"
+            filePath = "OSX-Version/Common/ViewController/BaseViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
-            landmarkName = "buttonObserverProductSell()"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
+            landmarkName = "getScreenSize()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -17,26 +17,4 @@ class CustomerStatusViewModel: CustomerStatusViewModelContract {
         self.model = CustomerStatusModel(receivedCustomer: receivedCustomer)
     }
     
-    func loadData() {
-        _view.showLoading()
-        load()
-    }
-    
-    func load() {
-        let path = "\(Paths.customerStatus):\(model.receivedCustomer.uid)"
-        
-        ServerManager.Read(path: path) { (value:CustomerStatus?, error) in
-            self._view.hideLoading()
-            
-            if error != nil, error != ServerError.body_serialization_error {
-                self._view.showError(message: ErrorHandler.Server(error: error!))
-                return
-            }
-            self.model.loadedStatus = value
-            DispatchQueue.main.async {
-                self._view.showSuccess(value: value)
-            }
-        }
-    }
-    
 }

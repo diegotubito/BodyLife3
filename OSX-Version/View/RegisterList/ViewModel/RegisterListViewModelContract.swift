@@ -17,6 +17,7 @@ protocol RegisterListViewModelContract {
     func setSelectedRegister(_ selectedRegister: RegisterListModel.ViewModel?)
     func getSelectedRegister() -> RegisterListModel.ViewModel?
     func setIsEnabled(row: Int)
+   
 
 }
 
@@ -29,4 +30,5 @@ protocol RegisterListViewContract {
     func updateButtonState()
     func cancelSuccess()
     func cancelError()
+    func notificateStatusInfo(data: CustomerStatusModel.StatusInfo?)
 }

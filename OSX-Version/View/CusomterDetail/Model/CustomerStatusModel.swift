@@ -11,4 +11,9 @@ import Cocoa
 struct CustomerStatusModel {
     var loadedStatus : CustomerStatus?
     var receivedCustomer : CustomerModel.Customer
+    
+    struct StatusInfo {
+        var expiration : Date
+        var balance : Double
+    }
 }

@@ -9,6 +9,7 @@
 import Cocoa
 
 class RegisterListView: XibViewWithAnimation , RegisterListViewContract{
+   
     
     @IBOutlet weak var agregarCobroOutlet: NSButton!
     @IBOutlet weak var anularButtonOutlet: NSButton!
@@ -92,9 +93,17 @@ class RegisterListView: XibViewWithAnimation , RegisterListViewContract{
     func cancelSuccess() {
         let row = tableView.selectedRow
         viewModel.setIsEnabled(row: row)
+        tableView.beginUpdates()
         tableView.removeRows(at: IndexSet(integer: row), withAnimation: .effectFade)
         tableView.insertRows(at: IndexSet(integer: row), withAnimation: .effectGap)
-        NotificationCenter.default.post(.init(name: .notificationUpdateStatus))
+        tableView.endUpdates()
+        
+        let statusInfo = CustomerStatusModel.StatusInfo(expiration: Date(), balance: 300.00)
+        NotificationCenter.default.post(name: .notificationUpdateStatus, object: statusInfo, userInfo: nil)
+    }
+    
+    func notificateStatusInfo(data: CustomerStatusModel.StatusInfo?) {
+        NotificationCenter.default.post(name: .notificationUpdateStatus, object: data, userInfo: nil)
     }
     
 }

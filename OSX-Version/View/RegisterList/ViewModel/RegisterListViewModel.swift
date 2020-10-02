@@ -10,6 +10,8 @@ import Cocoa
 
 class RegisterListViewModel: RegisterListViewModelContract {
     
+    
+    
     var _view : RegisterListViewContract!
     var model : RegisterListModel!
     
@@ -65,7 +67,6 @@ class RegisterListViewModel: RegisterListViewModelContract {
             do {
                 let response = try JSONDecoder().decode(PaymentModel.ViewModel.self, from: data)
                 self.calcExtras(payments: response.payments)
-                self._view.displayData()
             } catch {
                 print("could not decode")
                 return
@@ -78,19 +79,40 @@ class RegisterListViewModel: RegisterListViewModelContract {
         guard let sells = model.response?.sells else {
             return
         }
+        
+        var totalSells : Double = 0
+        var totalPayments : Double = 0
+        var maxExpiration = "01-01-2001".toDate(formato: "dd-MM-yyyy")!
+        
         let sorted = sells.sorted(by: {$0.timestamp > $1.timestamp})
+        let filterSells = sorted.filter({$0.isEnabled == true})
         model.response?.sells = sorted
-        for (x,sell) in sorted.enumerated() {
+        for (x,sell) in filterSells.enumerated() {
             let amountToPay = sell.price
-            let correctPayments = payments.filter({$0.self.sell._id == sell._id})
-    
-            let totalPayments = calcTotalPayment(payments: correctPayments)
-            let balance = totalPayments - amountToPay
             
-            model.response?.sells[x].totalPayment = totalPayments
+            let correctPayments = payments.filter({$0.self.sell._id == sell._id && $0.isEnabled == true})
+            
+            let partialPayments = calcTotalPayment(payments: correctPayments)
+            let balance = partialPayments - amountToPay
+            
+            if let toDate = sell.toDate?.toDate1970 {
+                if toDate > maxExpiration {
+                    maxExpiration = toDate
+                }
+            }
+            model.response?.sells[x].totalPayment = partialPayments
             model.response?.sells[x].balance = balance
+            totalSells += amountToPay
+            totalPayments += partialPayments
         }
+        
+        let statusInfo = CustomerStatusModel.StatusInfo(expiration: maxExpiration,
+                                                        balance: totalPayments - totalSells)
+        self._view.notificateStatusInfo(data: statusInfo)
+        self._view.displayData()
+  
     }
+   
     
     private func calcTotalPayment(payments: [PaymentModel.ViewModel.AUX]) -> Double {
         var total : Double = 0
@@ -222,4 +244,5 @@ class RegisterListViewModel: RegisterListViewModelContract {
     func setIsEnabled(row: Int) {
         model.response?.sells[row].isEnabled = false
     }
+    
 }

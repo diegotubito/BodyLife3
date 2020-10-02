@@ -22,4 +22,5 @@ protocol CustomerListViewContract {
     func hideLoading()
     func showSuccess()
     func showError()
+    func reloadCell(row: Int)
 }

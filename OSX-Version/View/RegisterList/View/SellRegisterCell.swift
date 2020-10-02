@@ -36,6 +36,9 @@ class SellRegisterCell: NSTableCellView {
         labelTotalPayment.stringValue = totalPayment.currencyFormat(decimal: 2)
         labelSaldo.stringValue = balance.currencyFormat(decimal: 2)
         
+        if !sell.isEnabled {
+        print("not enabled sell")
+        }
         alphaValue = sell.isEnabled ? 1.0 : 0.3
         labelSaldo.textColor = balance < 0 ? Constants.Colors.Red.ematita : NSColor.lightGray
         let articleImage = #imageLiteral(resourceName: "beverages-supplier")

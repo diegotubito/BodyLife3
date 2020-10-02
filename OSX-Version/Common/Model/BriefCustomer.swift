@@ -72,9 +72,6 @@ class CustomerModel {
         var state : String
         var country : String
     }
-    
-    
-    
 }
 struct BriefCustomer: Decodable {
     var childID : String

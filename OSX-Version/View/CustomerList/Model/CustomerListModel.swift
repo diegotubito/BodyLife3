@@ -12,10 +12,16 @@ struct CustomerListModel {
     var selectedCustomer : CustomerModel.Customer?
     var customers = [CustomerModel.Customer]()
     var response : Response!
+    var images = [Images]()
     
     struct Response :Decodable {
         var response : String
         var customers : [CustomerModel.Customer]
         var total_amount : Int
+    }
+    
+    struct Images {
+        var image : NSImage?
+        var _id : String
     }
 }
