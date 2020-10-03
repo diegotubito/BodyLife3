@@ -9,17 +9,17 @@
 import Foundation
 
 extension ImportDatabase {
-    class VentaArticulo {
-        static private func getArticulos() -> [SellModel.NewRegister]? {
+    class PagoArticulo {
+        static private func getPagosArticulos() -> [PaymentModel.Response]? {
             guard let json = ImportDatabase.loadBodyLife() else {
                 return nil
             }
             
-            guard let venta = json["venta"] as? [String : Any] else {
+            guard let cobro = json["cobro"] as? [String : Any] else {
                 return nil
             }
             
-            guard let registers = venta["articulo"] as? [String : Any] else {
+            guard let registers = cobro["articulo"] as? [String : Any] else {
                 return nil
             }
             
@@ -41,61 +41,51 @@ extension ImportDatabase {
             guard let data = try? JSONSerialization.data(withJSONObject: list, options: []) else {
                 return nil
             }
-            guard let oldRegisters = try? JSONDecoder().decode([SellModel.OldArticulo].self, from: data) else {
+            guard let oldRegisters = try? JSONDecoder().decode([PaymentModel.OldArticulo].self, from: data) else {
                 print("could not decode")
                 return nil
             }
             
-            var result = [SellModel.NewRegister]()
+            var result = [PaymentModel.Response]()
             for i in oldRegisters {
                 let createdAt = i.fechaCreacion.toDate(formato: "dd-MM-yyyy HH:mm:ss")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970
                    
                 let _id = ImportDatabase.codeUID(i.childID)
-                let customerId = ImportDatabase.codeUID(i.childIDSocio)
-                let dicountID = ImportDatabase.codeUID(i.childIDDescuento ?? "")
-                let article = ImportDatabase.codeUID(i.childIDProducto)
+                let customer = ImportDatabase.codeUID(i.childIDSocio)
+                let sell = ImportDatabase.codeUID(i.childIDVentaArticulo)
                 
-                let newRegister = SellModel.NewRegister(_id: _id,
-                                                        customer: customerId,
-                                                        discount: dicountID,
-                                                        activity: nil,
-                                                        article: article,
-                                                        period: nil,
+                let newRegister = PaymentModel.Response(_id: _id,
+                                                        customer: customer,
+                                                        sell: sell,
+                                                        isEnabled: !i.esAnulado,
                                                         timestamp: createdAt,
-                                                        fromDate: nil,
-                                                        toDate: nil,
-                                                        quantity: i.cantidadVendida,
-                                                        isEnabled: true,
-                                                        operationCategory: "articulo",
-                                                        price: i.precioVenta,
-                                                        priceList: i.precioCompra,
-                                                        description: i.descripcionProducto)
-                
+                                                        paidAmount: i.importeCobrado,
+                                                        productCategory: ProductCategory.article.rawValue)
                 result.append(newRegister)
             }
             return result
         }
         
-        static private func encodeRegister(_ register: SellModel.NewRegister) -> [String : Any] {
+        static private func encodeRegister(_ register: PaymentModel.Response) -> [String : Any] {
             let data = try? JSONEncoder().encode(register)
             let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String : Any]
             return json!
         }
         
         static func MigrateToMongoDB() {
-            guard let articulos = ImportDatabase.VentaArticulo.getArticulos() else {
+            guard let cobros = ImportDatabase.PagoArticulo.getPagosArticulos() else {
                 return
             }
-            let url = "http://127.0.0.1:2999/v1/sell"
+            let url = "http://127.0.0.1:2999/v1/payment"
             let _services = NetwordManager()
             var notAdded = 0
-            for (x,articulo) in articulos.enumerated() {
+            for (x,cobro) in cobros.enumerated() {
                 let semasphore = DispatchSemaphore(value: 0)
                 
-                let body = ImportDatabase.VentaArticulo.encodeRegister(articulo)
+                let body = ImportDatabase.PagoArticulo.encodeRegister(cobro)
                 _services.post(url: url, body: body) { (data, error) in
                     guard data != nil else {
-                        print("no se guardo \(articulo.customer) error")
+                        print("no se guardo \(cobro.customer) error")
                         print(body)
                         notAdded += 1
                         print("not added \(notAdded)")
@@ -106,10 +96,9 @@ extension ImportDatabase {
                 }
                 
                 _ = semasphore.wait(timeout: .distantFuture)
-                print("\(x + 1)/\(articulos.count)")
+                print("\(x + 1)/\(cobros.count)")
             }
             print("not added \(notAdded)")
         }
     }
 }
-

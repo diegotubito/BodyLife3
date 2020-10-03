@@ -29,12 +29,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 //        ImportDatabase.Article.MigrateToMongoDB()
         
 //        ImportDatabase.Customer.MigrateToMongoDB()
+//        ImportDatabase.Thumbnail.MigrateToMongoDB()
+
 //        ImportDatabase.Carnet.MigrateToMongoDB()
 //        ImportDatabase.VentaArticulo.MigrateToMongoDB()
-//        ImportDatabase.Thumbnail.MigrateToMongoDB()
-        
 //        ImportDatabase.PagoCarnet.MigrateToMongoDB()
- 
+//        ImportDatabase.PagoArticulo.MigrateToMongoDB()
+
     }
     
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {

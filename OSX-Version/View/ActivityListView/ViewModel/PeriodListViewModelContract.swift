@@ -8,11 +8,11 @@
 
 import Cocoa
 
-protocol ActivityListViewModelContract {
-    init(withView view: ActivityListViewContract)
+protocol PeriodListViewModelContract {
+    init(withView view: PeriodListViewContract)
 }
 
-protocol ActivityListViewContract {
+protocol PeriodListViewContract {
     func displayList()
     func showError()
     func showLoading()

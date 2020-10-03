@@ -8,11 +8,11 @@
 
 import Cocoa
 
-struct ServiceTypeModel : Decodable {
-    var childID : String
-    var name : String
-    var isEnabled : Bool
-    var createdAt : Double
-}
-
-
+//struct ServiceTypeModel : Decodable {
+//    var childID : String
+//    var name : String
+//    var isEnabled : Bool
+//    var createdAt : Double
+//}
+//
+//

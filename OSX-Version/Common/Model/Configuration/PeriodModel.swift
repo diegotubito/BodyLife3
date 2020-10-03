@@ -32,6 +32,21 @@ class PeriodModel {
         var price : Double
         var days : Int
     }
+    
+    struct ViewModel : Decodable {
+        var response : String
+        var periods : [PeriodModel.AUX_Period]
+        var count : Int
+    }
+    
+    struct AUX_Period : Decodable {
+        var _id : String
+        var description : String
+        var isEnabled : Bool
+        var timestamp : Double
+        var activity : ActivityModel.NewRegister?
+        var price : Double
+        var days : Int
+    }
    
 }
-

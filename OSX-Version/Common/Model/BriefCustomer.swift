@@ -107,7 +107,7 @@ class SellModel {
         var fromDate : Double?
         var toDate : Double?
         var timestamp: Double
-        var operationCategory : String
+        var productCategory : String
         var customer : CustomerModel.Customer
         var activity: ActivityModel.NewRegister?
         var discount: DiscountModel.NewRegister?
@@ -154,9 +154,10 @@ class SellModel {
         var toDate : Double?
         var quantity : Int?
         var isEnabled : Bool
-        var operationCategory : String
+        var productCategory : String
         var price: Double?
         var priceList: Double?
+        var priceCost : Double?
         var description: String
     }
     

@@ -18,7 +18,7 @@ class PaymentModel {
         var fechaCreacion : String
         var importeCobrado : Double
     }
-    
+  
     struct OldArticulo : Decodable {
         var childID : String
         var childIDSocio : String
@@ -44,7 +44,7 @@ class PaymentModel {
         var isEnabled : Bool
         var timestamp : Double
         var paidAmount : Double
-        var operationCategory : String
+        var productCategory : String
     }
     
     struct ViewModel : Decodable {
@@ -59,7 +59,7 @@ class PaymentModel {
             var isEnabled : Bool
             var timestamp : Double
             var paidAmount : Double
-            var operationCategory : String
+            var productCategory : String
         }
     }
 }

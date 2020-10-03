@@ -10,35 +10,38 @@ import Cocoa
 
 protocol ActivitySaleViewModelContract {
     init(withView view: ActivitySaleViewContract)
-    
-    func setCustomerStatus(selectedCustomer: BriefCustomer, selectedStatus: CustomerStatus?)
-    func loadServices()
-    func getActivities() -> [ActivityModel.Register]
-    func getTypes() -> [ServiceTypeModel]
-    func getDiscounts() -> [DiscountModel.Register]
+    func loadPeriods()
+    func loadDiscounts()
+    func selectActivity(_ value: Int)
+    func selectDiscount(_ value: Int)
+    func setCustomerStatus(selectedCustomer: CustomerModel.Customer, selectedStatus: CustomerStatus?)
     func selectTypeAutomatically()
     func selectDiscountAutomatically()
-    func selectType(_ value: Int)
-    func selectDiscount(_ value: Int)
-    func setSelectedActivity(_ value: ActivityModel.Register?)
-    func getSelectedActivity() -> ActivityModel.Register?
+    func setSelectedActivity(_ value: ActivityModel.NewRegister?)
+    func setSelectedPeriod(_ value: PeriodModel.AUX_Period?)
+    func getSelectedPeriod() -> PeriodModel.AUX_Period?
+    func getSelectedActivity() -> ActivityModel.NewRegister?
+    func getSelectedDiscount() -> DiscountModel.NewRegister?
     func getProperFromDate() -> Date
     func getTotals() -> (amount: Double, amountDiscounted: Double)
     func validate() -> Bool
-    func save()
     func getRemainingDays() -> String
     func getExpirationDate() -> String
+    func getPeriods() -> [PeriodModel.AUX_Period]
+    func getActivities() -> [ActivityModel.NewRegister]
+    func getDiscounts() -> [DiscountModel.NewRegister]
 }
 
 protocol ActivitySaleViewContract {
     func showLoading()
     func hideLoading()
     func showError(_ message: String)
-    func showSuccess()
+    func showActivities()
     func showSuccessSaving()
-    func setPopupTypeByTitle(_ value: String?)
+    func setPopupPeriodByTitle(_ value: String?)
     func setPopupDiscountByTitle(_ value: String?)
-    func showActivities() 
+    func showPeriods()
+    func showDiscounts()
     func adjustDates()
     func getToDate() -> Date
     func getFromDate() -> Date

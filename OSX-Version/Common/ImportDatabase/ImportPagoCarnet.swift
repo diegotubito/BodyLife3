@@ -60,7 +60,7 @@ extension ImportDatabase {
                                                         isEnabled: !i.esAnulado,
                                                         timestamp: createdAt,
                                                         paidAmount: i.importeCobrado,
-                                                        operationCategory: "activity")
+                                                        productCategory: ProductCategory.activity.rawValue)
                 result.append(newRegister)
             }
             return result

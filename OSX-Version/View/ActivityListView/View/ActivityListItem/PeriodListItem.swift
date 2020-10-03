@@ -8,12 +8,12 @@
 
 import Cocoa
 
-class ActivityListItem: GenericCollectionItem<ActivityModel.Register> {
+class PeriodListItem: GenericCollectionItem<PeriodModel.AUX_Period> {
     @IBOutlet weak var titleLabel: NSTextField!
        
-    override var item : ActivityModel.Register! {
+    override var item : PeriodModel.AUX_Period! {
            didSet {
-            titleLabel.stringValue = String(item.days)
+            titleLabel.stringValue = "\(item.days) días - $\(item.price)"
            }
        }
        
@@ -21,7 +21,7 @@ class ActivityListItem: GenericCollectionItem<ActivityModel.Register> {
            super .viewDidLoad()
         view.wantsLayer = true
         selectionBorderColor = NSColor.white
-        selectionBorderWidth = 3
+        selectionBorderWidth = 2
        
        }
     

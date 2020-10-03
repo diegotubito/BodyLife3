@@ -21,8 +21,8 @@ class ActivitySaleView : XibViewBlurBackground {
     @IBOutlet weak var priceLabel: NSTextField!
     @IBOutlet weak var discountLabel: NSTextField!
     @IBOutlet weak var totalLabel: NSTextField!
-    @IBOutlet weak var activityViewContainer: NSView!
-    var activityListView : ActivityListView!
+    @IBOutlet weak var periodViewContainer: NSView!
+    var periodListView : PeriodListView!
     @IBOutlet weak var popupType: NSPopUpButton!
     
     @IBOutlet weak var popupDiscount: NSPopUpButton!
@@ -39,7 +39,8 @@ class ActivitySaleView : XibViewBlurBackground {
         disableDates()
         viewModel = ActivitySaleViewModel(withView: self)
         createProductListView()
-        viewModel.loadServices()
+        viewModel.loadPeriods()
+        viewModel.loadDiscounts()
         
         addObserver()
         
@@ -64,26 +65,23 @@ class ActivitySaleView : XibViewBlurBackground {
         let clickGesture = NSClickGestureRecognizer(target: self, action: #selector(backTouched))
         backgroundClickableView.addGestureRecognizer(clickGesture)
         
-        activityListView.didSelectActivity = { activity in
-            self.viewModel.setSelectedActivity(activity)
+        periodListView.didSelectPeriod = { period in
+            self.viewModel.setSelectedPeriod(period)
             self.updateTotal()
         }
-        
         buttonSaveObserver()
-        
     }
     
     func buttonSaveObserver() {
-    
         saveButtonView.onButtonPressed = {
             if self.viewModel.validate() {
-                self.viewModel.save()
+//                self.viewModel.save()
             }
         }
     }
     
     @objc func loadDataHandler() {
-        viewModel.loadServices()
+        viewModel.loadPeriods()
     }
     
     @objc private func backTouched() {
@@ -91,25 +89,27 @@ class ActivitySaleView : XibViewBlurBackground {
     }
     
     func createProductListView() {
-        activityListView = ActivityListView(frame: CGRect(x: 0, y: 0, width: activityViewContainer.frame.width, height: activityViewContainer.frame.height))
-        activityListView.collectionView.layer?.backgroundColor = NSColor.clear.cgColor
-        activityViewContainer.addSubview(activityListView)
+      
+        periodListView = PeriodListView(frame: CGRect(x: 0, y: 0, width: periodViewContainer.frame.width, height: periodViewContainer.frame.height))
+        periodListView.collectionView.layer?.backgroundColor = NSColor.clear.cgColor
+        periodViewContainer.addSubview(periodListView)
+        periodViewContainer.layer?.backgroundColor = NSColor.red.cgColor
     }
     @IBAction func typePopupDidChanged(_ sender: NSPopUpButton) {
-        viewModel.selectType(sender.indexOfSelectedItem)
+        viewModel.selectActivity(sender.indexOfSelectedItem)
         updateTotal()
     }
     
     @IBAction func discountPopupDidChanged(_ sender: NSPopUpButton) {
-        viewModel.selectDiscount(sender.indexOfSelectedItem)
+        viewModel.selectDiscount(sender.indexOfSelectedItem - 1) // first item is not coming from api
         updateTotal()
     }
     
     
     @IBAction func fromDateDidChanged(_ sender: NSDatePicker) {
-        let selectedActivity = viewModel.getSelectedActivity()
-        let days = selectedActivity?.days
-            ?? 0
+        let selectedPeriod = viewModel.getSelectedPeriod()
+        
+        let days = selectedPeriod?.days ?? 0
         
         let properDate = viewModel.getProperFromDate()
         let diff = properDate.diasTranscurridos(fecha: Date()) ?? 0
@@ -134,26 +134,18 @@ class ActivitySaleView : XibViewBlurBackground {
         updateTotal()
     }
     
-    private func showTypes() {
-        loadTypesPopup()
-    }
-    
-    private func showDiscounts() {
-        loadDiscountsPopup()
-    }
-    
-    private func loadTypesPopup() {
-        let types = viewModel.getTypes()
+    private func showActivitiesPopup() {
+        let types = viewModel.getActivities()
         let titles = types.map { (type) -> String in
-            return type.name
+            return type.description
         }
         popupType.addItems(withTitles: titles)
     }
     
-    private func loadDiscountsPopup() {
+    private func showDiscountsPopup() {
         let discounts = viewModel.getDiscounts()
         var titles = discounts.map { (discount) -> String in
-            return discount.name
+            return discount.description
         }
         titles.insert("Sin Descuento", at: 0)
         popupDiscount.addItems(withTitles: titles)
@@ -190,6 +182,7 @@ class ActivitySaleView : XibViewBlurBackground {
 
 
 extension ActivitySaleView: ActivitySaleViewContract {
+    
     func showSuccessSaving() {
         DispatchQueue.main.async {
             NotificationCenter.default.post(name: .needUpdateCustomerList, object: nil)
@@ -223,24 +216,29 @@ extension ActivitySaleView: ActivitySaleViewContract {
         }
     }
     
-    func showSuccess() {
+    func showActivities() {
         DispatchQueue.main.async {
-            self.showTypes()
-            self.showDiscounts()
+            self.showActivitiesPopup()
         }
     }
     
-    func showActivities() {
-        self.viewModel.setSelectedActivity(nil)
-        self.activityListView.items = self.viewModel.getActivities()
+    func showDiscounts() {
+        DispatchQueue.main.async {
+            self.showDiscountsPopup()
+        }
+    }
+    
+    func showPeriods() {
+        self.viewModel.setSelectedPeriod(nil)
+        self.periodListView.items = self.viewModel.getPeriods()
         
         DispatchQueue.main.async {
-            self.activityListView.displayList()
-            self.activityListView.collectionView.deselectAll(nil)
+            self.periodListView.displayList()
+            self.periodListView.collectionView.deselectAll(nil)
         }
     }
     
-    func setPopupTypeByTitle(_ value: String?) {
+    func setPopupPeriodByTitle(_ value: String?) {
         popupType.selectItem(withTitle: value ?? "")
     }
     
@@ -249,18 +247,22 @@ extension ActivitySaleView: ActivitySaleViewContract {
     }
     
     func adjustDates() {
-        let selectedActivity = viewModel.getSelectedActivity()
-        if selectedActivity == nil {
-            fromDate.dateValue = viewModel.getProperFromDate()
-            endDate.dateValue = viewModel.getProperFromDate()
-            disableDates()
-            return
+        DispatchQueue.main.async {
+            let selectedPeriod = self.viewModel.getSelectedPeriod()
+            
+            if selectedPeriod == nil {
+                self.fromDate.dateValue = self.viewModel.getProperFromDate()
+                self.endDate.dateValue = self.viewModel.getProperFromDate()
+                self.disableDates()
+                return
+            }
+            self.enableDates()
+            let days = selectedPeriod?.days ?? 0
+            self.fromDate.dateValue = self.viewModel.getProperFromDate()
+            self.endDate.dateValue = self.fromDate.dateValue
+            self.endDate.dateValue.addDays(valor: days)
+
         }
-        enableDates()
-        let days = selectedActivity?.days ?? 0
-        fromDate.dateValue = viewModel.getProperFromDate()
-        endDate.dateValue = fromDate.dateValue
-        endDate.dateValue.addDays(valor: days)
     }
     
 }

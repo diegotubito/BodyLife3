@@ -8,6 +8,6 @@
 
 import Cocoa
 
-struct ActivityListModel {
-    var activities = [ActivityModel]()
+struct PeriodListModel {
+    var periodss = [PeriodModel]()
 }

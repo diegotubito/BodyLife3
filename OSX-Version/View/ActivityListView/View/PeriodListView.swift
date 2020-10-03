@@ -8,30 +8,32 @@
 
 import Cocoa
 
-class ActivityListView : GenericCollectionView<ActivityListItem, ActivityModel.Register> {
+class PeriodListView : GenericCollectionView<PeriodListItem, PeriodModel.AUX_Period> {
     
-    var viewModel : ActivityListViewModelContract!
+    var viewModel : PeriodListViewModelContract!
     
-    var didSelectActivity : ((ActivityModel.Register?) -> Void)?
+    var didSelectPeriod : ((PeriodModel.AUX_Period?) -> Void)?
     
     override func commonInit() {
         super .commonInit()
         
-        viewModel = ActivityListViewModel(withView: self)
+        viewModel = PeriodListViewModel(withView: self)
         
         onSelectedItem = { (item) in
-            self.didSelectActivity?(item)
+            self.didSelectPeriod?(item)
         }
+        
+        
     }
     
     override func collectionView(_ collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> NSSize {
         
-           return NSSize(width: 80, height: 80)
+        return NSSize(width: (self.frame.width - (3 * 10)) / 3, height: 50)
     }
     
 }
 
-extension ActivityListView : ActivityListViewContract {
+extension PeriodListView : PeriodListViewContract {
     func displayList() {
         DispatchQueue.main.async {
             self.collectionView.reloadData()

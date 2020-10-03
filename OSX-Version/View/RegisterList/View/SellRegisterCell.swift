@@ -30,7 +30,7 @@ class SellRegisterCell: NSTableCellView {
         let balance = sell.balance ?? 0
         let timestamp = sell.timestamp.toDate1970.toString(formato: "dd-MM-yyyy - HH:mm")
         labelCreatedAt.stringValue = timestamp + "HS."
-        let labelName = sell.operationCategory == "articulo" ? (sell.article?.description ?? "mmm") : sell.activity?.description ?? "Activitidad sin descripción"
+        let labelName = sell.productCategory == ProductCategory.article.rawValue ? (sell.article?.description ?? "Artículo sin descripción") : sell.activity?.description ?? "Activitidad sin descripción"
         labelDisplayName.stringValue = labelName
         labelPrice.stringValue = sell.price.currencyFormat(decimal: 2)
         labelTotalPayment.stringValue = totalPayment.currencyFormat(decimal: 2)
@@ -43,7 +43,7 @@ class SellRegisterCell: NSTableCellView {
         labelSaldo.textColor = balance < 0 ? Constants.Colors.Red.ematita : NSColor.lightGray
         let articleImage = #imageLiteral(resourceName: "beverages-supplier")
         let activityImage = #imageLiteral(resourceName: "carrito")
-        imageTypeOfRegister.image = sell.operationCategory == "articulo" ? articleImage : activityImage
+        imageTypeOfRegister.image = sell.productCategory == ProductCategory.article.rawValue ? articleImage : activityImage
     }
    
 }

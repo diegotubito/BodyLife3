@@ -27,6 +27,13 @@ class DiscountModel {
         var timestamp : Double
     }
     
+    
+    struct ViewModel: Encodable, Decodable {
+        var response : String
+        var discounts : [NewRegister]
+        var count : Int
+    }
+    
     struct Register: Encodable, Decodable {
         var childID  : String
         var name : String

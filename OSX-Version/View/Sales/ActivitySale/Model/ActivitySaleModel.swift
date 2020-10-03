@@ -10,15 +10,15 @@ import Foundation
 
 struct ActivitySaleModel {
     var selectedStatus : CustomerStatus?
-    var selectedCustomer : BriefCustomer!
+    var selectedCustomer : CustomerModel.Customer!
     
     var fromDate = Date()
     var endDate = Date()
     
-    var activities = [ActivityModel.Register]()
-    var types = [ServiceTypeModel]()
-    var discounts = [DiscountModel.Register]()
-    var selectedType : ServiceTypeModel?
-    var selectedActivity : ActivityModel.Register?
-    var selectedDiscount : DiscountModel.Register?
+    var activities = [ActivityModel.NewRegister]()
+    var periods = [PeriodModel.AUX_Period]()
+    var discounts = [DiscountModel.NewRegister]()
+    var selectedPeriod : PeriodModel.AUX_Period?
+    var selectedActivity : ActivityModel.NewRegister?
+    var selectedDiscount : DiscountModel.NewRegister?
 }

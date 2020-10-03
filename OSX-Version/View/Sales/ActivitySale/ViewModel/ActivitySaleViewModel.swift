@@ -10,6 +10,8 @@ import Cocoa
 
 class ActivitySaleViewModel : ActivitySaleViewModelContract {
    
+    
+   
     var model: ActivitySaleModel!
     var _view : ActivitySaleViewContract!
     
@@ -18,133 +20,125 @@ class ActivitySaleViewModel : ActivitySaleViewModelContract {
         model = ActivitySaleModel()
     }
     
-    func setCustomerStatus(selectedCustomer: BriefCustomer, selectedStatus: CustomerStatus?) {
+    func setCustomerStatus(selectedCustomer: CustomerModel.Customer, selectedStatus: CustomerStatus?) {
         model.selectedStatus = selectedStatus
         model.selectedCustomer = selectedCustomer
     }
     
-    func loadServices() {
-        let path = Paths.productService
+    func loadPeriods() {
         _view.showLoading()
-       
-        ServerManager.ReadJSON(path: path) { (json, error) in
+        
+        let url = "http://127.0.0.1:2999/v1/period"
+        
+        let _service = NetwordManager()
+        _service.get(url: url) { (data, error) in
             self._view.hideLoading()
-            if error != nil {
-                self._view.showError("Error al cargar los producto servicios")
-                return
-            }
-            guard let json = json else {
-                self._view.showError("Error al cargar los producto servicios")
+            guard let data = data else {
+               
                 return
             }
             do {
-                if let activityTypesJSON = json["type"] as? [String : Any] {
-                    let activityTypeArray = ServerManager.jsonArray(json: activityTypesJSON)
-                    let dataActivityType = try JSONSerialization.data(withJSONObject: activityTypeArray, options: [])
-                    self.model.types = try JSONDecoder().decode([ServiceTypeModel].self, from: dataActivityType)
-                }
-                if let activityJSON = json["activity"] as? [String : Any] {
-                    let activityArray = ServerManager.jsonArray(json: activityJSON)
-                    let dataActivity = try JSONSerialization.data(withJSONObject: activityArray, options: [])
-                    self.model.activities = try JSONDecoder().decode([ActivityModel.Register].self, from: dataActivity)
-                }
-                if let discountJSON = json["discount"] as? [String : Any] {
-                    let discountArray = ServerManager.jsonArray(json: discountJSON)
-                    let dataDiscount = try JSONSerialization.data(withJSONObject: discountArray, options: [])
-                    self.model.discounts = try JSONDecoder().decode([DiscountModel.Register].self, from: dataDiscount)
-                }
-                self._view.showSuccess()
+                let response = try JSONDecoder().decode(PeriodModel.ViewModel.self, from: data)
+                self.parseActivityAndDiscount(response: response)
             } catch {
-                self._view.showError("Error en serializacion producto servicios")
+                return
             }
         }
- 
     }
     
-    func getActivities() -> [ActivityModel.Register] {
+    func loadDiscounts() {
+        _view.showLoading()
         
-        guard let selectedType = model.selectedType else {
-            return []
+        let url = "http://127.0.0.1:2999/v1/discount"
+        
+        let _service = NetwordManager()
+        _service.get(url: url) { (data, error) in
+            self._view.hideLoading()
+            guard let data = data else {
+               
+                return
+            }
+            do {
+                let response = try JSONDecoder().decode(DiscountModel.ViewModel.self, from: data)
+                self.model.discounts = response.discounts
+                self._view.showDiscounts()
+            } catch {
+                return
+            }
         }
-        
-        let filterByEnableActivities = model.activities.filter { (activity) -> Bool in
-            return activity.isEnabled != false
-        }
-        
-        let filterByType = filterByEnableActivities.filter({$0.childIDType == selectedType.childID})
-        
-        let sorted = filterByType.sorted(by: { $0.days < $1.days })
-        
-        return sorted
     }
     
-    func getTypes() -> [ServiceTypeModel] {
-        let types = model.types
-        let enabledTypes = types.filter { (type) -> Bool in
-            return type.isEnabled
+    func parseActivityAndDiscount(response : PeriodModel.ViewModel) {
+        let activities = response.periods.compactMap { $0.activity }
+        
+        var uniqueArray = [ActivityModel.NewRegister]()
+        for i in activities {
+            if !uniqueArray.contains(where: {$0._id == i._id}) {
+                uniqueArray.append(i)
+            }
         }
-        let sorted = enabledTypes.sorted(by: { $0.name > $1.name })
-        return sorted
-    }
-    
-    func getDiscounts() -> [DiscountModel.Register] {
-        let discounts = model.discounts
-        let enabled = discounts.filter { (discount) -> Bool in
-            return discount.isEnabled
-        }
-        let sorted = enabled.sorted(by: { $0.name > $1.name })
-        return sorted
-    }
-    
-    func selectType(_ value: Int) {
-        let types = getTypes()
-        model.selectedType = types[value]
+        let filterActivities = uniqueArray.filter({$0.isEnabled})
+        let sortedActivities = filterActivities.sorted(by: { $0.timestamp > $1.timestamp })
+        model.activities = sortedActivities
+        
+        let filterPeriods = response.periods.filter({$0.isEnabled})
+        let sortedPeriods = filterPeriods.sorted(by: {$0.days < $1.days})
+        model.periods = sortedPeriods
         _view.showActivities()
-    }
-    
-    func selectDiscount(_ value: Int) {
-        let discounts = getDiscounts()
-        model.selectedDiscount = discounts[value]
+        _view.showPeriods()
     }
     
     func selectTypeAutomatically() {
-        let childIDLastType = model.selectedStatus?.childIDLastType
-        let availableTypes = getTypes()
-        let lastType = availableTypes.filter({$0.childID == childIDLastType})
-        if lastType.count == 1 {
-            _view.setPopupTypeByTitle(lastType[0].name)
-            model.selectedType = lastType[0]
-            _view.showActivities()
-            return
-        }
-        model.selectedType = nil
-        _view.setPopupTypeByTitle(nil)
-        _view.showActivities()
+//        let childIDLastType = model.selectedStatus?.childIDLastType
+//        let availableTypes = getTypes()
+//        let lastType = availableTypes.filter({$0.childID == childIDLastType})
+//        if lastType.count == 1 {
+//            _view.setPopupTypeByTitle(lastType[0].name)
+//            model.selectedType = lastType[0]
+//            _view.showActivities()
+//            return
+//        }
+//        model.selectedType = nil
+//        _view.setPopupTypeByTitle(nil)
+//        _view.showActivities()
     }
     
     
     
     func selectDiscountAutomatically() {
-        let childIDLastDiscount = model.selectedStatus?.childIDLastDiscount
-        let availableDiscounts = getDiscounts()
-        let lastDiscount = availableDiscounts.filter({$0.childID == childIDLastDiscount})
-        if lastDiscount.count == 0 {return}
-        if lastDiscount.count == 1 {
-            _view.setPopupDiscountByTitle(lastDiscount[0].name)
-            model.selectedDiscount = lastDiscount[0]
-            return
-        }
-        model.selectedDiscount = availableDiscounts[0]
-        _view.setPopupDiscountByTitle(availableDiscounts[0].name)
+//        let childIDLastDiscount = model.selectedStatus?.childIDLastDiscount
+//        let availableDiscounts = getDiscounts()
+//        let lastDiscount = availableDiscounts.filter({$0.childID == childIDLastDiscount})
+//        if lastDiscount.count == 0 {return}
+//        if lastDiscount.count == 1 {
+//            _view.setPopupDiscountByTitle(lastDiscount[0].name)
+//            model.selectedDiscount = lastDiscount[0]
+//            return
+//        }
+//        model.selectedDiscount = availableDiscounts[0]
+//        _view.setPopupDiscountByTitle(availableDiscounts[0].name)
     }
     
-    func setSelectedActivity(_ value: ActivityModel.Register?) {
+    func setSelectedActivity(_ value: ActivityModel.NewRegister?) {
         model.selectedActivity = value
         _view.adjustDates()
     }
     
-    func getSelectedActivity() -> ActivityModel.Register? {
+    func setSelectedPeriod(_ value: PeriodModel.AUX_Period?) {
+        model.selectedPeriod = value
+        _view.adjustDates()
+    }
+    
+    func getSelectedDiscount() -> DiscountModel.NewRegister? {
+        return model.selectedDiscount
+    }
+    
+    func getSelectedActivity() -> ActivityModel.NewRegister? {
         return model.selectedActivity
+    }
+    
+    func getSelectedPeriod() -> PeriodModel.AUX_Period? {
+        return model.selectedPeriod
     }
     
     func getProperFromDate() -> Date {
@@ -162,16 +156,16 @@ class ActivitySaleViewModel : ActivitySaleViewModelContract {
     
     
     func getTotals() -> (amount: Double, amountDiscounted: Double) {
-        let multiplier = model.selectedDiscount?.multiplier ?? 0.0
-        let price = model.selectedActivity?.price ?? 0.0
+        let multiplier = model.selectedDiscount?.factor ?? 0.0
+        let price = model.selectedPeriod?.price ?? 0.0
         let discount = multiplier * price
         return (price, discount)
     }
     
     func getRemainingDays() -> String {
         var expDate = model.selectedStatus?.expiration.toDate ?? Date()
-        if let activity = model.selectedActivity {
-            expDate.addDays(valor: activity.days)
+        if let period = model.selectedPeriod {
+            expDate.addDays(valor: period.days)
         }
         let days = expDate.diasTranscurridos(fecha: Date()) ?? 0
         return String(-days)
@@ -179,16 +173,31 @@ class ActivitySaleViewModel : ActivitySaleViewModelContract {
     
     func getExpirationDate() -> String {
         var expDate = model.selectedStatus?.expiration.toDate
-        if let activity = model.selectedActivity {
+        if let period = model.selectedPeriod {
             if expDate == nil {
                 expDate = Date()
             }
-            expDate?.addDays(valor: activity.days)
+            expDate?.addDays(valor: period.days)
         }
         let result = expDate?.toString(formato: "dd/MM/yyyy")
         return result ?? "-"
         
     }
+    
+    func getPeriods() -> [PeriodModel.AUX_Period] {
+        let filter = model.periods.filter({$0.activity?._id == model.selectedActivity?._id})
+        
+        return filter
+    }
+    
+    func getActivities() -> [ActivityModel.NewRegister] {
+        return model.activities
+    }
+    
+    func getDiscounts() -> [DiscountModel.NewRegister] {
+        return model.discounts
+    }
+    
 }
 
 
@@ -197,7 +206,7 @@ class ActivitySaleViewModel : ActivitySaleViewModelContract {
 extension ActivitySaleViewModel {
     
     func save() {
-        let childIDCustomer = model.selectedCustomer.childID
+  /*      let childIDCustomer = model.selectedCustomer.childID
         let childIDNew = ServerManager.createNewChildID()
         let statusJSON = prepareStatus(childID: childIDNew)
         let sellJSON = prepareSell(childID: childIDNew)
@@ -245,6 +254,7 @@ extension ActivitySaleViewModel {
         saveNewTransaction(path: statusPathTransaction, value: -amountToPay)
         
         _view.showSuccessSaving()
+ */
     }
     
     private func updateSellCountForActivity(_ childIDActivity: String) {
@@ -267,55 +277,34 @@ extension ActivitySaleViewModel {
         }) { (error) in
         }
     }
-    
-    func prepareStatus(childID: String) -> [String : Any] {
-        let childIDCustomer = model.selectedCustomer.childID
-        let surname = model.selectedCustomer.surname
-        let name = model.selectedCustomer.name
-        let childIDLastType = (model.selectedType?.childID)!
-        let childIDLastActivity = (model.selectedActivity?.childID) ?? ""
-        let childIDLastDiscount = (model.selectedDiscount?.childID) ?? ""
-        let status = ["surname" : surname,
-                      "name": name,
-                      "expiration": _view.getToDate().timeIntervalSinceReferenceDate,
-                      "childID": childIDCustomer,
-                      "childIDLastType": childIDLastType,
-                      "childIDLastActivity": childIDLastActivity,
-                      "childIDLastDiscount":childIDLastDiscount] as [String : Any]
-        return status
-    }
-    
+
     func prepareSell(childID: String) -> [String : Any] {
-        let displayName = model.selectedActivity!.name + ", " + model.selectedType!.name
-        let fromDate = _view.getFromDate()
-        let toDate = _view.getToDate()
-        let (price, amountDiscounted) = getTotals()
-        let childIDCustomer = model.selectedCustomer.childID
-        let sell = [childID:["childID" : childID,
-                             "childIDCustomer" : childIDCustomer,
-                             "createdAt" : Date().timeIntervalSinceReferenceDate,
-                             "fromDate" : fromDate.timeIntervalSinceReferenceDate,
-                             "toDate" : toDate.timeIntervalSinceReferenceDate,
-                             "price" : price,
-                             "operationCategory" : OperationCategory.income,
-                             "amountDiscounted" : amountDiscounted,
-                             "amount" : (price - amountDiscounted),
-                             "isEnabled" : true,
-                             "queryByDMY" : Date().queryByDMY,
-                             "queryByMY" : Date().queryByMY,
-                             "queryByY" : Date().queryByY,
-                             "displayName" : displayName]]
-            as [String : Any]
-        
-        return sell
+      
+        return [String : Any]()
     }
     
     func validate() -> Bool {
         var result = true
-        if model.selectedType == nil || model.selectedActivity == nil {
+        if model.selectedPeriod == nil || model.selectedActivity == nil {
             result = false
         }
         return result
     }
     
+    func selectActivity(_ value: Int) {
+        model.selectedActivity = model.activities[value]
+        _view.showPeriods()
+    }
+    
+    func selectDiscount(_ value: Int) {
+        if value == -1 {
+            model.selectedDiscount = nil
+            
+        } else {
+            model.selectedDiscount = model.discounts[value]
+        }
+    }
+    
+  
+   
 }

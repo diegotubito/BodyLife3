@@ -40,7 +40,7 @@ class GenericCollectionItem<U>: NSCollectionViewItem {
 class GenericCollectionView<T: GenericCollectionItem<U>, U>: XibView, NSCollectionViewDataSource, NSCollectionViewDelegate, NSCollectionViewDelegateFlowLayout {
     var scrollView : NSScrollView!
     var collectionView : NSCollectionView!
-    var numberOfVisibleItems = 3
+    var numberOfVisibleItems = 6
     
     var items : [U] = []
     var onSelectedItem : ((U) -> ())?
@@ -61,7 +61,10 @@ class GenericCollectionView<T: GenericCollectionItem<U>, U>: XibView, NSCollecti
     
     private func createCollection() {
         let layout = NSCollectionViewFlowLayout()
-    
+        layout.sectionInset = NSEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        layout.minimumLineSpacing = 10
+        layout.minimumInteritemSpacing = 10
+        
         collectionView = NSCollectionView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
         collectionView.wantsLayer = true
         collectionView.backgroundColors = [NSColor.clear]

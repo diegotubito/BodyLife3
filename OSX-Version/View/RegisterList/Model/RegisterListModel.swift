@@ -26,7 +26,7 @@ class RegisterListModel {
         var fromDate : Double?
         var toDate : Double?
         var timestamp: Double
-        var operationCategory : String
+        var productCategory : String
         var price : Double
         var priceList : Double
         var customer : CustomerModel.Customer

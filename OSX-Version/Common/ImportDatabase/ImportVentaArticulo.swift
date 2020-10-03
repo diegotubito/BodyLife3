@@ -1,16 +1,16 @@
 //
-//  ImportSells.swift
+//  ImportVentaArticulo.swift
 //  OSX-Version
 //
-//  Created by David Diego Gomez on 27/09/2020.
+//  Created by David Diego Gomez on 03/10/2020.
 //  Copyright © 2020 David Diego Gomez. All rights reserved.
 //
 
 import Foundation
 
 extension ImportDatabase {
-    class Carnet {
-        static private func getCarnets() -> [SellModel.NewRegister]? {
+    class VentaArticulo {
+        static private func getVentasArticulos() -> [SellModel.NewRegister]? {
             guard let json = ImportDatabase.loadBodyLife() else {
                 return nil
             }
@@ -19,7 +19,7 @@ extension ImportDatabase {
                 return nil
             }
             
-            guard let registers = venta["carnet"] as? [String : Any] else {
+            guard let registers = venta["articulo"] as? [String : Any] else {
                 return nil
             }
             
@@ -41,7 +41,7 @@ extension ImportDatabase {
             guard let data = try? JSONSerialization.data(withJSONObject: list, options: []) else {
                 return nil
             }
-            guard let oldRegisters = try? JSONDecoder().decode([SellModel.Old].self, from: data) else {
+            guard let oldRegisters = try? JSONDecoder().decode([SellModel.OldArticulo].self, from: data) else {
                 print("could not decode")
                 return nil
             }
@@ -49,32 +49,28 @@ extension ImportDatabase {
             var result = [SellModel.NewRegister]()
             for i in oldRegisters {
                 let createdAt = i.fechaCreacion.toDate(formato: "dd-MM-yyyy HH:mm:ss")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970
-                let fromDate = i.fechaInicial.toDate(formato: "dd-MM-yyyy HH:mm:ss")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970
-                let toDate = i.fechaVencimiento.toDate(formato: "dd-MM-yyyy HH:mm:ss")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970
-                
+                  
                 let _id = ImportDatabase.codeUID(i.childID)
                 let customerId = ImportDatabase.codeUID(i.childIDSocio)
                 let dicountID = ImportDatabase.codeUID(i.childIDDescuento ?? "")
-                let activityID = ImportDatabase.codeUID(i.childIDActividad)
-                let periodID = ImportDatabase.codeUID(i.childIDPeriodo)
-                
-                
+                let article = ImportDatabase.codeUID(i.childIDProducto)
+
                 let newRegister = SellModel.NewRegister(_id: _id,
                                                         customer: customerId,
                                                         discount: dicountID,
-                                                        activity: activityID,
-                                                        article: nil,
-                                                        period: periodID,
+                                                        activity: nil,
+                                                        article: article,
+                                                        period: nil,
                                                         timestamp: createdAt,
-                                                        fromDate: fromDate,
-                                                        toDate: toDate,
-                                                        quantity: nil,
+                                                        fromDate: nil,
+                                                        toDate: nil,
+                                                        quantity: i.cantidadVendida,
                                                         isEnabled: !i.esAnulado,
                                                         productCategory: ProductCategory.activity.rawValue,
-                                                        price: i.precio,
-                                                        priceList: nil,
-                                                        priceCost: nil,
-                                                        description: i.descripcionActividad + " - " + i.descripcionPeriodo)
+                                                        price: i.precioVenta,
+                                                        priceList: i.precioVenta,
+                                                        priceCost: i.precioCompra,
+                                                        description: i.descripcionProducto)
                 
                 result.append(newRegister)
             }
@@ -88,20 +84,19 @@ extension ImportDatabase {
         }
         
         static func MigrateToMongoDB() {
-            guard let carnets = ImportDatabase.Carnet.getCarnets() else {
+            guard let articulosVendidos = ImportDatabase.VentaArticulo.getVentasArticulos() else {
                 return
             }
             let url = "http://127.0.0.1:2999/v1/sell"
             let _services = NetwordManager()
             var notAdded = 0
-            for (x,carnet) in carnets.enumerated() {
+            for (x,articulo) in articulosVendidos.enumerated() {
                 let semasphore = DispatchSemaphore(value: 0)
                 
-                let body = ImportDatabase.Carnet.encodeRegister(carnet)
+                let body = ImportDatabase.VentaArticulo.encodeRegister(articulo)
                 _services.post(url: url, body: body) { (data, error) in
                     guard data != nil else {
-                        print("no se guardo \(carnet.customer) error")
-                        print(body)
+                        print("no se guardo \(articulo.description) error")
                         notAdded += 1
                         print("not added \(notAdded)")
                         semasphore.signal()
@@ -111,7 +106,7 @@ extension ImportDatabase {
                 }
                 
                 _ = semasphore.wait(timeout: .distantFuture)
-                print("\(x + 1)/\(carnets.count)")
+                print("\(x + 1)/\(articulosVendidos.count)")
             }
             print("not added \(notAdded)")
         }

@@ -69,16 +69,18 @@
 		1166AF3523B27F880047C7AE /* ArticleViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1166AF3323B27F880047C7AE /* ArticleViewItem.swift */; };
 		1166AF3623B27F880047C7AE /* ArticleViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1166AF3423B27F880047C7AE /* ArticleViewItem.xib */; };
 		1166AF3C23B296090047C7AE /* ArticleSellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1166AF3B23B296090047C7AE /* ArticleSellView.swift */; };
-		116CE96123EDCDAF00688C0B /* ActivityListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CE96023EDCDAF00688C0B /* ActivityListModel.swift */; };
-		116CE96323EDCDCD00688C0B /* ActivityListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CE96223EDCDCD00688C0B /* ActivityListViewModel.swift */; };
-		116CE96523EDCDEF00688C0B /* ActivityListViewModelContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CE96423EDCDEF00688C0B /* ActivityListViewModelContract.swift */; };
-		116CE96723EDCDF800688C0B /* ActivityListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CE96623EDCDF800688C0B /* ActivityListView.swift */; };
-		116CE96F23EDE94A00688C0B /* ActivityListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CE96D23EDE94A00688C0B /* ActivityListItem.swift */; };
-		116CE97023EDE94A00688C0B /* ActivityListItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 116CE96E23EDE94A00688C0B /* ActivityListItem.xib */; };
+		116CE96123EDCDAF00688C0B /* PeriodListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CE96023EDCDAF00688C0B /* PeriodListModel.swift */; };
+		116CE96323EDCDCD00688C0B /* PeriodListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CE96223EDCDCD00688C0B /* PeriodListViewModel.swift */; };
+		116CE96523EDCDEF00688C0B /* PeriodListViewModelContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CE96423EDCDEF00688C0B /* PeriodListViewModelContract.swift */; };
+		116CE96723EDCDF800688C0B /* PeriodListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CE96623EDCDF800688C0B /* PeriodListView.swift */; };
+		116CE96F23EDE94A00688C0B /* PeriodListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CE96D23EDE94A00688C0B /* PeriodListItem.swift */; };
+		116CE97023EDE94A00688C0B /* PeriodListItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 116CE96E23EDE94A00688C0B /* PeriodListItem.xib */; };
 		116CEB6123A1E2D40081D356 /* RegisterListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 116CEB6023A1E2D40081D356 /* RegisterListView.xib */; };
 		116CEB6323A1E2F30081D356 /* RegisterListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CEB6223A1E2F30081D356 /* RegisterListView.swift */; };
 		116CEB6623A3115E0081D356 /* SellRegisterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CEB6523A3115E0081D356 /* SellRegisterCell.swift */; };
 		1183D1842522F77200BDDBFC /* importThumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1183D1832522F77200BDDBFC /* importThumbnail.swift */; };
+		1184723E2528D2BE0012D237 /* operationCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1184723D2528D2BE0012D237 /* operationCategory.swift */; };
+		118472432528D6D20012D237 /* ImportVentaArticulo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118472422528D6D20012D237 /* ImportVentaArticulo.swift */; };
 		119AE145237F78D90045960C /* ServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119AE144237F78D90045960C /* ServerManager.swift */; };
 		119C68622380BDC8009E9AA0 /* NewCustomerStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 119C68612380BDC8009E9AA0 /* NewCustomerStoryboard.storyboard */; };
 		11A8B44E23BE22B8007A5251 /* GenericTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A8B44D23BE22B8007A5251 /* GenericTableView.swift */; };
@@ -100,7 +102,7 @@
 		11D3D87725213A770008CFD0 /* ActivityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D3D87625213A770008CFD0 /* ActivityModel.swift */; };
 		11D3D87C25214C290008CFD0 /* PeriodModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D3D87B25214C290008CFD0 /* PeriodModel.swift */; };
 		11D3D87F25214DC10008CFD0 /* importPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D3D87E25214DC10008CFD0 /* importPeriod.swift */; };
-		11D3D88225216F0A0008CFD0 /* importVentaArticulo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D3D88125216F0A0008CFD0 /* importVentaArticulo.swift */; };
+		11D3D88225216F0A0008CFD0 /* importPagoArticulo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D3D88125216F0A0008CFD0 /* importPagoArticulo.swift */; };
 		11D3D8852521780B0008CFD0 /* ArticleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D3D8842521780B0008CFD0 /* ArticleModel.swift */; };
 		11D3D888252179E80008CFD0 /* importArticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D3D887252179E80008CFD0 /* importArticle.swift */; };
 		11D615762523F4C3005B5D81 /* ThumbnailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D615752523F4C3005B5D81 /* ThumbnailModel.swift */; };
@@ -205,16 +207,18 @@
 		1166AF3323B27F880047C7AE /* ArticleViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewItem.swift; sourceTree = "<group>"; };
 		1166AF3423B27F880047C7AE /* ArticleViewItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticleViewItem.xib; sourceTree = "<group>"; };
 		1166AF3B23B296090047C7AE /* ArticleSellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleSellView.swift; sourceTree = "<group>"; };
-		116CE96023EDCDAF00688C0B /* ActivityListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityListModel.swift; sourceTree = "<group>"; };
-		116CE96223EDCDCD00688C0B /* ActivityListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityListViewModel.swift; sourceTree = "<group>"; };
-		116CE96423EDCDEF00688C0B /* ActivityListViewModelContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityListViewModelContract.swift; sourceTree = "<group>"; };
-		116CE96623EDCDF800688C0B /* ActivityListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityListView.swift; sourceTree = "<group>"; };
-		116CE96D23EDE94A00688C0B /* ActivityListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityListItem.swift; sourceTree = "<group>"; };
-		116CE96E23EDE94A00688C0B /* ActivityListItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityListItem.xib; sourceTree = "<group>"; };
+		116CE96023EDCDAF00688C0B /* PeriodListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodListModel.swift; sourceTree = "<group>"; };
+		116CE96223EDCDCD00688C0B /* PeriodListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodListViewModel.swift; sourceTree = "<group>"; };
+		116CE96423EDCDEF00688C0B /* PeriodListViewModelContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodListViewModelContract.swift; sourceTree = "<group>"; };
+		116CE96623EDCDF800688C0B /* PeriodListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodListView.swift; sourceTree = "<group>"; };
+		116CE96D23EDE94A00688C0B /* PeriodListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodListItem.swift; sourceTree = "<group>"; };
+		116CE96E23EDE94A00688C0B /* PeriodListItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PeriodListItem.xib; sourceTree = "<group>"; };
 		116CEB6023A1E2D40081D356 /* RegisterListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegisterListView.xib; sourceTree = "<group>"; };
 		116CEB6223A1E2F30081D356 /* RegisterListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterListView.swift; sourceTree = "<group>"; };
 		116CEB6523A3115E0081D356 /* SellRegisterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellRegisterCell.swift; sourceTree = "<group>"; };
 		1183D1832522F77200BDDBFC /* importThumbnail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = importThumbnail.swift; sourceTree = "<group>"; };
+		1184723D2528D2BE0012D237 /* operationCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = operationCategory.swift; sourceTree = "<group>"; };
+		118472422528D6D20012D237 /* ImportVentaArticulo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportVentaArticulo.swift; sourceTree = "<group>"; };
 		119AE144237F78D90045960C /* ServerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerManager.swift; sourceTree = "<group>"; };
 		119C68612380BDC8009E9AA0 /* NewCustomerStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewCustomerStoryboard.storyboard; sourceTree = "<group>"; };
 		11A8B44D23BE22B8007A5251 /* GenericTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericTableView.swift; sourceTree = "<group>"; };
@@ -236,7 +240,7 @@
 		11D3D87625213A770008CFD0 /* ActivityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityModel.swift; sourceTree = "<group>"; };
 		11D3D87B25214C290008CFD0 /* PeriodModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodModel.swift; sourceTree = "<group>"; };
 		11D3D87E25214DC10008CFD0 /* importPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = importPeriod.swift; sourceTree = "<group>"; };
-		11D3D88125216F0A0008CFD0 /* importVentaArticulo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = importVentaArticulo.swift; sourceTree = "<group>"; };
+		11D3D88125216F0A0008CFD0 /* importPagoArticulo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = importPagoArticulo.swift; sourceTree = "<group>"; };
 		11D3D8842521780B0008CFD0 /* ArticleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleModel.swift; sourceTree = "<group>"; };
 		11D3D887252179E80008CFD0 /* importArticle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = importArticle.swift; sourceTree = "<group>"; };
 		11D615752523F4C3005B5D81 /* ThumbnailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailModel.swift; sourceTree = "<group>"; };
@@ -491,7 +495,8 @@
 				11D3D869252127A30008CFD0 /* Configuration */,
 				11498E572520069700E4D679 /* importDatabase.swift */,
 				11498E622520979000E4D679 /* ImportVentaCarnet.swift */,
-				11D3D88125216F0A0008CFD0 /* importVentaArticulo.swift */,
+				118472422528D6D20012D237 /* ImportVentaArticulo.swift */,
+				11D3D88125216F0A0008CFD0 /* importPagoArticulo.swift */,
 				11D615782524E83B005B5D81 /* ImportPagoCarnet.swift */,
 				11498E5F2520975000E4D679 /* ImportCustomer.swift */,
 				1183D1832522F77200BDDBFC /* importThumbnail.swift */,
@@ -635,7 +640,7 @@
 		116CE95D23EDCD7600688C0B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				116CE96023EDCDAF00688C0B /* ActivityListModel.swift */,
+				116CE96023EDCDAF00688C0B /* PeriodListModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -643,8 +648,8 @@
 		116CE95E23EDCD8100688C0B /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				116CE96223EDCDCD00688C0B /* ActivityListViewModel.swift */,
-				116CE96423EDCDEF00688C0B /* ActivityListViewModelContract.swift */,
+				116CE96223EDCDCD00688C0B /* PeriodListViewModel.swift */,
+				116CE96423EDCDEF00688C0B /* PeriodListViewModelContract.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -653,7 +658,7 @@
 			isa = PBXGroup;
 			children = (
 				116CE96823EDCE6F00688C0B /* ActivityListItem */,
-				116CE96623EDCDF800688C0B /* ActivityListView.swift */,
+				116CE96623EDCDF800688C0B /* PeriodListView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -661,8 +666,8 @@
 		116CE96823EDCE6F00688C0B /* ActivityListItem */ = {
 			isa = PBXGroup;
 			children = (
-				116CE96D23EDE94A00688C0B /* ActivityListItem.swift */,
-				116CE96E23EDE94A00688C0B /* ActivityListItem.xib */,
+				116CE96D23EDE94A00688C0B /* PeriodListItem.swift */,
+				116CE96E23EDE94A00688C0B /* PeriodListItem.xib */,
 			);
 			path = ActivityListItem;
 			sourceTree = "<group>";
@@ -863,6 +868,7 @@
 				11233786237B7AEB00F60078 /* BriefCustomer.swift */,
 				114C54212415822A000CC75A /* ExpenseModel.swift */,
 				11D615752523F4C3005B5D81 /* ThumbnailModel.swift */,
+				1184723D2528D2BE0012D237 /* operationCategory.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1087,7 +1093,7 @@
 				111DE572238A01BF002F4216 /* XButtonCustomView.xib in Resources */,
 				11EEF0F0239D4A42007C9821 /* PaymentView.xib in Resources */,
 				11EBD34C23764A9600AB4BFF /* Info.plist in Resources */,
-				116CE97023EDE94A00688C0B /* ActivityListItem.xib in Resources */,
+				116CE97023EDE94A00688C0B /* PeriodListItem.xib in Resources */,
 				1147AB732384AA2D00D19AA9 /* CustomerStatusView.xib in Resources */,
 				1166AF3623B27F880047C7AE /* ArticleViewItem.xib in Resources */,
 			);
@@ -1152,18 +1158,18 @@
 				1147AB7A2384D41900D19AA9 /* CustomerStatusViewModelContract.swift in Sources */,
 				11EBD38A237726A800AB4BFF /* LoginPresenter.swift in Sources */,
 				111DE56D2389F567002F4216 /* SaveButtonCustomView.swift in Sources */,
-				116CE96523EDCDEF00688C0B /* ActivityListViewModelContract.swift in Sources */,
+				116CE96523EDCDEF00688C0B /* PeriodListViewModelContract.swift in Sources */,
 				116CEB6323A1E2F30081D356 /* RegisterListView.swift in Sources */,
 				1163933A238214AC00D14B19 /* CameraViewController.swift in Sources */,
 				116CEB6623A3115E0081D356 /* SellRegisterCell.swift in Sources */,
 				11EBD36623766D2500AB4BFF /* ErrorModel.swift in Sources */,
-				116CE96F23EDE94A00688C0B /* ActivityListItem.swift in Sources */,
+				116CE96F23EDE94A00688C0B /* PeriodListItem.swift in Sources */,
 				11EBD38F237726A800AB4BFF /* LoginInteractor.swift in Sources */,
 				1147AB462383652F00D19AA9 /* CustomerListViewModelContract.swift in Sources */,
 				1147AB482383653A00D19AA9 /* CustomerListViewModel.swift in Sources */,
 				110664C523775C9000DC44F3 /* ErrorMessageView.swift in Sources */,
 				11498E5B25203B9A00E4D679 /* MapManager.swift in Sources */,
-				11D3D88225216F0A0008CFD0 /* importVentaArticulo.swift in Sources */,
+				11D3D88225216F0A0008CFD0 /* importPagoArticulo.swift in Sources */,
 				114C54192413FF66000CC75A /* ExpenseInteractor.swift in Sources */,
 				11AC546423DDE4F30033A27D /* ActivitySaleViewModel.swift in Sources */,
 				110664EB2378F1F100DC44F3 /* NewCustomerInteractor.swift in Sources */,
@@ -1191,6 +1197,7 @@
 				11498E632520979000E4D679 /* ImportVentaCarnet.swift in Sources */,
 				1147AB7C2384D49E00D19AA9 /* CustomerStatusViewModel.swift in Sources */,
 				11D3D8852521780B0008CFD0 /* ArticleModel.swift in Sources */,
+				118472432528D6D20012D237 /* ImportVentaArticulo.swift in Sources */,
 				11EEF0F2239D4A83007C9821 /* PaymentView.swift in Sources */,
 				1147AB4A2383654C00D19AA9 /* CustomerListView.swift in Sources */,
 				11A8ECF823B0E76E00F15B9A /* ArticleListViewModel.swift in Sources */,
@@ -1202,10 +1209,11 @@
 				110664E72378F1F100DC44F3 /* NewCustomerWorker.swift in Sources */,
 				11EBD38E237726A800AB4BFF /* LoginViewController.swift in Sources */,
 				1163932E2381AA0400D14B19 /* TextFieldValidation.swift in Sources */,
-				116CE96123EDCDAF00688C0B /* ActivityListModel.swift in Sources */,
+				116CE96123EDCDAF00688C0B /* PeriodListModel.swift in Sources */,
 				11A8B44E23BE22B8007A5251 /* GenericTableView.swift in Sources */,
 				114C54222415822A000CC75A /* ExpenseModel.swift in Sources */,
 				11D615762523F4C3005B5D81 /* ThumbnailModel.swift in Sources */,
+				1184723E2528D2BE0012D237 /* operationCategory.swift in Sources */,
 				11D3D87C25214C290008CFD0 /* PeriodModel.swift in Sources */,
 				11498E602520975000E4D679 /* ImportCustomer.swift in Sources */,
 				11D3D86B252127BD0008CFD0 /* importDiscount.swift in Sources */,
@@ -1213,12 +1221,12 @@
 				1183D1842522F77200BDDBFC /* importThumbnail.swift in Sources */,
 				1163932B2381975600D14B19 /* ValidationField.swift in Sources */,
 				11EBD35B2376683300AB4BFF /* FirebaseUserModel.swift in Sources */,
-				116CE96323EDCDCD00688C0B /* ActivityListViewModel.swift in Sources */,
+				116CE96323EDCDCD00688C0B /* PeriodListViewModel.swift in Sources */,
 				11AC546223DDE4E30033A27D /* ActivitySaleViewModelContract.swift in Sources */,
 				11EBD3802377130C00AB4BFF /* HomeModels.swift in Sources */,
 				11EBD37F2377130C00AB4BFF /* HomeRouter.swift in Sources */,
 				11AC546023DDE4B40033A27D /* ActivitySaleModel.swift in Sources */,
-				116CE96723EDCDF800688C0B /* ActivityListView.swift in Sources */,
+				116CE96723EDCDF800688C0B /* PeriodListView.swift in Sources */,
 				110664D82377ACBF00DC44F3 /* extensions.swift in Sources */,
 				11498E582520069700E4D679 /* importDatabase.swift in Sources */,
 				1166AF3523B27F880047C7AE /* ArticleViewItem.swift in Sources */,
