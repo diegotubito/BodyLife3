@@ -15,5 +15,9 @@ struct CustomerStatusModel {
     struct StatusInfo {
         var expiration : Date
         var balance : Double
+        var customer : CustomerModel.Customer
+        var lastActivityId : String?
+        var lastPeriodId : String?
+        var lastDiscountId : String?
     }
 }

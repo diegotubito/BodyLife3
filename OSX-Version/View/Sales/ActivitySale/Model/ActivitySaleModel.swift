@@ -9,11 +9,11 @@
 import Foundation
 
 struct ActivitySaleModel {
-    var selectedStatus : CustomerStatus?
     var selectedCustomer : CustomerModel.Customer!
     
     var fromDate = Date()
-    var endDate = Date()
+    
+    var statusInfo : CustomerStatusModel.StatusInfo?
     
     var activities = [ActivityModel.NewRegister]()
     var periods = [PeriodModel.AUX_Period]()

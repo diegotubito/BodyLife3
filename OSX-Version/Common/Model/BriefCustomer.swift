@@ -159,6 +159,9 @@ class SellModel {
         var priceList: Double?
         var priceCost : Double?
         var description: String
+        
+        var totalPayment : Double?
+        var balance : Double?
     }
     
     struct Register: Encodable, Decodable {

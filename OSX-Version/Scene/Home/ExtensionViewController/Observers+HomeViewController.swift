@@ -29,6 +29,7 @@ extension HomeViewController {
             if ((self?.sellRegisterView.isHidden) != nil) {
                 self?.sellRegisterView.animateMode = .fadeIn
             }
+            
         }
     }
     
@@ -62,20 +63,13 @@ extension HomeViewController {
         }
     }
     
-    func showSellRegister() {
-        if self.sellRegisterView.isHidden {
-            self.sellRegisterView.animateMode = .leftIn
-        }
-    }
-
+   
     
     func didSelectCustomer(customerSelected: CustomerModel.Customer) {
         DispatchQueue.main.async {
             self.showStatusCustomer()
             self.customerStatusView.viewModel = CustomerStatusViewModel(withView: self.customerStatusView, receivedCustomer: customerSelected)
-            self.showSellRegister()
-            self.customerStatusView.showLoading()
-            self.sellRegisterView.viewModel.loadData()
+            self.sellRegisterView.viewModel.loadPayments()
         }
     }
 }

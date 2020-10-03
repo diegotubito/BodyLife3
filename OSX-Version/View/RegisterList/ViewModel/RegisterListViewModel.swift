@@ -9,9 +9,6 @@
 import Cocoa
 
 class RegisterListViewModel: RegisterListViewModelContract {
-    
-    
-    
     var _view : RegisterListViewContract!
     var model : RegisterListModel!
     
@@ -20,95 +17,86 @@ class RegisterListViewModel: RegisterListViewModelContract {
         model = RegisterListModel()
     }
     
-    func loadData() {
-        _view.showLoading()
-        setSelectedRegister(nil)
-        
-        let uid = ImportDatabase.codeUID(model.selectedCustomer.uid)
-        
-        let url = "http://127.0.0.1:2999/v1/sell?customer=\(uid)"
-        self.model.response = nil
-        let _service = NetwordManager()
-        _service.get(url: url) { (data, error) in
-            self._view.hideLoading()
-            guard let data = data else {
-               
-                return
-            }
-            do {
-            
-                let response = try JSONDecoder().decode(RegisterListModel.Response.self, from: data)
-                self.model.response = response
-                
-                
-                self.loadPayments()
-            } catch {
-                print("could not decode")
-                return
-            }
-        }
-        
-    }
-    
     func loadPayments() {
         _view.showLoading()
         
-        let uid = ImportDatabase.codeUID(model.selectedCustomer.uid)
-        
-        let url = "http://127.0.0.1:2999/v1/payment?customer=\(uid)"
+        let url = "http://127.0.0.1:2999/v1/payment?customer=\(model.selectedCustomer._id)"
         
         let _service = NetwordManager()
         _service.get(url: url) { (data, error) in
-            self._view.hideLoading()
+            
             guard let data = data else {
                
                 return
             }
             do {
                 let response = try JSONDecoder().decode(PaymentModel.ViewModel.self, from: data)
-                self.calcExtras(payments: response.payments)
+                self.parsePaymentAndSell(response: response)
             } catch {
-                print("could not decode")
                 return
             }
         }
+    }
+    
+    
+    func parsePaymentAndSell(response : PaymentModel.ViewModel) {
+        let sells = response.payments.compactMap { $0.sell }
         
+        var uniqueArray = [SellModel.NewRegister]()
+        for i in sells {
+            if !uniqueArray.contains(where: {$0._id == i._id}) {
+                uniqueArray.append(i)
+            }
+        }
+        let sortedSells = uniqueArray.sorted(by: { $0.timestamp > $1.timestamp })
+        model.sells = sortedSells
+        
+        let sortedPayments = response.payments.sorted(by: {$0.timestamp > $1.timestamp})
+        model.payments = sortedPayments
+    
+        calcExtras(payments: model.payments)
     }
     
     private func calcExtras(payments: [PaymentModel.ViewModel.AUX]) {
-        guard let sells = model.response?.sells else {
-            return
-        }
-        
+        let sells = model.sells
         var totalSells : Double = 0
         var totalPayments : Double = 0
         var maxExpiration = "01-01-2001".toDate(formato: "dd-MM-yyyy")!
+        var lastActivity : String?
+        var lastPeriod : String?
+        var lastDiscount : String?
         
         let sorted = sells.sorted(by: {$0.timestamp > $1.timestamp})
         let filterSells = sorted.filter({$0.isEnabled == true})
-        model.response?.sells = sorted
+        model.sells = sorted
         for (x,sell) in filterSells.enumerated() {
             let amountToPay = sell.price
             
             let correctPayments = payments.filter({$0.self.sell._id == sell._id && $0.isEnabled == true})
             
             let partialPayments = calcTotalPayment(payments: correctPayments)
-            let balance = partialPayments - amountToPay
+            let balance = partialPayments - (amountToPay ?? 0)
             
             if let toDate = sell.toDate?.toDate1970 {
                 if toDate > maxExpiration {
                     maxExpiration = toDate
+                    
                 }
             }
-            model.response?.sells[x].totalPayment = partialPayments
-            model.response?.sells[x].balance = balance
-            totalSells += amountToPay
+            model.sells[x].totalPayment = partialPayments
+            model.sells[x].balance = balance
+            totalSells += amountToPay ?? 0
             totalPayments += partialPayments
         }
         
         let statusInfo = CustomerStatusModel.StatusInfo(expiration: maxExpiration,
-                                                        balance: totalPayments - totalSells)
+                                                        balance: totalPayments - totalSells,
+                                                        customer: model.selectedCustomer,
+                                                        lastActivityId: lastActivity,
+                                                        lastPeriodId: lastPeriod,
+                                                        lastDiscountId: lastDiscount)
         self._view.notificateStatusInfo(data: statusInfo)
+        self._view.hideLoading()
         self._view.displayData()
   
     }
@@ -125,22 +113,27 @@ class RegisterListViewModel: RegisterListViewModelContract {
     
     func setSelectedCustomer(customer: CustomerModel.Customer) {
         model.selectedCustomer = customer
-        model.response = nil
+        model.sells.removeAll()
+        model.payments.removeAll()
         _view.displayData()
     }
     
-    func getRegisters() -> RegisterListModel.Response? {
-        return model.response
+    func getSells() -> [SellModel.NewRegister] {
+        return model.sells
     }
-    
-    func setSelectedRegister(_ selectedRegister: RegisterListModel.ViewModel?) {
+
+    func getPayments() -> [PaymentModel.ViewModel.AUX] {
+        return model.payments
+    }
+
+    func setSelectedRegister(_ selectedRegister: SellModel.NewRegister?) {
         model.selectedSellRegister = selectedRegister
         DispatchQueue.main.async {
             self._view.updateButtonState()
         }
     }
     
-    func getSelectedRegister() -> RegisterListModel.ViewModel? {
+    func getSelectedRegister() -> SellModel.NewRegister? {
         return model.selectedSellRegister
     }
     
@@ -242,7 +235,7 @@ class RegisterListViewModel: RegisterListViewModelContract {
     }
     
     func setIsEnabled(row: Int) {
-        model.response?.sells[row].isEnabled = false
+        model.sells[row].isEnabled = false
     }
     
 }

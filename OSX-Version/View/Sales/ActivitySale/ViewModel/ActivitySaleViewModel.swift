@@ -9,9 +9,8 @@
 import Cocoa
 
 class ActivitySaleViewModel : ActivitySaleViewModelContract {
-   
     
-   
+  
     var model: ActivitySaleModel!
     var _view : ActivitySaleViewContract!
     
@@ -20,8 +19,7 @@ class ActivitySaleViewModel : ActivitySaleViewModelContract {
         model = ActivitySaleModel()
     }
     
-    func setCustomerStatus(selectedCustomer: CustomerModel.Customer, selectedStatus: CustomerStatus?) {
-        model.selectedStatus = selectedStatus
+    func setCustomerStatus(selectedCustomer: CustomerModel.Customer) {
         model.selectedCustomer = selectedCustomer
     }
     
@@ -121,12 +119,10 @@ class ActivitySaleViewModel : ActivitySaleViewModelContract {
     
     func setSelectedActivity(_ value: ActivityModel.NewRegister?) {
         model.selectedActivity = value
-        _view.adjustDates()
     }
     
     func setSelectedPeriod(_ value: PeriodModel.AUX_Period?) {
         model.selectedPeriod = value
-        _view.adjustDates()
     }
     
     func getSelectedDiscount() -> DiscountModel.NewRegister? {
@@ -142,16 +138,15 @@ class ActivitySaleViewModel : ActivitySaleViewModelContract {
     }
     
     func getProperFromDate() -> Date {
-        let selectedStatus = model.selectedStatus
-        if selectedStatus?.expiration == nil {
+        guard let expiration = model.statusInfo?.expiration else {
             return Date()
         }
-        let expirationDate = selectedStatus?.expiration.toDate ?? Date()
-        let dueToDays = expirationDate.diasTranscurridos(fecha: Date()) ?? 0
-        if dueToDays > 15 {
+        
+        guard let days = expiration.diasTranscurridos(fecha: Date()), days < 16 else {
             return Date()
         }
-        return expirationDate
+        
+        return expiration
     }
     
     
@@ -160,28 +155,6 @@ class ActivitySaleViewModel : ActivitySaleViewModelContract {
         let price = model.selectedPeriod?.price ?? 0.0
         let discount = multiplier * price
         return (price, discount)
-    }
-    
-    func getRemainingDays() -> String {
-        var expDate = model.selectedStatus?.expiration.toDate ?? Date()
-        if let period = model.selectedPeriod {
-            expDate.addDays(valor: period.days)
-        }
-        let days = expDate.diasTranscurridos(fecha: Date()) ?? 0
-        return String(-days)
-    }
-    
-    func getExpirationDate() -> String {
-        var expDate = model.selectedStatus?.expiration.toDate
-        if let period = model.selectedPeriod {
-            if expDate == nil {
-                expDate = Date()
-            }
-            expDate?.addDays(valor: period.days)
-        }
-        let result = expDate?.toString(formato: "dd/MM/yyyy")
-        return result ?? "-"
-        
     }
     
     func getPeriods() -> [PeriodModel.AUX_Period] {
@@ -196,6 +169,10 @@ class ActivitySaleViewModel : ActivitySaleViewModelContract {
     
     func getDiscounts() -> [DiscountModel.NewRegister] {
         return model.discounts
+    }
+    
+    func setStatusInfo(_ statusInfo: CustomerStatusModel.StatusInfo?) {
+        model.statusInfo = statusInfo
     }
     
 }

@@ -10,12 +10,15 @@ import Cocoa
 
 protocol RegisterListViewModelContract {
     init(withView view: RegisterListViewContract)
-    func loadData()
+    func loadPayments()
     func cancelRegister()
     func setSelectedCustomer(customer: CustomerModel.Customer)
-    func getRegisters() -> RegisterListModel.Response?
-    func setSelectedRegister(_ selectedRegister: RegisterListModel.ViewModel?)
-    func getSelectedRegister() -> RegisterListModel.ViewModel?
+    
+    func getSells() -> [SellModel.NewRegister]
+    func getPayments() -> [PaymentModel.ViewModel.AUX]
+    
+    func setSelectedRegister(_ selectedRegister: SellModel.NewRegister?)
+    func getSelectedRegister() -> SellModel.NewRegister?
     func setIsEnabled(row: Int)
    
 

@@ -16,8 +16,8 @@
                 <outlet property="fromDate" destination="9IV-Vw-H1S" id="baK-Pt-P72"/>
                 <outlet property="myIndicator" destination="ZUh-4E-i2g" id="EPU-MK-Nh6"/>
                 <outlet property="periodViewContainer" destination="IGF-yz-WcV" id="crH-uF-rid"/>
+                <outlet property="popupActivity" destination="tem-Nk-y8Y" id="5Xm-hV-sIj"/>
                 <outlet property="popupDiscount" destination="c50-aI-oda" id="eNQ-tI-2Bz"/>
-                <outlet property="popupType" destination="tem-Nk-y8Y" id="5Xm-hV-sIj"/>
                 <outlet property="priceLabel" destination="Wp1-vi-9lM" id="8s0-ro-a4Z"/>
                 <outlet property="saveButtonView" destination="xl2-GI-VKM" id="FZj-yt-Hjl"/>
                 <outlet property="totalLabel" destination="TmY-1l-BWm" id="udj-ED-M0s"/>

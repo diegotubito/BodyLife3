@@ -91,7 +91,6 @@ extension HomeViewController {
         
         sellRegisterView = RegisterListView(frame: CGRect(x: 0, y: 0, width: containerSellRegisters.frame.width, height: containerSellRegisters.frame.height))
         self.containerSellRegisters.addSubview(sellRegisterView)
-        
     }
     
 }

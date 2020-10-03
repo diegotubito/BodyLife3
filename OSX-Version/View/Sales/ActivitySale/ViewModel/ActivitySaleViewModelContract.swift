@@ -12,9 +12,11 @@ protocol ActivitySaleViewModelContract {
     init(withView view: ActivitySaleViewContract)
     func loadPeriods()
     func loadDiscounts()
+    func setStatusInfo(_ statusInfo: CustomerStatusModel.StatusInfo?)
+    
     func selectActivity(_ value: Int)
     func selectDiscount(_ value: Int)
-    func setCustomerStatus(selectedCustomer: CustomerModel.Customer, selectedStatus: CustomerStatus?)
+    func setCustomerStatus(selectedCustomer: CustomerModel.Customer)
     func selectTypeAutomatically()
     func selectDiscountAutomatically()
     func setSelectedActivity(_ value: ActivityModel.NewRegister?)
@@ -22,11 +24,8 @@ protocol ActivitySaleViewModelContract {
     func getSelectedPeriod() -> PeriodModel.AUX_Period?
     func getSelectedActivity() -> ActivityModel.NewRegister?
     func getSelectedDiscount() -> DiscountModel.NewRegister?
-    func getProperFromDate() -> Date
     func getTotals() -> (amount: Double, amountDiscounted: Double)
     func validate() -> Bool
-    func getRemainingDays() -> String
-    func getExpirationDate() -> String
     func getPeriods() -> [PeriodModel.AUX_Period]
     func getActivities() -> [ActivityModel.NewRegister]
     func getDiscounts() -> [DiscountModel.NewRegister]
@@ -38,11 +37,8 @@ protocol ActivitySaleViewContract {
     func showError(_ message: String)
     func showActivities()
     func showSuccessSaving()
-    func setPopupPeriodByTitle(_ value: String?)
+    func setPopupActivitydByTitle(_ value: String?)
     func setPopupDiscountByTitle(_ value: String?)
     func showPeriods()
     func showDiscounts()
-    func adjustDates()
-    func getToDate() -> Date
-    func getFromDate() -> Date
 }

@@ -98,8 +98,8 @@ class RegisterListView: XibViewWithAnimation , RegisterListViewContract{
         tableView.insertRows(at: IndexSet(integer: row), withAnimation: .effectGap)
         tableView.endUpdates()
         
-        let statusInfo = CustomerStatusModel.StatusInfo(expiration: Date(), balance: 300.00)
-        NotificationCenter.default.post(name: .notificationUpdateStatus, object: statusInfo, userInfo: nil)
+//        let statusInfo = CustomerStatusModel.StatusInfo(expiration: Date(), balance: 300.00)
+//        NotificationCenter.default.post(name: .notificationUpdateStatus, object: statusInfo, userInfo: nil)
     }
     
     func notificateStatusInfo(data: CustomerStatusModel.StatusInfo?) {
@@ -111,17 +111,16 @@ class RegisterListView: XibViewWithAnimation , RegisterListViewContract{
 
 extension RegisterListView: NSTableViewDataSource, NSTableViewDelegate {
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return viewModel.getRegisters()?.sells.count ?? 0
+        return viewModel.getSells().count
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView?{
         
         let cell : SellRegisterCell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "defaultRow"), owner: self) as! SellRegisterCell
-        let sells = viewModel
-            .getRegisters()?.sells
-        let count = sells?.count ?? 0
+        let sells = viewModel.getSells()
+        let count = sells.count
         if row <= count{
-            cell.displayCell(sell: sells?[row])
+            cell.displayCell(sell: sells[row])
         } else {
             print("safe exit")
         }
@@ -137,8 +136,8 @@ extension RegisterListView: NSTableViewDataSource, NSTableViewDelegate {
                 return
             }
             
-            let sells = viewModel.getRegisters()?.sells
-            let selectedRegister = sells?[myTable.selectedRow]
+            let sells = viewModel.getSells()
+            let selectedRegister = sells[myTable.selectedRow]
             viewModel.setSelectedRegister(selectedRegister)
             
         }

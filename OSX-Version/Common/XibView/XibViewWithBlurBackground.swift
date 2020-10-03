@@ -7,12 +7,18 @@
 //
 
 import Cocoa
+protocol XibViewblurBackgroundDelegate: class {
+    func viewWillShow()
+    func viewWillHide()
+}
 
 class XibViewBlurBackground: XibView {
     var backgroundView : NSView!
     var origin : CGPoint!
     var destiny : CGPoint!
     var closeWhenBackgroundIsTouch : Bool = true
+    
+    weak var delegate : XibViewblurBackgroundDelegate?
     
     override func commonInit() {
         super .commonInit()
@@ -41,12 +47,14 @@ class XibViewBlurBackground: XibView {
     }
     
     func showView() {
+        delegate?.viewWillShow()
         createBackgroundView()
         move(from: CGPoint(x: origin.x, y: origin.y), to: CGPoint(x: destiny.x, y: destiny.y))
         self.setFrameOrigin(NSPoint(x: destiny.x, y: destiny.y))
     }
     
     func hideView() {
+        delegate?.viewWillHide()
         backgroundView.removeFromSuperview()
         move(from: CGPoint(x: destiny.x, y: destiny.y), to: CGPoint(x: origin.x, y: origin.y))
         self.setFrameOrigin(NSPoint(x: origin.x, y: origin.y))

@@ -22,7 +22,7 @@ class SellRegisterCell: NSTableCellView {
         // Drawing code here.
     }
     
-    func displayCell(sell: RegisterListModel.ViewModel?) {
+    func displayCell(sell: SellModel.NewRegister?) {
         guard let sell = sell else {
             return
         }
@@ -30,9 +30,10 @@ class SellRegisterCell: NSTableCellView {
         let balance = sell.balance ?? 0
         let timestamp = sell.timestamp.toDate1970.toString(formato: "dd-MM-yyyy - HH:mm")
         labelCreatedAt.stringValue = timestamp + "HS."
-        let labelName = sell.productCategory == ProductCategory.article.rawValue ? (sell.article?.description ?? "Artículo sin descripción") : sell.activity?.description ?? "Activitidad sin descripción"
+        print("\(sell.productCategory)")
+        let labelName = sell.productCategory == ProductCategory.activity.rawValue ? sell.description : (sell.article?.description ?? "Artículo sin descripción")
         labelDisplayName.stringValue = labelName
-        labelPrice.stringValue = sell.price.currencyFormat(decimal: 2)
+        labelPrice.stringValue = sell.price?.currencyFormat(decimal: 2) ?? "$0.0"
         labelTotalPayment.stringValue = totalPayment.currencyFormat(decimal: 2)
         labelSaldo.stringValue = balance.currencyFormat(decimal: 2)
         
