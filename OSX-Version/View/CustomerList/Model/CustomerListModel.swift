@@ -10,14 +10,21 @@ import Cocoa
 
 struct CustomerListModel {
     var selectedCustomer : CustomerModel.Customer?
-    var customers = [CustomerModel.Customer]()
+    var customersbyPages = [CustomerModel.Customer]()
+    var customersbySearch = [CustomerModel.Customer]()
+    var customersToDisplay = [CustomerModel.Customer]()
+    var bySearch = false
     var response : Response!
-    var images = [Images]()
+    var imagesToDisplay = [Images]()
+    var imagesBySearch = [Images]()
+    var imagesByPages = [Images]()
+    var countByPages : Int = 0
+    var countBySearch : Int = 0
     
     struct Response :Decodable {
         var response : String
         var customers : [CustomerModel.Customer]
-        var total_amount : Int
+        var count : Int
     }
     
     struct Images {

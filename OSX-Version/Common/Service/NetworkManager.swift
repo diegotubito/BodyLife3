@@ -271,7 +271,8 @@ class NetwordManager {
     
     func get(url: String, response: @escaping(Data?, ServerError?) -> Void){
         //create the url with NSURL
-        let urlTransformmed = URL(string: url)!
+        let encodedUrl = url.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
+        let urlTransformmed = URL(string: encodedUrl!)!
         
         //create the session object
         var session = URLSession.shared

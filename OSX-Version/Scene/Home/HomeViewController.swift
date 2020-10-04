@@ -63,9 +63,6 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
         
         self.timerForDelayCustomerSelection = Timer.scheduledTimer(timeInterval: 0.0, target: self, selector: #selector(self.loadStatus), userInfo: nil, repeats: false)
         
-      
-        
-           
     }
     
    

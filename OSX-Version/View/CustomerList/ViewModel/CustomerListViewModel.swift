@@ -21,46 +21,101 @@ class CustomerListViewModel: CustomerListViewModelContract {
         self.model = CustomerListModel()
     }
     
+    func loadCustomers(bySearch: String, offset: Int) {
+        if offset == 0 {
+            model.customersbySearch.removeAll()
+        }
+        _view.showLoading()
+        let url = "http://127.0.0.1:2999/v1/customer-search?queryString=\(bySearch)&offset=\(offset)&limit=50"
+        let _services = NetwordManager()
+        _services.get(url: url, response: { [weak self] (data, error) in
+            self?._view.hideLoading()
+            self?.loading = false
+            guard error == nil, let data = data else {
+                self?._view.showError()
+                return
+            }
+            
+            do {
+                let response = try JSONDecoder().decode(CustomerListModel.Response.self, from: data)
+                self?.model.response = response
+                self?.model.customersbySearch.append(contentsOf: response.customers)
+                self?.switchLoadingCustomers(bySearch: true)
+                self?.model.countBySearch = response.count
+                self?._view.showSuccess()
+                self?._view.hideLoading()
+                print(response.customers.count)
+                self?.loadImages()
+                
+            } catch {
+                print(error.localizedDescription)
+                self?._view.showError()
+            }
+
+        })
+    }
+    
     func loadCustomers(offset: Int) {
         if loading {return}
         loading = true
         _view.showLoading()
         let url = "http://127.0.0.1:2999/v1/customer?offset=\(offset)&limit=50"
         let _services = NetwordManager()
-        _services.get(url: url, response: { (data, error) in
-            self._view.hideLoading()
-            self.loading = false
+        _services.get(url: url, response: { [weak self] (data, error) in
+            self?._view.hideLoading()
+            self?.loading = false
             guard error == nil, let data = data else {
-                self._view.showError()
+                self?._view.showError()
                 return
             }
             
             do {
                 let response = try JSONDecoder().decode(CustomerListModel.Response.self, from: data) 
-                self.model.response = response
-                self.model.customers.append(contentsOf: response.customers)
-                self._view.showSuccess()
-                self._view.hideLoading()
-                self.loadImages()
-                
+                self?.model.response = response
+                self?.model.countByPages = response.count
+      
+                self?.model.customersbyPages.append(contentsOf: response.customers)
+                self?._view.hideLoading()
+                self?.loadImages()
+                self?.switchLoadingCustomers(bySearch: false)
+                self?._view.showSuccess()
             } catch {
-                self._view.showError()
+                self?._view.showError()
             }
 
         })
     }
     
+    func switchLoadingCustomers(bySearch: Bool) {
+        model.bySearch = bySearch
+        if model.bySearch {
+            model.customersToDisplay = model.customersbySearch
+            model.imagesToDisplay = model.imagesBySearch
+        } else {
+            model.customersToDisplay = model.customersbyPages
+            model.imagesToDisplay = model.imagesByPages
+        }
+    }
+    
     func loadImages() {
-        for (x,customer) in self.model.customers.enumerated() {
+        let customers = model.customersToDisplay
+        for (x,customer) in customers.enumerated() {
             self.loadImage(row: x, customer: customer)
         }
     }
     
     
     func loadImage(row: Int, customer: CustomerModel.Customer) {
+      
         self.loadImage(row: row, customer: customer) { (image, correctRow) in
-            self.model.images.append(CustomerListModel.Images(image: image,
-                                                              _id: customer._id))
+            if self.model.bySearch {
+                self.model.imagesBySearch.append(CustomerListModel.Images(image: image,
+                                                                  _id: customer._id))
+            } else {
+                self.model.imagesByPages.append(CustomerListModel.Images(image: image,
+                                                                  _id: customer._id))
+            }
+            self.switchLoadingCustomers(bySearch: self.model.bySearch)
             DispatchQueue.main.async {
                 self._view.reloadCell(row: row)
             }
@@ -103,7 +158,12 @@ class CustomerListViewModel: CustomerListViewModelContract {
     
     
     func getTotalItems() -> Int {
-        return model.response?.total_amount ?? 0
+        if model.bySearch {
+            return model.countBySearch
+        }
+        else {
+            return model.countByPages
+        }
     }
 }
 

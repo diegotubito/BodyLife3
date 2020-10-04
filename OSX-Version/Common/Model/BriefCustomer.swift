@@ -37,6 +37,7 @@ class CustomerModel {
         var dni : String
         var lastName : String
         var firstName : String
+        var fullname : String
         var thumbnailImage : String?
         var street: String
         var locality: String

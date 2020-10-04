@@ -12,9 +12,10 @@ protocol CustomerListViewModelContract {
     init(withView view: CustomerListViewContract)
     
     var model : CustomerListModel! {get set}
-    
+    func loadCustomers(bySearch: String, offset: Int)
     func loadCustomers(offset: Int)
     func getTotalItems() -> Int
+    func switchLoadingCustomers(bySearch: Bool)
 }
 
 protocol CustomerListViewContract {

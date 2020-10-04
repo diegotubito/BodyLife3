@@ -51,12 +51,17 @@ extension ImportDatabase {
                 let dateDouble = date?.timeIntervalSince1970 ?? Date().timeIntervalSince1970
                 let dob = i.fechaNacimiento.toDate(formato: "dd-MM-yyyy")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970
                 let _id = ImportDatabase.codeUID(i.childID)
+                let firstName = i.nombre.condenseWhitespace().capitalized
+                let lastName = i.apellido.condenseWhitespace().capitalized
+                let fullname = lastName + " " + firstName
+                
                 let newCustomer = CustomerModel.Full(_id: _id,
                                                      uid: i.childID,
                                                      timestamp: dateDouble,
                                                      dni: i.dni,
-                                                     lastName: i.apellido.condenseWhitespace().capitalized,
-                                                     firstName: i.nombre.condenseWhitespace().capitalized,
+                                                     lastName: lastName,
+                                                     firstName: firstName,
+                                                     fullname: fullname,
                                                      thumbnailImage: i.childID,
                                                      street: i.direccion.condenseWhitespace().capitalized,
                                                      locality: i.localidad.condenseWhitespace().capitalized,

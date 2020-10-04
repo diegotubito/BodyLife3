@@ -11,7 +11,7 @@ import Cocoa
 
 class CustomerListView: NSView {
     @IBOutlet var myView: NSView!
-    
+    @IBOutlet weak var searchField : NSSearchField!
     @IBOutlet weak var myActivityIndicator: NSProgressIndicator!
     @IBOutlet var tableViewSocio: NSTableView!
     
@@ -39,7 +39,7 @@ class CustomerListView: NSView {
 
         tableViewSocio.delegate = self
         tableViewSocio.dataSource = self
-        
+        searchField.delegate = self
         viewModel = CustomerListViewModel(withView: self)
         
         self.wantsLayer = true
@@ -48,26 +48,57 @@ class CustomerListView: NSView {
         
         NotificationCenter.default.addObserver(self, selector: #selector(newCustomerNotificationHandler(notification:)), name: .newCustomer, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(newSellNotificationHandler(notification:)), name: .needUpdateCustomerList, object: nil)
-      }
+    
+    }
     
     @objc func newSellNotificationHandler(notification: Notification) {
         let row = tableViewSocio.selectedRow
-        self.onSelectedCustomer?(viewModel.model.customers[row] )
+        self.onSelectedCustomer?(viewModel.model.customersToDisplay[row] )
     }
     
     @objc func newCustomerNotificationHandler(notification: Notification) {
         let obj = notification.object
         if let customer = obj as? CustomerModel.Customer {
-            viewModel.model.customers.insert(customer, at: 0)
+            viewModel.model.customersToDisplay.insert(customer, at: 0)
+            viewModel.model.customersbyPages.insert(customer, at: 0)
             let index = IndexSet(integer: 0)
+            
+            tableViewSocio.beginUpdates()
             tableViewSocio.insertRows(at: index, withAnimation: .effectFade)
             tableViewSocio.selectRowIndexes(index, byExtendingSelection: false)
             tableViewSocio.scrollRowToVisible(0)
+            tableViewSocio.endUpdates()
         }
     }
     
     func startLoading() {
         viewModel.loadCustomers(offset: 0)
+    }
+    
+    @IBAction func searchFieldDidChanged(_ sender: NSSearchField) {
+        print("did changed")
+    }
+}
+
+extension CustomerListView: NSSearchFieldDelegate {
+  
+    func control(_ control: NSControl, textView: NSTextView, doCommandBy commandSelector: Selector) -> Bool {
+     
+        if (commandSelector == #selector(NSResponder.insertNewline(_:))) {
+            if !searchField.stringValue.isEmpty {
+                viewModel.switchLoadingCustomers(bySearch: true)
+                viewModel.loadCustomers(bySearch: searchField.stringValue, offset: 0)
+            } else {
+                viewModel.switchLoadingCustomers(bySearch: false)
+                tableViewSocio.reloadData()
+            }
+        }
+        if (commandSelector == #selector(NSResponder.deleteBackward(_:)) ) {
+            if !searchField.stringValue.isEmpty {
+                searchField.stringValue.removeLast()
+            }
+        }
+        return true
     }
 }
 
@@ -101,14 +132,14 @@ extension CustomerListView: NSTableViewDataSource, NSTableViewDelegate {
    
     func numberOfRows(in tableView: NSTableView) -> Int {
         if viewModel == nil {return 0}
-        return self.viewModel.model.customers.count
+        return self.viewModel.model.customersToDisplay.count
     }
    
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView?{
       
         let cell : CustomerListCell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "defaultRow"), owner: self) as! CustomerListCell
         
-        let customer = self.viewModel.model.customers[row]
+        let customer = self.viewModel.model.customersToDisplay[row]
         
         let apellido = customer.lastName.capitalized
         let nombre = customer.firstName.capitalized
@@ -121,7 +152,7 @@ extension CustomerListView: NSTableViewDataSource, NSTableViewDelegate {
         
         cell.fotoCell.image = nil
         cell.showLoading()
-        let loadedImage = viewModel.model.images.filter({$0._id == customer._id})
+        let loadedImage = viewModel.model.imagesToDisplay.filter({$0._id == customer._id})
         if loadedImage.count > 0 {
             cell.hideLoading()
             if let image = loadedImage[0].image {
@@ -131,10 +162,16 @@ extension CustomerListView: NSTableViewDataSource, NSTableViewDelegate {
             }
         }
         
-        let count = viewModel.model.customers.count
+        let count = viewModel.model.customersToDisplay.count
         if row == (count - 1) - 25 {
             if count < viewModel.getTotalItems() {
-                viewModel.loadCustomers(offset: count)
+                if viewModel.model.bySearch {
+                    viewModel.switchLoadingCustomers(bySearch: true)
+                    viewModel.loadCustomers(bySearch: searchField.stringValue, offset: count)
+                } else {
+                    viewModel.switchLoadingCustomers(bySearch: false)
+                    viewModel.loadCustomers(offset: count)
+                }
             }
         }
         
@@ -155,7 +192,7 @@ extension CustomerListView: NSTableViewDataSource, NSTableViewDelegate {
             
              if myTable == tableViewSocio {
                 let posicion = myTable.selectedRow
-                self.viewModel.model.selectedCustomer = viewModel.model.customers[posicion]
+                self.viewModel.model.selectedCustomer = viewModel.model.customersToDisplay[posicion]
                 if viewModel.model.selectedCustomer != nil {
                     self.onSelectedCustomer?(viewModel.model.selectedCustomer!)
                 }
@@ -183,6 +220,5 @@ extension CustomerListView: NSTableViewDataSource, NSTableViewDelegate {
     func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
         return MyNSTableRowView()
     }
-    
 }
 
