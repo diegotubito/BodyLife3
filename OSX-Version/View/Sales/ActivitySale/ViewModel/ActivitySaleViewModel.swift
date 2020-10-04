@@ -86,35 +86,40 @@ class ActivitySaleViewModel : ActivitySaleViewModelContract {
         _view.showPeriods()
     }
     
-    func selectTypeAutomatically() {
-//        let childIDLastType = model.selectedStatus?.childIDLastType
-//        let availableTypes = getTypes()
-//        let lastType = availableTypes.filter({$0.childID == childIDLastType})
-//        if lastType.count == 1 {
-//            _view.setPopupTypeByTitle(lastType[0].name)
-//            model.selectedType = lastType[0]
-//            _view.showActivities()
-//            return
-//        }
-//        model.selectedType = nil
-//        _view.setPopupTypeByTitle(nil)
-//        _view.showActivities()
+    func selectActivityAutomatically() {
+        let activityId = model.statusInfo?.lastActivityId
+        let availableActivities = model.activities
+        let lastActivity = availableActivities.filter({$0._id == activityId})
+        if lastActivity.count == 1 {
+            _view.setPopupActivitydByTitle(lastActivity[0].description)
+            model.selectedActivity = lastActivity[0]
+            return
+        }
+        model.selectedActivity = nil
+        _view.setPopupActivitydByTitle(nil)
     }
     
     
     
     func selectDiscountAutomatically() {
-//        let childIDLastDiscount = model.selectedStatus?.childIDLastDiscount
-//        let availableDiscounts = getDiscounts()
-//        let lastDiscount = availableDiscounts.filter({$0.childID == childIDLastDiscount})
-//        if lastDiscount.count == 0 {return}
-//        if lastDiscount.count == 1 {
-//            _view.setPopupDiscountByTitle(lastDiscount[0].name)
-//            model.selectedDiscount = lastDiscount[0]
-//            return
-//        }
-//        model.selectedDiscount = availableDiscounts[0]
-//        _view.setPopupDiscountByTitle(availableDiscounts[0].name)
+        if model.statusInfo?.lastDiscountId == nil {
+            _view.setPopupDiscountByTitle("Sin Descuento")
+            model.selectedDiscount = nil
+            return
+        }
+        let discountId = model.statusInfo?.lastDiscountId
+        let availableDiscounts = getDiscounts()
+        let lastDiscount = availableDiscounts.filter({$0._id == discountId})
+        if lastDiscount.count == 0 {
+            return
+        }
+        if lastDiscount.count == 1 {
+            _view.setPopupDiscountByTitle(lastDiscount[0].description)
+            model.selectedDiscount = lastDiscount[0]
+            return
+        }
+        model.selectedDiscount = availableDiscounts[0]
+        _view.setPopupDiscountByTitle(availableDiscounts[0].description)
     }
     
     func setSelectedActivity(_ value: ActivityModel.NewRegister?) {
@@ -174,10 +179,7 @@ class ActivitySaleViewModel : ActivitySaleViewModelContract {
     func setStatusInfo(_ statusInfo: CustomerStatusModel.StatusInfo?) {
         model.statusInfo = statusInfo
     }
-    
 }
-
-
 
 //MARK: SAVE METHODS
 extension ActivitySaleViewModel {
@@ -270,7 +272,6 @@ extension ActivitySaleViewModel {
     
     func selectActivity(_ value: Int) {
         model.selectedActivity = model.activities[value]
-        _view.showPeriods()
     }
     
     func selectDiscount(_ value: Int) {
@@ -282,6 +283,38 @@ extension ActivitySaleViewModel {
         }
     }
     
-  
-   
+    func setFromDate() {
+        guard let expiration = model.statusInfo?.expiration else {
+            model.fromDate = Date()
+            _view.showFromDate(value: model.fromDate)
+            return
+        }
+        
+        if let days = expiration.diasTranscurridos(fecha: Date()) {
+            if days > 15 {
+                model.fromDate = Date()
+            } else {
+                model.fromDate = expiration
+            }
+        } else {
+            model.fromDate = Date()
+        }
+        _view.showFromDate(value: model.fromDate)
+    }
+    
+    func setEndDate() {
+        guard let selectedPeriod = model.selectedPeriod else {
+            model.endDate = model.fromDate
+            _view.showEndDate(value: model.endDate)
+            return
+        }
+        
+        let days = selectedPeriod.days
+        let fromDate = model.fromDate
+        let myCalendar = Calendar(identifier: .gregorian)
+        let endDate = myCalendar.date(byAdding: .day, value: days, to: fromDate)
+        model.endDate = endDate!
+        
+        _view.showEndDate(value: model.endDate)
+    }
 }

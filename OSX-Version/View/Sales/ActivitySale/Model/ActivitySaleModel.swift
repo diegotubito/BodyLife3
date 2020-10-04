@@ -10,9 +10,8 @@ import Foundation
 
 struct ActivitySaleModel {
     var selectedCustomer : CustomerModel.Customer!
-    
+    var endDate = Date()
     var fromDate = Date()
-    
     var statusInfo : CustomerStatusModel.StatusInfo?
     
     var activities = [ActivityModel.NewRegister]()

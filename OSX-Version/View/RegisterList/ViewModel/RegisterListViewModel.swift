@@ -80,13 +80,16 @@ class RegisterListViewModel: RegisterListViewModelContract {
             if let toDate = sell.toDate?.toDate1970 {
                 if toDate > maxExpiration {
                     maxExpiration = toDate
-                    
+                    lastActivity = sell.activity
+                    lastDiscount = sell.discount
+                    lastPeriod = sell.period
                 }
             }
             model.sells[x].totalPayment = partialPayments
             model.sells[x].balance = balance
             totalSells += amountToPay ?? 0
             totalPayments += partialPayments
+            print("\(lastDiscount) lastDiscount")
         }
         
         let statusInfo = CustomerStatusModel.StatusInfo(expiration: maxExpiration,

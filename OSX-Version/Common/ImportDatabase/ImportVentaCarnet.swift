@@ -61,7 +61,7 @@ extension ImportDatabase {
                 
                 let newRegister = SellModel.NewRegister(_id: _id,
                                                         customer: customerId,
-                                                        discount: dicountID,
+                                                        discount: dicountID == "000000000000000000000000" ? nil : dicountID,
                                                         activity: activityID,
                                                         article: nil,
                                                         period: periodID,

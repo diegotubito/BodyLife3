@@ -17,7 +17,7 @@ protocol ActivitySaleViewModelContract {
     func selectActivity(_ value: Int)
     func selectDiscount(_ value: Int)
     func setCustomerStatus(selectedCustomer: CustomerModel.Customer)
-    func selectTypeAutomatically()
+    func selectActivityAutomatically()
     func selectDiscountAutomatically()
     func setSelectedActivity(_ value: ActivityModel.NewRegister?)
     func setSelectedPeriod(_ value: PeriodModel.AUX_Period?)
@@ -29,6 +29,8 @@ protocol ActivitySaleViewModelContract {
     func getPeriods() -> [PeriodModel.AUX_Period]
     func getActivities() -> [ActivityModel.NewRegister]
     func getDiscounts() -> [DiscountModel.NewRegister]
+    func setFromDate()
+    func setEndDate()
 }
 
 protocol ActivitySaleViewContract {
@@ -41,4 +43,7 @@ protocol ActivitySaleViewContract {
     func setPopupDiscountByTitle(_ value: String?)
     func showPeriods()
     func showDiscounts()
+    
+    func showFromDate(value: Date)
+    func showEndDate(value: Date)
 }
