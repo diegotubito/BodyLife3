@@ -184,56 +184,69 @@ class ActivitySaleViewModel : ActivitySaleViewModelContract {
 //MARK: SAVE METHODS
 extension ActivitySaleViewModel {
     
-    func save() {
-  /*      let childIDCustomer = model.selectedCustomer.childID
-        let childIDNew = ServerManager.createNewChildID()
-        let statusJSON = prepareStatus(childID: childIDNew)
-        let sellJSON = prepareSell(childID: childIDNew)
-        let statusPath = "\(Paths.customerStatus):\(childIDCustomer)"
-        let statusPathSell = "\(Paths.fullPersonalData):\(childIDCustomer):sells"
-        let statusPathTransaction = "\(Paths.customerStatus):\(childIDCustomer)"
-        let pathSell = Paths.registers
-        var error : ServerError?
-        let semasphore = DispatchSemaphore(value: 0)
+    func save(fromDate: Date, toDate: Date, price: Double, priceList: Double) {
+        let dicountID : String? = model.selectedDiscount?._id
+        let activityID : String = model.selectedActivity!._id
+        let periodID : String = model.selectedPeriod!._id
+        let createdAt = Date().timeIntervalSince1970
+        let customerId : String = ImportDatabase.codeUID((model.statusInfo?.customer.uid)!)
+        let activityDescription = model.selectedActivity?.description ?? ""
+        let periodDescription = model.selectedPeriod?.description ?? ""
+        let description = activityDescription + " - " + periodDescription
+        let newRegister = SellModel.NewRegister(customer: customerId,
+                                                discount: dicountID,
+                                                activity: activityID,
+                                                article: nil,
+                                                period: periodID,
+                                                timestamp: createdAt,
+                                                fromDate: fromDate.timeIntervalSince1970,
+                                                toDate: toDate.timeIntervalSince1970,
+                                                quantity: nil,
+                                                isEnabled: true,
+                                                productCategory: ProductCategory.activity.rawValue,
+                                                price: price,
+                                                priceList: priceList,
+                                                priceCost: nil,
+                                                description: description)
         
-        updateSellCountForActivity((model.selectedActivity?.childID)!)
         
-        saveNewMembership(datos: sellJSON, path: statusPathSell) { (err) in
-            error = err
-            semasphore.signal()
-        }
-        _ = semasphore.wait(timeout: .distantFuture)
-        if error != nil {
-            _view.showError("No se pudo guardar la venta en Status.")
-            return
-        }
         
-        saveNewMembership(datos: sellJSON, path: pathSell) { (err) in
-            error = err
-            semasphore.signal()
+        let url = "http://127.0.0.1:2999/v1/sell"
+        let _services = NetwordManager()
+        let body = encodeSell(newRegister)
+        _services.post(url: url, body: body) { (data, error) in
+            guard data != nil else {
+                self._view.showError("No se puedo guardar venta")
+                return
+            }
+            let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any]
+            let _id = json?["_id"] as? String
+            
+            self.addNullPayment(sellId: _id!)
         }
-        _ = semasphore.wait(timeout: .distantFuture)
-        if error != nil {
-            _view.showError("No se pudo guardar la venta.")
-            return
-        }
+    }
+    
+    private func addNullPayment(sellId: String) {
+        let createdAt = Date().timeIntervalSince1970
+        let customerId : String = ImportDatabase.codeUID((model.statusInfo?.customer.uid)!)
+
+        let newRegister = PaymentModel.Response(customer: customerId,
+                                                sell: sellId,
+                                                isEnabled: true,
+                                                timestamp: createdAt,
+                                                paidAmount: 0,
+                                                productCategory: ProductCategory.activity.rawValue)
         
-        saveNewMembership(datos: statusJSON, path: statusPath) { (err) in
-            error = err
-            semasphore.signal()
+        let url = "http://127.0.0.1:2999/v1/payment"
+        let _services = NetwordManager()
+        let body = encodePayment(newRegister)
+        _services.post(url: url, body: body) { (data, error) in
+            guard data != nil else {
+                self._view.showError("No se puedo guardar pago nulo")
+                return
+            }
+            self._view.showSuccessSaving()
         }
-        _ = semasphore.wait(timeout: .distantFuture)
-        if error != nil {
-            _view.showError("No se pudo actualizar el Status del socio.")
-            return
-        }
-        
-        let (price, discount) = getTotals()
-        let amountToPay = price - discount
-        saveNewTransaction(path: statusPathTransaction, value: -amountToPay)
-        
-        _view.showSuccessSaving()
- */
     }
     
     private func updateSellCountForActivity(_ childIDActivity: String) {
@@ -242,6 +255,18 @@ extension ActivitySaleViewModel {
         }) { (err) in
             
         }
+    }
+    
+    private func encodeSell(_ register: SellModel.NewRegister) -> [String : Any] {
+        let data = try? JSONEncoder().encode(register)
+        let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String : Any]
+        return json!
+    }
+    
+    private func encodePayment(_ register: PaymentModel.Response) -> [String : Any] {
+        let data = try? JSONEncoder().encode(register)
+        let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String : Any]
+        return json!
     }
     
     func saveNewMembership(datos: [String: Any], path: String, completion: @escaping (ServerError?) -> ()) {

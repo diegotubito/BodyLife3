@@ -20,7 +20,6 @@ protocol RegisterListViewModelContract {
     func setSelectedRegister(_ selectedRegister: SellModel.NewRegister?)
     func getSelectedRegister() -> SellModel.NewRegister?
     func setIsEnabled(row: Int)
-   
 
 }
 

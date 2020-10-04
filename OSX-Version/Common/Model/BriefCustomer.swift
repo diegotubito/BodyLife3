@@ -143,7 +143,7 @@ class SellModel {
     }
     
     struct NewRegister: Encodable, Decodable {
-        var _id: String
+        var _id: String?
         var customer : String?
         var discount : String?
         var activity : String?

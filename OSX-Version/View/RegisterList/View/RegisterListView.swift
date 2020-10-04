@@ -66,15 +66,15 @@ class RegisterListView: XibViewWithAnimation , RegisterListViewContract{
             return
         }
        
-        let createdAt = selection.timestamp.toDate
-        let today = Calendar.current.component(.day, from: Date())
-        let createdDay = Calendar.current.component(.day, from: createdAt!)
+        let timestamp = selection.timestamp.toDate1970.toString(formato: "dd-MM-yyyy")
+        let today = Date().toString(formato: "dd-MM-yyyy")
+        
         let selectedRegister = viewModel.getSelectedRegister()
             
         if selection.balance ?? 0 < 0, (selectedRegister?.isEnabled)! {
             agregarCobroOutlet.isEnabled = true
         }
-        if createdDay == today, (selectedRegister?.isEnabled)! {
+        if timestamp == today, (selectedRegister?.isEnabled)! {
             anularButtonOutlet.isEnabled = true
         }
         
@@ -87,19 +87,14 @@ class RegisterListView: XibViewWithAnimation , RegisterListViewContract{
     }
     
     func cancelError() {
-        
+        print("could no cancel show message")
     }
     
     func cancelSuccess() {
-        let row = tableView.selectedRow
-        viewModel.setIsEnabled(row: row)
-        tableView.beginUpdates()
-        tableView.removeRows(at: IndexSet(integer: row), withAnimation: .effectFade)
-        tableView.insertRows(at: IndexSet(integer: row), withAnimation: .effectGap)
-        tableView.endUpdates()
-        
-//        let statusInfo = CustomerStatusModel.StatusInfo(expiration: Date(), balance: 300.00)
-//        NotificationCenter.default.post(name: .notificationUpdateStatus, object: statusInfo, userInfo: nil)
+        viewModel.loadPayments()
+        DispatchQueue.main.async {
+            self.tableView.deselectAll(nil)
+        }
     }
     
     func notificateStatusInfo(data: CustomerStatusModel.StatusInfo?) {
@@ -139,7 +134,6 @@ extension RegisterListView: NSTableViewDataSource, NSTableViewDelegate {
             let sells = viewModel.getSells()
             let selectedRegister = sells[myTable.selectedRow]
             viewModel.setSelectedRegister(selectedRegister)
-            
         }
         
     }

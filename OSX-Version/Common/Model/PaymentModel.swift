@@ -38,7 +38,7 @@ class PaymentModel {
     }
     
     struct Response : Encodable, Decodable {
-        var _id : String
+        var _id : String?
         var customer : String
         var sell : String
         var isEnabled : Bool

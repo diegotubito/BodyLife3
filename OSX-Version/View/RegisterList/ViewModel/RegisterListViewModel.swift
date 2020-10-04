@@ -9,6 +9,8 @@
 import Cocoa
 
 class RegisterListViewModel: RegisterListViewModelContract {
+   
+    
     var _view : RegisterListViewContract!
     var model : RegisterListModel!
     
@@ -19,7 +21,9 @@ class RegisterListViewModel: RegisterListViewModelContract {
     
     func loadPayments() {
         _view.showLoading()
-        
+        model.sells.removeAll()
+        model.payments.removeAll()
+    
         let url = "http://127.0.0.1:2999/v1/payment?customer=\(model.selectedCustomer._id)"
         
         let _service = NetwordManager()
@@ -30,6 +34,8 @@ class RegisterListViewModel: RegisterListViewModelContract {
                 return
             }
             do {
+                let json = try JSONSerialization.jsonObject(with: data, options: [])
+                print(json)
                 let response = try JSONDecoder().decode(PaymentModel.ViewModel.self, from: data)
                 self.parsePaymentAndSell(response: response)
             } catch {
@@ -40,6 +46,7 @@ class RegisterListViewModel: RegisterListViewModelContract {
     
     
     func parsePaymentAndSell(response : PaymentModel.ViewModel) {
+        print("parsing payments")
         let sells = response.payments.compactMap { $0.sell }
         
         var uniqueArray = [SellModel.NewRegister]()
@@ -57,7 +64,7 @@ class RegisterListViewModel: RegisterListViewModelContract {
         calcExtras(payments: model.payments)
     }
     
-    private func calcExtras(payments: [PaymentModel.ViewModel.AUX]) {
+    func calcExtras(payments: [PaymentModel.ViewModel.AUX]) {
         let sells = model.sells
         var totalSells : Double = 0
         var totalPayments : Double = 0
@@ -66,19 +73,16 @@ class RegisterListViewModel: RegisterListViewModelContract {
         var lastPeriod : String?
         var lastDiscount : String?
         
-        let sorted = sells.sorted(by: {$0.timestamp > $1.timestamp})
-        let filterSells = sorted.filter({$0.isEnabled == true})
-        model.sells = sorted
-        for (x,sell) in filterSells.enumerated() {
+        for (x,sell) in sells.enumerated() {
             let amountToPay = sell.price
             
-            let correctPayments = payments.filter({$0.self.sell._id == sell._id && $0.isEnabled == true})
+            let correctPayments = payments.filter({$0.self.sell._id == sell._id})
             
             let partialPayments = calcTotalPayment(payments: correctPayments)
             let balance = partialPayments - (amountToPay ?? 0)
             
             if let toDate = sell.toDate?.toDate1970 {
-                if toDate > maxExpiration {
+                if toDate > maxExpiration && sell.isEnabled {
                     maxExpiration = toDate
                     lastActivity = sell.activity
                     lastDiscount = sell.discount
@@ -87,9 +91,10 @@ class RegisterListViewModel: RegisterListViewModelContract {
             }
             model.sells[x].totalPayment = partialPayments
             model.sells[x].balance = balance
-            totalSells += amountToPay ?? 0
-            totalPayments += partialPayments
-            print("\(lastDiscount) lastDiscount")
+            if sell.isEnabled {
+                totalSells += amountToPay ?? 0
+                totalPayments += partialPayments
+            }
         }
         
         let statusInfo = CustomerStatusModel.StatusInfo(expiration: maxExpiration,
@@ -108,7 +113,9 @@ class RegisterListViewModel: RegisterListViewModelContract {
     private func calcTotalPayment(payments: [PaymentModel.ViewModel.AUX]) -> Double {
         var total : Double = 0
         for i in payments {
-            total += i.paidAmount
+            if i.isEnabled {
+                total += i.paidAmount
+            }
         }
         
         return total
@@ -141,66 +148,56 @@ class RegisterListViewModel: RegisterListViewModelContract {
     }
     
     func cancelRegister() {
-        cancel { (success) in
-            
-            success == true ? self._view.cancelSuccess() : self._view.cancelError()
-        }
+        let json = ["isEnabled" : false]
+        
+        let url = "http://127.0.0.1:2999/v1/sell?id=\((model.selectedSellRegister?._id)!)"
+        
+        let _service = NetwordManager()
+        _service.update(url: url, body: json, response: { (data, error) in
+            guard data != nil else {
+                self._view.cancelError()
+                return
+            }
+            self._view.cancelSuccess()
+        })
     }
     
-    func cancel(completion: (Bool) -> ()) {
-       /* let json = ["isEnabled" : false]
-        var error : ServerError?
-        let semasphore = DispatchSemaphore(value: 0)
+    func realDeleteEveryRelatedSellAndPayment() {
+        let json = ["isEnabled" : false]
         
-        if let childIDArticle = model.selectedSellRegister.childIDArticle {
-            updateStockAndSellcount(childIDArticle)
-        }
-        if let childIDActivity = model.selectedSellRegister.childIDPeriod {
-            updateSellcountForActivity(childIDActivity)
-        }
+        let url = "http://127.0.0.1:2999/v1/sell?id=\((model.selectedSellRegister?._id)!)"
+        
+        let _service = NetwordManager()
+        _service.delete(url: url, body: json, response: { (data, error) in
+            guard data != nil else {
+                self._view.cancelError()
+                return
+            }
+            self._view.cancelSuccess()
+        })
         
         
-        let pathSell = "\(Paths.registers):\(model.selectedSellRegister.childID)"
-        ServerManager.Update(path: pathSell, json: json) { (data, err) in
-            error = err
-            semasphore.signal()
+        for i in model.payments {
+            
+            if i.sell._id == (model.selectedSellRegister?._id)! {
+                let json = ["isEnabled" : false]
+                
+                let url = "http://127.0.0.1:2999/v1/payment?id=\(i._id)"
+                
+                let _service = NetwordManager()
+                _service.delete(url: url, body: json, response: { (data, error) in
+                    guard data != nil else {
+                        self._view.cancelError()
+                        return
+                    }
+                    self._view.cancelSuccess()
+                })
+            }
+
         }
-        _ = semasphore.wait(timeout: .distantFuture)
-        if error != nil {
-            completion(false)
-            return
-        }
-        
-        let pathCustomerSell = "\(Paths.fullPersonalData):\(model.selectedCustomer.uid):sells:\(model.selectedSellRegister.childID)"
-        ServerManager.Update(path: pathCustomerSell, json: json) { (data, err) in
-            error = err
-            semasphore.signal()
-        }
-        _ = semasphore.wait(timeout: .distantFuture)
-        if error != nil {
-            completion(false)
-            return
-        }
-        
-        let pathStatus = "\(Paths.customerStatus):\(model.selectedCustomer.uid)"
-        let paid = calcTotalPayments()
-        let amount = model.selectedSellRegister.amount
-        let balance = amount - paid
-        ServerManager.Transaction(path: pathStatus, key: "balance", value: balance, success: {
-            semasphore.signal()
-        }) { (err) in
-            error = err
-        }
-        _ = semasphore.wait(timeout: .distantFuture)
-        if error != nil {
-            completion(false)
-            return
-        }
-        */
-        completion(true)
- 
  
     }
+    
     
     private func calcTotalPayments() -> Double {
      /*   var result : Double = 0

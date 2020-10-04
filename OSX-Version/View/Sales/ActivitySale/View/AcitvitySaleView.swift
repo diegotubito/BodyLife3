@@ -83,7 +83,11 @@ class ActivitySaleView : XibViewBlurBackground {
     func buttonSaveObserver() {
         saveButtonView.onButtonPressed = {
             if self.viewModel.validate() {
-//                self.viewModel.save()
+                let (price, discount) = self.viewModel.getTotals()
+                self.viewModel.save(fromDate: self.fromDate.dateValue,
+                                    toDate: self.endDate.dateValue,
+                                    price: (price - discount),
+                                    priceList: price)
             }
         }
     }
@@ -194,7 +198,7 @@ extension ActivitySaleView: ActivitySaleViewContract {
     
     func showError(_ message: String) {
         DispatchQueue.main.async {
-            
+            print(message)
         }
     }
     
