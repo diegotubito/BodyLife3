@@ -31,7 +31,7 @@ class SellRegisterCell: NSTableCellView {
         let timestamp = sell.timestamp.toDate1970.toString(formato: "dd-MM-yyyy - HH:mm")
         labelCreatedAt.stringValue = timestamp + "HS."
         print("\(sell.productCategory)")
-        let labelName = sell.productCategory == ProductCategory.activity.rawValue ? sell.description : (sell.article?.description ?? "Artículo sin descripción")
+        let labelName = sell.productCategory == ProductCategory.activity.rawValue ? sell.description : sell.description
         labelDisplayName.stringValue = labelName
         labelPrice.stringValue = sell.price?.currencyFormat(decimal: 2) ?? "$0.0"
         labelTotalPayment.stringValue = totalPayment.currencyFormat(decimal: 2)

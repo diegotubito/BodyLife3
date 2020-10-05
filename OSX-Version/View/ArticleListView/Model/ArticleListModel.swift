@@ -9,5 +9,5 @@
 import Foundation
 
 struct ArticleListModel {
-    var products = [ArticleModel.Register]()
+    var response : ArticleModel.ViewModel!
 }

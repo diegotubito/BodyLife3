@@ -55,6 +55,7 @@ extension ImportDatabase {
                                                            isEnabled: !i.esOculto,
                                                            timestamp: createdAt,
                                                            price: i.precioVenta,
+                                                           priceCost: i.precioCompra,
                                                            stock: 0,
                                                            minStock: 0,
                                                            maxStock: 0)

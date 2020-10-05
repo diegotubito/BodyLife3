@@ -16,6 +16,7 @@ protocol RegisterListViewModelContract {
     
     func getSells() -> [SellModel.NewRegister]
     func getPayments() -> [PaymentModel.ViewModel.AUX]
+    func getPaymentsForSelectedRegister() -> [PaymentModel.ViewModel.AUX]
     
     func setSelectedRegister(_ selectedRegister: SellModel.NewRegister?)
     func getSelectedRegister() -> SellModel.NewRegister?

@@ -13,7 +13,7 @@ extension Notification.Name {
 }
 
 
-class ArticleListView : GenericCollectionView<ArticleViewItem, ArticleModel.Register> {
+class ArticleListView : GenericCollectionView<ArticleViewItem, ArticleModel.NewRegister> {
     var viewModel : ArticleListViewModelContract!
       
     override func commonInit() {

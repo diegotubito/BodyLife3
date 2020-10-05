@@ -19,11 +19,12 @@ class ArticleModel {
     }
     
     struct NewRegister: Decodable, Encodable {
-        var _id : String
+        var _id : String?
         var description : String
         var isEnabled : Bool
         var timestamp : Double
         var price : Double
+        var priceCost : Double
         var stock : Int
         var minStock : Int
         var maxStock : Int
@@ -40,5 +41,11 @@ class ArticleModel {
         var minStock : Int
         var maxStock : Int
         var sellCount: Int
+    }
+    
+    struct ViewModel: Decodable {
+        var response : String
+        var articles : [NewRegister]
+        var count: Int
     }
 }

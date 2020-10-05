@@ -29,8 +29,8 @@ extension HomeViewController {
     }
     
     func createArticleSellView() {
-        let ancho = view.frame.width * 0.40
-        let alto = view.frame.height * 0.5
+        let ancho = view.frame.width * 0.45
+        let alto = view.frame.height * 0.65
         sellProductView = ArticleSellView(frame: CGRect(x: -ancho + 5, y: 0, width: ancho, height: alto))
         sellProductView.destiny = CGPoint(x: 0, y: 0)
         sellProductView.closeWhenBackgroundIsTouch = true

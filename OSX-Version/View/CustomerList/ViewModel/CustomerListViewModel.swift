@@ -115,8 +115,9 @@ class CustomerListViewModel: CustomerListViewModelContract {
                 self.model.imagesByPages.append(CustomerListModel.Images(image: image,
                                                                   _id: customer._id))
             }
-            self.switchLoadingCustomers(bySearch: self.model.bySearch)
+            
             DispatchQueue.main.async {
+                self.switchLoadingCustomers(bySearch: self.model.bySearch)
                 self._view.reloadCell(row: row)
             }
         }

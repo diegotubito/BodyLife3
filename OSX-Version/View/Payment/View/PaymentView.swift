@@ -31,8 +31,8 @@ class PaymentView: XibViewBlurBackground, PaymentViewContract {
     
     func displayInfo() {
         let register = viewmodel.model.selectedSellRegister
-        let sellName = register!.displayName
-        let amountToPay = register?.amount ?? 0
+        let sellName = register?.description ?? ""
+        let amountToPay = register?.price ?? 0.0
         let paid = calcTotalPayments()
         let balance = amountToPay - paid
         infoLabel.stringValue = sellName + ". Total a pagar: \(balance.currencyFormat(decimal: 2))"
@@ -47,10 +47,10 @@ class PaymentView: XibViewBlurBackground, PaymentViewContract {
     
     func calcTotalPayments() -> Double {
         var result : Double = 0
-        let payments = viewmodel.model.selectedSellRegister.payments
+        let payments = viewmodel.model.payments
         if payments == nil {return 0}
         for i in payments! {
-            result += i.amount
+            result += i.paidAmount
         }
         return result
     }

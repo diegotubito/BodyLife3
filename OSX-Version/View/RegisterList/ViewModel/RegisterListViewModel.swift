@@ -34,8 +34,6 @@ class RegisterListViewModel: RegisterListViewModelContract {
                 return
             }
             do {
-                let json = try JSONSerialization.jsonObject(with: data, options: [])
-                print(json)
                 let response = try JSONDecoder().decode(PaymentModel.ViewModel.self, from: data)
                 self.parsePaymentAndSell(response: response)
             } catch {
@@ -134,6 +132,12 @@ class RegisterListViewModel: RegisterListViewModelContract {
 
     func getPayments() -> [PaymentModel.ViewModel.AUX] {
         return model.payments
+    }
+    
+    func getPaymentsForSelectedRegister() -> [PaymentModel.ViewModel.AUX] {
+        let payments = model.payments
+        let filter = payments.filter({$0.sell._id == model.selectedSellRegister?._id})
+        return filter
     }
 
     func setSelectedRegister(_ selectedRegister: SellModel.NewRegister?) {

@@ -12,7 +12,7 @@ protocol ArticleListViewModelContract {
     init(withView view: ArticletListViewContract)
     var model : ArticleListModel! {get}
     func loadProducts()
-    func getProducts() -> [ArticleModel.Register]
+    func getProducts() -> [ArticleModel.NewRegister]
 }
 
 protocol ArticletListViewContract {

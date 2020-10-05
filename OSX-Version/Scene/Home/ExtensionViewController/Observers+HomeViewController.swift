@@ -51,9 +51,9 @@ extension HomeViewController {
     }
     
     func buttonObserverPayment() {
-        self.sellRegisterView.onAddPayment = {
-//            self.paymentView.viewmodel.setSelectedInfo(self.selectedCustomer!, self.sellRegisterView.viewModel.getSelectedRegister()!)
-//            self.paymentView.showView()
+        self.sellRegisterView.onAddPayment = { payments in
+            self.paymentView.viewmodel.setSelectedInfo(self.selectedCustomer!, self.sellRegisterView.viewModel.getSelectedRegister()!, payments: payments)
+            self.paymentView.showView()
         }
     }
     

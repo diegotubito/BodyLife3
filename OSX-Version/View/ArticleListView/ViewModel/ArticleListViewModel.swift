@@ -18,47 +18,38 @@ class ArticleListViewModel : ArticleListViewModelContract {
     }
     
     func loadProducts() {
-        self._view.showLoading()
-        let path = Paths.productArticle
-        ServerManager.ReadJSON(path: path) { (json, error) in
-            self._view.hideLoading()
-            guard error == nil else {
-                self._view.showError()
-                return
-            }
+        _view.showLoading()
+       
+        let url = "http://127.0.0.1:2999/v1/article"
+        
+        let _service = NetwordManager()
+        _service.get(url: url) { (data, error) in
             
-            guard let json = json else {
-                self._view.showError()
-                return
-            }
-            
-            let jsonArray = ServerManager.jsonArray(json: json)
-            do {
-                //this block sometime cause a crush
-                let data = try JSONSerialization.data(withJSONObject: jsonArray, options: [])
-                let articles = try JSONDecoder().decode([ArticleModel.Register].self, from: data)
+            guard let data = data else {
                
-                self.model.products = articles
-                self.filterAndSort()
-                    
-                self._view.displayList()
-            } catch {
-                self._view.showError()
+                return
             }
-            
+            do {
+                let response = try JSONDecoder().decode(ArticleModel.ViewModel.self, from: data)
+                self.model.response = response
+                for i in response.articles {
+                    print(i.priceCost)
+                }
+                self.filterAndSort()
+            } catch {
+                return
+            }
         }
     }
     
     func filterAndSort() {
-        let filtered = model.products.filter { (product) -> Bool in
-            return product.isEnabled != false
-        }
-        let sorted = filtered.sorted(by: { $0.sellCount > $1.sellCount })
-        model.products = sorted
+        let sorted = model.response.articles.sorted(by: { $0.description > $1.description })
+        model.response.articles = sorted
+        _view.displayList()
     }
     
-    func getProducts() -> [ArticleModel.Register] {
+    func getProducts() -> [ArticleModel.NewRegister] {
         
-        return model.products
+        return model.response.articles
     }
 }

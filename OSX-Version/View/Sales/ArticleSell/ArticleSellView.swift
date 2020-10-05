@@ -14,7 +14,7 @@ class ArticleSellView: XibViewBlurBackground {
     var selectedCustomer : CustomerModel.Customer!
     var myActivityIndicator : NSProgressIndicator!
      
-    var selectedItem : ArticleModel.Register? {
+    var selectedItem : ArticleModel.NewRegister? {
         didSet {
             buttonAccept.isEnabled = selectedItem != nil ? true : false
         }
@@ -22,13 +22,10 @@ class ArticleSellView: XibViewBlurBackground {
     
     override func commonInit() {
         super .commonInit()
-       
         createBackgroundGradient()
-
         createProductListView()
         addAcceptButton()
         addObservers()
-        
     }
     
     
@@ -69,8 +66,8 @@ class ArticleSellView: XibViewBlurBackground {
     }
     
     func createProductListView() {
-        let alto = self.frame.height * 0.8
-        productListView = ArticleListView(frame: CGRect(x: 16, y: self.frame.height - alto - 16, width: self.frame.width - 32, height: alto))
+        let alto = self.frame.height * 0.7
+        productListView = ArticleListView(frame: CGRect(x: 16, y: self.frame.height - alto - 32, width: self.frame.width - 32, height: alto))
         productListView.collectionView.layer?.backgroundColor = NSColor.clear.cgColor
         self.addSubview(productListView)
     }
@@ -86,20 +83,85 @@ class ArticleSellView: XibViewBlurBackground {
     func save() {
         self.buttonAccept.showLoading()
         
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime(uptimeNanoseconds: 0)) {
-            self.saveNewSell { (success) in
-                self.hideView()
-                self.buttonAccept.hideLoading()
-                if success {
-                    NotificationCenter.default.post(name: .needUpdateCustomerList, object: nil)
-                    NotificationCenter.default.post(.init(name: .needUpdateArticleList))
-                }
-            }
-        }
+        let createdAt = Date().timeIntervalSince1970
+        let customerId = ImportDatabase.codeUID((selectedCustomer.uid))
+        let dicountID : String? = nil
+        let article = selectedItem?._id
+
+        let newRegister = SellModel.NewRegister(customer: customerId,
+                                                discount: dicountID,
+                                                activity: nil,
+                                                article: article,
+                                                period: nil,
+                                                timestamp: createdAt,
+                                                fromDate: nil,
+                                                toDate: nil,
+                                                quantity: 1,
+                                                isEnabled: true,
+                                                productCategory: ProductCategory.article.rawValue,
+                                                price: selectedItem?.price,
+                                                priceList: selectedItem?.price,
+                                                priceCost: selectedItem?.priceCost,
+                                                description: selectedItem?.description ?? "")
         
+        let url = "http://127.0.0.1:2999/v1/sell"
+        let _services = NetwordManager()
+        let body = encodeSell(newRegister)
+        _services.post(url: url, body: body) { (data, error) in
+            guard data != nil else {
+                print("no se pudo guardar venta de articulo")
+                return
+            }
+            let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any]
+            let _id = json?["_id"] as? String
+            
+            self.addNullPayment(sellId: _id!)
+        }
     }
     
-    func saveNewSell(completion: (Bool) -> ()) {
+    private func addNullPayment(sellId: String) {
+        let createdAt = Date().timeIntervalSince1970
+        let customerId : String = ImportDatabase.codeUID((selectedCustomer.uid))
+
+        let newRegister = PaymentModel.Response(customer: customerId,
+                                                sell: sellId,
+                                                isEnabled: true,
+                                                timestamp: createdAt,
+                                                paidAmount: 0,
+                                                productCategory: ProductCategory.article.rawValue)
+        
+        let url = "http://127.0.0.1:2999/v1/payment"
+        let _services = NetwordManager()
+        let body = encodePayment(newRegister)
+        _services.post(url: url, body: body) { (data, error) in
+            DispatchQueue.main.async {
+                self.buttonAccept.hideLoading()
+            }
+            guard data != nil else {
+                print("No se puedo guardar pago nulo")
+                return
+            }
+            DispatchQueue.main.async {
+                self.hideView()
+                NotificationCenter.default.post(name: .needUpdateCustomerList, object: nil)
+                NotificationCenter.default.post(.init(name: .needUpdateArticleList))
+            }
+        }
+    }
+    
+    private func encodeSell(_ register: SellModel.NewRegister) -> [String : Any] {
+        let data = try? JSONEncoder().encode(register)
+        let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String : Any]
+        return json!
+    }
+    
+    private func encodePayment(_ register: PaymentModel.Response) -> [String : Any] {
+        let data = try? JSONEncoder().encode(register)
+        let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String : Any]
+        return json!
+    }
+    
+/*    func saveNewSell(completion: (Bool) -> ()) {
         var error : ServerError?
         let semasphore = DispatchSemaphore(value: 0)
         let request = createRequest()
@@ -152,30 +214,6 @@ class ArticleSellView: XibViewBlurBackground {
         
         self.buttonAccept.hideLoading()
         completion(true)
-        
-        
     }
-    
-    func createRequest() -> [String: Any] {
-        var json = [String : Any]()
-        let childID = ServerManager.createNewChildID()
-        json.updateValue(childID, forKey: "childID")
-        json.updateValue(selectedCustomer.uid, forKey: "childIDCustomer")
-        json.updateValue((selectedItem?.childID)!, forKey: "childIDArticle")
-        json.updateValue(Date().timeIntervalSinceReferenceDate, forKey: "createdAt")
-        json.updateValue(Date().queryByDMY, forKey: "queryByDMY")
-        json.updateValue(Date().queryByMY, forKey: "queryByMY")
-        json.updateValue(Date().queryByY, forKey: "queryByY")
-        json.updateValue(OperationCategory.income, forKey: "operationCategory")
-        json.updateValue(true, forKey: "isEnabled")
-        json.updateValue((selectedItem?.price)!, forKey: "amount")
-        json.updateValue(0, forKey: "amountDiscounted")
-        json.updateValue((selectedItem?.price)!, forKey: "price")
-        json.updateValue((selectedItem?.name)!, forKey: "displayName")
-        
-        let result = [childID : json]
-        return result
-    }
-    
-    
+ */
 }

@@ -9,6 +9,8 @@
 import Cocoa
 
 class PaymentViewModel: PaymentViewModelContract {
+   
+    
     var _view : PaymentViewContract!
     var model : NewPaymentModel!
     
@@ -17,78 +19,45 @@ class PaymentViewModel: PaymentViewModelContract {
         model = NewPaymentModel()
     }
     
-    func setSelectedInfo(_ customer: CustomerModel.Customer, _ register: SellModel.Register) {
+    func setSelectedInfo(_ customer: CustomerModel.Customer, _ register: SellModel.NewRegister, payments: [PaymentModel.ViewModel.AUX]) {
         model.selectedCustomer = customer
         model.selectedSellRegister = register
+        model.payments = payments
         _view.displayInfo()
     }
    
     func saveNewPayment() {
+        let createdAt = Date().timeIntervalSince1970
+        let customerId : String = ImportDatabase.codeUID((model.selectedCustomer.uid))
+        let sellId = model.selectedSellRegister._id ?? ""
+        let paidAmount = Double(self._view.getAmountString())!
+        let productCategory = model.selectedSellRegister.productCategory
+
+        let newRegister = PaymentModel.Response(customer: customerId,
+                                                sell: sellId,
+                                                isEnabled: true,
+                                                timestamp: createdAt,
+                                                paidAmount: paidAmount,
+                                                productCategory: productCategory)
+        
+        let url = "http://127.0.0.1:2999/v1/payment"
+        let _services = NetwordManager()
+        let body = encodePayment(newRegister)
         _view.showLoading()
-        let childIDCustomer = model.selectedCustomer.uid
-        let childIDRegister = model.selectedSellRegister.childID
-        let price = Double(_view.getAmountString())!
-        var error : ServerError?
-        let semasphore = DispatchSemaphore(value: 0)
-        
-        let pathNewPayment = "\(Paths.fullPersonalData):\(childIDCustomer):sells:\(childIDRegister):payments"
-        let request = createRequest()
-        ServerManager.Update(path: pathNewPayment, json: request) { (data, err) in
-           error = err
-            semasphore.signal()
+        _services.post(url: url, body: body) { (data, error) in
+            self._view.hideLoading()
+            guard data != nil else {
+                print("No se puedo guardar pago")
+                self._view.showError()
+                return
+            }
+            self._view.showSuccess()
         }
-        _ = semasphore.wait(timeout: .distantFuture)
-        if error != nil {
-            _view.showError()
-            return
-        }
-        
-        
-        let pathNewPayment2 = Paths.payments
-        ServerManager.Update(path: pathNewPayment2, json: request) { (data, err) in
-           error = err
-            semasphore.signal()
-        }
-        _ = semasphore.wait(timeout: .distantFuture)
-        if error != nil {
-            _view.showError()
-            return
-        }
-        
-        
-        
-        let pathStatus = "\(Paths.customerStatus):\(childIDCustomer)"
-        ServerManager.Transaction(path: pathStatus, key: "balance", value: price, success: {
-            semasphore.signal()
-        }) { (err) in
-            error = err
-        }
-        _ = semasphore.wait(timeout: .distantFuture)
-        if error != nil {
-            _view.showError()
-            return
-        }
-        
-        _view.showSuccess()
-        _view.hideLoading()
-        
     }
     
-    func createRequest() -> [String:Any] {
-        let childIDCustomer = model.selectedCustomer.uid
-        let childIDRegister = model.selectedSellRegister.childID
-         
-        let newChildID = ServerManager.createNewChildID()
-        let data = ["childID" : newChildID,
-                    "childIDCustomer" : childIDCustomer,
-                    "childIDSell" : childIDRegister,
-                    "createAt" : Date().timeIntervalSinceReferenceDate,
-                    "isEnabled" : true,
-                    "amount" : Double(self._view.getAmountString())!] as [String : Any]
-        
-        
-        let json = [newChildID : data]
-        return json
+    private func encodePayment(_ register: PaymentModel.Response) -> [String : Any] {
+        let data = try? JSONEncoder().encode(register)
+        let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String : Any]
+        return json!
     }
-    
 }
