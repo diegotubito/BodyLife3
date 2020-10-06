@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "115784D6252B85C0008A89DC"
-               BuildableName = "OSX-Internal.app"
-               BlueprintName = "OSX-Internal"
+               BuildableName = "Internal-Target.app"
+               BlueprintName = "Internal-Target"
                ReferencedContainer = "container:BodyLife3.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,8 +45,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "115784D6252B85C0008A89DC"
-            BuildableName = "OSX-Internal.app"
-            BlueprintName = "OSX-Internal"
+            BuildableName = "Internal-Target.app"
+            BlueprintName = "Internal-Target"
             ReferencedContainer = "container:BodyLife3.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -62,8 +62,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "115784D6252B85C0008A89DC"
-            BuildableName = "OSX-Internal.app"
-            BlueprintName = "OSX-Internal"
+            BuildableName = "Internal-Target.app"
+            BlueprintName = "Internal-Target"
             ReferencedContainer = "container:BodyLife3.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
