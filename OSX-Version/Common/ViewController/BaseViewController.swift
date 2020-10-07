@@ -201,7 +201,6 @@ class BaseViewController : NSViewController {
         _ = semasphore.wait(timeout: .distantFuture)
         
         if needLogin {
-            print("go to login")
             GoToLogin()
         }
         
@@ -214,7 +213,6 @@ class BaseViewController : NSViewController {
                 sameUserName = true
             }
             self.routeToLogin(sameUserName: sameUserName) { data in
-                print("successfull")
                 UserSaved.Save(userData: data)
             }
         }

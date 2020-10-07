@@ -107,6 +107,18 @@ class LoginViewController: BaseViewController, LoginDisplayLogic {
         disableTexfields()
          doLogin()
     }
+    @IBAction func onNewUserPressed(_ sender: Any) {
+        routeToNewUser()
+    }
+    
+    func routeToNewUser()
+    {
+        let storyboard = NSStoryboard(name: "LoginStoryboard", bundle: nil)
+        
+        let destinationVC = storyboard.instantiateController(withIdentifier: "NewUserViewController") as! NewUserViewController
+        
+        presentAsModalWindow(destinationVC)
+    }
     
     func enableTextfields() {
         passwordTextField.isHidden = false

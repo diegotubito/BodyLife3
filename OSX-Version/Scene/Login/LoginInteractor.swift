@@ -16,19 +16,9 @@ class LoginInteractor: LoginBusinessLogic, LoginDataStore {
     // MARK: Do something
     
     func doLogin(request: Login.Login.Request) {
-       /* let worker = LoginWorker()
-        worker.doLogin(request: request) { (error) in
-            let response = Login.Login.Response(error: error)
-            
+        let worker = LoginWorker()
+        worker.doLogin(request: request) { (response) in
             self.presenter?.presentLogin(response: response)
-            
         }
-        */
-        ServerManager.Login(userName: request.userName, password: request.password) { (data,error)  in
-            let respose = Login.Login.Response(error: error, data: data)
-            self.presenter?.presentLogin(response: respose)
-        }
-        
-        
     }
 }

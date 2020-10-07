@@ -55,24 +55,22 @@ class Connect : BaseConnect {
         DispatchQueue.global().async {
             self.Start()
         }
-        
-        
     }
     
     static private func Start() {
         if !fisrtTime { return }
-            fisrtTime = false
-            NotificationCenter.default.addObserver(self, selector: #selector(Connect.reachable), name: Notification.Name.Reachability.reachable, object: nil)
-            NotificationCenter.default.addObserver(self, selector: #selector(Connect.nonReachable), name: Notification.Name.Reachability.notReachable, object: nil)
+        fisrtTime = false
+        NotificationCenter.default.addObserver(self, selector: #selector(Connect.reachable), name: Notification.Name.Reachability.reachable, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(Connect.nonReachable), name: Notification.Name.Reachability.notReachable, object: nil)
         
-            cerrarProcesoWWW()
-            
-            if Configuration.server == ServerType.local {
-                process = MLConsoleCommand.runProcess(name: pathEnDiscoServidor, arguments: [""])
-            }
-            
-            PeriodicChecking()
-            Connect.TimerConfiguration(time: Connect.timerConstantShort)
+        cerrarProcesoWWW()
+        
+        if Configuration.server == ServerType.local {
+            process = MLConsoleCommand.runProcess(name: pathEnDiscoServidor, arguments: [""])
+        }
+        
+        PeriodicChecking()
+        Connect.TimerConfiguration(time: Connect.timerConstantShort)
     }
     
     static func StopListening() {

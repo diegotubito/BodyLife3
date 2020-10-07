@@ -195,6 +195,10 @@
 		1157855E252B85C0008A89DC /* PeriodListItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 116CE96E23EDE94A00688C0B /* PeriodListItem.xib */; };
 		1157855F252B85C0008A89DC /* CustomerStatusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1147AB722384AA2D00D19AA9 /* CustomerStatusView.xib */; };
 		11578560252B85C0008A89DC /* ArticleViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1166AF3423B27F880047C7AE /* ArticleViewItem.xib */; };
+		11578578252CE411008A89DC /* NewUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11578577252CE411008A89DC /* NewUserViewController.swift */; };
+		11578579252CE411008A89DC /* NewUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11578577252CE411008A89DC /* NewUserViewController.swift */; };
+		11578581252E71C0008A89DC /* environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11578580252E71C0008A89DC /* environment.swift */; };
+		11578582252E71C0008A89DC /* environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11578580252E71C0008A89DC /* environment.swift */; };
 		1163932B2381975600D14B19 /* ValidationField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1163932A2381975600D14B19 /* ValidationField.swift */; };
 		1163932E2381AA0400D14B19 /* TextFieldValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1163932D2381AA0400D14B19 /* TextFieldValidation.swift */; };
 		1163933723820CA500D14B19 /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1163933623820CA500D14B19 /* CameraManager.swift */; };
@@ -335,6 +339,8 @@
 		11542D8C2380B0BE0011AB1D /* BaseConnect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseConnect.swift; sourceTree = "<group>"; };
 		11578565252B85C0008A89DC /* Internal-Target.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Internal-Target.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		11578566252B85C0008A89DC /* OSX-Version copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "OSX-Version copy-Info.plist"; path = "/Users/daviddiegogomez/MyApps/iOS/BodyLife3/OSX-Version copy-Info.plist"; sourceTree = "<absolute>"; };
+		11578577252CE411008A89DC /* NewUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserViewController.swift; sourceTree = "<group>"; };
+		11578580252E71C0008A89DC /* environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = environment.swift; sourceTree = "<group>"; };
 		1163932A2381975600D14B19 /* ValidationField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationField.swift; sourceTree = "<group>"; };
 		1163932D2381AA0400D14B19 /* TextFieldValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldValidation.swift; sourceTree = "<group>"; };
 		1163933623820CA500D14B19 /* CameraManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
@@ -713,6 +719,14 @@
 			path = Reachability;
 			sourceTree = "<group>";
 		};
+		11578576252CE3FD008A89DC /* NewUser */ = {
+			isa = PBXGroup;
+			children = (
+				11578577252CE411008A89DC /* NewUserViewController.swift */,
+			);
+			path = NewUser;
+			sourceTree = "<group>";
+		};
 		116393292381973800D14B19 /* ValidationField */ = {
 			isa = PBXGroup;
 			children = (
@@ -1072,6 +1086,7 @@
 			isa = PBXGroup;
 			children = (
 				11EBD35D23766A3D00AB4BFF /* Configuration.swift */,
+				11578580252E71C0008A89DC /* environment.swift */,
 			);
 			path = Configuration;
 			sourceTree = "<group>";
@@ -1093,6 +1108,7 @@
 		11EBD3832377269100AB4BFF /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				11578576252CE3FD008A89DC /* NewUser */,
 				11EBD384237726A800AB4BFF /* LoginPresenter.swift */,
 				11EBD385237726A800AB4BFF /* LoginWorker.swift */,
 				11EBD386237726A800AB4BFF /* LoginRouter.swift */,
@@ -1380,6 +1396,7 @@
 			files = (
 				115784D9252B85C0008A89DC /* ServerManager.swift in Sources */,
 				115784DA252B85C0008A89DC /* ImportPagoCarnet.swift in Sources */,
+				11578582252E71C0008A89DC /* environment.swift in Sources */,
 				115784DB252B85C0008A89DC /* RegisterListViewModelContract.swift in Sources */,
 				115784DC252B85C0008A89DC /* stringExtension.swift in Sources */,
 				115784DD252B85C0008A89DC /* importArticle.swift in Sources */,
@@ -1428,6 +1445,7 @@
 				11578508252B85C0008A89DC /* CustomerStatusViewModel.swift in Sources */,
 				11578509252B85C0008A89DC /* ArticleModel.swift in Sources */,
 				1157850A252B85C0008A89DC /* ImportVentaArticulo.swift in Sources */,
+				11578579252CE411008A89DC /* NewUserViewController.swift in Sources */,
 				1157850B252B85C0008A89DC /* PaymentView.swift in Sources */,
 				1157850C252B85C0008A89DC /* CustomerListView.swift in Sources */,
 				1157850D252B85C0008A89DC /* ArticleListViewModel.swift in Sources */,
@@ -1502,6 +1520,7 @@
 			files = (
 				119AE145237F78D90045960C /* ServerManager.swift in Sources */,
 				11D615792524E83C005B5D81 /* ImportPagoCarnet.swift in Sources */,
+				11578581252E71C0008A89DC /* environment.swift in Sources */,
 				114A540F23A5A9AC00F2746A /* RegisterListViewModelContract.swift in Sources */,
 				11233783237AFE9400F60078 /* stringExtension.swift in Sources */,
 				11D3D888252179E80008CFD0 /* importArticle.swift in Sources */,
@@ -1550,6 +1569,7 @@
 				1147AB7C2384D49E00D19AA9 /* CustomerStatusViewModel.swift in Sources */,
 				11D3D8852521780B0008CFD0 /* ArticleModel.swift in Sources */,
 				118472432528D6D20012D237 /* ImportVentaArticulo.swift in Sources */,
+				11578578252CE411008A89DC /* NewUserViewController.swift in Sources */,
 				11EEF0F2239D4A83007C9821 /* PaymentView.swift in Sources */,
 				1147AB4A2383654C00D19AA9 /* CustomerListView.swift in Sources */,
 				11A8ECF823B0E76E00F15B9A /* ArticleListViewModel.swift in Sources */,
