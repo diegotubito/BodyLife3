@@ -26,7 +26,7 @@ class CustomerListViewModel: CustomerListViewModelContract {
             model.customersbySearch.removeAll()
         }
         _view.showLoading()
-        let url = "http://127.0.0.1:2999/v1/customer-search?queryString=\(bySearch)&offset=\(offset)&limit=50"
+        let url = "\(Config.baseUrl.rawValue)/v1/customer-search?queryString=\(bySearch)&offset=\(offset)&limit=50"
         let _services = NetwordManager()
         _services.get(url: url, response: { [weak self] (data, error) in
             self?._view.hideLoading()
@@ -59,7 +59,7 @@ class CustomerListViewModel: CustomerListViewModelContract {
         if loading {return}
         loading = true
         _view.showLoading()
-        let url = "http://127.0.0.1:2999/v1/customer?offset=\(offset)&limit=50"
+        let url = "\(Config.baseUrl.rawValue)/v1/customer?offset=\(offset)&limit=50"
         let _services = NetwordManager()
         _services.get(url: url, response: { [weak self] (data, error) in
             self?._view.hideLoading()
@@ -125,7 +125,7 @@ class CustomerListViewModel: CustomerListViewModelContract {
     
     
     func loadImage(row: Int, customer: CustomerModel.Customer, completion: @escaping (NSImage?, Int) -> ()) {
-        let url = "http://127.0.0.1:2999/v1/thumbnail?uid=\(customer.uid)"
+        let url = "\(Config.baseUrl.rawValue)/v1/thumbnail?uid=\(customer.uid)"
         
         //if I have already loaded the image, there's no need to load it again.
         if let imageFromCache = imageCache.object(forKey: url as AnyObject) as? NSImage {

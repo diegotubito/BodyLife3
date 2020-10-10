@@ -16,8 +16,8 @@ enum Server: String {
 class Config {
     static let shared = Config()
     
-    static var baseUrl = Server.Develop
-
+    static var baseUrl : Server!
+    
     struct URL {
         struct Firebase {
             static let Login = baseUrl.rawValue + "/v1/firebase/auth/login"

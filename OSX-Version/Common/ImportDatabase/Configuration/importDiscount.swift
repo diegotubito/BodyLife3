@@ -67,7 +67,7 @@ extension ImportDatabase {
             guard let discounts = ImportDatabase.Discount.getDiscounts() else {
                 return
             }
-            let url = "http://127.0.0.1:2999/v1/discount"
+            let url = "\(Config.baseUrl.rawValue)/v1/discount"
             let _services = NetwordManager()
             var notAdded = 0
             for (x,discount) in discounts.enumerated() {

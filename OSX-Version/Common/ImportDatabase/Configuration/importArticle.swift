@@ -75,7 +75,7 @@ extension ImportDatabase {
             guard let articles = ImportDatabase.Article.getArticles() else {
                 return
             }
-            let url = "http://127.0.0.1:2999/v1/article"
+            let url = "\(Config.baseUrl.rawValue)/v1/article"
             let _services = NetwordManager()
             var notAdded = 0
             for (x,article) in articles.enumerated() {

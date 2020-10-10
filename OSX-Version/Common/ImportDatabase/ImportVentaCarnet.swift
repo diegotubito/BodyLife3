@@ -91,7 +91,7 @@ extension ImportDatabase {
             guard let carnets = ImportDatabase.Carnet.getCarnets() else {
                 return
             }
-            let url = "http://127.0.0.1:2999/v1/sell"
+            let url = "\(Config.baseUrl.rawValue)/v1/sell"
             let _services = NetwordManager()
             var notAdded = 0
             for (x,carnet) in carnets.enumerated() {

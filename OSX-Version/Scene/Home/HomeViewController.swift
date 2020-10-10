@@ -80,7 +80,7 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
     }
     
     override func viewWillAppear() {
-   
+        
         super.viewWillAppear()
         self.view.window?.delegate = self
         
@@ -120,7 +120,7 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
             NotificationCenter.default.post(.init(name: .needUpdateArticleList))
             NotificationCenter.default.post(.init(name: .needUpdateProductService))
             print("Start Loading...")
-            
+            self.view.window?.title = UserSaved.GetUser()?.displayName ?? "Sin Nombre"
         }
  
        
@@ -140,18 +140,18 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
     }
     
     @IBAction func importData(_ sender: Any) {
-//        ImportDatabase.Discount.MigrateToMongoDB()
-//        ImportDatabase.Activity.MigrateToMongoDB()
-//        ImportDatabase.Period.MigrateToMongoDB()
-//        ImportDatabase.Article.MigrateToMongoDB()
-//        
-//        ImportDatabase.Customer.MigrateToMongoDB()
-//        ImportDatabase.Thumbnail.MigrateToMongoDB()
-//        
-//        ImportDatabase.Carnet.MigrateToMongoDB()
-//        ImportDatabase.VentaArticulo.MigrateToMongoDB()
-//        ImportDatabase.PagoCarnet.MigrateToMongoDB()
-//        ImportDatabase.PagoArticulo.MigrateToMongoDB()
+        ImportDatabase.Discount.MigrateToMongoDB()
+        ImportDatabase.Activity.MigrateToMongoDB()
+        ImportDatabase.Period.MigrateToMongoDB()
+        ImportDatabase.Article.MigrateToMongoDB()
+        
+        ImportDatabase.Customer.MigrateToMongoDB()
+        ImportDatabase.Thumbnail.MigrateToMongoDB()
+        
+        ImportDatabase.Carnet.MigrateToMongoDB()
+        ImportDatabase.VentaArticulo.MigrateToMongoDB()
+        ImportDatabase.PagoCarnet.MigrateToMongoDB()
+        ImportDatabase.PagoArticulo.MigrateToMongoDB()
     }
     
     @IBAction func closeSessionPressed(_ sender: Any) {

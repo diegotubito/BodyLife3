@@ -40,7 +40,7 @@ class PaymentViewModel: PaymentViewModelContract {
                                                 paidAmount: paidAmount,
                                                 productCategory: productCategory)
         
-        let url = "http://127.0.0.1:2999/v1/payment"
+        let url = "\(Config.baseUrl.rawValue)/v1/payment"
         let _services = NetwordManager()
         let body = encodePayment(newRegister)
         _view.showLoading()

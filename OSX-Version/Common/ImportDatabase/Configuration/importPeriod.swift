@@ -73,7 +73,7 @@ extension ImportDatabase {
             guard let periods = ImportDatabase.Period.getPeriods() else {
                 return
             }
-            let url = "http://127.0.0.1:2999/v1/period"
+            let url = "\(Config.baseUrl.rawValue)/v1/period"
             let _services = NetwordManager()
             var notAdded = 0
             for (x,period) in periods.enumerated() {

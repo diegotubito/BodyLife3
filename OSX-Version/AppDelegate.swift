@@ -20,34 +20,48 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
         Reachability.sharedInstance.suscribeConnectionChanged()
-        
         #if INTERNAL
-        print("INTERNAL")
+            Config.baseUrl = Server.Develop
         #else
-        print("PRODUCTION")
+            Config.baseUrl = Server.Production
         #endif
-        
-      
+     
+        forceCloseSessionIfTargetChanged()
         Connect.StartListening()
-        
-       
-        
-//        ImportDatabase.Discount.MigrateToMongoDB()
-//        ImportDatabase.Activity.MigrateToMongoDB()
-//        ImportDatabase.Period.MigrateToMongoDB()
-//        ImportDatabase.Article.MigrateToMongoDB()
-        
-//        ImportDatabase.Customer.MigrateToMongoDB()
-//        ImportDatabase.Thumbnail.MigrateToMongoDB()
-
-//        ImportDatabase.Carnet.MigrateToMongoDB()
-//        ImportDatabase.VentaArticulo.MigrateToMongoDB()
-//        ImportDatabase.PagoCarnet.MigrateToMongoDB()
-//        ImportDatabase.PagoArticulo.MigrateToMongoDB()
-
+    }
+    
+    func forceCloseSessionIfTargetChanged() {
+        //Necesito guardar el environment, de lo contrario, estaria con un usuario incorrecto.
+        //lo podria evitar cerrando session, para limpiar el usuario, pero a veces se olvida.
+        //esto fuerza a un cierre de session y limpieza del usuario
+        //como consecuencia, cada vez que cambio de target, es necesario volver a loguearse.
+ 
+        let lastEnvironment = UserDefaults.standard.string(forKey: "lastEnvironment")
+        #if INTERNAL
+            if lastEnvironment == "PRODUCTION" || lastEnvironment == "" {
+                UserSaved.Remove()
+            }
+            UserDefaults.standard.setValue("INTERNAL", forKey: "lastEnvironment")
+        #else
+            if lastEnvironment == "INTERNAL" || lastEnvironment == "" {
+                UserSaved.Remove()
+            }
+            UserDefaults.standard.setValue("PRODUCTION", forKey: "lastEnvironment")
+        #endif
     }
     
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
+        let semasphore = DispatchSemaphore(value: 0)
+        
+        ServerManager.DisconnectMongoDB { (success) in
+            if success {
+                print("base de dato desconectada")
+            }
+            semasphore.signal()
+        }
+        
+        _ = semasphore.wait(timeout: .distantFuture)
+        
         return true
     }
 
@@ -108,10 +122,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Returns the NSUndoManager for the application. In this case, the manager returned is that of the managed object context for the application.
         return persistentContainer.viewContext.undoManager
     }
-
+    
     func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
         // Save changes in the application's managed object context before the application terminates.
         let context = persistentContainer.viewContext
+        
         
         if !context.commitEditing() {
             NSLog("\(NSStringFromClass(type(of: self))) unable to commit editing to terminate")

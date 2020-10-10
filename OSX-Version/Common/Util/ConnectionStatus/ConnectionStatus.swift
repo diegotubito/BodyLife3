@@ -28,7 +28,7 @@ class Connect {
     static private func AddObservers() {
         NotificationCenter.default.addObserver(Connect.Shared, selector: #selector(checkUserSession), name: .DidLogin, object: nil)
 
-        NotificationCenter.default.addObserver(Connect.Shared, selector: #selector(checkUserSession), name: .TokenExpired, object: nil)
+        NotificationCenter.default.addObserver(Connect.Shared, selector: #selector(refreshToken), name: .TokenExpired, object: nil)
         NotificationCenter.default.addObserver(Connect.Shared, selector: #selector(socketConnected), name: .ServerConnected, object: nil)
         NotificationCenter.default.addObserver(Connect.Shared, selector: #selector(socketDisconnected), name: .ServerDisconnected, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(Connect.reachable), name: Notification.Name.Reachability.reachable, object: nil)
@@ -49,6 +49,20 @@ class Connect {
         doCheck()
     }
     
+    @objc func refreshToken() {
+        ServerManager.RefreshToken { (data, error) in
+            guard let data = data else {
+                NotificationCenter.default.post(name: .NeedLogin, object: nil, userInfo: nil)
+                return
+            }
+            
+            var userSession = UserSaved.GetUser()!
+            userSession.token = data.token
+            UserSaved.Update(userSession)
+            UserSession = userSession
+        }
+    }
+    
     func doCheck() {
         if let user = UserSaved.GetUser() {
             ServerManager.RefreshToken { (data, error) in
@@ -62,9 +76,16 @@ class Connect {
                 UserSaved.Update(userSession)
                 UserSession = userSession
                 
-                
-                ServerManager.ConntectMongoDB(uid: userSession.uid) { (connectedToDatabase) in
-     
+                //Select database name
+                var uid = ""
+                #if INTERNAL
+                uid = "developDB"
+                #else
+                uid = userSession.uid
+                #endif
+ 
+                ServerManager.ConntectMongoDB(uid: uid) { (connectedToDatabase) in
+      
                     if connectedToDatabase {
                         NotificationCenter.default.post(name: .CommunicationStablished, object: nil, userInfo: nil)
                     } else {

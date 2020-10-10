@@ -20,7 +20,7 @@ class ArticleListViewModel : ArticleListViewModelContract {
     func loadProducts() {
         _view.showLoading()
        
-        let url = "http://127.0.0.1:2999/v1/article"
+        let url = "\(Config.baseUrl.rawValue)/v1/article"
         
         let _service = NetwordManager()
         _service.get(url: url) { (data, error) in

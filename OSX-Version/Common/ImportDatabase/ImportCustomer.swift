@@ -103,7 +103,7 @@ extension ImportDatabase {
             guard let customers = ImportDatabase.Customer.getCustomers() else {
                 return
             }
-            let url = "http://127.0.0.1:2999/v1/customer"
+            let url = "\(Config.baseUrl.rawValue)/v1/customer"
             let _services = NetwordManager()
             var notAdded = 0
             for (x,customer) in customers.enumerated() {
@@ -130,7 +130,7 @@ extension ImportDatabase {
         
         
         static func downloadImage() {
-            let url = "http://127.0.0.1:2999/v1/downloadImage?filename=socios/-0JEaB5GvklUIoBcxhGo.jpeg"
+            let url = "\(Config.baseUrl.rawValue)/v1/downloadImage?filename=socios/-0JEaB5GvklUIoBcxhGo.jpeg"
             let _services = NetwordManager()
             
             _services.downloadImageFromUrl(url: url) { (image) in

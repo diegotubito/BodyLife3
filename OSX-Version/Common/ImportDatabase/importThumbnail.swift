@@ -134,7 +134,7 @@ extension ImportDatabase {
         }
         
         static func saveNewThumbnail(uid: String, thumbnail: String, completion: @escaping (Bool) -> ()) {
-            let url = "http://127.0.0.1:2999/v1/thumbnail"
+            let url = "\(Config.baseUrl.rawValue)/v1/thumbnail"
             let _services = NetwordManager()
             
             if thumbnail.isEmpty {
@@ -162,7 +162,7 @@ extension ImportDatabase {
         }
         
         static func updateCustomer(uid: String, thumbnail: String, completion: @escaping (Bool) -> ()) {
-            let url = "http://127.0.0.1:2999/v1/customer"
+            let url = "\(Config.baseUrl.rawValue)/v1/customer"
             let _services = NetwordManager()
             
             if thumbnail.isEmpty {
@@ -189,7 +189,7 @@ extension ImportDatabase {
         }
         
         static func downloadImage(childID: String, completion: @escaping (String?, String?, Error?) -> ()) {
-            let url = "http://127.0.0.1:2999/v1/downloadImage?filename=socios/\(childID).jpeg"
+            let url = "\(Config.baseUrl.rawValue)/v1/downloadImage?filename=socios/\(childID).jpeg"
             let _services = NetwordManager()
 
             _services.downloadImageFromUrl(url: url) { (image) in

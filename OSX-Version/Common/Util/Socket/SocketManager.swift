@@ -14,7 +14,7 @@ class SocketHelper: NSObject {
     static let shared = SocketHelper()
 
     private let manager = SocketManager(
-        socketURL: URL(string: "http://localhost:2999")!,
+        socketURL: URL(string: Config.baseUrl.rawValue)!,
         config: [.forceNew(true)]
     )
 

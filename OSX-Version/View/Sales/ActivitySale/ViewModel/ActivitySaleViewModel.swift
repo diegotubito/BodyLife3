@@ -26,7 +26,7 @@ class ActivitySaleViewModel : ActivitySaleViewModelContract {
     func loadPeriods() {
         _view.showLoading()
         
-        let url = "http://127.0.0.1:2999/v1/period"
+        let url = "\(Config.baseUrl.rawValue)/v1/period"
         
         let _service = NetwordManager()
         _service.get(url: url) { (data, error) in
@@ -47,7 +47,7 @@ class ActivitySaleViewModel : ActivitySaleViewModelContract {
     func loadDiscounts() {
         _view.showLoading()
         
-        let url = "http://127.0.0.1:2999/v1/discount"
+        let url = "\(Config.baseUrl.rawValue)/v1/discount"
         
         let _service = NetwordManager()
         _service.get(url: url) { (data, error) in
@@ -211,7 +211,7 @@ extension ActivitySaleViewModel {
         
         
         
-        let url = "http://127.0.0.1:2999/v1/sell"
+        let url = "\(Config.baseUrl.rawValue)/v1/sell"
         let _services = NetwordManager()
         let body = encodeSell(newRegister)
         _services.post(url: url, body: body) { (data, error) in
@@ -237,7 +237,7 @@ extension ActivitySaleViewModel {
                                                 paidAmount: 0,
                                                 productCategory: ProductCategory.activity.rawValue)
         
-        let url = "http://127.0.0.1:2999/v1/payment"
+        let url = "\(Config.baseUrl.rawValue)/v1/payment"
         let _services = NetwordManager()
         let body = encodePayment(newRegister)
         _services.post(url: url, body: body) { (data, error) in

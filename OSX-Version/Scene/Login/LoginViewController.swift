@@ -96,6 +96,7 @@ class LoginViewController: BaseViewController, LoginDisplayLogic {
                 } else {
                     self.resultLabel.isHidden = true
                     self.didLogin?(viewModel.data!)
+                    UserSaved.Save(userData: viewModel.data!)
                     NotificationCenter.default.post(name: .DidLogin, object: nil)
                     self.view.window?.close()
                 }

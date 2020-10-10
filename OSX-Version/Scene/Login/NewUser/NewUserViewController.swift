@@ -30,7 +30,7 @@ class NewUserViewController : BaseViewController {
      
         let body = createRequest()
         
-        let url = "http://127.0.0.1:2999/v1/firebase/user"
+        let url = "\(Config.baseUrl.rawValue)/v1/firebase/user"
         let _services = NetwordManager()
         _services.post(url: url, body: body) { (data, error) in
             guard data != nil else {

@@ -69,7 +69,7 @@ extension ImportDatabase {
             guard let activities = ImportDatabase.Activity.getActivities() else {
                 return
             }
-            let url = "http://127.0.0.1:2999/v1/activity"
+            let url = "\(Config.baseUrl.rawValue)/v1/activity"
             let _services = NetwordManager()
             var notAdded = 0
             for (x,activity) in activities.enumerated() {

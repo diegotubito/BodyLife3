@@ -76,7 +76,7 @@ extension ImportDatabase {
             guard let cobros = ImportDatabase.PagoCarnet.getPagosCarnets() else {
                 return
             }
-            let url = "http://127.0.0.1:2999/v1/payment"
+            let url = "\(Config.baseUrl.rawValue)/v1/payment"
             let _services = NetwordManager()
             var notAdded = 0
             for (x,cobro) in cobros.enumerated() {
