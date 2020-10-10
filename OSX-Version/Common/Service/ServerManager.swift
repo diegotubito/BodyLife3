@@ -10,7 +10,7 @@
 import Cocoa
 
 class ServerManager {
-    static let uid = UserSaved.Load()?.uid
+    static let uid = UserSaved.GetUser()?.uid
     
     static let Shared = ServerManager()
     
@@ -205,8 +205,7 @@ class ServerManager {
     }
     
     static func CurrentUser(completion: @escaping (CurrentUserModel?, ServerError?) -> Void) {
-        let basicUrl = Configuration.URL.Auth.currentUser
-        let url = basicUrl
+        let url = Config.URL.Firebase.currentUser
         
         let _service = NetwordManager()
         _service.get(url: url) { (data, error) in
@@ -225,10 +224,10 @@ class ServerManager {
         }
     }
     
-    static func RefreshToken(onError: @escaping (ServerError?) -> ()) {
+    static func RefreshToken(completion: @escaping (CurrentUserModel?, ServerError?) -> ()) {
         let loginJSON = ["email"      : ""] as [String : Any]
         
-        let url = Configuration.URL.Auth.refreshToken
+        let url = Config.URL.Server.RefreshToken
         
         //HTTP Headers
         
@@ -236,21 +235,42 @@ class ServerManager {
         _service.post(url: url, body: loginJSON) { (data, serverError) in
             
             guard let data = data else {
-                onError(serverError)
+                completion(nil, serverError)
                 return
             }
             do {
                 
                 let tokenUserDecoded = try JSONDecoder().decode(CurrentUserModel.self, from: data)
-                var user = UserSaved.Load()
-                user?.token = tokenUserDecoded.token
-                user?.exp = tokenUserDecoded.exp
-                
-                UserSaved.Update(user!)
-                onError(nil)
+                completion(tokenUserDecoded, nil)
             } catch {
-                onError(error as? ServerError)
+                completion(nil, error as? ServerError)
             }
+        }
+    }
+    
+    static func ConntectMongoDB(uid: String, success: @escaping (Bool) -> ()) {
+        let url = "\(Config.URL.Server.ConnectMongodb)?database=\(uid)"
+        
+        let _service = NetwordManager()
+        _service.post(url: url, body: nil) { (data, serverError) in
+            guard data != nil else {
+                success(false)
+                return
+            }
+            success(true)
+        }
+    }
+    
+    static func DisconnectMongoDB(success: @escaping (Bool) -> ()) {
+        let url = Config.URL.Server.DisconnectMongodb
+        
+        let _service = NetwordManager()
+        _service.post(url: url, body: nil) { (data, serverError) in
+            guard data != nil else {
+                success(false)
+                return
+            }
+            success(true)
         }
     }
     

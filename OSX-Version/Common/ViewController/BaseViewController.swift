@@ -71,10 +71,10 @@ class BaseViewController : NSViewController {
     
     func listenToNotification() {
            
-        NotificationCenter.default.addObserver(self, selector: #selector(disconnected), name: .notificationDisconnected, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(connected), name: .notificationConnected, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(disconnected), name: .ServerDisconnected, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(connected), name: .ServerConnected, object: nil)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(GoToLogin), name: .needLogin, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(GoToLogin), name: .NeedLogin, object: nil)
     }
     
     deinit {
@@ -93,7 +93,7 @@ class BaseViewController : NSViewController {
         DispatchQueue.main.async {
             self.unlockBackground()
             self.deleteNoConnectionView()
-            self.showNoConnection(message: Connect.messageString)
+            self.showNoConnection(message: "fff")
             
         }
     }
@@ -175,41 +175,11 @@ class BaseViewController : NSViewController {
             self.presentAsSheet(destinationVC)
         }
     }
-    
-    func CheckLogin() {
-        var needLogin = false
-        let semasphore = DispatchSemaphore(value: 0)
-        
-        ServerManager.CurrentUser { (currentUser, serverError) in
-            
-            if serverError != nil {
-                if serverError! == ServerError.invalidToken || serverError == ServerError.tokenNotProvided {
-                    if serverError! == ServerError.invalidToken {
-                        print("token vencido: ", UserSaved.TokenExp()?.toString(formato: "dd-MM-yyyy HH:mm:ss") ?? "nil")
-                    }
-                    print("need new login:", ErrorHandler.Server(error: serverError!))
-                    needLogin = true
-                }
-            } else {
-                UserSaved.SaveDate(date: currentUser?.exp)
-                print("token vigente: ", UserSaved.TokenExp()?.toString(formato: "dd-MM-yyyy HH:mm:ss") ?? "nil")
-                
-            }
-            semasphore.signal()
-        }
-        
-        _ = semasphore.wait(timeout: .distantFuture)
-        
-        if needLogin {
-            GoToLogin()
-        }
-        
-    }
-    
+   
     @objc func GoToLogin() {
         DispatchQueue.main.async {
             var sameUserName = false
-            if (UserSaved.Load()?.uid) != nil {
+            if (UserSaved.GetUser()?.uid) != nil {
                 sameUserName = true
             }
             self.routeToLogin(sameUserName: sameUserName) { data in

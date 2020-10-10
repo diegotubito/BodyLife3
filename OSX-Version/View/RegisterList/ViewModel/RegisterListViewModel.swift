@@ -30,7 +30,7 @@ class RegisterListViewModel: RegisterListViewModelContract {
         _service.get(url: url) { (data, error) in
             
             guard let data = data else {
-               
+                self._view.showError(value: error?.localizedDescription ?? ServerError.unknown_auth_error.localizedDescription)
                 return
             }
             do {

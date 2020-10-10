@@ -59,7 +59,7 @@ class LoginViewController: BaseViewController, LoginDisplayLogic {
         setupWindow(width: Constants.ViewControllerSizes.Login.width, height: Constants.ViewControllerSizes.Login.height)
 
         if sameUserName {
-            let user = UserSaved.Load()
+            let user = UserSaved.GetUser()
             userTextField.stringValue = user?.email ?? ""
             userTextField.resignFirstResponder()
             passwordTextField.becomeFirstResponder()
@@ -87,7 +87,6 @@ class LoginViewController: BaseViewController, LoginDisplayLogic {
     func displayLoginResult(viewModel:
         
         Login.Login.ViewModel) {
-        //nameTextField.text = viewModel.name
         DispatchQueue.main.async {
             self.hideLoading()
                 if viewModel.errorMessage != nil {
@@ -97,7 +96,7 @@ class LoginViewController: BaseViewController, LoginDisplayLogic {
                 } else {
                     self.resultLabel.isHidden = true
                     self.didLogin?(viewModel.data!)
-                    NotificationCenter.default.post(name: .notificationConnected, object: nil)
+                    NotificationCenter.default.post(name: .DidLogin, object: nil)
                     self.view.window?.close()
                 }
         }

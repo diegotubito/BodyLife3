@@ -304,6 +304,7 @@ class NetwordManager {
                 if httpResponse.statusCode == 200 {
                     response(data, error as? ServerError)
                 } else if httpResponse.statusCode == 401 {
+                    NotificationCenter.default.post(name: .TokenExpired, object: nil, userInfo: nil)
                     response(nil, ServerError.invalidToken)
                 } else if httpResponse.statusCode == 403 {
                     response(nil, ServerError.tokenNotProvided)

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		03D35A25D109D5B7B5B0360E /* Pods_Internal_Target.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F63F44B30FFA08FCD3FF5CE /* Pods_Internal_Target.framework */; };
 		110664C523775C9000DC44F3 /* ErrorMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110664C423775C9000DC44F3 /* ErrorMessageView.swift */; };
 		110664C723775D6000DC44F3 /* ErrorMessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 110664C623775D6000DC44F3 /* ErrorMessageView.xib */; };
 		110664D82377ACBF00DC44F3 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110664D72377ACBF00DC44F3 /* extensions.swift */; };
@@ -60,7 +61,6 @@
 		114C54222415822A000CC75A /* ExpenseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114C54212415822A000CC75A /* ExpenseModel.swift */; };
 		11542D812380698F0011AB1D /* ConnectionStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11542D802380698F0011AB1D /* ConnectionStatus.swift */; };
 		11542D842380703F0011AB1D /* ConsoleCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11542D832380703F0011AB1D /* ConsoleCommand.swift */; };
-		11542D8D2380B0BE0011AB1D /* BaseConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11542D8C2380B0BE0011AB1D /* BaseConnect.swift */; };
 		115784D9252B85C0008A89DC /* ServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119AE144237F78D90045960C /* ServerManager.swift */; };
 		115784DA252B85C0008A89DC /* ImportPagoCarnet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D615782524E83B005B5D81 /* ImportPagoCarnet.swift */; };
 		115784DB252B85C0008A89DC /* RegisterListViewModelContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114A540E23A5A9AC00F2746A /* RegisterListViewModelContract.swift */; };
@@ -100,7 +100,6 @@
 		115784FD252B85C0008A89DC /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD35D23766A3D00AB4BFF /* Configuration.swift */; };
 		115784FE252B85C0008A89DC /* dateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11233780237AFC9100F60078 /* dateExtension.swift */; };
 		115784FF252B85C0008A89DC /* XibView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD39523773E5800AB4BFF /* XibView.swift */; };
-		11578500252B85C0008A89DC /* BaseConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11542D8C2380B0BE0011AB1D /* BaseConnect.swift */; };
 		11578501252B85C0008A89DC /* HomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD37C2377130C00AB4BFF /* HomeInteractor.swift */; };
 		11578502252B85C0008A89DC /* ConsoleCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11542D832380703F0011AB1D /* ConsoleCommand.swift */; };
 		11578503252B85C0008A89DC /* UserSaved.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD36123766BF400AB4BFF /* UserSaved.swift */; };
@@ -176,7 +175,6 @@
 		11578549252B85C0008A89DC /* Observers+HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114A541223A7C8F200F2746A /* Observers+HomeViewController.swift */; };
 		1157854A252B85C0008A89DC /* CustomerStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1147AB702384AA0600D19AA9 /* CustomerStatusView.swift */; };
 		1157854B252B85C0008A89DC /* RegisterListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114A540C23A5A99F00F2746A /* RegisterListViewModel.swift */; };
-		1157854D252B85C0008A89DC /* Pods_OSX_Version.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DD05D16FCB3BBCB58D25AF1 /* Pods_OSX_Version.framework */; };
 		1157854F252B85C0008A89DC /* bodyshaping.json in Resources */ = {isa = PBXBuildFile; fileRef = 11498E4E251FFEC600E4D679 /* bodyshaping.json */; };
 		11578550252B85C0008A89DC /* ErrorMessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 110664C623775D6000DC44F3 /* ErrorMessageView.xib */; };
 		11578551252B85C0008A89DC /* Expense.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 114C541F241401B5000CC75A /* Expense.storyboard */; };
@@ -199,6 +197,10 @@
 		11578579252CE411008A89DC /* NewUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11578577252CE411008A89DC /* NewUserViewController.swift */; };
 		11578581252E71C0008A89DC /* environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11578580252E71C0008A89DC /* environment.swift */; };
 		11578582252E71C0008A89DC /* environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11578580252E71C0008A89DC /* environment.swift */; };
+		11578587252E7E57008A89DC /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11578586252E7E57008A89DC /* AuthManager.swift */; };
+		11578588252E7E57008A89DC /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11578586252E7E57008A89DC /* AuthManager.swift */; };
+		115786DF252FE943008A89DC /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115786DE252FE943008A89DC /* SocketManager.swift */; };
+		115786E0252FE943008A89DC /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115786DE252FE943008A89DC /* SocketManager.swift */; };
 		1163932B2381975600D14B19 /* ValidationField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1163932A2381975600D14B19 /* ValidationField.swift */; };
 		1163932E2381AA0400D14B19 /* TextFieldValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1163932D2381AA0400D14B19 /* TextFieldValidation.swift */; };
 		1163933723820CA500D14B19 /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1163933623820CA500D14B19 /* CameraManager.swift */; };
@@ -278,7 +280,7 @@
 		11EEF0F4239D4A91007C9821 /* PaymentViewModelContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EEF0F3239D4A91007C9821 /* PaymentViewModelContract.swift */; };
 		11EEF0F6239D4A98007C9821 /* PaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EEF0F5239D4A98007C9821 /* PaymentViewModel.swift */; };
 		11EEF0F8239D4AA1007C9821 /* NewPaymentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EEF0F7239D4AA1007C9821 /* NewPaymentModel.swift */; };
-		5FE3DFDF421744DA0084410C /* Pods_OSX_Version.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DD05D16FCB3BBCB58D25AF1 /* Pods_OSX_Version.framework */; };
+		926CEF284308DA144DB89D5C /* Pods_Production_Target.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FF373A9763F4A243CF88EE2 /* Pods_Production_Target.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -336,11 +338,12 @@
 		114C54212415822A000CC75A /* ExpenseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseModel.swift; sourceTree = "<group>"; };
 		11542D802380698F0011AB1D /* ConnectionStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionStatus.swift; sourceTree = "<group>"; };
 		11542D832380703F0011AB1D /* ConsoleCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleCommand.swift; sourceTree = "<group>"; };
-		11542D8C2380B0BE0011AB1D /* BaseConnect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseConnect.swift; sourceTree = "<group>"; };
 		11578565252B85C0008A89DC /* Internal-Target.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Internal-Target.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		11578566252B85C0008A89DC /* OSX-Version copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "OSX-Version copy-Info.plist"; path = "/Users/daviddiegogomez/MyApps/iOS/BodyLife3/OSX-Version copy-Info.plist"; sourceTree = "<absolute>"; };
 		11578577252CE411008A89DC /* NewUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserViewController.swift; sourceTree = "<group>"; };
 		11578580252E71C0008A89DC /* environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = environment.swift; sourceTree = "<group>"; };
+		11578586252E7E57008A89DC /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		115786DE252FE943008A89DC /* SocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketManager.swift; sourceTree = "<group>"; };
 		1163932A2381975600D14B19 /* ValidationField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationField.swift; sourceTree = "<group>"; };
 		1163932D2381AA0400D14B19 /* TextFieldValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldValidation.swift; sourceTree = "<group>"; };
 		1163933623820CA500D14B19 /* CameraManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
@@ -423,7 +426,12 @@
 		11EEF0F5239D4A98007C9821 /* PaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewModel.swift; sourceTree = "<group>"; };
 		11EEF0F7239D4AA1007C9821 /* NewPaymentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPaymentModel.swift; sourceTree = "<group>"; };
 		14FC6D7A37E45495D3C3DD3B /* Pods-OSX-Version.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OSX-Version.release.xcconfig"; path = "Target Support Files/Pods-OSX-Version/Pods-OSX-Version.release.xcconfig"; sourceTree = "<group>"; };
-		2DD05D16FCB3BBCB58D25AF1 /* Pods_OSX_Version.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OSX_Version.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F63F44B30FFA08FCD3FF5CE /* Pods_Internal_Target.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Internal_Target.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3568D5C5689143F6D28CE58F /* Pods-Internal-Target.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Internal-Target.debug.xcconfig"; path = "Target Support Files/Pods-Internal-Target/Pods-Internal-Target.debug.xcconfig"; sourceTree = "<group>"; };
+		3FF373A9763F4A243CF88EE2 /* Pods_Production_Target.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Production_Target.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		57CE21EEC8471DFE80C105BD /* Pods-Production-Target.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Production-Target.release.xcconfig"; path = "Target Support Files/Pods-Production-Target/Pods-Production-Target.release.xcconfig"; sourceTree = "<group>"; };
+		B40A3ABBAF6E3690911F7E89 /* Pods-Internal-Target.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Internal-Target.release.xcconfig"; path = "Target Support Files/Pods-Internal-Target/Pods-Internal-Target.release.xcconfig"; sourceTree = "<group>"; };
+		BC6DA3896F51023605172C94 /* Pods-Production-Target.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Production-Target.debug.xcconfig"; path = "Target Support Files/Pods-Production-Target/Pods-Production-Target.debug.xcconfig"; sourceTree = "<group>"; };
 		CED88F90963C7E66B8F88063 /* Pods-OSX-Version.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OSX-Version.debug.xcconfig"; path = "Target Support Files/Pods-OSX-Version/Pods-OSX-Version.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -432,7 +440,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1157854D252B85C0008A89DC /* Pods_OSX_Version.framework in Frameworks */,
+				03D35A25D109D5B7B5B0360E /* Pods_Internal_Target.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,7 +448,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5FE3DFDF421744DA0084410C /* Pods_OSX_Version.framework in Frameworks */,
+				926CEF284308DA144DB89D5C /* Pods_Production_Target.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -706,7 +714,6 @@
 			isa = PBXGroup;
 			children = (
 				11542D802380698F0011AB1D /* ConnectionStatus.swift */,
-				11542D8C2380B0BE0011AB1D /* BaseConnect.swift */,
 			);
 			path = ConnectionStatus;
 			sourceTree = "<group>";
@@ -725,6 +732,22 @@
 				11578577252CE411008A89DC /* NewUserViewController.swift */,
 			);
 			path = NewUser;
+			sourceTree = "<group>";
+		};
+		11578585252E7E48008A89DC /* AuthManager */ = {
+			isa = PBXGroup;
+			children = (
+				11578586252E7E57008A89DC /* AuthManager.swift */,
+			);
+			path = AuthManager;
+			sourceTree = "<group>";
+		};
+		115786DD252FE930008A89DC /* Socket */ = {
+			isa = PBXGroup;
+			children = (
+				115786DE252FE943008A89DC /* SocketManager.swift */,
+			);
+			path = Socket;
 			sourceTree = "<group>";
 		};
 		116393292381973800D14B19 /* ValidationField */ = {
@@ -1071,6 +1094,8 @@
 		11EBD35723765D2000AB4BFF /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				115786DD252FE930008A89DC /* Socket */,
+				11578585252E7E48008A89DC /* AuthManager */,
 				1163933523820C9100D14B19 /* Camera */,
 				116393292381973800D14B19 /* ValidationField */,
 				11542D8B2380B0730011AB1D /* Reachability */,
@@ -1168,6 +1193,10 @@
 			children = (
 				CED88F90963C7E66B8F88063 /* Pods-OSX-Version.debug.xcconfig */,
 				14FC6D7A37E45495D3C3DD3B /* Pods-OSX-Version.release.xcconfig */,
+				3568D5C5689143F6D28CE58F /* Pods-Internal-Target.debug.xcconfig */,
+				B40A3ABBAF6E3690911F7E89 /* Pods-Internal-Target.release.xcconfig */,
+				BC6DA3896F51023605172C94 /* Pods-Production-Target.debug.xcconfig */,
+				57CE21EEC8471DFE80C105BD /* Pods-Production-Target.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -1175,7 +1204,8 @@
 		A7A55170CCA51CEE5CF3DC58 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				2DD05D16FCB3BBCB58D25AF1 /* Pods_OSX_Version.framework */,
+				1F63F44B30FFA08FCD3FF5CE /* Pods_Internal_Target.framework */,
+				3FF373A9763F4A243CF88EE2 /* Pods_Production_Target.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1324,7 +1354,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-OSX-Version-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Internal-Target-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1337,15 +1367,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-OSX-Version/Pods-OSX-Version-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Internal-Target/Pods-Internal-Target-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-OSX-Version/Pods-OSX-Version-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Internal-Target/Pods-Internal-Target-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OSX-Version/Pods-OSX-Version-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Internal-Target/Pods-Internal-Target-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6E50DA979F812F1F25992FD8 /* [CP] Check Pods Manifest.lock */ = {
@@ -1363,7 +1393,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-OSX-Version-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Production-Target-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1376,15 +1406,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-OSX-Version/Pods-OSX-Version-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Production-Target/Pods-Production-Target-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-OSX-Version/Pods-OSX-Version-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Production-Target/Pods-Production-Target-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OSX-Version/Pods-OSX-Version-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Production-Target/Pods-Production-Target-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1434,7 +1464,6 @@
 				115784FD252B85C0008A89DC /* Configuration.swift in Sources */,
 				115784FE252B85C0008A89DC /* dateExtension.swift in Sources */,
 				115784FF252B85C0008A89DC /* XibView.swift in Sources */,
-				11578500252B85C0008A89DC /* BaseConnect.swift in Sources */,
 				11578501252B85C0008A89DC /* HomeInteractor.swift in Sources */,
 				11578502252B85C0008A89DC /* ConsoleCommand.swift in Sources */,
 				11578503252B85C0008A89DC /* UserSaved.swift in Sources */,
@@ -1445,6 +1474,7 @@
 				11578508252B85C0008A89DC /* CustomerStatusViewModel.swift in Sources */,
 				11578509252B85C0008A89DC /* ArticleModel.swift in Sources */,
 				1157850A252B85C0008A89DC /* ImportVentaArticulo.swift in Sources */,
+				11578588252E7E57008A89DC /* AuthManager.swift in Sources */,
 				11578579252CE411008A89DC /* NewUserViewController.swift in Sources */,
 				1157850B252B85C0008A89DC /* PaymentView.swift in Sources */,
 				1157850C252B85C0008A89DC /* CustomerListView.swift in Sources */,
@@ -1465,6 +1495,7 @@
 				1157851B252B85C0008A89DC /* PeriodModel.swift in Sources */,
 				1157851C252B85C0008A89DC /* ImportCustomer.swift in Sources */,
 				1157851D252B85C0008A89DC /* importDiscount.swift in Sources */,
+				115786E0252FE943008A89DC /* SocketManager.swift in Sources */,
 				1157851E252B85C0008A89DC /* ExpenseModels.swift in Sources */,
 				1157851F252B85C0008A89DC /* importThumbnail.swift in Sources */,
 				11578520252B85C0008A89DC /* ValidationField.swift in Sources */,
@@ -1558,7 +1589,6 @@
 				11EBD35E23766A3D00AB4BFF /* Configuration.swift in Sources */,
 				11233781237AFC9100F60078 /* dateExtension.swift in Sources */,
 				11EBD39623773E5800AB4BFF /* XibView.swift in Sources */,
-				11542D8D2380B0BE0011AB1D /* BaseConnect.swift in Sources */,
 				11EBD3822377130C00AB4BFF /* HomeInteractor.swift in Sources */,
 				11542D842380703F0011AB1D /* ConsoleCommand.swift in Sources */,
 				11EBD36223766BF400AB4BFF /* UserSaved.swift in Sources */,
@@ -1569,6 +1599,7 @@
 				1147AB7C2384D49E00D19AA9 /* CustomerStatusViewModel.swift in Sources */,
 				11D3D8852521780B0008CFD0 /* ArticleModel.swift in Sources */,
 				118472432528D6D20012D237 /* ImportVentaArticulo.swift in Sources */,
+				11578587252E7E57008A89DC /* AuthManager.swift in Sources */,
 				11578578252CE411008A89DC /* NewUserViewController.swift in Sources */,
 				11EEF0F2239D4A83007C9821 /* PaymentView.swift in Sources */,
 				1147AB4A2383654C00D19AA9 /* CustomerListView.swift in Sources */,
@@ -1589,6 +1620,7 @@
 				11D3D87C25214C290008CFD0 /* PeriodModel.swift in Sources */,
 				11498E602520975000E4D679 /* ImportCustomer.swift in Sources */,
 				11D3D86B252127BD0008CFD0 /* importDiscount.swift in Sources */,
+				115786DF252FE943008A89DC /* SocketManager.swift in Sources */,
 				114C54152413FF66000CC75A /* ExpenseModels.swift in Sources */,
 				1183D1842522F77200BDDBFC /* importThumbnail.swift in Sources */,
 				1163932B2381975600D14B19 /* ValidationField.swift in Sources */,
@@ -1654,7 +1686,7 @@
 /* Begin XCBuildConfiguration section */
 		11578563252B85C0008A89DC /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CED88F90963C7E66B8F88063 /* Pods-OSX-Version.debug.xcconfig */;
+			baseConfigurationReference = 3568D5C5689143F6D28CE58F /* Pods-Internal-Target.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-internal";
 				CODE_SIGN_ENTITLEMENTS = "OSX-Version/OSX-VersionDebug.entitlements";
@@ -1677,7 +1709,7 @@
 		};
 		11578564252B85C0008A89DC /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 14FC6D7A37E45495D3C3DD3B /* Pods-OSX-Version.release.xcconfig */;
+			baseConfigurationReference = B40A3ABBAF6E3690911F7E89 /* Pods-Internal-Target.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-internal";
 				CODE_SIGN_ENTITLEMENTS = "OSX-Version/OSX_Version.entitlements";
@@ -1813,7 +1845,7 @@
 		};
 		11EBD32F2376499F00AB4BFF /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CED88F90963C7E66B8F88063 /* Pods-OSX-Version.debug.xcconfig */;
+			baseConfigurationReference = BC6DA3896F51023605172C94 /* Pods-Production-Target.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "OSX-Version/OSX-VersionDebug.entitlements";
@@ -1835,7 +1867,7 @@
 		};
 		11EBD3302376499F00AB4BFF /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 14FC6D7A37E45495D3C3DD3B /* Pods-OSX-Version.release.xcconfig */;
+			baseConfigurationReference = 57CE21EEC8471DFE80C105BD /* Pods-Production-Target.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "OSX-Version/OSX_Version.entitlements";

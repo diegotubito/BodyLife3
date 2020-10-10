@@ -18,7 +18,16 @@ class Config {
     
     static var baseUrl = Server.Develop
 
-    struct Firebase {
-        static let Login = baseUrl.rawValue + "/v1/firebase/auth/login"
+    struct URL {
+        struct Firebase {
+            static let Login = baseUrl.rawValue + "/v1/firebase/auth/login"
+            static let currentUser = baseUrl.rawValue + "v1/firebase/auth/currentUser"
+        }
+        
+        struct Server {
+            static let RefreshToken =  baseUrl.rawValue + "/v1/firebase/auth/refreshToken"
+            static let ConnectMongodb = baseUrl.rawValue + "/v1/connect-mongodb"
+            static let DisconnectMongodb = baseUrl.rawValue + "/v1/close-mongodb"
+        }
     }
 }

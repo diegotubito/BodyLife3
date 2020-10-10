@@ -72,7 +72,23 @@ class CustomerListView: NSView {
     }
     
     func startLoading() {
+        resetValues()
         viewModel.loadCustomers(offset: 0)
+    }
+    
+    private func resetValues() {
+        viewModel.model.selectedCustomer = nil
+        viewModel.model.customersbyPages.removeAll()
+        viewModel.model.customersbySearch.removeAll()
+        viewModel.model.customersToDisplay.removeAll()
+        viewModel.model.imagesToDisplay.removeAll()
+        viewModel.model.imagesByPages.removeAll()
+        viewModel.model.imagesBySearch.removeAll()
+        viewModel.model.countByPages = 0
+        viewModel.model.countBySearch = 0
+        DispatchQueue.main.async {
+            self.tableViewSocio.reloadData()
+        }
     }
     
     @IBAction func searchFieldDidChanged(_ sender: NSSearchField) {

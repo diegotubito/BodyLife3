@@ -58,7 +58,7 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
         setupWindow(width: Constants.ViewControllerSizes.Home.width, height: Constants.ViewControllerSizes.Home.height)
           
         
-        NotificationCenter.default.addObserver(self, selector: #selector(didConnected), name: .notificationConnected, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(StartLoading), name: .CommunicationStablished, object: nil)
         
         
         self.timerForDelayCustomerSelection = Timer.scheduledTimer(timeInterval: 0.0, target: self, selector: #selector(self.loadStatus), userInfo: nil, repeats: false)
@@ -84,12 +84,7 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
         super.viewWillAppear()
         self.view.window?.delegate = self
         
-        DispatchQueue.main.async {
-            self.createCustomViews()
-            self.addObservers()
-            
-        }
- 
+       
     }
     
     override func viewDidAppear() {
@@ -103,13 +98,32 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
         print("window: didResize")
     }
     
-    @objc func didConnected() {
-        if self.customerListView.viewModel.model.selectedCustomer == nil {
+    @objc func StartLoading() {
+       
+        DispatchQueue.main.async {
+            if self.customerListView != nil {
+                self.customerListView.removeFromSuperview()
+            }
+            if self.sellRegisterView != nil {
+                self.sellRegisterView.removeFromSuperview()
+            }
+            if self.paymentView != nil {
+                self.paymentView.removeFromSuperview()
+            }
+            if self.customerStatusView != nil {
+                self.customerStatusView.removeFromSuperview()
+            }
+            self.createCustomViews()
+            self.addObservers()
+            
             self.customerListView.startLoading()
             NotificationCenter.default.post(.init(name: .needUpdateArticleList))
             NotificationCenter.default.post(.init(name: .needUpdateProductService))
-            print("pre data loaded")
+            print("Start Loading...")
+            
         }
+ 
+       
     }
     
     
@@ -125,9 +139,30 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
         //nameTextField.text = viewModel.name
     }
     
+    @IBAction func importData(_ sender: Any) {
+//        ImportDatabase.Discount.MigrateToMongoDB()
+//        ImportDatabase.Activity.MigrateToMongoDB()
+//        ImportDatabase.Period.MigrateToMongoDB()
+//        ImportDatabase.Article.MigrateToMongoDB()
+//        
+//        ImportDatabase.Customer.MigrateToMongoDB()
+//        ImportDatabase.Thumbnail.MigrateToMongoDB()
+//        
+//        ImportDatabase.Carnet.MigrateToMongoDB()
+//        ImportDatabase.VentaArticulo.MigrateToMongoDB()
+//        ImportDatabase.PagoCarnet.MigrateToMongoDB()
+//        ImportDatabase.PagoArticulo.MigrateToMongoDB()
+    }
+    
     @IBAction func closeSessionPressed(_ sender: Any) {
-        UserSaved.Remove()
-        CheckLogin()
+        ServerManager.DisconnectMongoDB { (success) in
+            if success {
+                UserSaved.Remove()
+                self.GoToLogin()
+            } else {
+                print("could not disconnect db")
+            }
+        }
     }
     @IBAction func newExpensePressed(_ sender: Any) {
         router?.routeToNewExpense()

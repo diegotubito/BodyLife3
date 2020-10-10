@@ -9,6 +9,11 @@
 import Cocoa
 
 extension HomeViewController {
+    
+    func removeViews() {
+        
+    }
+    
     func createCustomViews() {
         
         createUpperView()

@@ -38,12 +38,14 @@ class RegisterListView: XibViewWithAnimation , RegisterListViewContract{
     
     func showLoading() {
         DispatchQueue.main.async {
+            self.removeErrorConnectionView()
             self.myIndicator.startAnimation(nil)
         }
     }
     
     func hideLoading() {
         DispatchQueue.main.async {
+            self.removeErrorConnectionView()
             self.myIndicator.stopAnimation(nil)
         }
     }

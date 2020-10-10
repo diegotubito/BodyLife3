@@ -14,6 +14,7 @@ class LoginPresenter: LoginPresentationLogic {
         if let error = response.error {
             viewModel.errorMessage = ErrorHandler.Server(error: error)
         }
+        viewModel.user = response.user
         viewModel.data = response.data
         viewController?.displayLoginResult(viewModel: viewModel)
     }

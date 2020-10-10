@@ -1,6 +1,0 @@
-framework module Pods_OSX_Version {
-  umbrella header "Pods-OSX-Version-umbrella.h"
-
-  export *
-  module * { export * }
-}

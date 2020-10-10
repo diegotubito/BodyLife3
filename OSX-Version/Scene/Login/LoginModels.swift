@@ -10,10 +10,12 @@ enum Login {
         }
         struct Response {
             var error : ServerError?
+            var user : FirebaseUserModel?
             var data : Data?
         }
         struct ViewModel {
             var errorMessage : String?
+            var user : FirebaseUserModel?
             var data : Data?
         }
     }

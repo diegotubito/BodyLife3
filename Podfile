@@ -4,9 +4,10 @@
 def shared_pods
   pod 'Alamofire'
   pod 'AlamofireImage'
+  pod 'Socket.IO-Client-Swift', '~> 15.2.0'
  end
 
-target 'OSX-Version' do
+target 'Production-Target' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
@@ -14,3 +15,13 @@ target 'OSX-Version' do
   shared_pods
 
 end
+
+target 'Internal-Target' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for OSX-Version
+  shared_pods
+
+end
+

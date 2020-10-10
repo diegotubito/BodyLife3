@@ -1,0 +1,6 @@
+framework module Pods_Internal_Target {
+  umbrella header "Pods-Internal-Target-umbrella.h"
+
+  export *
+  module * { export * }
+}

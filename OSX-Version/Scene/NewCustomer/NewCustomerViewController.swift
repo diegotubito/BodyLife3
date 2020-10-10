@@ -2,7 +2,6 @@ import Cocoa
 import AlamofireImage
 
 extension Notification.Name {
-    static let needLogin = Notification.Name("needLogin")
     static let newCustomer = Notification.Name("newCustomer")
 }
 protocol NewCustomerDisplayLogic: class {
@@ -100,7 +99,7 @@ class NewCustomerViewController: BaseViewController, NewCustomerDisplayLogic {
     }
     
     func createRequestBriefInfo(withDate: Date) -> NewCustomer.NewCustomer.Request {
-        let user = UserSaved.Load()
+        let user = UserSaved.GetUser()
         let uid = (user?.uid)!
         let fechaDouble = withDate.timeIntervalSinceReferenceDate
         let fechaRounded = (fechaDouble * 1000)
@@ -121,7 +120,7 @@ class NewCustomerViewController: BaseViewController, NewCustomerDisplayLogic {
     }
     
     func createRequestFullInfo(withDate: Date) -> NewCustomer.NewCustomer.Request {
-        let user = UserSaved.Load()
+        let user = UserSaved.GetUser()
         let uid = (user?.uid)!
         let fechaDouble = withDate.timeIntervalSinceReferenceDate
         let fechaRounded = (fechaDouble * 1000)

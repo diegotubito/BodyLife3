@@ -10,7 +10,7 @@ import Cocoa
 
 var MyConnectionStatus : Connect!
 var DateReference = "01-01-2020 00:00:00".toDate(formato: "dd-MM-yyyy HH:mm:ss")!
-
+var UserSession : FirebaseUserModel?
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -26,8 +26,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         #else
         print("PRODUCTION")
         #endif
-    
+        
+      
         Connect.StartListening()
+        
+       
         
 //        ImportDatabase.Discount.MigrateToMongoDB()
 //        ImportDatabase.Activity.MigrateToMongoDB()
@@ -149,5 +152,5 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return .terminateNow
     }
     
-  
+   
 }
