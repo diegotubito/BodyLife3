@@ -37,12 +37,12 @@ class Connect {
     
     @objc func socketConnected() {
         //connected
-        print("socket noti: connected")
+        print("Socket notification: Connected.")
         checkUserSession()
     }
 
     @objc func socketDisconnected() {
-        print("socket noti: disconnected")
+        print("Socket notification: Disconnected.")
     }
     
     @objc func checkUserSession() {
@@ -65,8 +65,10 @@ class Connect {
     
     func doCheck() {
         if let user = UserSaved.GetUser() {
+            print("Connect: User \(String(describing: user.displayName))")
             ServerManager.RefreshToken { (data, error) in
                 guard let data = data else {
+                    print("Connect: Refresh token FAIL - need to login")
                     NotificationCenter.default.post(name: .NeedLogin, object: nil, userInfo: nil)
                     return
                 }
@@ -75,22 +77,24 @@ class Connect {
                 userSession.token = data.token
                 UserSaved.Update(userSession)
                 UserSession = userSession
-                
+                print("Connect: Refresh token SUCCESS")
                 //Select database name
                 if let uid = userSession.uid {
                     ServerManager.ConntectMongoDB(uid: uid) { (connectedToDatabase) in
                         
                         if connectedToDatabase {
+                            print("Connect: database connection SUCCESS name = \(uid)")
                             NotificationCenter.default.post(name: .CommunicationStablished, object: nil, userInfo: nil)
                         } else {
-                            print("Error grave: No se pudo conectar a la base de datos")
+                            print("Connect: database connection FAIL name = \(uid)")
                         }
                     }
                 } else {
-                    print("Error, no hay uid para usarlo como base de dato")
+                    print("Connect: database connection FAIL name = NIL")
                 }
             }
         } else {
+            print("Connect: There's no user saved - need to login")
             NotificationCenter.default.post(name: .NeedLogin, object: nil, userInfo: nil)
         }
     }

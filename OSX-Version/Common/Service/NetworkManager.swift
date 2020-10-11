@@ -80,7 +80,6 @@ class NetwordManager {
                             break
                             
                         default:
-                            print(error?.localizedDescription)
                             response(nil, ServerError.unknown_auth_error)
                             break
                         }
@@ -166,7 +165,7 @@ class NetwordManager {
                             break
                             
                         default:
-                            print(error?.localizedDescription)
+                    
                             response(nil, ServerError.unknown_auth_error)
                             break
                         }
@@ -251,7 +250,7 @@ class NetwordManager {
                             break
                             
                         default:
-                            print(error?.localizedDescription)
+                          
                             response(nil, ServerError.unknown_auth_error)
                             break
                         }
@@ -325,7 +324,6 @@ class NetwordManager {
         //if I have already loaded the image, there's no need to load it again.
         if let imageFromCache = imageCache.object(forKey: url as AnyObject) as? NSImage {
             //return the image previously loaded
-            print("loaded from cache")
             result(imageFromCache)
             return
             

@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="15702" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17156" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15702"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17156"/>
         <capability name="System colors introduced in macOS 10.14" minToolsVersion="10.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="CustomerStatusView" customModule="OSX_Version" customModuleProvider="target">
+        <customObject id="-2" userLabel="File's Owner" customClass="CustomerStatusView" customModule="Internal_Target" customModuleProvider="target">
             <connections>
                 <outlet property="DayBox" destination="jdk-KK-FLE" id="5gv-oQ-33N"/>
                 <outlet property="activityIndicator" destination="CwU-P6-vvy" id="bzZ-bE-q1e"/>
@@ -189,10 +190,10 @@
                     </textFieldCell>
                 </textField>
                 <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="16" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kpY-4o-cfd">
-                    <rect key="frame" x="16" y="8" width="116" height="85"/>
+                    <rect key="frame" x="16" y="34" width="116" height="59"/>
                     <subviews>
                         <button translatesAutoresizingMaskIntoConstraints="NO" id="han-Ia-x20">
-                            <rect key="frame" x="0.0" y="25" width="50" height="35"/>
+                            <rect key="frame" x="0.0" y="12" width="50" height="35"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="50" id="3ec-LN-bHV"/>
                                 <constraint firstAttribute="height" constant="35" id="DMX-xT-VPF"/>
@@ -206,9 +207,8 @@
                             </connections>
                         </button>
                         <button translatesAutoresizingMaskIntoConstraints="NO" id="DIe-nX-XIk">
-                            <rect key="frame" x="66" y="13" width="50" height="59"/>
+                            <rect key="frame" x="66" y="0.0" width="50" height="59"/>
                             <constraints>
-                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="eaL-YZ-NAT"/>
                                 <constraint firstAttribute="width" constant="50" id="n6Z-So-oLn"/>
                                 <constraint firstAttribute="height" constant="59" id="ukD-Vs-Jzu"/>
                             </constraints>
@@ -253,7 +253,6 @@
                 <constraint firstAttribute="trailing" secondItem="2wd-pp-b16" secondAttribute="trailing" constant="16" id="lgp-5h-TGH"/>
                 <constraint firstAttribute="trailing" secondItem="Qjb-Dk-DUN" secondAttribute="trailing" id="pUD-NL-X9X"/>
                 <constraint firstAttribute="trailing" secondItem="BwV-uf-wSG" secondAttribute="trailing" id="qeN-zG-19U"/>
-                <constraint firstAttribute="bottom" secondItem="kpY-4o-cfd" secondAttribute="bottom" constant="8" id="rPr-9e-de9"/>
                 <constraint firstItem="Qjb-Dk-DUN" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="sFo-bi-4hN"/>
                 <constraint firstItem="BwV-uf-wSG" firstAttribute="centerY" secondItem="c22-O7-iKe" secondAttribute="centerY" id="v6Y-lv-x2L"/>
                 <constraint firstItem="2wd-pp-b16" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="16" id="w50-Ca-K3C"/>

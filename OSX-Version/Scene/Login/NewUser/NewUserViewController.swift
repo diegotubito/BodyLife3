@@ -34,11 +34,8 @@ class NewUserViewController : BaseViewController {
         let _services = NetwordManager()
         _services.post(url: url, body: body) { (data, error) in
             guard data != nil else {
-                print("No se puedo crear registro \(error?.localizedDescription)")
                 return
             }
-            print("success")
-            print(data)
         }
     }
     

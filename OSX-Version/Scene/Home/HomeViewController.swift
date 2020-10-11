@@ -53,8 +53,6 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("window: viewDidLoad")
-           
         setupWindow(width: Constants.ViewControllerSizes.Home.width, height: Constants.ViewControllerSizes.Home.height)
           
         
@@ -89,13 +87,11 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
     
     override func viewDidAppear() {
         super .viewDidAppear()
-        print("Window: DidAppear")
         self.view.window?.styleMask.remove(.resizable)
        createBackgroundGradient()
       }
     
     func windowDidResize(_ notification: Notification) {
-        print("window: didResize")
     }
     
     @objc func StartLoading() {
@@ -107,7 +103,6 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
             self.customerListView.startLoading()
             NotificationCenter.default.post(.init(name: .needUpdateArticleList))
             NotificationCenter.default.post(.init(name: .needUpdateProductService))
-            print("Start Loading...")
             self.view.window?.title = UserSaved.GetUser()?.displayName ?? "Sin Nombre"
         }
     }
@@ -128,7 +123,7 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
     @IBAction func importData(_ sender: Any) {
 //        ImportDatabase.Discount.MigrateToMongoDB()
 //        ImportDatabase.Activity.MigrateToMongoDB()
-        ImportDatabase.Period.MigrateToMongoDB()
+//        ImportDatabase.Period.MigrateToMongoDB()
 //        ImportDatabase.Article.MigrateToMongoDB()
 //        
 //        ImportDatabase.Customer.MigrateToMongoDB()

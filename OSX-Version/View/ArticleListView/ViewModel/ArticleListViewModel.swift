@@ -19,22 +19,15 @@ class ArticleListViewModel : ArticleListViewModelContract {
     
     func loadProducts() {
         _view.showLoading()
-       
         let url = "\(Config.baseUrl.rawValue)/v1/article"
-        
         let _service = NetwordManager()
         _service.get(url: url) { (data, error) in
-            
             guard let data = data else {
-               
                 return
             }
             do {
                 let response = try JSONDecoder().decode(ArticleModel.ViewModel.self, from: data)
                 self.model.response = response
-                for i in response.articles {
-                    print(i.priceCost)
-                }
                 self.filterAndSort()
             } catch {
                 return
@@ -49,7 +42,6 @@ class ArticleListViewModel : ArticleListViewModelContract {
     }
     
     func getProducts() -> [ArticleModel.NewRegister] {
-        
         return model.response.articles
     }
 }

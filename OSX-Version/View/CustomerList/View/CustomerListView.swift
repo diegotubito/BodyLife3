@@ -99,7 +99,7 @@ class CustomerListView: NSView {
     }
     
     @IBAction func searchFieldDidChanged(_ sender: NSSearchField) {
-        print("did changed")
+       
     }
 }
 
@@ -215,6 +215,7 @@ extension CustomerListView: NSTableViewDataSource, NSTableViewDelegate {
             
              if myTable == tableViewSocio {
                 let posicion = myTable.selectedRow
+                if posicion == -1 {return}
                 self.viewModel.model.selectedCustomer = viewModel.model.customersToDisplay[posicion]
                 if viewModel.model.selectedCustomer != nil {
                     self.onSelectedCustomer?(viewModel.model.selectedCustomer!)

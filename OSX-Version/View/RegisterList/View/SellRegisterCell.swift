@@ -30,16 +30,12 @@ class SellRegisterCell: NSTableCellView {
         let balance = sell.balance ?? 0
         let timestamp = sell.timestamp.toDate1970.toString(formato: "dd-MM-yyyy - HH:mm")
         labelCreatedAt.stringValue = timestamp + "HS."
-        print("\(sell.productCategory)")
         let labelName = sell.productCategory == ProductCategory.activity.rawValue ? sell.description : sell.description
         labelDisplayName.stringValue = labelName
         labelPrice.stringValue = sell.price?.currencyFormat(decimal: 2) ?? "$0.0"
         labelTotalPayment.stringValue = totalPayment.currencyFormat(decimal: 2)
         labelSaldo.stringValue = balance.currencyFormat(decimal: 2)
         
-        if !sell.isEnabled {
-        print("not enabled sell")
-        }
         alphaValue = sell.isEnabled ? 1.0 : 0.3
         labelSaldo.textColor = balance < 0 ? Constants.Colors.Red.ematita : NSColor.lightGray
         let articleImage = #imageLiteral(resourceName: "beverages-supplier")

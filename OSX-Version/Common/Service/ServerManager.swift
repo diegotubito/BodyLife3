@@ -285,7 +285,6 @@ class ServerManager {
         //if I have already loaded the image, there's no need to load it again.
         if let imageFromCache = imageCache.object(forKey: url as AnyObject) as? NSImage {
             //return the image previously loaded
-            print("loaded from cache")
             completion(imageFromCache, nil)
             return
             
@@ -306,7 +305,6 @@ class ServerManager {
                     
                     DispatchQueue.main.async {
                         //save loaded image to cache for better performance
-                        print("saved to cache")
                         let imageToCache = image
                         self.imageCache.setObject(imageToCache, forKey: url as AnyObject)
                         completion(imageToCache, nil)

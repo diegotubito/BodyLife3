@@ -46,7 +46,6 @@ class RegisterListViewModel: RegisterListViewModelContract {
     
     
     func parsePaymentAndSell(response : PaymentModel.ViewModel) {
-        print("parsing payments")
         let sells = response.payments.compactMap { $0.sell }
         
         var uniqueArray = [SellModel.NewRegister]()
@@ -218,7 +217,6 @@ class RegisterListViewModel: RegisterListViewModelContract {
     }
     
     private func updateStockAndSellcount(_ childIDArticle: String) {
-        print("stock updated")
         let pathArticleSellCount = "\(Paths.productArticle):\(childIDArticle)"
         ServerManager.Transaction(path: pathArticleSellCount, key: "sellCount", value: -1, success: {
         }) { (err) in

@@ -732,10 +732,13 @@
                                             <constraint firstAttribute="width" constant="33" id="SLO-6t-ijH"/>
                                             <constraint firstAttribute="height" constant="33" id="caY-HR-6uL"/>
                                         </constraints>
-                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSAdvanced" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="1KC-cN-yON">
+                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="mono-logout" imagePosition="only" alignment="center" imageScaling="axesIndependently" inset="2" id="1KC-cN-yON">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
+                                        <connections>
+                                            <action selector="closeSessionPressed:" target="XfG-lQ-9wD" id="fJW-4J-wgv"/>
+                                        </connections>
                                     </button>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="rtW-ah-ZyP">
                                         <rect key="frame" x="65" y="4" width="33" height="33"/>
@@ -781,20 +784,11 @@
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="vJS-25-cay">
                                 <rect key="frame" x="0.0" y="0.0" width="1280" height="20"/>
                                 <subviews>
-                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LN8-Ta-JZZ">
-                                        <rect key="frame" x="1161" y="-8" width="125" height="32"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="push" title="Close Session" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="0k0-T4-3Cg">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="closeSessionPressed:" target="XfG-lQ-9wD" id="OJn-T3-XCf"/>
-                                        </connections>
-                                    </button>
-                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EX2-Ss-9NK">
-                                        <rect key="frame" x="968" y="-7" width="140" height="32"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EX2-Ss-9NK">
+                                        <rect key="frame" x="1146" y="-7" width="140" height="31"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="128" id="Ctb-x7-BXs"/>
+                                        </constraints>
                                         <buttonCell key="cell" type="push" title="Import database" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="3Vu-4F-FKI">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -805,7 +799,10 @@
                                     </button>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="EX2-Ss-9NK" secondAttribute="bottom" id="5JG-Na-aF4"/>
                                     <constraint firstAttribute="height" constant="20" id="6QP-Zw-s8k"/>
+                                    <constraint firstItem="EX2-Ss-9NK" firstAttribute="top" secondItem="vJS-25-cay" secondAttribute="top" id="7Ep-JE-yzL"/>
+                                    <constraint firstAttribute="trailing" secondItem="EX2-Ss-9NK" secondAttribute="trailing" id="7Zr-O9-G7D"/>
                                 </constraints>
                             </customView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="xeN-qp-oFe">
@@ -854,9 +851,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="NSAdvanced" width="32" height="32"/>
         <image name="NSBonjour" width="32" height="32"/>
         <image name="NSInvalidDataFreestandingTemplate" width="14" height="14"/>
         <image name="NSUser" width="32" height="32"/>
+        <image name="mono-logout" width="2400" height="2400"/>
     </resources>
 </document>

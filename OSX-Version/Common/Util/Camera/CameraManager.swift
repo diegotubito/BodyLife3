@@ -71,9 +71,6 @@ class CameraManager: NSObject {
             
         
         if let device : [AVCaptureDevice] = AVCaptureDevice.devices() {
-            print("device found = ",device.count)
-            print(device)
-   
             let device_input : AVCaptureDeviceInput = try! AVCaptureDeviceInput(device: device[0])
             
             let previewLayer:AVCaptureVideoPreviewLayer = AVCaptureVideoPreviewLayer(session: session)

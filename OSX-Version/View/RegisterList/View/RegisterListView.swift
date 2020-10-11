@@ -119,8 +119,6 @@ extension RegisterListView: NSTableViewDataSource, NSTableViewDelegate {
         let count = sells.count
         if row <= count{
             cell.displayCell(sell: sells[row])
-        } else {
-            print("safe exit")
         }
         return cell
         

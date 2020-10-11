@@ -78,7 +78,6 @@ class BaseViewController : NSViewController {
     }
     
     deinit {
-        print("Notificacion Obs removed")
         NotificationCenter.default.removeObserver(self)
     }
   

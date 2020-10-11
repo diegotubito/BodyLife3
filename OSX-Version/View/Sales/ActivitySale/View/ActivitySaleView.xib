@@ -6,7 +6,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="ActivitySaleView" customModule="OSX_Version" customModuleProvider="target">
+        <customObject id="-2" userLabel="File's Owner" customClass="ActivitySaleView" customModule="Internal_Target" customModuleProvider="target">
             <connections>
                 <outlet property="backgroundClickableView" destination="hst-wN-AUA" id="mNf-jN-BcE"/>
                 <outlet property="daysLabel" destination="cXn-E1-cSX" id="8VQ-HY-OOq"/>
@@ -86,7 +86,7 @@
                     <rect key="frame" x="0.0" y="494" width="791" height="50"/>
                     <subviews>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aZa-M6-xhh">
-                            <rect key="frame" x="303" y="14" width="184" height="22"/>
+                            <rect key="frame" x="304" y="14" width="184" height="22"/>
                             <textFieldCell key="cell" lineBreakMode="clipping" title="Venta de Actividades" id="ghE-Rf-YRo">
                                 <font key="font" metaFont="system" size="19"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -173,8 +173,8 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="xl2-GI-VKM" customClass="SaveButtonCustomView" customModule="OSX_Version" customModuleProvider="target">
-                                <rect key="frame" x="77" y="16" width="120" height="50"/>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="xl2-GI-VKM" customClass="SaveButtonCustomView" customModule="Internal_Target" customModuleProvider="target">
+                                <rect key="frame" x="78" y="16" width="120" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Sfz-8L-7SX"/>
                                     <constraint firstAttribute="width" constant="120" id="VIm-QJ-gye"/>
@@ -290,7 +290,6 @@
                 <constraint firstItem="6q8-oB-qgM" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="32" id="hgI-Ky-mpz"/>
                 <constraint firstItem="9IV-Vw-H1S" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="32" id="i8u-8K-DIO"/>
                 <constraint firstItem="tem-Nk-y8Y" firstAttribute="top" secondItem="Zfy-tW-Qsc" secondAttribute="bottom" constant="3" id="khX-rp-CII"/>
-                <constraint firstItem="IBf-lp-0dy" firstAttribute="width" secondItem="c22-O7-iKe" secondAttribute="width" multiplier="0.35" id="lo1-m7-Dzz"/>
                 <constraint firstAttribute="bottom" secondItem="c50-aI-oda" secondAttribute="bottom" constant="16" id="nes-Lp-g34"/>
                 <constraint firstItem="oew-gq-VPO" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="rc9-Ii-VUX"/>
                 <constraint firstItem="hst-wN-AUA" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="sAi-2x-m68"/>

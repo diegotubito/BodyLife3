@@ -28,7 +28,6 @@ class SocketHelper: NSObject {
         socket = manager.defaultSocket
 
         socket.on(clientEvent: .connect, callback: { data, ack in
-            print("SocketManager: connected")
             if self.isConnected {return}
             self.isConnected = true
             self.sendNotification(name: .ServerConnected)
@@ -36,7 +35,6 @@ class SocketHelper: NSObject {
 
         //not working if server is killed
         socket.on(clientEvent: .disconnect, callback: { data, ack in
-            print("SocketManager: disconnected")
             if !self.isConnected {return}
             self.isConnected = false
             self.sendNotification(name: .ServerDisconnected)
