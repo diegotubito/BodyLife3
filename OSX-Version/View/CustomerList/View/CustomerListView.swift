@@ -67,16 +67,14 @@ class CustomerListView: NSView {
             viewModel.model.customersbyPages.insert(customer, at: 0)
             viewModel.model.imagesByPages.insert(CustomerListModel.Images(image: nil, _id: customer._id), at: 0)
             viewModel.model.imagesToDisplay.insert(CustomerListModel.Images(image: nil, _id: customer._id), at: 0)
+            viewModel.model.countByPages += 1
             let index = IndexSet(integer: 0)
             viewModel.model.selectedCustomer = customer
-
-            tableViewSocio.beginUpdates()
-            tableViewSocio.insertRows(at: index, withAnimation: .effectFade)
-            tableViewSocio.selectRowIndexes(index, byExtendingSelection: false)
             tableViewSocio.scrollRowToVisible(0)
-            tableViewSocio.reloadData(forRowIndexes: index, columnIndexes: index)
-            tableViewSocio.endUpdates()
-//            startLoading()
+            tableViewSocio.selectRowIndexes(index, byExtendingSelection: false)
+
+            tableViewSocio.reloadData()
+        
         }
     }
     
