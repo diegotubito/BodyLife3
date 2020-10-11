@@ -101,18 +101,6 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
     @objc func StartLoading() {
        
         DispatchQueue.main.async {
-            if self.customerListView != nil {
-                self.customerListView.removeFromSuperview()
-            }
-            if self.sellRegisterView != nil {
-                self.sellRegisterView.removeFromSuperview()
-            }
-            if self.paymentView != nil {
-                self.paymentView.removeFromSuperview()
-            }
-            if self.customerStatusView != nil {
-                self.customerStatusView.removeFromSuperview()
-            }
             self.createCustomViews()
             self.addObservers()
             
@@ -122,8 +110,6 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
             print("Start Loading...")
             self.view.window?.title = UserSaved.GetUser()?.displayName ?? "Sin Nombre"
         }
- 
-       
     }
     
     
@@ -140,18 +126,18 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
     }
     
     @IBAction func importData(_ sender: Any) {
-        ImportDatabase.Discount.MigrateToMongoDB()
-        ImportDatabase.Activity.MigrateToMongoDB()
+//        ImportDatabase.Discount.MigrateToMongoDB()
+//        ImportDatabase.Activity.MigrateToMongoDB()
         ImportDatabase.Period.MigrateToMongoDB()
-        ImportDatabase.Article.MigrateToMongoDB()
-        
-        ImportDatabase.Customer.MigrateToMongoDB()
-        ImportDatabase.Thumbnail.MigrateToMongoDB()
-        
-        ImportDatabase.Carnet.MigrateToMongoDB()
-        ImportDatabase.VentaArticulo.MigrateToMongoDB()
-        ImportDatabase.PagoCarnet.MigrateToMongoDB()
-        ImportDatabase.PagoArticulo.MigrateToMongoDB()
+//        ImportDatabase.Article.MigrateToMongoDB()
+//        
+//        ImportDatabase.Customer.MigrateToMongoDB()
+//        ImportDatabase.Thumbnail.MigrateToMongoDB()
+//
+//        ImportDatabase.Carnet.MigrateToMongoDB()
+//        ImportDatabase.VentaArticulo.MigrateToMongoDB()
+//        ImportDatabase.PagoCarnet.MigrateToMongoDB()
+//        ImportDatabase.PagoArticulo.MigrateToMongoDB()
     }
     
     @IBAction func closeSessionPressed(_ sender: Any) {

@@ -1,7 +1,7 @@
 import Cocoa
 
 protocol NewCustomerBusinessLogic {
-    func doSaveNewCustomer(requestBriefInfo: NewCustomer.NewCustomer.Request, requestFullInfo: NewCustomer.NewCustomer.Request)
+    func doSaveNewCustomer(request: NewCustomer.NewCustomer.Request)
 }
 
 protocol NewCustomerDataStore {
@@ -15,46 +15,40 @@ class NewCustomerInteractor: NewCustomerBusinessLogic, NewCustomerDataStore {
     
     // MARK: Do something
     
-    func doSaveNewCustomer(requestBriefInfo: NewCustomer.NewCustomer.Request, requestFullInfo: NewCustomer.NewCustomer.Request) {
-        var error : ServerError?
-        let path = "\(Paths.fullPersonalData)"
+    func doSaveNewCustomer(request: NewCustomer.NewCustomer.Request) {
+       
         let semasphore = DispatchSemaphore(value: 0)
         
         let worker = NewCustomerWorker()
-        worker.FindCustomer(path: path, key: "dni", value: requestBriefInfo.dni) { (jsonArray, err) in
-            error = err
-            
-            if jsonArray?.count ?? 0 > 0 {
-                error = ServerError.duplicated
+        var doExist = false
+        worker.FindCustomer(dni: request.dni) { (exist) in
+            if exist {
+                doExist = true
             }
             semasphore.signal()
         }
-        
         _ = semasphore.wait(timeout: .distantFuture)
-   
-        let response = NewCustomer.NewCustomer.Response(error: error, json: [:])
-        if error != nil, error != ServerError.body_serialization_error {
+        if doExist {
+            let response = NewCustomer.NewCustomer.Response(error: ServerError.duplicated, customer: nil)
             self.presenter?.presentNewCustomerResult(response: response)
             return
         }
         
-        let pathNewCustomerFullInfo = "\(Paths.fullPersonalData):\(requestFullInfo.childID)"
-        ServerManager.Post(path: pathNewCustomerFullInfo, Request: requestFullInfo) { (error) in
+        worker.SaveCustomer(customer: request.newUser) { (savedCustomer) in
+            guard let savedCustomer = savedCustomer else {
+                let response = NewCustomer.NewCustomer.Response(error: nil, customer: nil)
+                self.presenter?.presentNewCustomerResult(response: response)
+                return
+            }
             
+            let response = NewCustomer.NewCustomer.Response(error: nil, customer: savedCustomer)
+            self.presenter?.presentNewCustomerResult(response: response)
         }
-        
-        let pathNewCustomerBriefInfo = "\(Paths.customerBrief):\(requestBriefInfo.childID)"
-        ServerManager.Post(path: pathNewCustomerBriefInfo, Request: requestBriefInfo) { (error) in
-            let json = requestBriefInfo.json
-            let reponse = NewCustomer.NewCustomer.Response(error: error, json: json)
-            self.presenter?.presentNewCustomerResult(response: reponse)
-        }
-            
         
         let pathImage = Paths.customerOriginalImage
         let net = NetwordManager()
-        if let imageData = requestFullInfo.image.tiffRepresentation {
-            net.uploadPhoto(path: pathImage, imageData: imageData, nombre: requestFullInfo.childID, tipo: "jpeg") { (jsonResponse, error) in
+        if let imageData = request.image.tiffRepresentation {
+            net.uploadPhoto(path: pathImage, imageData: imageData, nombre: request.newUser.uid, tipo: "jpeg") { (jsonResponse, error) in
                 if jsonResponse != nil {
                     print("se subio foto a storage")
                 } else {

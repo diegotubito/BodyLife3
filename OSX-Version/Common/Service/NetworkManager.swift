@@ -357,8 +357,7 @@ class NetwordManager {
     }
     
     func uploadPhoto(path: String, imageData: Data, nombre: String, tipo: String, completion:@escaping ([String : Any]?, ServerError?) -> Void ) {
-        let baseURL = Configuration.URL.Storage.upload
-        let url = URL(string: baseURL + path)
+        let url = "\(Config.baseUrl.rawValue)/v1/uploadImage/\(path)"
         
         let headers: HTTPHeaders = ["Content-type": "multipart/form-data",
                                     "x-access-token" : UserSaved.GetToken()]
@@ -366,7 +365,7 @@ class NetwordManager {
         
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             multipartFormData.append(imageData, withName: "image", fileName: nombre + "." + tipo, mimeType: "image/jpeg")
-        }, usingThreshold: UInt64.init(), to: url!, method: .post, headers: headers) { (result) in
+        }, usingThreshold: UInt64.init(), to: url, method: .post, headers: headers) { (result) in
             
             switch result {
             case .success(let upload, _, _):

@@ -10,10 +10,6 @@ import Cocoa
 
 extension HomeViewController {
     
-    func removeViews() {
-        
-    }
-    
     func createCustomViews() {
         
         createUpperView()
@@ -34,6 +30,9 @@ extension HomeViewController {
     }
     
     func createArticleSellView() {
+        if sellProductView != nil {
+            sellProductView.removeFromSuperview()
+        }
         let ancho = view.frame.width * 0.45
         let alto = view.frame.height * 0.65
         sellProductView = ArticleSellView(frame: CGRect(x: -ancho + 5, y: 0, width: ancho, height: alto))
@@ -59,6 +58,9 @@ extension HomeViewController {
     }
     
     func createCustomerListView() {
+        if customerListView != nil {
+            customerListView.removeFromSuperview()
+        }
         customerListView = CustomerListView(frame: NSRect(x: 0, y: 0, width: containerCustomerList.frame.width, height: containerCustomerList.frame.height))
         containerCustomerList.addSubview(customerListView)
         containerCustomerList.wantsLayer = true
@@ -66,11 +68,17 @@ extension HomeViewController {
     }
     
     func createCustomerStatusView() {
+        if customerStatusView != nil {
+            customerStatusView.removeFromSuperview()
+        }
         customerStatusView = CustomerStatusView(frame: CGRect(x: 0, y: 0, width: containerStatus.frame.width, height: containerStatus.frame.height))
         containerStatus.addSubview(customerStatusView)
     }
     
     func createSellActivityCustomView() {
+        if sellActivityView != nil {
+            sellActivityView.removeFromSuperview()
+        }
         let ancho = view.frame.width * 0.7
         let alto = view.frame.height * 0.8
         sellActivityView = ActivitySaleView(frame: CGRect(x: self.view.frame.width - 5, y: 0, width: ancho, height: alto))
@@ -83,6 +91,9 @@ extension HomeViewController {
     }
     
     func createPaymentView() {
+        if paymentView != nil {
+            paymentView.removeFromSuperview()
+        }
         let ancho = view.frame.width * 0.4
         let alto = view.frame.height * 0.5
         paymentView = PaymentView(frame: CGRect(x: self.view.frame.width - 5, y: 0, width: ancho, height: alto))
@@ -93,6 +104,9 @@ extension HomeViewController {
     }
     
     func createRegisterView() {
+        if sellRegisterView != nil {
+            sellRegisterView.removeFromSuperview()
+        }
         
         sellRegisterView = RegisterListView(frame: CGRect(x: 0, y: 0, width: containerSellRegisters.frame.width, height: containerSellRegisters.frame.height))
         self.containerSellRegisters.addSubview(sellRegisterView)

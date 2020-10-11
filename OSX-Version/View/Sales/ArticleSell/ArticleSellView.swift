@@ -121,7 +121,7 @@ class ArticleSellView: XibViewBlurBackground {
     
     private func addNullPayment(sellId: String) {
         let createdAt = Date().timeIntervalSince1970
-        let customerId : String = ImportDatabase.codeUID((selectedCustomer.uid))
+        let customerId : String = selectedCustomer._id
 
         let newRegister = PaymentModel.Response(customer: customerId,
                                                 sell: sellId,

@@ -98,6 +98,7 @@ class CustomerListViewModel: CustomerListViewModelContract {
     }
     
     func loadImages() {
+        switchLoadingCustomers(bySearch: model.bySearch)
         let customers = model.customersToDisplay
         for (x,customer) in customers.enumerated() {
             self.loadImage(row: x, customer: customer)

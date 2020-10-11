@@ -189,7 +189,7 @@ extension ActivitySaleViewModel {
         let activityID : String = model.selectedActivity!._id
         let periodID : String = model.selectedPeriod!._id
         let createdAt = Date().timeIntervalSince1970
-        let customerId : String = ImportDatabase.codeUID((model.statusInfo?.customer.uid)!)
+        let customerId : String = model.statusInfo?.customer._id ?? ""
         let activityDescription = model.selectedActivity?.description ?? ""
         let periodDescription = model.selectedPeriod?.description ?? ""
         let description = activityDescription + " - " + periodDescription
@@ -228,7 +228,7 @@ extension ActivitySaleViewModel {
     
     private func addNullPayment(sellId: String) {
         let createdAt = Date().timeIntervalSince1970
-        let customerId : String = ImportDatabase.codeUID((model.statusInfo?.customer.uid)!)
+        let customerId : String = model.statusInfo?.customer._id ?? ""
 
         let newRegister = PaymentModel.Response(customer: customerId,
                                                 sell: sellId,

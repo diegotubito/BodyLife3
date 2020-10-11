@@ -31,7 +31,7 @@ class CustomerModel {
         var childID: String
     }
     struct Full : Encodable, Decodable {
-        var _id: String
+        var _id: String?
         var uid : String
         var timestamp : Double
         var dni : String

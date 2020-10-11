@@ -28,8 +28,9 @@ class RegisterListViewModel: RegisterListViewModelContract {
         
         let _service = NetwordManager()
         _service.get(url: url) { (data, error) in
-            
+ 
             guard let data = data else {
+                self._view.hideLoading()
                 self._view.showError(value: error?.localizedDescription ?? ServerError.unknown_auth_error.localizedDescription)
                 return
             }
@@ -37,6 +38,7 @@ class RegisterListViewModel: RegisterListViewModelContract {
                 let response = try JSONDecoder().decode(PaymentModel.ViewModel.self, from: data)
                 self.parsePaymentAndSell(response: response)
             } catch {
+                print("Could not parse")
                 return
             }
         }

@@ -77,20 +77,17 @@ class Connect {
                 UserSession = userSession
                 
                 //Select database name
-                var uid = ""
-                #if INTERNAL
-                uid = "developDB"
-                #else
-                uid = userSession.uid
-                #endif
- 
-                ServerManager.ConntectMongoDB(uid: uid) { (connectedToDatabase) in
-      
-                    if connectedToDatabase {
-                        NotificationCenter.default.post(name: .CommunicationStablished, object: nil, userInfo: nil)
-                    } else {
-                        print("Error grave: No se pudo conectar a la base de datos")
+                if let uid = userSession.uid {
+                    ServerManager.ConntectMongoDB(uid: uid) { (connectedToDatabase) in
+                        
+                        if connectedToDatabase {
+                            NotificationCenter.default.post(name: .CommunicationStablished, object: nil, userInfo: nil)
+                        } else {
+                            print("Error grave: No se pudo conectar a la base de datos")
+                        }
                     }
+                } else {
+                    print("Error, no hay uid para usarlo como base de dato")
                 }
             }
         } else {

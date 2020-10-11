@@ -5,18 +5,17 @@ enum NewCustomer {
     
     enum NewCustomer {
         struct Request {
-            var childID : String
             var dni : String
-            var json : [String : Any]
+            var newUser : CustomerModel.Full
             var image : NSImage
+            var thumbnail : String
         }
         struct Response {
             var error : ServerError?
-            var json : [String : Any]
+            var customer : CustomerModel.Customer?
         }
         struct ViewModel {
-            var errorMessage : ServerError?
-            var customer : BriefCustomer?
+            var customer: CustomerModel.Customer?
         }
     }
 

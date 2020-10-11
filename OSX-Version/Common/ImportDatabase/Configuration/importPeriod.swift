@@ -49,12 +49,12 @@ extension ImportDatabase {
             for i in oldRegisters {
                 let createdAt = i.fechaCreacion.toDate(formato: "dd-MM-yyyy HH:mm:ss")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970
                 let _id = ImportDatabase.codeUID(i.childID)
-                let activityId = ImportDatabase.codeUID(i.childIDActividad)
+                let activity = ImportDatabase.codeUID(i.childIDActividad)
                 let newRegister = PeriodModel.NewRegister(_id: _id,
                                                           description: i.descripcion,
                                                           isEnabled: !i.oculto,
                                                           timestamp: createdAt,
-                                                          activity: activityId,
+                                                          activity: activity,
                                                           price: i.precio,
                                                           days: i.dias)
                 

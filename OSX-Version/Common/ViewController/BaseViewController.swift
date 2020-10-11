@@ -93,7 +93,7 @@ class BaseViewController : NSViewController {
         DispatchQueue.main.async {
             self.unlockBackground()
             self.deleteNoConnectionView()
-            self.showNoConnection(message: "fff")
+            self.showNoConnection(message: "Servidor desconectado")
             
         }
     }

@@ -39,24 +39,6 @@ class ServerManager {
         return result
     }
     
-    static func Post(path: String, Request: NewCustomer.NewCustomer.Request, onError: @escaping (ServerError?) -> Void) {
-        
-        let basicUrl = Configuration.URL.Database.write
-        
-        let url = basicUrl + "users:\(uid!):" + path
-        let _services = NetwordManager()
-        
-        _services.post(url: url, body: Request.json) { (data, error) in
-            guard data != nil else {
-                onError(error)
-                return
-            }
-            
-            onError(nil)
-        }
-        
-    }
-    
     static func Post(path: String, json: [String : Any], onError: @escaping (ServerError?) -> Void) {
         
         let basicUrl = Configuration.URL.Database.write
@@ -155,7 +137,7 @@ class ServerManager {
                 return
             }
         }
-        
+
     }
     
     static func ReadAll(path: String, completion: @escaping ([[String: Any]]?, ServerError?) -> ()) {

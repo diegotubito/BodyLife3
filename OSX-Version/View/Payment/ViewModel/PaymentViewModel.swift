@@ -28,7 +28,7 @@ class PaymentViewModel: PaymentViewModelContract {
    
     func saveNewPayment() {
         let createdAt = Date().timeIntervalSince1970
-        let customerId : String = ImportDatabase.codeUID((model.selectedCustomer.uid))
+        let customerId : String = model.selectedCustomer._id
         let sellId = model.selectedSellRegister._id ?? ""
         let paidAmount = Double(self._view.getAmountString())!
         let productCategory = model.selectedSellRegister.productCategory

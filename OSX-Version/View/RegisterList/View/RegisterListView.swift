@@ -52,6 +52,7 @@ class RegisterListView: XibViewWithAnimation , RegisterListViewContract{
     
     func displayData() {
         DispatchQueue.main.async {
+            self.tableView.deselectAll(nil)
             self.tableView.reloadData()
         }
     }

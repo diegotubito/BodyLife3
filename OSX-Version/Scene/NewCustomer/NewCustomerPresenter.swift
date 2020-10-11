@@ -5,30 +5,22 @@ protocol NewCustomerPresentationLogic {
 }
 
 class NewCustomerPresenter: NewCustomerPresentationLogic {
-   
     
     weak var viewController: NewCustomerDisplayLogic?
     
     // MARK: Do something
     
     func presentNewCustomerResult(response: NewCustomer.NewCustomer.Response) {
-        let customer = parseCustomer(json: response.json)
-        var viewModel = NewCustomer.NewCustomer.ViewModel(customer: customer)
-        if let error = response.error {
-            viewModel.errorMessage = error
-        }
-        viewController?.displaySaveNewCustomerResult(viewModel: viewModel)
         
-    }
-    
-    func parseCustomer(json: [String : Any]) -> BriefCustomer? {
-        do {
-            let data = try JSONSerialization.data(withJSONObject: json, options: [])
-            let customer = try JSONDecoder().decode(BriefCustomer.self, from: data)
-            return customer
-        } catch {
-            return nil
+        guard let customer = response.customer else {
+            if response.error == ServerError.duplicated {
+                viewController?.customerAlreadyExist()
+            } else {
+                viewController?.customerCouldNotBeSaved(message: response.error?.localizedDescription ?? "Algo salio mal")
+            }
+            return
         }
+        let viewModel = NewCustomer.NewCustomer.ViewModel(customer: customer)
+        viewController?.customerSaved(viewModel: viewModel)
     }
-   
 }

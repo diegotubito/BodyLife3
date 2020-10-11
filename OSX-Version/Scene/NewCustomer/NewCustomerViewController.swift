@@ -5,10 +5,15 @@ extension Notification.Name {
     static let newCustomer = Notification.Name("newCustomer")
 }
 protocol NewCustomerDisplayLogic: class {
-    func displaySaveNewCustomerResult(viewModel: NewCustomer.NewCustomer.ViewModel)
+    func customerSaved(viewModel: NewCustomer.NewCustomer.ViewModel)
+    func customerAlreadyExist()
+    func customerCouldNotBeSaved(message: String)
 }
 
 class NewCustomerViewController: BaseViewController, NewCustomerDisplayLogic {
+   
+    
+    
     @IBOutlet weak var guardarButtonOutlet: NSButton!
     @IBOutlet weak var CustomerIconImageView: NSImageView!
     @IBOutlet weak var dniTF: NSTextField!
@@ -93,91 +98,84 @@ class NewCustomerViewController: BaseViewController, NewCustomerDisplayLogic {
     func doSaveNewCustomer() {
         showLoading()
         let date = Date()
-        let requestBriefInfo = createRequestBriefInfo(withDate: date)
+        
         let requestFullInfo = createRequestFullInfo(withDate: date)
-        interactor?.doSaveNewCustomer(requestBriefInfo: requestBriefInfo, requestFullInfo: requestFullInfo)
+        interactor?.doSaveNewCustomer(request: requestFullInfo)
     }
     
-    func createRequestBriefInfo(withDate: Date) -> NewCustomer.NewCustomer.Request {
-        let user = UserSaved.GetUser()
-        let uid = (user?.uid)!
-        let fechaDouble = withDate.timeIntervalSinceReferenceDate
-        let fechaRounded = (fechaDouble * 1000)
-        let childID = String(Int(fechaRounded))
-        
-        let fullJSON = ["childID" : childID,
-                        "createdAt" : fechaDouble,
-                        "dni": dniTF.stringValue,
-                        "surname" : apellidoTF.stringValue,
-                        "name": nombreTF.stringValue,
-                        "uid":uid] as [String : Any]
-        
-        let request = NewCustomer.NewCustomer.Request(childID: childID, dni: dniTF.stringValue, json: fullJSON, image: self.imageToStorage)
-         
-        
-        return request
-        
-    }
+    
     
     func createRequestFullInfo(withDate: Date) -> NewCustomer.NewCustomer.Request {
-        let user = UserSaved.GetUser()
-        let uid = (user?.uid)!
-        let fechaDouble = withDate.timeIntervalSinceReferenceDate
-        let fechaRounded = (fechaDouble * 1000)
-        let childID = String(Int(fechaRounded))
+        let dateDouble = Date().timeIntervalSince1970
+        let dob = fechaNacimiento.dateValue.timeIntervalSince1970
+        let firstName = nombreTF.stringValue.condenseWhitespace().capitalized
+        let lastName = apellidoTF.stringValue.condenseWhitespace().capitalized
+        let fullname = lastName + " " + firstName
+        let street = direccionTF.stringValue.condenseWhitespace().capitalized
+        let locality = "Lanus Este".condenseWhitespace().capitalized
+        let province = "Buenos Aires".condenseWhitespace().capitalized
+        let country = "Argentina".condenseWhitespace().capitalized
         
-        let images = ["thumbnailImage" : thumbImageBase64]
+        let fechaDouble = Date().timeIntervalSince1970
+        let uid = String(Int(fechaDouble))
         
-        let fullJSON = ["childID" : childID,
-                        "createdAt" : fechaDouble,
-                        "dni": dniTF.stringValue,
-                        "surname" : apellidoTF.stringValue,
-                        "name": nombreTF.stringValue,
-                        "address":direccionTF.stringValue,
-                        "phone":telefonoPrincipalTF.stringValue,
-                        "secondaryPhone":telefonoSecundarioTF.stringValue,
-                        "socialSecurity":obraSocialTF.stringValue,
-                        "email":emailTF.stringValue,
-                        "images" : images,
-                        "uid":uid] as [String : Any]
+        let newCustomer = CustomerModel.Full(uid: uid,
+                                             timestamp: dateDouble,
+                                             dni: dniTF.stringValue,
+                                             lastName: lastName,
+                                             firstName: firstName,
+                                             fullname: fullname,
+                                             thumbnailImage: "",
+                                             street: street,
+                                             locality: locality,
+                                             state: province,
+                                             country: country,
+                                             email: emailTF.stringValue.condenseWhitespace(),
+                                             phoneNumber: telefonoPrincipalTF.stringValue,
+                                             user: "SUPER_ROLE",
+                                             longitude: 0.0,
+                                             latitude: 0.0,
+                                             dob: dob,
+                                             genero: generoPUB.titleOfSelectedItem ?? "",
+                                             obraSocial: obraSocialTF.stringValue)
         
-        let request = NewCustomer.NewCustomer.Request(childID: childID, dni: dniTF.stringValue, json: fullJSON, image: self.imageToStorage)
+        let request = NewCustomer.NewCustomer.Request(dni: dniTF.stringValue, newUser: newCustomer, image: imageToStorage, thumbnail: thumbImageBase64)
          
         
         return request
         
     }
     
-    func displaySaveNewCustomerResult(viewModel: NewCustomer.NewCustomer.ViewModel) {
+    func customerAlreadyExist() {
         DispatchQueue.main.async {
             self.hideLoading()
-        }
-        //nameTextField.text = viewModel.name
-        if let error = viewModel.errorMessage {
-            if error == ServerError.duplicated {
-                ShowSheetAlert(title: "El DNI ya existe", message: "Es posible que el socio ya haya sido ingresado anteriormente.", buttons: [.ok])
-                
-            } else {
-                let message = ErrorHandler.Server(error: error)
-                ShowSheetAlert(title: "Error", message: message, buttons: [.ok])
-            }
-        } else {
-          
-            DispatchQueue.main.async {
-                self.view.window?.close()
-                self.sendNotifications(customer: viewModel.customer!)
-            }
+            self.ShowSheetAlert(title: "El DNI ya existe", message: "Es posible que el socio ya haya sido ingresado anteriormente.", buttons: [.ok])
         }
     }
     
-    func sendNotifications(customer: BriefCustomer) {
+    func customerCouldNotBeSaved(message: String) {
+        DispatchQueue.main.async {
+            self.hideLoading()
+            self.ShowSheetAlert(title: "Error", message: message, buttons: [.ok])
+        }
+    }
+    
+    func customerSaved(viewModel: NewCustomer.NewCustomer.ViewModel) {
+        DispatchQueue.main.async {
+            self.hideLoading()
+            self.view.window?.close()
+            self.sendNotifications(customer: viewModel.customer!)
+        }
+    }
+    
+    func sendNotifications(customer: CustomerModel.Customer) {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime(uptimeNanoseconds: 3)) {
             self.notificationMessage(messageID: customer.dni,
             title: "Nuevo Socio",
-            subtitle: customer.surname + ", " + customer.name,
+            subtitle: customer.lastName + ", " + customer.firstName,
             informativeText: "Sigamos sumando.")
         }
-        
+     
         NotificationCenter.default.post(name: .newCustomer, object: customer)
     }
     
