@@ -11,6 +11,7 @@
             <connections>
                 <outlet property="DayBox" destination="jdk-KK-FLE" id="5gv-oQ-33N"/>
                 <outlet property="activityIndicator" destination="CwU-P6-vvy" id="bzZ-bE-q1e"/>
+                <outlet property="ageLabel" destination="2GV-gb-OfN" id="m4W-PI-Fo8"/>
                 <outlet property="errorView" destination="Qjb-Dk-DUN" id="IxK-in-P4A"/>
                 <outlet property="expirationDateLabel" destination="5lU-pp-sGp" id="QhO-aT-blo"/>
                 <outlet property="innerBackground" destination="BwV-uf-wSG" id="7i9-Kn-Bep"/>
@@ -174,8 +175,16 @@
                     </constraints>
                 </customView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2wd-pp-b16">
-                    <rect key="frame" x="14" y="321" width="672" height="27"/>
+                    <rect key="frame" x="14" y="321" width="50" height="27"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" title="- - - " id="jOr-r7-evz">
+                        <font key="font" metaFont="system" size="23"/>
+                        <color key="textColor" name="systemGrayColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2GV-gb-OfN">
+                    <rect key="frame" x="76" y="321" width="59" height="27"/>
+                    <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="bP9-LQ-dI8">
                         <font key="font" metaFont="system" size="23"/>
                         <color key="textColor" name="systemGrayColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -249,8 +258,9 @@
                 <constraint firstItem="CwU-P6-vvy" firstAttribute="centerY" secondItem="hgy-GR-QxU" secondAttribute="centerY" id="Rz5-fH-c3r"/>
                 <constraint firstAttribute="bottom" secondItem="Qjb-Dk-DUN" secondAttribute="bottom" id="WRJ-Kp-wfy"/>
                 <constraint firstItem="Qjb-Dk-DUN" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="X5H-ga-U4M"/>
+                <constraint firstItem="2GV-gb-OfN" firstAttribute="leading" secondItem="2wd-pp-b16" secondAttribute="trailing" constant="16" id="km8-Rh-vdB"/>
                 <constraint firstItem="2wd-pp-b16" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="16" id="l1A-s6-V8C"/>
-                <constraint firstAttribute="trailing" secondItem="2wd-pp-b16" secondAttribute="trailing" constant="16" id="lgp-5h-TGH"/>
+                <constraint firstItem="2GV-gb-OfN" firstAttribute="centerY" secondItem="2wd-pp-b16" secondAttribute="centerY" id="pRc-Uu-QZI"/>
                 <constraint firstAttribute="trailing" secondItem="Qjb-Dk-DUN" secondAttribute="trailing" id="pUD-NL-X9X"/>
                 <constraint firstItem="Qjb-Dk-DUN" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="sFo-bi-4hN"/>
                 <constraint firstItem="BwV-uf-wSG" firstAttribute="centerY" secondItem="c22-O7-iKe" secondAttribute="centerY" id="v6Y-lv-x2L"/>

@@ -23,6 +23,8 @@ extension HomeViewController {
             self?.selectedCustomer = customer
             self?.timerForDelayCustomerSelection.invalidate()
             self?.customerStatusView.showLoading()
+            let age = customer.dob.toDate1970.age()
+            self?.customerStatusView.ageLabel.stringValue = String(age) + " Años"
             self?.customerStatusView.titleLabel.stringValue = customer.lastName + ", " + customer.firstName
             self?.sellRegisterView.setSelectedCustomer(customer: customer)
             self?.timerForDelayCustomerSelection = Timer.scheduledTimer(timeInterval: 0.25, target: self, selector: #selector(self?.loadStatus), userInfo: nil, repeats: false)

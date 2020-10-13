@@ -279,3 +279,12 @@ func timeAgoSinceDate(date:NSDate, numericDates:Bool) -> String {
 }
 
 
+extension Date {
+    func age() -> Int {
+        let calendar : NSCalendar = NSCalendar.current as NSCalendar
+        let ageComponents = calendar.components(.year, from: self, to: Date(), options: [])
+        let age = ageComponents.year!
+        
+        return age
+    }
+}

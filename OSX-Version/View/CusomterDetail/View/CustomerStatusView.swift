@@ -17,7 +17,8 @@ extension Notification.Name {
 class CustomerStatusView: XibViewWithAnimation {
     
     @IBOutlet weak var titleLabel: NSTextField!
-    
+    @IBOutlet weak var ageLabel: NSTextField!
+ 
     @IBOutlet weak var profilePicture : NSImageView!
     @IBOutlet weak var expirationDateLabel: NSTextField!
     @IBOutlet weak var saldoLabel: NSTextField!

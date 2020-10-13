@@ -8,11 +8,6 @@
 
 import Foundation
 
-struct FullCustomer: Decodable {
-    var briefInfo : BriefCustomer
-}
-
-
 class CustomerModel {
     struct Old: Decodable {
         var apellido : String
@@ -60,27 +55,25 @@ class CustomerModel {
         var dni : String
         var lastName : String
         var firstName : String
+        var fullname : String
         var thumbnailImage : String?
         var email : String
         var phoneNumber : String
         var user: String
+        var location : Location?
+        var dob: Double
+        var genero: String
+        var obraSocial : String?
     }
     
-    struct Location : Decodable {
-        var coordindates : [Double]
+    struct Location : Decodable, Encodable {
+        var _id : String
+        var coordindates : [Double]?
         var street : String
         var locality : String
         var state : String
         var country : String
     }
-}
-struct BriefCustomer: Decodable {
-    var childID : String
-    var createdAt : Double
-    var dni : String
-    var surname : String
-    var name : String
-    var thumbnailImage : String?
 }
 
 
