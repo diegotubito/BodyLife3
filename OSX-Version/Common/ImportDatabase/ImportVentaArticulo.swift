@@ -66,7 +66,7 @@ extension ImportDatabase {
                                                         toDate: nil,
                                                         quantity: i.cantidadVendida,
                                                         isEnabled: !i.esAnulado,
-                                                        productCategory: ProductCategory.activity.rawValue,
+                                                        productCategory: ProductCategory.article.rawValue,
                                                         price: i.precioVenta,
                                                         priceList: i.precioVenta,
                                                         priceCost: i.precioCompra,
