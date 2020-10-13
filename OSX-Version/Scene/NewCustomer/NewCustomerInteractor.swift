@@ -1,4 +1,5 @@
 import Cocoa
+import MapKit
 
 protocol NewCustomerBusinessLogic {
     func doSaveNewCustomer(request: NewCustomer.NewCustomer.Request)
@@ -16,10 +17,8 @@ class NewCustomerInteractor: NewCustomerBusinessLogic, NewCustomerDataStore {
     // MARK: Do something
     
     func doSaveNewCustomer(request: NewCustomer.NewCustomer.Request) {
-       
-        let semasphore = DispatchSemaphore(value: 0)
-        
         let worker = NewCustomerWorker()
+        let semasphore = DispatchSemaphore(value: 0)
         var doExist = false
         worker.FindCustomer(dni: request.dni) { (exist) in
             if exist {

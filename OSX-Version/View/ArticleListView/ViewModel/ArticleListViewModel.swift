@@ -11,6 +11,10 @@ import Cocoa
 class ArticleListViewModel : ArticleListViewModelContract {
     var model: ArticleListModel!
     var _view : ArticletListViewContract!
+    
+    struct Stock {
+        var stock : Int
+    }
    
     required init(withView view: ArticletListViewContract) {
         self.model = ArticleListModel()
@@ -28,7 +32,7 @@ class ArticleListViewModel : ArticleListViewModelContract {
             do {
                 let response = try JSONDecoder().decode(ArticleModel.ViewModel.self, from: data)
                 self.model.response = response
-                self.filterAndSort()
+                self.loadStock()
             } catch {
                 return
             }
@@ -43,5 +47,30 @@ class ArticleListViewModel : ArticleListViewModelContract {
     
     func getProducts() -> [ArticleModel.NewRegister] {
         return model.response.articles
+    }
+    
+    func loadStock() {
+        _view.showLoading()
+        ServerManager.LoadStock { (data, error) in
+            guard error == nil, let data = data else {
+                return
+            }
+            
+            if let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String : Any] {
+                for (key, value) in json {
+                    let articles = self.model.response.articles.filter({$0.isEnabled && $0._id == key})
+                    if articles.count > 0 {
+                        if let index = self.model.response.articles.firstIndex(where: {$0._id == key}) {
+                            let stockJSON = value as? [String : Any]
+                            let stock = stockJSON?["stock"] as! Int
+                            self.model.response.articles[index].stock = stock
+                        }
+                    }
+                }
+            }
+            
+            self.filterAndSort()
+            
+        }
     }
 }

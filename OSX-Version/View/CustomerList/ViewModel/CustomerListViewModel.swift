@@ -44,7 +44,6 @@ class CustomerListViewModel: CustomerListViewModelContract {
                 self?.model.countBySearch = response.count
                 self?._view.showSuccess()
                 self?._view.hideLoading()
-                print(response.customers.count)
                 self?.loadImages()
                 
             } catch {
@@ -98,10 +97,12 @@ class CustomerListViewModel: CustomerListViewModelContract {
     }
     
     func loadImages() {
-        switchLoadingCustomers(bySearch: model.bySearch)
         let customers = model.customersToDisplay
+
         for (x,customer) in customers.enumerated() {
+            
             self.loadImage(row: x, customer: customer)
+            
         }
     }
     
@@ -109,12 +110,12 @@ class CustomerListViewModel: CustomerListViewModelContract {
     func loadImage(row: Int, customer: CustomerModel.Customer) {
       
         self.loadImage(row: row, customer: customer) { (image, correctRow) in
+            let newImage = CustomerListModel.Images(image: image, _id: customer._id)
+            self.model.imagesToDisplay.append(newImage)
             if self.model.bySearch {
-                self.model.imagesBySearch.append(CustomerListModel.Images(image: image,
-                                                                  _id: customer._id))
+                self.model.imagesBySearch.append(newImage)
             } else {
-                self.model.imagesByPages.append(CustomerListModel.Images(image: image,
-                                                                  _id: customer._id))
+                self.model.imagesByPages.append(newImage)
             }
             
             DispatchQueue.main.async {

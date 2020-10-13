@@ -22,6 +22,8 @@ class Config {
         struct Firebase {
             static let Login = baseUrl.rawValue + "/v1/firebase/auth/login"
             static let currentUser = baseUrl.rawValue + "v1/firebase/auth/currentUser"
+            static let transaction = baseUrl.rawValue + "/v1/firebase/database/transaction"
+            static let database = baseUrl.rawValue + "/v1/firebase/database"
         }
         
         struct Server {

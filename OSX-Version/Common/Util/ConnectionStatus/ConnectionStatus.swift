@@ -111,11 +111,11 @@ class Connect {
     }
     
     @objc static func reachable() {
-        print("reachable")
+        print("Internet: Reachable")
     }
     
     @objc static func nonReachable() {
-        print("not reachable")
+        print("Internet: Not Reachable")
     }
     
 }

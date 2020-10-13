@@ -58,8 +58,8 @@ class ServerManager {
     }
     
     static func Transaction(path: String, key: String, value: Double, success: @escaping ()->(), fail: @escaping (ServerError?) -> Void) {
-        let basicUrl = Configuration.URL.Database.transaction
-        let url = basicUrl + "users:\(uid!):" + path + ":" + key
+        let basicUrl = Config.URL.Firebase.transaction
+        let url = basicUrl + "/users:\(uid!):\(path):\(key)"
         let _services = NetwordManager()
         
         let body = ["transaction": value]
@@ -72,6 +72,22 @@ class ServerManager {
             success()
         }
     }
+    
+    static func LoadStock(completion: @escaping (Data?, Error?)->()) {
+        let basicUrl = Config.URL.Firebase.database
+        let url = basicUrl + "/users:\(uid!):article"
+        let _services = NetwordManager()
+        
+        _services.get(url: url) { (data, error) in
+            guard error == nil else {
+                completion(nil, error)
+                return
+            }
+            
+            completion(data, nil)
+        }
+    }
+    
     
     static func Remove(path: String, completion: @escaping (Data?, ServerError?) -> Void) {
         

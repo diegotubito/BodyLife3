@@ -117,6 +117,15 @@ class ArticleSellView: XibViewBlurBackground {
             
             self.addNullPayment(sellId: _id!)
         }
+        
+        //update stock
+        let path = "article:\(selectedItem?._id ?? "")"
+        ServerManager.Transaction(path: path, key: "stock", value: -1) {
+            print("stock updated.")
+        } fail: { (error) in
+            print("couldn't update stock.")
+        }
+
     }
     
     private func addNullPayment(sellId: String) {

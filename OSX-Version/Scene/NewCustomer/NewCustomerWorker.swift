@@ -1,5 +1,7 @@
 import Cocoa
 
+import MapKit
+
 class NewCustomerWorker {
     func FindCustomer(dni: String, doExist: @escaping (Bool) -> ()) {
         let url = "\(Config.baseUrl.rawValue)/v1/customerByDni?dni=\(dni)"
@@ -42,7 +44,7 @@ class NewCustomerWorker {
         return json!
     }
     
-    static private func getFinalAddress(customer: CustomerModel.Full) -> String {
+    func getFinalAddress(customer: CustomerModel.Full) -> String {
         let street = customer.street
         let locality = customer.locality
         let state = customer.state

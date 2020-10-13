@@ -18,7 +18,7 @@ class CustomerStatusView: XibViewWithAnimation {
     
     @IBOutlet weak var titleLabel: NSTextField!
     
-    @IBOutlet weak var subtitleLabel: NSTextField!
+    @IBOutlet weak var profilePicture : NSImageView!
     @IBOutlet weak var expirationDateLabel: NSTextField!
     @IBOutlet weak var saldoLabel: NSTextField!
     @IBOutlet weak var remainingDayLabel: NSTextField!
@@ -40,6 +40,9 @@ class CustomerStatusView: XibViewWithAnimation {
         self.layer?.borderWidth = Constants.Borders.Status.width
         self.layer?.borderColor = Constants.Borders.Status.color
         //self.layer?.backgroundColor = Constants.Colors.Gray.gray10.cgColor
+        
+       
+        
         
         innerBackground.wantsLayer = true
         innerBackground.layer?.backgroundColor = Constants.Colors.Blue.chambray.withAlphaComponent(0.15).cgColor
@@ -65,14 +68,24 @@ class CustomerStatusView: XibViewWithAnimation {
         DispatchQueue.main.async {
             self.showData(statusInfo: userInfo)
         }
+       
+        downloadImage(childID: viewModel.model.receivedCustomer.uid) { (image, error) in
+            DispatchQueue.main.async {
+                self.hideLoading()
+                self.profilePicture.layer?.cornerRadius = (self.profilePicture.layer?.frame.width)! / 2
+                if image != nil {
+                    self.profilePicture.image = image!
+                } else {
+                    self.profilePicture.image = #imageLiteral(resourceName: "empty")
+                }
+            }
+        }
     }
     
     func initValues() {
-        subtitleLabel.stringValue = ""
         expirationDateLabel.stringValue = ""
         saldoLabel.stringValue = ""
         remainingDayLabel.stringValue = ""
-        
     }
     
     func configureBoxDay() {
@@ -80,6 +93,24 @@ class CustomerStatusView: XibViewWithAnimation {
         self.DayBox.layer?.borderWidth = 1
         self.DayBox.layer?.borderColor = NSColor.darkGray.cgColor
         
+    }
+   
+    func downloadImage(childID: String, completion: @escaping (NSImage?, Error?) -> ()) {
+        let url = "\(Config.baseUrl.rawValue)/v1/downloadImage?filename=socios/\(childID).jpeg"
+        let _services = NetwordManager()
+
+        _services.downloadImageFromUrl(url: url) { (image) in
+            guard let image = image else {
+                completion(nil, nil)
+                return
+            }
+            let medium = image.crop(size: NSSize(width: 200, height: 200))
+            
+            completion(medium, nil)
+        } fail: { (err) in
+            completion(nil, err)
+        }
+
     }
     @IBAction func SellActivityPressed(_ sender: Any) {
         didPressSellActivityButton?()
@@ -93,9 +124,8 @@ class CustomerStatusView: XibViewWithAnimation {
 extension CustomerStatusView : CustomerStatusViewContract{
     func showData(statusInfo: CustomerStatusModel.StatusInfo?) {
         errorView.isHidden = true
-        hideLoading()
+    
         guard let statusInfo = statusInfo else {
-            subtitleLabel.stringValue = ""
             expirationDateLabel.stringValue = "?"
             saldoLabel.stringValue = "?"
             remainingDayLabel.stringValue = "?"
@@ -105,7 +135,6 @@ extension CustomerStatusView : CustomerStatusViewContract{
         let balance = statusInfo.balance.currencyFormat(decimal: 2)
         
         let diff = Date().diasTranscurridos(fecha: statusInfo.expiration)
-        subtitleLabel.stringValue = "actividades"
         expirationDateLabel.stringValue = expiration
         remainingDayLabel.stringValue = String(diff!)
         saldoLabel.stringValue = balance
@@ -126,6 +155,7 @@ extension CustomerStatusView : CustomerStatusViewContract{
         DispatchQueue.main.async {
             self.initValues()
             self.activityIndicator.startAnimation(nil)
+            self.profilePicture.image = nil
         }
     }
     

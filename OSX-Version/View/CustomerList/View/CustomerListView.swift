@@ -60,9 +60,6 @@ class CustomerListView: NSView {
     @objc func newCustomerNotificationHandler(notification: Notification) {
         let obj = notification.object
         if let customer = obj as? CustomerModel.Customer {
-        
-           
-
             viewModel.model.customersToDisplay.insert(customer, at: 0)
             viewModel.model.customersbyPages.insert(customer, at: 0)
             viewModel.model.imagesByPages.insert(CustomerListModel.Images(image: nil, _id: customer._id), at: 0)
@@ -72,9 +69,7 @@ class CustomerListView: NSView {
             viewModel.model.selectedCustomer = customer
             tableViewSocio.scrollRowToVisible(0)
             tableViewSocio.selectRowIndexes(index, byExtendingSelection: false)
-
             tableViewSocio.reloadData()
-        
         }
     }
     
