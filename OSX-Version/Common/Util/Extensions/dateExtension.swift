@@ -75,19 +75,7 @@ extension Date {
         let days = myCalendar.dateComponents([.day], from: interval.start, to: interval.end).day!
         return days
     }
-    var day : Int {
-        let calendar = Calendar.current
-        let dia = calendar.component(.day, from: self)
-        
-        return dia
-    }
-    var month : Int {
-        let calendar = Calendar.current
-        let mes = calendar.component(.month, from: self)
-        
-        return mes
-    }
-    
+   
     var year : Int {
         let calendar = Calendar.current
         let mes = calendar.component(.year, from: self)
@@ -121,7 +109,6 @@ extension Date {
         
         return nombre
     }
-    
 }
 
 extension Date {
@@ -204,16 +191,6 @@ extension Calendar {
     }
 }
 
-func calcularEdad( Nacimiento: Date) -> Int{
-    let hoy = Date()
-    
-    let calendar : NSCalendar = NSCalendar.current as NSCalendar
-    let ageComponents = calendar.components(.year, from: Nacimiento, to: hoy, options: [])
-    let age = ageComponents.year!
-    
-    return age
-}
-
 func timeAgoSinceDate(date:NSDate, numericDates:Bool) -> String {
     let calendar = NSCalendar.current
     let unitFlags: Set<Calendar.Component> = [.minute, .hour, .day, .weekOfYear, .month, .year, .second]
@@ -287,4 +264,211 @@ extension Date {
         
         return age
     }
+}
+
+enum DateFormatterPattern: String {
+    case shortDateWithHour = "dd/MM/yyyy HH:mm:ss"
+    case shortDate = "dd/MM"
+    case longDate = "EEEE, d' de 'MMMM" // viernes, 21 de junio
+    case longDateWithTime = "EEEE, d' de 'MMMM, HH:mm'hs" // viernes, 21 de junio, 14:30hs
+    case shortDateWithTime = "dd/MM' a las 'HH:mm'hs" // 21/06 a las 14:30hs
+    case time = "hh:mm"
+    case jsonDate = "yyyy-MM-dd HH:mm:ss" //"2020-04-15 15:55:00"
+}
+
+func actualUnixDate() -> Int {
+    return Int(Date().timeIntervalSince1970 * 1000)
+}
+
+func getFormattedDateFrom(format: String) -> (Date) -> String {
+    let formatter = DateFormatter()
+    
+    return { date in
+        formatter.dateFormat = format
+        
+        return formatter.string(from: date)
+    }
+}
+
+extension TimeInterval {
+    func stringFromTimeInterval() -> String {
+        
+        let time = NSInteger(self)
+        
+        let seconds = time % 60
+        let minutes = (time / 60) % 60
+        let hours = (time / 3600)
+        
+        return String(format: "%0.2d:%0.2d:%0.2d",hours,minutes,seconds)
+    }
+    
+    func stringFromTimeIntervalShort() -> String {
+        let time = NSInteger(self)
+        
+       // let seconds = time % 60
+        let minutes = (time / 60) % 60
+        let hours = (time / 3600)
+        
+        if hours > 0 {
+            if minutes > 0 {
+                if  hours > 9 {
+                    return String(format: "%0.2dh %0.2dmin",hours,minutes)
+                }
+                else {
+                    return String(format: "%0.1dh %0.2dmin",hours,minutes)
+                }
+            }
+            else {
+                if  hours > 9 {
+                    return String(format: "%0.2dh",hours)
+                }
+                else {
+                    return String(format: "%0.1dh",hours)
+                }
+            }
+        }
+        else {
+            if minutes > 0 {
+                return String(format: "%0.2dmin",minutes)
+            }
+        }
+      
+        return ""
+    }
+}
+
+extension Date {
+    init(milliseconds: Int64) {
+        self = Date(timeIntervalSince1970: TimeInterval(milliseconds) / 1000)
+    }
+    
+    func toMillis() -> Int64! {
+        return Int64(self.timeIntervalSince1970 * 1000)
+    }
+    
+    func addDays(value:Int) -> Date {
+        let today = self
+        let calendar = Calendar.current
+        return calendar.date(byAdding: .day, value: value, to: today)!
+    }
+    
+    func addHours(value:Int) -> Date {
+        let today = self
+        let calendar = Calendar.current
+        return calendar.date(byAdding: .hour, value: value, to: today)!
+    }
+    
+    func isToday() -> Bool {
+        let today = Date()
+        let calendar = Calendar.current
+        let todayMonth = calendar.component(.month, from: today)
+        let todayDay = calendar.component(.day, from: today)
+        
+        let dateMonth = calendar.component(.month, from: self)
+        let dateDay = calendar.component(.day, from: self)
+        
+        return todayDay == dateDay && todayMonth == dateMonth
+    }
+    
+    static var firstHour: Date {
+        let date = Date()
+        let calendar = Calendar.current
+        var dateComponents = DateComponents()
+        dateComponents.year = calendar.component(.year, from: date)
+        dateComponents.month = calendar.component(.month, from: date)
+        dateComponents.day = calendar.component(.day, from: date) - 1
+        dateComponents.hour = calendar.component(.hour, from: date)
+        dateComponents.minute = 0
+        dateComponents.second = 0
+        let userCalendar = Calendar.current
+        
+        return userCalendar.date(from: dateComponents)!
+    }
+    
+    static var midHour: Date {
+        let date = Date()
+        let calendar = Calendar.current
+        var dateComponents = DateComponents()
+        dateComponents.year = calendar.component(.year, from: date)
+        dateComponents.month = calendar.component(.month, from: date)
+        dateComponents.day = calendar.component(.day, from: date) + 1
+        dateComponents.hour = 23
+        dateComponents.minute = 59
+        dateComponents.second = 59
+        let userCalendar = Calendar.current
+        
+        return userCalendar.date(from: dateComponents)!
+    }
+    
+    static var lastHour: Date {
+        let date = Date()
+        let calendar = Calendar.current
+        var dateComponents = DateComponents()
+        dateComponents.year = calendar.component(.year, from: date)
+        dateComponents.month = calendar.component(.month, from: date)
+        dateComponents.day = calendar.component(.day, from: date) + 7
+        dateComponents.hour = 23
+        dateComponents.minute = 59
+        dateComponents.second = 59
+        let userCalendar = Calendar.current
+        
+        return userCalendar.date(from: dateComponents)!
+    }
+    
+    func previousDay() -> Date {
+        return Calendar.current.date(byAdding: .day, value: -1, to: self)!
+    }
+    func nextWeek() -> Date {
+        return Calendar.current.date(byAdding: .day, value: 7, to: self)!
+    }
+    func previousHalfHour() -> Date {
+        return Calendar.current.date(byAdding: .minute, value: -30, to: self)!
+    }
+    func nextHalfHour() -> Date {
+        return Calendar.current.date(byAdding: .minute, value: 30, to: self)!
+    }
+    func adding(minutes: Int) -> Date {
+        return Calendar.current.date(byAdding: .minute, value: minutes, to: self)!
+    }
+    func subtracting(minutes: Int) -> Date {
+        return Calendar.current.date(byAdding: .minute, value: -minutes, to: self)!
+    }
+    static var yesterday: Date {
+        return Calendar.current.date(byAdding: .day, value: -1, to: Date().noon)!
+    }
+    static var tomorrow: Date {
+        return Calendar.current.date(byAdding: .day, value: 1, to: Date().noon)!
+    }
+    var dayBefore: Date {
+        return Calendar.current.date(byAdding: .day, value: -1, to: noon)!
+    }
+    var dayAfter: Date {
+        return Calendar.current.date(byAdding: .day, value: 1, to: noon)!
+    }
+    var noon: Date {
+        return Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: self)!
+    }
+    var day: Int {
+        return Calendar.current.component(.day,  from: self)
+    }
+    var month: Int {
+        return Calendar.current.component(.month,  from: self)
+    }
+    var stringDate: String {
+        return "\(String(self.day).count == 1 ? "0":"")\(self.day)/\(String(self.month).count == 1 ? "0":"")\(self.month)"
+    }
+    var isLastDayOfMonth: Bool {
+        return dayAfter.month != month
+    }
+    
+    func toString(with format: DateFormatterPattern) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format.rawValue
+        return dateFormatter.string(from: self)
+    }
+    
+    func isBetween(date date1: Date, andDate date2: Date) -> Bool {
+        return date1.compare(self).rawValue * self.compare(date2).rawValue >= 0
+    }
+    
 }
