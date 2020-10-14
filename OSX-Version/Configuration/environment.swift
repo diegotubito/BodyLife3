@@ -27,6 +27,7 @@ class Config {
         }
         
         struct Server {
+            static let CheckServerConnection = baseUrl.rawValue + "/v1/checkServerConnection"
             static let RefreshToken =  baseUrl.rawValue + "/v1/firebase/auth/refreshToken"
             static let ConnectMongodb = baseUrl.rawValue + "/v1/connect-mongodb"
             static let DisconnectMongodb = baseUrl.rawValue + "/v1/close-mongodb"

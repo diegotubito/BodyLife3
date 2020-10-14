@@ -22,7 +22,14 @@ class Connect {
     
     static func StartListening() {
         self.AddObservers()
-        SocketHelper.shared.connect()
+        ServerManager.CheckServerConnection { (success) in
+            if success {
+                SocketHelper.shared.connect()
+            } else {
+                NotificationCenter.default.post(name: .ServerDisconnected, object: nil, userInfo: nil)
+            }
+        }
+        
     }
     
     static private func AddObservers() {

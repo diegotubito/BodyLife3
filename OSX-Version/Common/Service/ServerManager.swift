@@ -39,6 +39,19 @@ class ServerManager {
         return result
     }
     
+    static func CheckServerConnection(success: @escaping (Bool) -> ()) {
+        let url = Config.URL.Server.CheckServerConnection
+        let _services = NetwordManager()
+        _services.get(url: url) { (data, error) in
+            guard data != nil else {
+                success(false)
+                return
+            }
+            
+            success(true)
+        }
+    }
+    
     static func Post(path: String, json: [String : Any], onError: @escaping (ServerError?) -> Void) {
         
         let basicUrl = Configuration.URL.Database.write
