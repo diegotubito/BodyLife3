@@ -374,10 +374,20 @@
                                     <real value="3.4028234663852886e+38"/>
                                 </customSpacing>
                             </stackView>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WyS-rE-xQo">
+                                <rect key="frame" x="283" y="111" width="37" height="16"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="1hu-Ne-7Dl">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="WyS-rE-xQo" firstAttribute="top" secondItem="EKu-V2-kZU" secondAttribute="bottom" constant="16" id="4Ny-mJ-UZb"/>
                             <constraint firstItem="Ahp-3I-ErB" firstAttribute="leading" secondItem="VPv-Ko-H0X" secondAttribute="leading" id="6DJ-de-dv1"/>
                             <constraint firstAttribute="trailing" secondItem="EKu-V2-kZU" secondAttribute="trailing" constant="32" id="NXX-kM-b0M"/>
+                            <constraint firstItem="WyS-rE-xQo" firstAttribute="centerX" secondItem="VPv-Ko-H0X" secondAttribute="centerX" id="V5x-tt-Ufo"/>
                             <constraint firstItem="EKu-V2-kZU" firstAttribute="top" secondItem="VPv-Ko-H0X" secondAttribute="top" constant="32" id="Yi7-Td-x89"/>
                             <constraint firstAttribute="trailing" secondItem="Ahp-3I-ErB" secondAttribute="trailing" id="nPG-7J-unI"/>
                             <constraint firstAttribute="bottom" secondItem="Ahp-3I-ErB" secondAttribute="bottom" id="nf5-Fd-SWG"/>
@@ -389,6 +399,7 @@
                         <outlet property="emailTF" destination="Jde-q7-F1p" id="EBw-dR-qJQ"/>
                         <outlet property="passwordTF" destination="kax-kZ-eO3" id="DmB-Xn-KpQ"/>
                         <outlet property="repeatPasswordTF" destination="H0Y-d6-bCI" id="bu0-H2-e5Z"/>
+                        <outlet property="resultLabel" destination="WyS-rE-xQo" id="2yb-Gt-QCU"/>
                     </connections>
                 </viewController>
                 <customObject id="jVr-ST-NDS" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

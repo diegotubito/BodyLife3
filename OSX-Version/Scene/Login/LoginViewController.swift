@@ -95,10 +95,16 @@ class LoginViewController: BaseViewController, LoginDisplayLogic {
                     self.enableTextfields()
                 } else {
                     self.resultLabel.isHidden = true
-                    self.didLogin?(viewModel.data!)
-                    UserSaved.Save(userData: viewModel.data!)
-                    NotificationCenter.default.post(name: .DidLogin, object: nil)
-                    self.view.window?.close()
+                    if (viewModel.user?.emailVerified ?? false) {
+                        self.didLogin?(viewModel.data!)
+                        UserSaved.Save(userData: viewModel.data!)
+                        NotificationCenter.default.post(name: .DidLogin, object: nil)
+                        self.view.window?.close()
+                    } else {
+                        self.resultLabel.isHidden = false
+                        self.resultLabel.stringValue = "Validate your mail, first."
+                        self.enableTextfields()
+                    }
                 }
         }
     

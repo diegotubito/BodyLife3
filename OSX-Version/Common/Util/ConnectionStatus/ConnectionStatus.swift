@@ -63,7 +63,11 @@ class Connect {
                 return
             }
             
-            var userSession = UserSaved.GetUser()!
+            guard let user = UserSaved.GetUser() else {
+                NotificationCenter.default.post(name: .NeedLogin, object: nil, userInfo: nil)
+                return
+            }
+            var userSession = user
             userSession.token = data.token
             UserSaved.Update(userSession)
             UserSession = userSession

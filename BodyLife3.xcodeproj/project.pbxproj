@@ -252,7 +252,6 @@
 		11EBD3262376499F00AB4BFF /* OSX_Version.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD3242376499F00AB4BFF /* OSX_Version.xcdatamodeld */; };
 		11EBD3282376499F00AB4BFF /* AssetsOSX.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11EBD3272376499F00AB4BFF /* AssetsOSX.xcassets */; };
 		11EBD32B2376499F00AB4BFF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11EBD3292376499F00AB4BFF /* Main.storyboard */; };
-		11EBD34C23764A9600AB4BFF /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 11EBD32C2376499F00AB4BFF /* Info.plist */; };
 		11EBD35923765F2D00AB4BFF /* Reachablility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD35823765F2D00AB4BFF /* Reachablility.swift */; };
 		11EBD35B2376683300AB4BFF /* FirebaseUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD35A2376683300AB4BFF /* FirebaseUserModel.swift */; };
 		11EBD35E23766A3D00AB4BFF /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD35D23766A3D00AB4BFF /* Configuration.swift */; };
@@ -339,7 +338,6 @@
 		11542D802380698F0011AB1D /* ConnectionStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionStatus.swift; sourceTree = "<group>"; };
 		11542D832380703F0011AB1D /* ConsoleCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleCommand.swift; sourceTree = "<group>"; };
 		11578565252B85C0008A89DC /* Internal-Target.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Internal-Target.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		11578566252B85C0008A89DC /* OSX-Version copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "OSX-Version copy-Info.plist"; path = "/Users/daviddiegogomez/MyApps/iOS/BodyLife3/OSX-Version copy-Info.plist"; sourceTree = "<absolute>"; };
 		11578577252CE411008A89DC /* NewUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserViewController.swift; sourceTree = "<group>"; };
 		11578580252E71C0008A89DC /* environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = environment.swift; sourceTree = "<group>"; };
 		11578586252E7E57008A89DC /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
@@ -990,7 +988,6 @@
 				11EBD3052376494E00AB4BFF /* Products */,
 				91D7C020059F995F9C4481BA /* Pods */,
 				A7A55170CCA51CEE5CF3DC58 /* Frameworks */,
-				11578566252B85C0008A89DC /* OSX-Version copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1258,7 +1255,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1120;
-				LastUpgradeCheck = 1120;
+				LastUpgradeCheck = 1210;
 				ORGANIZATIONNAME = "David Diego Gomez";
 				TargetAttributes = {
 					11EBD31D2376499F00AB4BFF = {
@@ -1329,7 +1326,6 @@
 				11AC546823DDE64E0033A27D /* ActivitySaleView.xib in Resources */,
 				111DE572238A01BF002F4216 /* XButtonCustomView.xib in Resources */,
 				11EEF0F0239D4A42007C9821 /* PaymentView.xib in Resources */,
-				11EBD34C23764A9600AB4BFF /* Info.plist in Resources */,
 				116CE97023EDE94A00688C0B /* PeriodListItem.xib in Resources */,
 				1147AB732384AA2D00D19AA9 /* CustomerStatusView.xib in Resources */,
 				1166AF3623B27F880047C7AE /* ArticleViewItem.xib in Resources */,
@@ -1690,6 +1686,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-internal";
 				CODE_SIGN_ENTITLEMENTS = "OSX-Version/OSX-VersionDebug.entitlements";
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = S2BEC8V882;
@@ -1713,6 +1710,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-internal";
 				CODE_SIGN_ENTITLEMENTS = "OSX-Version/OSX_Version.entitlements";
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = S2BEC8V882;
@@ -1756,6 +1754,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1816,6 +1815,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1849,6 +1849,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "OSX-Version/OSX-VersionDebug.entitlements";
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = S2BEC8V882;
@@ -1871,6 +1872,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "OSX-Version/OSX_Version.entitlements";
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = S2BEC8V882;
