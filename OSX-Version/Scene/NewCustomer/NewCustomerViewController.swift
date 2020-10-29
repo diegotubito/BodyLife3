@@ -193,7 +193,7 @@ class NewCustomerViewController: BaseViewController, NewCustomerDisplayLogic {
 
 
 extension NewCustomerViewController: CameraViewControllerDelegate {
-    func imagenCapturada(image: NSImage) {
+    func capturedImage(originalSize image: NSImage) {
         print("original image: \(String(describing: image.sizeInBytes))")
     
         let medium = image.crop(size: NSSize(width: 150, height: 150))

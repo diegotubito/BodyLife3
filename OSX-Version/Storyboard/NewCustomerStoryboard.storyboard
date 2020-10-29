@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="kB3-nJ-svr">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="kB3-nJ-svr">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15505"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17156"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--New Customer View Controller-->
         <scene sceneID="enq-yv-DFC">
             <objects>
-                <viewController storyboardIdentifier="NewCustomerViewController" id="kB3-nJ-svr" customClass="NewCustomerViewController" customModule="OSX_Version" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewCustomerViewController" id="kB3-nJ-svr" customClass="NewCustomerViewController" customModule="Internal_Target" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="lCM-vi-YvS">
                         <rect key="frame" x="0.0" y="0.0" width="932" height="511"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -505,7 +506,7 @@
                                                                                 <rect key="frame" x="-2" y="-3" width="100" height="25"/>
                                                                                 <popUpButtonCell key="cell" type="push" title="Masculino" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="rVy-IE-Red" id="cAc-0W-UdS">
                                                                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                                                    <font key="font" metaFont="system"/>
+                                                                                    <font key="font" metaFont="menu"/>
                                                                                     <menu key="menu" id="GZa-pA-zKX">
                                                                                         <items>
                                                                                             <menuItem title="Masculino" state="on" id="rVy-IE-Red"/>
@@ -800,7 +801,7 @@
         <!--Camera View Controller-->
         <scene sceneID="BQl-TW-PkN">
             <objects>
-                <viewController storyboardIdentifier="CameraViewController" id="gqG-oQ-aQf" customClass="CameraViewController" customModule="OSX_Version" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CameraViewController" id="gqG-oQ-aQf" customClass="CameraViewController" customModule="Internal_Target" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="KIS-gs-WJr">
                         <rect key="frame" x="0.0" y="0.0" width="611" height="496"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -845,14 +846,6 @@ Gw
                                     <action selector="tomarFotoPressed:" target="gqG-oQ-aQf" id="lgq-2T-DbK"/>
                                 </connections>
                             </button>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZXs-LG-lRT">
-                                <rect key="frame" x="16" y="80" width="64" height="60"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="64" id="mar-8B-u3X"/>
-                                    <constraint firstAttribute="height" constant="60" id="tJv-k2-C6M"/>
-                                </constraints>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="Gof-lR-dXp"/>
-                            </imageView>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="XLm-lu-FAT" secondAttribute="trailing" constant="20" id="262-SD-eZc"/>
@@ -860,15 +853,11 @@ Gw
                             <constraint firstItem="v07-G1-Rvi" firstAttribute="top" secondItem="XLm-lu-FAT" secondAttribute="bottom" constant="16" id="Jdk-L8-Tqn"/>
                             <constraint firstItem="XLm-lu-FAT" firstAttribute="leading" secondItem="KIS-gs-WJr" secondAttribute="leading" constant="20" id="LC8-af-7e1"/>
                             <constraint firstItem="v07-G1-Rvi" firstAttribute="centerX" secondItem="KIS-gs-WJr" secondAttribute="centerX" id="RPe-a7-z9K"/>
-                            <constraint firstItem="ZXs-LG-lRT" firstAttribute="top" secondItem="XLm-lu-FAT" secondAttribute="bottom" constant="16" id="SNT-VV-bVd"/>
                             <constraint firstAttribute="bottom" secondItem="wwI-rv-aKc" secondAttribute="bottom" constant="20" id="hAL-sM-SfP"/>
                             <constraint firstItem="XLm-lu-FAT" firstAttribute="top" secondItem="KIS-gs-WJr" secondAttribute="top" constant="20" id="jAF-LD-iCq"/>
-                            <constraint firstItem="ZXs-LG-lRT" firstAttribute="leading" secondItem="KIS-gs-WJr" secondAttribute="leading" constant="16" id="mxT-z5-Irj"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="imagenTomada" destination="ZXs-LG-lRT" id="NGB-7Z-tip"/>
-                        <outlet property="imagenTomadaDePrueba" destination="ZXs-LG-lRT" id="Pni-I9-CIW"/>
                         <outlet property="previewCam" destination="XLm-lu-FAT" id="ZzO-Ka-4wf"/>
                     </connections>
                 </viewController>

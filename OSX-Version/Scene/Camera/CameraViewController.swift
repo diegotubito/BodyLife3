@@ -11,58 +11,40 @@ import AVFoundation
 import AVKit
 
 protocol CameraViewControllerDelegate: class {
-    func imagenCapturada(image: NSImage)
+    func capturedImage(originalSize image: NSImage)
 }
 
 class CameraViewController: NSViewController {
-    
     weak var delegate : CameraViewControllerDelegate?
-    
     @IBOutlet var previewCam: AVCaptureView!
-    
-    @IBOutlet weak var imagenTomada: NSImageView!
-    
     var session : AVCaptureSession = AVCaptureSession()
+    var output = AVCapturePhotoOutput()
     
-    var tamañoActual : Int!
-    var tamañoOriginal : Int!
-    
-    var imagen = NSImage() {
+    var capturedImage = NSImage() {
         didSet {
             DispatchQueue.main.async {
-                self.imagenTomada.image = self.imagen
                 self.session.stopRunning()
                 self.view.window?.close()
-                self.delegate?.imagenCapturada(image: self.imagen)
-                
+                self.delegate?.capturedImage(originalSize: self.capturedImage)
             }
         }
     }
-    var output : AVCaptureStillImageOutput!
-    
     
     override func viewDidLoad() {
         super .viewDidLoad()
-        correrSessionCamara()
+        setupSession()
     }
     
     override func viewWillAppear() {
         super.viewWillAppear()
-        // preferredContentSize = NSSize(width: 500, height: 600)
         preferredContentSize = view.fittingSize
     }
     
     @IBAction func tomarFotoPressed(_ sender: Any) {
         guard let connection = output.connection(with: AVMediaType.video) else { return }
         connection.videoOrientation = .portrait
-        
-        output.captureStillImageAsynchronously(from: connection) { (sampleBuffer, error) in
-            guard sampleBuffer != nil && error == nil else { return }
-            
-            let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(sampleBuffer!)
-            guard let image = NSImage(data: imageData!) else { return }
-            self.imagen = image
-        }
+        let photoSettings = AVCapturePhotoSettings(format: [AVVideoCodecKey:AVVideoCodecType.jpeg])
+        output.capturePhoto(with: photoSettings, delegate: self)
     }
     
     @IBAction func cancelarClicked(_ sender: Any) {
@@ -70,45 +52,41 @@ class CameraViewController: NSViewController {
         view.window?.close()
     }
     
-    func correrSessionCamara() {
+    func setupSession() {
         view.wantsLayer = true
         previewCam.wantsLayer = true
-        
         session.sessionPreset = AVCaptureSession.Preset.photo
-        if let devices : [AVCaptureDevice] = AVCaptureDevice.devices() {
-            print(devices)
+        let device = bestDevice(in: .unspecified)
+        let device_input : AVCaptureDeviceInput = try! AVCaptureDeviceInput(device: device)
+        let previewLayer:AVCaptureVideoPreviewLayer = AVCaptureVideoPreviewLayer(session: session)
+        guard session.canAddInput(device_input) && session.canAddOutput(output) else { return }
+        previewLayer.frame = previewCam.bounds
+        previewLayer.videoGravity = AVLayerVideoGravity.resize
+        self.previewCam.layer?.addSublayer(previewLayer)
+        if session.canAddInput(device_input)
+        {
+            session.addInput(device_input)
         }
-        let device = AVCaptureDevice.DiscoverySession.init(deviceTypes: [.builtInWideAngleCamera], mediaType: nil, position: .front)
-        
-        
-        print("device found = ",device.devices.count)
-        print(device.devices)
-            
-          let device_input : AVCaptureDeviceInput = try! AVCaptureDeviceInput(device: device.devices[0])
-             
-            let previewLayer:AVCaptureVideoPreviewLayer = AVCaptureVideoPreviewLayer(session: session)
-            
-            output = AVCaptureStillImageOutput()
-            
-            output.outputSettings = [ AVVideoCodecKey: AVVideoCodecType.jpeg ]
-            
-            guard session.canAddInput(device_input) && session.canAddOutput(output) else { return }
-            
-            previewLayer.frame = previewCam.bounds
-            previewLayer.videoGravity = AVLayerVideoGravity.resize
-            self.previewCam.layer?.addSublayer(previewLayer)
-            if session.canAddInput(device_input)
-            {
-                session.addInput(device_input)
-                
-            }
-            if session.canAddOutput(output) {
-                session.addOutput(output)
-            }
-            
-        
+        if session.canAddOutput(output) {
+            session.addOutput(output)
+        }
         session.startRunning()
+    }
+    
+    func bestDevice(in position: AVCaptureDevice.Position) -> AVCaptureDevice {
+        let discoverySession = AVCaptureDevice.DiscoverySession.init(deviceTypes: [.builtInWideAngleCamera], mediaType: nil, position: .front)
+        let devices = discoverySession.devices
+        guard !devices.isEmpty else { fatalError("Missing capture devices.")}
         
+        return devices.first(where: { device in device.position == position })!
     }
 }
 
+extension CameraViewController : AVCapturePhotoCaptureDelegate{
+    func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
+        let imageData = photo.fileDataRepresentation()
+        if let data = imageData, let img = NSImage(data: data) {
+            self.capturedImage = img
+        }
+    }
+}
