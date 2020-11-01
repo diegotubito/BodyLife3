@@ -1,8 +1,8 @@
 //
-//  importImages.swift
-//  OSX-Version
+//  importStorage.swift
+//  BodyLife3
 //
-//  Created by David Diego Gomez on 29/09/2020.
+//  Created by David Diego Gomez on 31/10/2020.
 //  Copyright © 2020 David Diego Gomez. All rights reserved.
 //
 
@@ -10,7 +10,7 @@ import Foundation
 import Cocoa
 
 extension ImportDatabase {
-    class Thumbnail {
+    class Storage {
         
         
         
@@ -55,8 +55,8 @@ extension ImportDatabase {
                 let firstName = i.nombre.condenseWhitespace().capitalized
                 let lastName = i.apellido.condenseWhitespace().capitalized
                 let fullname = lastName + " " + firstName
-   
-      
+                
+                
                 let newCustomer = CustomerModel.Full(_id: _id,
                                                      uid: i.childID,
                                                      timestamp: dateDouble,
@@ -101,129 +101,72 @@ extension ImportDatabase {
             return address
         }
         
-        static func MigrateToMongoDB() {
-            guard let customers = ImportDatabase.Thumbnail.getCustomers() else {
+        static func MovePhotosToAnotherFolder() {
+            guard let customers = ImportDatabase.Storage.getCustomers() else {
                 return
             }
             var counter = 0
             var notLoaded = 0
             for customer in customers {
-                let imageSemasphore = DispatchSemaphore(value: 0
-                )
-                ImportDatabase.Thumbnail.downloadImage(childID: customer.uid) { (thumb, image, err) in
-                    if err != nil {
+                let imageSemasphore = DispatchSemaphore(value: 0)
+                ImportDatabase.Storage.downloadImage(childID: customer.uid) { (image, err) in
+    
+                    if err != nil || image == nil {
                         imageSemasphore.signal()
                     } else {
-
-                        ImportDatabase.Thumbnail.saveNewThumbnail(uid: customer.uid, thumbnail: thumb ?? "") { (success) in
-                            if success {
+            
+                        ImportDatabase.Storage.uploadPhoto(image: image!, filename: customer.uid) { (uploaded) in
+                            if uploaded {
                                 counter += 1
                                 print("\(counter)/\(customers.count)")
                             } else {
                                 notLoaded += 1
-                                print("not updated \(notLoaded)")
+                                print("not uploaded \(notLoaded)")
                             }
-                            imageSemasphore.signal()
+                           
                         }
-                        
-                        //move image from different firebase accounts
-                        if image != nil {
-                            ImportDatabase.Storage.uploadPhoto(image: image!, filename: customer.uid) { (uploaded) in
-                                if uploaded {
-                                    counter += 1
-                                    print("\(counter)/\(customers.count)")
-                                } else {
-                                    notLoaded += 1
-                                    print("not uploaded \(notLoaded)")
-                                }
-                                
-                            }
-                        }
-                        
                     }
+                    imageSemasphore.signal()
                 }
                 _ = imageSemasphore.wait(timeout: .distantFuture)
                 
             }
         }
         
-        static func saveNewThumbnail(uid: String, thumbnail: String, completion: @escaping (Bool) -> ()) {
-            let url = "\(Config.baseUrl.rawValue)/v1/thumbnail"
-            let _services = NetwordManager()
-            
-            if thumbnail.isEmpty {
-                completion(false)
-                return
-            }
-       
-            let body = ["uid": uid,
-                        "thumbnailImage": thumbnail,
-                        "isEnabled" : true] as [String : Any]
-            
-            _services.post(url: url, body: body) { (data, error) in
-                if error != nil {
-                    completion(false)
-                    return
-                }
-                guard data != nil else {
-                    completion(false)
-                    return
-                }
-                
-                completion(true)
-                
-            }
-        }
-        
-        static func updateCustomer(uid: String, thumbnail: String, completion: @escaping (Bool) -> ()) {
-            let url = "\(Config.baseUrl.rawValue)/v1/customer"
-            let _services = NetwordManager()
-            
-            if thumbnail.isEmpty {
-                completion(false)
-                return
-            }
-       
-            let body = ["uid": uid,
-                        "thumbnailImage": thumbnail]
-            
-            _services.update(url: url, body: body) { (data, error) in
-                if error != nil {
-                    completion(false)
-                    return
-                }
-                let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any]
-                
-                if let c = json?["customer"] as? [String: Any] {
-                    completion(true)
-                } else {
-                    completion(false)
+        static func uploadPhoto(image: NSImage, filename: String, success: @escaping (Bool) -> ()) {
+            let userId = UserSession?.uid ?? ""
+            let pathImage = "\(userId):\(Paths.customerOriginalImage)"
+            let net = NetwordManager()
+            if let imageData = image.tiffRepresentation {
+                net.uploadPhoto(path: pathImage, imageData: imageData, nombre: filename, tipo: "jpeg") { (jsonResponse, error) in
+                    if jsonResponse != nil {
+                        success(true)
+                    } else {
+                        success(false)
+                    }
                 }
             }
         }
         
-        static func downloadImage(childID: String, completion: @escaping (String?, NSImage?, Error?) -> ()) {
+        static func downloadImage(childID: String, completion: @escaping (NSImage?, Error?) -> ()) {
             let url = "\(Config.baseUrl.rawValue)/v1/downloadImageFromOldBucket?filename=socios/\(childID).jpeg"
             let _services = NetwordManager()
-
+            
             _services.downloadImageFromUrl(url: url) { (image) in
                 guard let image = image else {
-                    completion(nil, nil, nil)
+                    completion(nil, nil)
                     return
                 }
-                
-                let thumb = image.crop(size: NSSize(width: 50, height: 50))
-                let thumbBase64 = thumb?.convertToBase64
-                
+
                 let medium = image.crop(size: NSSize(width: 150, height: 150))
                 
-                completion(thumbBase64, medium, nil)
+                completion(medium, nil)
             } fail: { (err) in
-                completion(nil, nil, err)
+                completion(nil, err)
             }
-
+            
         }
-
+        
     }
     
     

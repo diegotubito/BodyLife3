@@ -3,6 +3,36 @@ import Cocoa
 import MapKit
 
 class NewCustomerWorker {
+    func saveNewThumbnail(uid: String, thumbnail: String, completion: @escaping (Bool) -> ()) {
+        let url = "\(Config.baseUrl.rawValue)/v1/thumbnail"
+        let _services = NetwordManager()
+        
+        if thumbnail.isEmpty {
+            completion(false)
+            return
+        }
+        
+        let body = ["uid": uid,
+                    "thumbnailImage": thumbnail,
+                    "isEnabled" : true] as [String : Any]
+        
+        _services.post(url: url, body: body) { (data, error) in
+            if error != nil {
+                completion(false)
+                return
+            }
+            guard data != nil else {
+                completion(false)
+                return
+            }
+            
+            completion(true)
+            
+        }
+    }
+    
+    
+    
     func FindCustomer(dni: String, doExist: @escaping (Bool) -> ()) {
         let url = "\(Config.baseUrl.rawValue)/v1/customerByDni?dni=\(dni)"
         let _service = NetwordManager()

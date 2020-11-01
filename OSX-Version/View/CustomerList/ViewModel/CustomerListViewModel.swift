@@ -72,11 +72,10 @@ class CustomerListViewModel: CustomerListViewModelContract {
                 let response = try JSONDecoder().decode(CustomerListModel.Response.self, from: data) 
                 self?.model.response = response
                 self?.model.countByPages = response.count
-      
                 self?.model.customersbyPages.append(contentsOf: response.customers)
                 self?._view.hideLoading()
-                self?.loadImages()
                 self?.switchLoadingCustomers(bySearch: false)
+                self?.loadImages()
                 self?._view.showSuccess()
             } catch {
                 self?._view.showError()

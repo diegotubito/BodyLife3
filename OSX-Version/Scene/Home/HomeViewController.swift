@@ -125,10 +125,11 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
 //        ImportDatabase.Activity.MigrateToMongoDB()
 //        ImportDatabase.Period.MigrateToMongoDB()
 //        ImportDatabase.Article.MigrateToMongoDB()
-//        
+        
 //        ImportDatabase.Customer.MigrateToMongoDB()
-//        ImportDatabase.Thumbnail.MigrateToMongoDB()
-//
+        ImportDatabase.Thumbnail.MigrateToMongoDB()
+//          ImportDatabase.Storage.MovePhotosToAnotherFolder()
+        
 //        ImportDatabase.Carnet.MigrateToMongoDB()
 //        ImportDatabase.VentaArticulo.MigrateToMongoDB()
 //        ImportDatabase.PagoCarnet.MigrateToMongoDB()

@@ -60,10 +60,11 @@ class CustomerListView: NSView {
     @objc func newCustomerNotificationHandler(notification: Notification) {
         let obj = notification.object
         if let customer = obj as? CustomerModel.Customer {
+            let image = customer.thumbnailImage?.convertToImage
             viewModel.model.customersToDisplay.insert(customer, at: 0)
             viewModel.model.customersbyPages.insert(customer, at: 0)
-            viewModel.model.imagesByPages.insert(CustomerListModel.Images(image: nil, _id: customer._id), at: 0)
-            viewModel.model.imagesToDisplay.insert(CustomerListModel.Images(image: nil, _id: customer._id), at: 0)
+            viewModel.model.imagesByPages.insert(CustomerListModel.Images(image: image, _id: customer._id), at: 0)
+            viewModel.model.imagesToDisplay.insert(CustomerListModel.Images(image: image, _id: customer._id), at: 0)
             viewModel.model.countByPages += 1
             let index = IndexSet(integer: 0)
             viewModel.model.selectedCustomer = customer

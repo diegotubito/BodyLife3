@@ -40,11 +40,21 @@ class NewCustomerInteractor: NewCustomerBusinessLogic, NewCustomerDataStore {
                 return
             }
             
-            let response = NewCustomer.NewCustomer.Response(error: nil, customer: savedCustomer)
+            var response = NewCustomer.NewCustomer.Response(error: nil, customer: savedCustomer)
+            response.customer?.thumbnailImage = request.thumbnail
             self.presenter?.presentNewCustomerResult(response: response)
         }
         
-        let pathImage = Paths.customerOriginalImage
+        worker.saveNewThumbnail(uid: request.newUser.uid, thumbnail: request.thumbnail) { (uploaded) in
+            if uploaded {
+                print("thumbnail uploaded")
+            } else {
+                print("thumbnail could not be loaded")
+            }
+        }
+        
+        let userId = UserSession?.uid ?? ""
+        let pathImage = "\(userId):\(Paths.customerOriginalImage)"
         let net = NetwordManager()
         if let imageData = request.image.tiffRepresentation {
             net.uploadPhoto(path: pathImage, imageData: imageData, nombre: request.newUser.uid, tipo: "jpeg") { (jsonResponse, error) in

@@ -97,7 +97,9 @@ class CustomerStatusView: XibViewWithAnimation {
     }
    
     func downloadImage(childID: String, completion: @escaping (NSImage?, Error?) -> ()) {
-        let url = "\(Config.baseUrl.rawValue)/v1/downloadImage?filename=socios/\(childID).jpeg"
+//        let url = "\(Config.baseUrl.rawValue)/v1/downloadImage?filename=socios/\(childID).jpeg"
+        let uid = UserSession?.uid ?? ""
+        let url = "\(Config.baseUrl.rawValue)/v1/downloadImage?filename=\(uid)/customer/\(childID).jpeg"
         let _services = NetwordManager()
 
         _services.downloadImageFromUrl(url: url) { (image) in
