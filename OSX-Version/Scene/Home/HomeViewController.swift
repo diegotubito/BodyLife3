@@ -121,12 +121,12 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
     }
     
     @IBAction func importData(_ sender: Any) {
-//        ImportDatabase.Discount.MigrateToMongoDB()
-//        ImportDatabase.Activity.MigrateToMongoDB()
-//        ImportDatabase.Period.MigrateToMongoDB()
-//        ImportDatabase.Article.MigrateToMongoDB()
+        ImportDatabase.Discount.MigrateToMongoDB()
+        ImportDatabase.Activity.MigrateToMongoDB()
+        ImportDatabase.Period.MigrateToMongoDB()
+        ImportDatabase.Article.MigrateToMongoDB()
         
-//        ImportDatabase.Customer.MigrateToMongoDB()
+        ImportDatabase.Customer.MigrateToMongoDB()
         ImportDatabase.Thumbnail.MigrateToMongoDB()
 //          ImportDatabase.Storage.MovePhotosToAnotherFolder()
         

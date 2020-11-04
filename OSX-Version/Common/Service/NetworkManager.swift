@@ -320,12 +320,12 @@ class NetwordManager {
         task.resume()
     }
     
-    func downloadImageFromUrl(url: String, result: @escaping (NSImage?) -> Void, fail: @escaping (ServerError?) -> Void) {
+    func downloadImageFromUrl(url: String, result: @escaping (NSImage?) -> Void, fail: @escaping (ServerError?) -> Void) -> URLSessionDataTask? {
         //if I have already loaded the image, there's no need to load it again.
         if let imageFromCache = imageCache.object(forKey: url as AnyObject) as? NSImage {
             //return the image previously loaded
             result(imageFromCache)
-            return
+            return nil
             
         }
         
@@ -351,7 +351,7 @@ class NetwordManager {
             
         }
         dataTask.resume()
-        
+        return dataTask
     }
     
     func uploadPhoto(path: String, imageData: Data, nombre: String, tipo: String, completion:@escaping ([String : Any]?, ServerError?) -> Void ) {

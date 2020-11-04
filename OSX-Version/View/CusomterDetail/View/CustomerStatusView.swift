@@ -34,6 +34,7 @@ class CustomerStatusView: XibViewWithAnimation {
     
     var didPressSellActivityButton : (() -> ())?
     var didPressSellProductButton : (() -> ())?
+    var profilePictureRequest : URLSessionDataTask?
     
     override func commonInit() {
         super .commonInit()
@@ -80,6 +81,8 @@ class CustomerStatusView: XibViewWithAnimation {
                     self.profilePicture.image = #imageLiteral(resourceName: "empty")
                 }
             }
+        } cancel: {
+            print("cancel request")
         }
     }
     
@@ -96,13 +99,19 @@ class CustomerStatusView: XibViewWithAnimation {
         
     }
    
-    func downloadImage(childID: String, completion: @escaping (NSImage?, Error?) -> ()) {
+    func downloadImage(childID: String, completion: @escaping (NSImage?, Error?) -> (), cancel: () -> ()) {
 //        let url = "\(Config.baseUrl.rawValue)/v1/downloadImage?filename=socios/\(childID).jpeg"
         let uid = UserSession?.uid ?? ""
         let url = "\(Config.baseUrl.rawValue)/v1/downloadImage?filename=\(uid)/customer/\(childID).jpeg"
         let _services = NetwordManager()
 
-        _services.downloadImageFromUrl(url: url) { (image) in
+        if profilePictureRequest != nil {
+            profilePictureRequest?.cancel()
+            profilePictureRequest = nil
+            cancel()
+        }
+        profilePictureRequest = _services.downloadImageFromUrl(url: url) { (image) in
+            self.profilePictureRequest = nil
             guard let image = image else {
                 completion(nil, nil)
                 return
@@ -111,6 +120,7 @@ class CustomerStatusView: XibViewWithAnimation {
             
             completion(medium, nil)
         } fail: { (err) in
+            self.profilePictureRequest = nil
             completion(nil, err)
         }
 
