@@ -18,24 +18,8 @@ class ExpenseInteractor: ExpenseBusinessLogic, ExpenseDataStore {
     // MARK: Do something
     
     func loadTypes(request: Expense.Types.Request) {
-        worker = ExpenseWorker()
-        worker?.doLoadTypes(response: { (responseJson, error) in
-            let regs = self.parseResponse(json: responseJson)
-            let response = Expense.Types.Response(types: regs, error: error)
-            self.presenter?.presentTypes(response: response)
-        })
+        
      }
-    
-    private func parseResponse(json: [String : Any]?) -> [ExpenseType]? {
-        do {
-            let array = ServerManager.jsonArray(json: json ?? [:])
-            let data = try JSONSerialization.data(withJSONObject: array, options: [])
-            let registers = try JSONDecoder().decode([ExpenseType].self, from: data)
-            return registers
-        } catch {
-            return nil
-        }
-    }
     
     func saveNewExpense(request: Expense.Save.Request) {
         let worker = ExpenseWorker()

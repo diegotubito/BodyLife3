@@ -765,7 +765,7 @@
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
-                                            <action selector="movementsPressed:" target="XfG-lQ-9wD" id="wbQ-7N-pcz"/>
+                                            <action selector="moneyFlow:" target="XfG-lQ-9wD" id="wbQ-7N-pcz"/>
                                         </connections>
                                     </button>
                                 </subviews>

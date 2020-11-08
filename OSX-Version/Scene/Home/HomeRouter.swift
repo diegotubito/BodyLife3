@@ -3,6 +3,7 @@ import Cocoa
 @objc protocol HomeRoutingLogic {
     func routeToNewCustomer()
     func routeToNewExpense()
+    func routeToMoneyFlow()
 }
 
 protocol HomeDataPassing {
@@ -15,6 +16,10 @@ class HomeRouter: NSObject, HomeRoutingLogic, HomeDataPassing {
     var dataStore: HomeDataStore?
     
     // MARK: Routing
+    
+    func routeToMoneyFlow() {
+        let storyboard = NSStoryboard(name: "MoneyFlow", bundle: nil)
+    }
     
     func routeToNewExpense() {
         let storyboard = NSStoryboard(name: "Expense", bundle: nil)

@@ -153,7 +153,7 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
         router?.routeToNewCustomer()
     }
     
-    @IBAction func movementsPressed(_ sender: Any) {
+    @IBAction func moneyFlow(_ sender: Any) {
         
     }
     func createBackgroundGradient() {

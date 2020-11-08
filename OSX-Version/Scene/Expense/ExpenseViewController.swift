@@ -156,42 +156,6 @@ class ExpenseViewController: BaseViewController, ExpenseDisplayLogic {
     
     @IBAction func savePressed(_ sender: Any) {
         DDBarLoader.showLoading(controller: self, message: "Agregando nuevo gasto")
-        
-        let today = Date()
-        let selectedBaseType = baseTypes[typePopup.indexOfSelectedItem]
-        let selectedSecondaryType = secondaryTypes[secondaryTypePopup.indexOfSelectedItem]
-        let childIDBaseType = selectedBaseType.childID
-        let childIDSecondaryType = selectedSecondaryType.childID
-        let childID = ServerManager.createNewChildID()
-        let createdAt = today.timeIntervalSinceReferenceDate
-        let isEnabled = true
-        let operationCategory = OperationCategory.expense
-        let displayName = selectedSecondaryType.name
-        let displayTypeName = selectedBaseType.name
-        let amount = -amountTextField.doubleValue
-        let queryByY = today.toString(formato: "yyyy")
-        let queryByMY = today.toString(formato: "MM-yyyy")
-        let queryByDMY = today.toString(formato: "dd-MM-yyyy")
-        let optionalDescription = descriptionTextfield.stringValue
-        
-        let jsonInfo : [String : Any] = ["childIDBaseType" : childIDBaseType,
-                                     "childIDSecondaryType" : childIDSecondaryType,
-                                     "childID" : childID,
-                                     "createdAt" : createdAt,
-                                     "isEnabled" : isEnabled,
-                                     "displayName" : displayName,
-                                     "displayTypeName" : displayTypeName,
-                                     "amount" : amount,
-                                     "queryByY" : queryByY,
-                                     "queryByMY" : queryByMY,
-                                     "queryByDMY" : queryByDMY,
-                                     "operationCategory" : operationCategory,
-                                     "optionalDescription" : optionalDescription]
-        
-        let finalJson = [childID : jsonInfo]
-        
-        let request = Expense.Save.Request(register: finalJson)
-        interactor?.saveNewExpense(request: request)
     }
 }
 
