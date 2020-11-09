@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import BLServerManager
 
 class NewUserViewController : BaseViewController {
     @IBOutlet weak var resultLabel: NSTextField!
@@ -41,7 +42,7 @@ class NewUserViewController : BaseViewController {
         let email = self.emailTF.stringValue
         let body = createRequest()
         
-        let url = "\(Config.baseUrl.rawValue)/v1/firebase/admin/user"
+        let url = "\(BLServerManager.baseUrl.rawValue)/v1/firebase/admin/user"
         let _services = NetwordManager()
         _services.post(url: url, body: body) { (data, error) in
             
@@ -89,14 +90,14 @@ class NewUserViewController : BaseViewController {
     }
     
     func sendVerificationMail(uid: String, to: String, success: @escaping (Bool) -> ()) {
-        let link = "\(Config.baseUrl.rawValue)/v1/firebase/admin/verifyEmail?uid=\(uid)"
+        let link = "\(BLServerManager.baseUrl.rawValue)/v1/firebase/admin/verifyEmail?uid=\(uid)"
         let body = ["to" : to,
                     "text" : "Antes de comenzar a utilizar tu cuenta, debes verificar tu correo haciendo link en el enlace.",
                     "subject": "Verification Account",
                     "link" : link]
         
        
-        let url = "\(Config.baseUrl.rawValue)/v1/sendMail"
+        let url = "\(BLServerManager.baseUrl.rawValue)/v1/sendMail"
         let _services = NetwordManager()
         _services.post(url: url, body: body) { (data, error) in
             guard data != nil else {

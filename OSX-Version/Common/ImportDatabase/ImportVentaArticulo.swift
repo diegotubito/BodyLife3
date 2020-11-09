@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import BLServerManager
 
 extension ImportDatabase {
     class VentaArticulo {
@@ -87,7 +88,7 @@ extension ImportDatabase {
             guard let articulosVendidos = ImportDatabase.VentaArticulo.getVentasArticulos() else {
                 return
             }
-            let url = "\(Config.baseUrl.rawValue)/v1/sell"
+            let url = "\(BLServerManager.baseUrl.rawValue)/v1/sell"
             let _services = NetwordManager()
             var notAdded = 0
             for (x,articulo) in articulosVendidos.enumerated() {

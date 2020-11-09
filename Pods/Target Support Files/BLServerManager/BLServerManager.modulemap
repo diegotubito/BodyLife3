@@ -1,0 +1,6 @@
+framework module BLServerManager {
+  umbrella header "BLServerManager-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -7,7 +7,7 @@
 //
 
 import Cocoa
-
+import BLServerManager
 
 extension Notification.Name {
     static let notificationUpdateStatus = Notification.Name("notificationUpdateStatus")
@@ -102,7 +102,7 @@ class CustomerStatusView: XibViewWithAnimation {
     func downloadImage(childID: String, completion: @escaping (NSImage?, Error?) -> (), cancel: () -> ()) {
 //        let url = "\(Config.baseUrl.rawValue)/v1/downloadImage?filename=socios/\(childID).jpeg"
         let uid = UserSession?.uid ?? ""
-        let url = "\(Config.baseUrl.rawValue)/v1/downloadImage?filename=\(uid)/customer/\(childID).jpeg"
+        let url = "\(BLServerManager.baseUrl.rawValue)/v1/downloadImage?filename=\(uid)/customer/\(childID).jpeg"
         let _services = NetwordManager()
 
         if profilePictureRequest != nil {

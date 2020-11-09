@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import BLServerManager
 
 extension ImportDatabase {
     class Activity {
@@ -69,7 +70,7 @@ extension ImportDatabase {
             guard let activities = ImportDatabase.Activity.getActivities() else {
                 return
             }
-            let url = "\(Config.baseUrl.rawValue)/v1/activity"
+            let url = "\(BLServerManager.baseUrl.rawValue)/v1/activity"
             let _services = NetwordManager()
             var notAdded = 0
             for (x,activity) in activities.enumerated() {

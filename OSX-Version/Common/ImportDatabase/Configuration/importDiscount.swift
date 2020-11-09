@@ -6,6 +6,7 @@
 //  Copyright © 2020 David Diego Gomez. All rights reserved.
 //
 import Foundation
+import BLServerManager
 
 extension ImportDatabase {
     class Discount {
@@ -67,7 +68,7 @@ extension ImportDatabase {
             guard let discounts = ImportDatabase.Discount.getDiscounts() else {
                 return
             }
-            let url = "\(Config.baseUrl.rawValue)/v1/discount"
+            let url = "\(BLServerManager.baseUrl.rawValue)/v1/discount"
             let _services = NetwordManager()
             var notAdded = 0
             for (x,discount) in discounts.enumerated() {

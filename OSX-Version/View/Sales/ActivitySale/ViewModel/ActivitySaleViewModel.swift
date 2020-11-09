@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import BLServerManager
 
 class ActivitySaleViewModel : ActivitySaleViewModelContract {
     
@@ -25,44 +26,25 @@ class ActivitySaleViewModel : ActivitySaleViewModelContract {
     
     func loadPeriods() {
         _view.showLoading()
-        
-        let url = "\(Config.baseUrl.rawValue)/v1/period"
-        
-        let _service = NetwordManager()
-        _service.get(url: url) { (data, error) in
+        let request = BLServerManager.prepareEndpoint(to: .GetAllPeriod)
+        BLServerManager.ApiCall(endpoint: request) { (periods:PeriodModel.ViewModel) in
             self._view.hideLoading()
-            guard let data = data else {
-               
-                return
-            }
-            do {
-                let response = try JSONDecoder().decode(PeriodModel.ViewModel.self, from: data)
-                self.parseActivityAndDiscount(response: response)
-            } catch {
-                return
-            }
+            self.parseActivityAndDiscount(response: periods)
+        } fail: { (error) in
+            self._view.hideLoading()
+            self._view.showError(error.localizedDescription)
         }
     }
     
     func loadDiscounts() {
         _view.showLoading()
-        
-        let url = "\(Config.baseUrl.rawValue)/v1/discount"
-        
-        let _service = NetwordManager()
-        _service.get(url: url) { (data, error) in
+        let endpoint = BLServerManager.prepareEndpoint(to: .GetAllDiscount)
+        BLServerManager.ApiCall(endpoint: endpoint) { (result:DiscountModel.ViewModel) in
             self._view.hideLoading()
-            guard let data = data else {
-               
-                return
-            }
-            do {
-                let response = try JSONDecoder().decode(DiscountModel.ViewModel.self, from: data)
-                self.model.discounts = response.discounts
-                self._view.showDiscounts()
-            } catch {
-                return
-            }
+            self.model.discounts = result.discounts
+            self._view.showDiscounts()
+        } fail: { (error) in
+            self._view.hideLoading()
         }
     }
     
@@ -98,8 +80,6 @@ class ActivitySaleViewModel : ActivitySaleViewModelContract {
         model.selectedActivity = nil
         _view.setPopupActivitydByTitle(nil)
     }
-    
-    
     
     func selectDiscountAutomatically() {
         if model.statusInfo?.lastDiscountId == nil {
@@ -209,20 +189,14 @@ extension ActivitySaleViewModel {
                                                 priceCost: nil,
                                                 description: description)
         
-        
-        
-        let url = "\(Config.baseUrl.rawValue)/v1/sell"
-        let _services = NetwordManager()
         let body = encodeSell(newRegister)
-        _services.post(url: url, body: body) { (data, error) in
-            guard data != nil else {
-                self._view.showError("No se puedo guardar venta")
-                return
-            }
-            let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any]
-            let _id = json?["_id"] as? String
-            
+        let endpoint = BLServerManager.prepareEndpoint(to: .SaveNewSell(token: UserSaved.GetToken(),
+                                                                        body: body))
+        BLServerManager.ApiCall(endpoint: endpoint) { (response:SellModel.NewRegister) in
+            let _id = response._id
             self.addNullPayment(sellId: _id!)
+        } fail: { (error) in
+            self._view.showError("No se puedo guardar venta")
         }
     }
     
@@ -237,7 +211,7 @@ extension ActivitySaleViewModel {
                                                 paidAmount: 0,
                                                 productCategory: ProductCategory.activity.rawValue)
         
-        let url = "\(Config.baseUrl.rawValue)/v1/payment"
+        let url = "\(BLServerManager.baseUrl.rawValue)/v1/payment"
         let _services = NetwordManager()
         let body = encodePayment(newRegister)
         _services.post(url: url, body: body) { (data, error) in

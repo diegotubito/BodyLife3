@@ -8,6 +8,7 @@
 
 import Foundation
 import Cocoa
+import BLServerManager
 
 extension ImportDatabase {
     class Thumbnail {
@@ -148,7 +149,7 @@ extension ImportDatabase {
         }
         
         static func saveNewThumbnail(uid: String, thumbnail: String, completion: @escaping (Bool) -> ()) {
-            let url = "\(Config.baseUrl.rawValue)/v1/thumbnail"
+            let url = "\(BLServerManager.baseUrl.rawValue)/v1/thumbnail"
             let _services = NetwordManager()
             
             if thumbnail.isEmpty {
@@ -176,7 +177,7 @@ extension ImportDatabase {
         }
         
         static func updateCustomer(uid: String, thumbnail: String, completion: @escaping (Bool) -> ()) {
-            let url = "\(Config.baseUrl.rawValue)/v1/customer"
+            let url = "\(BLServerManager.baseUrl.rawValue)/v1/customer"
             let _services = NetwordManager()
             
             if thumbnail.isEmpty {
@@ -203,7 +204,7 @@ extension ImportDatabase {
         }
         
         static func downloadImage(childID: String, completion: @escaping (String?, NSImage?, Error?) -> ()) {
-            let url = "\(Config.baseUrl.rawValue)/v1/downloadImageFromOldBucket?filename=socios/\(childID).jpeg"
+            let url = "\(BLServerManager.baseUrl.rawValue)/v1/downloadImageFromOldBucket?filename=socios/\(childID).jpeg"
             let _services = NetwordManager()
 
             _services.downloadImageFromUrl(url: url) { (image) in

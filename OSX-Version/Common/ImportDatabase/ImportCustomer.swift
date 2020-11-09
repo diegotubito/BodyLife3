@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import BLServerManager
 
 extension ImportDatabase {
     class Customer {
@@ -103,7 +104,7 @@ extension ImportDatabase {
             guard let customers = ImportDatabase.Customer.getCustomers() else {
                 return
             }
-            let url = "\(Config.baseUrl.rawValue)/v1/customer"
+            let url = "\(BLServerManager.baseUrl.rawValue)/v1/customer"
             let _services = NetwordManager()
             var notAdded = 0
             for (x,customer) in customers.enumerated() {
@@ -130,7 +131,7 @@ extension ImportDatabase {
         
         
         static func downloadImage() {
-            let url = "\(Config.baseUrl.rawValue)/v1/downloadImage?filename=socios/-0JEaB5GvklUIoBcxhGo.jpeg"
+            let url = "\(BLServerManager.baseUrl.rawValue)/v1/downloadImage?filename=socios/-0JEaB5GvklUIoBcxhGo.jpeg"
             let _services = NetwordManager()
             
             _services.downloadImageFromUrl(url: url) { (image) in

@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import BLServerManager
 
 var MyConnectionStatus : Connect!
 var DateReference = "01-01-2020 00:00:00".toDate(formato: "dd-MM-yyyy HH:mm:ss")!
@@ -18,9 +19,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Insert code here to initialize your application
         Reachability.sharedInstance.suscribeConnectionChanged()
         #if INTERNAL
-            Config.baseUrl = Server.Develop
+//            Config.baseUrl = BLServer.Develop
+            BLServerManager.baseUrl = BLServer.Develop
         #else
-            Config.baseUrl = Server.Production
+            BLServerManager.baseUrl = BLServer.Production
         #endif
      
         forceCloseSessionIfTargetChanged()

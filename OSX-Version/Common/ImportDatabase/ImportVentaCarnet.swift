@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import BLServerManager
 
 extension ImportDatabase {
     class Carnet {
@@ -91,7 +92,7 @@ extension ImportDatabase {
             guard let carnets = ImportDatabase.Carnet.getCarnets() else {
                 return
             }
-            let url = "\(Config.baseUrl.rawValue)/v1/sell"
+            let url = "\(BLServerManager.baseUrl.rawValue)/v1/sell"
             let _services = NetwordManager()
             var notAdded = 0
             for (x,carnet) in carnets.enumerated() {

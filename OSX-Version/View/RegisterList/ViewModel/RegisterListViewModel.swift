@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import BLServerManager
 
 class RegisterListViewModel: RegisterListViewModelContract {
    
@@ -24,7 +25,7 @@ class RegisterListViewModel: RegisterListViewModelContract {
         model.sells.removeAll()
         model.payments.removeAll()
     
-        let url = "\(Config.baseUrl.rawValue)/v1/payment?customer=\(model.selectedCustomer._id)"
+        let url = "\(BLServerManager.baseUrl.rawValue)/v1/payment?customer=\(model.selectedCustomer._id)"
         
         let _service = NetwordManager()
         _service.get(url: url) { (data, error) in
@@ -155,7 +156,7 @@ class RegisterListViewModel: RegisterListViewModelContract {
     func cancelRegister() {
         let json = ["isEnabled" : false]
         
-        let url = "\(Config.baseUrl.rawValue)/v1/sell?id=\((model.selectedSellRegister?._id)!)"
+        let url = "\(BLServerManager.baseUrl.rawValue)/v1/sell?id=\((model.selectedSellRegister?._id)!)"
         
         let _service = NetwordManager()
         _service.update(url: url, body: json, response: { (data, error) in
@@ -170,7 +171,7 @@ class RegisterListViewModel: RegisterListViewModelContract {
     func realDeleteEveryRelatedSellAndPayment() {
         let json = ["isEnabled" : false]
         
-        let url = "\(Config.baseUrl.rawValue)/v1/sell?id=\((model.selectedSellRegister?._id)!)"
+        let url = "\(BLServerManager.baseUrl.rawValue)/v1/sell?id=\((model.selectedSellRegister?._id)!)"
         
         let _service = NetwordManager()
         _service.delete(url: url, body: json, response: { (data, error) in
@@ -187,7 +188,7 @@ class RegisterListViewModel: RegisterListViewModelContract {
             if i.sell._id == (model.selectedSellRegister?._id)! {
                 let json = ["isEnabled" : false]
                 
-                let url = "\(Config.baseUrl.rawValue)/v1/payment?id=\(i._id)"
+                let url = "\(BLServerManager.baseUrl.rawValue)/v1/payment?id=\(i._id)"
                 
                 let _service = NetwordManager()
                 _service.delete(url: url, body: json, response: { (data, error) in

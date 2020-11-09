@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import BLServerManager
 
 class ArticleListViewModel : ArticleListViewModelContract {
     var model: ArticleListModel!
@@ -23,7 +24,7 @@ class ArticleListViewModel : ArticleListViewModelContract {
     
     func loadProducts() {
         _view.showLoading()
-        let url = "\(Config.baseUrl.rawValue)/v1/article"
+        let url = "\(BLServerManager.baseUrl.rawValue)/v1/article"
         let _service = NetwordManager()
         _service.get(url: url) { (data, error) in
             guard let data = data else {

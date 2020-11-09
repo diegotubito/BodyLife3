@@ -1,10 +1,10 @@
 import Cocoa
-
+import BLServerManager
 import MapKit
 
 class NewCustomerWorker {
     func saveNewThumbnail(uid: String, thumbnail: String, completion: @escaping (Bool) -> ()) {
-        let url = "\(Config.baseUrl.rawValue)/v1/thumbnail"
+        let url = "\(BLServerManager.baseUrl.rawValue)/v1/thumbnail"
         let _services = NetwordManager()
         
         if thumbnail.isEmpty {
@@ -34,7 +34,7 @@ class NewCustomerWorker {
     
     
     func FindCustomer(dni: String, doExist: @escaping (Bool) -> ()) {
-        let url = "\(Config.baseUrl.rawValue)/v1/customerByDni?dni=\(dni)"
+        let url = "\(BLServerManager.baseUrl.rawValue)/v1/customerByDni?dni=\(dni)"
         let _service = NetwordManager()
         _service.get(url: url) { (data, error) in
             guard let data = data else {
@@ -52,7 +52,7 @@ class NewCustomerWorker {
     }
     
     func SaveCustomer(customer: CustomerModel.Full, completion: @escaping (CustomerModel.Customer?) -> ()) {
-        let url = "\(Config.baseUrl.rawValue)/v1/customer"
+        let url = "\(BLServerManager.baseUrl.rawValue)/v1/customer"
         let _services = NetwordManager()
         let body = encodeNewCustomer(customer)
         _services.post(url: url, body: body) { (data, error) in

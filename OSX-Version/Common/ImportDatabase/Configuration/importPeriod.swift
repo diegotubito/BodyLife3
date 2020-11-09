@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import BLServerManager
 
 extension ImportDatabase {
     class Period {
@@ -73,7 +74,7 @@ extension ImportDatabase {
             guard let periods = ImportDatabase.Period.getPeriods() else {
                 return
             }
-            let url = "\(Config.baseUrl.rawValue)/v1/period"
+            let url = "\(BLServerManager.baseUrl.rawValue)/v1/period"
             let _services = NetwordManager()
             var notAdded = 0
             for (x,period) in periods.enumerated() {

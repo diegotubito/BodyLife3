@@ -8,6 +8,7 @@
 
 import Foundation
 import Cocoa
+import BLServerManager
 
 extension ImportDatabase {
     class Storage {
@@ -149,7 +150,7 @@ extension ImportDatabase {
         }
         
         static func downloadImage(childID: String, completion: @escaping (NSImage?, Error?) -> ()) {
-            let url = "\(Config.baseUrl.rawValue)/v1/downloadImageFromOldBucket?filename=socios/\(childID).jpeg"
+            let url = "\(BLServerManager.baseUrl.rawValue)/v1/downloadImageFromOldBucket?filename=socios/\(childID).jpeg"
             let _services = NetwordManager()
             
             _services.downloadImageFromUrl(url: url) { (image) in

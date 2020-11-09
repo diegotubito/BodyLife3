@@ -10,6 +10,7 @@
 import Foundation
 import Cocoa
 import Alamofire
+import BLServerManager
 
 class NetwordManager {
     var imageCache = NSCache<AnyObject, AnyObject>()
@@ -355,7 +356,7 @@ class NetwordManager {
     }
     
     func uploadPhoto(path: String, imageData: Data, nombre: String, tipo: String, completion:@escaping ([String : Any]?, ServerError?) -> Void ) {
-        let url = "\(Config.baseUrl.rawValue)/v1/uploadImage/\(path)"
+        let url = "\(BLServerManager.baseUrl.rawValue)/v1/uploadImage/\(path)"
         
         let headers: HTTPHeaders = ["Content-type": "multipart/form-data",
                                     "x-access-token" : UserSaved.GetToken()]

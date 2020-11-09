@@ -1,5 +1,4 @@
 import Cocoa
-import AlamofireImage
 
 extension Notification.Name {
     static let newCustomer = Notification.Name("newCustomer")

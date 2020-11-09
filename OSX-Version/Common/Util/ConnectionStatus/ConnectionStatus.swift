@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import BLServerManager
 
 extension Notification.Name {
     static let ServerDisconnected = Notification.Name("ServerDisconnected")
@@ -57,27 +58,51 @@ class Connect {
     }
     
     @objc func refreshToken() {
-        ServerManager.RefreshToken { (data, error) in
-            guard let data = data else {
-                NotificationCenter.default.post(name: .NeedLogin, object: nil, userInfo: nil)
-                return
-            }
-            
+        let endpoint = BLServerManager.prepareEndpoint(to: .RefreshToken(body: ["email" : ""]))
+        BLServerManager.ApiCall(endpoint: endpoint) { (token: ModelRefreshToken) in
             guard let user = UserSaved.GetUser() else {
                 NotificationCenter.default.post(name: .NeedLogin, object: nil, userInfo: nil)
                 return
             }
+            let tokenData = token
             var userSession = user
-            userSession.token = data.token
+            userSession.token = tokenData.token
             UserSaved.Update(userSession)
             UserSession = userSession
+        } fail: { (error) in
+           
         }
     }
     
     func doCheck() {
         if let user = UserSaved.GetUser() {
             print("Connect: User \(String(describing: user.displayName))")
-            ServerManager.RefreshToken { (data, error) in
+            let endpoint = BLServerManager.prepareEndpoint(to: .RefreshToken(body: ["email" : ""]))
+            BLServerManager.ApiCall(endpoint: endpoint) { (token:ModelRefreshToken) in
+                var userSession = user
+                userSession.token = token.token
+                UserSaved.Update(userSession)
+                UserSession = userSession
+                print("Connect: Refresh token SUCCESS")
+                //Select database name
+                if let uid = userSession.uid {
+                    ServerManager.ConntectMongoDB(uid: uid) { (connectedToDatabase) in
+                        
+                        if connectedToDatabase {
+                            print("Connect: database connection SUCCESS name = \(uid)")
+                            NotificationCenter.default.post(name: .CommunicationStablished, object: nil, userInfo: nil)
+                        } else {
+                            print("Connect: database connection FAIL name = \(uid)")
+                        }
+                    }
+                } else {
+                    print("Connect: database connection FAIL name = NIL")
+                }
+            } fail: { (error) in
+                
+            }
+
+        /*    ServerManager.RefreshToken { (data, error) in
                 guard let data = data else {
                     print("Connect: Refresh token FAIL - need to login")
                     NotificationCenter.default.post(name: .NeedLogin, object: nil, userInfo: nil)
@@ -103,7 +128,9 @@ class Connect {
                 } else {
                     print("Connect: database connection FAIL name = NIL")
                 }
+ 
             }
+ */
         } else {
             print("Connect: There's no user saved - need to login")
             NotificationCenter.default.post(name: .NeedLogin, object: nil, userInfo: nil)

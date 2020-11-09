@@ -10,7 +10,8 @@
 #endif
 #endif
 
+#import "BLServerManager.h"
 
-FOUNDATION_EXPORT double AlamofireImageVersionNumber;
-FOUNDATION_EXPORT const unsigned char AlamofireImageVersionString[];
+FOUNDATION_EXPORT double BLServerManagerVersionNumber;
+FOUNDATION_EXPORT const unsigned char BLServerManagerVersionString[];
 

@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import BLServerManager
 
 class ArticleSellView: XibViewBlurBackground {
     var productListView : ArticleListView!
@@ -104,7 +105,7 @@ class ArticleSellView: XibViewBlurBackground {
                                                 priceCost: selectedItem?.priceCost,
                                                 description: selectedItem?.description ?? "")
         
-        let url = "\(Config.baseUrl.rawValue)/v1/sell"
+        let url = "\(BLServerManager.baseUrl.rawValue)/v1/sell"
         let _services = NetwordManager()
         let body = encodeSell(newRegister)
         _services.post(url: url, body: body) { (data, error) in
@@ -139,7 +140,7 @@ class ArticleSellView: XibViewBlurBackground {
                                                 paidAmount: 0,
                                                 productCategory: ProductCategory.article.rawValue)
         
-        let url = "\(Config.baseUrl.rawValue)/v1/payment"
+        let url = "\(BLServerManager.baseUrl.rawValue)/v1/payment"
         let _services = NetwordManager()
         let body = encodePayment(newRegister)
         _services.post(url: url, body: body) { (data, error) in

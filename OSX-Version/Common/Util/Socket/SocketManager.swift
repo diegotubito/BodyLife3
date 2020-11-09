@@ -8,13 +8,14 @@
 
 import SocketIO
 import Cocoa
+import BLServerManager
 
 class SocketHelper: NSObject {
 
     static let shared = SocketHelper()
 
     private let manager = SocketManager(
-        socketURL: URL(string: Config.baseUrl.rawValue)!,
+        socketURL: URL(string: BLServerManager.baseUrl.rawValue)!,
         config: [.forceNew(true)]
     )
 

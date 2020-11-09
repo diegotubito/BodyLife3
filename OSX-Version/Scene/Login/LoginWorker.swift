@@ -1,14 +1,13 @@
 import Cocoa
 import Alamofire
+import BLServerManager
 
 class LoginWorker {
-    
-    
     func doLogin(request: Login.Login.Request, completion: @escaping (Login.Login.Response) -> Void) {
         
         let body = ["email"      : request.userName,
                     "password"   : request.password] as [String : Any]
-        let url = Config.URL.Firebase.Login
+        let url = BLEndpoint.URL.Firebase.Login
         let _service = NetwordManager()
         _service.post(url: url, body: body) { (data, error) in
             var response : Login.Login.Response!

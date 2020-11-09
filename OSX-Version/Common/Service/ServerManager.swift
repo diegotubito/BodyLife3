@@ -8,6 +8,7 @@
 
 
 import Cocoa
+import BLServerManager
 
 class ServerManager {
     static let uid = UserSaved.GetUser()?.uid
@@ -15,7 +16,7 @@ class ServerManager {
     static let Shared = ServerManager()
     
     static func CheckServerConnection(success: @escaping (Bool) -> ()) {
-        let url = Config.URL.Server.CheckServerConnection
+        let url = BLEndpoint.URL.Server.CheckServerConnection
         let _services = NetwordManager()
         _services.get(url: url) { (data, error) in
             guard data != nil else {
@@ -28,7 +29,7 @@ class ServerManager {
     }
     
     static func Transaction(path: String, key: String, value: Double, success: @escaping ()->(), fail: @escaping (ServerError?) -> Void) {
-        let basicUrl = Config.URL.Firebase.transaction
+        let basicUrl = BLEndpoint.URL.Firebase.transaction
         let url = basicUrl + "/users:\(uid!):\(path):\(key)"
         let _services = NetwordManager()
         
@@ -44,7 +45,7 @@ class ServerManager {
     }
     
     static func LoadStock(completion: @escaping (Data?, Error?)->()) {
-        let basicUrl = Config.URL.Firebase.database
+        let basicUrl = BLEndpoint.URL.Firebase.database
         let url = basicUrl + "/users:\(uid!):article"
         let _services = NetwordManager()
         
@@ -104,7 +105,7 @@ class ServerManager {
     }
    
     static func CurrentUser(completion: @escaping (CurrentUserModel?, ServerError?) -> Void) {
-        let url = Config.URL.Firebase.currentUser
+        let url = BLEndpoint.URL.Firebase.currentUser
         
         let _service = NetwordManager()
         _service.get(url: url) { (data, error) in
@@ -123,32 +124,32 @@ class ServerManager {
         }
     }
     
-    static func RefreshToken(completion: @escaping (CurrentUserModel?, ServerError?) -> ()) {
-        let loginJSON = ["email"      : ""] as [String : Any]
-        
-        let url = Config.URL.Server.RefreshToken
-        
-        //HTTP Headers
-        
-        let _service = NetwordManager()
-        _service.post(url: url, body: loginJSON) { (data, serverError) in
-            
-            guard let data = data else {
-                completion(nil, serverError)
-                return
-            }
-            do {
-                
-                let tokenUserDecoded = try JSONDecoder().decode(CurrentUserModel.self, from: data)
-                completion(tokenUserDecoded, nil)
-            } catch {
-                completion(nil, error as? ServerError)
-            }
-        }
-    }
+//    static func RefreshToken(completion: @escaping (CurrentUserModel?, ServerError?) -> ()) {
+//        let loginJSON = ["email"      : ""] as [String : Any]
+//        
+//        let url = Config.URL.Server.RefreshToken
+//        
+//        //HTTP Headers
+//        
+//        let _service = NetwordManager()
+//        _service.post(url: url, body: loginJSON) { (data, serverError) in
+//            
+//            guard let data = data else {
+//                completion(nil, serverError)
+//                return
+//            }
+//            do {
+//                
+//                let tokenUserDecoded = try JSONDecoder().decode(CurrentUserModel.self, from: data)
+//                completion(tokenUserDecoded, nil)
+//            } catch {
+//                completion(nil, error as? ServerError)
+//            }
+//        }
+//    }
     
     static func ConntectMongoDB(uid: String, success: @escaping (Bool) -> ()) {
-        let url = "\(Config.URL.Server.ConnectMongodb)?database=\(uid)"
+        let url = "\(BLEndpoint.URL.Server.ConnectMongodb)?database=\(uid)"
         
         let _service = NetwordManager()
         _service.post(url: url, body: nil) { (data, serverError) in
@@ -161,7 +162,7 @@ class ServerManager {
     }
     
     static func DisconnectMongoDB(success: @escaping (Bool) -> ()) {
-        let url = Config.URL.Server.DisconnectMongodb
+        let url = BLEndpoint.URL.Server.DisconnectMongodb
         
         let _service = NetwordManager()
         _service.post(url: url, body: nil) { (data, serverError) in

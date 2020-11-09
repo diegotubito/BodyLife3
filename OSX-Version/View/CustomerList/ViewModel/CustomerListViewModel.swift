@@ -8,6 +8,7 @@
 
 
 import Cocoa
+import BLServerManager
 
 class CustomerListViewModel: CustomerListViewModelContract {
     var loading = false
@@ -26,7 +27,7 @@ class CustomerListViewModel: CustomerListViewModelContract {
             model.customersbySearch.removeAll()
         }
         _view.showLoading()
-        let url = "\(Config.baseUrl.rawValue)/v1/customer-search?queryString=\(bySearch)&offset=\(offset)&limit=50"
+        let url = "\(BLServerManager.baseUrl.rawValue)/v1/customer-search?queryString=\(bySearch)&offset=\(offset)&limit=50"
         let _services = NetwordManager()
         _services.get(url: url, response: { [weak self] (data, error) in
             self?._view.hideLoading()
@@ -58,7 +59,7 @@ class CustomerListViewModel: CustomerListViewModelContract {
         if loading {return}
         loading = true
         _view.showLoading()
-        let url = "\(Config.baseUrl.rawValue)/v1/customer?offset=\(offset)&limit=50"
+        let url = "\(BLServerManager.baseUrl.rawValue)/v1/customer?offset=\(offset)&limit=50"
         let _services = NetwordManager()
         _services.get(url: url, response: { [weak self] (data, error) in
             self?._view.hideLoading()
@@ -126,7 +127,7 @@ class CustomerListViewModel: CustomerListViewModelContract {
     
     
     func loadImage(row: Int, customer: CustomerModel.Customer, completion: @escaping (NSImage?, Int) -> ()) {
-        let url = "\(Config.baseUrl.rawValue)/v1/thumbnail?uid=\(customer.uid)"
+        let url = "\(BLServerManager.baseUrl.rawValue)/v1/thumbnail?uid=\(customer.uid)"
         
         //if I have already loaded the image, there's no need to load it again.
         if let imageFromCache = imageCache.object(forKey: url as AnyObject) as? NSImage {

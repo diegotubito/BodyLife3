@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import BLServerManager
 
 class PaymentViewModel: PaymentViewModelContract {
    
@@ -40,7 +41,7 @@ class PaymentViewModel: PaymentViewModelContract {
                                                 paidAmount: paidAmount,
                                                 productCategory: productCategory)
         
-        let url = "\(Config.baseUrl.rawValue)/v1/payment"
+        let url = "\(BLServerManager.baseUrl.rawValue)/v1/payment"
         let _services = NetwordManager()
         let body = encodePayment(newRegister)
         _view.showLoading()
