@@ -20,6 +20,9 @@ public enum BLEndpointType {
     case GetAllPeriod
     case GetAllDiscount
     case SaveNewSell(token: String, body: [String : Any])
+    case CheckServerConnection
+    case Transaction(uid: String, path: String, key: String, value: Double)
+    case Stock(uid: String, path: String)
 }
 
 public enum BLServer: String {
@@ -46,7 +49,6 @@ public struct BLEndpoint {
         public static let period = "\(BLServerManager.baseUrl.rawValue)/v1/period"
         public static let discount = "\(BLServerManager.baseUrl.rawValue)/v1/discount"
         public static let sell = "\(BLServerManager.baseUrl.rawValue)/v1/sell"
-        
     }
 }
 

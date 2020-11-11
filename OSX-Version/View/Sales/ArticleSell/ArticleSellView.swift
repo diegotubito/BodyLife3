@@ -119,14 +119,21 @@ class ArticleSellView: XibViewBlurBackground {
             self.addNullPayment(sellId: _id!)
         }
         
-        //update stock
-        let path = "article:\(selectedItem?._id ?? "")"
-        ServerManager.Transaction(path: path, key: "stock", value: -1) {
-            print("stock updated.")
+        updateStock()
+    }
+   
+    private func updateStock() {
+        let path = "\(Paths.productArticle):\(selectedItem?._id ?? "")"
+        let uid = UserSaved.GetUser()?.uid
+        let endpoint = BLServerManager.EndpointValue(to: .Transaction(uid: uid!,
+                                                                      path: path,
+                                                                      key: "stock",
+                                                                      value: -1))
+        BLServerManager.ApiCall(endpoint: endpoint) { (response: Bool) in
+            print("stock updated", response)
         } fail: { (error) in
-            print("couldn't update stock.")
+            print("could not update stock", error.rawValue)
         }
-
     }
     
     private func addNullPayment(sellId: String) {
@@ -139,7 +146,6 @@ class ArticleSellView: XibViewBlurBackground {
                                                 timestamp: createdAt,
                                                 paidAmount: 0,
                                                 productCategory: ProductCategory.article.rawValue)
-        
         let url = "\(BLServerManager.baseUrl.rawValue)/v1/payment"
         let _services = NetwordManager()
         let body = encodePayment(newRegister)

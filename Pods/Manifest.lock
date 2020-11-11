@@ -1,13 +1,13 @@
 PODS:
   - Alamofire (4.9.1)
-  - BLServerManager (0.1.8)
+  - BLServerManager (0.1.9)
   - Socket.IO-Client-Swift (15.2.0):
     - Starscream (~> 3.1)
   - Starscream (3.1.1)
 
 DEPENDENCIES:
   - Alamofire (= 4.9.1)
-  - BLServerManager (= 0.1.8)
+  - BLServerManager (= 0.1.9)
   - Socket.IO-Client-Swift (~> 15.2.0)
 
 SPEC REPOS:
@@ -20,10 +20,10 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
-  BLServerManager: 774ec0d5edebb0cec72f0f42230a7642f3a2d92a
+  BLServerManager: 63f921b309e388a3ee62253a85cd39ad5839d8f9
   Socket.IO-Client-Swift: 1e3e3a1f09f3312a167f0d781eb2f383d477357c
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
 
-PODFILE CHECKSUM: d65d187971dc92933a71c704811018ed20fda200
+PODFILE CHECKSUM: a4a1bf35159e6ed28ccf24c87efd9dad5254e6ec
 
 COCOAPODS: 1.10.0

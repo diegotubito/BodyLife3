@@ -165,6 +165,9 @@ class RegisterListViewModel: RegisterListViewModelContract {
                 return
             }
             self._view.cancelSuccess()
+            if let articleID = self.model.selectedSellRegister?.article {
+                self.updateStock(articleID)
+            }
         })
     }
     
@@ -217,27 +220,23 @@ class RegisterListViewModel: RegisterListViewModelContract {
         return 0.0
     }
     
-    private func updateStockAndSellcount(_ childIDArticle: String) {
-        let pathArticleSellCount = "\(Paths.productArticle):\(childIDArticle)"
-        ServerManager.Transaction(path: pathArticleSellCount, key: "sellCount", value: -1, success: {
-        }) { (err) in
-         
+    private func updateStock(_ childIDArticle: String) {
+        //update stock
+        let path = "\(Paths.productArticle):\(childIDArticle)"
+        let uid = UserSaved.GetUser()?.uid
+        let endpoint = BLServerManager.EndpointValue(to: .Transaction(uid: uid!,
+                                                                      path: path,
+                                                                      key: "stock",
+                                                                      value: 1))
+        BLServerManager.ApiCall(endpoint: endpoint) { (response: Bool) in
+            print("stock updated")
+            NotificationCenter.default.post(.init(name: .needUpdateArticleList))
+        } fail: { (error) in
+            print("could not update stock")
         }
         
-        let pathArticleStock = "\(Paths.productArticle):\(childIDArticle)"
-        ServerManager.Transaction(path: pathArticleStock, key: "stock", value: 1, success: {
-        }) { (err) in
-         
-        }
     }
     
-    private func updateSellcountForActivity(_ childIDActivity: String) {
-        let pathArticleSellCount = "\(Paths.productService):activity:\(childIDActivity)"
-        ServerManager.Transaction(path: pathArticleSellCount, key: "sellCount", value: -1, success: {
-        }) { (err) in
-            
-        }
-    }
     
     func setIsEnabled(row: Int) {
         model.sells[row].isEnabled = false

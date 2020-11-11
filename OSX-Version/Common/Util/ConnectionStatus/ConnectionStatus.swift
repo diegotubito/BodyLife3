@@ -23,12 +23,15 @@ class Connect {
     
     static func StartListening() {
         self.AddObservers()
-        ServerManager.CheckServerConnection { (success) in
-            if success {
+        let endpoint = BLServerManager.EndpointValue(to: .CheckServerConnection)
+        BLServerManager.ApiCall(endpoint: endpoint) { (isConnected: Bool) in
+            if isConnected {
                 SocketHelper.shared.connect()
             } else {
                 NotificationCenter.default.post(name: .ServerDisconnected, object: nil, userInfo: nil)
             }
+        } fail: { (error) in
+            NotificationCenter.default.post(name: .ServerDisconnected, object: nil, userInfo: nil)
         }
         
     }
@@ -58,7 +61,7 @@ class Connect {
     }
     
     @objc func refreshToken() {
-        let endpoint = BLServerManager.prepareEndpoint(to: .RefreshToken(body: ["email" : ""]))
+        let endpoint = BLServerManager.EndpointValue(to: .RefreshToken(body: ["email" : ""]))
         BLServerManager.ApiCall(endpoint: endpoint) { (token: ModelRefreshToken) in
             guard let user = UserSaved.GetUser() else {
                 NotificationCenter.default.post(name: .NeedLogin, object: nil, userInfo: nil)
@@ -77,7 +80,7 @@ class Connect {
     func doCheck() {
         if let user = UserSaved.GetUser() {
             print("Connect: User \(String(describing: user.displayName))")
-            let endpoint = BLServerManager.prepareEndpoint(to: .RefreshToken(body: ["email" : ""]))
+            let endpoint = BLServerManager.EndpointValue(to: .RefreshToken(body: ["email" : ""]))
             BLServerManager.ApiCall(endpoint: endpoint) { (token:ModelRefreshToken) in
                 var userSession = user
                 userSession.token = token.token

@@ -9,5 +9,9 @@
 import Foundation
 
 struct ArticleListModel {
-    var response : ArticleModel.ViewModel!
+    var articles : [ArticleModel.NewRegister]!
+}
+
+struct StockModel: Decodable {
+    var stock : Double
 }

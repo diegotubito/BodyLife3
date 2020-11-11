@@ -26,7 +26,7 @@ class ActivitySaleViewModel : ActivitySaleViewModelContract {
     
     func loadPeriods() {
         _view.showLoading()
-        let request = BLServerManager.prepareEndpoint(to: .GetAllPeriod)
+        let request = BLServerManager.EndpointValue(to: .GetAllPeriod)
         BLServerManager.ApiCall(endpoint: request) { (periods:PeriodModel.ViewModel) in
             self._view.hideLoading()
             self.parseActivityAndDiscount(response: periods)
@@ -38,7 +38,7 @@ class ActivitySaleViewModel : ActivitySaleViewModelContract {
     
     func loadDiscounts() {
         _view.showLoading()
-        let endpoint = BLServerManager.prepareEndpoint(to: .GetAllDiscount)
+        let endpoint = BLServerManager.EndpointValue(to: .GetAllDiscount)
         BLServerManager.ApiCall(endpoint: endpoint) { (result:DiscountModel.ViewModel) in
             self._view.hideLoading()
             self.model.discounts = result.discounts
@@ -190,7 +190,7 @@ extension ActivitySaleViewModel {
                                                 description: description)
         
         let body = encodeSell(newRegister)
-        let endpoint = BLServerManager.prepareEndpoint(to: .SaveNewSell(token: UserSaved.GetToken(),
+        let endpoint = BLServerManager.EndpointValue(to: .SaveNewSell(token: UserSaved.GetToken(),
                                                                         body: body))
         BLServerManager.ApiCall(endpoint: endpoint) { (response:SellModel.NewRegister) in
             let _id = response._id
@@ -222,14 +222,7 @@ extension ActivitySaleViewModel {
             self._view.showSuccessSaving()
         }
     }
-    
-    private func updateSellCountForActivity(_ childIDActivity: String) {
-        let path = "\(Paths.productActivity):\(childIDActivity)"
-        ServerManager.Transaction(path: path, key: "sellCount", value: 1, success: {
-        }) { (err) in
-            
-        }
-    }
+   
     
     private func encodeSell(_ register: SellModel.NewRegister) -> [String : Any] {
         let data = try? JSONEncoder().encode(register)
@@ -248,14 +241,7 @@ extension ActivitySaleViewModel {
             completion(error)
         }
     }
-    
-    func saveNewTransaction(path: String, value: Double) {
-        ServerManager.Transaction(path: path, key: "balance", value: value, success: {
-            print("transaction made")
-        }) { (error) in
-        }
-    }
-
+ 
     func prepareSell(childID: String) -> [String : Any] {
       
         return [String : Any]()

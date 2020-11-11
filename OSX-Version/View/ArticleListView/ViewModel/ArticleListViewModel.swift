@@ -24,16 +24,18 @@ class ArticleListViewModel : ArticleListViewModelContract {
     
     func loadProducts() {
         _view.showLoading()
-        let url = "\(BLServerManager.baseUrl.rawValue)/v1/article"
+        let uid = UserSaved.GetUID()
+        let path = Paths.productArticle
+        let url = BLEndpoint.URL.Firebase.database + "/users:\(uid):\(path)"
         let _service = NetwordManager()
         _service.get(url: url) { (data, error) in
             guard let data = data else {
                 return
             }
             do {
-                let response = try JSONDecoder().decode(ArticleModel.ViewModel.self, from: data)
-                self.model.response = response
-                self.loadStock()
+                let articles = try JSONDecoder().decode([ArticleModel.NewRegister].self, from: data)
+                self.model.articles = articles
+                self.filterAndSort()
             } catch {
                 return
             }
@@ -41,37 +43,13 @@ class ArticleListViewModel : ArticleListViewModelContract {
     }
     
     func filterAndSort() {
-        let sorted = model.response.articles.sorted(by: { $0.description > $1.description })
-        model.response.articles = sorted
+        let sorted = model.articles.sorted(by: { $0.description > $1.description })
+        let filtered = sorted.filter({$0.isEnabled})
+        model.articles = filtered
         _view.displayList()
     }
     
     func getProducts() -> [ArticleModel.NewRegister] {
-        return model.response.articles
-    }
-    
-    func loadStock() {
-        _view.showLoading()
-        ServerManager.LoadStock { (data, error) in
-            guard error == nil, let data = data else {
-                return
-            }
-            
-            if let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String : Any] {
-                for (key, value) in json {
-                    let articles = self.model.response.articles.filter({$0.isEnabled && $0._id == key})
-                    if articles.count > 0 {
-                        if let index = self.model.response.articles.firstIndex(where: {$0._id == key}) {
-                            let stockJSON = value as? [String : Any]
-                            let stock = stockJSON?["stock"] as! Int
-                            self.model.response.articles[index].stock = stock
-                        }
-                    }
-                }
-            }
-            
-            self.filterAndSort()
-            
-        }
+        return model.articles
     }
 }

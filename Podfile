@@ -6,7 +6,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 def shared_pods
   pod 'Alamofire', '4.9.1'
   pod 'Socket.IO-Client-Swift', '~> 15.2.0'
-  pod 'BLServerManager', '0.1.8'
+  pod 'BLServerManager', '0.1.9'
  end
 
 target 'Production-Target' do
