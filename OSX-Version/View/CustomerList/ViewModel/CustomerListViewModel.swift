@@ -41,8 +41,6 @@ class CustomerListViewModel: CustomerListViewModelContract {
                 let response = try JSONDecoder().decode(CustomerListModel.Response.self, from: data)
                 self?.model.response = response
                 self?.model.customersbySearch.append(contentsOf: response.customers)
-                self?.switchLoadingCustomers(bySearch: true)
-                self?.model.countBySearch = response.count
                 self?._view.showSuccess()
                 self?._view.hideLoading()
                 self?.loadImages()
@@ -61,43 +59,30 @@ class CustomerListViewModel: CustomerListViewModelContract {
         _view.showLoading()
         let url = "\(BLServerManager.baseUrl.rawValue)/v1/customer?offset=\(offset)&limit=50"
         let _services = NetwordManager()
-        _services.get(url: url, response: { [weak self] (data, error) in
-            self?._view.hideLoading()
-            self?.loading = false
+        _services.get(url: url, response: { (data, error) in
+            self._view.hideLoading()
+            self.loading = false
             guard error == nil, let data = data else {
-                self?._view.showError()
+                self._view.showError()
                 return
             }
             
             do {
                 let response = try JSONDecoder().decode(CustomerListModel.Response.self, from: data) 
-                self?.model.response = response
-                self?.model.countByPages = response.count
-                self?.model.customersbyPages.append(contentsOf: response.customers)
-                self?._view.hideLoading()
-                self?.switchLoadingCustomers(bySearch: false)
-                self?.loadImages()
-                self?._view.showSuccess()
+                self.model.response = response
+                self.model.customersbyPages.append(contentsOf: response.customers)
+                self._view.hideLoading()
+               self.loadImages()
+                self._view.showSuccess()
             } catch {
-                self?._view.showError()
+                self._view.showError()
             }
 
         })
     }
     
-    func switchLoadingCustomers(bySearch: Bool) {
-        model.bySearch = bySearch
-        if model.bySearch {
-            model.customersToDisplay = model.customersbySearch
-            model.imagesToDisplay = model.imagesBySearch
-        } else {
-            model.customersToDisplay = model.customersbyPages
-            model.imagesToDisplay = model.imagesByPages
-        }
-    }
-    
     func loadImages() {
-        let customers = model.customersToDisplay
+        let customers = model.bySearch ? model.customersbySearch : model.customersbyPages
 
         for (x,customer) in customers.enumerated() {
             
@@ -105,23 +90,17 @@ class CustomerListViewModel: CustomerListViewModelContract {
             
         }
     }
-    
-    
+  
     func loadImage(row: Int, customer: CustomerModel.Customer) {
       
         self.loadImage(row: row, customer: customer) { (image, correctRow) in
             let newImage = CustomerListModel.Images(image: image, _id: customer._id)
-            self.model.imagesToDisplay.append(newImage)
             if self.model.bySearch {
                 self.model.imagesBySearch.append(newImage)
             } else {
                 self.model.imagesByPages.append(newImage)
             }
-            
-            DispatchQueue.main.async {
-                self.switchLoadingCustomers(bySearch: self.model.bySearch)
-                self._view.reloadCell(row: row)
-            }
+            self._view.reloadCell(row: row)
         }
     }
     
@@ -157,15 +136,6 @@ class CustomerListViewModel: CustomerListViewModelContract {
             }
       })
     }
-    
-    
-    func getTotalItems() -> Int {
-        if model.bySearch {
-            return model.countBySearch
-        }
-        else {
-            return model.countByPages
-        }
-    }
+  
 }
 

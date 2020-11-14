@@ -54,18 +54,18 @@ class CustomerListView: NSView {
     @objc func newSellNotificationHandler(notification: Notification) {
         let row = tableViewSocio.selectedRow
         if row == -1 {return}
-        self.onSelectedCustomer?(viewModel.model.customersToDisplay[row] )
+        let customer = viewModel.model.bySearch ? viewModel.model.customersbySearch[row] : viewModel.model.customersbyPages[row]
+        
+        self.onSelectedCustomer?(customer)
     }
     
     @objc func newCustomerNotificationHandler(notification: Notification) {
         let obj = notification.object
         if let customer = obj as? CustomerModel.Customer {
             let image = customer.thumbnailImage?.convertToImage
-            viewModel.model.customersToDisplay.insert(customer, at: 0)
             viewModel.model.customersbyPages.insert(customer, at: 0)
             viewModel.model.imagesByPages.insert(CustomerListModel.Images(image: image, _id: customer._id), at: 0)
-            viewModel.model.imagesToDisplay.insert(CustomerListModel.Images(image: image, _id: customer._id), at: 0)
-            viewModel.model.countByPages += 1
+           
             let index = IndexSet(integer: 0)
             viewModel.model.selectedCustomer = customer
             tableViewSocio.scrollRowToVisible(0)
@@ -83,12 +83,9 @@ class CustomerListView: NSView {
         viewModel.model.selectedCustomer = nil
         viewModel.model.customersbyPages.removeAll()
         viewModel.model.customersbySearch.removeAll()
-        viewModel.model.customersToDisplay.removeAll()
-        viewModel.model.imagesToDisplay.removeAll()
         viewModel.model.imagesByPages.removeAll()
         viewModel.model.imagesBySearch.removeAll()
-        viewModel.model.countByPages = 0
-        viewModel.model.countBySearch = 0
+       
         DispatchQueue.main.async {
             self.tableViewSocio.reloadData()
         }
@@ -105,10 +102,10 @@ extension CustomerListView: NSSearchFieldDelegate {
      
         if (commandSelector == #selector(NSResponder.insertNewline(_:))) {
             if !searchField.stringValue.isEmpty {
-                viewModel.switchLoadingCustomers(bySearch: true)
+                viewModel.model.bySearch = true
                 viewModel.loadCustomers(bySearch: searchField.stringValue, offset: 0)
             } else {
-                viewModel.switchLoadingCustomers(bySearch: false)
+                viewModel.model.bySearch = false
                 tableViewSocio.reloadData()
             }
         }
@@ -151,27 +148,29 @@ extension CustomerListView: NSTableViewDataSource, NSTableViewDelegate {
    
     func numberOfRows(in tableView: NSTableView) -> Int {
         if viewModel == nil {return 0}
-        return self.viewModel.model.customersToDisplay.count
+        let customers = viewModel.model.bySearch ? viewModel.model.customersbySearch : viewModel.model.customersbyPages
+        return customers.count
     }
    
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView?{
       
         let cell : CustomerListCell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "defaultRow"), owner: self) as! CustomerListCell
         
-        let customer = self.viewModel.model.customersToDisplay[row]
+        let customers = viewModel.model.bySearch ? viewModel.model.customersbySearch : viewModel.model.customersbyPages
+        let images = viewModel.model.bySearch ? viewModel.model.imagesBySearch : viewModel.model.imagesByPages
         
-        let apellido = customer.lastName.capitalized
-        let nombre = customer.firstName.capitalized
-        let createdAt = customer.timestamp.toDate1970
+        let apellido = customers[row].lastName.capitalized
+        let nombre = customers[row].firstName.capitalized
+        let createdAt = customers[row].timestamp.toDate1970
         let createdAtAgo = createdAt.desdeHace(numericDates: true) + " \(createdAt.toString(formato: "dd-MM-yyyy HH:mm"))"
         cell.primerRenglonCell.stringValue = apellido + ", " + nombre
         cell.timeAgoCell.stringValue = createdAtAgo
         cell.counterLabel.stringValue = String(row + 1)
-        cell.segundoRenglonCell.stringValue = "uid: \(customer.uid)"
+        cell.segundoRenglonCell.stringValue = "uid: \(customers[row].uid)"
         
         cell.fotoCell.image = nil
         cell.showLoading()
-        let loadedImage = viewModel.model.imagesToDisplay.filter({$0._id == customer._id})
+        let loadedImage = images.filter({$0._id == customers[row]._id})
         if loadedImage.count > 0 {
             cell.hideLoading()
             if let image = loadedImage[0].image {
@@ -181,16 +180,12 @@ extension CustomerListView: NSTableViewDataSource, NSTableViewDelegate {
             }
         }
         
-        let count = viewModel.model.customersToDisplay.count
+        let count = customers.count
         if row == (count - 1) - 25 {
-            if count < viewModel.getTotalItems() {
-                if viewModel.model.bySearch {
-                    viewModel.switchLoadingCustomers(bySearch: true)
-                    viewModel.loadCustomers(bySearch: searchField.stringValue, offset: count)
-                } else {
-                    viewModel.switchLoadingCustomers(bySearch: false)
-                    viewModel.loadCustomers(offset: count)
-                }
+            if viewModel.model.bySearch {
+                viewModel.loadCustomers(bySearch: searchField.stringValue, offset: count)
+            } else {
+                viewModel.loadCustomers(offset: count)
             }
         }
         
@@ -212,7 +207,8 @@ extension CustomerListView: NSTableViewDataSource, NSTableViewDelegate {
              if myTable == tableViewSocio {
                 let posicion = myTable.selectedRow
                 if posicion == -1 {return}
-                self.viewModel.model.selectedCustomer = viewModel.model.customersToDisplay[posicion]
+                let customer = viewModel.model.bySearch ? viewModel.model.customersbySearch[posicion] : viewModel.model.customersbyPages[posicion]
+                self.viewModel.model.selectedCustomer = customer
                 if viewModel.model.selectedCustomer != nil {
                     self.onSelectedCustomer?(viewModel.model.selectedCustomer!)
                 }
