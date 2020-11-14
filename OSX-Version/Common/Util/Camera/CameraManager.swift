@@ -10,90 +10,83 @@ import Cocoa
 import AVFoundation
 import AVKit
 
-protocol CameraManagerDelegate: class {
-    func imagenCapturada(image: NSImage)
+protocol CameraViewControllerDelegate: class {
+    func capturedImage(originalSize image: NSImage)
 }
 
-class CameraManager: NSObject {
-    weak var delegate : CameraManagerDelegate?
-    
+class CameraViewController: NSViewController {
+    weak var delegate : CameraViewControllerDelegate?
+    @IBOutlet var previewCam: AVCaptureView!
     var session : AVCaptureSession = AVCaptureSession()
+    var output = AVCapturePhotoOutput()
     
-    var tamañoActual : Int!
-    var tamañoOriginal : Int!
-    
-    var imagen = NSImage() {
+    var capturedImage = NSImage() {
         didSet {
-            self.delegate?.imagenCapturada(image: self.imagen)
-            
+            DispatchQueue.main.async {
+                self.session.stopRunning()
+                self.view.window?.close()
+                self.delegate?.capturedImage(originalSize: self.capturedImage)
+            }
         }
     }
     
-    override init() {
-        super .init()
-        correrSessionCamara()
+    override func viewDidLoad() {
+        super .viewDidLoad()
+        setupSession()
     }
     
-    var output : AVCaptureStillImageOutput!
+    override func viewWillAppear() {
+        super.viewWillAppear()
+        preferredContentSize = view.fittingSize
+    }
     
-
-    func tomarFotoPressed(completion: @escaping (NSImage?) -> ()) {
+    @IBAction func tomarFotoPressed(_ sender: Any) {
         guard let connection = output.connection(with: AVMediaType.video) else { return }
         connection.videoOrientation = .portrait
-        
-        output.captureStillImageAsynchronously(from: connection) { (sampleBuffer, error) in
-            guard sampleBuffer != nil && error == nil else { return }
-            
-            let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(sampleBuffer!)
-            guard let image = NSImage(data: imageData!) else
-            {
-                completion(nil)
-                return
-                
-            }
-            
-            completion(image)
-        }
+        let photoSettings = AVCapturePhotoSettings(format: [AVVideoCodecKey:AVVideoCodecType.jpeg])
+        output.capturePhoto(with: photoSettings, delegate: self)
     }
     
-    func StopSession() {
+    @IBAction func cancelarClicked(_ sender: Any) {
         session.stopRunning()
+        view.window?.close()
     }
     
-    func correrSessionCamara() {
+    func setupSession() {
+        view.wantsLayer = true
+        previewCam.wantsLayer = true
         session.sessionPreset = AVCaptureSession.Preset.photo
-        
-        guard let device = AVCaptureDevice.default(.builtInWideAngleCamera, for: AVMediaType.video, position: .front) else {
-            fatalError("no front camera. but don't all iOS 10 devices have them?")
-            return
+        let device = bestDevice(in: .unspecified)
+        let device_input : AVCaptureDeviceInput = try! AVCaptureDeviceInput(device: device)
+        let previewLayer:AVCaptureVideoPreviewLayer = AVCaptureVideoPreviewLayer(session: session)
+        guard session.canAddInput(device_input) && session.canAddOutput(output) else { return }
+        previewLayer.frame = previewCam.bounds
+        previewLayer.videoGravity = AVLayerVideoGravity.resize
+        self.previewCam.layer?.addSublayer(previewLayer)
+        if session.canAddInput(device_input)
+        {
+            session.addInput(device_input)
         }
-            
-            
-        
-        if let device : [AVCaptureDevice] = AVCaptureDevice.devices() {
-            let device_input : AVCaptureDeviceInput = try! AVCaptureDeviceInput(device: device[0])
-            
-            let previewLayer:AVCaptureVideoPreviewLayer = AVCaptureVideoPreviewLayer(session: session)
-            
-            output = AVCaptureStillImageOutput()
-            
-            output.outputSettings = [ AVVideoCodecKey: AVVideoCodecType.jpeg ]
-            
-            guard session.canAddInput(device_input) && session.canAddOutput(output) else { return }
-            
-            if session.canAddInput(device_input)
-            {
-                session.addInput(device_input)
-                
-            }
-            if session.canAddOutput(output) {
-                session.addOutput(output)
-            }
-            
+        if session.canAddOutput(output) {
+            session.addOutput(output)
         }
         session.startRunning()
+    }
+    
+    func bestDevice(in position: AVCaptureDevice.Position) -> AVCaptureDevice {
+        let discoverySession = AVCaptureDevice.DiscoverySession.init(deviceTypes: [.builtInWideAngleCamera], mediaType: nil, position: .front)
+        let devices = discoverySession.devices
+        guard !devices.isEmpty else { fatalError("Missing capture devices.")}
         
+        return devices.first(where: { device in device.position == position })!
     }
 }
 
-
+extension CameraViewController : AVCapturePhotoCaptureDelegate{
+    func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
+        let imageData = photo.fileDataRepresentation()
+        if let data = imageData, let img = NSImage(data: data) {
+            self.capturedImage = img
+        }
+    }
+}

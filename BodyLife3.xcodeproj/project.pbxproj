@@ -43,7 +43,6 @@
 		1147AB7A2384D41900D19AA9 /* CustomerStatusViewModelContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1147AB792384D41900D19AA9 /* CustomerStatusViewModelContract.swift */; };
 		1147AB7C2384D49E00D19AA9 /* CustomerStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1147AB7B2384D49E00D19AA9 /* CustomerStatusViewModel.swift */; };
 		1147AB7E238611C200D19AA9 /* NSViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1147AB7D238611C200D19AA9 /* NSViewExtension.swift */; };
-		11498E4F251FFEC600E4D679 /* bodyshaping.json in Resources */ = {isa = PBXBuildFile; fileRef = 11498E4E251FFEC600E4D679 /* bodyshaping.json */; };
 		11498E582520069700E4D679 /* importDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11498E572520069700E4D679 /* importDatabase.swift */; };
 		11498E5B25203B9A00E4D679 /* MapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11498E5A25203B9A00E4D679 /* MapManager.swift */; };
 		11498E602520975000E4D679 /* ImportCustomer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11498E5F2520975000E4D679 /* ImportCustomer.swift */; };
@@ -76,7 +75,6 @@
 		115784E2252B85C0008A89DC /* SaveButtonCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111DE56C2389F567002F4216 /* SaveButtonCustomView.swift */; };
 		115784E3252B85C0008A89DC /* PeriodListViewModelContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CE96423EDCDEF00688C0B /* PeriodListViewModelContract.swift */; };
 		115784E4252B85C0008A89DC /* RegisterListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CEB6223A1E2F30081D356 /* RegisterListView.swift */; };
-		115784E5252B85C0008A89DC /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11639339238214AC00D14B19 /* CameraViewController.swift */; };
 		115784E6252B85C0008A89DC /* SellRegisterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CEB6523A3115E0081D356 /* SellRegisterCell.swift */; };
 		115784E7252B85C0008A89DC /* ErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD36523766D2500AB4BFF /* ErrorModel.swift */; };
 		115784E8252B85C0008A89DC /* PeriodListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CE96D23EDE94A00688C0B /* PeriodListItem.swift */; };
@@ -178,7 +176,6 @@
 		11578549252B85C0008A89DC /* Observers+HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114A541223A7C8F200F2746A /* Observers+HomeViewController.swift */; };
 		1157854A252B85C0008A89DC /* CustomerStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1147AB702384AA0600D19AA9 /* CustomerStatusView.swift */; };
 		1157854B252B85C0008A89DC /* RegisterListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114A540C23A5A99F00F2746A /* RegisterListViewModel.swift */; };
-		1157854F252B85C0008A89DC /* bodyshaping.json in Resources */ = {isa = PBXBuildFile; fileRef = 11498E4E251FFEC600E4D679 /* bodyshaping.json */; };
 		11578550252B85C0008A89DC /* ErrorMessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 110664C623775D6000DC44F3 /* ErrorMessageView.xib */; };
 		11578551252B85C0008A89DC /* Expense.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 114C541F241401B5000CC75A /* Expense.storyboard */; };
 		11578552252B85C0008A89DC /* AssetsOSX.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11EBD3272376499F00AB4BFF /* AssetsOSX.xcassets */; };
@@ -205,7 +202,6 @@
 		1163932B2381975600D14B19 /* ValidationField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1163932A2381975600D14B19 /* ValidationField.swift */; };
 		1163932E2381AA0400D14B19 /* TextFieldValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1163932D2381AA0400D14B19 /* TextFieldValidation.swift */; };
 		1163933723820CA500D14B19 /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1163933623820CA500D14B19 /* CameraManager.swift */; };
-		1163933A238214AC00D14B19 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11639339238214AC00D14B19 /* CameraViewController.swift */; };
 		1163933C238229DE00D14B19 /* imageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1163933B238229DE00D14B19 /* imageExtension.swift */; };
 		1166AF3523B27F880047C7AE /* ArticleViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1166AF3323B27F880047C7AE /* ArticleViewItem.swift */; };
 		1166AF3623B27F880047C7AE /* ArticleViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1166AF3423B27F880047C7AE /* ArticleViewItem.xib */; };
@@ -282,6 +278,8 @@
 		11EEF0F4239D4A91007C9821 /* PaymentViewModelContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EEF0F3239D4A91007C9821 /* PaymentViewModelContract.swift */; };
 		11EEF0F6239D4A98007C9821 /* PaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EEF0F5239D4A98007C9821 /* PaymentViewModel.swift */; };
 		11EEF0F8239D4AA1007C9821 /* NewPaymentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EEF0F7239D4AA1007C9821 /* NewPaymentModel.swift */; };
+		11FFB781255DE64E00C65E11 /* bodyshaping.json in Resources */ = {isa = PBXBuildFile; fileRef = 11FFB780255DE64E00C65E11 /* bodyshaping.json */; };
+		11FFB782255DE64E00C65E11 /* bodyshaping.json in Resources */ = {isa = PBXBuildFile; fileRef = 11FFB780255DE64E00C65E11 /* bodyshaping.json */; };
 		B3908D156960A159B2A9D032 /* Pods_Production_Target.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F45EC514CD5FFD1D5AF94A5 /* Pods_Production_Target.framework */; };
 		D54D0B073ED3FAF9D330DE4C /* Pods_Internal_Target.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ECCD00A415CE28FF4C4F58C /* Pods_Internal_Target.framework */; };
 /* End PBXBuildFile section */
@@ -323,7 +321,6 @@
 		1147AB792384D41900D19AA9 /* CustomerStatusViewModelContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerStatusViewModelContract.swift; sourceTree = "<group>"; };
 		1147AB7B2384D49E00D19AA9 /* CustomerStatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerStatusViewModel.swift; sourceTree = "<group>"; };
 		1147AB7D238611C200D19AA9 /* NSViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSViewExtension.swift; sourceTree = "<group>"; };
-		11498E4E251FFEC600E4D679 /* bodyshaping.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bodyshaping.json; sourceTree = "<group>"; };
 		11498E572520069700E4D679 /* importDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = importDatabase.swift; sourceTree = "<group>"; };
 		11498E5A25203B9A00E4D679 /* MapManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapManager.swift; sourceTree = "<group>"; };
 		11498E5F2520975000E4D679 /* ImportCustomer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportCustomer.swift; sourceTree = "<group>"; };
@@ -350,7 +347,6 @@
 		1163932A2381975600D14B19 /* ValidationField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationField.swift; sourceTree = "<group>"; };
 		1163932D2381AA0400D14B19 /* TextFieldValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldValidation.swift; sourceTree = "<group>"; };
 		1163933623820CA500D14B19 /* CameraManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
-		11639339238214AC00D14B19 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		1163933B238229DE00D14B19 /* imageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imageExtension.swift; sourceTree = "<group>"; };
 		1166AF3323B27F880047C7AE /* ArticleViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewItem.swift; sourceTree = "<group>"; };
 		1166AF3423B27F880047C7AE /* ArticleViewItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticleViewItem.xib; sourceTree = "<group>"; };
@@ -429,6 +425,7 @@
 		11EEF0F3239D4A91007C9821 /* PaymentViewModelContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewModelContract.swift; sourceTree = "<group>"; };
 		11EEF0F5239D4A98007C9821 /* PaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewModel.swift; sourceTree = "<group>"; };
 		11EEF0F7239D4AA1007C9821 /* NewPaymentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPaymentModel.swift; sourceTree = "<group>"; };
+		11FFB780255DE64E00C65E11 /* bodyshaping.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bodyshaping.json; sourceTree = "<group>"; };
 		2ECCD00A415CE28FF4C4F58C /* Pods_Internal_Target.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Internal_Target.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E8609A42B2DD3EA93A01A43 /* Pods-Production-Target.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Production-Target.debug.xcconfig"; path = "Target Support Files/Pods-Production-Target/Pods-Production-Target.debug.xcconfig"; sourceTree = "<group>"; };
 		641EE16B88D759A122ACA44B /* Pods-Production-Target.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Production-Target.release.xcconfig"; path = "Target Support Files/Pods-Production-Target/Pods-Production-Target.release.xcconfig"; sourceTree = "<group>"; };
@@ -777,14 +774,6 @@
 			path = Camera;
 			sourceTree = "<group>";
 		};
-		116393382382149F00D14B19 /* Camera */ = {
-			isa = PBXGroup;
-			children = (
-				11639339238214AC00D14B19 /* CameraViewController.swift */,
-			);
-			path = Camera;
-			sourceTree = "<group>";
-		};
 		1166AF3223B27F650047C7AE /* ProductViewItem */ = {
 			isa = PBXGroup;
 			children = (
@@ -1016,7 +1005,7 @@
 				11EBD35323765C9800AB4BFF /* Scene */,
 				11EBD35223765C9200AB4BFF /* Storyboard */,
 				11EBD3272376499F00AB4BFF /* AssetsOSX.xcassets */,
-				11498E4E251FFEC600E4D679 /* bodyshaping.json */,
+				11FFB780255DE64E00C65E11 /* bodyshaping.json */,
 				11EBD32C2376499F00AB4BFF /* Info.plist */,
 				11EBD3242376499F00AB4BFF /* OSX_Version.xcdatamodeld */,
 				110664D92377C38100DC44F3 /* OSX-VersionDebug.entitlements */,
@@ -1087,7 +1076,6 @@
 			children = (
 				112021752518316C002B61B5 /* Movements */,
 				114C54082413FE19000CC75A /* Expense */,
-				116393382382149F00D14B19 /* Camera */,
 				11EBD3832377269100AB4BFF /* Login */,
 				11EBD376237712E600AB4BFF /* Home */,
 				110664EC2378F1FC00DC44F3 /* NewCustomer */,
@@ -1291,7 +1279,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1157854F252B85C0008A89DC /* bodyshaping.json in Resources */,
 				114AC2C525525638007A0AFD /* MoneyFlow.storyboard in Resources */,
 				11578550252B85C0008A89DC /* ErrorMessageView.xib in Resources */,
 				11578551252B85C0008A89DC /* Expense.storyboard in Resources */,
@@ -1309,6 +1296,7 @@
 				1157855D252B85C0008A89DC /* Info.plist in Resources */,
 				1157855E252B85C0008A89DC /* PeriodListItem.xib in Resources */,
 				1157855F252B85C0008A89DC /* CustomerStatusView.xib in Resources */,
+				11FFB782255DE64E00C65E11 /* bodyshaping.json in Resources */,
 				11578560252B85C0008A89DC /* ArticleViewItem.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1317,7 +1305,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				11498E4F251FFEC600E4D679 /* bodyshaping.json in Resources */,
+				11FFB781255DE64E00C65E11 /* bodyshaping.json in Resources */,
 				110664C723775D6000DC44F3 /* ErrorMessageView.xib in Resources */,
 				114C5420241401B5000CC75A /* Expense.storyboard in Resources */,
 				11EBD3282376499F00AB4BFF /* AssetsOSX.xcassets in Resources */,
@@ -1438,7 +1426,6 @@
 				115784E2252B85C0008A89DC /* SaveButtonCustomView.swift in Sources */,
 				115784E3252B85C0008A89DC /* PeriodListViewModelContract.swift in Sources */,
 				115784E4252B85C0008A89DC /* RegisterListView.swift in Sources */,
-				115784E5252B85C0008A89DC /* CameraViewController.swift in Sources */,
 				115784E6252B85C0008A89DC /* SellRegisterCell.swift in Sources */,
 				115784E7252B85C0008A89DC /* ErrorModel.swift in Sources */,
 				115784E8252B85C0008A89DC /* PeriodListItem.swift in Sources */,
@@ -1564,7 +1551,6 @@
 				111DE56D2389F567002F4216 /* SaveButtonCustomView.swift in Sources */,
 				116CE96523EDCDEF00688C0B /* PeriodListViewModelContract.swift in Sources */,
 				116CEB6323A1E2F30081D356 /* RegisterListView.swift in Sources */,
-				1163933A238214AC00D14B19 /* CameraViewController.swift in Sources */,
 				116CEB6623A3115E0081D356 /* SellRegisterCell.swift in Sources */,
 				11EBD36623766D2500AB4BFF /* ErrorModel.swift in Sources */,
 				116CE96F23EDE94A00688C0B /* PeriodListItem.swift in Sources */,

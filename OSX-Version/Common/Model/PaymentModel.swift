@@ -55,7 +55,7 @@ class PaymentModel {
         struct AUX: Decodable {
             var _id : String
             var customer : CustomerModel.Customer
-            var sell : SellModel.NewRegister
+            var sell : SellModel.NewRegister?
             var isEnabled : Bool
             var timestamp : Double
             var paidAmount : Double

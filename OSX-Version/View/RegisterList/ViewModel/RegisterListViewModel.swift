@@ -29,9 +29,8 @@ class RegisterListViewModel: RegisterListViewModelContract {
         
         let _service = NetwordManager()
         _service.get(url: url) { (data, error) in
- 
+            self._view.hideLoading()
             guard let data = data else {
-                self._view.hideLoading()
                 self._view.showError(value: error?.localizedDescription ?? ServerError.unknown_auth_error.localizedDescription)
                 return
             }
@@ -40,6 +39,7 @@ class RegisterListViewModel: RegisterListViewModelContract {
                 self.parsePaymentAndSell(response: response)
             } catch {
                 print("Could not parse")
+                self._view.notificateStatusInfo(data: nil)
                 return
             }
         }
@@ -74,9 +74,10 @@ class RegisterListViewModel: RegisterListViewModelContract {
         var lastDiscount : String?
         
         for (x,sell) in sells.enumerated() {
+            
             let amountToPay = sell.price
             
-            let correctPayments = payments.filter({$0.self.sell._id == sell._id})
+            let correctPayments = payments.filter({$0.self.sell?._id == sell._id})
             
             let partialPayments = calcTotalPayment(payments: correctPayments)
             let balance = partialPayments - (amountToPay ?? 0)
@@ -138,7 +139,7 @@ class RegisterListViewModel: RegisterListViewModelContract {
     
     func getPaymentsForSelectedRegister() -> [PaymentModel.ViewModel.AUX] {
         let payments = model.payments
-        let filter = payments.filter({$0.sell._id == model.selectedSellRegister?._id})
+        let filter = payments.filter({$0.sell?._id == model.selectedSellRegister?._id})
         return filter
     }
 
@@ -188,7 +189,7 @@ class RegisterListViewModel: RegisterListViewModelContract {
         
         for i in model.payments {
             
-            if i.sell._id == (model.selectedSellRegister?._id)! {
+            if i.sell?._id == (model.selectedSellRegister?._id)! {
                 let json = ["isEnabled" : false]
                 
                 let url = "\(BLServerManager.baseUrl.rawValue)/v1/payment?id=\(i._id)"

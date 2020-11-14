@@ -33,7 +33,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         //Necesito guardar el environment, de lo contrario, estaria con un usuario incorrecto.
         //lo podria evitar cerrando session, para limpiar el usuario, pero a veces se olvida.
         //esto fuerza a un cierre de session y limpieza del usuario
-        //como consecuencia, cada vez que cambio de target, es necesario volver a loguearse.
+        //cada vez que cambio de target, es necesario volver a loguearse, porque se borra el usuario de default.
  
         let lastEnvironment = UserDefaults.standard.string(forKey: "lastEnvironment")
         #if INTERNAL
