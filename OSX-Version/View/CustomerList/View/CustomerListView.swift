@@ -162,11 +162,11 @@ extension CustomerListView: NSTableViewDataSource, NSTableViewDelegate {
         let apellido = customers[row].lastName.capitalized
         let nombre = customers[row].firstName.capitalized
         let createdAt = customers[row].timestamp.toDate1970
-        let createdAtAgo = createdAt.desdeHace(numericDates: true) + " \(createdAt.toString(formato: "dd-MM-yyyy HH:mm"))"
+        let createdAtAgo = createdAt.desdeHace(numericDates: true) + "\n\(createdAt.toString(formato: "dd-MM-yyyy"))"
         cell.primerRenglonCell.stringValue = apellido + ", " + nombre
         cell.timeAgoCell.stringValue = createdAtAgo
         cell.counterLabel.stringValue = String(row + 1)
-        cell.segundoRenglonCell.stringValue = "uid: \(customers[row].uid)"
+        cell.segundoRenglonCell.stringValue = "Cel: \(customers[row].phoneNumber)"
         
         cell.fotoCell.image = nil
         cell.showLoading()
