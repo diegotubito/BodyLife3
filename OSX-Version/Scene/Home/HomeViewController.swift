@@ -1,4 +1,5 @@
 import Cocoa
+import BLServerManager
 
 protocol HomeDisplayLogic: class {
     func displaySomething(viewModel: Home.Something.ViewModel)
@@ -137,13 +138,13 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
     }
     
     @IBAction func closeSessionPressed(_ sender: Any) {
-        ServerManager.DisconnectMongoDB { (success) in
-            if success {
-                UserSaved.Remove()
-                self.GoToLogin()
-            } else {
-                print("could not disconnect db")
-            }
+        let endpoint = BLServerManager.EndpointValue(to: .DisconnectMongoDB)
+        BLServerManager.ApiCall(endpoint: endpoint) { (success: Bool) in
+            print("MongoDB database disconnected.")
+            UserSaved.Remove()
+            self.GoToLogin()
+        } fail: { (error) in
+            print("Could not disconnect MongoDB database.")
         }
     }
     @IBAction func newExpensePressed(_ sender: Any) {

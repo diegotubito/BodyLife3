@@ -72,6 +72,12 @@ public class BLServerManager {
                                    method: "GET",
                                    query: nil,
                                    body: nil)
+        case .ConnectToMongoDB(query: let query):
+            let url = "\(BLEndpoint.URL.Server.ConnectMongodb)"
+            return BLEndpointModel(url: url, token: nil, method: "POST", query: query, body: nil)
+        case .DisconnectMongoDB:
+            let url = BLEndpoint.URL.Server.DisconnectMongodb
+            return BLEndpointModel(url: url, token: nil, method: "POST", query: nil, body: nil)
         }
     }
     

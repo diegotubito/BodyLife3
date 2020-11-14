@@ -31,6 +31,7 @@ protocol ActivitySaleViewModelContract {
     func getDiscounts() -> [DiscountModel.NewRegister]
     func setFromDate()
     func setEndDate()
+    func setFromDate(value: Date)
     
     func save(fromDate: Date, toDate: Date, price: Double, priceList: Double) 
 }
@@ -45,7 +46,6 @@ protocol ActivitySaleViewContract {
     func setPopupDiscountByTitle(_ value: String?)
     func showPeriods()
     func showDiscounts()
-    
     func showFromDate(value: Date)
     func showEndDate(value: Date)
 }

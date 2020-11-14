@@ -31,7 +31,9 @@ class CustomerStatusView: XibViewWithAnimation {
     @IBOutlet weak var errorView: NSView!
     var viewModel : CustomerStatusViewModelContract!
     @IBOutlet weak var DayBox: NSBox!
+    @IBOutlet weak var sellArticleButtonOutlet: NSButton!
     
+    @IBOutlet weak var sellActivityButtonOutlet: NSButton!
     var didPressSellActivityButton : (() -> ())?
     var didPressSellProductButton : (() -> ())?
     var profilePictureRequest : URLSessionDataTask?
@@ -60,12 +62,12 @@ class CustomerStatusView: XibViewWithAnimation {
         errorView.layer?.zPosition = 100
         
         self.DayBox.wantsLayer = true
-        
       
         NotificationCenter.default.addObserver(self, selector: #selector(updateDataFromNotification), name: .notificationUpdateStatus, object: nil)
     }
     
     @objc func updateDataFromNotification(notification: Notification) {
+        
         let userInfo = notification.object as? CustomerStatusModel.StatusInfo
         DispatchQueue.main.async {
             self.showData(statusInfo: userInfo)
@@ -87,6 +89,8 @@ class CustomerStatusView: XibViewWithAnimation {
     }
     
     func initValues() {
+        sellActivityButtonOutlet.isEnabled = false
+        sellArticleButtonOutlet.isEnabled = false
         expirationDateLabel.stringValue = ""
         saldoLabel.stringValue = ""
         remainingDayLabel.stringValue = ""
@@ -137,7 +141,9 @@ class CustomerStatusView: XibViewWithAnimation {
 extension CustomerStatusView : CustomerStatusViewContract{
     func showData(statusInfo: CustomerStatusModel.StatusInfo?) {
         errorView.isHidden = true
-    
+        self.sellArticleButtonOutlet.isEnabled = true
+        self.sellActivityButtonOutlet.isEnabled = true
+
         guard let statusInfo = statusInfo else {
             expirationDateLabel.stringValue = "?"
             saldoLabel.stringValue = "?"

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17156" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17506" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17156"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17506"/>
         <capability name="System colors introduced in macOS 10.14" minToolsVersion="10.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,6 +20,8 @@
                 <outlet property="profilePicture" destination="hgy-GR-QxU" id="Xbg-0m-CkA"/>
                 <outlet property="remainingDayLabel" destination="7eP-sd-Clw" id="diH-TR-Eeo"/>
                 <outlet property="saldoLabel" destination="FMQ-l3-Oeq" id="qXD-6I-5ou"/>
+                <outlet property="sellActivityButtonOutlet" destination="DIe-nX-XIk" id="02z-e8-8mr"/>
+                <outlet property="sellArticleButtonOutlet" destination="han-Ia-x20" id="gIC-CY-a3i"/>
                 <outlet property="titleLabel" destination="2wd-pp-b16" id="hAG-50-H0v"/>
             </connections>
         </customObject>
@@ -70,7 +72,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7eP-sd-Clw">
-                                        <rect key="frame" x="29" y="41" width="47" height="24"/>
+                                        <rect key="frame" x="29" y="41" width="47" height="25"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="- - - " id="e4g-cF-5E5">
                                             <font key="font" metaFont="system" size="21"/>
                                             <color key="textColor" red="0.57414853570000002" green="0.57416242360000003" blue="0.57415497299999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

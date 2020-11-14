@@ -89,14 +89,12 @@ class Connect {
                 print("Connect: Refresh token SUCCESS")
                 //Select database name
                 if let uid = userSession.uid {
-                    ServerManager.ConntectMongoDB(uid: uid) { (connectedToDatabase) in
-                        
-                        if connectedToDatabase {
-                            print("Connect: database connection SUCCESS name = \(uid)")
-                            NotificationCenter.default.post(name: .CommunicationStablished, object: nil, userInfo: nil)
-                        } else {
-                            print("Connect: database connection FAIL name = \(uid)")
-                        }
+                    let endpoint = BLServerManager.EndpointValue(to: .ConnectToMongoDB(query: "?database=\(uid)"))
+                    BLServerManager.ApiCall(endpoint: endpoint) { (success: Bool) in
+                        print("Connect: database connection SUCCESS name = \(uid)")
+                        NotificationCenter.default.post(name: .CommunicationStablished, object: nil, userInfo: nil)
+                    } fail: { (error) in
+                        print("Connect: database connection FAIL name = \(uid)")
                     }
                 } else {
                     print("Connect: database connection FAIL name = NIL")

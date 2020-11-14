@@ -23,7 +23,7 @@ class ArticleViewItem: GenericCollectionItem<ArticleModel.NewRegister> {
         didSet {
             productName.stringValue = item.description
             productPrice.stringValue = item.price.currencyFormat(decimal: 2)
-            productIcon.image = #imageLiteral(resourceName: "coca2")
+            productIcon.image = #imageLiteral(resourceName: "coca1")
             stockLabel.stringValue = String(item.stock)
             stockBrackground.layer?.backgroundColor = determinateColor().cgColor
         }
@@ -50,7 +50,7 @@ class ArticleViewItem: GenericCollectionItem<ArticleModel.NewRegister> {
         selectionBackgroundColor = Constants.Colors.Blue.blueWhale
         selectionBorderWidth = 0
         stockBrackground.wantsLayer = true
-        stockBrackground.layer?.cornerRadius = 10
+        stockBrackground.layer?.cornerRadius = 13
         stockBrackground.layer?.backgroundColor = Constants.Colors.Red.ematita.cgColor
         stockLabel.textColor = NSColor.black
         

@@ -23,6 +23,8 @@ public enum BLEndpointType {
     case CheckServerConnection
     case Transaction(uid: String, path: String, key: String, value: Double)
     case Stock(uid: String, path: String)
+    case ConnectToMongoDB(query: String)
+    case DisconnectMongoDB
 }
 
 public enum BLServer: String {

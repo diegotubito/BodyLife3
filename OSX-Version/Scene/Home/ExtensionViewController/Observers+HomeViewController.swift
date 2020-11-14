@@ -27,7 +27,7 @@ extension HomeViewController {
             self?.customerStatusView.ageLabel.stringValue = String(age) + " Años"
             self?.customerStatusView.titleLabel.stringValue = customer.lastName + ", " + customer.firstName
             self?.sellRegisterView.setSelectedCustomer(customer: customer)
-            self?.timerForDelayCustomerSelection = Timer.scheduledTimer(timeInterval: 0.25, target: self, selector: #selector(self?.loadStatus), userInfo: nil, repeats: false)
+            self?.timerForDelayCustomerSelection = Timer.scheduledTimer(timeInterval: 0.25, target: self as Any, selector: #selector(self?.loadStatus), userInfo: nil, repeats: false)
             if ((self?.sellRegisterView.isHidden) != nil) {
                 self?.sellRegisterView.animateMode = .fadeIn
             }
@@ -64,8 +64,6 @@ extension HomeViewController {
             self.customerStatusView.animateMode = .fadeIn
         }
     }
-    
-   
     
     func didSelectCustomer(customerSelected: CustomerModel.Customer) {
         DispatchQueue.main.async {

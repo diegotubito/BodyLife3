@@ -122,7 +122,7 @@ class ActivitySaleView : XibViewBlurBackground {
     
     
     @IBAction func fromDateDidChanged(_ sender: NSDatePicker?) {
-       
+        viewModel.setFromDate(value: fromDate.dateValue)
     }
     
     @IBAction func endDateDidChanged(_ sender: NSDatePicker) {
@@ -189,6 +189,7 @@ class ActivitySaleView : XibViewBlurBackground {
 
 
 extension ActivitySaleView: ActivitySaleViewContract {
+   
     func showSuccessSaving() {
         DispatchQueue.main.async {
             NotificationCenter.default.post(name: .needUpdateCustomerList, object: nil)

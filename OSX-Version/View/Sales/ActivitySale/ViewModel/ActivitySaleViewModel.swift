@@ -236,12 +236,6 @@ extension ActivitySaleViewModel {
         return json!
     }
     
-    func saveNewMembership(datos: [String: Any], path: String, completion: @escaping (ServerError?) -> ()) {
-        ServerManager.Update(path: path, json: datos) { (data, error) in
-            completion(error)
-        }
-    }
- 
     func prepareSell(childID: String) -> [String : Any] {
       
         return [String : Any]()
@@ -302,4 +296,10 @@ extension ActivitySaleViewModel {
         
         _view.showEndDate(value: model.endDate)
     }
+    
+    func setFromDate(value: Date) {
+        model.fromDate = value
+        setEndDate()
+    }
+
 }
