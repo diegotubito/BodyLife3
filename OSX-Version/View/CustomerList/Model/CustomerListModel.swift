@@ -13,16 +13,8 @@ struct CustomerListModel {
     var customersbyPages = [CustomerModel.Customer]()
     var customersbySearch = [CustomerModel.Customer]()
     var bySearch = false
-    var response : Response!
     var imagesBySearch = [Images]()
     var imagesByPages = [Images]()
-  
-    
-    struct Response :Decodable {
-        var response : String
-        var customers : [CustomerModel.Customer]
-        var count : Int
-    }
     
     struct Images {
         var image : NSImage?

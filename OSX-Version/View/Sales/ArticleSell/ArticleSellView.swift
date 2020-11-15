@@ -104,21 +104,17 @@ class ArticleSellView: XibViewBlurBackground {
                                                 priceList: selectedItem?.price,
                                                 priceCost: selectedItem?.priceCost,
                                                 description: selectedItem?.description ?? "")
-        
-        let url = "\(BLServerManager.baseUrl.rawValue)/v1/sell"
-        let _services = NetwordManager()
         let body = encodeSell(newRegister)
-        _services.post(url: url, body: body) { (data, error) in
-            guard data != nil else {
-                print("no se pudo guardar venta de articulo")
+        let token = UserSaved.GetToken()
+        let endpoint = BLServerManager.EndpointValue(to: .Sell(.Save(body: body, token: token)))
+        BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<ArticleModel.Response>) in
+            guard let _id = response.data?._id else {
                 return
             }
-            let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any]
-            let _id = json?["_id"] as? String
-            
-            self.addNullPayment(sellId: _id!)
+            self.addNullPayment(sellId: _id)
+        } fail: { (error) in
+            print("no se pudo guardar venta de articulo", error.rawValue)
         }
-        
         updateStock()
     }
    
@@ -146,22 +142,20 @@ class ArticleSellView: XibViewBlurBackground {
                                                 timestamp: createdAt,
                                                 paidAmount: 0,
                                                 productCategory: ProductCategory.article.rawValue)
-        let url = "\(BLServerManager.baseUrl.rawValue)/v1/payment"
-        let _services = NetwordManager()
+        
+        let token = UserSaved.GetToken()
         let body = encodePayment(newRegister)
-        _services.post(url: url, body: body) { (data, error) in
-            DispatchQueue.main.async {
-                self.buttonAccept.hideLoading()
-            }
-            guard data != nil else {
-                print("No se puedo guardar pago nulo")
-                return
-            }
+        let endpoint = BLServerManager.EndpointValue(to: .Payment(.Save(body: body, token: token)))
+        BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<PaymentModel.Response>) in
+            self.buttonAccept.hideLoading()
             DispatchQueue.main.async {
                 self.hideView()
                 NotificationCenter.default.post(name: .needUpdateCustomerList, object: nil)
                 NotificationCenter.default.post(.init(name: .needUpdateArticleList))
             }
+        } fail: { (error) in
+            print("No se puedo guardar pago nulo")
+            self.buttonAccept.hideLoading()
         }
     }
     

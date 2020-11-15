@@ -24,7 +24,7 @@ class RegisterListViewModel: RegisterListViewModelContract {
         model.payments.removeAll()
         let customerId = model.selectedCustomer._id
         let token = UserSaved.GetToken()
-        let endpoint = BLServerManager.EndpointValue(to: .LoadPayments(customerId: customerId, token: token))
+        let endpoint = BLServerManager.EndpointValue(to: .Payment(.Load(customerId: customerId, token: token)))
         BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<[PaymentModel.NewRegister]>) in
             
             self.parsePaymentAndSell(payments: response.data!)
@@ -145,8 +145,8 @@ class RegisterListViewModel: RegisterListViewModelContract {
     
     func cancelRegister() {
         let body = ["isEnabled" : false]
-        let uid = (model.selectedSellRegister?._id)!
-        let endpoint = BLServerManager.EndpointValue(to: .CancelRegister(uid: uid, body: body))
+        guard let uid = (model.selectedSellRegister?._id) else {return}
+        let endpoint = BLServerManager.EndpointValue(to: .Sell(.Disable(uid: uid, body: body)))
         BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<SellModel.NewRegister>) in
             self._view.cancelSuccess()
             if let articleID = self.model.selectedSellRegister?.article {
@@ -158,8 +158,8 @@ class RegisterListViewModel: RegisterListViewModelContract {
     }
     
     func realDeleteEveryRelatedSellAndPayment() {
-        let uid = model.selectedSellRegister?._id
-        let endpoint = BLServerManager.EndpointValue(to: .DeleteSell(uid: uid!))
+        guard let uid = model.selectedSellRegister?._id else {return}
+        let endpoint = BLServerManager.EndpointValue(to: .Sell(.Delete(uid: uid)))
         BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<SellModel.NewRegister>) in
             response.success ?? false ? self._view.cancelSuccess() : self._view.cancelError()
         } fail: { (error) in
@@ -169,8 +169,8 @@ class RegisterListViewModel: RegisterListViewModelContract {
         for i in model.payments {
             if i.sell?._id == (model.selectedSellRegister?._id)! {
                 let uid = i._id
-                let endpoint = BLServerManager.EndpointValue(to: .DeletePayment(uid: uid))
-                BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<PaymentModel.NewRegister>) in
+                let endpoint = BLServerManager.EndpointValue(to: .Payment(.Delete(uid: uid)))
+                BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<PaymentModel.Response>) in
                     response.success ?? false ? self._view.cancelSuccess() : self._view.cancelError()
                 } fail: { (error) in
                     self._view.cancelError()

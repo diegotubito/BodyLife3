@@ -15,12 +15,6 @@ class SellRegisterCell: NSTableCellView {
     @IBOutlet weak var labelTotalPayment: NSTextField!
     @IBOutlet weak var labelSaldo: NSTextField!
     @IBOutlet weak var imageTypeOfRegister : NSImageView!
-          
-    override func draw(_ dirtyRect: NSRect) {
-        super.draw(dirtyRect)
-
-        // Drawing code here.
-    }
     
     func displayCell(sell: SellModel.NewRegister?) {
         guard let sell = sell else {

@@ -27,58 +27,42 @@ class CustomerListViewModel: CustomerListViewModelContract {
             model.customersbySearch.removeAll()
         }
         _view.showLoading()
-        let url = "\(BLServerManager.baseUrl.rawValue)/v1/customer-search?queryString=\(bySearch)&offset=\(offset)&limit=50"
-        let _services = NetwordManager()
-        _services.get(url: url, response: { [weak self] (data, error) in
-            self?._view.hideLoading()
-            self?.loading = false
-            guard error == nil, let data = data else {
-                self?._view.showError()
-                return
-            }
-            
-            do {
-                let response = try JSONDecoder().decode(CustomerListModel.Response.self, from: data)
-                self?.model.response = response
-                self?.model.customersbySearch.append(contentsOf: response.customers)
-                self?._view.showSuccess()
-                self?._view.hideLoading()
-                self?.loadImages()
-                
-            } catch {
-                print(error.localizedDescription)
-                self?._view.showError()
-            }
-
-        })
+        
+        let query = "?queryString=\(bySearch)&offset=\(offset)&limit=50"
+        let token = UserSaved.GetToken()
+        let endpoint = BLServerManager.EndpointValue(to: .Customer(.Search(query: query, token: token)))
+        BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<[CustomerModel.Customer]>) in
+            self._view.hideLoading()
+            self.loading = false
+            self.model.customersbySearch.append(contentsOf: response.data!)
+            self._view.showSuccess()
+            self._view.hideLoading()
+            self.loadImages()
+        } fail: { (error) in
+            self._view.hideLoading()
+            self.loading = false
+            self._view.showError()
+        }
     }
     
     func loadCustomers(offset: Int) {
         if loading {return}
         loading = true
         _view.showLoading()
-        let url = "\(BLServerManager.baseUrl.rawValue)/v1/customer?offset=\(offset)&limit=50"
-        let _services = NetwordManager()
-        _services.get(url: url, response: { (data, error) in
+        let query = "?offset=\(offset)&limit=50"
+        let token = UserSaved.GetToken()
+        let endpoint = BLServerManager.EndpointValue(to: .Customer(.LoadPage(query: query, token: token)))
+        BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<[CustomerModel.Customer]>) in
             self._view.hideLoading()
             self.loading = false
-            guard error == nil, let data = data else {
-                self._view.showError()
-                return
-            }
-            
-            do {
-                let response = try JSONDecoder().decode(CustomerListModel.Response.self, from: data) 
-                self.model.response = response
-                self.model.customersbyPages.append(contentsOf: response.customers)
-                self._view.hideLoading()
-               self.loadImages()
-                self._view.showSuccess()
-            } catch {
-                self._view.showError()
-            }
-
-        })
+            self.model.customersbyPages.append(contentsOf: response.data!)
+            self.loadImages()
+            self._view.showSuccess()
+        } fail: { (error) in
+            self._view.hideLoading()
+            self.loading = false
+            self._view.showError()
+        }
     }
     
     func loadImages() {

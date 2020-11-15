@@ -190,8 +190,8 @@ extension ActivitySaleViewModel {
                                                 description: description)
         
         let body = encodeSell(newRegister)
-        let endpoint = BLServerManager.EndpointValue(to: .SaveNewSell(token: UserSaved.GetToken(),
-                                                                        body: body))
+        let token = UserSaved.GetToken()
+        let endpoint = BLServerManager.EndpointValue(to: .Sell(.Save(body: body, token: token)))
         BLServerManager.ApiCall(endpoint: endpoint) { (response:SellModel.NewRegister) in
             let _id = response._id
             self.addNullPayment(sellId: _id!)
@@ -210,16 +210,15 @@ extension ActivitySaleViewModel {
                                                 timestamp: createdAt,
                                                 paidAmount: 0,
                                                 productCategory: ProductCategory.activity.rawValue)
-        
-        let url = "\(BLServerManager.baseUrl.rawValue)/v1/payment"
-        let _services = NetwordManager()
+        let token = UserSaved.GetToken()
         let body = encodePayment(newRegister)
-        _services.post(url: url, body: body) { (data, error) in
-            guard data != nil else {
-                self._view.showError("No se puedo guardar pago nulo")
-                return
-            }
+        let endpoint = BLServerManager.EndpointValue(to: .Payment(.Save(body: body, token: token)))
+        BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<PaymentModel.Response>) in
+            self._view.hideLoading()
             self._view.showSuccessSaving()
+        } fail: { (error) in
+            self._view.hideLoading()
+            self._view.showError("No se puedo guardar pago nulo")
         }
     }
    

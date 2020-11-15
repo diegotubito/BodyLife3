@@ -41,18 +41,15 @@ class PaymentViewModel: PaymentViewModelContract {
                                                 paidAmount: paidAmount,
                                                 productCategory: productCategory)
         
-        let url = "\(BLServerManager.baseUrl.rawValue)/v1/payment"
-        let _services = NetwordManager()
+        let token = UserSaved.GetToken()
         let body = encodePayment(newRegister)
-        _view.showLoading()
-        _services.post(url: url, body: body) { (data, error) in
+        let endpoint = BLServerManager.EndpointValue(to: .Payment(.Save(body: body, token: token)))
+        BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<PaymentModel.Response>) in
             self._view.hideLoading()
-            guard data != nil else {
-                print("No se puedo guardar pago")
-                self._view.showError()
-                return
-            }
             self._view.showSuccess()
+        } fail: { (error) in
+            self._view.hideLoading()
+            self._view.showError()
         }
     }
     

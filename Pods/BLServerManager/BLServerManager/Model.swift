@@ -19,16 +19,34 @@ public enum BLEndpointType {
     case RefreshToken(body: [String : Any])
     case GetAllPeriod
     case GetAllDiscount
-    case SaveNewSell(token: String, body: [String : Any])
     case CheckServerConnection
     case Transaction(uid: String, path: String, key: String, value: Double)
     case Stock(uid: String, path: String)
     case ConnectToMongoDB(query: String)
     case DisconnectMongoDB
-    case DeleteSell(uid: String)
-    case DeletePayment(uid: String)
-    case CancelRegister(uid: String, body: [String: Any])
-    case LoadPayments(customerId: String, token: String)
+    
+    case Payment(PaymentType)
+    case Sell(SellType)
+    case Customer(CustomerType)
+    
+    public enum CustomerType {
+        case LoadPage(query: String, token: String)
+        case Search(query: String, token: String)
+    }
+    
+    public enum SellType {
+        case Save(body: [String : Any], token: String)
+        case Disable(uid: String, body: [String: Any])
+        case Delete(uid: String)
+    }
+    
+    public enum PaymentType {
+        case Save(body: [String : Any]?, token: String?)
+        case Load(customerId: String, token: String)
+        case Delete(uid: String)
+
+        
+    }
     
 }
 

@@ -66,8 +66,10 @@ class SaveButtonCustomView: NSView {
     }
     
     func hideLoading() {
-        titleLabel.stringValue = title
-        myIndicator.stopAnimation(nil)
+        DispatchQueue.main.async {
+            self.titleLabel.stringValue = self.title
+            self.myIndicator.stopAnimation(nil)
+        }
     }
     
 }

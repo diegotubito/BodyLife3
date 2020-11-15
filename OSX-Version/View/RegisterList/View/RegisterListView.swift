@@ -134,8 +134,8 @@ extension RegisterListView: NSTableViewDataSource, NSTableViewDelegate {
                 viewModel.setSelectedRegister(nil)
                 return
             }
-            
             let sells = viewModel.getSells()
+            if myTable.selectedRow > sells.count {return}
             let selectedRegister = sells[myTable.selectedRow]
             viewModel.setSelectedRegister(selectedRegister)
         }

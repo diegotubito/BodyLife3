@@ -30,6 +30,19 @@ class ArticleModel {
         var maxStock : Int
     }
     
+    struct Response: Decodable, Encodable {
+        var _id : String?
+        var article : String
+        var customer : String
+        var description : String
+        var isEnabled : Bool
+        var price : Double
+        var priceList : Double
+        var productCategory : String
+        var quantity : Int
+        var timestamp : Double
+    }
+    
     struct Register: Decodable {
         var childID : String
         var name : String

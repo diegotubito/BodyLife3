@@ -12,8 +12,18 @@ import Cocoa
 class PaymentModel {
     struct NewRegister: Decodable {
         var _id : String
-        var customer : CustomerModel.Customer
+        var customer : CustomerModel.Customer?
         var sell : SellModel.NewRegister?
+        var isEnabled : Bool
+        var timestamp : Double
+        var paidAmount : Double
+        var productCategory : String
+    }
+    
+    struct Response : Encodable, Decodable {
+        var _id : String?
+        var customer : String
+        var sell : String
         var isEnabled : Bool
         var timestamp : Double
         var paidAmount : Double
@@ -47,14 +57,6 @@ class PaymentModel {
         var paidAmount : Double
     }
     
-    struct Response : Encodable, Decodable {
-        var _id : String?
-        var customer : String
-        var sell : String
-        var isEnabled : Bool
-        var timestamp : Double
-        var paidAmount : Double
-        var productCategory : String
-    }
+   
    
 }
