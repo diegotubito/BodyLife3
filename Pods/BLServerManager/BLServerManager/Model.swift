@@ -25,6 +25,11 @@ public enum BLEndpointType {
     case Stock(uid: String, path: String)
     case ConnectToMongoDB(query: String)
     case DisconnectMongoDB
+    case DeleteSell(uid: String)
+    case DeletePayment(uid: String)
+    case CancelRegister(uid: String, body: [String: Any])
+    case LoadPayments(customerId: String, token: String)
+    
 }
 
 public enum BLServer: String {
@@ -51,6 +56,7 @@ public struct BLEndpoint {
         public static let period = "\(BLServerManager.baseUrl.rawValue)/v1/period"
         public static let discount = "\(BLServerManager.baseUrl.rawValue)/v1/discount"
         public static let sell = "\(BLServerManager.baseUrl.rawValue)/v1/sell"
+        public static let payment = "\(BLServerManager.baseUrl.rawValue)/v1/payment"
     }
 }
 

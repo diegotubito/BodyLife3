@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17506" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17506"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="RegisterListView" customModule="OSX_Version" customModuleProvider="target">
+        <customObject id="-2" userLabel="File's Owner" customClass="RegisterListView" customModule="Internal_Target" customModuleProvider="target">
             <connections>
                 <outlet property="agregarCobroOutlet" destination="KBe-on-7xB" id="ZOB-yb-AcT"/>
                 <outlet property="anularButtonOutlet" destination="lOn-nR-CCY" id="lFd-W0-8yQ"/>
@@ -32,9 +33,8 @@
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                 <tableColumns>
-                                    <tableColumn identifier="defaultRow" width="790" minWidth="10" maxWidth="3.4028234663852886e+38" id="Min-dm-1G9">
+                                    <tableColumn identifier="defaultRow" width="781" minWidth="10" maxWidth="3.4028234663852886e+38" id="Min-dm-1G9">
                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
-                                            <font key="font" metaFont="message" size="11"/>
                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </tableHeaderCell>
@@ -45,7 +45,7 @@
                                         </textFieldCell>
                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                         <prototypeCellViews>
-                                            <customView id="DpR-7H-piO" customClass="SellRegisterCell" customModule="OSX_Version" customModuleProvider="target">
+                                            <customView id="DpR-7H-piO" customClass="SellRegisterCell" customModule="Internal_Target" customModuleProvider="target">
                                                 <rect key="frame" x="1" y="1" width="790" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <subviews>
@@ -204,18 +204,34 @@
                         <action selector="anularDidPressed:" target="-2" id="Dai-gd-XpG"/>
                     </connections>
                 </button>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="WmR-0U-4uY">
+                    <rect key="frame" x="447" y="15" width="100" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="hrC-Zo-QZL"/>
+                        <constraint firstAttribute="width" constant="100" id="i69-ZQ-bqe"/>
+                    </constraints>
+                    <buttonCell key="cell" type="square" title="Eliminar" bezelStyle="shadowlessSquare" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="TjG-2b-3Xo">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="removeRegister:" target="-2" id="bvp-Rp-EPG"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="KBe-on-7xB" secondAttribute="bottom" constant="16" id="7oW-j5-G77"/>
                 <constraint firstItem="KBe-on-7xB" firstAttribute="top" secondItem="MJa-6N-FZC" secondAttribute="bottom" constant="16" id="8gh-0r-JNI"/>
                 <constraint firstAttribute="trailing" secondItem="MJa-6N-FZC" secondAttribute="trailing" id="Byk-zX-j4e"/>
                 <constraint firstItem="9n3-tI-0xJ" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="16" id="EaT-5b-jrZ"/>
+                <constraint firstItem="lOn-nR-CCY" firstAttribute="leading" secondItem="WmR-0U-4uY" secondAttribute="trailing" constant="16" id="LEG-BB-DSt"/>
                 <constraint firstItem="MJa-6N-FZC" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="ODz-0d-f0c"/>
                 <constraint firstAttribute="trailing" secondItem="KBe-on-7xB" secondAttribute="trailing" constant="16" id="RRa-kn-vnG"/>
                 <constraint firstItem="MJa-6N-FZC" firstAttribute="top" secondItem="9n3-tI-0xJ" secondAttribute="bottom" constant="16" id="SPX-Up-7MH"/>
                 <constraint firstItem="9n3-tI-0xJ" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="16" id="Skg-C2-oI7"/>
                 <constraint firstItem="mf1-i7-s27" firstAttribute="centerX" secondItem="c22-O7-iKe" secondAttribute="centerX" id="T8b-bc-sxN"/>
                 <constraint firstItem="KBe-on-7xB" firstAttribute="leading" secondItem="lOn-nR-CCY" secondAttribute="trailing" constant="16" id="Ztk-Vy-AT7"/>
+                <constraint firstItem="WmR-0U-4uY" firstAttribute="centerY" secondItem="lOn-nR-CCY" secondAttribute="centerY" id="fti-G3-NO3"/>
                 <constraint firstAttribute="bottom" secondItem="lOn-nR-CCY" secondAttribute="bottom" constant="15" id="trm-Gi-0DH"/>
                 <constraint firstItem="mf1-i7-s27" firstAttribute="centerY" secondItem="9n3-tI-0xJ" secondAttribute="centerY" id="vpQ-qJ-ao0"/>
             </constraints>

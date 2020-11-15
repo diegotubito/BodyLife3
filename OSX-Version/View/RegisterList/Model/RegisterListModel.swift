@@ -13,5 +13,5 @@ class RegisterListModel {
     var selectedSellRegister : SellModel.NewRegister?
    
     var sells = [SellModel.NewRegister]()
-    var payments = [PaymentModel.ViewModel.AUX]()
+    var payments = [PaymentModel.NewRegister]()
 }

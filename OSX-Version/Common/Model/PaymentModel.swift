@@ -10,6 +10,16 @@ import Foundation
 import Cocoa
 
 class PaymentModel {
+    struct NewRegister: Decodable {
+        var _id : String
+        var customer : CustomerModel.Customer
+        var sell : SellModel.NewRegister?
+        var isEnabled : Bool
+        var timestamp : Double
+        var paidAmount : Double
+        var productCategory : String
+    }
+    
     struct OldCarnet : Decodable {
         var childID : String
         var childIDSocio : String
@@ -46,20 +56,5 @@ class PaymentModel {
         var paidAmount : Double
         var productCategory : String
     }
-    
-    struct ViewModel : Decodable {
-        var payments : [AUX]
-        var count : Int
-        
-        
-        struct AUX: Decodable {
-            var _id : String
-            var customer : CustomerModel.Customer
-            var sell : SellModel.NewRegister?
-            var isEnabled : Bool
-            var timestamp : Double
-            var paidAmount : Double
-            var productCategory : String
-        }
-    }
+   
 }

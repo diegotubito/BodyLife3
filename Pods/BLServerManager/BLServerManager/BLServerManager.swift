@@ -78,6 +78,22 @@ public class BLServerManager {
         case .DisconnectMongoDB:
             let url = BLEndpoint.URL.Server.DisconnectMongodb
             return BLEndpointModel(url: url, token: nil, method: "POST", query: nil, body: nil)
+        case .DeletePayment(uid: let uid) :
+            let query = "?id=\(uid)"
+            let url = BLEndpoint.URL.payment
+            return BLEndpointModel(url: url, token: nil, method: "DELETE", query: query, body: nil)
+        case .DeleteSell(uid: let uid) :
+            let query = "?id=\(uid)"
+            let url = BLEndpoint.URL.sell
+            return BLEndpointModel(url: url, token: nil, method: "DELETE", query: query, body: nil)
+        case .CancelRegister(uid: let uid, body: let body):
+            let query = "?id=\(uid)"
+            let url = "\(BLServerManager.baseUrl.rawValue)/v1/sell"
+            return BLEndpointModel(url: url, token: nil, method: "PUT", query: query, body: body)
+        case .LoadPayments(customerId: let id, token: let token):
+            let url = "\(BLServerManager.baseUrl.rawValue)/v1/payment"
+            let query = "?customer=\(id)"
+            return BLEndpointModel(url: url, token: token, method: "GET", query: query, body: nil)
         }
     }
     

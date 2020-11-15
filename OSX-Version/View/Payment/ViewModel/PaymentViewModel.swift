@@ -20,7 +20,7 @@ class PaymentViewModel: PaymentViewModelContract {
         model = NewPaymentModel()
     }
     
-    func setSelectedInfo(_ customer: CustomerModel.Customer, _ register: SellModel.NewRegister, payments: [PaymentModel.ViewModel.AUX]) {
+    func setSelectedInfo(_ customer: CustomerModel.Customer, _ register: SellModel.NewRegister, payments: [PaymentModel.NewRegister]) {
         model.selectedCustomer = customer
         model.selectedSellRegister = register
         model.payments = payments

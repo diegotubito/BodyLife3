@@ -10,8 +10,6 @@ import Cocoa
 import BLServerManager
 
 class RegisterListViewModel: RegisterListViewModelContract {
-   
-    
     var _view : RegisterListViewContract!
     var model : RegisterListModel!
     
@@ -24,30 +22,21 @@ class RegisterListViewModel: RegisterListViewModelContract {
         _view.showLoading()
         model.sells.removeAll()
         model.payments.removeAll()
-    
-        let url = "\(BLServerManager.baseUrl.rawValue)/v1/payment?customer=\(model.selectedCustomer._id)"
-        
-        let _service = NetwordManager()
-        _service.get(url: url) { (data, error) in
-            self._view.hideLoading()
-            guard let data = data else {
-                self._view.showError(value: error?.localizedDescription ?? ServerError.unknown_auth_error.localizedDescription)
-                return
-            }
-            do {
-                let response = try JSONDecoder().decode(PaymentModel.ViewModel.self, from: data)
-                self.parsePaymentAndSell(response: response)
-            } catch {
-                print("Could not parse")
-                self._view.notificateStatusInfo(data: nil)
-                return
-            }
+        let customerId = model.selectedCustomer._id
+        let token = UserSaved.GetToken()
+        let endpoint = BLServerManager.EndpointValue(to: .LoadPayments(customerId: customerId, token: token))
+        BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<[PaymentModel.NewRegister]>) in
+            
+            self.parsePaymentAndSell(payments: response.data!)
+        } fail: { (error) in
+            print(error.rawValue)
+            self._view.notificateStatusInfo(data: nil)
         }
     }
     
     
-    func parsePaymentAndSell(response : PaymentModel.ViewModel) {
-        let sells = response.payments.compactMap { $0.sell }
+    func parsePaymentAndSell(payments : [PaymentModel.NewRegister]) {
+        let sells = payments.compactMap { $0.sell }
         
         var uniqueArray = [SellModel.NewRegister]()
         for i in sells {
@@ -58,17 +47,17 @@ class RegisterListViewModel: RegisterListViewModelContract {
         let sortedSells = uniqueArray.sorted(by: { $0.timestamp > $1.timestamp })
         model.sells = sortedSells
         
-        let sortedPayments = response.payments.sorted(by: {$0.timestamp > $1.timestamp})
+        let sortedPayments = payments.sorted(by: {$0.timestamp > $1.timestamp})
         model.payments = sortedPayments
     
         calcExtras(payments: model.payments)
     }
     
-    func calcExtras(payments: [PaymentModel.ViewModel.AUX]) {
+    func calcExtras(payments: [PaymentModel.NewRegister]) {
         let sells = model.sells
         var totalSells : Double = 0
         var totalPayments : Double = 0
-        var maxExpiration = "01-01-2001".toDate(formato: "dd-MM-yyyy")!
+        var maxExpiration = "11-11-2004".toDate(formato: "dd-MM-yyyy")!
         var lastActivity : String?
         var lastPeriod : String?
         var lastDiscount : String?
@@ -111,7 +100,7 @@ class RegisterListViewModel: RegisterListViewModelContract {
     }
    
     
-    private func calcTotalPayment(payments: [PaymentModel.ViewModel.AUX]) -> Double {
+    private func calcTotalPayment(payments: [PaymentModel.NewRegister]) -> Double {
         var total : Double = 0
         for i in payments {
             if i.isEnabled {
@@ -133,11 +122,11 @@ class RegisterListViewModel: RegisterListViewModelContract {
         return model.sells
     }
 
-    func getPayments() -> [PaymentModel.ViewModel.AUX] {
+    func getPayments() -> [PaymentModel.NewRegister] {
         return model.payments
     }
     
-    func getPaymentsForSelectedRegister() -> [PaymentModel.ViewModel.AUX] {
+    func getPaymentsForSelectedRegister() -> [PaymentModel.NewRegister] {
         let payments = model.payments
         let filter = payments.filter({$0.sell?._id == model.selectedSellRegister?._id})
         return filter
@@ -155,74 +144,44 @@ class RegisterListViewModel: RegisterListViewModelContract {
     }
     
     func cancelRegister() {
-        let json = ["isEnabled" : false]
-        
-        let url = "\(BLServerManager.baseUrl.rawValue)/v1/sell?id=\((model.selectedSellRegister?._id)!)"
-        
-        let _service = NetwordManager()
-        _service.update(url: url, body: json, response: { (data, error) in
-            guard data != nil else {
-                self._view.cancelError()
-                return
-            }
+        let body = ["isEnabled" : false]
+        let uid = (model.selectedSellRegister?._id)!
+        let endpoint = BLServerManager.EndpointValue(to: .CancelRegister(uid: uid, body: body))
+        BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<SellModel.NewRegister>) in
             self._view.cancelSuccess()
             if let articleID = self.model.selectedSellRegister?.article {
                 self.updateStock(articleID)
             }
-        })
+        } fail: { (error) in
+            self._view.cancelError()
+        }
     }
     
     func realDeleteEveryRelatedSellAndPayment() {
-        let json = ["isEnabled" : false]
-        
-        let url = "\(BLServerManager.baseUrl.rawValue)/v1/sell?id=\((model.selectedSellRegister?._id)!)"
-        
-        let _service = NetwordManager()
-        _service.delete(url: url, body: json, response: { (data, error) in
-            guard data != nil else {
-                self._view.cancelError()
-                return
-            }
-            self._view.cancelSuccess()
-        })
-        
-        
+        let uid = model.selectedSellRegister?._id
+        let endpoint = BLServerManager.EndpointValue(to: .DeleteSell(uid: uid!))
+        BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<SellModel.NewRegister>) in
+            response.success ?? false ? self._view.cancelSuccess() : self._view.cancelError()
+        } fail: { (error) in
+            self._view.cancelError()
+        }
+
         for i in model.payments {
-            
             if i.sell?._id == (model.selectedSellRegister?._id)! {
-                let json = ["isEnabled" : false]
-                
-                let url = "\(BLServerManager.baseUrl.rawValue)/v1/payment?id=\(i._id)"
-                
-                let _service = NetwordManager()
-                _service.delete(url: url, body: json, response: { (data, error) in
-                    guard data != nil else {
-                        self._view.cancelError()
-                        return
-                    }
-                    self._view.cancelSuccess()
-                })
+                let uid = i._id
+                let endpoint = BLServerManager.EndpointValue(to: .DeletePayment(uid: uid))
+                BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<PaymentModel.NewRegister>) in
+                    response.success ?? false ? self._view.cancelSuccess() : self._view.cancelError()
+                } fail: { (error) in
+                    self._view.cancelError()
+                }
             }
 
         }
  
     }
     
-    
-    private func calcTotalPayments() -> Double {
-     /*   var result : Double = 0
-        let payments = model.selectedSellRegister.pay
-        if payments == nil {return 0}
-        for i in payments {
-            result += i.amount
-        }
-        return result
- */
-        return 0.0
-    }
-    
     private func updateStock(_ childIDArticle: String) {
-        //update stock
         let path = "\(Paths.productArticle):\(childIDArticle)"
         let uid = UserSaved.GetUser()?.uid
         let endpoint = BLServerManager.EndpointValue(to: .Transaction(uid: uid!,
@@ -235,9 +194,7 @@ class RegisterListViewModel: RegisterListViewModelContract {
         } fail: { (error) in
             print("could not update stock")
         }
-        
     }
-    
     
     func setIsEnabled(row: Int) {
         model.sells[row].isEnabled = false

@@ -12,11 +12,12 @@ protocol RegisterListViewModelContract {
     init(withView view: RegisterListViewContract)
     func loadPayments()
     func cancelRegister()
+    func realDeleteEveryRelatedSellAndPayment()
     func setSelectedCustomer(customer: CustomerModel.Customer)
     
     func getSells() -> [SellModel.NewRegister]
-    func getPayments() -> [PaymentModel.ViewModel.AUX]
-    func getPaymentsForSelectedRegister() -> [PaymentModel.ViewModel.AUX]
+    func getPayments() -> [PaymentModel.NewRegister]
+    func getPaymentsForSelectedRegister() -> [PaymentModel.NewRegister]
     
     func setSelectedRegister(_ selectedRegister: SellModel.NewRegister?)
     func getSelectedRegister() -> SellModel.NewRegister?

@@ -16,7 +16,7 @@ class RegisterListView: XibViewWithAnimation , RegisterListViewContract{
     @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var myIndicator : NSProgressIndicator!
     var viewModel : RegisterListViewModelContract!
-    var onAddPayment : (([PaymentModel.ViewModel.AUX]) -> ())?
+    var onAddPayment : (([PaymentModel.NewRegister]) -> ())?
       
     override func commonInit() {
         super .commonInit()
@@ -87,6 +87,9 @@ class RegisterListView: XibViewWithAnimation , RegisterListViewContract{
     }
     @IBAction func cobroDidPressed(_ sender: Any) {
         onAddPayment?(viewModel.getPaymentsForSelectedRegister())
+    }
+    @IBAction func removeRegister(_ sender: Any) {
+        viewModel.realDeleteEveryRelatedSellAndPayment()
     }
     
     func cancelError() {
