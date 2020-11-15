@@ -12,6 +12,5 @@ struct ResponseModel <T: Decodable> : Decodable{
     var success : Bool?
     var data : T?
     var count : Int?
-    var errorMessage : String?
 }
 

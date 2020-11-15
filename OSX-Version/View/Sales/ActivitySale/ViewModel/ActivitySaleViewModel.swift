@@ -191,11 +191,11 @@ extension ActivitySaleViewModel {
         
         let body = encodeSell(newRegister)
         let endpoint = Endpoint.Create(to: .Sell(.Save(body: body)))
-        BLServerManager.ApiCall(endpoint: endpoint) { (response:SellModel.NewRegister) in
-            let _id = response._id
+        BLServerManager.ApiCall(endpoint: endpoint) { (response:ResponseModel<SellModel.NewRegister>) in
+            let _id = response.data?._id
             self.addNullPayment(sellId: _id!)
         } fail: { (error) in
-            self._view.showError("No se puedo guardar venta")
+            self._view.showError("No se puedo guardar venta \(error.rawValue)")
         }
     }
     

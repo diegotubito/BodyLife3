@@ -97,26 +97,19 @@ class CustomerListViewModel: CustomerListViewModelContract {
             return
         }
         
-        let _services = NetwordManager()
-        _services.get(url: url, response: { (data, error) in
-            guard error == nil, let data = data else {
-                completion(nil, row)
-                return
-            }
-            
-            do {
-                let response = try JSONDecoder().decode(ThumbnailModel.Response.self, from: data)
-                if response.thumbnails.count > 0 {
-                    let image = response.thumbnails[0].thumbnailImage.convertToImage
-                    self.imageCache.setObject(image!, forKey: url as AnyObject)
-                    completion(image, row)
-                } else {
-                    completion(nil, row)
-                }
-            } catch {
+        let uid = customer.uid
+        let endpoint = Endpoint.Create(to: .Image(.LoadThumbnail(uid: uid)))
+        BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<[ThumbnailModel.Thumbnail]>) in
+            if response.data?.count ?? 0 > 0 {
+                let image = response.data![0].thumbnailImage.convertToImage
+                self.imageCache.setObject(image!, forKey: url as AnyObject)
+                completion(image, row)
+            } else {
                 completion(nil, row)
             }
-      })
+        } fail: { (error) in
+            completion(nil, row)
+        }
     }
   
 }

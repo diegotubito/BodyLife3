@@ -4,9 +4,6 @@ import MapKit
 
 class NewCustomerWorker {
     func saveNewThumbnail(uid: String, thumbnail: String, completion: @escaping (Bool) -> ()) {
-        let url = "\(BLServerManager.baseUrl.rawValue)/v1/thumbnail"
-        let _services = NetwordManager()
-        
         if thumbnail.isEmpty {
             completion(false)
             return
@@ -16,19 +13,13 @@ class NewCustomerWorker {
                     "thumbnailImage": thumbnail,
                     "isEnabled" : true] as [String : Any]
         
-        _services.post(url: url, body: body) { (data, error) in
-            if error != nil {
-                completion(false)
-                return
-            }
-            guard data != nil else {
-                completion(false)
-                return
-            }
-            
+        let endpoint = Endpoint.Create(to: .Image(.SaveThumbnail(body: body)))
+        BLServerManager.ApiCall(endpoint: endpoint) { (data) in
             completion(true)
-            
+        } fail: { (error) in
+            completion(false)
         }
+
     }
     
     func FindCustomer(dni: String, doExist: @escaping (Bool) -> ()) {

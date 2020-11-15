@@ -129,18 +129,7 @@ extension ImportDatabase {
             print("not added \(notAdded)")
         }
         
-        
-        static func downloadImage() {
-            let url = "\(BLServerManager.baseUrl.rawValue)/v1/downloadImage?filename=socios/-0JEaB5GvklUIoBcxhGo.jpeg"
-            let _services = NetwordManager()
-            
-            _services.downloadImageFromUrl(url: url) { (image) in
-                print("success")
-            } fail: { (err) in
-                print("error")
-            }
-
-        }
+     
     }
     
     

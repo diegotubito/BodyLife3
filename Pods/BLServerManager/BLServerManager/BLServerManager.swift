@@ -21,8 +21,8 @@ public class BLServerManager {
                 break
             case .success(let data):
                 do {
-                    let json = try? JSONSerialization.jsonObject(with: data, options: [])
-                    print(json)
+//                    let json = try? JSONSerialization.jsonObject(with: data, options: [])
+//                    print(json)
                     let genericData = try JSONDecoder().decode(T.self, from: data)
                     success(genericData)
                 } catch {
@@ -32,6 +32,21 @@ public class BLServerManager {
             }
         }
     }
+  
+    public static func ApiCall(endpoint: BLEndpointModel, success: @escaping (Data?) -> (), fail: @escaping (BLNetworkError) ->()) {
+        
+        self.ApiRequest(endpoint: endpoint) { (result) in
+            switch result {
+            case .failure(let error):
+                fail(error)
+                break
+            case .success(let data):
+                success(data)
+                break
+            }
+        }
+    }
+    
     
     private static func ApiRequest(endpoint: BLEndpointModel, completion: @escaping (Result<Data, BLNetworkError>) -> ()) {
         NetwordManager.request(endpoint: endpoint) { (result) in

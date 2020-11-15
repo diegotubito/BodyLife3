@@ -150,22 +150,38 @@ extension ImportDatabase {
         }
         
         static func downloadImage(childID: String, completion: @escaping (NSImage?, Error?) -> ()) {
-            let url = "\(BLServerManager.baseUrl.rawValue)/v1/downloadImageFromOldBucket?filename=socios/\(childID).jpeg"
-            let _services = NetwordManager()
+            let endpoint = Endpoint.Create(to: .Image(.LoadBigSizeFromOldBucket(customerUID: childID)))
             
-            _services.downloadImageFromUrl(url: url) { (image) in
-                guard let image = image else {
+            BLServerManager.ApiCall(endpoint: endpoint) { (data) in
+                guard let data = data, let image = NSImage(data: data) else {
                     completion(nil, nil)
                     return
                 }
-
                 let medium = image.crop(size: NSSize(width: 150, height: 150))
                 
                 completion(medium, nil)
-            } fail: { (err) in
-                completion(nil, err)
+            } fail: { (error) in
+                completion(nil, error)
             }
-            
+
+          
+
+//            let url = "\(BLServerManager.baseUrl.rawValue)/v1/downloadImageFromOldBucket?filename=socios/\(childID).jpeg"
+//            let _services = NetwordManager()
+//
+//            _services.downloadImageFromUrl(url: url) { (image) in
+//                guard let image = image else {
+//                    completion(nil, nil)
+//                    return
+//                }
+//
+//                let medium = image.crop(size: NSSize(width: 150, height: 150))
+//
+//                completion(medium, nil)
+//            } fail: { (err) in
+//                completion(nil, err)
+//            }
+//
         }
         
     }

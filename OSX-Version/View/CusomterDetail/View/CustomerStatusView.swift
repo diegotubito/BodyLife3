@@ -104,29 +104,53 @@ class CustomerStatusView: XibViewWithAnimation {
     }
    
     func downloadImage(childID: String, completion: @escaping (NSImage?, Error?) -> (), cancel: () -> ()) {
-//        let url = "\(Config.baseUrl.rawValue)/v1/downloadImage?filename=socios/\(childID).jpeg"
-        let uid = UserSession?.uid ?? ""
-        let url = "\(BLServerManager.baseUrl.rawValue)/v1/downloadImage?filename=\(uid)/customer/\(childID).jpeg"
-        let _services = NetwordManager()
-
         if profilePictureRequest != nil {
             profilePictureRequest?.cancel()
             profilePictureRequest = nil
             cancel()
         }
-        profilePictureRequest = _services.downloadImageFromUrl(url: url) { (image) in
+        
+        let userUID = UserSaved.GetUID()
+        let endpoint = Endpoint.Create(to: .Image(.LoadBigSize(userUID: userUID, customerUID: childID)))
+        BLServerManager.ApiCall(endpoint: endpoint) { (data) in
             self.profilePictureRequest = nil
-            guard let image = image else {
+            guard let data = data, let image = NSImage(data: data) else {
                 completion(nil, nil)
                 return
             }
             let medium = image.crop(size: NSSize(width: 200, height: 200))
             
             completion(medium, nil)
-        } fail: { (err) in
+        } fail: { (error) in
             self.profilePictureRequest = nil
-            completion(nil, err)
+            completion(nil, error)
         }
+
+
+        
+////        let url = "\(Config.baseUrl.rawValue)/v1/downloadImage?filename=socios/\(childID).jpeg"
+//        let uid = UserSession?.uid ?? ""
+//        let url = "\(BLServerManager.baseUrl.rawValue)/v1/downloadImage?filename=\(uid)/customer/\(childID).jpeg"
+//        let _services = NetwordManager()
+//
+//        if profilePictureRequest != nil {
+//            profilePictureRequest?.cancel()
+//            profilePictureRequest = nil
+//            cancel()
+//        }
+//        profilePictureRequest = _services.downloadImageFromUrl(url: url) { (image) in
+//            self.profilePictureRequest = nil
+//            guard let image = image else {
+//                completion(nil, nil)
+//                return
+//            }
+//            let medium = image.crop(size: NSSize(width: 200, height: 200))
+//
+//            completion(medium, nil)
+//        } fail: { (err) in
+//            self.profilePictureRequest = nil
+//            completion(nil, err)
+//        }
 
     }
     @IBAction func SellActivityPressed(_ sender: Any) {

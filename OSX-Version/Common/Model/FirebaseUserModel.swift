@@ -7,7 +7,7 @@
 //
 
 
-struct FirebaseUserModel: Decodable {
+struct FirebaseUserModel: Decodable, Encodable {
     var token : String?
     var username : String?
     var exp : Double?

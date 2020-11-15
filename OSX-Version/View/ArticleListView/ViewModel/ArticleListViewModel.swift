@@ -26,23 +26,17 @@ class ArticleListViewModel : ArticleListViewModelContract {
         _view.showLoading()
         let uid = UserSaved.GetUID()
         let path = "product:article"
-        let url = myURL.Firebase.database + "/users:\(uid):\(path)"
-        let _service = NetwordManager()
-        _service.get(url: url) { (data, error) in
-            guard let data = data else {
-                return
-            }
-            do {
-                let articles = try JSONDecoder().decode([ArticleModel.NewRegister].self, from: data)
-                self.model.articles = articles
-                self.filterAndSort()
-            } catch {
-                return
-            }
+        let endpoint = Endpoint.Create(to: .Article(.Load(userUID: uid, path: path)))
+        BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<[ArticleModel.NewRegister]>) in
+            self.model.articles = response.data
+            self.filterAndSort()
+        } fail: { (error) in
+            print("Could not load Articles", error.rawValue)
         }
     }
     
     func filterAndSort() {
+        if model.articles == nil {return}
         let sorted = model.articles.sorted(by: { $0.description > $1.description })
         let filtered = sorted.filter({$0.isEnabled})
         model.articles = filtered

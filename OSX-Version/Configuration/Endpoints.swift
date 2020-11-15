@@ -23,6 +23,9 @@ public enum EndpointType {
     case Payment(PaymentType)
     case Sell(SellType)
     case Customer(CustomerType)
+    case Article(ArticleType)
+    case Image(ImageType)
+    case Firebase(FirebaseType)
     
     public enum CustomerType {
         case LoadPage(query: String)
@@ -45,6 +48,22 @@ public enum EndpointType {
         case Delete(uid: String)
     }
     
+    public enum ArticleType {
+        case Load(userUID: String, path: String)
+    }
+    
+    public enum ImageType {
+        case LoadThumbnail(uid: String)
+        case SaveThumbnail(body: [String: Any])
+        case LoadBigSize(userUID: String, customerUID: String)
+        case LoadBigSizeFromOldBucket(customerUID: String)
+    }
+    
+    public enum FirebaseType {
+        case Login(body: [String: Any])
+        case SighUp(body: [String: Any])
+        case SendVerificationMail(body: [String: Any])
+    }
 }
 
 class Endpoint {
@@ -123,6 +142,33 @@ class Endpoint {
             let query = "?dni=\(dni)"
             let token = UserSaved.GetToken()
             return BLEndpointModel(url: url, token: token, method: "GET", query: query, body: nil)
+        case .Article(.Load(userUID: let id, path: let path)):
+            let url = myURL.Firebase.database + "/users:\(id):\(path)"
+            return BLEndpointModel(url: url, token: nil, method: "GET", query: nil, body: nil)
+        case .Image(.LoadThumbnail(uid: let uid)) :
+            let query = "?uid=\(uid)"
+            let url = "\(BLServerManager.baseUrl.rawValue)/v1/thumbnail"
+            return BLEndpointModel(url: url, token: nil, method: "GET", query: query, body: nil)
+        case .Image(.LoadBigSize(userUID: let userUID, customerUID: let customerUID)) :
+            let query = "?filename=\(userUID)/customer/\(customerUID).jpeg"
+            let url = "\(BLServerManager.baseUrl.rawValue)/v1/downloadImage"
+            return BLEndpointModel(url: url, token: nil, method: "GET", query: query, body: nil)
+        case .Image(.LoadBigSizeFromOldBucket(customerUID: let customerUID)) :
+            let query = "?filename=socios/\(customerUID).jpeg"
+            let url = "\(BLServerManager.baseUrl.rawValue)/v1/downloadImageFromOldBucket"
+            return BLEndpointModel(url: url, token: nil, method: "GET", query: query, body: nil)
+        case .Image(.SaveThumbnail(body: let body)):
+            let url = "\(BLServerManager.baseUrl.rawValue)/v1/thumbnail"
+            return BLEndpointModel(url: url, token: nil, method: "POST", query: nil, body: body)
+        case .Firebase(.Login(body: let body)):
+            let url = myURL.Firebase.Login
+            return BLEndpointModel(url: url, token: nil, method: "POST", query: nil, body: body)
+        case .Firebase(.SighUp(body: let body)):
+            let url = "\(BLServerManager.baseUrl.rawValue)/v1/firebase/admin/user"
+            return BLEndpointModel(url: url, token: nil, method: "POST", query: nil, body: body)
+        case .Firebase(.SendVerificationMail(body: let body)):
+            let url = "\(BLServerManager.baseUrl.rawValue)/v1/sendMail"
+            return BLEndpointModel(url: url, token: nil, method: "POST", query: nil, body: body)
         }
     }
 }

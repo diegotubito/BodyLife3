@@ -149,37 +149,24 @@ extension ImportDatabase {
         }
         
         static func saveNewThumbnail(uid: String, thumbnail: String, completion: @escaping (Bool) -> ()) {
-            let url = "\(BLServerManager.baseUrl.rawValue)/v1/thumbnail"
-            let _services = NetwordManager()
-            
             if thumbnail.isEmpty {
                 completion(false)
                 return
             }
-       
+            
             let body = ["uid": uid,
                         "thumbnailImage": thumbnail,
                         "isEnabled" : true] as [String : Any]
             
-            _services.post(url: url, body: body) { (data, error) in
-                if error != nil {
-                    completion(false)
-                    return
-                }
-                guard data != nil else {
-                    completion(false)
-                    return
-                }
-                
+            let endpoint = Endpoint.Create(to: .Image(.SaveThumbnail(body: body)))
+            BLServerManager.ApiCall(endpoint: endpoint) { (data) in
                 completion(true)
-                
+            } fail: { (error) in
+                completion(false)
             }
         }
         
         static func updateCustomer(uid: String, thumbnail: String, completion: @escaping (Bool) -> ()) {
-   //         let url = "\(BLServerManager.baseUrl.rawValue)/v1/customer"
-   //         let _services = NetwordManager()
-            
             if thumbnail.isEmpty {
                 completion(false)
                 return
@@ -192,29 +179,14 @@ extension ImportDatabase {
             } fail: { (error) in
                 completion(false)
             }
-//
-//
-//            _services.update(url: url, body: body) { (data, error) in
-//                if error != nil {
-//                    completion(false)
-//                    return
-//                }
-//                let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any]
-//
-//                if let c = json?["customer"] as? [String: Any] {
-//                    completion(true)
-//                } else {
-//                    completion(false)
-//                }
-//            }
         }
         
         static func downloadImage(childID: String, completion: @escaping (String?, NSImage?, Error?) -> ()) {
-            let url = "\(BLServerManager.baseUrl.rawValue)/v1/downloadImageFromOldBucket?filename=socios/\(childID).jpeg"
-            let _services = NetwordManager()
-
-            _services.downloadImageFromUrl(url: url) { (image) in
-                guard let image = image else {
+            
+            let endpoint = Endpoint.Create(to: .Image(.LoadBigSizeFromOldBucket(customerUID: childID)))
+            
+            BLServerManager.ApiCall(endpoint: endpoint) { (imageData) in
+                guard let data = imageData, let image = NSImage(data: data) else {
                     completion(nil, nil, nil)
                     return
                 }
@@ -225,10 +197,10 @@ extension ImportDatabase {
                 let medium = image.crop(size: NSSize(width: 150, height: 150))
                 
                 completion(thumbBase64, medium, nil)
-            } fail: { (err) in
-                completion(nil, nil, err)
+                
+            } fail: { (error) in
+                completion(nil, nil, error)
             }
-
         }
 
     }
