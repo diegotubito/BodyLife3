@@ -7,7 +7,7 @@ class LoginWorker {
         
         let body = ["email"      : request.userName,
                     "password"   : request.password] as [String : Any]
-        let url = BLEndpoint.URL.Firebase.Login
+        let url = myURL.Firebase.Login
         let _service = NetwordManager()
         _service.post(url: url, body: body) { (data, error) in
             var response : Login.Login.Response!

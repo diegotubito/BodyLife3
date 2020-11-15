@@ -77,14 +77,14 @@ extension ImportDatabase {
                 return
             }
             let uid = UserSaved.GetUID()
-            let path = Paths.productArticle
+            let path = "product:article"
             let _services = NetwordManager()
             var notAdded = 0
             for (x,article) in articles.enumerated() {
                 let semasphore = DispatchSemaphore(value: 0)
                 
                 let body = ImportDatabase.Article.encodeRegister(article)
-                let url = BLEndpoint.URL.Firebase.database + "/users:\(uid):\(path):\(article._id!)"
+                let url = myURL.Firebase.database + "/users:\(uid):\(path):\(article._id!)"
                 _services.post(url: url, body: body) { (data, error) in
                     guard data != nil else {
                         print("no se guardo \(article.description) error")

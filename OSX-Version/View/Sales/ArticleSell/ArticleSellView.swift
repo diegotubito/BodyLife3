@@ -105,8 +105,7 @@ class ArticleSellView: XibViewBlurBackground {
                                                 priceCost: selectedItem?.priceCost,
                                                 description: selectedItem?.description ?? "")
         let body = encodeSell(newRegister)
-        let token = UserSaved.GetToken()
-        let endpoint = BLServerManager.EndpointValue(to: .Sell(.Save(body: body, token: token)))
+        let endpoint = Endpoint.Create(to: .Sell(.Save(body: body)))
         BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<ArticleModel.Response>) in
             guard let _id = response.data?._id else {
                 return
@@ -119,9 +118,9 @@ class ArticleSellView: XibViewBlurBackground {
     }
    
     private func updateStock() {
-        let path = "\(Paths.productArticle):\(selectedItem?._id ?? "")"
+        let path = "product:article:\(selectedItem?._id ?? "")"
         let uid = UserSaved.GetUser()?.uid
-        let endpoint = BLServerManager.EndpointValue(to: .Transaction(uid: uid!,
+        let endpoint = Endpoint.Create(to: .Transaction(uid: uid!,
                                                                       path: path,
                                                                       key: "stock",
                                                                       value: -1))
@@ -143,9 +142,8 @@ class ArticleSellView: XibViewBlurBackground {
                                                 paidAmount: 0,
                                                 productCategory: ProductCategory.article.rawValue)
         
-        let token = UserSaved.GetToken()
         let body = encodePayment(newRegister)
-        let endpoint = BLServerManager.EndpointValue(to: .Payment(.Save(body: body, token: token)))
+        let endpoint = Endpoint.Create(to: .Payment(.Save(body: body)))
         BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<PaymentModel.Response>) in
             self.buttonAccept.hideLoading()
             DispatchQueue.main.async {

@@ -51,7 +51,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
         let semasphore = DispatchSemaphore(value: 0)
-        let endpoint = BLServerManager.EndpointValue(to: .DisconnectMongoDB)
+        let endpoint = Endpoint.Create(to: .DisconnectMongoDB)
         BLServerManager.ApiCall(endpoint: endpoint) { (success: Bool) in
             print("MongoDB database disconnected.")
             semasphore.signal()

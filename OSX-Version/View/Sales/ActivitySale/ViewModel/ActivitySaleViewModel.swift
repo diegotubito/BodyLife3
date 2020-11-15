@@ -26,7 +26,7 @@ class ActivitySaleViewModel : ActivitySaleViewModelContract {
     
     func loadPeriods() {
         _view.showLoading()
-        let request = BLServerManager.EndpointValue(to: .GetAllPeriod)
+        let request = Endpoint.Create(to: .GetAllPeriod)
         BLServerManager.ApiCall(endpoint: request) { (periods:PeriodModel.ViewModel) in
             self._view.hideLoading()
             self.parseActivityAndDiscount(response: periods)
@@ -38,7 +38,7 @@ class ActivitySaleViewModel : ActivitySaleViewModelContract {
     
     func loadDiscounts() {
         _view.showLoading()
-        let endpoint = BLServerManager.EndpointValue(to: .GetAllDiscount)
+        let endpoint = Endpoint.Create(to: .GetAllDiscount)
         BLServerManager.ApiCall(endpoint: endpoint) { (result:DiscountModel.ViewModel) in
             self._view.hideLoading()
             self.model.discounts = result.discounts
@@ -190,8 +190,7 @@ extension ActivitySaleViewModel {
                                                 description: description)
         
         let body = encodeSell(newRegister)
-        let token = UserSaved.GetToken()
-        let endpoint = BLServerManager.EndpointValue(to: .Sell(.Save(body: body, token: token)))
+        let endpoint = Endpoint.Create(to: .Sell(.Save(body: body)))
         BLServerManager.ApiCall(endpoint: endpoint) { (response:SellModel.NewRegister) in
             let _id = response._id
             self.addNullPayment(sellId: _id!)
@@ -210,9 +209,8 @@ extension ActivitySaleViewModel {
                                                 timestamp: createdAt,
                                                 paidAmount: 0,
                                                 productCategory: ProductCategory.activity.rawValue)
-        let token = UserSaved.GetToken()
         let body = encodePayment(newRegister)
-        let endpoint = BLServerManager.EndpointValue(to: .Payment(.Save(body: body, token: token)))
+        let endpoint = Endpoint.Create(to: .Payment(.Save(body: body)))
         BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<PaymentModel.Response>) in
             self._view.hideLoading()
             self._view.showSuccessSaving()

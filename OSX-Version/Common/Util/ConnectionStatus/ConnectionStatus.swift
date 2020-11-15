@@ -23,7 +23,7 @@ class Connect {
     
     static func StartListening() {
         self.AddObservers()
-        let endpoint = BLServerManager.EndpointValue(to: .CheckServerConnection)
+        let endpoint = Endpoint.Create(to: .CheckServerConnection)
         BLServerManager.ApiCall(endpoint: endpoint) { (isConnected: Bool) in
             if isConnected {
                 SocketHelper.shared.connect()
@@ -61,7 +61,7 @@ class Connect {
     }
     
     @objc func refreshToken() {
-        let endpoint = BLServerManager.EndpointValue(to: .RefreshToken(body: ["_id" : UserSaved.GetUID()]))
+        let endpoint = Endpoint.Create(to: .RefreshToken(body: ["_id" : UserSaved.GetUID()]))
         BLServerManager.ApiCall(endpoint: endpoint) { (token: ModelRefreshToken) in
             guard let user = UserSaved.GetUser() else {
                 NotificationCenter.default.post(name: .NeedLogin, object: nil, userInfo: nil)
@@ -80,7 +80,7 @@ class Connect {
     func doCheck() {
         if let user = UserSaved.GetUser() {
             print("Connect: User \(String(describing: user.displayName))")
-            let endpoint = BLServerManager.EndpointValue(to: .RefreshToken(body: ["_id" : UserSaved.GetUID()]))
+            let endpoint = Endpoint.Create(to: .RefreshToken(body: ["_id" : UserSaved.GetUID()]))
             BLServerManager.ApiCall(endpoint: endpoint) { (token:ModelRefreshToken) in
                 var userSession = user
                 userSession.token = token.token
@@ -89,7 +89,7 @@ class Connect {
                 print("Connect: Refresh token SUCCESS")
                 //Select database name
                 if let uid = userSession.uid {
-                    let endpoint = BLServerManager.EndpointValue(to: .ConnectToMongoDB(query: "?database=\(uid)"))
+                    let endpoint = Endpoint.Create(to: .ConnectToMongoDB(query: "?database=\(uid)"))
                     BLServerManager.ApiCall(endpoint: endpoint) { (success: Bool) in
                         print("Connect: database connection SUCCESS name = \(uid)")
                         NotificationCenter.default.post(name: .CommunicationStablished, object: nil, userInfo: nil)

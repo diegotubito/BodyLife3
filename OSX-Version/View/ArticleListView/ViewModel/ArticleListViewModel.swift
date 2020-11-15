@@ -25,8 +25,8 @@ class ArticleListViewModel : ArticleListViewModelContract {
     func loadProducts() {
         _view.showLoading()
         let uid = UserSaved.GetUID()
-        let path = Paths.productArticle
-        let url = BLEndpoint.URL.Firebase.database + "/users:\(uid):\(path)"
+        let path = "product:article"
+        let url = myURL.Firebase.database + "/users:\(uid):\(path)"
         let _service = NetwordManager()
         _service.get(url: url) { (data, error) in
             guard let data = data else {

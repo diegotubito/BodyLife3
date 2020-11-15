@@ -177,30 +177,36 @@ extension ImportDatabase {
         }
         
         static func updateCustomer(uid: String, thumbnail: String, completion: @escaping (Bool) -> ()) {
-            let url = "\(BLServerManager.baseUrl.rawValue)/v1/customer"
-            let _services = NetwordManager()
+   //         let url = "\(BLServerManager.baseUrl.rawValue)/v1/customer"
+   //         let _services = NetwordManager()
             
             if thumbnail.isEmpty {
                 completion(false)
                 return
             }
        
-            let body = ["uid": uid,
-                        "thumbnailImage": thumbnail]
-            
-            _services.update(url: url, body: body) { (data, error) in
-                if error != nil {
-                    completion(false)
-                    return
-                }
-                let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any]
-                
-                if let c = json?["customer"] as? [String: Any] {
-                    completion(true)
-                } else {
-                    completion(false)
-                }
+            let body = ["thumbnailImage": thumbnail]
+            let endpoint = Endpoint.Create(to: .Customer(.Update(uid: uid, body: body)))
+            BLServerManager.ApiCall(endpoint: endpoint) { (response : ResponseModel<CustomerModel.Customer>) in
+                completion(true)
+            } fail: { (error) in
+                completion(false)
             }
+//
+//
+//            _services.update(url: url, body: body) { (data, error) in
+//                if error != nil {
+//                    completion(false)
+//                    return
+//                }
+//                let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any]
+//
+//                if let c = json?["customer"] as? [String: Any] {
+//                    completion(true)
+//                } else {
+//                    completion(false)
+//                }
+//            }
         }
         
         static func downloadImage(childID: String, completion: @escaping (String?, NSImage?, Error?) -> ()) {

@@ -29,8 +29,7 @@ class CustomerListViewModel: CustomerListViewModelContract {
         _view.showLoading()
         
         let query = "?queryString=\(bySearch)&offset=\(offset)&limit=50"
-        let token = UserSaved.GetToken()
-        let endpoint = BLServerManager.EndpointValue(to: .Customer(.Search(query: query, token: token)))
+        let endpoint = Endpoint.Create(to: .Customer(.Search(query: query)))
         BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<[CustomerModel.Customer]>) in
             self._view.hideLoading()
             self.loading = false
@@ -50,8 +49,7 @@ class CustomerListViewModel: CustomerListViewModelContract {
         loading = true
         _view.showLoading()
         let query = "?offset=\(offset)&limit=50"
-        let token = UserSaved.GetToken()
-        let endpoint = BLServerManager.EndpointValue(to: .Customer(.LoadPage(query: query, token: token)))
+        let endpoint = Endpoint.Create(to: .Customer(.LoadPage(query: query)))
         BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<[CustomerModel.Customer]>) in
             self._view.hideLoading()
             self.loading = false

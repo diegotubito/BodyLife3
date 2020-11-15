@@ -138,7 +138,7 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
     }
     
     @IBAction func closeSessionPressed(_ sender: Any) {
-        let endpoint = BLServerManager.EndpointValue(to: .DisconnectMongoDB)
+        let endpoint = Endpoint.Create(to: .DisconnectMongoDB)
         BLServerManager.ApiCall(endpoint: endpoint) { (success: Bool) in
             print("MongoDB database disconnected.")
             UserSaved.Remove()

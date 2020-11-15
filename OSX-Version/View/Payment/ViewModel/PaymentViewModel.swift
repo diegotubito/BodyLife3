@@ -41,9 +41,8 @@ class PaymentViewModel: PaymentViewModelContract {
                                                 paidAmount: paidAmount,
                                                 productCategory: productCategory)
         
-        let token = UserSaved.GetToken()
         let body = encodePayment(newRegister)
-        let endpoint = BLServerManager.EndpointValue(to: .Payment(.Save(body: body, token: token)))
+        let endpoint = Endpoint.Create(to: .Payment(.Save(body: body)))
         BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<PaymentModel.Response>) in
             self._view.hideLoading()
             self._view.showSuccess()

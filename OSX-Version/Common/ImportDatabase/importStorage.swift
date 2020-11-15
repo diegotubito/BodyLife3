@@ -136,7 +136,7 @@ extension ImportDatabase {
         
         static func uploadPhoto(image: NSImage, filename: String, success: @escaping (Bool) -> ()) {
             let userId = UserSession?.uid ?? ""
-            let pathImage = "\(userId):\(Paths.customerOriginalImage)"
+            let pathImage = "\(userId):customer"
             let net = NetwordManager()
             if let imageData = image.tiffRepresentation {
                 net.uploadPhoto(path: pathImage, imageData: imageData, nombre: filename, tipo: "jpeg") { (jsonResponse, error) in

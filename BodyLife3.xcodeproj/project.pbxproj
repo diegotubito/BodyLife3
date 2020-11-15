@@ -97,7 +97,7 @@
 		115784FA252B85C0008A89DC /* LoginWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD385237726A800AB4BFF /* LoginWorker.swift */; };
 		115784FB252B85C0008A89DC /* ExpenseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114C540B2413FF66000CC75A /* ExpenseRouter.swift */; };
 		115784FC252B85C0008A89DC /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110664DE2378718800DC44F3 /* ErrorHandler.swift */; };
-		115784FD252B85C0008A89DC /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD35D23766A3D00AB4BFF /* Configuration.swift */; };
+		115784FD252B85C0008A89DC /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD35D23766A3D00AB4BFF /* Endpoints.swift */; };
 		115784FE252B85C0008A89DC /* dateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11233780237AFC9100F60078 /* dateExtension.swift */; };
 		115784FF252B85C0008A89DC /* XibView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD39523773E5800AB4BFF /* XibView.swift */; };
 		11578501252B85C0008A89DC /* HomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD37C2377130C00AB4BFF /* HomeInteractor.swift */; };
@@ -253,7 +253,7 @@
 		11EBD32B2376499F00AB4BFF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11EBD3292376499F00AB4BFF /* Main.storyboard */; };
 		11EBD35923765F2D00AB4BFF /* Reachablility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD35823765F2D00AB4BFF /* Reachablility.swift */; };
 		11EBD35B2376683300AB4BFF /* FirebaseUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD35A2376683300AB4BFF /* FirebaseUserModel.swift */; };
-		11EBD35E23766A3D00AB4BFF /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD35D23766A3D00AB4BFF /* Configuration.swift */; };
+		11EBD35E23766A3D00AB4BFF /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD35D23766A3D00AB4BFF /* Endpoints.swift */; };
 		11EBD36023766B7800AB4BFF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD35F23766B7800AB4BFF /* Constants.swift */; };
 		11EBD36223766BF400AB4BFF /* UserSaved.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD36123766BF400AB4BFF /* UserSaved.swift */; };
 		11EBD36423766CFE00AB4BFF /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD36323766CFE00AB4BFF /* NetworkManager.swift */; };
@@ -400,7 +400,7 @@
 		11EBD32D2376499F00AB4BFF /* OSX_Version.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OSX_Version.entitlements; sourceTree = "<group>"; };
 		11EBD35823765F2D00AB4BFF /* Reachablility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachablility.swift; sourceTree = "<group>"; };
 		11EBD35A2376683300AB4BFF /* FirebaseUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseUserModel.swift; sourceTree = "<group>"; };
-		11EBD35D23766A3D00AB4BFF /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		11EBD35D23766A3D00AB4BFF /* Endpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoints.swift; sourceTree = "<group>"; };
 		11EBD35F23766B7800AB4BFF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		11EBD36123766BF400AB4BFF /* UserSaved.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSaved.swift; sourceTree = "<group>"; };
 		11EBD36323766CFE00AB4BFF /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -1094,7 +1094,7 @@
 		11EBD35C23766A2A00AB4BFF /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
-				11EBD35D23766A3D00AB4BFF /* Configuration.swift */,
+				11EBD35D23766A3D00AB4BFF /* Endpoints.swift */,
 			);
 			path = Configuration;
 			sourceTree = "<group>";
@@ -1441,7 +1441,7 @@
 				115784FA252B85C0008A89DC /* LoginWorker.swift in Sources */,
 				115784FB252B85C0008A89DC /* ExpenseRouter.swift in Sources */,
 				115784FC252B85C0008A89DC /* ErrorHandler.swift in Sources */,
-				115784FD252B85C0008A89DC /* Configuration.swift in Sources */,
+				115784FD252B85C0008A89DC /* Endpoints.swift in Sources */,
 				115784FE252B85C0008A89DC /* dateExtension.swift in Sources */,
 				115784FF252B85C0008A89DC /* XibView.swift in Sources */,
 				11578501252B85C0008A89DC /* HomeInteractor.swift in Sources */,
@@ -1566,7 +1566,7 @@
 				11EBD38B237726A800AB4BFF /* LoginWorker.swift in Sources */,
 				114C54132413FF66000CC75A /* ExpenseRouter.swift in Sources */,
 				110664DF2378718800DC44F3 /* ErrorHandler.swift in Sources */,
-				11EBD35E23766A3D00AB4BFF /* Configuration.swift in Sources */,
+				11EBD35E23766A3D00AB4BFF /* Endpoints.swift in Sources */,
 				11233781237AFC9100F60078 /* dateExtension.swift in Sources */,
 				11EBD39623773E5800AB4BFF /* XibView.swift in Sources */,
 				11EBD3822377130C00AB4BFF /* HomeInteractor.swift in Sources */,

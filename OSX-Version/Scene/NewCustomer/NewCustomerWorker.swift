@@ -31,40 +31,22 @@ class NewCustomerWorker {
         }
     }
     
-    
-    
     func FindCustomer(dni: String, doExist: @escaping (Bool) -> ()) {
-        let url = "\(BLServerManager.baseUrl.rawValue)/v1/customerByDni?dni=\(dni)"
-        let _service = NetwordManager()
-        _service.get(url: url) { (data, error) in
-            guard let data = data else {
-                doExist(false)
-                return
-            }
-            
-            let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
-            if let count = json?["count"] as? Int, count > 0 {
-                doExist(true)
-            } else {
-                doExist(false)
-            }
+        let endpoint = Endpoint.Create(to: .Customer(.FindByDNI(dni: dni)))
+        BLServerManager.ApiCall(endpoint: endpoint) { (respose: ResponseModel<[CustomerModel.Customer]>) in
+            respose.count ?? 0 > 0 ? doExist(true) : doExist(false)
+        } fail: { (error) in
+            doExist(true)
         }
     }
     
     func SaveCustomer(customer: CustomerModel.Full, completion: @escaping (CustomerModel.Customer?) -> ()) {
-        let url = "\(BLServerManager.baseUrl.rawValue)/v1/customer"
-        let _services = NetwordManager()
         let body = encodeNewCustomer(customer)
-        _services.post(url: url, body: body) { (data, error) in
-            guard let data = data else {
-                completion(nil)
-                return
-            }
-            guard let newUser = try? JSONDecoder().decode(CustomerModel.Customer.self, from: data) else {
-                completion(nil)
-                return
-            }
-            completion(newUser)
+        let endpoint = Endpoint.Create(to: .Customer(.Save(body: body)))
+        BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<CustomerModel.Customer>) in
+            completion(response.data)
+        } fail: { (error) in
+            completion(nil)
         }
     }
     

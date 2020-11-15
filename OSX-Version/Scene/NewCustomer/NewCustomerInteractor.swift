@@ -54,7 +54,7 @@ class NewCustomerInteractor: NewCustomerBusinessLogic, NewCustomerDataStore {
         }
         
         let userId = UserSession?.uid ?? ""
-        let pathImage = "\(userId):\(Paths.customerOriginalImage)"
+        let pathImage = "\(userId):customer"
         let net = NetwordManager()
         if let imageData = request.image.tiffRepresentation {
             net.uploadPhoto(path: pathImage, imageData: imageData, nombre: request.newUser.uid, tipo: "jpeg") { (jsonResponse, error) in

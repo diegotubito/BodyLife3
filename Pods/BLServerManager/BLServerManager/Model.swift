@@ -7,74 +7,24 @@
 
 import Foundation
 
-public struct BLEndpointModel {
-    var url : String
-    var token : String?
-    var method : String
-    var query : String?
-    var body : [String : Any]?
-}
-
-public enum BLEndpointType {
-    case RefreshToken(body: [String : Any])
-    case GetAllPeriod
-    case GetAllDiscount
-    case CheckServerConnection
-    case Transaction(uid: String, path: String, key: String, value: Double)
-    case Stock(uid: String, path: String)
-    case ConnectToMongoDB(query: String)
-    case DisconnectMongoDB
-    
-    case Payment(PaymentType)
-    case Sell(SellType)
-    case Customer(CustomerType)
-    
-    public enum CustomerType {
-        case LoadPage(query: String, token: String)
-        case Search(query: String, token: String)
-    }
-    
-    public enum SellType {
-        case Save(body: [String : Any], token: String)
-        case Disable(uid: String, body: [String: Any])
-        case Delete(uid: String)
-    }
-    
-    public enum PaymentType {
-        case Save(body: [String : Any]?, token: String?)
-        case Load(customerId: String, token: String)
-        case Delete(uid: String)
-
-        
-    }
-    
-}
-
 public enum BLServer: String {
     case Develop = "http://127.0.0.1:2999"
     case Production = "https://bodyshaping-heroku.herokuapp.com"
 }
 
-public struct BLEndpoint {
-    public struct URL {
-        public struct Firebase {
-            public static let Login = BLServerManager.baseUrl.rawValue + "/v1/firebase/auth/login"
-            public static let currentUser = BLServerManager.baseUrl.rawValue + "v1/firebase/auth/currentUser"
-            public static let transaction = BLServerManager.baseUrl.rawValue + "/v1/firebase/database/transaction"
-            public static let database = BLServerManager.baseUrl.rawValue + "/v1/firebase/database"
-        }
-        
-        public struct Server {
-            public static let CheckServerConnection = BLServerManager.baseUrl.rawValue + "/v1/checkServerConnection"
-            public static let RefreshToken =  BLServerManager.baseUrl.rawValue + "/v1/firebase/auth/refreshToken"
-            public static let ConnectMongodb = BLServerManager.baseUrl.rawValue + "/v1/connect-mongodb"
-            public static let DisconnectMongodb = BLServerManager.baseUrl.rawValue + "/v1/close-mongodb"
-        }
-        
-        public static let period = "\(BLServerManager.baseUrl.rawValue)/v1/period"
-        public static let discount = "\(BLServerManager.baseUrl.rawValue)/v1/discount"
-        public static let sell = "\(BLServerManager.baseUrl.rawValue)/v1/sell"
-        public static let payment = "\(BLServerManager.baseUrl.rawValue)/v1/payment"
+public class BLEndpointModel {
+    var url : String
+    var token : String?
+    var method : String
+    var query : String?
+    var body : [String : Any]?
+    
+    public init(url: String, token: String?, method: String, query: String?, body: [String : Any]?) {
+        self.url = url
+        self.token = token
+        self.method = method
+        self.query = query
+        self.body = body
     }
 }
 
