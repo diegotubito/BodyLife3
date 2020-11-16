@@ -92,25 +92,20 @@ extension ImportDatabase {
             guard let carnets = ImportDatabase.Carnet.getCarnets() else {
                 return
             }
-            let url = "\(BLServerManager.baseUrl.rawValue)/v1/sell"
-            let _services = NetwordManager()
             var notAdded = 0
             for (x,carnet) in carnets.enumerated() {
                 let semasphore = DispatchSemaphore(value: 0)
                 
                 let body = ImportDatabase.Carnet.encodeRegister(carnet)
-                _services.post(url: url, body: body) { (data, error) in
-                    guard data != nil else {
-                        print("no se guardo \(carnet.customer) error")
-                        print(body)
-                        notAdded += 1
-                        print("not added \(notAdded)")
-                        semasphore.signal()
-                        return
-                    }
+                let endpoint = Endpoint.Create(to: .Sell(.Save(body: body)))
+                BLServerManager.ApiCall(endpoint: endpoint) { (data) in
+                    semasphore.signal()
+                } fail: { (error) in
+                    print("no se guardo \(carnet.customer) error")
+                    notAdded += 1
+                    print("not added \(notAdded)")
                     semasphore.signal()
                 }
-                
                 _ = semasphore.wait(timeout: .distantFuture)
                 print("\(x + 1)/\(carnets.count)")
             }

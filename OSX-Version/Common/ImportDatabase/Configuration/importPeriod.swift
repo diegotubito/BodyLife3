@@ -74,25 +74,21 @@ extension ImportDatabase {
             guard let periods = ImportDatabase.Period.getPeriods() else {
                 return
             }
-            let url = "\(BLServerManager.baseUrl.rawValue)/v1/period"
-            let _services = NetwordManager()
             var notAdded = 0
             for (x,period) in periods.enumerated() {
                 let semasphore = DispatchSemaphore(value: 0)
                 
                 let body = ImportDatabase.Period.encodeRegister(period)
-                _services.post(url: url, body: body) { (data, error) in
-                    guard data != nil else {
-                        print("no se guardo \(period.description) error")
-                        print(body)
-                        notAdded += 1
-                        print("not added \(notAdded)")
-                        semasphore.signal()
-                        return
-                    }
+                
+                let endpoint = Endpoint.Create(to: .Period(.Save(body: body)))
+                BLServerManager.ApiCall(endpoint: endpoint) { (data) in
+                    semasphore.signal()
+                } fail: { (error) in
+                    print("no se guardo \(period.description) error")
+                    notAdded += 1
+                    print("not added \(notAdded)")
                     semasphore.signal()
                 }
-                
                 _ = semasphore.wait(timeout: .distantFuture)
                 print("\(x + 1)/\(periods.count)")
             }

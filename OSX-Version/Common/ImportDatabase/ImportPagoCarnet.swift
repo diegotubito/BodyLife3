@@ -77,25 +77,21 @@ extension ImportDatabase {
             guard let cobros = ImportDatabase.PagoCarnet.getPagosCarnets() else {
                 return
             }
-            let url = "\(BLServerManager.baseUrl.rawValue)/v1/payment"
-            let _services = NetwordManager()
             var notAdded = 0
             for (x,cobro) in cobros.enumerated() {
                 let semasphore = DispatchSemaphore(value: 0)
                 
                 let body = ImportDatabase.PagoCarnet.encodeRegister(cobro)
-                _services.post(url: url, body: body) { (data, error) in
-                    guard data != nil else {
-                        print("no se guardo \(cobro.customer) error")
-                        print(body)
-                        notAdded += 1
-                        print("not added \(notAdded)")
-                        semasphore.signal()
-                        return
-                    }
+                
+                let endpoint = Endpoint.Create(to: .Payment(.Save(body: body)))
+                BLServerManager.ApiCall(endpoint: endpoint) { (data) in
+                    semasphore.signal()
+                } fail: { (error) in
+                    print("no se guardo \(cobro.customer) error")
+                    notAdded += 1
+                    print("not added \(notAdded)")
                     semasphore.signal()
                 }
-                
                 _ = semasphore.wait(timeout: .distantFuture)
                 print("\(x + 1)/\(cobros.count)")
             }

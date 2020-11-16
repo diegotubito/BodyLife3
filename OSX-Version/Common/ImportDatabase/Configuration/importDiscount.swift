@@ -68,25 +68,20 @@ extension ImportDatabase {
             guard let discounts = ImportDatabase.Discount.getDiscounts() else {
                 return
             }
-            let url = "\(BLServerManager.baseUrl.rawValue)/v1/discount"
-            let _services = NetwordManager()
             var notAdded = 0
             for (x,discount) in discounts.enumerated() {
                 let semasphore = DispatchSemaphore(value: 0)
                 
                 let body = ImportDatabase.Discount.encodeRegister(discount)
-                _services.post(url: url, body: body) { (data, error) in
-                    guard data != nil else {
-                        print("no se guardo \(discount.description) error")
-                        print(body)
-                        notAdded += 1
-                        print("not added \(notAdded)")
-                        semasphore.signal()
-                        return
-                    }
+                let endpoint = Endpoint.Create(to: .Discount(.Save(body: body)))
+                BLServerManager.ApiCall(endpoint: endpoint) { (data) in
+                    semasphore.signal()
+                } fail: { (error) in
+                    print("no se guardo \(discount.description) error")
+                    notAdded += 1
+                    print("not added \(notAdded)")
                     semasphore.signal()
                 }
-                
                 _ = semasphore.wait(timeout: .distantFuture)
                 print("\(x + 1)/\(discounts.count)")
             }

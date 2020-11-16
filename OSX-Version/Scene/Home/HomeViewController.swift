@@ -122,23 +122,23 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
     }
     
     @IBAction func importData(_ sender: Any) {
-      //  ImportDatabase.Discount.MigrateToMongoDB()
-      //  ImportDatabase.Activity.MigrateToMongoDB()
-      //  ImportDatabase.Period.MigrateToMongoDB()
-      //  ImportDatabase.Article.MigrateToMongoDB()
+  //      ImportDatabase.Discount.MigrateToMongoDB()
+  //      ImportDatabase.Activity.MigrateToMongoDB()
+  //      ImportDatabase.Period.MigrateToMongoDB()
+  //      ImportDatabase.Article.MigrateToMongoDB()
         
-      //  ImportDatabase.Customer.MigrateToMongoDB()
+  //      ImportDatabase.Customer.MigrateToMongoDB()
         
         //this also create thumbnail and move old bucket pictures to new
-        ImportDatabase.Thumbnail.MigrateToMongoDB()
+  //      ImportDatabase.Thumbnail.MigrateToMongoDB()
         
         //this only move old bucket photos to new bucket
 //        ImportDatabase.Storage.MovePhotosToAnotherFolder()
         
-//        ImportDatabase.Carnet.MigrateToMongoDB()
-//        ImportDatabase.VentaArticulo.MigrateToMongoDB()
-//        ImportDatabase.PagoCarnet.MigrateToMongoDB()
-//        ImportDatabase.PagoArticulo.MigrateToMongoDB()
+  //      ImportDatabase.Carnet.MigrateToMongoDB()
+  //      ImportDatabase.VentaArticulo.MigrateToMongoDB()
+  //      ImportDatabase.PagoCarnet.MigrateToMongoDB()
+  //      ImportDatabase.PagoArticulo.MigrateToMongoDB()
     }
     
     @IBAction func closeSessionPressed(_ sender: Any) {

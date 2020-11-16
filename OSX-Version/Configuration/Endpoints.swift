@@ -26,6 +26,21 @@ public enum EndpointType {
     case Article(ArticleType)
     case Image(ImageType)
     case Firebase(FirebaseType)
+    case Period(PeriodType)
+    case Discount(DiscountType)
+    case Activity(ActivityType)
+    
+    public enum ActivityType {
+        case Save(body: [String: Any])
+    }
+    
+    public enum DiscountType {
+        case Save(body: [String: Any])
+    }
+    
+    public enum PeriodType {
+        case Save(body: [String: Any])
+    }
     
     public enum CustomerType {
         case LoadPage(query: String)
@@ -63,6 +78,7 @@ public enum EndpointType {
         case Login(body: [String: Any])
         case SighUp(body: [String: Any])
         case SendVerificationMail(body: [String: Any])
+        case Save(path: String, body: [String: Any])
     }
 }
 
@@ -169,6 +185,19 @@ class Endpoint {
         case .Firebase(.SendVerificationMail(body: let body)):
             let url = "\(BLServerManager.baseUrl.rawValue)/v1/sendMail"
             return BLEndpointModel(url: url, token: nil, method: "POST", query: nil, body: body)
+        case .Firebase(.Save(path: let path, body: let body)):
+            let url = myURL.Firebase.database + path
+            return BLEndpointModel(url: url, token: nil, method: "POST", query: nil, body: body)
+        case .Period(.Save(body: let body)):
+            let url = "\(BLServerManager.baseUrl.rawValue)/v1/period"
+            return BLEndpointModel(url: url, token: nil, method: "POST", query: nil, body: body)
+        case .Discount(.Save(body: let body)):
+            let url = "\(BLServerManager.baseUrl.rawValue)/v1/discount"
+            return BLEndpointModel(url: url, token: nil, method: "POST", query: nil, body: body)
+        case .Activity(.Save(body: let body)):
+            let url = "\(BLServerManager.baseUrl.rawValue)/v1/activity"
+            return BLEndpointModel(url: url, token: nil, method: "POST", query: nil, body: body)
+            
         }
     }
 }

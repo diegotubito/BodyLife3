@@ -70,25 +70,21 @@ extension ImportDatabase {
             guard let activities = ImportDatabase.Activity.getActivities() else {
                 return
             }
-            let url = "\(BLServerManager.baseUrl.rawValue)/v1/activity"
-            let _services = NetwordManager()
             var notAdded = 0
             for (x,activity) in activities.enumerated() {
                 let semasphore = DispatchSemaphore(value: 0)
                 
                 let body = ImportDatabase.Activity.encodeRegister(activity)
-                _services.post(url: url, body: body) { (data, error) in
-                    guard data != nil else {
-                        print("no se guardo \(activity.description) error")
-                        print(body)
-                        notAdded += 1
-                        print("not added \(notAdded)")
-                        semasphore.signal()
-                        return
-                    }
+                let endpoint = Endpoint.Create(to: .Activity(.Save(body: body)))
+                BLServerManager.ApiCall(endpoint: endpoint) { (data) in
+                    semasphore.signal()
+                } fail: { (error) in
+                    print("no se guardo \(activity.description) error")
+                    notAdded += 1
+                    print("not added \(notAdded)")
                     semasphore.signal()
                 }
-                
+
                 _ = semasphore.wait(timeout: .distantFuture)
                 print("\(x + 1)/\(activities.count)")
             }

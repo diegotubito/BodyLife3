@@ -104,25 +104,20 @@ extension ImportDatabase {
             guard let customers = ImportDatabase.Customer.getCustomers() else {
                 return
             }
-            let url = "\(BLServerManager.baseUrl.rawValue)/v1/customer"
-            let _services = NetwordManager()
             var notAdded = 0
             for (x,customer) in customers.enumerated() {
                 let semasphore = DispatchSemaphore(value: 0)
                 
                 let body = encodeRegister(customer)
-                _services.post(url: url, body: body) { (data, error) in
-                    guard data != nil else {
-                        print("no se guardo \(customer.dni) error")
-                        print(body)
-                        notAdded += 1
-                        print("not added \(notAdded)")
-                        semasphore.signal()
-                        return
-                    }
+                let endpoint = Endpoint.Create(to: .Customer(.Save(body: body)))
+                BLServerManager.ApiCall(endpoint: endpoint) { (data) in
+                    semasphore.signal()
+                } fail: { (error) in
+                    print("no se guardo \(customer.dni) error")
+                    notAdded += 1
+                    print("not added \(notAdded)")
                     semasphore.signal()
                 }
-                
                 _ = semasphore.wait(timeout: .distantFuture)
                 print("\(x + 1)/\(customers.count)")
             }

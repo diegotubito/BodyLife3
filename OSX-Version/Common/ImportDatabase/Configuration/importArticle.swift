@@ -77,26 +77,24 @@ extension ImportDatabase {
                 return
             }
             let uid = UserSaved.GetUID()
-            let path = "product:article"
-            let _services = NetwordManager()
+            let place = "product:article"
             var notAdded = 0
             for (x,article) in articles.enumerated() {
                 let semasphore = DispatchSemaphore(value: 0)
                 
                 let body = ImportDatabase.Article.encodeRegister(article)
-                let url = myURL.Firebase.database + "/users:\(uid):\(path):\(article._id!)"
-                _services.post(url: url, body: body) { (data, error) in
-                    guard data != nil else {
-                        print("no se guardo \(article.description) error")
-                        print(body)
-                        notAdded += 1
-                        print("not added \(notAdded)")
-                        semasphore.signal()
-                        return
-                    }
+                let path = "/users:\(uid):\(place):\(article._id!)"
+                
+                let endpoint = Endpoint.Create(to: .Firebase(.Save(path: path, body: body)))
+                BLServerManager.ApiCall(endpoint: endpoint) { (data) in
+                    semasphore.signal()
+                } fail: { (error) in
+                    print("no se guardo \(article.description) error")
+                    notAdded += 1
+                    print("not added \(notAdded)")
                     semasphore.signal()
                 }
-                
+
                 _ = semasphore.wait(timeout: .distantFuture)
                 print("\(x + 1)/\(articles.count)")
             }
