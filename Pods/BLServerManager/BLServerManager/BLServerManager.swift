@@ -21,8 +21,6 @@ public class BLServerManager {
                 break
             case .success(let data):
                 do {
-//                    let json = try? JSONSerialization.jsonObject(with: data, options: [])
-//                    print(json)
                     let genericData = try JSONDecoder().decode(T.self, from: data)
                     success(genericData)
                 } catch {

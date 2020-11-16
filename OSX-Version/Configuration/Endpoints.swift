@@ -12,8 +12,6 @@ import BLServerManager
 
 public enum EndpointType {
     case RefreshToken(body: [String : Any])
-    case GetAllPeriod
-    case GetAllDiscount
     case CheckServerConnection
     case Transaction(uid: String, path: String, key: String, value: Double)
     case Stock(uid: String, path: String)
@@ -36,10 +34,12 @@ public enum EndpointType {
     
     public enum DiscountType {
         case Save(body: [String: Any])
+        case LoadAll
     }
     
     public enum PeriodType {
         case Save(body: [String: Any])
+        case LoadAll
     }
     
     public enum CustomerType {
@@ -87,36 +87,41 @@ class Endpoint {
         
         switch to {
         case .RefreshToken(body: let body):
-            return BLEndpointModel(url: myURL.Server.RefreshToken, token: nil, method: "POST", query: nil, body: body)
-        case .GetAllPeriod:
-            return BLEndpointModel(url: myURL.period, token: nil, method: "GET", query: nil, body: nil)
-        case .GetAllDiscount:
-            return BLEndpointModel(url: myURL.discount, token: nil, method: "GET", query: nil, body: nil)
+            let url = BLServerManager.baseUrl.rawValue + "/v1/firebase/auth/refreshToken"
+            return BLEndpointModel(url: url, token: nil, method: "POST", query: nil, body: body)
+        case .Period(.LoadAll):
+            let url = "\(BLServerManager.baseUrl.rawValue)/v1/period"
+            return BLEndpointModel(url: url, token: nil, method: "GET", query: nil, body: nil)
+        case .Discount(.LoadAll):
+            let url = "\(BLServerManager.baseUrl.rawValue)/v1/discount"
+            return BLEndpointModel(url: url, token: nil, method: "GET", query: nil, body: nil)
         case .Sell(.Save(body: let body)):
             let token = UserSaved.GetToken()
-            return BLEndpointModel(url: myURL.sell, token: token, method: "POST", query: nil, body: body)
+            let url = "\(BLServerManager.baseUrl.rawValue)/v1/sell"
+            return BLEndpointModel(url: url, token: token, method: "POST", query: nil, body: body)
         case .CheckServerConnection:
-            return BLEndpointModel(url: myURL.Server.CheckServerConnection, token: nil, method: "GET", query: nil, body: nil)
+            let url = BLServerManager.baseUrl.rawValue + "/v1/checkServerConnection"
+            return BLEndpointModel(url: url, token: nil, method: "GET", query: nil, body: nil)
         case .Transaction(uid: let uid, path: let path, key: let key, value: let value):
             let body = ["transaction": value]
-            let url = myURL.Firebase.transaction + "/users:\(uid):\(path):\(key)"
+            let url = BLServerManager.baseUrl.rawValue + "/v1/firebase/database/transaction" + "/users:\(uid):\(path):\(key)"
             return BLEndpointModel(url: url, token: nil, method: "POST", query: nil, body: body)
         case .Stock(uid: let uid, path: let path):
-            let url = myURL.Firebase.database + "/users:\(uid):\(path)"
+            let url = BLServerManager.baseUrl.rawValue + "/v1/firebase/database" + "/users:\(uid):\(path)"
             return BLEndpointModel(url: url, token: nil, method: "GET", query: nil, body: nil)
         case .ConnectToMongoDB(query: let query):
-            let url = "\(myURL.Server.ConnectMongodb)"
+            let url = BLServerManager.baseUrl.rawValue + "/v1/connect-mongodb"
             return BLEndpointModel(url: url, token: nil, method: "POST", query: query, body: nil)
         case .DisconnectMongoDB:
-            let url = myURL.Server.DisconnectMongodb
+            let url = BLServerManager.baseUrl.rawValue + "/v1/close-mongodb"
             return BLEndpointModel(url: url, token: nil, method: "POST", query: nil, body: nil)
         case .Payment(.Delete(uid: let uid)) :
             let query = "?id=\(uid)"
-            let url = myURL.payment
+            let url = "\(BLServerManager.baseUrl.rawValue)/v1/payment"
             return BLEndpointModel(url: url, token: nil, method: "DELETE", query: query, body: nil)
         case .Sell(.Delete(uid: let uid)):
             let query = "?id=\(uid)"
-            let url = myURL.sell
+            let url = "\(BLServerManager.baseUrl.rawValue)/v1/sell"
             return BLEndpointModel(url: url, token: nil, method: "DELETE", query: query, body: nil)
         case .Sell(.Disable(uid: let uid, body: let body)):
             let query = "?id=\(uid)"
@@ -159,7 +164,7 @@ class Endpoint {
             let token = UserSaved.GetToken()
             return BLEndpointModel(url: url, token: token, method: "GET", query: query, body: nil)
         case .Article(.Load(userUID: let id, path: let path)):
-            let url = myURL.Firebase.database + "/users:\(id):\(path)"
+            let url = BLServerManager.baseUrl.rawValue + "/v1/firebase/database" + "/users:\(id):\(path)"
             return BLEndpointModel(url: url, token: nil, method: "GET", query: nil, body: nil)
         case .Image(.LoadThumbnail(uid: let uid)) :
             let query = "?uid=\(uid)"
@@ -177,7 +182,7 @@ class Endpoint {
             let url = "\(BLServerManager.baseUrl.rawValue)/v1/thumbnail"
             return BLEndpointModel(url: url, token: nil, method: "POST", query: nil, body: body)
         case .Firebase(.Login(body: let body)):
-            let url = myURL.Firebase.Login
+            let url = BLServerManager.baseUrl.rawValue + "/v1/firebase/auth/login"
             return BLEndpointModel(url: url, token: nil, method: "POST", query: nil, body: body)
         case .Firebase(.SighUp(body: let body)):
             let url = "\(BLServerManager.baseUrl.rawValue)/v1/firebase/admin/user"
@@ -186,7 +191,7 @@ class Endpoint {
             let url = "\(BLServerManager.baseUrl.rawValue)/v1/sendMail"
             return BLEndpointModel(url: url, token: nil, method: "POST", query: nil, body: body)
         case .Firebase(.Save(path: let path, body: let body)):
-            let url = myURL.Firebase.database + path
+            let url = BLServerManager.baseUrl.rawValue + "/v1/firebase/database" + path
             return BLEndpointModel(url: url, token: nil, method: "POST", query: nil, body: body)
         case .Period(.Save(body: let body)):
             let url = "\(BLServerManager.baseUrl.rawValue)/v1/period"
@@ -200,25 +205,4 @@ class Endpoint {
             
         }
     }
-}
-
-public struct myURL {
-    public struct Firebase {
-        public static let Login = BLServerManager.baseUrl.rawValue + "/v1/firebase/auth/login"
-        public static let currentUser = BLServerManager.baseUrl.rawValue + "v1/firebase/auth/currentUser"
-        public static let transaction = BLServerManager.baseUrl.rawValue + "/v1/firebase/database/transaction"
-        public static let database = BLServerManager.baseUrl.rawValue + "/v1/firebase/database"
-    }
-    
-    public struct Server {
-        public static let CheckServerConnection = BLServerManager.baseUrl.rawValue + "/v1/checkServerConnection"
-        public static let RefreshToken =  BLServerManager.baseUrl.rawValue + "/v1/firebase/auth/refreshToken"
-        public static let ConnectMongodb = BLServerManager.baseUrl.rawValue + "/v1/connect-mongodb"
-        public static let DisconnectMongodb = BLServerManager.baseUrl.rawValue + "/v1/close-mongodb"
-    }
-    
-    public static let period = "\(BLServerManager.baseUrl.rawValue)/v1/period"
-    public static let discount = "\(BLServerManager.baseUrl.rawValue)/v1/discount"
-    public static let sell = "\(BLServerManager.baseUrl.rawValue)/v1/sell"
-    public static let payment = "\(BLServerManager.baseUrl.rawValue)/v1/payment"
 }

@@ -26,7 +26,7 @@ class ActivitySaleViewModel : ActivitySaleViewModelContract {
     
     func loadPeriods() {
         _view.showLoading()
-        let request = Endpoint.Create(to: .GetAllPeriod)
+        let request = Endpoint.Create(to: .Period(.LoadAll))
         BLServerManager.ApiCall(endpoint: request) { (periods:PeriodModel.ViewModel) in
             self._view.hideLoading()
             self.parseActivityAndDiscount(response: periods)
@@ -38,7 +38,7 @@ class ActivitySaleViewModel : ActivitySaleViewModelContract {
     
     func loadDiscounts() {
         _view.showLoading()
-        let endpoint = Endpoint.Create(to: .GetAllDiscount)
+        let endpoint = Endpoint.Create(to: .Discount(.LoadAll))
         BLServerManager.ApiCall(endpoint: endpoint) { (result:DiscountModel.ViewModel) in
             self._view.hideLoading()
             self.model.discounts = result.discounts
