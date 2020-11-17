@@ -7,13 +7,14 @@
 //
 
 import Cocoa
-
+import BLServerManager
 
 extension HomeViewController {
     
     func addObservers() {
         customerListOberserver()
         buttonObserverProductSell()
+        buttonObserverEditProfilePicture()
         buttonObserverActivitySell()
         buttonObserverPayment()
     }
@@ -52,6 +53,17 @@ extension HomeViewController {
         }
     }
     
+    func buttonObserverEditProfilePicture() {
+        self.customerStatusView.didPressEditProfilePicture = { [weak self] in
+            //route to camera virecontroller
+            let storyboard = NSStoryboard(name: "NewCustomerStoryboard", bundle: nil)
+            
+            let destinationVC = storyboard.instantiateController(withIdentifier: "CameraViewController") as! CameraViewController
+            destinationVC.delegate = self
+            self?.presentAsSheet(destinationVC)
+        }
+    }
+    
     func buttonObserverPayment() {
         self.sellRegisterView.onAddPayment = { payments in
             self.paymentView.viewmodel.setSelectedInfo(self.selectedCustomer!, self.sellRegisterView.viewModel.getSelectedRegister()!, payments: payments)
@@ -72,4 +84,25 @@ extension HomeViewController {
             self.sellRegisterView.viewModel.loadPayments()
         }
     }
+}
+
+extension HomeViewController: CameraViewControllerDelegate {
+    func capturedImage(originalSize image: NSImage) {
+        let id = customerStatusView.viewModel.model.receivedCustomer._id
+        
+        CommonWorker.Image.updateThumbnail(_id: id, image: image) { (stringImage) in
+            if stringImage != nil {
+                self.customerListView.viewModel.setImageForCustomer(_id: id, thumbnail: stringImage!)
+            }
+        }
+        
+        
+        self.customerStatusView.showLoading()
+        CommonWorker.Image.uploadImage(uid: id, image: image) { (success) in
+            success ? print("storage image uploaded") : print("storage image fail")
+            self.customerStatusView.downloadProfileImage()
+        }
+    }
+    
+    
 }

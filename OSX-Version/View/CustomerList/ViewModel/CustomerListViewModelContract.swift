@@ -14,6 +14,7 @@ protocol CustomerListViewModelContract {
     var model : CustomerListModel! {get set}
     func loadCustomers(bySearch: String, offset: Int)
     func loadCustomers(offset: Int)
+    func setImageForCustomer(_id: String, thumbnail: String)
 }
 
 protocol CustomerListViewContract {
@@ -22,4 +23,5 @@ protocol CustomerListViewContract {
     func showSuccess()
     func showError()
     func reloadCell(row: Int)
+    func reloadList()
 }

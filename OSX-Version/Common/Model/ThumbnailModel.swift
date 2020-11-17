@@ -17,7 +17,7 @@ class ThumbnailModel {
     }
     
     struct Thumbnail : Decodable {
-        var uid : String
+        var _id : String
         var thumbnailImage : String
         var isEnabled : Bool
     }

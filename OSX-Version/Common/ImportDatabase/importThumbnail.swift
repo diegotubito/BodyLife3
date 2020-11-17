@@ -115,11 +115,11 @@ extension ImportDatabase {
                     if err != nil {
                         imageSemasphore.signal()
                     } else {
-
-                        ImportDatabase.Thumbnail.saveNewThumbnail(uid: customer.uid, thumbnail: thumb ?? "") { (success) in
+                        
+                        CommonWorker.Image.uploadThumbnail(_id: customer._id!, image: image!) { (success) in
                             if success {
                                 counter += 1
-                                print("\(counter)/\(customers.count)")
+                                print("thumbnail uploaded \(counter)/\(customers.count)")
                             } else {
                                 notLoaded += 1
                                 print("not updated \(notLoaded)")
@@ -127,9 +127,9 @@ extension ImportDatabase {
                             imageSemasphore.signal()
                         }
                         
-                        //move image from different firebase accounts
+                        //move image to different firebase backet and different account
                         if image != nil {
-                            ImportDatabase.Storage.uploadPhoto(image: image!, filename: customer.uid) { (uploaded) in
+                            ImportDatabase.Storage.uploadPhoto(image: image!, filename: customer._id!) { (uploaded) in
                                 if uploaded {
                                     counter += 1
                                     print("\(counter)/\(customers.count)")
@@ -145,24 +145,6 @@ extension ImportDatabase {
                 }
                 _ = imageSemasphore.wait(timeout: .distantFuture)
                 
-            }
-        }
-        
-        static func saveNewThumbnail(uid: String, thumbnail: String, completion: @escaping (Bool) -> ()) {
-            if thumbnail.isEmpty {
-                completion(false)
-                return
-            }
-            
-            let body = ["uid": uid,
-                        "thumbnailImage": thumbnail,
-                        "isEnabled" : true] as [String : Any]
-            
-            let endpoint = Endpoint.Create(to: .Image(.SaveThumbnail(body: body)))
-            BLServerManager.ApiCall(endpoint: endpoint) { (data) in
-                completion(true)
-            } fail: { (error) in
-                completion(false)
             }
         }
         

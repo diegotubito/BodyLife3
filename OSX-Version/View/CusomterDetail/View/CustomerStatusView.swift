@@ -16,6 +16,7 @@ extension Notification.Name {
 
 class CustomerStatusView: XibViewWithAnimation {
     
+    @IBOutlet weak var editProfilePictureOutlet: NSButton!
     @IBOutlet weak var titleLabel: NSTextField!
     @IBOutlet weak var ageLabel: NSTextField!
  
@@ -36,6 +37,7 @@ class CustomerStatusView: XibViewWithAnimation {
     @IBOutlet weak var sellActivityButtonOutlet: NSButton!
     var didPressSellActivityButton : (() -> ())?
     var didPressSellProductButton : (() -> ())?
+    var didPressEditProfilePicture : (() -> ())?
     var profilePictureRequest : URLSessionDataTask?
     
     override func commonInit() {
@@ -64,6 +66,7 @@ class CustomerStatusView: XibViewWithAnimation {
         self.DayBox.wantsLayer = true
       
         NotificationCenter.default.addObserver(self, selector: #selector(updateDataFromNotification), name: .notificationUpdateStatus, object: nil)
+        
     }
     
     @objc func updateDataFromNotification(notification: Notification) {
@@ -73,7 +76,11 @@ class CustomerStatusView: XibViewWithAnimation {
             self.showData(statusInfo: userInfo)
         }
        
-        downloadImage(childID: viewModel.model.receivedCustomer.uid) { (image, error) in
+        downloadProfileImage()
+    }
+    
+    func downloadProfileImage() {
+        downloadImage(childID: viewModel.model.receivedCustomer._id) { (image, error) in
             DispatchQueue.main.async {
                 self.hideLoading()
                 self.profilePicture.layer?.cornerRadius = (self.profilePicture.layer?.frame.width)! / 2
@@ -89,6 +96,7 @@ class CustomerStatusView: XibViewWithAnimation {
     }
     
     func initValues() {
+        editProfilePictureOutlet.isEnabled = false
         sellActivityButtonOutlet.isEnabled = false
         sellArticleButtonOutlet.isEnabled = false
         expirationDateLabel.stringValue = ""
@@ -126,38 +134,15 @@ class CustomerStatusView: XibViewWithAnimation {
             completion(nil, error)
         }
 
-
-        
-////        let url = "\(Config.baseUrl.rawValue)/v1/downloadImage?filename=socios/\(childID).jpeg"
-//        let uid = UserSession?.uid ?? ""
-//        let url = "\(BLServerManager.baseUrl.rawValue)/v1/downloadImage?filename=\(uid)/customer/\(childID).jpeg"
-//        let _services = NetwordManager()
-//
-//        if profilePictureRequest != nil {
-//            profilePictureRequest?.cancel()
-//            profilePictureRequest = nil
-//            cancel()
-//        }
-//        profilePictureRequest = _services.downloadImageFromUrl(url: url) { (image) in
-//            self.profilePictureRequest = nil
-//            guard let image = image else {
-//                completion(nil, nil)
-//                return
-//            }
-//            let medium = image.crop(size: NSSize(width: 200, height: 200))
-//
-//            completion(medium, nil)
-//        } fail: { (err) in
-//            self.profilePictureRequest = nil
-//            completion(nil, err)
-//        }
-
     }
     @IBAction func SellActivityPressed(_ sender: Any) {
         didPressSellActivityButton?()
     }
     @IBAction func SellProductPressed(_ sender: Any) {
         didPressSellProductButton?()
+    }
+    @IBAction func editPictureProfilePressed(_ sender: Any) {
+        didPressEditProfilePicture?()
     }
 }
 
@@ -196,7 +181,8 @@ extension CustomerStatusView : CustomerStatusViewContract{
     
     func showLoading() {
         DispatchQueue.main.async {
-            self.initValues()
+            self.sellArticleButtonOutlet.isEnabled = false
+            self.sellActivityButtonOutlet.isEnabled = false
             self.activityIndicator.startAnimation(nil)
             self.profilePicture.image = nil
         }
@@ -204,7 +190,10 @@ extension CustomerStatusView : CustomerStatusViewContract{
     
     func hideLoading() {
         DispatchQueue.main.async {
+            self.sellArticleButtonOutlet.isEnabled = true
+            self.sellActivityButtonOutlet.isEnabled = true
             self.activityIndicator.stopAnimation(nil)
+            self.editProfilePictureOutlet.isEnabled = true
         }
         
     }

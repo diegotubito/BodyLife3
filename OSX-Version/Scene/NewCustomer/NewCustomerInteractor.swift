@@ -43,27 +43,19 @@ class NewCustomerInteractor: NewCustomerBusinessLogic, NewCustomerDataStore {
             var response = NewCustomer.NewCustomer.Response(error: nil, customer: savedCustomer)
             response.customer?.thumbnailImage = request.thumbnail
             self.presenter?.presentNewCustomerResult(response: response)
+            
+            self.uploadPictures(_id: savedCustomer._id, image: request.image)
+        }
+    }
+    
+    func uploadPictures(_id: String, image: NSImage) {
+       
+        CommonWorker.Image.uploadThumbnail(_id: _id, image: image) { (success) in
+            success ? print("thumbnail uploaded") : print("thumbnail fail")
         }
         
-        worker.saveNewThumbnail(uid: request.newUser.uid, thumbnail: request.thumbnail) { (uploaded) in
-            if uploaded {
-                print("thumbnail uploaded")
-            } else {
-                print("thumbnail could not be loaded")
-            }
-        }
-        
-        let userId = UserSession?.uid ?? ""
-        let pathImage = "\(userId):customer"
-        let net = StorageManager()
-        if let imageData = request.image.tiffRepresentation {
-            net.uploadPhoto(path: pathImage, imageData: imageData, nombre: request.newUser.uid, tipo: "jpeg") { (jsonResponse, error) in
-                if jsonResponse != nil {
-                    print("se subio foto a storage")
-                } else {
-                    print("no se puedo subir foto")
-                }
-            }
+        CommonWorker.Image.uploadImage(uid: _id, image: image) { (success) in
+            success ? print("storage image uploaded") : print("storage image fail")
         }
     }
 }

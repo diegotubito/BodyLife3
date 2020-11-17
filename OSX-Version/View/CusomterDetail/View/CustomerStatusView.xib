@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17506"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="System colors introduced in macOS 10.14" minToolsVersion="10.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -12,6 +13,7 @@
                 <outlet property="DayBox" destination="jdk-KK-FLE" id="5gv-oQ-33N"/>
                 <outlet property="activityIndicator" destination="CwU-P6-vvy" id="bzZ-bE-q1e"/>
                 <outlet property="ageLabel" destination="2GV-gb-OfN" id="m4W-PI-Fo8"/>
+                <outlet property="editProfilePictureOutlet" destination="M1D-iN-0m6" id="njK-UD-NaN"/>
                 <outlet property="errorView" destination="Qjb-Dk-DUN" id="IxK-in-P4A"/>
                 <outlet property="expirationDateLabel" destination="5lU-pp-sGp" id="QhO-aT-blo"/>
                 <outlet property="innerBackground" destination="BwV-uf-wSG" id="7i9-Kn-Bep"/>
@@ -49,7 +51,7 @@
                     </constraints>
                 </customView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="BwV-uf-wSG">
-                    <rect key="frame" x="0.0" y="100" width="488" height="164"/>
+                    <rect key="frame" x="0.0" y="100" width="508" height="164"/>
                     <subviews>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NbD-P7-V87">
                             <rect key="frame" x="52" y="109" width="79" height="16"/>
@@ -60,13 +62,13 @@
                             </textFieldCell>
                         </textField>
                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="S25-mF-RC4">
-                            <rect key="frame" x="16" y="81" width="456" height="2"/>
+                            <rect key="frame" x="16" y="81" width="476" height="2"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="2" id="XEI-ke-WD7"/>
                             </constraints>
                         </customView>
                         <box boxType="custom" cornerRadius="20" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="jdk-KK-FLE">
-                            <rect key="frame" x="364" y="28" width="108" height="108"/>
+                            <rect key="frame" x="384" y="28" width="108" height="108"/>
                             <view key="contentView" id="M3w-oW-UtH">
                                 <rect key="frame" x="1" y="1" width="106" height="106"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -122,7 +124,7 @@
                             <font key="titleFont" size="13" name="HelveticaNeue"/>
                         </box>
                         <box boxType="custom" cornerRadius="20" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="qVv-Px-vIw">
-                            <rect key="frame" x="169" y="55" width="150" height="54"/>
+                            <rect key="frame" x="179" y="55" width="150" height="54"/>
                             <view key="contentView" id="LeF-J2-QAP">
                                 <rect key="frame" x="1" y="1" width="148" height="52"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -149,7 +151,7 @@
                             <font key="titleFont" size="13" name="HelveticaNeue"/>
                         </box>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KzM-r5-hA5">
-                            <rect key="frame" x="225" y="109" width="39" height="16"/>
+                            <rect key="frame" x="235" y="109" width="39" height="16"/>
                             <textFieldCell key="cell" lineBreakMode="clipping" title="Saldo" id="nZK-zv-MH9">
                                 <font key="font" metaFont="system"/>
                                 <color key="textColor" name="tertiaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -192,14 +194,39 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hgy-GR-QxU">
-                    <rect key="frame" x="504" y="92" width="180" height="180"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="180" id="GpI-8W-pxZ"/>
-                        <constraint firstAttribute="width" secondItem="hgy-GR-QxU" secondAttribute="height" multiplier="1:1" id="VKF-cA-Rs0"/>
-                    </constraints>
-                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="empty" id="m5N-UE-yGN"/>
-                </imageView>
+                <stackView distribution="fill" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dAc-8q-hAF">
+                    <rect key="frame" x="524" y="90" width="160" height="184"/>
+                    <subviews>
+                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hgy-GR-QxU">
+                            <rect key="frame" x="0.0" y="24" width="160" height="160"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="160" id="GpI-8W-pxZ"/>
+                                <constraint firstAttribute="width" secondItem="hgy-GR-QxU" secondAttribute="height" multiplier="1:1" id="VKF-cA-Rs0"/>
+                            </constraints>
+                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="empty" id="m5N-UE-yGN"/>
+                        </imageView>
+                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="M1D-iN-0m6">
+                            <rect key="frame" x="38" y="0.0" width="85" height="16"/>
+                            <buttonCell key="cell" type="bevel" title="Editar foto" bezelStyle="regularSquare" imagePosition="left" inset="2" id="BwZ-Bp-u0K">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                                <imageReference key="image" image="pencil" catalog="system" symbolScale="large"/>
+                            </buttonCell>
+                            <color key="contentTintColor" red="0.42054998972055047" green="0.74322729218964811" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <connections>
+                                <action selector="editPictureProfilePressed:" target="-2" id="fWT-5W-GgO"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <visibilityPriorities>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                    </visibilityPriorities>
+                    <customSpacing>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                    </customSpacing>
+                </stackView>
                 <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="16" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kpY-4o-cfd">
                     <rect key="frame" x="16" y="33" width="116" height="59"/>
                     <subviews>
@@ -242,7 +269,7 @@
                     </customSpacing>
                 </stackView>
                 <progressIndicator wantsLayer="YES" maxValue="100" displayedWhenStopped="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="CwU-P6-vvy">
-                    <rect key="frame" x="584" y="174" width="20" height="16"/>
+                    <rect key="frame" x="594" y="186" width="20" height="16"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="20" id="Diq-ie-NtS"/>
                     </constraints>
@@ -251,20 +278,20 @@
             <constraints>
                 <constraint firstItem="kpY-4o-cfd" firstAttribute="top" secondItem="BwV-uf-wSG" secondAttribute="bottom" constant="8" id="6b8-4a-ORY"/>
                 <constraint firstItem="BwV-uf-wSG" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="ADY-K8-xo7"/>
-                <constraint firstItem="hgy-GR-QxU" firstAttribute="leading" secondItem="BwV-uf-wSG" secondAttribute="trailing" constant="16" id="Kjv-BD-28Z"/>
+                <constraint firstItem="dAc-8q-hAF" firstAttribute="leading" secondItem="BwV-uf-wSG" secondAttribute="trailing" constant="16" id="HYo-yq-gwO"/>
+                <constraint firstItem="dAc-8q-hAF" firstAttribute="centerY" secondItem="BwV-uf-wSG" secondAttribute="centerY" id="KnM-vk-tlg"/>
                 <constraint firstItem="kpY-4o-cfd" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="16" id="Mdb-Zx-Foc"/>
-                <constraint firstAttribute="trailing" secondItem="hgy-GR-QxU" secondAttribute="trailing" constant="16" id="NCb-gT-plF"/>
-                <constraint firstItem="CwU-P6-vvy" firstAttribute="centerX" secondItem="hgy-GR-QxU" secondAttribute="centerX" id="NpX-DZ-7B9"/>
                 <constraint firstItem="BwV-uf-wSG" firstAttribute="height" secondItem="c22-O7-iKe" secondAttribute="height" multiplier="0.45" id="PCW-P9-WOL"/>
-                <constraint firstItem="hgy-GR-QxU" firstAttribute="centerY" secondItem="c22-O7-iKe" secondAttribute="centerY" id="Pz5-Jm-X2q"/>
-                <constraint firstItem="CwU-P6-vvy" firstAttribute="centerY" secondItem="hgy-GR-QxU" secondAttribute="centerY" id="Rz5-fH-c3r"/>
                 <constraint firstAttribute="bottom" secondItem="Qjb-Dk-DUN" secondAttribute="bottom" id="WRJ-Kp-wfy"/>
                 <constraint firstItem="Qjb-Dk-DUN" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="X5H-ga-U4M"/>
+                <constraint firstAttribute="trailing" secondItem="dAc-8q-hAF" secondAttribute="trailing" constant="16" id="XbF-Kk-em5"/>
+                <constraint firstItem="CwU-P6-vvy" firstAttribute="centerY" secondItem="hgy-GR-QxU" secondAttribute="centerY" id="eue-vT-pPf"/>
                 <constraint firstItem="2GV-gb-OfN" firstAttribute="leading" secondItem="2wd-pp-b16" secondAttribute="trailing" constant="16" id="km8-Rh-vdB"/>
                 <constraint firstItem="2wd-pp-b16" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="16" id="l1A-s6-V8C"/>
                 <constraint firstItem="2GV-gb-OfN" firstAttribute="centerY" secondItem="2wd-pp-b16" secondAttribute="centerY" id="pRc-Uu-QZI"/>
                 <constraint firstAttribute="trailing" secondItem="Qjb-Dk-DUN" secondAttribute="trailing" id="pUD-NL-X9X"/>
                 <constraint firstItem="Qjb-Dk-DUN" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="sFo-bi-4hN"/>
+                <constraint firstItem="CwU-P6-vvy" firstAttribute="centerX" secondItem="hgy-GR-QxU" secondAttribute="centerX" id="tyY-q9-Vc4"/>
                 <constraint firstItem="BwV-uf-wSG" firstAttribute="centerY" secondItem="c22-O7-iKe" secondAttribute="centerY" id="v6Y-lv-x2L"/>
                 <constraint firstItem="2wd-pp-b16" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="16" id="w50-Ca-K3C"/>
             </constraints>
@@ -276,5 +303,6 @@
         <image name="carrito" width="512" height="512"/>
         <image name="empty" width="460" height="460"/>
         <image name="gatito" width="445" height="302"/>
+        <image name="pencil" catalog="system" width="17" height="16"/>
     </resources>
 </document>

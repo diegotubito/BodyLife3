@@ -68,8 +68,9 @@ public enum EndpointType {
     }
     
     public enum ImageType {
-        case LoadThumbnail(uid: String)
+        case LoadThumbnail(_id: String)
         case SaveThumbnail(body: [String: Any])
+        case UpdateThumbnail(body: [String: Any])
         case LoadBigSize(userUID: String, customerUID: String)
         case LoadBigSizeFromOldBucket(customerUID: String)
     }
@@ -166,8 +167,8 @@ class Endpoint {
         case .Article(.Load(userUID: let id, path: let path)):
             let url = BLServerManager.baseUrl.rawValue + "/v1/firebase/database" + "/users:\(id):\(path)"
             return BLEndpointModel(url: url, token: nil, method: "GET", query: nil, body: nil)
-        case .Image(.LoadThumbnail(uid: let uid)) :
-            let query = "?uid=\(uid)"
+        case .Image(.LoadThumbnail(_id: let _id)) :
+            let query = "?_id=\(_id)"
             let url = "\(BLServerManager.baseUrl.rawValue)/v1/thumbnail"
             return BLEndpointModel(url: url, token: nil, method: "GET", query: query, body: nil)
         case .Image(.LoadBigSize(userUID: let userUID, customerUID: let customerUID)) :
@@ -181,6 +182,9 @@ class Endpoint {
         case .Image(.SaveThumbnail(body: let body)):
             let url = "\(BLServerManager.baseUrl.rawValue)/v1/thumbnail"
             return BLEndpointModel(url: url, token: nil, method: "POST", query: nil, body: body)
+        case .Image(.UpdateThumbnail(body: let body)):
+            let url = "\(BLServerManager.baseUrl.rawValue)/v1/thumbnail"
+            return BLEndpointModel(url: url, token: nil, method: "PUT", query: nil, body: body)
         case .Firebase(.Login(body: let body)):
             let url = BLServerManager.baseUrl.rawValue + "/v1/firebase/auth/login"
             return BLEndpointModel(url: url, token: nil, method: "POST", query: nil, body: body)

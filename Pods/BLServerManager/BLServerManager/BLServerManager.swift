@@ -30,7 +30,7 @@ public class BLServerManager {
             }
         }
     }
-  
+    
     public static func ApiCall(endpoint: BLEndpointModel, success: @escaping (Data?) -> (), fail: @escaping (BLNetworkError) ->()) {
         
         self.ApiRequest(endpoint: endpoint) { (result) in

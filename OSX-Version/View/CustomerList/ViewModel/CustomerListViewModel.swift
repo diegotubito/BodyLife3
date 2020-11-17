@@ -97,20 +97,31 @@ class CustomerListViewModel: CustomerListViewModelContract {
             return
         }
         
-        let uid = customer.uid
-        let endpoint = Endpoint.Create(to: .Image(.LoadThumbnail(uid: uid)))
-        BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<[ThumbnailModel.Thumbnail]>) in
-            if response.data?.count ?? 0 > 0 {
-                let image = response.data![0].thumbnailImage.convertToImage
-                self.imageCache.setObject(image!, forKey: url as AnyObject)
-                completion(image, row)
-            } else {
+        let uid = customer._id
+        let endpoint = Endpoint.Create(to: .Image(.LoadThumbnail(_id: uid)))
+        BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<ThumbnailModel.Thumbnail>) in
+            guard let imageDowloaded = response.data else {
                 completion(nil, row)
+                return
             }
+            let image = imageDowloaded.thumbnailImage.convertToImage
+            self.imageCache.setObject(image!, forKey: url as AnyObject)
+            completion(image, row)
         } fail: { (error) in
             completion(nil, row)
         }
     }
   
+    func setImageForCustomer(_id: String, thumbnail: String) {
+        let image = thumbnail.convertToImage
+        if let position = model.imagesByPages.lastIndex(where: {$0._id == _id}) {
+            model.imagesByPages[position].image = image
+        }
+        if let position = model.imagesBySearch.lastIndex(where: {$0._id == _id}) {
+            model.imagesBySearch[position].image = image
+        }
+        self._view.reloadList()
+        
+    }
 }
 

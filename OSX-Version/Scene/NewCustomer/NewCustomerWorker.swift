@@ -3,25 +3,6 @@ import BLServerManager
 import MapKit
 
 class NewCustomerWorker {
-    func saveNewThumbnail(uid: String, thumbnail: String, completion: @escaping (Bool) -> ()) {
-        if thumbnail.isEmpty {
-            completion(false)
-            return
-        }
-        
-        let body = ["uid": uid,
-                    "thumbnailImage": thumbnail,
-                    "isEnabled" : true] as [String : Any]
-        
-        let endpoint = Endpoint.Create(to: .Image(.SaveThumbnail(body: body)))
-        BLServerManager.ApiCall(endpoint: endpoint) { (data) in
-            completion(true)
-        } fail: { (error) in
-            completion(false)
-        }
-
-    }
-    
     func FindCustomer(dni: String, doExist: @escaping (Bool) -> ()) {
         let endpoint = Endpoint.Create(to: .Customer(.FindByDNI(dni: dni)))
         BLServerManager.ApiCall(endpoint: endpoint) { (respose: ResponseModel<[CustomerModel.Customer]>) in

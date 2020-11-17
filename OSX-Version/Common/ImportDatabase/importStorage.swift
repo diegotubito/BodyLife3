@@ -116,7 +116,7 @@ extension ImportDatabase {
                         imageSemasphore.signal()
                     } else {
             
-                        ImportDatabase.Storage.uploadPhoto(image: image!, filename: customer.uid) { (uploaded) in
+                        ImportDatabase.Storage.uploadPhoto(image: image!, filename: customer._id!) { (uploaded) in
                             if uploaded {
                                 counter += 1
                                 print("\(counter)/\(customers.count)")

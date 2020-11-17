@@ -28,7 +28,6 @@ class RegisterListViewModel: RegisterListViewModelContract {
             
             self.parsePaymentAndSell(payments: response.data!)
         } fail: { (error) in
-            print(error.rawValue)
             self._view.notificateStatusInfo(data: nil)
         }
     }
@@ -95,7 +94,6 @@ class RegisterListViewModel: RegisterListViewModelContract {
         self._view.notificateStatusInfo(data: statusInfo)
         self._view.hideLoading()
         self._view.displayData()
-  
     }
    
     

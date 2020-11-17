@@ -142,6 +142,16 @@ extension CustomerListView: CustomerListViewContract {
             self.myActivityIndicator.stopAnimation(nil)
         }
     }
+    
+    func reloadList() {
+        DispatchQueue.main.async {
+            self.tableViewSocio.beginUpdates()
+            self.tableViewSocio.reloadData()
+            let row = self.tableViewSocio.selectedRow
+            self.tableViewSocio.selectRowIndexes(IndexSet([row]), byExtendingSelection: false)
+            self.tableViewSocio.endUpdates()
+        }
+    }
 }
 
 extension CustomerListView: NSTableViewDataSource, NSTableViewDelegate {
