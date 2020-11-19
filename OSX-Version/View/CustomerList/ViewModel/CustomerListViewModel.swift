@@ -13,7 +13,7 @@ import BLServerManager
 class CustomerListViewModel: CustomerListViewModelContract {
     var loading = false
     var imageCache = NSCache<AnyObject, AnyObject>()
-
+   
     var model: CustomerListModel!
     var _view : CustomerListViewContract!
     
@@ -23,20 +23,29 @@ class CustomerListViewModel: CustomerListViewModelContract {
     }
     
     func loadCustomers(bySearch: String, offset: Int) {
+        if model.stopLoading {
+            return
+        }
+       
         if offset == 0 {
             model.customersbySearch.removeAll()
         }
         _view.showLoading()
         
         let query = "?queryString=\(bySearch)&offset=\(offset)&limit=50"
-        let endpoint = Endpoint.Create(to: .Customer(.Search(query: query)))
+        let stringQuery = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        
+        let endpoint = Endpoint.Create(to: .Customer(.Search(query: stringQuery!)))
         BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<[CustomerModel.Customer]>) in
             self._view.hideLoading()
             self.loading = false
             self.model.customersbySearch.append(contentsOf: response.data!)
-            self._view.showSuccess()
-            self._view.hideLoading()
             self.loadImages()
+            self._view.showSuccess()
+            if response.data!.count < 50 {
+                self.model.stopLoading = true
+            }
+           
         } fail: { (error) in
             self._view.hideLoading()
             self.loading = false
@@ -45,6 +54,13 @@ class CustomerListViewModel: CustomerListViewModelContract {
     }
     
     func loadCustomers(offset: Int) {
+        if model.stopLoading {
+            return
+        }
+        if offset == 0 {
+            model.customersbyPages.removeAll()
+        }
+    
         if loading {return}
         loading = true
         _view.showLoading()
@@ -56,6 +72,9 @@ class CustomerListViewModel: CustomerListViewModelContract {
             self.model.customersbyPages.append(contentsOf: response.data!)
             self.loadImages()
             self._view.showSuccess()
+            if response.data!.count < 50 {
+                self.model.stopLoading = true
+            }
         } fail: { (error) in
             self._view.hideLoading()
             self.loading = false
@@ -114,14 +133,18 @@ class CustomerListViewModel: CustomerListViewModelContract {
   
     func setImageForCustomer(_id: String, thumbnail: String) {
         let image = thumbnail.convertToImage
-        if let position = model.imagesByPages.lastIndex(where: {$0._id == _id}) {
+        if let position = model.imagesByPages.firstIndex(where: {$0._id == _id}) {
             model.imagesByPages[position].image = image
+           
         }
         if let position = model.imagesBySearch.lastIndex(where: {$0._id == _id}) {
             model.imagesBySearch[position].image = image
+            
         }
         self._view.reloadList()
         
+        
     }
+    
 }
 

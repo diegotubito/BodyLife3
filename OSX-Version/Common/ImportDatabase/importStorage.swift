@@ -157,7 +157,7 @@ extension ImportDatabase {
                     completion(nil, nil)
                     return
                 }
-                let medium = image.crop(size: NSSize(width: 150, height: 150))
+                let medium = image.crop(size: NSSize(width: ImageSize.storageSize, height: ImageSize.storageSize))
                 
                 completion(medium, nil)
             } fail: { (error) in

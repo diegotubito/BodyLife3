@@ -9,6 +9,11 @@
 import Foundation
 import Cocoa
 
+struct ImageSize {
+    static let thumbnail = 40
+    static let storageSize = 100
+}
+
 struct Constants {
 // MARK : USER DEFAULTS KEYS
     enum UserDefaultKey : String {

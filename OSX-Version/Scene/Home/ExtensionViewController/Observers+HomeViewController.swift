@@ -21,6 +21,11 @@ extension HomeViewController {
     
     func customerListOberserver() {
         self.customerListView.onSelectedCustomer = { [weak self] customer in
+            guard let customer = customer else {
+                self?.customerStatusView.initValues()
+                self?.sellRegisterView.viewModel.initValues()
+                return
+            }
             self?.selectedCustomer = customer
             self?.timerForDelayCustomerSelection.invalidate()
             self?.customerStatusView.showLoading()
@@ -77,7 +82,13 @@ extension HomeViewController {
         }
     }
     
-    func didSelectCustomer(customerSelected: CustomerModel.Customer) {
+    func hideStatusCustomer() {
+        if self.customerStatusView.isHidden {
+            self.customerStatusView.animateMode = .fadeIn
+        }
+    }
+    
+    func didSelectCustomer(customerSelected: CustomerModel.Customer?) {
         DispatchQueue.main.async {
             self.showStatusCustomer()
             self.customerStatusView.viewModel = CustomerStatusViewModel(withView: self.customerStatusView, receivedCustomer: customerSelected)
@@ -88,7 +99,10 @@ extension HomeViewController {
 
 extension HomeViewController: CameraViewControllerDelegate {
     func capturedImage(originalSize image: NSImage) {
-        let id = customerStatusView.viewModel.model.receivedCustomer._id
+        guard let customer = customerStatusView.viewModel.model.receivedCustomer else {
+            return
+        }
+        let id = customer._id
         
         CommonWorker.Image.updateThumbnail(_id: id, image: image) { (stringImage) in
             if stringImage != nil {

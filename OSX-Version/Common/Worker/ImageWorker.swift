@@ -13,7 +13,7 @@ public class CommonWorker {
     
     public struct Image {
         public static func uploadThumbnail(_id: String, image: NSImage, success: @escaping (Bool) -> ()) {
-            guard let imageCropped = image.crop(size: NSSize(width: 50, height: 50)),
+            guard let imageCropped = image.crop(size: NSSize(width: ImageSize.thumbnail, height: ImageSize.thumbnail)),
                   let thumbnail = imageCropped.convertToBase64 else {
                 success(false)
                 return

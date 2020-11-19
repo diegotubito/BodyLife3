@@ -108,7 +108,7 @@ class RegisterListViewModel: RegisterListViewModelContract {
         return total
     }
     
-    func setSelectedCustomer(customer: CustomerModel.Customer) {
+    func setSelectedCustomer(customer: CustomerModel.Customer?) {
         model.selectedCustomer = customer
         model.sells.removeAll()
         model.payments.removeAll()
@@ -195,6 +195,15 @@ class RegisterListViewModel: RegisterListViewModelContract {
     
     func setIsEnabled(row: Int) {
         model.sells[row].isEnabled = false
+    }
+    
+    func initValues() {
+        model.selectedCustomer = nil
+        model.selectedSellRegister = nil
+        model.payments.removeAll()
+        model.sells.removeAll()
+        _view.updateButtonState()
+        _view.displayData()
     }
     
 }

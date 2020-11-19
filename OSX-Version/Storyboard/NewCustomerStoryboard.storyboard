@@ -10,15 +10,15 @@
         <scene sceneID="enq-yv-DFC">
             <objects>
                 <viewController storyboardIdentifier="NewCustomerViewController" id="kB3-nJ-svr" customClass="NewCustomerViewController" customModule="Internal_Target" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="lCM-vi-YvS">
-                        <rect key="frame" x="0.0" y="0.0" width="932" height="511"/>
+                    <view key="view" misplaced="YES" id="lCM-vi-YvS">
+                        <rect key="frame" x="0.0" y="0.0" width="782" height="511"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="KwB-Mn-x1W">
-                                <rect key="frame" x="0.0" y="0.0" width="932" height="50"/>
+                                <rect key="frame" x="0.0" y="0.0" width="782" height="50"/>
                                 <subviews>
                                     <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="40" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5NI-he-EI0">
-                                        <rect key="frame" x="346" y="15" width="240" height="20"/>
+                                        <rect key="frame" x="271" y="15" width="240" height="20"/>
                                         <subviews>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bDx-Vy-uiI">
                                                 <rect key="frame" x="-7" y="-7" width="114" height="32"/>
@@ -64,10 +64,10 @@
                                 </constraints>
                             </customView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="o0R-5v-XV4">
-                                <rect key="frame" x="0.0" y="50" width="932" height="461"/>
+                                <rect key="frame" x="0.0" y="50" width="782" height="461"/>
                                 <subviews>
                                     <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rbj-9g-qYI">
-                                        <rect key="frame" x="0.0" y="0.0" width="932" height="461"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="782" height="461"/>
                                         <subviews>
                                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="Wtx-nu-Nha">
                                                 <rect key="frame" x="0.0" y="0.0" width="600" height="461"/>
@@ -709,18 +709,18 @@
                                                 </constraints>
                                             </customView>
                                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="pfM-X4-xGb">
-                                                <rect key="frame" x="600" y="0.0" width="332" height="461"/>
+                                                <rect key="frame" x="600" y="0.0" width="182" height="461"/>
                                                 <subviews>
                                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EFQ-qS-4kG">
-                                                        <rect key="frame" x="16" y="145" width="300" height="300"/>
+                                                        <rect key="frame" x="16" y="295" width="150" height="150"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="EFQ-qS-4kG" secondAttribute="height" multiplier="1:1" id="1pK-Oz-1dS"/>
-                                                            <constraint firstAttribute="width" constant="300" id="pyK-a7-6vI"/>
+                                                            <constraint firstAttribute="width" constant="150" id="pyK-a7-6vI"/>
                                                         </constraints>
                                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="empty" id="CSY-Ji-DiM"/>
                                                     </imageView>
                                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hgT-6V-EhK">
-                                                        <rect key="frame" x="126" y="102" width="81" height="32"/>
+                                                        <rect key="frame" x="51" y="252" width="81" height="32"/>
                                                         <buttonCell key="cell" type="push" title="Camara" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="CfT-CD-btV">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="system"/>

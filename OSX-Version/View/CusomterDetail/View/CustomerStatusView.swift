@@ -80,7 +80,10 @@ class CustomerStatusView: XibViewWithAnimation {
     }
     
     func downloadProfileImage() {
-        downloadImage(childID: viewModel.model.receivedCustomer._id) { (image, error) in
+        guard let customer = viewModel.model.receivedCustomer else {
+            return
+        }
+        downloadImage(childID: customer._id) { (image, error) in
             DispatchQueue.main.async {
                 self.hideLoading()
                 self.profilePicture.layer?.cornerRadius = (self.profilePicture.layer?.frame.width)! / 2
@@ -102,6 +105,9 @@ class CustomerStatusView: XibViewWithAnimation {
         expirationDateLabel.stringValue = ""
         saldoLabel.stringValue = ""
         remainingDayLabel.stringValue = ""
+        profilePicture.image = nil
+        titleLabel.stringValue = ""
+        ageLabel.stringValue = ""
     }
     
     func configureBoxDay() {
@@ -126,7 +132,7 @@ class CustomerStatusView: XibViewWithAnimation {
                 completion(nil, nil)
                 return
             }
-            let medium = image.crop(size: NSSize(width: 200, height: 200))
+            let medium = image.crop(size: NSSize(width: ImageSize.storageSize, height: ImageSize.storageSize))
             
             completion(medium, nil)
         } fail: { (error) in
@@ -152,20 +158,32 @@ extension CustomerStatusView : CustomerStatusViewContract{
         errorView.isHidden = true
         self.sellArticleButtonOutlet.isEnabled = true
         self.sellActivityButtonOutlet.isEnabled = true
-
+        
         guard let statusInfo = statusInfo else {
-            expirationDateLabel.stringValue = "?"
-            saldoLabel.stringValue = "?"
-            remainingDayLabel.stringValue = "?"
             return
         }
-        let expiration = statusInfo.expiration.toString(formato: "dd-MM-yyyy")
         let balance = statusInfo.balance.currencyFormat(decimal: 2)
+        saldoLabel.stringValue = balance
+        saldoLabel.textColor =  statusInfo.balance >= 0 ? NSColor.lightGray : Constants.Colors.Red.ematita
+
+        guard statusInfo.lastActivityId != nil else {
+            expirationDateLabel.stringValue = "---"
+            remainingDayLabel.stringValue = "---"
+            expirationDateLabel.textColor = Constants.Colors.Red.ematita
+            remainingDayLabel.textColor = Constants.Colors.Red.ematita
+            return
+        }
+       
+        let expiration = statusInfo.expiration.toString(formato: "dd-MM-yyyy")
+       
         
         let diff = Date().diasTranscurridos(fecha: statusInfo.expiration)
         expirationDateLabel.stringValue = expiration
         remainingDayLabel.stringValue = String(diff!)
-        saldoLabel.stringValue = balance
+        remainingDayLabel.textColor =  diff! >= 0 ? NSColor.lightGray : Constants.Colors.Red.ematita
+        expirationDateLabel.textColor =  diff! >= 0 ? NSColor.lightGray : Constants.Colors.Red.ematita
+
+        
     }
     
     func showError(message: String) {

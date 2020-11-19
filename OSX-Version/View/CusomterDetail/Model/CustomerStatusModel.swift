@@ -10,7 +10,7 @@ import Cocoa
 
 struct CustomerStatusModel {
     var loadedStatus : CustomerStatus?
-    var receivedCustomer : CustomerModel.Customer
+    var receivedCustomer : CustomerModel.Customer?
     
     struct StatusInfo {
         var expiration : Date

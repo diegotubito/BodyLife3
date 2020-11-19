@@ -15,6 +15,7 @@ struct CustomerListModel {
     var bySearch = false
     var imagesBySearch = [Images]()
     var imagesByPages = [Images]()
+    var stopLoading = false
     
     struct Images {
         var image : NSImage?

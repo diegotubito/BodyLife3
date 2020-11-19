@@ -195,10 +195,10 @@ extension NewCustomerViewController: CameraViewControllerDelegate {
     func capturedImage(originalSize image: NSImage) {
         print("original image: \(String(describing: image.sizeInBytes))")
     
-        let medium = image.crop(size: NSSize(width: 150, height: 150))
+        let medium = image.crop(size: NSSize(width: ImageSize.storageSize, height: ImageSize.storageSize))
         print("medium image: \(String(describing: medium?.sizeInBytes))")
         
-        let thumb = image.crop(size: NSSize(width: 50, height: 50))
+        let thumb = image.crop(size: NSSize(width: ImageSize.thumbnail, height: ImageSize.thumbnail))
         print("thumbnail image: \(String(describing: thumb?.sizeInBytes))")
         
         self.thumbImageBase64 = (thumb?.convertToBase64)!

@@ -173,10 +173,10 @@ extension ImportDatabase {
                     return
                 }
                 
-                let thumb = image.crop(size: NSSize(width: 50, height: 50))
+                let thumb = image.crop(size: NSSize(width: ImageSize.thumbnail, height: ImageSize.thumbnail))
                 let thumbBase64 = thumb?.convertToBase64
                 
-                let medium = image.crop(size: NSSize(width: 150, height: 150))
+                let medium = image.crop(size: NSSize(width: ImageSize.storageSize, height: ImageSize.storageSize))
                 
                 completion(thumbBase64, medium, nil)
                 

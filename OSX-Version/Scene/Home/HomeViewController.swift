@@ -120,6 +120,20 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
     func displaySomething(viewModel: Home.Something.ViewModel) {
         //nameTextField.text = viewModel.name
     }
+    @IBAction func removeCustomer(_ sender: Any) {
+        guard let customer = customerListView.viewModel.model.selectedCustomer else {
+            return
+        }
+        let endpoint = Endpoint.Create(to: .Customer(.Delete(uid: customer._id)))
+        BLServerManager.ApiCall(endpoint: endpoint) { (data) in
+            print("socio borrado")
+            self.customerListView.viewModel.loadCustomers(offset: 0)
+        } fail: { (error) in
+            print("no se pudo borrar el socio")
+        }
+        
+
+    }
     
     @IBAction func importData(_ sender: Any) {
 //        ImportDatabase.Discount.MigrateToMongoDB()

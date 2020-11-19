@@ -16,7 +16,7 @@ class CustomerListView: NSView {
     @IBOutlet var tableViewSocio: NSTableView!
     
     var viewModel : CustomerListViewModelContract!
-    var onSelectedCustomer : ((CustomerModel.Customer) -> ())?
+    var onSelectedCustomer : ((CustomerModel.Customer?) -> ())?
     
     override init(frame frameRect: NSRect) {
         super .init(frame: frameRect)
@@ -62,16 +62,23 @@ class CustomerListView: NSView {
     @objc func newCustomerNotificationHandler(notification: Notification) {
         let obj = notification.object
         if let customer = obj as? CustomerModel.Customer {
-            let image = customer.thumbnailImage?.convertToImage
-            viewModel.model.customersbyPages.insert(customer, at: 0)
-            viewModel.model.imagesByPages.insert(CustomerListModel.Images(image: image, _id: customer._id), at: 0)
-           
-            let index = IndexSet(integer: 0)
-            viewModel.model.selectedCustomer = customer
-            tableViewSocio.scrollRowToVisible(0)
-            tableViewSocio.selectRowIndexes(index, byExtendingSelection: false)
-            tableViewSocio.reloadData()
+            insertNewCustomerInTableView(customer: customer, row: 0)
+            self.onSelectedCustomer?(customer)
         }
+    }
+    
+    func insertNewCustomerInTableView(customer: CustomerModel.Customer, row: Int) {
+        let image = customer.thumbnailImage?.convertToImage
+        viewModel.model.customersbyPages.insert(customer, at: row)
+        viewModel.model.imagesByPages.insert(CustomerListModel.Images(image: image, _id: customer._id), at: row)
+        
+        let index = IndexSet(integer: row)
+        viewModel.model.selectedCustomer = customer
+        tableViewSocio.beginUpdates()
+        tableViewSocio.insertRows(at: index, withAnimation: .effectGap)
+        tableViewSocio.scrollRowToVisible(row)
+        tableViewSocio.selectRowIndexes(index, byExtendingSelection: false)
+        tableViewSocio.endUpdates()
     }
     
     func startLoading() {
@@ -101,12 +108,18 @@ extension CustomerListView: NSSearchFieldDelegate {
     func control(_ control: NSControl, textView: NSTextView, doCommandBy commandSelector: Selector) -> Bool {
      
         if (commandSelector == #selector(NSResponder.insertNewline(_:))) {
+            tableViewSocio.deselectAll(nil)
+            viewModel.model.selectedCustomer = nil
+            onSelectedCustomer?(nil)
+
             if !searchField.stringValue.isEmpty {
                 viewModel.model.bySearch = true
+                viewModel.model.stopLoading = false
                 viewModel.loadCustomers(bySearch: searchField.stringValue, offset: 0)
             } else {
+                viewModel.model.stopLoading = false
                 viewModel.model.bySearch = false
-                tableViewSocio.reloadData()
+                reloadList()
             }
         }
         if (commandSelector == #selector(NSResponder.deleteBackward(_:)) ) {
@@ -120,11 +133,7 @@ extension CustomerListView: NSSearchFieldDelegate {
 
 extension CustomerListView: CustomerListViewContract {
     func showSuccess() {
-        DispatchQueue.main.async {
-            self.tableViewSocio.beginUpdates()
-            self.tableViewSocio.reloadData()
-            self.tableViewSocio.endUpdates()
-        }
+        reloadList()
     }
     
     func showError() {
@@ -147,10 +156,26 @@ extension CustomerListView: CustomerListViewContract {
         DispatchQueue.main.async {
             self.tableViewSocio.beginUpdates()
             self.tableViewSocio.reloadData()
-            let row = self.tableViewSocio.selectedRow
-            self.tableViewSocio.selectRowIndexes(IndexSet([row]), byExtendingSelection: false)
             self.tableViewSocio.endUpdates()
+            self.selectCustomerInTableView()
         }
+    }
+    
+    func selectCustomerInTableView() {
+        // hay que volver a seleccionar el customer, ya que el reloaddata deselecciona la tabla.
+        let customer = self.viewModel.model.selectedCustomer
+        if customer != nil {
+            if let row = self.viewModel.model.customersbyPages.firstIndex(where: {$0._id == customer?._id}) {
+                self.tableViewSocio.selectRowIndexes(IndexSet([row]), byExtendingSelection: false)
+            }
+        } else {
+            self.tableViewSocio.deselectAll(nil)
+        }
+    }
+    
+    func scrollToSelectedCustomer() {
+        let row = tableViewSocio.selectedRow
+        tableViewSocio.scrollRowToVisible(row)
     }
 }
 
@@ -191,7 +216,7 @@ extension CustomerListView: NSTableViewDataSource, NSTableViewDelegate {
         }
         
         let count = customers.count
-        if row == (count - 1) - 25 {
+        if row == (count - 1) - 25 || row == (count - 1) {
             if viewModel.model.bySearch {
                 viewModel.loadCustomers(bySearch: searchField.stringValue, offset: count)
             } else {
@@ -213,15 +238,19 @@ extension CustomerListView: NSTableViewDataSource, NSTableViewDelegate {
     
     func tableViewSelectionDidChange(_ notification: Notification) {
         if let myTable = notification.object as? NSTableView {
-            
+            print("selection changed")
              if myTable == tableViewSocio {
                 let posicion = myTable.selectedRow
+                
                 if posicion == -1 {return}
                 let customer = viewModel.model.bySearch ? viewModel.model.customersbySearch[posicion] : viewModel.model.customersbyPages[posicion]
-                self.viewModel.model.selectedCustomer = customer
-                if viewModel.model.selectedCustomer != nil {
-                    self.onSelectedCustomer?(viewModel.model.selectedCustomer!)
+                if self.viewModel.model.selectedCustomer?._id != customer._id {
+                    self.viewModel.model.selectedCustomer = customer
+                    if let customer = viewModel.model.selectedCustomer {
+                        self.onSelectedCustomer?(customer)
+                    }
                 }
+                
             }
         }
     }
@@ -234,7 +263,7 @@ extension CustomerListView: NSTableViewDataSource, NSTableViewDelegate {
                 let selectionRect = NSInsetRect(self.bounds, 0, 0)
                 
                 Constants.Colors.Blue.blueWhale.setFill()
-                let selectionPath = NSBezierPath.init(roundedRect: selectionRect, xRadius: 10, yRadius: 10)
+                let selectionPath = NSBezierPath.init(roundedRect: selectionRect, xRadius: 0, yRadius: 0)
                 selectionPath.fill()
                 selectionPath.stroke()
                 
