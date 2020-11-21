@@ -136,7 +136,11 @@ class ActivitySaleViewModel : ActivitySaleViewModelContract {
     
     
     func getTotals() -> (amount: Double, amountDiscounted: Double) {
-        let multiplier = model.selectedDiscount?.factor ?? 0.0
+        var multiplier = 1 - (model.selectedDiscount?.factor ?? 0.0)
+        if multiplier == 1 {
+            multiplier = 0
+        }
+        
         let price = model.selectedPeriod?.price ?? 0.0
         let discount = multiplier * price
         return (price, discount)

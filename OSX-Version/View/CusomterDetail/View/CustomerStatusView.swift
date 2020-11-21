@@ -77,7 +77,8 @@ class CustomerStatusView: XibViewWithAnimation {
         guard let customer = viewModel.model.receivedCustomer else {
             return
         }
-        downloadImage(childID: customer._id) { (image, error) in
+        
+        CommonWorker.Image.downloadBigSize(childID: customer._id) { (image, error) in
             DispatchQueue.main.async {
                 self.hideLoading()
                 self.editProfilePictureOutlet.isEnabled = true
@@ -88,8 +89,6 @@ class CustomerStatusView: XibViewWithAnimation {
                     self.profilePicture.image = #imageLiteral(resourceName: "empty")
                 }
             }
-        } cancel: {
-            print("cancel request")
         }
     }
     
@@ -112,30 +111,7 @@ class CustomerStatusView: XibViewWithAnimation {
         
     }
    
-    func downloadImage(childID: String, completion: @escaping (NSImage?, Error?) -> (), cancel: () -> ()) {
-        if profilePictureRequest != nil {
-            profilePictureRequest?.cancel()
-            profilePictureRequest = nil
-            cancel()
-        }
-        
-        let userUID = UserSaved.GetUID()
-        let endpoint = Endpoint.Create(to: .Image(.LoadBigSize(userUID: userUID, customerUID: childID)))
-        BLServerManager.ApiCall(endpoint: endpoint) { (data) in
-            self.profilePictureRequest = nil
-            guard let data = data, let image = NSImage(data: data) else {
-                completion(nil, nil)
-                return
-            }
-            let medium = image.crop(size: NSSize(width: ImageSize.storageSize, height: ImageSize.storageSize))
-            
-            completion(medium, nil)
-        } fail: { (error) in
-            self.profilePictureRequest = nil
-            completion(nil, error)
-        }
-
-    }
+   
     @IBAction func SellActivityPressed(_ sender: Any) {
         didPressSellActivityButton?()
     }
@@ -161,8 +137,8 @@ extension CustomerStatusView : CustomerStatusViewContract{
         saldoLabel.textColor =  statusInfo.balance >= 0 ? NSColor.lightGray : Constants.Colors.Red.ematita
 
         guard statusInfo.lastActivityId != nil else {
-            expirationDateLabel.stringValue = "---"
-            remainingDayLabel.stringValue = "---"
+            expirationDateLabel.stringValue = "-"
+            remainingDayLabel.stringValue = "-"
             expirationDateLabel.textColor = Constants.Colors.Red.ematita
             remainingDayLabel.textColor = Constants.Colors.Red.ematita
             return
@@ -197,6 +173,9 @@ extension CustomerStatusView : CustomerStatusViewContract{
             self.activityIndicator.startAnimation(nil)
             self.profilePicture.image = nil
             self.editProfilePictureOutlet.isEnabled = false
+            self.saldoLabel.stringValue = ""
+            self.expirationDateLabel.stringValue = ""
+            self.remainingDayLabel.stringValue = ""
         }
     }
     

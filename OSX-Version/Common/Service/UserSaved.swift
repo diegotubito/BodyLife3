@@ -24,7 +24,7 @@ class UserSaved {
     static func Update(_ newUserObj: FirebaseUserModel) {
         if let data = UserDefaults.standard.object(forKey: "user_session") as? Data {
             var json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String : Any]
-            json?.updateValue(newUserObj.token, forKey: "token")
+            json?.updateValue(newUserObj.token as Any, forKey: "token")
             let newData = (try? JSONSerialization.data(withJSONObject: json!, options: []))!
             UserSaved.Save(userData: newData)
         }

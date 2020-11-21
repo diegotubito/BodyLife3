@@ -96,7 +96,6 @@
 		115784F6252B85C0008A89DC /* XButtonCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111DE573238A01CA002F4216 /* XButtonCustomView.swift */; };
 		115784F7252B85C0008A89DC /* importPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D3D87E25214DC10008CFD0 /* importPeriod.swift */; };
 		115784F8252B85C0008A89DC /* RegisterListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114A541023A5A9B900F2746A /* RegisterListModel.swift */; };
-		115784F9252B85C0008A89DC /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD36323766CFE00AB4BFF /* StorageManager.swift */; };
 		115784FA252B85C0008A89DC /* LoginWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD385237726A800AB4BFF /* LoginWorker.swift */; };
 		115784FB252B85C0008A89DC /* ExpenseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114C540B2413FF66000CC75A /* ExpenseRouter.swift */; };
 		115784FC252B85C0008A89DC /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110664DE2378718800DC44F3 /* ErrorHandler.swift */; };
@@ -260,7 +259,6 @@
 		11EBD35E23766A3D00AB4BFF /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD35D23766A3D00AB4BFF /* Endpoints.swift */; };
 		11EBD36023766B7800AB4BFF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD35F23766B7800AB4BFF /* Constants.swift */; };
 		11EBD36223766BF400AB4BFF /* UserSaved.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD36123766BF400AB4BFF /* UserSaved.swift */; };
-		11EBD36423766CFE00AB4BFF /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD36323766CFE00AB4BFF /* StorageManager.swift */; };
 		11EBD36623766D2500AB4BFF /* ErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD36523766D2500AB4BFF /* ErrorModel.swift */; };
 		11EBD37D2377130C00AB4BFF /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD3772377130C00AB4BFF /* HomePresenter.swift */; };
 		11EBD37E2377130C00AB4BFF /* HomeWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD3782377130C00AB4BFF /* HomeWorker.swift */; };
@@ -410,7 +408,6 @@
 		11EBD35D23766A3D00AB4BFF /* Endpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoints.swift; sourceTree = "<group>"; };
 		11EBD35F23766B7800AB4BFF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		11EBD36123766BF400AB4BFF /* UserSaved.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSaved.swift; sourceTree = "<group>"; };
-		11EBD36323766CFE00AB4BFF /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		11EBD36523766D2500AB4BFF /* ErrorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorModel.swift; sourceTree = "<group>"; };
 		11EBD3772377130C00AB4BFF /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
 		11EBD3782377130C00AB4BFF /* HomeWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWorker.swift; sourceTree = "<group>"; };
@@ -1058,7 +1055,6 @@
 			isa = PBXGroup;
 			children = (
 				11EBD36123766BF400AB4BFF /* UserSaved.swift */,
-				11EBD36323766CFE00AB4BFF /* StorageManager.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -1450,7 +1446,6 @@
 				115784F6252B85C0008A89DC /* XButtonCustomView.swift in Sources */,
 				115784F7252B85C0008A89DC /* importPeriod.swift in Sources */,
 				115784F8252B85C0008A89DC /* RegisterListModel.swift in Sources */,
-				115784F9252B85C0008A89DC /* StorageManager.swift in Sources */,
 				115784FA252B85C0008A89DC /* LoginWorker.swift in Sources */,
 				115784FB252B85C0008A89DC /* ExpenseRouter.swift in Sources */,
 				115784FC252B85C0008A89DC /* ErrorHandler.swift in Sources */,
@@ -1576,7 +1571,6 @@
 				111DE574238A01CA002F4216 /* XButtonCustomView.swift in Sources */,
 				11D3D87F25214DC10008CFD0 /* importPeriod.swift in Sources */,
 				114A541123A5A9B900F2746A /* RegisterListModel.swift in Sources */,
-				11EBD36423766CFE00AB4BFF /* StorageManager.swift in Sources */,
 				11EBD38B237726A800AB4BFF /* LoginWorker.swift in Sources */,
 				114C54132413FF66000CC75A /* ExpenseRouter.swift in Sources */,
 				110664DF2378718800DC44F3 /* ErrorHandler.swift in Sources */,

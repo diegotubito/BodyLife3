@@ -151,12 +151,11 @@ extension RegisterListView: NSTableViewDataSource, NSTableViewDelegate {
                 let selectionRect = NSInsetRect(self.bounds, 0, 0)
                 
                 Constants.Colors.Blue.blueWhale.setFill()
-                let selectionPath = NSBezierPath.init(roundedRect: selectionRect, xRadius: 10, yRadius: 10)
+                let selectionPath = NSBezierPath.init(roundedRect: selectionRect, xRadius: 0, yRadius: 0)
                 selectionPath.fill()
                 selectionPath.stroke()
                 
             }
-            
         }
     }
     

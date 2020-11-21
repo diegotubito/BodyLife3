@@ -110,9 +110,12 @@ extension HomeViewController: CameraViewControllerDelegate {
             }
         }
         
-        
         self.customerStatusView.showLoading()
-        CommonWorker.Image.uploadImage(uid: id, image: image) { (success) in
+        
+        let medium = image.crop(size: NSSize(width: ImageSize.storageSize, height: ImageSize.storageSize))
+        print("medium image: \(String(describing: medium?.sizeInBytes))")
+      
+        CommonWorker.Image.uploadImage(uid: id, image: medium!) { (success) in
             success ? print("storage image uploaded") : print("storage image fail")
             self.customerStatusView.downloadProfileImage()
         }

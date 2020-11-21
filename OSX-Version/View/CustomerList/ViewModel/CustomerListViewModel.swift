@@ -91,7 +91,7 @@ class CustomerListViewModel: CustomerListViewModelContract {
   
     func loadImage(row: Int, customer: CustomerModel.Customer) {
       
-        self.loadImage(row: row, customer: customer) { (image, correctRow) in
+        CommonWorker.Image.loadThumbnail(row: row, customer: customer) { (image, correctRow) in
             let newImage = CustomerListModel.Images(image: image, _id: customer._id)
             if self.model.bySearch {
                 self.model.imagesBySearch.append(newImage)
@@ -99,32 +99,6 @@ class CustomerListViewModel: CustomerListViewModelContract {
                 self.model.imagesByPages.append(newImage)
             }
             self._view.reloadCell(row: row)
-        }
-    }
-    
-    
-    func loadImage(row: Int, customer: CustomerModel.Customer, completion: @escaping (NSImage?, Int) -> ()) {
-        let url = "\(BLServerManager.baseUrl.rawValue)/v1/thumbnail?uid=\(customer.uid)"
-        
-        //if I have already loaded the image, there's no need to load it again.
-        if let imageFromCache = imageCache.object(forKey: url as AnyObject) as? NSImage {
-            //return the image previously loaded
-            completion(imageFromCache, row)
-            return
-        }
-        
-        let uid = customer._id
-        let endpoint = Endpoint.Create(to: .Image(.LoadThumbnail(_id: uid)))
-        BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<ThumbnailModel.Thumbnail>) in
-            guard let imageDowloaded = response.data else {
-                completion(nil, row)
-                return
-            }
-            let image = imageDowloaded.thumbnailImage.convertToImage
-            self.imageCache.setObject(image!, forKey: url as AnyObject)
-            completion(image, row)
-        } fail: { (error) in
-            completion(nil, row)
         }
     }
   
