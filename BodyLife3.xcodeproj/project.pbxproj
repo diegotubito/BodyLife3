@@ -38,7 +38,6 @@
 		1147AB4D2383676D00D19AA9 /* CustomerListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1147AB4C2383676D00D19AA9 /* CustomerListCell.swift */; };
 		1147AB4F2383678700D19AA9 /* CustomerListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1147AB4E2383678700D19AA9 /* CustomerListCell.xib */; };
 		1147AB712384AA0600D19AA9 /* CustomerStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1147AB702384AA0600D19AA9 /* CustomerStatusView.swift */; };
-		1147AB732384AA2D00D19AA9 /* CustomerStatusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1147AB722384AA2D00D19AA9 /* CustomerStatusView.xib */; };
 		1147AB782384D23100D19AA9 /* CustomerStatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1147AB772384D23100D19AA9 /* CustomerStatusModel.swift */; };
 		1147AB7A2384D41900D19AA9 /* CustomerStatusViewModelContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1147AB792384D41900D19AA9 /* CustomerStatusViewModelContract.swift */; };
 		1147AB7C2384D49E00D19AA9 /* CustomerStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1147AB7B2384D49E00D19AA9 /* CustomerStatusViewModel.swift */; };
@@ -194,7 +193,6 @@
 		1157855C252B85C0008A89DC /* PaymentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11EEF0EF239D4A42007C9821 /* PaymentView.xib */; };
 		1157855D252B85C0008A89DC /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 11EBD32C2376499F00AB4BFF /* Info.plist */; };
 		1157855E252B85C0008A89DC /* PeriodListItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 116CE96E23EDE94A00688C0B /* PeriodListItem.xib */; };
-		1157855F252B85C0008A89DC /* CustomerStatusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1147AB722384AA2D00D19AA9 /* CustomerStatusView.xib */; };
 		11578560252B85C0008A89DC /* ArticleViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1166AF3423B27F880047C7AE /* ArticleViewItem.xib */; };
 		11578578252CE411008A89DC /* NewUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11578577252CE411008A89DC /* NewUserViewController.swift */; };
 		11578579252CE411008A89DC /* NewUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11578577252CE411008A89DC /* NewUserViewController.swift */; };
@@ -218,8 +216,8 @@
 		116CEB6123A1E2D40081D356 /* RegisterListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 116CEB6023A1E2D40081D356 /* RegisterListView.xib */; };
 		116CEB6323A1E2F30081D356 /* RegisterListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CEB6223A1E2F30081D356 /* RegisterListView.swift */; };
 		116CEB6623A3115E0081D356 /* SellRegisterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CEB6523A3115E0081D356 /* SellRegisterCell.swift */; };
-		1181F4D6256724970044083C /* CustomerStatusView2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1181F4D5256724970044083C /* CustomerStatusView2.xib */; };
-		1181F4D7256724970044083C /* CustomerStatusView2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1181F4D5256724970044083C /* CustomerStatusView2.xib */; };
+		1181F4D6256724970044083C /* CustomerStatusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1181F4D5256724970044083C /* CustomerStatusView.xib */; };
+		1181F4D7256724970044083C /* CustomerStatusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1181F4D5256724970044083C /* CustomerStatusView.xib */; };
 		1183D1842522F77200BDDBFC /* importThumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1183D1832522F77200BDDBFC /* importThumbnail.swift */; };
 		1184723E2528D2BE0012D237 /* operationCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1184723D2528D2BE0012D237 /* operationCategory.swift */; };
 		118472432528D6D20012D237 /* ImportVentaArticulo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118472422528D6D20012D237 /* ImportVentaArticulo.swift */; };
@@ -323,7 +321,6 @@
 		1147AB4C2383676D00D19AA9 /* CustomerListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerListCell.swift; sourceTree = "<group>"; };
 		1147AB4E2383678700D19AA9 /* CustomerListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomerListCell.xib; sourceTree = "<group>"; };
 		1147AB702384AA0600D19AA9 /* CustomerStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerStatusView.swift; sourceTree = "<group>"; };
-		1147AB722384AA2D00D19AA9 /* CustomerStatusView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomerStatusView.xib; sourceTree = "<group>"; };
 		1147AB772384D23100D19AA9 /* CustomerStatusModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerStatusModel.swift; sourceTree = "<group>"; };
 		1147AB792384D41900D19AA9 /* CustomerStatusViewModelContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerStatusViewModelContract.swift; sourceTree = "<group>"; };
 		1147AB7B2384D49E00D19AA9 /* CustomerStatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerStatusViewModel.swift; sourceTree = "<group>"; };
@@ -369,7 +366,7 @@
 		116CEB6023A1E2D40081D356 /* RegisterListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegisterListView.xib; sourceTree = "<group>"; };
 		116CEB6223A1E2F30081D356 /* RegisterListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterListView.swift; sourceTree = "<group>"; };
 		116CEB6523A3115E0081D356 /* SellRegisterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellRegisterCell.swift; sourceTree = "<group>"; };
-		1181F4D5256724970044083C /* CustomerStatusView2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomerStatusView2.xib; sourceTree = "<group>"; };
+		1181F4D5256724970044083C /* CustomerStatusView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomerStatusView.xib; sourceTree = "<group>"; };
 		1183D1832522F77200BDDBFC /* importThumbnail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = importThumbnail.swift; sourceTree = "<group>"; };
 		1184723D2528D2BE0012D237 /* operationCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = operationCategory.swift; sourceTree = "<group>"; };
 		118472422528D6D20012D237 /* ImportVentaArticulo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportVentaArticulo.swift; sourceTree = "<group>"; };
@@ -623,8 +620,7 @@
 			isa = PBXGroup;
 			children = (
 				1147AB702384AA0600D19AA9 /* CustomerStatusView.swift */,
-				1181F4D5256724970044083C /* CustomerStatusView2.xib */,
-				1147AB722384AA2D00D19AA9 /* CustomerStatusView.xib */,
+				1181F4D5256724970044083C /* CustomerStatusView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1298,13 +1294,12 @@
 				11578557252B85C0008A89DC /* Movement.storyboard in Resources */,
 				11578558252B85C0008A89DC /* Main.storyboard in Resources */,
 				11578559252B85C0008A89DC /* NewCustomerStoryboard.storyboard in Resources */,
-				1181F4D7256724970044083C /* CustomerStatusView2.xib in Resources */,
+				1181F4D7256724970044083C /* CustomerStatusView.xib in Resources */,
 				1157855A252B85C0008A89DC /* ActivitySaleView.xib in Resources */,
 				1157855B252B85C0008A89DC /* XButtonCustomView.xib in Resources */,
 				1157855C252B85C0008A89DC /* PaymentView.xib in Resources */,
 				1157855D252B85C0008A89DC /* Info.plist in Resources */,
 				1157855E252B85C0008A89DC /* PeriodListItem.xib in Resources */,
-				1157855F252B85C0008A89DC /* CustomerStatusView.xib in Resources */,
 				114BD33B2561F064007FCEFC /* bodyshaping.json in Resources */,
 				11578560252B85C0008A89DC /* ArticleViewItem.xib in Resources */,
 			);
@@ -1328,10 +1323,9 @@
 				11AC546823DDE64E0033A27D /* ActivitySaleView.xib in Resources */,
 				111DE572238A01BF002F4216 /* XButtonCustomView.xib in Resources */,
 				11EEF0F0239D4A42007C9821 /* PaymentView.xib in Resources */,
-				1181F4D6256724970044083C /* CustomerStatusView2.xib in Resources */,
+				1181F4D6256724970044083C /* CustomerStatusView.xib in Resources */,
 				116CE97023EDE94A00688C0B /* PeriodListItem.xib in Resources */,
 				114AC2C425525638007A0AFD /* MoneyFlow.storyboard in Resources */,
-				1147AB732384AA2D00D19AA9 /* CustomerStatusView.xib in Resources */,
 				1166AF3623B27F880047C7AE /* ArticleViewItem.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

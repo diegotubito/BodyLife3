@@ -29,8 +29,7 @@ class CustomerStatusView: XibViewWithAnimation {
     @IBOutlet weak var line: NSView!
     @IBOutlet weak var activityIndicator: NSProgressIndicator!
     
-    @IBOutlet weak var errorView: NSView!
-    var viewModel : CustomerStatusViewModelContract!
+     var viewModel : CustomerStatusViewModelContract!
     @IBOutlet weak var DayBox: NSBox!
     @IBOutlet weak var sellArticleButtonOutlet: NSButton!
     
@@ -47,9 +46,6 @@ class CustomerStatusView: XibViewWithAnimation {
         self.layer?.borderColor = Constants.Borders.Status.color
         //self.layer?.backgroundColor = Constants.Colors.Gray.gray10.cgColor
         
-       
-        
-        
         innerBackground.wantsLayer = true
         innerBackground.layer?.backgroundColor = Constants.Colors.Blue.chambray.withAlphaComponent(0.15).cgColor
         innerBackground.layer?.borderColor = NSColor.black.cgColor
@@ -58,14 +54,12 @@ class CustomerStatusView: XibViewWithAnimation {
         line.wantsLayer = true
         line.layer?.backgroundColor = Constants.Colors.Gray.gray17.cgColor
         
-        errorView.wantsLayer = true
-        errorView.layer?.backgroundColor = NSColor.clear.cgColor
-        errorView.isHidden = true
-        errorView.layer?.zPosition = 100
+        
         
         self.DayBox.wantsLayer = true
       
         NotificationCenter.default.addObserver(self, selector: #selector(updateDataFromNotification), name: .notificationUpdateStatus, object: nil)
+        initValues()
         
     }
     
@@ -86,7 +80,8 @@ class CustomerStatusView: XibViewWithAnimation {
         downloadImage(childID: customer._id) { (image, error) in
             DispatchQueue.main.async {
                 self.hideLoading()
-                self.profilePicture.layer?.cornerRadius = (self.profilePicture.layer?.frame.width)! / 2
+                self.editProfilePictureOutlet.isEnabled = true
+                self.profilePicture.layer?.cornerRadius = self.profilePicture.frame.size.width / 2
                 if image != nil {
                     self.profilePicture.image = image!
                 } else {
@@ -155,7 +150,6 @@ class CustomerStatusView: XibViewWithAnimation {
 
 extension CustomerStatusView : CustomerStatusViewContract{
     func showData(statusInfo: CustomerStatusModel.StatusInfo?) {
-        errorView.isHidden = true
         self.sellArticleButtonOutlet.isEnabled = true
         self.sellActivityButtonOutlet.isEnabled = true
         
@@ -188,8 +182,7 @@ extension CustomerStatusView : CustomerStatusViewContract{
     
     func showError(message: String) {
         DispatchQueue.main.async {
-            self.errorView.isHidden = false
-            self.errorView.Blur()
+         
         }
     }
     
@@ -203,6 +196,7 @@ extension CustomerStatusView : CustomerStatusViewContract{
             self.sellActivityButtonOutlet.isEnabled = false
             self.activityIndicator.startAnimation(nil)
             self.profilePicture.image = nil
+            self.editProfilePictureOutlet.isEnabled = false
         }
     }
     
@@ -211,7 +205,7 @@ extension CustomerStatusView : CustomerStatusViewContract{
             self.sellArticleButtonOutlet.isEnabled = true
             self.sellActivityButtonOutlet.isEnabled = true
             self.activityIndicator.stopAnimation(nil)
-            self.editProfilePictureOutlet.isEnabled = true
+            
         }
         
     }

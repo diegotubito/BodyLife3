@@ -33,7 +33,7 @@
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                 <tableColumns>
-                                    <tableColumn identifier="defaultRow" width="1091" minWidth="10" maxWidth="3.4028234663852886e+38" id="Min-dm-1G9">
+                                    <tableColumn identifier="defaultRow" width="1062" minWidth="10" maxWidth="3.4028234663852886e+38" id="Min-dm-1G9">
                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -46,7 +46,7 @@
                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                         <prototypeCellViews>
                                             <customView id="DpR-7H-piO" customClass="SellRegisterCell" customModule="Internal_Target" customModuleProvider="target">
-                                                <rect key="frame" x="1" y="1" width="1100" height="30"/>
+                                                <rect key="frame" x="11" y="1" width="1071" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <subviews>
                                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YVd-wf-jUW">
@@ -58,7 +58,7 @@
                                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="logo_body_life" id="gIV-TW-jYF"/>
                                                     </imageView>
                                                     <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xqd-dD-fOu">
-                                                        <rect key="frame" x="44" y="6" width="1048" height="19"/>
+                                                        <rect key="frame" x="44" y="6" width="1019" height="19"/>
                                                         <subviews>
                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JyL-6b-VT1">
                                                                 <rect key="frame" x="-2" y="2" width="154" height="15"/>
@@ -72,7 +72,7 @@
                                                                 </textFieldCell>
                                                             </textField>
                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jYd-1X-vnX">
-                                                                <rect key="frame" x="156" y="2" width="520" height="15"/>
+                                                                <rect key="frame" x="156" y="2" width="491" height="15"/>
                                                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="8up-vp-Om3">
                                                                     <font key="font" metaFont="cellTitle"/>
                                                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -80,7 +80,7 @@
                                                                 </textFieldCell>
                                                             </textField>
                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="t9v-SQ-6Hc">
-                                                                <rect key="frame" x="680" y="2" width="104" height="15"/>
+                                                                <rect key="frame" x="651" y="2" width="104" height="15"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="100" id="cQc-4x-ag3"/>
                                                                 </constraints>
@@ -91,7 +91,7 @@
                                                                 </textFieldCell>
                                                             </textField>
                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XKr-Qn-yZe">
-                                                                <rect key="frame" x="788" y="2" width="104" height="15"/>
+                                                                <rect key="frame" x="759" y="2" width="104" height="15"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="100" id="2U7-Mm-wfv"/>
                                                                 </constraints>
@@ -102,7 +102,7 @@
                                                                 </textFieldCell>
                                                             </textField>
                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="U8t-FB-psE">
-                                                                <rect key="frame" x="896" y="0.0" width="154" height="19"/>
+                                                                <rect key="frame" x="867" y="0.0" width="154" height="19"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="150" id="03d-Ue-rA8"/>
                                                                 </constraints>
@@ -169,7 +169,7 @@
                     <rect key="frame" x="14" y="297" width="180" height="16"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" title="Registros de ventas y cobros" id="ruI-RB-AEs">
                         <font key="font" usesAppearanceFont="YES"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
