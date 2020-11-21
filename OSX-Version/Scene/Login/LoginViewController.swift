@@ -5,6 +5,7 @@ protocol LoginDisplayLogic: class {
 }
 
 class LoginViewController: BaseViewController, LoginDisplayLogic {
+    @IBOutlet weak var newUserButtonOutlet: NSButton!
     @IBOutlet weak var resultLabel: NSTextField!
     @IBOutlet weak var userTextField: NSTextField!
     @IBOutlet weak var passwordTextField: NSSecureTextField!
@@ -69,6 +70,9 @@ class LoginViewController: BaseViewController, LoginDisplayLogic {
     
     override func viewWillAppear() {
         super .viewWillAppear()
+        #if DEBUG || INTERNAL
+        newUserButtonOutlet.isEnabled = true
+        #endif
     
     }
     

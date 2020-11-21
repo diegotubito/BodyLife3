@@ -36,6 +36,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         //cada vez que cambio de target, es necesario volver a loguearse, porque se borra el usuario de default.
  
         let lastEnvironment = UserDefaults.standard.string(forKey: "lastEnvironment")
+        
         #if INTERNAL
             if lastEnvironment == "PRODUCTION" || lastEnvironment == "" {
                 UserSaved.Remove()

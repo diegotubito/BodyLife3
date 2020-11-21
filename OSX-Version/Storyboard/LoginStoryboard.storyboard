@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="8N1-8O-FeI">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="8N1-8O-FeI">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17156"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17506"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -15,7 +15,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="285-Ix-IDP">
-                                <rect key="frame" x="301" y="43" width="132" height="32"/>
+                                <rect key="frame" x="300" y="43" width="134" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="16Z-bb-XDB"/>
                                 </constraints>
@@ -123,7 +123,7 @@
                                 </customSpacing>
                             </stackView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WIB-uY-768">
-                                <rect key="frame" x="231" y="281" width="271" height="22"/>
+                                <rect key="frame" x="232" y="280" width="269" height="23"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Ingresá tu usuario y contraseña" id="hSM-G2-EvN">
                                     <font key="font" metaFont="system" size="19"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -131,7 +131,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="766-6f-cuI">
-                                <rect key="frame" x="348" y="257" width="37" height="16"/>
+                                <rect key="frame" x="348" y="256" width="37" height="16"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="clt-Hm-AME">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
@@ -139,8 +139,8 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KPU-zH-MRB">
-                                <rect key="frame" x="521" y="43" width="202" height="32"/>
-                                <buttonCell key="cell" type="push" title="Registrar un nuevo usuario" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ZRi-Mt-Joj">
+                                <rect key="frame" x="528" y="43" width="196" height="32"/>
+                                <buttonCell key="cell" type="push" title="Registrar un nuevo usuario" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ZRi-Mt-Joj">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -163,6 +163,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="newUserButtonOutlet" destination="KPU-zH-MRB" id="74k-jL-9t3"/>
                         <outlet property="passwordTextField" destination="tsq-lI-448" id="lSE-ND-fYZ"/>
                         <outlet property="resultLabel" destination="766-6f-cuI" id="33f-qc-Mez"/>
                         <outlet property="userTextField" destination="u8E-bu-NCb" id="dcq-VU-3sN"/>
@@ -184,10 +185,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="602" height="50"/>
                                 <subviews>
                                     <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="40" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cj1-e7-8Wk">
-                                        <rect key="frame" x="181" y="15" width="240" height="21"/>
+                                        <rect key="frame" x="181" y="15" width="240" height="20"/>
                                         <subviews>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Fgq-jM-VRV">
-                                                <rect key="frame" x="-6" y="-7" width="112" height="32"/>
+                                                <rect key="frame" x="-7" y="-7" width="114" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="100" id="cPg-vo-dsu"/>
                                                 </constraints>
@@ -200,7 +201,7 @@
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="s4U-dP-ijS">
-                                                <rect key="frame" x="134" y="-7" width="112" height="32"/>
+                                                <rect key="frame" x="133" y="-7" width="114" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="100" id="OIj-Uq-6On"/>
                                                 </constraints>

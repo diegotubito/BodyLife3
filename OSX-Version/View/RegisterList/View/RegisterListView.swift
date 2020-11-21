@@ -89,7 +89,7 @@ class RegisterListView: XibViewWithAnimation , RegisterListViewContract{
         onAddPayment?(viewModel.getPaymentsForSelectedRegister())
     }
     @IBAction func removeRegister(_ sender: Any) {
-        viewModel.realDeleteEveryRelatedSellAndPayment()
+        //viewModel.realDeleteEveryRelatedSellAndPayment()
     }
     
     func cancelError() {
