@@ -6,7 +6,6 @@
 //  Copyright © 2019 David Diego Gomez. All rights reserved.
 //
 
-
 import Cocoa
 import BLServerManager
 
@@ -23,18 +22,18 @@ class CustomerListViewModel: CustomerListViewModelContract {
     }
     
     func loadCustomers(bySearch: String, offset: Int) {
-        if model.stopLoading {
+        if model.stopLoading || loading {
             return
         }
        
         if offset == 0 {
             model.customersbySearch.removeAll()
         }
+        loading = true
         _view.showLoading()
         
-        let query = "?queryString=\(bySearch)&offset=\(offset)&limit=50"
+        let query = "?queryString=\(bySearch)&offset=\(offset)&limit=\(model.limit)"
         let stringQuery = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-        
         let endpoint = Endpoint.Create(to: .Customer(.Search(query: stringQuery!)))
         BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<[CustomerModel.Customer]>) in
             self._view.hideLoading()
@@ -42,7 +41,7 @@ class CustomerListViewModel: CustomerListViewModelContract {
             self.model.customersbySearch.append(contentsOf: response.data!)
             self.loadImages()
             self._view.showSuccess()
-            if response.data!.count < 50 {
+            if response.data!.count < self.model.limit {
                 self.model.stopLoading = true
             }
            
@@ -54,17 +53,15 @@ class CustomerListViewModel: CustomerListViewModelContract {
     }
     
     func loadCustomers(offset: Int) {
-        if model.stopLoading {
+        if model.stopLoading || loading {
             return
         }
         if offset == 0 {
             model.customersbyPages.removeAll()
         }
-    
-        if loading {return}
         loading = true
         _view.showLoading()
-        let query = "?offset=\(offset)&limit=50"
+        let query = "?offset=\(offset)&limit=\(model.limit)"
         let endpoint = Endpoint.Create(to: .Customer(.LoadPage(query: query)))
         BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<[CustomerModel.Customer]>) in
             self._view.hideLoading()
@@ -72,7 +69,7 @@ class CustomerListViewModel: CustomerListViewModelContract {
             self.model.customersbyPages.append(contentsOf: response.data!)
             self.loadImages()
             self._view.showSuccess()
-            if response.data!.count < 50 {
+            if response.data!.count < self.model.limit {
                 self.model.stopLoading = true
             }
         } fail: { (error) in
@@ -135,15 +132,11 @@ class CustomerListViewModel: CustomerListViewModelContract {
         let image = thumbnail.convertToImage
         if let position = model.imagesByPages.firstIndex(where: {$0._id == _id}) {
             model.imagesByPages[position].image = image
-           
         }
         if let position = model.imagesBySearch.lastIndex(where: {$0._id == _id}) {
             model.imagesBySearch[position].image = image
-            
         }
         self._view.reloadList()
-        
-        
     }
     
 }

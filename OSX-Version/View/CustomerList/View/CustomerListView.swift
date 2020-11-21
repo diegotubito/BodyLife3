@@ -216,7 +216,7 @@ extension CustomerListView: NSTableViewDataSource, NSTableViewDelegate {
         }
         
         let count = customers.count
-        if row == (count - 1) - 25 || row == (count - 1) {
+        if row == (count - 1) - (viewModel.model.limit/2) || row == (count - 1) {
             if viewModel.model.bySearch {
                 viewModel.loadCustomers(bySearch: searchField.stringValue, offset: count)
             } else {
