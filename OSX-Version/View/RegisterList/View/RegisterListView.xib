@@ -204,13 +204,13 @@
                         <action selector="anularDidPressed:" target="-2" id="Dai-gd-XpG"/>
                     </connections>
                 </button>
-                <button translatesAutoresizingMaskIntoConstraints="NO" id="WmR-0U-4uY">
+                <button hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WmR-0U-4uY">
                     <rect key="frame" x="757" y="15" width="100" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="hrC-Zo-QZL"/>
                         <constraint firstAttribute="width" constant="100" id="i69-ZQ-bqe"/>
                     </constraints>
-                    <buttonCell key="cell" type="square" title="Eliminar" bezelStyle="shadowlessSquare" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="TjG-2b-3Xo">
+                    <buttonCell key="cell" type="square" title="Eliminar" bezelStyle="shadowlessSquare" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="TjG-2b-3Xo">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>

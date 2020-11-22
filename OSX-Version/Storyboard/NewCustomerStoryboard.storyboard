@@ -10,7 +10,7 @@
         <scene sceneID="enq-yv-DFC">
             <objects>
                 <viewController storyboardIdentifier="NewCustomerViewController" id="kB3-nJ-svr" customClass="NewCustomerViewController" customModule="Internal_Target" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" misplaced="YES" id="lCM-vi-YvS">
+                    <view key="view" id="lCM-vi-YvS">
                         <rect key="frame" x="0.0" y="0.0" width="782" height="511"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
@@ -839,8 +839,8 @@ Gw
                                 </customSpacing>
                             </stackView>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="v07-G1-Rvi">
-                                <rect key="frame" x="268" y="113" width="75" height="32"/>
-                                <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="88b-qN-Tv3">
+                                <rect key="frame" x="254" y="113" width="103" height="32"/>
+                                <buttonCell key="cell" type="push" title="Tomar Foto" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="88b-qN-Tv3">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>

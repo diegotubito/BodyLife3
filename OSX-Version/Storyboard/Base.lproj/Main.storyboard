@@ -740,44 +740,12 @@
                                             <action selector="closeSessionPressed:" target="XfG-lQ-9wD" id="fJW-4J-wgv"/>
                                         </connections>
                                     </button>
-                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="rtW-ah-ZyP">
-                                        <rect key="frame" x="65" y="1" width="33" height="39"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="33" id="CLI-Dj-VmL"/>
-                                            <constraint firstAttribute="height" constant="33" id="nFr-eX-OPV"/>
-                                        </constraints>
-                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSInvalidDataFreestandingTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="h4m-4z-ve3">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="newExpensePressed:" target="XfG-lQ-9wD" id="8IF-uu-uH4"/>
-                                        </connections>
-                                    </button>
-                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="o29-Ts-AjV">
-                                        <rect key="frame" x="114" y="4" width="33" height="33"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="33" id="xfd-49-09c"/>
-                                            <constraint firstAttribute="width" constant="33" id="ysA-FM-S3J"/>
-                                        </constraints>
-                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSBonjour" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="CsR-zW-OHf">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="moneyFlow:" target="XfG-lQ-9wD" id="wbQ-7N-pcz"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="9AY-9h-Rjr" firstAttribute="leading" secondItem="Y6C-Pr-GNv" secondAttribute="leading" constant="16" id="28c-pc-z5b"/>
-                                    <constraint firstItem="o29-Ts-AjV" firstAttribute="centerY" secondItem="Y6C-Pr-GNv" secondAttribute="centerY" id="5pl-yR-QVc"/>
                                     <constraint firstAttribute="trailing" secondItem="Kec-wk-swp" secondAttribute="trailing" constant="16" id="9P1-m4-2aV"/>
                                     <constraint firstItem="9AY-9h-Rjr" firstAttribute="centerY" secondItem="Y6C-Pr-GNv" secondAttribute="centerY" id="AOL-qY-63e"/>
-                                    <constraint firstItem="rtW-ah-ZyP" firstAttribute="leading" secondItem="9AY-9h-Rjr" secondAttribute="trailing" constant="16" id="Jg1-tt-MXa"/>
-                                    <constraint firstItem="rtW-ah-ZyP" firstAttribute="centerY" secondItem="Y6C-Pr-GNv" secondAttribute="centerY" id="dhN-Ru-x7s"/>
                                     <constraint firstItem="Kec-wk-swp" firstAttribute="centerY" secondItem="Y6C-Pr-GNv" secondAttribute="centerY" id="hAy-he-GmQ"/>
-                                    <constraint firstItem="o29-Ts-AjV" firstAttribute="leading" secondItem="rtW-ah-ZyP" secondAttribute="trailing" constant="16" id="mxE-ip-PP6"/>
                                     <constraint firstAttribute="height" constant="40" id="xBg-Mn-Ma1"/>
                                 </constraints>
                             </customView>
@@ -862,8 +830,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="NSBonjour" width="32" height="32"/>
-        <image name="NSInvalidDataFreestandingTemplate" width="15" height="15"/>
         <image name="NSUser" width="32" height="32"/>
         <image name="mono-logout" width="2400" height="2400"/>
     </resources>

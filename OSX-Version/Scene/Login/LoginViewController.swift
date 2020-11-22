@@ -72,6 +72,7 @@ class LoginViewController: BaseViewController, LoginDisplayLogic {
         super .viewWillAppear()
         #if DEBUG || INTERNAL
         newUserButtonOutlet.isEnabled = true
+        newUserButtonOutlet.isHidden = false
         #endif
     
     }
