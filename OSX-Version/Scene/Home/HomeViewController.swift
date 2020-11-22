@@ -97,7 +97,6 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
     }
     
     @objc func StartLoading() {
-       
         DispatchQueue.main.async {
             self.createCustomViews()
             self.addObservers()

@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "115784D6252B85C0008A89DC"
-               BuildableName = "Internal-Target.app"
+               BuildableName = "Body Shaping Internal.app"
                BlueprintName = "Internal-Target"
                ReferencedContainer = "container:BodyLife3.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "115784D6252B85C0008A89DC"
-            BuildableName = "Internal-Target.app"
+            BuildableName = "Body Shaping Internal.app"
             BlueprintName = "Internal-Target"
             ReferencedContainer = "container:BodyLife3.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "115784D6252B85C0008A89DC"
-            BuildableName = "Internal-Target.app"
+            BuildableName = "Body Shaping Internal.app"
             BlueprintName = "Internal-Target"
             ReferencedContainer = "container:BodyLife3.xcodeproj">
          </BuildableReference>

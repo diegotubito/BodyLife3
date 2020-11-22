@@ -19,7 +19,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Insert code here to initialize your application
         Reachability.sharedInstance.suscribeConnectionChanged()
         #if INTERNAL
-//            Config.baseUrl = BLServer.Develop
             BLServerManager.baseUrl = BLServer.Develop
         #else
             BLServerManager.baseUrl = BLServer.Production
