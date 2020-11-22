@@ -81,8 +81,9 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
     override func viewWillAppear() {
         super.viewWillAppear()
         self.view.window?.delegate = self
-        #if DEBUG || INTERNAL
         containerBottomBar.isHidden = true
+        #if DEBUG || INTERNAL
+        containerBottomBar.isHidden = false
         #endif
     }
     
