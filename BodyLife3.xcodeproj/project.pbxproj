@@ -344,7 +344,7 @@
 		114C54212415822A000CC75A /* ExpenseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseModel.swift; sourceTree = "<group>"; };
 		11542D802380698F0011AB1D /* ConnectionStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionStatus.swift; sourceTree = "<group>"; };
 		11542D832380703F0011AB1D /* ConsoleCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleCommand.swift; sourceTree = "<group>"; };
-		11578565252B85C0008A89DC /* Internal-Target.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Internal-Target.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		11578565252B85C0008A89DC /* Body Shaping Internal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Body Shaping Internal.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		11578577252CE411008A89DC /* NewUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserViewController.swift; sourceTree = "<group>"; };
 		11578586252E7E57008A89DC /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		115786DE252FE943008A89DC /* SocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketManager.swift; sourceTree = "<group>"; };
@@ -396,7 +396,7 @@
 		11D615782524E83B005B5D81 /* ImportPagoCarnet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportPagoCarnet.swift; sourceTree = "<group>"; };
 		11D6157B2524E9EC005B5D81 /* PaymentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentModel.swift; sourceTree = "<group>"; };
 		11E580E7254DFCC600E5A54D /* importStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = importStorage.swift; sourceTree = "<group>"; };
-		11EBD31E2376499F00AB4BFF /* Production-Target.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Production-Target.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		11EBD31E2376499F00AB4BFF /* Body Shaping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Body Shaping.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		11EBD3202376499F00AB4BFF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		11EBD3252376499F00AB4BFF /* OSX_Version.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = OSX_Version.xcdatamodel; sourceTree = "<group>"; };
 		11EBD3272376499F00AB4BFF /* AssetsOSX.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AssetsOSX.xcassets; sourceTree = "<group>"; };
@@ -989,8 +989,8 @@
 		11EBD3052376494E00AB4BFF /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				11EBD31E2376499F00AB4BFF /* Production-Target.app */,
-				11578565252B85C0008A89DC /* Internal-Target.app */,
+				11EBD31E2376499F00AB4BFF /* Body Shaping.app */,
+				11578565252B85C0008A89DC /* Body Shaping Internal.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1218,7 +1218,7 @@
 			);
 			name = "Internal-Target";
 			productName = "OSX-Version";
-			productReference = 11578565252B85C0008A89DC /* Internal-Target.app */;
+			productReference = 11578565252B85C0008A89DC /* Body Shaping Internal.app */;
 			productType = "com.apple.product-type.application";
 		};
 		11EBD31D2376499F00AB4BFF /* Production-Target */ = {
@@ -1237,7 +1237,7 @@
 			);
 			name = "Production-Target";
 			productName = "OSX-Version";
-			productReference = 11EBD31E2376499F00AB4BFF /* Production-Target.app */;
+			productReference = 11EBD31E2376499F00AB4BFF /* Body Shaping.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1693,7 +1693,7 @@
 				);
 				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "DDG.OSX-Version";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Body Shaping Internal";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = INTERNAL;
 				SWIFT_VERSION = 5.0;
@@ -1719,7 +1719,7 @@
 				);
 				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "DDG.OSX-Version";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Body Shaping Internal";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = INTERNAL;
 				SWIFT_VERSION = 5.0;
@@ -1860,7 +1860,7 @@
 				);
 				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "ddg.body-shaping-OSX";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Body Shaping";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 			};
@@ -1885,7 +1885,7 @@
 				);
 				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "ddg.body-shaping-OSX";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Body Shaping";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 			};
