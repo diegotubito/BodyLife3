@@ -89,7 +89,7 @@ class ArticleSellView: XibViewBlurBackground {
         let dicountID : String? = nil
         let article = selectedItem?._id
 
-        let newRegister = SellModel.NewRegister(customer: customerId,
+        let newRegister = SellModel.Register(customer: customerId,
                                                 discount: dicountID,
                                                 activity: nil,
                                                 article: article,
@@ -106,7 +106,7 @@ class ArticleSellView: XibViewBlurBackground {
                                                 description: selectedItem?.description ?? "")
         let body = encodeSell(newRegister)
         let endpoint = Endpoint.Create(to: .Sell(.Save(body: body)))
-        BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<ArticleModel.Response>) in
+        BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<SellModel.Register>) in
             guard let _id = response.data?._id else {
                 return
             }
@@ -133,9 +133,9 @@ class ArticleSellView: XibViewBlurBackground {
     
     private func addNullPayment(sellId: String) {
         let createdAt = Date().timeIntervalSince1970
-        let customerId : String = selectedCustomer._id
+        let customerId : String = selectedCustomer._id!
 
-        let newRegister = PaymentModel.Response(customer: customerId,
+        let newRegister = PaymentModel.Register(customer: customerId,
                                                 sell: sellId,
                                                 isEnabled: true,
                                                 timestamp: createdAt,
@@ -144,7 +144,7 @@ class ArticleSellView: XibViewBlurBackground {
         
         let body = encodePayment(newRegister)
         let endpoint = Endpoint.Create(to: .Payment(.Save(body: body)))
-        BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<PaymentModel.Response>) in
+        BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<PaymentModel.Register>) in
             self.buttonAccept.hideLoading()
             DispatchQueue.main.async {
                 self.hideView()
@@ -157,13 +157,13 @@ class ArticleSellView: XibViewBlurBackground {
         }
     }
     
-    private func encodeSell(_ register: SellModel.NewRegister) -> [String : Any] {
+    private func encodeSell(_ register: SellModel.Register) -> [String : Any] {
         let data = try? JSONEncoder().encode(register)
         let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String : Any]
         return json!
     }
     
-    private func encodePayment(_ register: PaymentModel.Response) -> [String : Any] {
+    private func encodePayment(_ register: PaymentModel.Register) -> [String : Any] {
         let data = try? JSONEncoder().encode(register)
         let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String : Any]
         return json!

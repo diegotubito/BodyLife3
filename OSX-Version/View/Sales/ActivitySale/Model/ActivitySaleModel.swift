@@ -15,9 +15,9 @@ struct ActivitySaleModel {
     var statusInfo : CustomerStatusModel.StatusInfo?
     
     var activities = [ActivityModel.NewRegister]()
-    var periods = [PeriodModel.AUX_Period]()
-    var discounts = [DiscountModel.NewRegister]()
-    var selectedPeriod : PeriodModel.AUX_Period?
+    var periods = [PeriodModel.Populated]()
+    var discounts = [DiscountModel.Register]()
+    var selectedPeriod : PeriodModel.Populated?
     var selectedActivity : ActivityModel.NewRegister?
-    var selectedDiscount : DiscountModel.NewRegister?
+    var selectedDiscount : DiscountModel.Register?
 }

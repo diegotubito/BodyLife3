@@ -8,10 +8,10 @@
 
 import Cocoa
 
-class PeriodListItem: GenericCollectionItem<PeriodModel.AUX_Period> {
+class PeriodListItem: GenericCollectionItem<PeriodModel.Populated> {
     @IBOutlet weak var titleLabel: NSTextField!
        
-    override var item : PeriodModel.AUX_Period! {
+    override var item : PeriodModel.Populated! {
            didSet {
             titleLabel.stringValue = "\(item.days) días - $\(item.price)"
            }

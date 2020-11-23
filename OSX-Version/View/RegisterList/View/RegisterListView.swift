@@ -16,7 +16,7 @@ class RegisterListView: XibViewWithAnimation , RegisterListViewContract{
     @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var myIndicator : NSProgressIndicator!
     var viewModel : RegisterListViewModelContract!
-    var onAddPayment : (([PaymentModel.NewRegister]) -> ())?
+    var onAddPayment : (([PaymentModel.Populated]) -> ())?
       
     override func commonInit() {
         super .commonInit()

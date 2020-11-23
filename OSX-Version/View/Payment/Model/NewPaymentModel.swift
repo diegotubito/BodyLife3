@@ -11,6 +11,6 @@ import Cocoa
 
 class NewPaymentModel {
     var selectedCustomer : CustomerModel.Customer!
-    var payments : [PaymentModel.NewRegister]!
-    var selectedSellRegister : SellModel.NewRegister!
+    var payments : [PaymentModel.Populated]!
+    var selectedSellRegister : SellModel.Register!
 }

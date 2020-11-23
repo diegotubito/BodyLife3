@@ -27,9 +27,9 @@ class ActivitySaleViewModel : ActivitySaleViewModelContract {
     func loadPeriods() {
         _view.showLoading()
         let request = Endpoint.Create(to: .Period(.LoadAll))
-        BLServerManager.ApiCall(endpoint: request) { (periods:PeriodModel.ViewModel) in
+        BLServerManager.ApiCall(endpoint: request) { (response:ResponseModel<[PeriodModel.Populated]>) in
             self._view.hideLoading()
-            self.parseActivityAndDiscount(response: periods)
+            self.parseActivityAndDiscount(periods: response.data!)
         } fail: { (error) in
             self._view.hideLoading()
             self._view.showError(error.localizedDescription)
@@ -39,17 +39,17 @@ class ActivitySaleViewModel : ActivitySaleViewModelContract {
     func loadDiscounts() {
         _view.showLoading()
         let endpoint = Endpoint.Create(to: .Discount(.LoadAll))
-        BLServerManager.ApiCall(endpoint: endpoint) { (result:DiscountModel.ViewModel) in
+        BLServerManager.ApiCall(endpoint: endpoint) { (result:ResponseModel<[DiscountModel.Register]>) in
             self._view.hideLoading()
-            self.model.discounts = result.discounts
+            self.model.discounts = result.data!
             self._view.showDiscounts()
         } fail: { (error) in
             self._view.hideLoading()
         }
     }
     
-    func parseActivityAndDiscount(response : PeriodModel.ViewModel) {
-        let activities = response.periods.compactMap { $0.activity }
+    func parseActivityAndDiscount(periods : [PeriodModel.Populated]) {
+        let activities = periods.compactMap { $0.activity }
         
         var uniqueArray = [ActivityModel.NewRegister]()
         for i in activities {
@@ -61,7 +61,7 @@ class ActivitySaleViewModel : ActivitySaleViewModelContract {
         let sortedActivities = filterActivities.sorted(by: { $0.timestamp > $1.timestamp })
         model.activities = sortedActivities
         
-        let filterPeriods = response.periods.filter({$0.isEnabled})
+        let filterPeriods = periods.filter({$0.isEnabled})
         let sortedPeriods = filterPeriods.sorted(by: {$0.days < $1.days})
         model.periods = sortedPeriods
         _view.showActivities()
@@ -106,11 +106,11 @@ class ActivitySaleViewModel : ActivitySaleViewModelContract {
         model.selectedActivity = value
     }
     
-    func setSelectedPeriod(_ value: PeriodModel.AUX_Period?) {
+    func setSelectedPeriod(_ value: PeriodModel.Populated?) {
         model.selectedPeriod = value
     }
     
-    func getSelectedDiscount() -> DiscountModel.NewRegister? {
+    func getSelectedDiscount() -> DiscountModel.Register? {
         return model.selectedDiscount
     }
     
@@ -118,7 +118,7 @@ class ActivitySaleViewModel : ActivitySaleViewModelContract {
         return model.selectedActivity
     }
     
-    func getSelectedPeriod() -> PeriodModel.AUX_Period? {
+    func getSelectedPeriod() -> PeriodModel.Populated? {
         return model.selectedPeriod
     }
     
@@ -146,7 +146,7 @@ class ActivitySaleViewModel : ActivitySaleViewModelContract {
         return (price, discount)
     }
     
-    func getPeriods() -> [PeriodModel.AUX_Period] {
+    func getPeriods() -> [PeriodModel.Populated] {
         let filter = model.periods.filter({$0.activity?._id == model.selectedActivity?._id})
         
         return filter
@@ -156,7 +156,7 @@ class ActivitySaleViewModel : ActivitySaleViewModelContract {
         return model.activities
     }
     
-    func getDiscounts() -> [DiscountModel.NewRegister] {
+    func getDiscounts() -> [DiscountModel.Register] {
         return model.discounts
     }
     
@@ -177,7 +177,7 @@ extension ActivitySaleViewModel {
         let activityDescription = model.selectedActivity?.description ?? ""
         let periodDescription = model.selectedPeriod?.description ?? ""
         let description = activityDescription + " - " + periodDescription
-        let newRegister = SellModel.NewRegister(customer: customerId,
+        let newRegister = SellModel.Register(customer: customerId,
                                                 discount: dicountID,
                                                 activity: activityID,
                                                 article: nil,
@@ -195,7 +195,7 @@ extension ActivitySaleViewModel {
         
         let body = encodeSell(newRegister)
         let endpoint = Endpoint.Create(to: .Sell(.Save(body: body)))
-        BLServerManager.ApiCall(endpoint: endpoint) { (response:ResponseModel<SellModel.NewRegister>) in
+        BLServerManager.ApiCall(endpoint: endpoint) { (response:ResponseModel<SellModel.Register>) in
             let _id = response.data?._id
             self.addNullPayment(sellId: _id!)
         } fail: { (error) in
@@ -207,7 +207,7 @@ extension ActivitySaleViewModel {
         let createdAt = Date().timeIntervalSince1970
         let customerId : String = model.statusInfo?.customer._id ?? ""
 
-        let newRegister = PaymentModel.Response(customer: customerId,
+        let newRegister = PaymentModel.Register(customer: customerId,
                                                 sell: sellId,
                                                 isEnabled: true,
                                                 timestamp: createdAt,
@@ -215,7 +215,7 @@ extension ActivitySaleViewModel {
                                                 productCategory: ProductCategory.activity.rawValue)
         let body = encodePayment(newRegister)
         let endpoint = Endpoint.Create(to: .Payment(.Save(body: body)))
-        BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<PaymentModel.Response>) in
+        BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<PaymentModel.Register>) in
             self._view.hideLoading()
             self._view.showSuccessSaving()
         } fail: { (error) in
@@ -225,13 +225,13 @@ extension ActivitySaleViewModel {
     }
    
     
-    private func encodeSell(_ register: SellModel.NewRegister) -> [String : Any] {
+    private func encodeSell(_ register: SellModel.Register) -> [String : Any] {
         let data = try? JSONEncoder().encode(register)
         let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String : Any]
         return json!
     }
     
-    private func encodePayment(_ register: PaymentModel.Response) -> [String : Any] {
+    private func encodePayment(_ register: PaymentModel.Register) -> [String : Any] {
         let data = try? JSONEncoder().encode(register)
         let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String : Any]
         return json!

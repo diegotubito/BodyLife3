@@ -11,7 +11,21 @@ import BLServerManager
 
 extension ImportDatabase {
     class VentaArticulo {
-        static private func getVentasArticulos() -> [SellModel.NewRegister]? {
+        
+        struct OldArticulo: Decodable {
+            var childID : String
+            var descripcionProducto : String
+            var childIDSocio : String
+            var childIDProducto : String
+            var fechaCreacion : String
+            var esAnulado : Bool
+            var precioCompra : Double?
+            var precioVenta : Double
+            var childIDDescuento : String?
+            var cantidadVendida : Int
+        }
+        
+        static private func getVentasArticulos() -> [SellModel.Register]? {
             guard let json = ImportDatabase.loadBodyLife() else {
                 return nil
             }
@@ -42,12 +56,12 @@ extension ImportDatabase {
             guard let data = try? JSONSerialization.data(withJSONObject: list, options: []) else {
                 return nil
             }
-            guard let oldRegisters = try? JSONDecoder().decode([SellModel.OldArticulo].self, from: data) else {
+            guard let oldRegisters = try? JSONDecoder().decode([ImportDatabase.VentaArticulo.OldArticulo].self, from: data) else {
                 print("could not decode")
                 return nil
             }
             
-            var result = [SellModel.NewRegister]()
+            var result = [SellModel.Register]()
             for i in oldRegisters {
                 let createdAt = i.fechaCreacion.toDate(formato: "dd-MM-yyyy HH:mm:ss")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970
                   
@@ -56,7 +70,7 @@ extension ImportDatabase {
                 let dicountID = ImportDatabase.codeUID(i.childIDDescuento ?? "")
                 let article = ImportDatabase.codeUID(i.childIDProducto)
 
-                let newRegister = SellModel.NewRegister(_id: _id,
+                let newRegister = SellModel.Register(_id: _id,
                                                         customer: customerId,
                                                         discount: dicountID == "000000000000000000000000" ? nil : dicountID,
                                                         activity: nil,
@@ -78,7 +92,7 @@ extension ImportDatabase {
             return result
         }
         
-        static private func encodeRegister(_ register: SellModel.NewRegister) -> [String : Any] {
+        static private func encodeRegister(_ register: SellModel.Register) -> [String : Any] {
             let data = try? JSONEncoder().encode(register)
             let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String : Any]
             return json!

@@ -63,6 +63,7 @@ class CustomerListViewModel: CustomerListViewModelContract {
         _view.showLoading()
         let query = "?offset=\(offset)&limit=\(model.limit)"
         let endpoint = Endpoint.Create(to: .Customer(.LoadPage(query: query)))
+        
         BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<[CustomerModel.Customer]>) in
             self._view.hideLoading()
             self.loading = false
@@ -92,7 +93,7 @@ class CustomerListViewModel: CustomerListViewModelContract {
     func loadImage(row: Int, customer: CustomerModel.Customer) {
       
         CommonWorker.Image.loadThumbnail(row: row, customer: customer) { (image, correctRow) in
-            let newImage = CustomerListModel.Images(image: image, _id: customer._id)
+            let newImage = CustomerListModel.Images(image: image, _id: customer._id!)
             if self.model.bySearch {
                 self.model.imagesBySearch.append(newImage)
             } else {

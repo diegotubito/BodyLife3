@@ -25,7 +25,7 @@ public class CommonWorker {
             }
             
             let uid = customer._id
-            let endpoint = Endpoint.Create(to: .Image(.LoadThumbnail(_id: uid)))
+            let endpoint = Endpoint.Create(to: .Image(.LoadThumbnail(_id: uid!)))
             BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<ThumbnailModel.Thumbnail>) in
                 guard let imageDowloaded = response.data else {
                     completion(nil, row)

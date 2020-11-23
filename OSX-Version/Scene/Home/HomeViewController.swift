@@ -124,7 +124,7 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
         guard let customer = customerListView.viewModel.model.selectedCustomer else {
             return
         }
-        let endpoint = Endpoint.Create(to: .Customer(.Delete(uid: customer._id)))
+        let endpoint = Endpoint.Create(to: .Customer(.Delete(uid: customer._id!)))
         BLServerManager.ApiCall(endpoint: endpoint) { (data) in
             print("socio borrado")
             self.customerListView.viewModel.loadCustomers(offset: 0)

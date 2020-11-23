@@ -10,8 +10,8 @@ import Cocoa
 
 class RegisterListModel {
     var selectedCustomer : CustomerModel.Customer!
-    var selectedSellRegister : SellModel.NewRegister?
+    var selectedSellRegister : SellModel.Register?
    
-    var sells = [SellModel.NewRegister]()
-    var payments = [PaymentModel.NewRegister]()
+    var sells = [SellModel.Register]()
+    var payments = [PaymentModel.Populated]()
 }

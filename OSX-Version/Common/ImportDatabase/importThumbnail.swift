@@ -15,7 +15,7 @@ extension ImportDatabase {
         
         
         
-        static private func getCustomers() -> [CustomerModel.Full]? {
+        static private func getCustomers() -> [CustomerModel.Customer]? {
             guard let json = ImportDatabase.loadBodyLife() else {
                 return nil
             }
@@ -42,12 +42,12 @@ extension ImportDatabase {
             guard let data = try? JSONSerialization.data(withJSONObject: list, options: []) else {
                 return nil
             }
-            guard let oldSocios = try? JSONDecoder().decode([CustomerModel.Old].self, from: data) else {
+            guard let oldSocios = try? JSONDecoder().decode([ImportDatabase.Customer.Old].self, from: data) else {
                 print("could not decode")
                 return nil
             }
             
-            var customers = [CustomerModel.Full]()
+            var customers = [CustomerModel.Customer]()
             for i in oldSocios {
                 let date = i.fechaIngreso.toDate(formato: "dd-MM-yyyy HH:mm:ss")
                 let dateDouble = date?.timeIntervalSince1970 ?? Date().timeIntervalSince1970
@@ -56,28 +56,32 @@ extension ImportDatabase {
                 let firstName = i.nombre.condenseWhitespace().capitalized
                 let lastName = i.apellido.condenseWhitespace().capitalized
                 let fullname = lastName + " " + firstName
+                
+                let location = CustomerModel.Location(_id: _id,
+                                                      longitude: 0.0,
+                                                      latitude: 0.0,
+                                                      street: i.direccion.condenseWhitespace().capitalized,
+                                                      locality: i.localidad.condenseWhitespace().capitalized,
+                                                      state: "Buenos Aires".capitalized,
+                                                      country: "Argentina".capitalized)
+                
+                let newCustomer = CustomerModel.Customer(_id: _id,
+                                                         uid: i.childID,
+                                                         timestamp: dateDouble,
+                                                         dni: i.dni,
+                                                         lastName: lastName,
+                                                         firstName: firstName,
+                                                         fullname: fullname,
+                                                         thumbnailImage: i.childID,
+                                                         email: i.correo,
+                                                         phoneNumber: i.telefono,
+                                                         user: "SUPER_ROLE",
+                                                         location: location,
+                                                         dob: dob,
+                                                         genero: i.genero,
+                                                         obraSocial: i.obraSocial ?? "",
+                                                         isEnabled: true)
    
-      
-                let newCustomer = CustomerModel.Full(_id: _id,
-                                                     uid: i.childID,
-                                                     timestamp: dateDouble,
-                                                     dni: i.dni,
-                                                     lastName: lastName,
-                                                     firstName: firstName,
-                                                     fullname: fullname,
-                                                     thumbnailImage: i.childID,
-                                                     street: i.direccion.condenseWhitespace().capitalized,
-                                                     locality: i.localidad.condenseWhitespace().capitalized,
-                                                     state: "Buenos Aires".capitalized,
-                                                     country: "Argentina".capitalized,
-                                                     email: i.correo,
-                                                     phoneNumber: i.telefono,
-                                                     user: "SUPER_ROLE",
-                                                     longitude: 0.0,
-                                                     latitude: 0.0,
-                                                     dob: dob,
-                                                     genero: i.genero,
-                                                     obraSocial: i.obraSocial ?? "")
                 customers.append(newCustomer)
             }
             
@@ -85,21 +89,10 @@ extension ImportDatabase {
             
         }
         
-        static private func encodeRegister(_ customer: CustomerModel.Full) -> [String : Any] {
+        static private func encodeRegister(_ customer: CustomerModel.Customer) -> [String : Any] {
             let data = try? JSONEncoder().encode(customer)
             let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String : Any]
             return json!
-        }
-        
-        
-        static private func getFinalAddress(customer: CustomerModel.Full) -> String {
-            let street = customer.street
-            let locality = customer.locality
-            let state = customer.state
-            let country = customer.country
-            
-            let address = street + " " + locality + " " + state + " " + country
-            return address
         }
         
         static func MigrateToMongoDB() {

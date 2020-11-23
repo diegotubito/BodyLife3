@@ -20,7 +20,7 @@ class PaymentViewModel: PaymentViewModelContract {
         model = NewPaymentModel()
     }
     
-    func setSelectedInfo(_ customer: CustomerModel.Customer, _ register: SellModel.NewRegister, payments: [PaymentModel.NewRegister]) {
+    func setSelectedInfo(_ customer: CustomerModel.Customer, _ register: SellModel.Register, payments: [PaymentModel.Populated]) {
         model.selectedCustomer = customer
         model.selectedSellRegister = register
         model.payments = payments
@@ -29,12 +29,12 @@ class PaymentViewModel: PaymentViewModelContract {
    
     func saveNewPayment() {
         let createdAt = Date().timeIntervalSince1970
-        let customerId : String = model.selectedCustomer._id
+        let customerId : String = model.selectedCustomer._id!
         let sellId = model.selectedSellRegister._id ?? ""
         let paidAmount = Double(self._view.getAmountString())!
         let productCategory = model.selectedSellRegister.productCategory
 
-        let newRegister = PaymentModel.Response(customer: customerId,
+        let newRegister = PaymentModel.Register(customer: customerId,
                                                 sell: sellId,
                                                 isEnabled: true,
                                                 timestamp: createdAt,
@@ -43,7 +43,7 @@ class PaymentViewModel: PaymentViewModelContract {
         
         let body = encodePayment(newRegister)
         let endpoint = Endpoint.Create(to: .Payment(.Save(body: body)))
-        BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<PaymentModel.Response>) in
+        BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<PaymentModel.Register>) in
             self._view.hideLoading()
             self._view.showSuccess()
         } fail: { (error) in
@@ -52,7 +52,7 @@ class PaymentViewModel: PaymentViewModelContract {
         }
     }
     
-    private func encodePayment(_ register: PaymentModel.Response) -> [String : Any] {
+    private func encodePayment(_ register: PaymentModel.Register) -> [String : Any] {
         let data = try? JSONEncoder().encode(register)
         let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String : Any]
         return json!

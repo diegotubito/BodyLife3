@@ -10,7 +10,17 @@ import BLServerManager
 
 extension ImportDatabase {
     class Discount {
-        static private func getDiscounts() -> [DiscountModel.NewRegister]? {
+        struct Old : Decodable {
+            var childID : String
+            var descripcion : String
+            var esOculto : Bool
+            var fechaCreacion : String
+            var fechaVencimiento : String
+            var multiplicador : Double
+        }
+        
+        
+        static private func getDiscounts() -> [DiscountModel.Register]? {
             guard let json = ImportDatabase.loadBodyLife() else {
                 return nil
             }
@@ -36,17 +46,17 @@ extension ImportDatabase {
             guard let data = try? JSONSerialization.data(withJSONObject: list, options: []) else {
                 return nil
             }
-            guard let oldRegisters = try? JSONDecoder().decode([DiscountModel.Old].self, from: data) else {
+            guard let oldRegisters = try? JSONDecoder().decode([ImportDatabase.Discount.Old].self, from: data) else {
                 print("could not decode")
                 return nil
             }
             
-            var result = [DiscountModel.NewRegister]()
+            var result = [DiscountModel.Register]()
             for i in oldRegisters {
                 let createdAt = i.fechaCreacion.toDate(formato: "dd-MM-yyyy HH:mm:ss")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970
                 let expiration = i.fechaVencimiento.toDate(formato: "dd-MM-yyyy HH:mm:ss")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970
                 let _id = ImportDatabase.codeUID(i.childID)
-                let newRegister = DiscountModel.NewRegister(_id: _id,
+                let newRegister = DiscountModel.Register(_id: _id,
                                                             description: i.descripcion.condenseWhitespace(),
                                                             isEnabled: !i.esOculto,
                                                             expiration: expiration,
@@ -58,7 +68,7 @@ extension ImportDatabase {
             return result
         }
         
-        static private func encodeRegister(_ register: DiscountModel.NewRegister) -> [String : Any] {
+        static private func encodeRegister(_ register: DiscountModel.Register) -> [String : Any] {
             let data = try? JSONEncoder().encode(register)
             let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String : Any]
             return json!

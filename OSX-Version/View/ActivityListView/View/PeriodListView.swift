@@ -8,11 +8,11 @@
 
 import Cocoa
 
-class PeriodListView : GenericCollectionView<PeriodListItem, PeriodModel.AUX_Period> {
+class PeriodListView : GenericCollectionView<PeriodListItem, PeriodModel.Populated> {
     
     var viewModel : PeriodListViewModelContract!
     
-    var didSelectPeriod : ((PeriodModel.AUX_Period?) -> Void)?
+    var didSelectPeriod : ((PeriodModel.Populated?) -> Void)?
     
     override func commonInit() {
         super .commonInit()

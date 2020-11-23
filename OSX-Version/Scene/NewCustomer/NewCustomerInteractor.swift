@@ -44,7 +44,7 @@ class NewCustomerInteractor: NewCustomerBusinessLogic, NewCustomerDataStore {
             response.customer?.thumbnailImage = request.thumbnail
             self.presenter?.presentNewCustomerResult(response: response)
             
-            self.uploadPictures(_id: savedCustomer._id, image: request.image)
+            self.uploadPictures(_id: savedCustomer._id!, image: request.image)
         }
     }
     

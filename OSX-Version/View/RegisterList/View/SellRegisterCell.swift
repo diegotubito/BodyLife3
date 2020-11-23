@@ -16,7 +16,7 @@ class SellRegisterCell: NSTableCellView {
     @IBOutlet weak var labelSaldo: NSTextField!
     @IBOutlet weak var imageTypeOfRegister : NSImageView!
     
-    func displayCell(sell: SellModel.NewRegister?) {
+    func displayCell(sell: SellModel.Register?) {
         guard let sell = sell else {
             return
         }

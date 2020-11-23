@@ -20,15 +20,15 @@ protocol ActivitySaleViewModelContract {
     func selectActivityAutomatically()
     func selectDiscountAutomatically()
     func setSelectedActivity(_ value: ActivityModel.NewRegister?)
-    func setSelectedPeriod(_ value: PeriodModel.AUX_Period?)
-    func getSelectedPeriod() -> PeriodModel.AUX_Period?
+    func setSelectedPeriod(_ value: PeriodModel.Populated?)
+    func getSelectedPeriod() -> PeriodModel.Populated?
     func getSelectedActivity() -> ActivityModel.NewRegister?
-    func getSelectedDiscount() -> DiscountModel.NewRegister?
+    func getSelectedDiscount() -> DiscountModel.Register?
     func getTotals() -> (amount: Double, amountDiscounted: Double)
     func validate() -> Bool
-    func getPeriods() -> [PeriodModel.AUX_Period]
+    func getPeriods() -> [PeriodModel.Populated]
     func getActivities() -> [ActivityModel.NewRegister]
-    func getDiscounts() -> [DiscountModel.NewRegister]
+    func getDiscounts() -> [DiscountModel.Register]
     func setFromDate()
     func setEndDate()
     func setFromDate(value: Date)

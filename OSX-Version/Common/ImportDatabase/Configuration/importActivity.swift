@@ -11,6 +11,14 @@ import BLServerManager
 
 extension ImportDatabase {
     class Activity {
+        
+        struct Old: Decodable {
+            var childID : String
+            var descripcion : String
+            var fechaCreacion : String
+            var oculto : Bool
+        }
+        
         static private func getActivities() -> [ActivityModel.NewRegister]? {
             guard let json = ImportDatabase.loadBodyLife() else {
                 return nil
@@ -41,7 +49,7 @@ extension ImportDatabase {
             guard let data = try? JSONSerialization.data(withJSONObject: list, options: []) else {
                 return nil
             }
-            guard let oldRegisters = try? JSONDecoder().decode([ActivityModel.Old].self, from: data) else {
+            guard let oldRegisters = try? JSONDecoder().decode([ImportDatabase.Activity.Old].self, from: data) else {
                 print("could not decode")
                 return nil
             }

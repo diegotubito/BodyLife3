@@ -11,7 +11,21 @@ import BLServerManager
 
 extension ImportDatabase {
     class Period {
-        static private func getPeriods() -> [PeriodModel.NewRegister]? {
+        
+        struct Old: Decodable {
+            var childID : String
+            var cantidadDeClases : Int
+            var fechaCreacion : String
+            var oculto : Bool
+            var childIDActividad : String
+            var descripcion : String
+            var dias : Int
+            var esPorClase : Bool
+            var esPorVencimiento : Bool
+            var precio : Double
+        }
+        
+        static private func getPeriods() -> [PeriodModel.Register]? {
             guard let json = ImportDatabase.loadBodyLife() else {
                 return nil
             }
@@ -41,17 +55,17 @@ extension ImportDatabase {
             guard let data = try? JSONSerialization.data(withJSONObject: list, options: []) else {
                 return nil
             }
-            guard let oldRegisters = try? JSONDecoder().decode([PeriodModel.Old].self, from: data) else {
+            guard let oldRegisters = try? JSONDecoder().decode([ImportDatabase.Period.Old].self, from: data) else {
                 print("could not decode")
                 return nil
             }
             
-            var result = [PeriodModel.NewRegister]()
+            var result = [PeriodModel.Register]()
             for i in oldRegisters {
                 let createdAt = i.fechaCreacion.toDate(formato: "dd-MM-yyyy HH:mm:ss")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970
                 let _id = ImportDatabase.codeUID(i.childID)
                 let activity = ImportDatabase.codeUID(i.childIDActividad)
-                let newRegister = PeriodModel.NewRegister(_id: _id,
+                let newRegister = PeriodModel.Register(_id: _id,
                                                           description: i.descripcion,
                                                           isEnabled: !i.oculto,
                                                           timestamp: createdAt,
@@ -64,7 +78,7 @@ extension ImportDatabase {
             return result
         }
         
-        static private func encodeRegister(_ register: PeriodModel.NewRegister) -> [String : Any] {
+        static private func encodeRegister(_ register: PeriodModel.Register) -> [String : Any] {
             let data = try? JSONEncoder().encode(register)
             let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String : Any]
             return json!

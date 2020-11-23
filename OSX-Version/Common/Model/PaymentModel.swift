@@ -9,18 +9,27 @@
 import Foundation
 import Cocoa
 
+
+struct Payment: Encodable, Decodable {
+    var childID : String
+    var childIDCustomer : String
+    var childIDSell : String
+    var amount : Double
+}
+
+
 class PaymentModel {
-    struct NewRegister: Decodable {
+    struct Populated: Decodable {
         var _id : String
         var customer : CustomerModel.Customer?
-        var sell : SellModel.NewRegister?
+        var sell : SellModel.Register?
         var isEnabled : Bool
         var timestamp : Double
         var paidAmount : Double
         var productCategory : String
     }
     
-    struct Response : Encodable, Decodable {
+    struct Register : Encodable, Decodable {
         var _id : String?
         var customer : String
         var sell : String
@@ -29,34 +38,4 @@ class PaymentModel {
         var paidAmount : Double
         var productCategory : String
     }
-    
-    struct OldCarnet : Decodable {
-        var childID : String
-        var childIDSocio : String
-        var childIDVentaCarnet : String
-        var esAnulado : Bool
-        var fechaCreacion : String
-        var importeCobrado : Double
-    }
-  
-    struct OldArticulo : Decodable {
-        var childID : String
-        var childIDSocio : String
-        var childIDVentaArticulo : String
-        var esAnulado : Bool
-        var fechaCreacion : String
-        var importeCobrado : Double
-    }
-    
-    struct Request {
-        var _id : String
-        var customer : String
-        var sell : String
-        var isEnabled : Bool
-        var timestamp : String
-        var paidAmount : Double
-    }
-    
-   
-   
 }

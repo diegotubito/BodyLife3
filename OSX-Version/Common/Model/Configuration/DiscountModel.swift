@@ -9,16 +9,7 @@
 import Foundation
 
 class DiscountModel {
-    struct Old : Decodable {
-        var childID : String
-        var descripcion : String
-        var esOculto : Bool
-        var fechaCreacion : String
-        var fechaVencimiento : String
-        var multiplicador : Double
-    }
-    
-    struct NewRegister: Encodable, Decodable {
+    struct Register: Encodable, Decodable {
         var _id  : String
         var description : String
         var isEnabled : Bool
@@ -26,22 +17,4 @@ class DiscountModel {
         var factor : Double
         var timestamp : Double
     }
-    
-    
-    struct ViewModel: Encodable, Decodable {
-        var response : String
-        var discounts : [NewRegister]
-        var count : Int
-    }
-    
-    struct Register: Encodable, Decodable {
-        var childID  : String
-        var name : String
-        var isEnabled : Bool
-        var expiration : Double
-        var multiplier : Double
-        var createdAt : Double
-        var isRemovable : Bool
-    }
-
 }

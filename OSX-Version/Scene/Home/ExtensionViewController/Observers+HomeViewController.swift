@@ -104,9 +104,9 @@ extension HomeViewController: CameraViewControllerDelegate {
         }
         let id = customer._id
         
-        CommonWorker.Image.updateThumbnail(_id: id, image: image) { (stringImage) in
+        CommonWorker.Image.updateThumbnail(_id: id!, image: image) { (stringImage) in
             if stringImage != nil {
-                self.customerListView.viewModel.setImageForCustomer(_id: id, thumbnail: stringImage!)
+                self.customerListView.viewModel.setImageForCustomer(_id: id!, thumbnail: stringImage!)
             }
         }
         
@@ -115,7 +115,7 @@ extension HomeViewController: CameraViewControllerDelegate {
         let medium = image.crop(size: NSSize(width: ImageSize.storageSize, height: ImageSize.storageSize))
         print("medium image: \(String(describing: medium?.sizeInBytes))")
       
-        CommonWorker.Image.uploadImage(uid: id, image: medium!) { (success) in
+        CommonWorker.Image.uploadImage(uid: id!, image: medium!) { (success) in
             success ? print("storage image uploaded") : print("storage image fail")
             self.customerStatusView.downloadProfileImage()
         }

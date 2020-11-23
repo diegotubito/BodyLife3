@@ -10,20 +10,7 @@ import Foundation
 
 class PeriodModel {
     
-    struct Old: Decodable {
-        var childID : String
-        var cantidadDeClases : Int
-        var fechaCreacion : String
-        var oculto : Bool
-        var childIDActividad : String
-        var descripcion : String
-        var dias : Int
-        var esPorClase : Bool
-        var esPorVencimiento : Bool
-        var precio : Double
-    }
-    
-    struct NewRegister: Decodable, Encodable {
+    struct Register: Decodable, Encodable {
         var _id : String
         var description : String
         var isEnabled : Bool
@@ -33,13 +20,7 @@ class PeriodModel {
         var days : Int
     }
     
-    struct ViewModel : Decodable {
-        var response : String
-        var periods : [PeriodModel.AUX_Period]
-        var count : Int
-    }
-    
-    struct AUX_Period : Decodable {
+    struct Populated : Decodable {
         var _id : String
         var description : String
         var isEnabled : Bool

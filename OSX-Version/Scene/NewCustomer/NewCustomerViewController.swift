@@ -118,25 +118,31 @@ class NewCustomerViewController: BaseViewController, NewCustomerDisplayLogic {
         let fechaDouble = Date().timeIntervalSince1970
         let uid = String(Int(fechaDouble))
         
-        let newCustomer = CustomerModel.Full(uid: uid,
-                                             timestamp: dateDouble,
-                                             dni: dniTF.stringValue,
-                                             lastName: lastName,
-                                             firstName: firstName,
-                                             fullname: fullname,
-                                             thumbnailImage: "",
-                                             street: street,
-                                             locality: locality,
-                                             state: province,
-                                             country: country,
-                                             email: emailTF.stringValue.condenseWhitespace(),
-                                             phoneNumber: telefonoPrincipalTF.stringValue,
-                                             user: "SUPER_ROLE",
-                                             longitude: 0.0,
-                                             latitude: 0.0,
-                                             dob: dob,
-                                             genero: generoPUB.titleOfSelectedItem ?? "",
-                                             obraSocial: obraSocialTF.stringValue)
+        let location = CustomerModel.Location(longitude: 0.0,
+                                              latitude: 0.0,
+                                              street: street,
+                                              locality: locality,
+                                              state: province,
+                                              country: country)
+        
+        let newCustomer = CustomerModel.Customer(uid: uid,
+                                                 timestamp: dateDouble,
+                                                 dni: dniTF.stringValue,
+                                                 lastName: lastName,
+                                                 firstName: firstName,
+                                                 fullname: fullname,
+                                                 thumbnailImage: "",
+                                                 email: emailTF.stringValue.condenseWhitespace().lowercased(),
+                                                 phoneNumber: telefonoPrincipalTF.stringValue,
+                                                 user: "SUPER_ROLE",
+                                                 location: location,
+                                                 dob: dob,
+                                                 genero: generoPUB.titleOfSelectedItem ?? "",
+                                                 obraSocial: obraSocialTF.stringValue,
+                                                 isEnabled: true)
+        
+        
+        
         
         let request = NewCustomer.NewCustomer.Request(dni: dniTF.stringValue, newUser: newCustomer, image: imageToStorage, thumbnail: thumbImageBase64)
          

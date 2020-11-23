@@ -12,8 +12,9 @@ class NewCustomerWorker {
         }
     }
     
-    func SaveCustomer(customer: CustomerModel.Full, completion: @escaping (CustomerModel.Customer?) -> ()) {
+    func SaveCustomer(customer: CustomerModel.Customer, completion: @escaping (CustomerModel.Customer?) -> ()) {
         let body = encodeNewCustomer(customer)
+        print(body)
         let endpoint = Endpoint.Create(to: .Customer(.Save(body: body)))
         BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<CustomerModel.Customer>) in
             completion(response.data)
@@ -22,20 +23,10 @@ class NewCustomerWorker {
         }
     }
     
-    private func encodeNewCustomer(_ register: CustomerModel.Full) -> [String : Any] {
+    private func encodeNewCustomer(_ register: CustomerModel.Customer) -> [String : Any] {
         let data = try? JSONEncoder().encode(register)
         let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String : Any]
         return json!
     }
     
-    func getFinalAddress(customer: CustomerModel.Full) -> String {
-        let street = customer.street
-        let locality = customer.locality
-        let state = customer.state
-        let country = customer.country
-        
-        let address = street + " " + locality + " " + state + " " + country
-        return address
-    }
-   
 }

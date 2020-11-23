@@ -78,7 +78,7 @@ class CustomerStatusView: XibViewWithAnimation {
             return
         }
         
-        CommonWorker.Image.downloadBigSize(childID: customer._id) { (image, error) in
+        CommonWorker.Image.downloadBigSize(childID: customer._id!) { (image, error) in
             DispatchQueue.main.async {
                 self.hideLoading()
                 self.editProfilePictureOutlet.isEnabled = true

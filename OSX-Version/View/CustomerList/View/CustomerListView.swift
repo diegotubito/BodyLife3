@@ -70,7 +70,7 @@ class CustomerListView: NSView {
     func insertNewCustomerInTableView(customer: CustomerModel.Customer, row: Int) {
         let image = customer.thumbnailImage?.convertToImage
         viewModel.model.customersbyPages.insert(customer, at: row)
-        viewModel.model.imagesByPages.insert(CustomerListModel.Images(image: image, _id: customer._id), at: row)
+        viewModel.model.imagesByPages.insert(CustomerListModel.Images(image: image, _id: customer._id!), at: row)
         
         let index = IndexSet(integer: row)
         viewModel.model.selectedCustomer = customer

@@ -11,7 +11,17 @@ import BLServerManager
 
 extension ImportDatabase {
     class PagoCarnet {
-        static private func getPagosCarnets() -> [PaymentModel.Response]? {
+        
+        struct OldCarnet : Decodable {
+            var childID : String
+            var childIDSocio : String
+            var childIDVentaCarnet : String
+            var esAnulado : Bool
+            var fechaCreacion : String
+            var importeCobrado : Double
+        }
+        
+        static private func getPagosCarnets() -> [PaymentModel.Register]? {
             guard let json = ImportDatabase.loadBodyLife() else {
                 return nil
             }
@@ -42,12 +52,12 @@ extension ImportDatabase {
             guard let data = try? JSONSerialization.data(withJSONObject: list, options: []) else {
                 return nil
             }
-            guard let oldRegisters = try? JSONDecoder().decode([PaymentModel.OldCarnet].self, from: data) else {
+            guard let oldRegisters = try? JSONDecoder().decode([ImportDatabase.PagoCarnet.OldCarnet].self, from: data) else {
                 print("could not decode")
                 return nil
             }
             
-            var result = [PaymentModel.Response]()
+            var result = [PaymentModel.Register]()
             for i in oldRegisters {
                 let createdAt = i.fechaCreacion.toDate(formato: "dd-MM-yyyy HH:mm:ss")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970
                    
@@ -55,7 +65,7 @@ extension ImportDatabase {
                 let customer = ImportDatabase.codeUID(i.childIDSocio)
                 let sell = ImportDatabase.codeUID(i.childIDVentaCarnet)
                 
-                let newRegister = PaymentModel.Response(_id: _id,
+                let newRegister = PaymentModel.Register(_id: _id,
                                                         customer: customer,
                                                         sell: sell,
                                                         isEnabled: !i.esAnulado,
@@ -67,7 +77,7 @@ extension ImportDatabase {
             return result
         }
         
-        static private func encodeRegister(_ register: PaymentModel.Response) -> [String : Any] {
+        static private func encodeRegister(_ register: PaymentModel.Register) -> [String : Any] {
             let data = try? JSONEncoder().encode(register)
             let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String : Any]
             return json!

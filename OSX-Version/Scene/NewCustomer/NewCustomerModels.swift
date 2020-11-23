@@ -6,7 +6,7 @@ enum NewCustomer {
     enum NewCustomer {
         struct Request {
             var dni : String
-            var newUser : CustomerModel.Full
+            var newUser : CustomerModel.Customer
             var image : NSImage
             var thumbnail : String
         }
