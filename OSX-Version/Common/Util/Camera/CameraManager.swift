@@ -56,7 +56,10 @@ class CameraViewController: NSViewController {
         view.wantsLayer = true
         previewCam.wantsLayer = true
         session.sessionPreset = AVCaptureSession.Preset.photo
-        let device = bestDevice(in: .unspecified)
+        guard let device = bestDevice(in: .unspecified) else {
+            return
+        }
+        
         let device_input : AVCaptureDeviceInput = try! AVCaptureDeviceInput(device: device)
         let previewLayer:AVCaptureVideoPreviewLayer = AVCaptureVideoPreviewLayer(session: session)
         guard session.canAddInput(device_input) && session.canAddOutput(output) else { return }
@@ -73,10 +76,15 @@ class CameraViewController: NSViewController {
         session.startRunning()
     }
     
-    func bestDevice(in position: AVCaptureDevice.Position) -> AVCaptureDevice {
-        let discoverySession = AVCaptureDevice.DiscoverySession.init(deviceTypes: [.builtInWideAngleCamera], mediaType: nil, position: .front)
+    func bestDevice(in position: AVCaptureDevice.Position) -> AVCaptureDevice? {
+        let discoverySession = AVCaptureDevice.DiscoverySession.init(deviceTypes: [.builtInWideAngleCamera, .externalUnknown], mediaType: nil, position: .unspecified)
+        
+      
         let devices = discoverySession.devices
-        guard !devices.isEmpty else { fatalError("Missing capture devices.")}
+        guard !devices.isEmpty else {
+            print("There's no camera device.")
+            return nil
+        }
         
         return devices.first(where: { device in device.position == position })!
     }

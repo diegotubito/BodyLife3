@@ -50,8 +50,6 @@
 		114A541323A7C8F200F2746A /* Observers+HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114A541223A7C8F200F2746A /* Observers+HomeViewController.swift */; };
 		114AC2C425525638007A0AFD /* MoneyFlow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 114AC2C325525638007A0AFD /* MoneyFlow.storyboard */; };
 		114AC2C525525638007A0AFD /* MoneyFlow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 114AC2C325525638007A0AFD /* MoneyFlow.storyboard */; };
-		114BD33A2561F064007FCEFC /* bodyshaping.json in Resources */ = {isa = PBXBuildFile; fileRef = 114BD3392561F064007FCEFC /* bodyshaping.json */; };
-		114BD33B2561F064007FCEFC /* bodyshaping.json in Resources */ = {isa = PBXBuildFile; fileRef = 114BD3392561F064007FCEFC /* bodyshaping.json */; };
 		114BD3502562E8B5007FCEFC /* ImageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114BD34F2562E8B5007FCEFC /* ImageWorker.swift */; };
 		114BD3512562E8B5007FCEFC /* ImageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114BD34F2562E8B5007FCEFC /* ImageWorker.swift */; };
 		114C540F2413FF66000CC75A /* ExpensePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114C54092413FF66000CC75A /* ExpensePresenter.swift */; };
@@ -215,6 +213,8 @@
 		1177827B256C0659006B51FD /* CustomerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11778279256C0659006B51FD /* CustomerModel.swift */; };
 		1177827F256C06A1006B51FD /* SellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1177827E256C06A1006B51FD /* SellModel.swift */; };
 		11778280256C06A1006B51FD /* SellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1177827E256C06A1006B51FD /* SellModel.swift */; };
+		1177828E256C33DA006B51FD /* bodyshaping.json in Resources */ = {isa = PBXBuildFile; fileRef = 1177828D256C33DA006B51FD /* bodyshaping.json */; };
+		1177828F256C33DA006B51FD /* bodyshaping.json in Resources */ = {isa = PBXBuildFile; fileRef = 1177828D256C33DA006B51FD /* bodyshaping.json */; };
 		1181F4D6256724970044083C /* CustomerStatusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1181F4D5256724970044083C /* CustomerStatusView.xib */; };
 		1181F4D7256724970044083C /* CustomerStatusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1181F4D5256724970044083C /* CustomerStatusView.xib */; };
 		1183D1842522F77200BDDBFC /* importThumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1183D1832522F77200BDDBFC /* importThumbnail.swift */; };
@@ -330,7 +330,6 @@
 		114A541023A5A9B900F2746A /* RegisterListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterListModel.swift; sourceTree = "<group>"; };
 		114A541223A7C8F200F2746A /* Observers+HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Observers+HomeViewController.swift"; sourceTree = "<group>"; };
 		114AC2C325525638007A0AFD /* MoneyFlow.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MoneyFlow.storyboard; sourceTree = "<group>"; };
-		114BD3392561F064007FCEFC /* bodyshaping.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bodyshaping.json; sourceTree = "<group>"; };
 		114BD34F2562E8B5007FCEFC /* ImageWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageWorker.swift; sourceTree = "<group>"; };
 		114C54092413FF66000CC75A /* ExpensePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensePresenter.swift; sourceTree = "<group>"; };
 		114C540A2413FF66000CC75A /* ExpenseWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseWorker.swift; sourceTree = "<group>"; };
@@ -364,6 +363,7 @@
 		116CEB6523A3115E0081D356 /* SellRegisterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellRegisterCell.swift; sourceTree = "<group>"; };
 		11778279256C0659006B51FD /* CustomerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerModel.swift; sourceTree = "<group>"; };
 		1177827E256C06A1006B51FD /* SellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellModel.swift; sourceTree = "<group>"; };
+		1177828D256C33DA006B51FD /* bodyshaping.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bodyshaping.json; sourceTree = "<group>"; };
 		1181F4D5256724970044083C /* CustomerStatusView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomerStatusView.xib; sourceTree = "<group>"; };
 		1183D1832522F77200BDDBFC /* importThumbnail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = importThumbnail.swift; sourceTree = "<group>"; };
 		1184723D2528D2BE0012D237 /* operationCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = operationCategory.swift; sourceTree = "<group>"; };
@@ -1007,8 +1007,8 @@
 				11EBD35223765C9200AB4BFF /* Storyboard */,
 				11EBD3272376499F00AB4BFF /* AssetsOSX.xcassets */,
 				11EBD32C2376499F00AB4BFF /* Info.plist */,
-				114BD3392561F064007FCEFC /* bodyshaping.json */,
 				11EBD3242376499F00AB4BFF /* OSX_Version.xcdatamodeld */,
+				1177828D256C33DA006B51FD /* bodyshaping.json */,
 				110664D92377C38100DC44F3 /* OSX-VersionDebug.entitlements */,
 				11EBD32D2376499F00AB4BFF /* OSX_Version.entitlements */,
 			);
@@ -1296,7 +1296,7 @@
 				1157855C252B85C0008A89DC /* PaymentView.xib in Resources */,
 				1157855D252B85C0008A89DC /* Info.plist in Resources */,
 				1157855E252B85C0008A89DC /* PeriodListItem.xib in Resources */,
-				114BD33B2561F064007FCEFC /* bodyshaping.json in Resources */,
+				1177828F256C33DA006B51FD /* bodyshaping.json in Resources */,
 				11578560252B85C0008A89DC /* ArticleViewItem.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1305,7 +1305,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				114BD33A2561F064007FCEFC /* bodyshaping.json in Resources */,
+				1177828E256C33DA006B51FD /* bodyshaping.json in Resources */,
 				110664C723775D6000DC44F3 /* ErrorMessageView.xib in Resources */,
 				114C5420241401B5000CC75A /* Expense.storyboard in Resources */,
 				11EBD3282376499F00AB4BFF /* AssetsOSX.xcassets in Resources */,
@@ -1691,7 +1691,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "DDG.OSX-Version";
 				PRODUCT_NAME = "Body Shaping Internal";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1717,7 +1717,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "DDG.OSX-Version";
 				PRODUCT_NAME = "Body Shaping Internal";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1850,6 +1850,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = S2BEC8V882;
 				ENABLE_HARDENED_RUNTIME = NO;
 				ENVIRONMENT = DEBUG;
@@ -1858,7 +1859,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "ddg.body-shaping-OSX";
 				PRODUCT_NAME = "Body Shaping";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1875,6 +1876,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = S2BEC8V882;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENVIRONMENT = RELEASE;
@@ -1883,7 +1885,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "ddg.body-shaping-OSX";
 				PRODUCT_NAME = "Body Shaping";
 				PROVISIONING_PROFILE_SPECIFIER = "";

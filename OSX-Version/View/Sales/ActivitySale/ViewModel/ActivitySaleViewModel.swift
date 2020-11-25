@@ -29,7 +29,10 @@ class ActivitySaleViewModel : ActivitySaleViewModelContract {
         let request = Endpoint.Create(to: .Period(.LoadAll))
         BLServerManager.ApiCall(endpoint: request) { (response:ResponseModel<[PeriodModel.Populated]>) in
             self._view.hideLoading()
-            self.parseActivityAndDiscount(periods: response.data!)
+            guard let periods = response.data else {
+                return
+            }
+            self.parseActivityAndDiscount(periods: periods)
         } fail: { (error) in
             self._view.hideLoading()
             self._view.showError(error.localizedDescription)
@@ -41,7 +44,10 @@ class ActivitySaleViewModel : ActivitySaleViewModelContract {
         let endpoint = Endpoint.Create(to: .Discount(.LoadAll))
         BLServerManager.ApiCall(endpoint: endpoint) { (result:ResponseModel<[DiscountModel.Register]>) in
             self._view.hideLoading()
-            self.model.discounts = result.data!
+            guard let discounts = result.data else {
+                return
+            }
+            self.model.discounts = discounts
             self._view.showDiscounts()
         } fail: { (error) in
             self._view.hideLoading()
