@@ -71,14 +71,25 @@ class CustomerListView: NSView {
         let image = customer.thumbnailImage?.convertToImage
         viewModel.model.customersbyPages.insert(customer, at: row)
         viewModel.model.imagesByPages.insert(CustomerListModel.Images(image: image, _id: customer._id!), at: row)
-        
-        let index = IndexSet(integer: row)
         viewModel.model.selectedCustomer = customer
-        tableViewSocio.beginUpdates()
-        tableViewSocio.insertRows(at: index, withAnimation: .effectGap)
-        tableViewSocio.scrollRowToVisible(row)
-        tableViewSocio.selectRowIndexes(index, byExtendingSelection: false)
-        tableViewSocio.endUpdates()
+        
+        if viewModel.model.bySearch {
+            viewModel.model.bySearch = false
+            searchField.stringValue = ""
+            searchField.resignFirstResponder()
+            reloadList()
+            return
+        } else {
+            let index = IndexSet(integer: row)
+            tableViewSocio.beginUpdates()
+            tableViewSocio.insertRows(at: index, withAnimation: .effectGap)
+            tableViewSocio.scrollRowToVisible(row)
+            tableViewSocio.selectRowIndexes(index, byExtendingSelection: false)
+            tableViewSocio.endUpdates()
+            
+        }
+       
+     
     }
     
     func startLoading() {
@@ -200,7 +211,6 @@ extension CustomerListView: NSTableViewDataSource, NSTableViewDelegate {
         let createdAtAgo = createdAt.desdeHace(numericDates: true) + "\n\(createdAt.toString(formato: "dd-MM-yyyy"))"
         cell.primerRenglonCell.stringValue = apellido + ", " + nombre
         cell.timeAgoCell.stringValue = createdAtAgo
-        cell.counterLabel.stringValue = String(row + 1)
         cell.segundoRenglonCell.stringValue = "Cel: \(customers[row].phoneNumber)"
         
         cell.fotoCell.image = nil
@@ -229,9 +239,11 @@ extension CustomerListView: NSTableViewDataSource, NSTableViewDelegate {
     
     func reloadCell(row: Int) {
         DispatchQueue.main.async {
+            self.tableViewSocio.beginUpdates()
             let indexSet = IndexSet(integer: row)
             let indexSetColumn = IndexSet(integer: 0)
             self.tableViewSocio.reloadData(forRowIndexes: indexSet, columnIndexes: indexSetColumn)
+            self.tableViewSocio.endUpdates()
         }
     }
     
