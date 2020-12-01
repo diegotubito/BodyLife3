@@ -14,12 +14,12 @@ class PaymentView: XibViewBlurBackground, PaymentViewContract {
     @IBOutlet weak var myBackground: NSView!
     @IBOutlet weak var amountTextField: NSTextField!
     @IBOutlet weak var titleLineSeparator: NSView!
-    @IBOutlet weak var saveButtonOutlet: SaveButtonCustomView!
+    @IBOutlet weak var saveButtonView: SaveButtonCustomView!
     var viewmodel : PaymentViewModelContract!
     override func commonInit() {
         super .commonInit()
         viewmodel = PaymentViewModel(withView: self)
-        saveButtonOutlet.title = "Guardar"
+        saveButtonView.title = "Guardar"
         titleLineSeparator.wantsLayer = true
         titleLineSeparator.layer?.backgroundColor = Constants.Colors.Gray.gray21.cgColor
         
@@ -37,7 +37,7 @@ class PaymentView: XibViewBlurBackground, PaymentViewContract {
         let balance = amountToPay - paid
         infoLabel.stringValue = sellName + ". Total a pagar: \(balance.currencyFormat(decimal: 2))"
         amountTextField.stringValue = String(balance)
-        
+        self.enableSaveButton()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             // your code here
             self.amountTextField.becomeFirstResponder()
@@ -74,7 +74,7 @@ class PaymentView: XibViewBlurBackground, PaymentViewContract {
     }
     
     func buttonSaveObserver() {
-        saveButtonOutlet.onButtonPressed = {
+        saveButtonView.onButtonPressed = {
             self.viewmodel.saveNewPayment()
         }
         
@@ -101,19 +101,31 @@ class PaymentView: XibViewBlurBackground, PaymentViewContract {
         print("something went wrong")
     }
     
-    func showLoading() {
-        saveButtonOutlet.showLoading()
-    }
-    
-    func hideLoading() {
-        DispatchQueue.main.async {
-            self.saveButtonOutlet.hideLoading()
-        }
-       
-    }
-    
     func getAmountString() -> String {
         return amountTextField.stringValue
     }
     
+    func showLoadingButton() {
+        DispatchQueue.main.async {
+            self.saveButtonView.showLoading()
+        }
+    }
+    
+    func hideLoadingButton() {
+        DispatchQueue.main.async {
+            self.saveButtonView.hideLoading()
+        }
+    }
+    
+    func enableSaveButton() {
+        DispatchQueue.main.async {
+            self.saveButtonView.isEnabled = true
+        }
+    }
+    
+    func disableSaveButton() {
+        DispatchQueue.main.async {
+            self.saveButtonView.isEnabled = false
+        }
+    }
 }

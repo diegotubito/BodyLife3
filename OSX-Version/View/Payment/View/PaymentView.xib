@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="15702" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17506" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15702"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17506"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -10,7 +10,7 @@
                 <outlet property="amountTextField" destination="owq-pK-VSm" id="4TM-WC-6bp"/>
                 <outlet property="infoLabel" destination="aZL-xe-EWO" id="cDL-Yh-psX"/>
                 <outlet property="myBackground" destination="Qcg-Se-7E7" id="ylO-gg-QoN"/>
-                <outlet property="saveButtonOutlet" destination="Q2p-FP-71b" id="Haq-uz-bdm"/>
+                <outlet property="saveButtonView" destination="Q2p-FP-71b" id="Haq-uz-bdm"/>
                 <outlet property="titleLineSeparator" destination="sQz-SR-dIA" id="zeX-5G-YOP"/>
             </connections>
         </customObject>
@@ -31,7 +31,7 @@
                             </constraints>
                         </customView>
                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="owq-pK-VSm">
-                            <rect key="frame" x="195" y="155" width="150" height="29"/>
+                            <rect key="frame" x="195" y="154" width="150" height="29"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="150" id="8Tw-IG-86l"/>
                             </constraints>
@@ -45,7 +45,7 @@
                             </connections>
                         </textField>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="if0-kY-n5v">
-                            <rect key="frame" x="-2" y="289" width="544" height="22"/>
+                            <rect key="frame" x="-2" y="288" width="544" height="23"/>
                             <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="NUEVO COBRO" id="vxt-zx-p8e">
                                 <font key="font" metaFont="system" size="19"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -53,13 +53,13 @@
                             </textFieldCell>
                         </textField>
                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="sQz-SR-dIA">
-                            <rect key="frame" x="32" y="272" width="476" height="1"/>
+                            <rect key="frame" x="32" y="271" width="476" height="1"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="x93-K1-Un1"/>
                             </constraints>
                         </customView>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Aac-H3-tea">
-                            <rect key="frame" x="30" y="240" width="55" height="16"/>
+                            <rect key="frame" x="30" y="239" width="55" height="16"/>
                             <textFieldCell key="cell" lineBreakMode="clipping" title="Registro" id="RmX-uy-iEF">
                                 <font key="font" metaFont="system"/>
                                 <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -67,7 +67,7 @@
                             </textFieldCell>
                         </textField>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aZL-xe-EWO">
-                            <rect key="frame" x="30" y="216" width="273" height="16"/>
+                            <rect key="frame" x="30" y="215" width="273" height="16"/>
                             <textFieldCell key="cell" lineBreakMode="clipping" title="Powerade 500cm3, saldo adeudado: $80.00" id="U2z-DV-EDa">
                                 <font key="font" metaFont="system"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>

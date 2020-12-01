@@ -11,13 +11,13 @@ import BLServerManager
 
 class ArticleSellView: XibViewBlurBackground {
     var productListView : ArticleListView!
-    var buttonAccept : SaveButtonCustomView!
+    var saveButtonView : SaveButtonCustomView!
     var selectedCustomer : CustomerModel.Customer!
     var myActivityIndicator : NSProgressIndicator!
      
     var selectedItem : ArticleModel.NewRegister? {
         didSet {
-            buttonAccept.isEnabled = selectedItem != nil ? true : false
+            saveButtonView.isEnabled = selectedItem != nil ? true : false
         }
     }
     
@@ -48,10 +48,10 @@ class ArticleSellView: XibViewBlurBackground {
         let ancho : CGFloat = 100
         let alto : CGFloat = 40
         
-        buttonAccept = SaveButtonCustomView(frame: CGRect(x: self.frame.width/2 - ancho/2, y: 8, width: ancho, height: alto))
-        buttonAccept.title = "Guardar"
-        self.addSubview(buttonAccept)
-        buttonAccept.isEnabled = false
+        saveButtonView = SaveButtonCustomView(frame: CGRect(x: self.frame.width/2 - ancho/2, y: 8, width: ancho, height: alto))
+        saveButtonView.title = "Guardar"
+        self.addSubview(saveButtonView)
+        saveButtonView.isEnabled = false
     }
     
     func addObservers() {
@@ -59,7 +59,7 @@ class ArticleSellView: XibViewBlurBackground {
             self.selectedItem = item
         }
         
-        buttonAccept.onButtonPressed = {
+        saveButtonView.onButtonPressed = {
             DispatchQueue.main.async {
                 self.save()
             }
@@ -82,8 +82,8 @@ class ArticleSellView: XibViewBlurBackground {
     }
     
     func save() {
-        self.buttonAccept.showLoading()
-        
+        self.saveButtonView.showLoading()
+        self.disableSaveButton()
         let createdAt = Date().timeIntervalSince1970
         let customerId = ImportDatabase.codeUID((selectedCustomer.uid))
         let dicountID : String? = nil
@@ -107,12 +107,17 @@ class ArticleSellView: XibViewBlurBackground {
         let body = encodeSell(newRegister)
         let endpoint = Endpoint.Create(to: .Sell(.Save(body: body)))
         BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<SellModel.Register>) in
+            
             guard let _id = response.data?._id else {
+                self.hideLoadingButton()
+                self.enableSaveButton()
                 return
             }
             self.addNullPayment(sellId: _id)
         } fail: { (error) in
             print("no se pudo guardar venta de articulo", error.rawValue)
+            self.hideLoadingButton()
+            self.enableSaveButton()
         }
         updateStock()
     }
@@ -145,7 +150,8 @@ class ArticleSellView: XibViewBlurBackground {
         let body = encodePayment(newRegister)
         let endpoint = Endpoint.Create(to: .Payment(.Save(body: body)))
         BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<PaymentModel.Register>) in
-            self.buttonAccept.hideLoading()
+            self.saveButtonView.hideLoading()
+            
             DispatchQueue.main.async {
                 self.hideView()
                 NotificationCenter.default.post(name: .needUpdateCustomerList, object: nil)
@@ -153,7 +159,8 @@ class ArticleSellView: XibViewBlurBackground {
             }
         } fail: { (error) in
             print("No se puedo guardar pago nulo")
-            self.buttonAccept.hideLoading()
+            self.enableSaveButton()
+            self.saveButtonView.hideLoading()
         }
     }
     
@@ -167,6 +174,30 @@ class ArticleSellView: XibViewBlurBackground {
         let data = try? JSONEncoder().encode(register)
         let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String : Any]
         return json!
+    }
+    
+    func showLoadingButton() {
+        DispatchQueue.main.async {
+            self.saveButtonView.showLoading()
+        }
+    }
+    
+    func hideLoadingButton() {
+        DispatchQueue.main.async {
+            self.saveButtonView.hideLoading()
+        }
+    }
+    
+    func enableSaveButton() {
+        DispatchQueue.main.async {
+            self.saveButtonView.isEnabled = true
+        }
+    }
+    
+    func disableSaveButton() {
+        DispatchQueue.main.async {
+            self.saveButtonView.isEnabled = false
+        }
     }
 
 }

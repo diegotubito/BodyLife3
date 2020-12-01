@@ -28,6 +28,8 @@ class PaymentViewModel: PaymentViewModelContract {
     }
    
     func saveNewPayment() {
+        self._view.disableSaveButton()
+        self._view.showLoadingButton()
         let createdAt = Date().timeIntervalSince1970
         let customerId : String = model.selectedCustomer._id!
         let sellId = model.selectedSellRegister._id ?? ""
@@ -44,10 +46,11 @@ class PaymentViewModel: PaymentViewModelContract {
         let body = encodePayment(newRegister)
         let endpoint = Endpoint.Create(to: .Payment(.Save(body: body)))
         BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<PaymentModel.Register>) in
-            self._view.hideLoading()
+            self._view.hideLoadingButton()
             self._view.showSuccess()
         } fail: { (error) in
-            self._view.hideLoading()
+            self._view.enableSaveButton()
+            self._view.hideLoadingButton()
             self._view.showError()
         }
     }

@@ -81,6 +81,7 @@ class ActivitySaleView : XibViewBlurBackground {
     }
     
     func buttonSaveObserver() {
+        saveButtonView.title = "Guardar"
         saveButtonView.onButtonPressed = {
             if self.viewModel.validate() {
                 let (price, discount) = self.viewModel.getTotals()
@@ -177,19 +178,34 @@ class ActivitySaleView : XibViewBlurBackground {
         totalLabel.stringValue = (price - discount).currencyFormat(decimal: 2)
         viewModel.validate() ? enableSaveButton() : disableSaveButton()
     }
-    
-    private func enableSaveButton() {
-        saveButtonView.isEnabled = true
-    }
-    
-    private func disableSaveButton() {
-        saveButtonView.isEnabled = false
-    }
 }
 
 
 extension ActivitySaleView: ActivitySaleViewContract {
-   
+    func showLoadingButton() {
+        DispatchQueue.main.async {
+            self.saveButtonView.showLoading()
+        }
+    }
+    
+    func hideLoadingButton() {
+        DispatchQueue.main.async {
+            self.saveButtonView.hideLoading()
+        }
+    }
+    
+    func enableSaveButton() {
+        DispatchQueue.main.async {
+            self.saveButtonView.isEnabled = true
+        }
+    }
+    
+    func disableSaveButton() {
+        DispatchQueue.main.async {
+            self.saveButtonView.isEnabled = false
+        }
+    }
+    
     func showSuccessSaving() {
         DispatchQueue.main.async {
             NotificationCenter.default.post(name: .needUpdateCustomerList, object: nil)

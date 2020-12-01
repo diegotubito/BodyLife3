@@ -9,15 +9,6 @@
 import Foundation
 import Cocoa
 
-
-struct Payment: Encodable, Decodable {
-    var childID : String
-    var childIDCustomer : String
-    var childIDSell : String
-    var amount : Double
-}
-
-
 class PaymentModel {
     struct Populated: Decodable {
         var _id : String

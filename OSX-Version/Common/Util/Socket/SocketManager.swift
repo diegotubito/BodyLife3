@@ -44,6 +44,7 @@ class SocketHelper: NSObject {
         //added to detect disconnection by server killed
         socket?.onAny({ (event) in
             if let string = event.items?.first as? String {
+                print("socket: received - \(string)")
                 if string == "Could not connect to the server." {
                     if !self.isConnected {return}
                     self.isConnected = false
@@ -51,6 +52,13 @@ class SocketHelper: NSObject {
                 }
             }
         })
+        
+        // Get emit Call via On method ( emit will fire from Node )
+        socket.on("messages") { [weak self](data, ack) in
+            print("socket: received - \(data)")
+            if data.count > 0 {
+            }
+        }
     }
 
     private func sendNotification(name: Notification.Name) {

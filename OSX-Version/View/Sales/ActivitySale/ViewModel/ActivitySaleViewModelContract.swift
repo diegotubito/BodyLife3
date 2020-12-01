@@ -48,4 +48,8 @@ protocol ActivitySaleViewContract {
     func showDiscounts()
     func showFromDate(value: Date)
     func showEndDate(value: Date)
+    func enableSaveButton()
+    func disableSaveButton()
+    func showLoadingButton()
+    func hideLoadingButton()
 }

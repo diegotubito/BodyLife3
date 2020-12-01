@@ -90,13 +90,10 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
     override func viewDidAppear() {
         super .viewDidAppear()
         self.view.window?.styleMask.remove(.resizable)
-       createBackgroundGradient()
-      }
-    
-    func windowDidResize(_ notification: Notification) {
     }
-    
+  
     @objc func StartLoading() {
+        createBackgroundGradient()
         DispatchQueue.main.async {
             self.createCustomViews()
             self.addObservers()
@@ -107,8 +104,6 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
             self.view.window?.title = UserSaved.GetUser()?.displayName ?? "Sin Nombre"
         }
     }
-    
-    
     
     @objc func loadStatus() {
         if selectedCustomer == nil {return}

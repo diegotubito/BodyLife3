@@ -21,7 +21,9 @@ protocol PaymentViewContract {
     func displayInfo()
     func showSuccess()
     func showError()
-    func showLoading()
-    func hideLoading()
+    func showLoadingButton()
+    func hideLoadingButton()
+    func enableSaveButton()
+    func disableSaveButton()
     func getAmountString() -> String
 }

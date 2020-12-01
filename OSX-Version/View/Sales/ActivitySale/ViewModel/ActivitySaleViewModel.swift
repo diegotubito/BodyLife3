@@ -175,6 +175,8 @@ class ActivitySaleViewModel : ActivitySaleViewModelContract {
 extension ActivitySaleViewModel {
     
     func save(fromDate: Date, toDate: Date, price: Double, priceList: Double) {
+        _view.disableSaveButton()
+        _view.showLoadingButton()
         let dicountID : String? = model.selectedDiscount?._id
         let activityID : String = model.selectedActivity!._id
         let periodID : String = model.selectedPeriod!._id
@@ -206,6 +208,8 @@ extension ActivitySaleViewModel {
             self.addNullPayment(sellId: _id!)
         } fail: { (error) in
             self._view.showError("No se puedo guardar venta \(error.rawValue)")
+            self._view.enableSaveButton()
+            self._view.hideLoadingButton()
         }
     }
     
@@ -224,9 +228,12 @@ extension ActivitySaleViewModel {
         BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<PaymentModel.Register>) in
             self._view.hideLoading()
             self._view.showSuccessSaving()
+            self._view.hideLoadingButton()
         } fail: { (error) in
             self._view.hideLoading()
             self._view.showError("No se puedo guardar pago nulo")
+            self._view.enableSaveButton()
+            self._view.hideLoadingButton()
         }
     }
    
