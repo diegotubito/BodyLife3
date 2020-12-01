@@ -93,8 +93,9 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
     }
   
     @objc func StartLoading() {
-        createBackgroundGradient()
+       print("Start Loading")
         DispatchQueue.main.async {
+            self.createBackgroundGradient()
             self.createCustomViews()
             self.addObservers()
             
