@@ -12,12 +12,6 @@
 		110664D82377ACBF00DC44F3 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110664D72377ACBF00DC44F3 /* extensions.swift */; };
 		110664DC237852BD00DC44F3 /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110664DB237852BD00DC44F3 /* Loader.swift */; };
 		110664DF2378718800DC44F3 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110664DE2378718800DC44F3 /* ErrorHandler.swift */; };
-		110664E62378F1F100DC44F3 /* NewCustomerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110664E02378F1F100DC44F3 /* NewCustomerPresenter.swift */; };
-		110664E72378F1F100DC44F3 /* NewCustomerWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110664E12378F1F100DC44F3 /* NewCustomerWorker.swift */; };
-		110664E82378F1F100DC44F3 /* NewCustomerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110664E22378F1F100DC44F3 /* NewCustomerRouter.swift */; };
-		110664E92378F1F100DC44F3 /* NewCustomerModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110664E32378F1F100DC44F3 /* NewCustomerModels.swift */; };
-		110664EA2378F1F100DC44F3 /* NewCustomerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110664E42378F1F100DC44F3 /* NewCustomerViewController.swift */; };
-		110664EB2378F1F100DC44F3 /* NewCustomerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110664E52378F1F100DC44F3 /* NewCustomerInteractor.swift */; };
 		111DE5692389C623002F4216 /* CustomView+Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111DE5682389C623002F4216 /* CustomView+Home.swift */; };
 		111DE56D2389F567002F4216 /* SaveButtonCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111DE56C2389F567002F4216 /* SaveButtonCustomView.swift */; };
 		111DE56F2389F5A3002F4216 /* SaveButtonCustomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 111DE56E2389F5A3002F4216 /* SaveButtonCustomView.xib */; };
@@ -84,7 +78,6 @@
 		115784EE252B85C0008A89DC /* importPagoArticulo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D3D88125216F0A0008CFD0 /* importPagoArticulo.swift */; };
 		115784EF252B85C0008A89DC /* ExpenseInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114C540E2413FF66000CC75A /* ExpenseInteractor.swift */; };
 		115784F0252B85C0008A89DC /* ActivitySaleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AC546323DDE4F30033A27D /* ActivitySaleViewModel.swift */; };
-		115784F1252B85C0008A89DC /* NewCustomerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110664E52378F1F100DC44F3 /* NewCustomerInteractor.swift */; };
 		115784F2252B85C0008A89DC /* doubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11233784237AFEC000F60078 /* doubleExtension.swift */; };
 		115784F3252B85C0008A89DC /* PaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EEF0F5239D4A98007C9821 /* PaymentViewModel.swift */; };
 		115784F5252B85C0008A89DC /* ExpenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114C540D2413FF66000CC75A /* ExpenseViewController.swift */; };
@@ -100,9 +93,7 @@
 		11578501252B85C0008A89DC /* HomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD37C2377130C00AB4BFF /* HomeInteractor.swift */; };
 		11578502252B85C0008A89DC /* ConsoleCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11542D832380703F0011AB1D /* ConsoleCommand.swift */; };
 		11578503252B85C0008A89DC /* UserSaved.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD36123766BF400AB4BFF /* UserSaved.swift */; };
-		11578504252B85C0008A89DC /* NewCustomerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110664E22378F1F100DC44F3 /* NewCustomerRouter.swift */; };
 		11578505252B85C0008A89DC /* AcitvitySaleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AC546523DDE5250033A27D /* AcitvitySaleView.swift */; };
-		11578506252B85C0008A89DC /* NewCustomerModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110664E32378F1F100DC44F3 /* NewCustomerModels.swift */; };
 		11578507252B85C0008A89DC /* ImportVentaCarnet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11498E622520979000E4D679 /* ImportVentaCarnet.swift */; };
 		11578508252B85C0008A89DC /* CustomerStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1147AB7B2384D49E00D19AA9 /* CustomerStatusViewModel.swift */; };
 		11578509252B85C0008A89DC /* ArticleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D3D8842521780B0008CFD0 /* ArticleModel.swift */; };
@@ -115,9 +106,7 @@
 		11578510252B85C0008A89DC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD37B2377130C00AB4BFF /* HomeViewController.swift */; };
 		11578511252B85C0008A89DC /* DiscountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D3D86F252128030008CFD0 /* DiscountModel.swift */; };
 		11578512252B85C0008A89DC /* CustomerStatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1147AB772384D23100D19AA9 /* CustomerStatusModel.swift */; };
-		11578513252B85C0008A89DC /* NewCustomerWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110664E12378F1F100DC44F3 /* NewCustomerWorker.swift */; };
 		11578514252B85C0008A89DC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD388237726A800AB4BFF /* LoginViewController.swift */; };
-		11578515252B85C0008A89DC /* TextFieldValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1163932D2381AA0400D14B19 /* TextFieldValidation.swift */; };
 		11578516252B85C0008A89DC /* PeriodListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CE96023EDCDAF00688C0B /* PeriodListModel.swift */; };
 		11578517252B85C0008A89DC /* GenericTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A8B44D23BE22B8007A5251 /* GenericTableView.swift */; };
 		11578518252B85C0008A89DC /* ExpenseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114C54212415822A000CC75A /* ExpenseModel.swift */; };
@@ -145,8 +134,6 @@
 		1157852F252B85C0008A89DC /* ActivityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D3D87625213A770008CFD0 /* ActivityModel.swift */; };
 		11578530252B85C0008A89DC /* XibViewWithBlurBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A8ECFF23B1208600F15B9A /* XibViewWithBlurBackground.swift */; };
 		11578531252B85C0008A89DC /* ArticleListViewModelContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A8ECF523B0E76300F15B9A /* ArticleListViewModelContract.swift */; };
-		11578532252B85C0008A89DC /* NewCustomerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110664E02378F1F100DC44F3 /* NewCustomerPresenter.swift */; };
-		11578533252B85C0008A89DC /* NewCustomerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110664E42378F1F100DC44F3 /* NewCustomerViewController.swift */; };
 		11578534252B85C0008A89DC /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD39323773B5C00AB4BFF /* BaseViewController.swift */; };
 		11578535252B85C0008A89DC /* ExpenseWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114C540A2413FF66000CC75A /* ExpenseWorker.swift */; };
 		11578536252B85C0008A89DC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBD3202376499F00AB4BFF /* AppDelegate.swift */; };
@@ -194,7 +181,6 @@
 		115786DF252FE943008A89DC /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115786DE252FE943008A89DC /* SocketManager.swift */; };
 		115786E0252FE943008A89DC /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115786DE252FE943008A89DC /* SocketManager.swift */; };
 		1163932B2381975600D14B19 /* ValidationField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1163932A2381975600D14B19 /* ValidationField.swift */; };
-		1163932E2381AA0400D14B19 /* TextFieldValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1163932D2381AA0400D14B19 /* TextFieldValidation.swift */; };
 		1163933723820CA500D14B19 /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1163933623820CA500D14B19 /* CameraManager.swift */; };
 		1163933C238229DE00D14B19 /* imageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1163933B238229DE00D14B19 /* imageExtension.swift */; };
 		1166AF3523B27F880047C7AE /* ArticleViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1166AF3323B27F880047C7AE /* ArticleViewItem.swift */; };
@@ -220,6 +206,20 @@
 		1183D1842522F77200BDDBFC /* importThumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1183D1832522F77200BDDBFC /* importThumbnail.swift */; };
 		1184723E2528D2BE0012D237 /* operationCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1184723D2528D2BE0012D237 /* operationCategory.swift */; };
 		118472432528D6D20012D237 /* ImportVentaArticulo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118472422528D6D20012D237 /* ImportVentaArticulo.swift */; };
+		118773CE2577292F002F2635 /* NewCustomerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118773C82577292F002F2635 /* NewCustomerViewController.swift */; };
+		118773CF2577292F002F2635 /* NewCustomerModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118773C92577292F002F2635 /* NewCustomerModels.swift */; };
+		118773D02577292F002F2635 /* NewCustomerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118773CA2577292F002F2635 /* NewCustomerInteractor.swift */; };
+		118773D12577292F002F2635 /* NewCustomerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118773CB2577292F002F2635 /* NewCustomerPresenter.swift */; };
+		118773D22577292F002F2635 /* NewCustomerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118773CC2577292F002F2635 /* NewCustomerRouter.swift */; };
+		118773D32577292F002F2635 /* NewCustomerWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118773CD2577292F002F2635 /* NewCustomerWorker.swift */; };
+		118773D725772939002F2635 /* TextFieldValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118773D625772939002F2635 /* TextFieldValidation.swift */; };
+		118773E225772974002F2635 /* NewCustomerModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118773C92577292F002F2635 /* NewCustomerModels.swift */; };
+		118773E325772974002F2635 /* NewCustomerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118773CC2577292F002F2635 /* NewCustomerRouter.swift */; };
+		118773E425772974002F2635 /* NewCustomerWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118773CD2577292F002F2635 /* NewCustomerWorker.swift */; };
+		118773E525772974002F2635 /* NewCustomerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118773CA2577292F002F2635 /* NewCustomerInteractor.swift */; };
+		118773E625772974002F2635 /* NewCustomerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118773CB2577292F002F2635 /* NewCustomerPresenter.swift */; };
+		118773E725772974002F2635 /* NewCustomerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118773C82577292F002F2635 /* NewCustomerViewController.swift */; };
+		118773EA25772978002F2635 /* TextFieldValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118773D625772939002F2635 /* TextFieldValidation.swift */; };
 		119C68622380BDC8009E9AA0 /* NewCustomerStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 119C68612380BDC8009E9AA0 /* NewCustomerStoryboard.storyboard */; };
 		11A8B44E23BE22B8007A5251 /* GenericTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A8B44D23BE22B8007A5251 /* GenericTableView.swift */; };
 		11A8ECF423B0E74300F15B9A /* ArticleListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A8ECF323B0E74300F15B9A /* ArticleListModel.swift */; };
@@ -294,12 +294,6 @@
 		110664D92377C38100DC44F3 /* OSX-VersionDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "OSX-VersionDebug.entitlements"; sourceTree = "<group>"; };
 		110664DB237852BD00DC44F3 /* Loader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
 		110664DE2378718800DC44F3 /* ErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
-		110664E02378F1F100DC44F3 /* NewCustomerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCustomerPresenter.swift; sourceTree = "<group>"; };
-		110664E12378F1F100DC44F3 /* NewCustomerWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCustomerWorker.swift; sourceTree = "<group>"; };
-		110664E22378F1F100DC44F3 /* NewCustomerRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCustomerRouter.swift; sourceTree = "<group>"; };
-		110664E32378F1F100DC44F3 /* NewCustomerModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCustomerModels.swift; sourceTree = "<group>"; };
-		110664E42378F1F100DC44F3 /* NewCustomerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCustomerViewController.swift; sourceTree = "<group>"; };
-		110664E52378F1F100DC44F3 /* NewCustomerInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCustomerInteractor.swift; sourceTree = "<group>"; };
 		111DE5682389C623002F4216 /* CustomView+Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomView+Home.swift"; sourceTree = "<group>"; };
 		111DE56C2389F567002F4216 /* SaveButtonCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveButtonCustomView.swift; sourceTree = "<group>"; };
 		111DE56E2389F5A3002F4216 /* SaveButtonCustomView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SaveButtonCustomView.xib; sourceTree = "<group>"; };
@@ -346,7 +340,6 @@
 		11578586252E7E57008A89DC /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		115786DE252FE943008A89DC /* SocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketManager.swift; sourceTree = "<group>"; };
 		1163932A2381975600D14B19 /* ValidationField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationField.swift; sourceTree = "<group>"; };
-		1163932D2381AA0400D14B19 /* TextFieldValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldValidation.swift; sourceTree = "<group>"; };
 		1163933623820CA500D14B19 /* CameraManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
 		1163933B238229DE00D14B19 /* imageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imageExtension.swift; sourceTree = "<group>"; };
 		1166AF3323B27F880047C7AE /* ArticleViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewItem.swift; sourceTree = "<group>"; };
@@ -368,6 +361,13 @@
 		1183D1832522F77200BDDBFC /* importThumbnail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = importThumbnail.swift; sourceTree = "<group>"; };
 		1184723D2528D2BE0012D237 /* operationCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = operationCategory.swift; sourceTree = "<group>"; };
 		118472422528D6D20012D237 /* ImportVentaArticulo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportVentaArticulo.swift; sourceTree = "<group>"; };
+		118773C82577292F002F2635 /* NewCustomerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCustomerViewController.swift; sourceTree = "<group>"; };
+		118773C92577292F002F2635 /* NewCustomerModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCustomerModels.swift; sourceTree = "<group>"; };
+		118773CA2577292F002F2635 /* NewCustomerInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCustomerInteractor.swift; sourceTree = "<group>"; };
+		118773CB2577292F002F2635 /* NewCustomerPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCustomerPresenter.swift; sourceTree = "<group>"; };
+		118773CC2577292F002F2635 /* NewCustomerRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCustomerRouter.swift; sourceTree = "<group>"; };
+		118773CD2577292F002F2635 /* NewCustomerWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCustomerWorker.swift; sourceTree = "<group>"; };
+		118773D625772939002F2635 /* TextFieldValidation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldValidation.swift; sourceTree = "<group>"; };
 		119C68612380BDC8009E9AA0 /* NewCustomerStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewCustomerStoryboard.storyboard; sourceTree = "<group>"; };
 		11A8B44D23BE22B8007A5251 /* GenericTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericTableView.swift; sourceTree = "<group>"; };
 		11A8ECF323B0E74300F15B9A /* ArticleListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleListModel.swift; sourceTree = "<group>"; };
@@ -482,13 +482,13 @@
 		110664EC2378F1FC00DC44F3 /* NewCustomer */ = {
 			isa = PBXGroup;
 			children = (
+				118773CA2577292F002F2635 /* NewCustomerInteractor.swift */,
+				118773C92577292F002F2635 /* NewCustomerModels.swift */,
+				118773CB2577292F002F2635 /* NewCustomerPresenter.swift */,
+				118773CC2577292F002F2635 /* NewCustomerRouter.swift */,
+				118773C82577292F002F2635 /* NewCustomerViewController.swift */,
+				118773CD2577292F002F2635 /* NewCustomerWorker.swift */,
 				1163932C2381A9F000D14B19 /* TextFieldValidation */,
-				110664E02378F1F100DC44F3 /* NewCustomerPresenter.swift */,
-				110664E12378F1F100DC44F3 /* NewCustomerWorker.swift */,
-				110664E22378F1F100DC44F3 /* NewCustomerRouter.swift */,
-				110664E32378F1F100DC44F3 /* NewCustomerModels.swift */,
-				110664E42378F1F100DC44F3 /* NewCustomerViewController.swift */,
-				110664E52378F1F100DC44F3 /* NewCustomerInteractor.swift */,
 			);
 			path = NewCustomer;
 			sourceTree = "<group>";
@@ -762,7 +762,7 @@
 		1163932C2381A9F000D14B19 /* TextFieldValidation */ = {
 			isa = PBXGroup;
 			children = (
-				1163932D2381AA0400D14B19 /* TextFieldValidation.swift */,
+				118773D625772939002F2635 /* TextFieldValidation.swift */,
 			);
 			path = TextFieldValidation;
 			sourceTree = "<group>";
@@ -1416,6 +1416,7 @@
 			files = (
 				115784DA252B85C0008A89DC /* ImportPagoCarnet.swift in Sources */,
 				115784DB252B85C0008A89DC /* RegisterListViewModelContract.swift in Sources */,
+				118773E225772974002F2635 /* NewCustomerModels.swift in Sources */,
 				115784DC252B85C0008A89DC /* stringExtension.swift in Sources */,
 				1177827B256C0659006B51FD /* CustomerModel.swift in Sources */,
 				115784DD252B85C0008A89DC /* importArticle.swift in Sources */,
@@ -1436,13 +1437,15 @@
 				115784ED252B85C0008A89DC /* MapManager.swift in Sources */,
 				115784EE252B85C0008A89DC /* importPagoArticulo.swift in Sources */,
 				115784EF252B85C0008A89DC /* ExpenseInteractor.swift in Sources */,
+				118773E725772974002F2635 /* NewCustomerViewController.swift in Sources */,
 				115784F0252B85C0008A89DC /* ActivitySaleViewModel.swift in Sources */,
-				115784F1252B85C0008A89DC /* NewCustomerInteractor.swift in Sources */,
 				115784F2252B85C0008A89DC /* doubleExtension.swift in Sources */,
 				115784F3252B85C0008A89DC /* PaymentViewModel.swift in Sources */,
 				111F02D925590238006065F3 /* AuthModel.swift in Sources */,
 				115784F5252B85C0008A89DC /* ExpenseViewController.swift in Sources */,
+				118773E325772974002F2635 /* NewCustomerRouter.swift in Sources */,
 				114BD3512562E8B5007FCEFC /* ImageWorker.swift in Sources */,
+				118773E425772974002F2635 /* NewCustomerWorker.swift in Sources */,
 				115784F6252B85C0008A89DC /* XButtonCustomView.swift in Sources */,
 				115784F7252B85C0008A89DC /* importPeriod.swift in Sources */,
 				115784F8252B85C0008A89DC /* RegisterListModel.swift in Sources */,
@@ -1453,15 +1456,15 @@
 				115784FE252B85C0008A89DC /* dateExtension.swift in Sources */,
 				115784FF252B85C0008A89DC /* XibView.swift in Sources */,
 				11578501252B85C0008A89DC /* HomeInteractor.swift in Sources */,
+				118773E625772974002F2635 /* NewCustomerPresenter.swift in Sources */,
 				11578502252B85C0008A89DC /* ConsoleCommand.swift in Sources */,
 				11578503252B85C0008A89DC /* UserSaved.swift in Sources */,
-				11578504252B85C0008A89DC /* NewCustomerRouter.swift in Sources */,
 				11578505252B85C0008A89DC /* AcitvitySaleView.swift in Sources */,
-				11578506252B85C0008A89DC /* NewCustomerModels.swift in Sources */,
 				11578507252B85C0008A89DC /* ImportVentaCarnet.swift in Sources */,
 				11578508252B85C0008A89DC /* CustomerStatusViewModel.swift in Sources */,
 				11578509252B85C0008A89DC /* ArticleModel.swift in Sources */,
 				1157850A252B85C0008A89DC /* ImportVentaArticulo.swift in Sources */,
+				118773EA25772978002F2635 /* TextFieldValidation.swift in Sources */,
 				11578588252E7E57008A89DC /* AuthManager.swift in Sources */,
 				11578579252CE411008A89DC /* NewUserViewController.swift in Sources */,
 				11C62A96256091E7008F8700 /* GenericResponseModel.swift in Sources */,
@@ -1473,9 +1476,7 @@
 				11578510252B85C0008A89DC /* HomeViewController.swift in Sources */,
 				11578511252B85C0008A89DC /* DiscountModel.swift in Sources */,
 				11578512252B85C0008A89DC /* CustomerStatusModel.swift in Sources */,
-				11578513252B85C0008A89DC /* NewCustomerWorker.swift in Sources */,
 				11578514252B85C0008A89DC /* LoginViewController.swift in Sources */,
-				11578515252B85C0008A89DC /* TextFieldValidation.swift in Sources */,
 				11578516252B85C0008A89DC /* PeriodListModel.swift in Sources */,
 				11578517252B85C0008A89DC /* GenericTableView.swift in Sources */,
 				11578518252B85C0008A89DC /* ExpenseModel.swift in Sources */,
@@ -1495,6 +1496,7 @@
 				11578525252B85C0008A89DC /* HomeRouter.swift in Sources */,
 				11578526252B85C0008A89DC /* ActivitySaleModel.swift in Sources */,
 				11578527252B85C0008A89DC /* PeriodListView.swift in Sources */,
+				118773E525772974002F2635 /* NewCustomerInteractor.swift in Sources */,
 				11578528252B85C0008A89DC /* extensions.swift in Sources */,
 				11578529252B85C0008A89DC /* importDatabase.swift in Sources */,
 				1157852A252B85C0008A89DC /* ArticleViewItem.swift in Sources */,
@@ -1506,8 +1508,6 @@
 				11578530252B85C0008A89DC /* XibViewWithBlurBackground.swift in Sources */,
 				11578531252B85C0008A89DC /* ArticleListViewModelContract.swift in Sources */,
 				11778280256C06A1006B51FD /* SellModel.swift in Sources */,
-				11578532252B85C0008A89DC /* NewCustomerPresenter.swift in Sources */,
-				11578533252B85C0008A89DC /* NewCustomerViewController.swift in Sources */,
 				11578534252B85C0008A89DC /* BaseViewController.swift in Sources */,
 				11578535252B85C0008A89DC /* ExpenseWorker.swift in Sources */,
 				11578536252B85C0008A89DC /* AppDelegate.swift in Sources */,
@@ -1546,6 +1546,7 @@
 				11D3D888252179E80008CFD0 /* importArticle.swift in Sources */,
 				111DE5692389C623002F4216 /* CustomView+Home.swift in Sources */,
 				11EEF0F4239D4A91007C9821 /* PaymentViewModelContract.swift in Sources */,
+				118773CF2577292F002F2635 /* NewCustomerModels.swift in Sources */,
 				1147AB7A2384D41900D19AA9 /* CustomerStatusViewModelContract.swift in Sources */,
 				11EBD38A237726A800AB4BFF /* LoginPresenter.swift in Sources */,
 				111DE56D2389F567002F4216 /* SaveButtonCustomView.swift in Sources */,
@@ -1560,9 +1561,9 @@
 				110664C523775C9000DC44F3 /* ErrorMessageView.swift in Sources */,
 				11498E5B25203B9A00E4D679 /* MapManager.swift in Sources */,
 				11D3D88225216F0A0008CFD0 /* importPagoArticulo.swift in Sources */,
+				118773CE2577292F002F2635 /* NewCustomerViewController.swift in Sources */,
 				114C54192413FF66000CC75A /* ExpenseInteractor.swift in Sources */,
 				11AC546423DDE4F30033A27D /* ActivitySaleViewModel.swift in Sources */,
-				110664EB2378F1F100DC44F3 /* NewCustomerInteractor.swift in Sources */,
 				11233785237AFEC000F60078 /* doubleExtension.swift in Sources */,
 				11EEF0F6239D4A98007C9821 /* PaymentViewModel.swift in Sources */,
 				111F02D825590238006065F3 /* AuthModel.swift in Sources */,
@@ -1580,17 +1581,18 @@
 				11EBD3822377130C00AB4BFF /* HomeInteractor.swift in Sources */,
 				11542D842380703F0011AB1D /* ConsoleCommand.swift in Sources */,
 				11EBD36223766BF400AB4BFF /* UserSaved.swift in Sources */,
-				110664E82378F1F100DC44F3 /* NewCustomerRouter.swift in Sources */,
+				118773D32577292F002F2635 /* NewCustomerWorker.swift in Sources */,
 				11AC546623DDE5250033A27D /* AcitvitySaleView.swift in Sources */,
-				110664E92378F1F100DC44F3 /* NewCustomerModels.swift in Sources */,
 				11498E632520979000E4D679 /* ImportVentaCarnet.swift in Sources */,
 				1147AB7C2384D49E00D19AA9 /* CustomerStatusViewModel.swift in Sources */,
 				11D3D8852521780B0008CFD0 /* ArticleModel.swift in Sources */,
 				118472432528D6D20012D237 /* ImportVentaArticulo.swift in Sources */,
 				11578587252E7E57008A89DC /* AuthManager.swift in Sources */,
 				11578578252CE411008A89DC /* NewUserViewController.swift in Sources */,
+				118773D725772939002F2635 /* TextFieldValidation.swift in Sources */,
 				11C62A95256091E7008F8700 /* GenericResponseModel.swift in Sources */,
 				11EEF0F2239D4A83007C9821 /* PaymentView.swift in Sources */,
+				118773D22577292F002F2635 /* NewCustomerRouter.swift in Sources */,
 				1147AB4A2383654C00D19AA9 /* CustomerListView.swift in Sources */,
 				11A8ECF823B0E76E00F15B9A /* ArticleListViewModel.swift in Sources */,
 				11A8ED0323B1442700F15B9A /* GenericCollectionView.swift in Sources */,
@@ -1598,9 +1600,7 @@
 				11EBD3812377130C00AB4BFF /* HomeViewController.swift in Sources */,
 				11D3D870252128030008CFD0 /* DiscountModel.swift in Sources */,
 				1147AB782384D23100D19AA9 /* CustomerStatusModel.swift in Sources */,
-				110664E72378F1F100DC44F3 /* NewCustomerWorker.swift in Sources */,
 				11EBD38E237726A800AB4BFF /* LoginViewController.swift in Sources */,
-				1163932E2381AA0400D14B19 /* TextFieldValidation.swift in Sources */,
 				116CE96123EDCDAF00688C0B /* PeriodListModel.swift in Sources */,
 				11A8B44E23BE22B8007A5251 /* GenericTableView.swift in Sources */,
 				114C54222415822A000CC75A /* ExpenseModel.swift in Sources */,
@@ -1630,11 +1630,11 @@
 				11D3D87725213A770008CFD0 /* ActivityModel.swift in Sources */,
 				11A8ED0023B1208600F15B9A /* XibViewWithBlurBackground.swift in Sources */,
 				11A8ECF623B0E76300F15B9A /* ArticleListViewModelContract.swift in Sources */,
+				118773D12577292F002F2635 /* NewCustomerPresenter.swift in Sources */,
 				1177827F256C06A1006B51FD /* SellModel.swift in Sources */,
-				110664E62378F1F100DC44F3 /* NewCustomerPresenter.swift in Sources */,
-				110664EA2378F1F100DC44F3 /* NewCustomerViewController.swift in Sources */,
 				11EBD39423773B5C00AB4BFF /* BaseViewController.swift in Sources */,
 				114C54112413FF66000CC75A /* ExpenseWorker.swift in Sources */,
+				118773D02577292F002F2635 /* NewCustomerInteractor.swift in Sources */,
 				11EBD3212376499F00AB4BFF /* AppDelegate.swift in Sources */,
 				11D6157C2524E9EC005B5D81 /* PaymentModel.swift in Sources */,
 				1163933723820CA500D14B19 /* CameraManager.swift in Sources */,

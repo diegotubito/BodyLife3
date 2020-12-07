@@ -2,17 +2,17 @@ import Cocoa
 
 extension Notification.Name {
     static let newCustomer = Notification.Name("newCustomer")
+    static let updatedCustomer = Notification.Name("updatedCustomer")
 }
 protocol NewCustomerDisplayLogic: class {
     func customerSaved(viewModel: NewCustomer.NewCustomer.ViewModel)
+    func customerUpdated(viewModel: NewCustomer.NewCustomer.ViewModel)
     func customerAlreadyExist()
     func customerCouldNotBeSaved(message: String)
 }
 
 class NewCustomerViewController: BaseViewController, NewCustomerDisplayLogic {
    
-    
-    
     @IBOutlet weak var guardarButtonOutlet: NSButton!
     @IBOutlet weak var CustomerIconImageView: NSImageView!
     @IBOutlet weak var dniTF: NSTextField!
@@ -35,9 +35,12 @@ class NewCustomerViewController: BaseViewController, NewCustomerDisplayLogic {
     @IBOutlet weak var emailLabel: NSTextField!
     var interactor: NewCustomerBusinessLogic?
     var router: (NSObjectProtocol & NewCustomerRoutingLogic & NewCustomerDataPassing)?
+    var customerReceived : CustomerModel.Customer?
     
-    var thumbImageBase64 : String = ""
-    var imageToStorage : NSImage = NSImage()
+    var thumbImageBase64 : String?
+    var imageToStorage : NSImage?
+    
+    var customer : CustomerModel.Customer?
     
     // MARK: Object lifecycle
     
@@ -81,14 +84,18 @@ class NewCustomerViewController: BaseViewController, NewCustomerDisplayLogic {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         CustomerIconImageView.wantsLayer = true
         CustomerIconImageView.layer?.borderColor = NSColor.black.cgColor
         CustomerIconImageView.layer?.cornerRadius = 20
         CustomerIconImageView.layer?.borderWidth = 2
         
+        if customer != nil {
+            setValuesForEdition()
+        }
         
     }
+    
+
     
     // MARK: Do something
     
@@ -98,14 +105,24 @@ class NewCustomerViewController: BaseViewController, NewCustomerDisplayLogic {
         showLoading()
         let date = Date()
         
-        let requestFullInfo = createRequestFullInfo(withDate: date)
-        interactor?.doSaveNewCustomer(request: requestFullInfo)
+        
+        if customer == nil {
+            //current day for new customes.
+            let requestFullInfo = createRequestFullInfo(withDate: date)
+            interactor?.doSaveNewCustomer(request: requestFullInfo)
+        } else {
+            //use same timestime for update profile
+            print(customer?.timestamp)
+            let requestFullInfo = createRequestFullInfo(withDate: customer?.timestamp.toDate1970 ?? Date())
+            interactor?.doUpdateNewCustomer(request: requestFullInfo, previousDNI: customer?.dni ?? "")
+        }
     }
     
     
     
     func createRequestFullInfo(withDate: Date) -> NewCustomer.NewCustomer.Request {
-        let dateDouble = Date().timeIntervalSince1970
+        
+        let dateDouble = withDate.timeIntervalSince1970
         let dob = fechaNacimiento.dateValue.timeIntervalSince1970
         let firstName = nombreTF.stringValue.condenseWhitespace().capitalized
         let lastName = apellidoTF.stringValue.condenseWhitespace().capitalized
@@ -124,8 +141,8 @@ class NewCustomerViewController: BaseViewController, NewCustomerDisplayLogic {
                                               locality: locality,
                                               state: province,
                                               country: country)
-        
-        let newCustomer = CustomerModel.Customer(uid: uid,
+        let newCustomer = CustomerModel.Customer(_id: customer?._id,
+                                                uid: uid,
                                                  timestamp: dateDouble,
                                                  dni: dniTF.stringValue,
                                                  lastName: lastName,
@@ -154,7 +171,7 @@ class NewCustomerViewController: BaseViewController, NewCustomerDisplayLogic {
     func customerAlreadyExist() {
         DispatchQueue.main.async {
             self.hideLoading()
-            self.ShowSheetAlert(title: "El DNI ya existe", message: "Es posible que el socio ya haya sido ingresado anteriormente.", buttons: [.ok])
+            self.ShowSheetAlert(title: "El DNI ya existe", message: "Es posible que el socio haya sido ingresado anteriormente.", buttons: [.ok])
         }
     }
     
@@ -170,8 +187,19 @@ class NewCustomerViewController: BaseViewController, NewCustomerDisplayLogic {
             self.hideLoading()
             self.view.window?.close()
             self.sendNotifications(customer: viewModel.customer!)
+            NotificationCenter.default.post(name: .newCustomer, object: viewModel.customer!)
         }
     }
+    
+    func customerUpdated(viewModel: NewCustomer.NewCustomer.ViewModel) {
+        DispatchQueue.main.async {
+            self.hideLoading()
+            self.view.window?.close()
+            self.sendNotifications(customer: viewModel.customer!)
+            NotificationCenter.default.post(name: .updatedCustomer, object:  viewModel.customer!)
+        }
+    }
+    
     
     func sendNotifications(customer: CustomerModel.Customer) {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime(uptimeNanoseconds: 3)) {
@@ -180,8 +208,6 @@ class NewCustomerViewController: BaseViewController, NewCustomerDisplayLogic {
             subtitle: customer.lastName + ", " + customer.firstName,
             informativeText: "Sigamos sumando.")
         }
-     
-        NotificationCenter.default.post(name: .newCustomer, object: customer)
     }
     
     @IBAction func saveNewCustomerPressed(_ sender: Any) {
@@ -193,6 +219,20 @@ class NewCustomerViewController: BaseViewController, NewCustomerDisplayLogic {
     }
     @IBAction func camaraPressed(_ sender: Any) {
         router?.routeToCameraViewController()
+    }
+    
+    private func setValuesForEdition() {
+        dniTF.stringValue = customer?.dni ?? ""
+        apellidoTF.stringValue = customer?.lastName ?? ""
+        nombreTF.stringValue = customer?.firstName ?? ""
+        direccionTF.stringValue = customer?.location?.street ?? ""
+        telefonoPrincipalTF.stringValue = customer?.phoneNumber ?? ""
+        let dob = customer?.dob.toDate1970
+        fechaNacimiento.dateValue = dob ?? Date()
+        let genero = customer?.genero ?? ""
+        generoPUB.selectItem(withTitle: genero)
+        obraSocialTF.stringValue = customer?.obraSocial ?? ""
+        emailTF.stringValue = customer?.email ?? ""
     }
 }
 
@@ -207,8 +247,8 @@ extension NewCustomerViewController: CameraViewControllerDelegate {
         let thumb = image.crop(size: NSSize(width: ImageSize.thumbnail, height: ImageSize.thumbnail))
         print("thumbnail image: \(String(describing: thumb?.sizeInBytes))")
         
-        self.thumbImageBase64 = (thumb?.convertToBase64)!
-        self.imageToStorage = medium!
+        self.thumbImageBase64 = thumb?.convertToBase64
+        self.imageToStorage = medium
         
         DispatchQueue.main.async {
             self.CustomerIconImageView.image = medium

@@ -16,6 +16,7 @@ extension Notification.Name {
 
 class CustomerStatusView: XibViewWithAnimation {
     
+    @IBOutlet weak var editProfileInformationOutlet: NSButton!
     @IBOutlet weak var editProfilePictureOutlet: NSButton!
     @IBOutlet weak var titleLabel: NSTextField!
     @IBOutlet weak var ageLabel: NSTextField!
@@ -37,7 +38,19 @@ class CustomerStatusView: XibViewWithAnimation {
     var didPressSellActivityButton : (() -> ())?
     var didPressSellProductButton : (() -> ())?
     var didPressEditProfilePicture : (() -> ())?
+    var didPressEditProfile : (() -> ())?
     var profilePictureRequest : URLSessionDataTask?
+    var downloadedImage : NSImage? {
+        didSet {
+            DispatchQueue.main.async {
+                if self.downloadedImage != nil {
+                    self.profilePicture.image = self.downloadedImage!
+                } else {
+                    self.profilePicture.image = #imageLiteral(resourceName: "empty")
+                }
+            }
+        }
+    }
     
     override func commonInit() {
         super .commonInit()
@@ -79,21 +92,20 @@ class CustomerStatusView: XibViewWithAnimation {
         }
         
         CommonWorker.Image.downloadBigSize(childID: customer._id!) { (image, error) in
+            self.downloadedImage = image
             DispatchQueue.main.async {
                 self.hideLoading()
                 self.editProfilePictureOutlet.isEnabled = true
+                self.editProfileInformationOutlet.isEnabled = true
                 self.profilePicture.layer?.cornerRadius = self.profilePicture.frame.size.width / 2
-                if image != nil {
-                    self.profilePicture.image = image!
-                } else {
-                    self.profilePicture.image = #imageLiteral(resourceName: "empty")
-                }
+                
             }
         }
     }
     
     func initValues() {
         editProfilePictureOutlet.isEnabled = false
+        editProfileInformationOutlet.isEnabled = false
         sellActivityButtonOutlet.isEnabled = false
         sellArticleButtonOutlet.isEnabled = false
         expirationDateLabel.stringValue = ""
@@ -120,6 +132,9 @@ class CustomerStatusView: XibViewWithAnimation {
     }
     @IBAction func editPictureProfilePressed(_ sender: Any) {
         didPressEditProfilePicture?()
+    }
+    @IBAction func editProfileInformationPressed(_ sender: Any) {
+        didPressEditProfile?()
     }
 }
 
@@ -173,6 +188,7 @@ extension CustomerStatusView : CustomerStatusViewContract{
             self.activityIndicator.startAnimation(nil)
             self.profilePicture.image = nil
             self.editProfilePictureOutlet.isEnabled = false
+            self.editProfileInformationOutlet.isEnabled = false
             self.saldoLabel.stringValue = ""
             self.expirationDateLabel.stringValue = ""
             self.remainingDayLabel.stringValue = ""

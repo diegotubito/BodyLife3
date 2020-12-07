@@ -67,6 +67,27 @@ extension HomeViewController {
             destinationVC.delegate = self
             self?.presentAsSheet(destinationVC)
         }
+        
+        self.customerStatusView.didPressEditProfile = { [weak self] in
+            //route to camera virecontroller
+            let storyboard = NSStoryboard(name: "NewCustomerStoryboard", bundle: nil)
+            
+            let destinationVC = storyboard.instantiateController(withIdentifier: "NewCustomerViewController") as! NewCustomerViewController
+            destinationVC.customer = self?.customerStatusView.viewModel.model.receivedCustomer
+            destinationVC.customerReceived = self?.customerStatusView.viewModel.model.receivedCustomer
+            let image = self?.customerStatusView.downloadedImage
+            destinationVC.imageToStorage = image
+            destinationVC.thumbImageBase64 = image?.convertToBase64
+            DispatchQueue.main.async {
+                if image == nil {
+                    destinationVC.CustomerIconImageView.image = #imageLiteral(resourceName: "empty")
+                } else {
+                    destinationVC.CustomerIconImageView.image = destinationVC.imageToStorage
+                }
+            }
+            self?.presentAsSheet(destinationVC)
+        }
+        
     }
     
     func buttonObserverPayment() {

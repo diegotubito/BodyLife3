@@ -47,6 +47,7 @@ class CustomerListView: NSView {
         self.layer?.borderColor = Constants.Borders.CustomerList.color
         
         NotificationCenter.default.addObserver(self, selector: #selector(newCustomerNotificationHandler(notification:)), name: .newCustomer, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updatedCustomerNotificationHandler(notification:)), name: .updatedCustomer, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(newSellNotificationHandler(notification:)), name: .needUpdateCustomerList, object: nil)
     
     }
@@ -63,6 +64,14 @@ class CustomerListView: NSView {
         let obj = notification.object
         if let customer = obj as? CustomerModel.Customer {
             insertNewCustomerInTableView(customer: customer, row: 0)
+            self.onSelectedCustomer?(customer)
+        }
+    }
+    
+    @objc func updatedCustomerNotificationHandler(notification: Notification) {
+        let obj = notification.object
+        if let customer = obj as? CustomerModel.Customer {
+            updateCustomerInTableView(customer: customer, row: 0)
             self.onSelectedCustomer?(customer)
         }
     }
@@ -86,10 +95,26 @@ class CustomerListView: NSView {
             tableViewSocio.scrollRowToVisible(row)
             tableViewSocio.selectRowIndexes(index, byExtendingSelection: false)
             tableViewSocio.endUpdates()
+        }
+    }
+    
+    func updateCustomerInTableView(customer: CustomerModel.Customer, row: Int) {
+        if let rowByPage = viewModel.model.customersbyPages.firstIndex(where: {$0._id == customer._id}) {
+            viewModel.model.customersbyPages[rowByPage] = customer
+        }
+        if let rowBySearch = viewModel.model.customersbySearch.firstIndex(where: {$0._id == customer._id}) {
+            viewModel.model.customersbySearch[rowBySearch] = customer
             
         }
-       
-     
+        if let thumbnail = customer.thumbnailImage {
+            viewModel.setImageForCustomer(_id: customer._id!, thumbnail: thumbnail)
+        }
+        viewModel.model.selectedCustomer = customer
+        viewModel.model.bySearch = false
+        searchField.stringValue = ""
+        searchField.resignFirstResponder()
+        reloadList()
+        return
     }
     
     func startLoading() {

@@ -13,6 +13,7 @@
                 <outlet property="DayBox" destination="vaq-Je-dr5" id="n4h-KU-KU6"/>
                 <outlet property="activityIndicator" destination="aw3-gI-2ez" id="UMa-0F-hzw"/>
                 <outlet property="ageLabel" destination="IcF-S3-Ojv" id="gZR-Db-qtS"/>
+                <outlet property="editProfileInformationOutlet" destination="tuc-zI-EqA" id="BFT-6T-5zf"/>
                 <outlet property="editProfilePictureOutlet" destination="9Wh-8E-Imv" id="Pj5-K5-vrP"/>
                 <outlet property="expirationDateLabel" destination="aER-jf-vv0" id="0Oh-Gh-Rj2"/>
                 <outlet property="innerBackground" destination="fLV-S9-ob2" id="aBP-vW-LCs"/>
@@ -57,9 +58,22 @@
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
+                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tuc-zI-EqA">
+                                            <rect key="frame" x="136" y="26" width="90" height="16"/>
+                                            <buttonCell key="cell" type="bevel" title="Editar socio" bezelStyle="rounded" image="pencil" catalog="system" imagePosition="leading" alignment="center" imageScaling="proportionallyDown" inset="2" id="Krh-73-7TD">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <color key="contentTintColor" name="linkColor" catalog="System" colorSpace="catalog"/>
+                                            <connections>
+                                                <action selector="editProfileInformationPressed:" target="-2" id="qmq-eW-vLy"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="IcF-S3-Ojv" firstAttribute="top" secondItem="m96-Zy-mqw" secondAttribute="top" constant="8" id="OU6-9s-hG4"/>
+                                        <constraint firstItem="tuc-zI-EqA" firstAttribute="leading" secondItem="Mv1-F5-4HJ" secondAttribute="trailing" constant="8" id="ZHM-yG-iyA"/>
+                                        <constraint firstItem="tuc-zI-EqA" firstAttribute="centerY" secondItem="Mv1-F5-4HJ" secondAttribute="centerY" id="cen-jr-nlJ"/>
                                         <constraint firstAttribute="trailing" secondItem="IcF-S3-Ojv" secondAttribute="trailing" constant="8" id="dSu-H0-STA"/>
                                         <constraint firstItem="Mv1-F5-4HJ" firstAttribute="top" secondItem="m96-Zy-mqw" secondAttribute="top" constant="8" id="gWO-Ss-E2G"/>
                                         <constraint firstItem="Mv1-F5-4HJ" firstAttribute="leading" secondItem="m96-Zy-mqw" secondAttribute="leading" constant="8" id="jUC-tV-VP9"/>
@@ -301,13 +315,13 @@
                             </customSpacing>
                         </stackView>
                         <customView horizontalCompressionResistancePriority="748" verticalCompressionResistancePriority="748" translatesAutoresizingMaskIntoConstraints="NO" id="b7B-ll-BPX">
-                            <rect key="frame" x="978" y="31" width="549" height="549"/>
+                            <rect key="frame" x="978" y="31" width="549" height="548"/>
                             <subviews>
                                 <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z7e-ZS-eEL">
-                                    <rect key="frame" x="0.0" y="0.0" width="549" height="549"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="549" height="548"/>
                                     <subviews>
                                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ubC-hZ-OwU">
-                                            <rect key="frame" x="15" y="30" width="519" height="519"/>
+                                            <rect key="frame" x="15" y="30" width="519" height="518"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="ubC-hZ-OwU" secondAttribute="height" multiplier="1:1" id="au6-qX-X5N"/>
                                             </constraints>
@@ -339,7 +353,7 @@
                                     </customSpacing>
                                 </stackView>
                                 <progressIndicator wantsLayer="YES" maxValue="100" displayedWhenStopped="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="aw3-gI-2ez">
-                                    <rect key="frame" x="267" y="281" width="16" height="16"/>
+                                    <rect key="frame" x="266" y="281" width="16" height="16"/>
                                 </progressIndicator>
                             </subviews>
                             <constraints>
@@ -378,6 +392,6 @@
     <resources>
         <image name="beverages-supplier" width="282" height="340"/>
         <image name="carrito" width="512" height="512"/>
-        <image name="pencil" catalog="system" width="17" height="16"/>
+        <image name="pencil" catalog="system" width="14" height="13"/>
     </resources>
 </document>

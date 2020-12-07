@@ -2,9 +2,12 @@ import Cocoa
 
 protocol NewCustomerPresentationLogic {
     func presentNewCustomerResult(response: NewCustomer.NewCustomer.Response)
+    func presentUpdateCustomerResult(response: NewCustomer.NewCustomer.Response)
 }
 
 class NewCustomerPresenter: NewCustomerPresentationLogic {
+   
+    
     
     weak var viewController: NewCustomerDisplayLogic?
     
@@ -22,5 +25,18 @@ class NewCustomerPresenter: NewCustomerPresentationLogic {
         }
         let viewModel = NewCustomer.NewCustomer.ViewModel(customer: customer)
         viewController?.customerSaved(viewModel: viewModel)
+    }
+    
+    func presentUpdateCustomerResult(response: NewCustomer.NewCustomer.Response) {
+        guard let customer = response.customer else {
+            if response.error == ServerError.duplicated {
+                viewController?.customerAlreadyExist()
+            } else {
+                viewController?.customerCouldNotBeSaved(message: response.error?.localizedDescription ?? "Algo salió mal")
+            }
+            return
+        }
+        let viewModel = NewCustomer.NewCustomer.ViewModel(customer: customer)
+        viewController?.customerUpdated(viewModel: viewModel)
     }
 }

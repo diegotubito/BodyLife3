@@ -14,8 +14,17 @@ class NewCustomerWorker {
     
     func SaveCustomer(customer: CustomerModel.Customer, completion: @escaping (CustomerModel.Customer?) -> ()) {
         let body = encodeNewCustomer(customer)
-        print(body)
         let endpoint = Endpoint.Create(to: .Customer(.Save(body: body)))
+        BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<CustomerModel.Customer>) in
+            completion(response.data)
+        } fail: { (error) in
+            completion(nil)
+        }
+    }
+    
+    func UpdateCustomer(customer: CustomerModel.Customer, completion: @escaping (CustomerModel.Customer?) -> ()) {
+        let body = encodeNewCustomer(customer)
+        let endpoint = Endpoint.Create(to: .Customer(.Update(uid: customer._id!, body: body)))
         BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<CustomerModel.Customer>) in
             completion(response.data)
         } fail: { (error) in
