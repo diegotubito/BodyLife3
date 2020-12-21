@@ -102,7 +102,8 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
             self.customerListView.startLoading()
             NotificationCenter.default.post(.init(name: .needUpdateArticleList))
             NotificationCenter.default.post(.init(name: .needUpdateProductService))
-            self.view.window?.title = UserSaved.GetUser()?.displayName ?? "Sin Nombre"
+            let user = UserSaved.GetUser()
+            self.view.window?.title = (user?.displayName ?? "Sin Nombre") + " (\(user?.email ?? ""))"
         }
     }
     

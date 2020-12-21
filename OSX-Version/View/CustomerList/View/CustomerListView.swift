@@ -203,6 +203,7 @@ extension CustomerListView: CustomerListViewContract {
         if customer != nil {
             if let row = self.viewModel.model.customersbyPages.firstIndex(where: {$0._id == customer?._id}) {
                 self.tableViewSocio.selectRowIndexes(IndexSet([row]), byExtendingSelection: false)
+                self.tableViewSocio.scrollRowToVisible(row)
             }
         } else {
             self.tableViewSocio.deselectAll(nil)
