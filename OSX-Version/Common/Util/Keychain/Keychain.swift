@@ -10,8 +10,7 @@ import Foundation
 import KeychainSwift
 
 enum KeychainKey: String{
-    case bodyshapingAccessToken = "bodyshapingAccessToken"
-    case userEmail = "userEmail"
+    case userData = "userData"
 }
 
 
@@ -30,6 +29,7 @@ class Keychain{
         if let v = value as? Bool{ keychain.set(v, forKey: forKey.rawValue) }
         //Data
         if let v = value as? Data{ keychain.set(v, forKey: forKey.rawValue) }
+        
     }
     
     //MARK: Get Keychain Object

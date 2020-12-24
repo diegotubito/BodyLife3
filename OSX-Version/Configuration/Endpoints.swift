@@ -85,7 +85,8 @@ public enum EndpointType {
 
 class Endpoint {
     static func Create(to: EndpointType) -> BLEndpointModel {
-        
+        let token = UserSaved.GetToken()
+    
         switch to {
         case .RefreshToken(body: let body):
             let url = BLServerManager.baseUrl.rawValue + "/v1/firebase/auth/refreshToken"
@@ -96,8 +97,7 @@ class Endpoint {
         case .Discount(.LoadAll):
             let url = "\(BLServerManager.baseUrl.rawValue)/v1/discount"
             return BLEndpointModel(url: url, token: nil, method: "GET", query: nil, body: nil)
-        case .Sell(.Save(body: let body)):
-            let token = UserSaved.GetToken()
+        case .Sell(.Save(body: let body)):()
             let url = "\(BLServerManager.baseUrl.rawValue)/v1/sell"
             return BLEndpointModel(url: url, token: token, method: "POST", query: nil, body: body)
         case .CheckServerConnection:
@@ -131,38 +131,30 @@ class Endpoint {
         case .Payment(.Load(customerId: let id)):
             let url = "\(BLServerManager.baseUrl.rawValue)/v1/payment"
             let query = "?customer=\(id)"
-            let token = UserSaved.GetToken()
             return BLEndpointModel(url: url, token: token, method: "GET", query: query, body: nil)
         case .Payment(.Save(body: let body)):
             let url = "\(BLServerManager.baseUrl.rawValue)/v1/payment"
-            let token = UserSaved.GetToken()
             return BLEndpointModel(url: url, token: token, method: "POST", query: nil, body: body)
         case .Customer(.LoadPage(query: let query)):
             let url = "\(BLServerManager.baseUrl.rawValue)/v1/customer"
-            let token = UserSaved.GetToken()
             return BLEndpointModel(url: url, token: token, method: "GET", query: query, body: nil)
         case .Customer(.Search(query: let query)):
             let url = "\(BLServerManager.baseUrl.rawValue)/v1/customer-search"
-            let token = UserSaved.GetToken()
             return BLEndpointModel(url: url, token: token, method: "GET", query: query, body: nil)
         case .Customer(.Save(body: let body)):
             let url = "\(BLServerManager.baseUrl.rawValue)/v1/customer"
-            let token = UserSaved.GetToken()
             return BLEndpointModel(url: url, token: token, method: "POST", query: nil, body: body)
         case .Customer(.Delete(uid: let uid)):
             let url = "\(BLServerManager.baseUrl.rawValue)/v1/customer"
             let query = "?id=\(uid)"
-            let token = UserSaved.GetToken()
             return BLEndpointModel(url: url, token: token, method: "DELETE", query: query, body: nil)
         case .Customer(.Update(uid: let uid, body: let body)):
             let url = "\(BLServerManager.baseUrl.rawValue)/v1/customer"
             let query = "?id=\(uid)"
-            let token = UserSaved.GetToken()
             return BLEndpointModel(url: url, token: token, method: "PUT", query: query, body: body)
         case .Customer(.FindByDNI(dni: let dni)):
             let url = "\(BLServerManager.baseUrl.rawValue)/v1/customerByDni"
             let query = "?dni=\(dni)"
-            let token = UserSaved.GetToken()
             return BLEndpointModel(url: url, token: token, method: "GET", query: query, body: nil)
         case .Article(.Load(userUID: let id, path: let path)):
             let url = BLServerManager.baseUrl.rawValue + "/v1/firebase/database" + "/users:\(id):\(path)"
