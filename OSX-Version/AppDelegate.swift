@@ -24,29 +24,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             BLServerManager.baseUrl = BLServer.Production
         #endif
      
-        forceCloseSessionIfTargetChanged()
         Connect.StartListening()
-    }
-    
-    func forceCloseSessionIfTargetChanged() {
-        //Necesito guardar el environment, de lo contrario, estaria con un usuario incorrecto.
-        //lo podria evitar cerrando session, para limpiar el usuario, pero a veces se olvida.
-        //esto fuerza a un cierre de session y limpieza del usuario
-        //cada vez que cambio de target, es necesario volver a loguearse, porque se borra el usuario de default.
- 
-        let lastEnvironment = UserDefaults.standard.string(forKey: "lastEnvironment")
-        
-        #if INTERNAL
-            if lastEnvironment == "PRODUCTION" || lastEnvironment == "" {
-                UserSaved.Remove()
-            }
-            UserDefaults.standard.setValue("INTERNAL", forKey: "lastEnvironment")
-        #else
-            if lastEnvironment == "INTERNAL" || lastEnvironment == "" {
-                UserSaved.Remove()
-            }
-            UserDefaults.standard.setValue("PRODUCTION", forKey: "lastEnvironment")
-        #endif
     }
     
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {

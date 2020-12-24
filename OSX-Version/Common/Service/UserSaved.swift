@@ -13,16 +13,16 @@ class UserSaved {
     static let Shared = UserSaved()
     
     static func Save(userData: Data) {
-        Keychain.set(value: userData, forKey: .userData)
+        Keychain.set(value: userData, service: .userData)
     }
     
     static func Remove() {
         //esto remueve todos los items en keychain
-        Keychain.clear()
+        Keychain.clear(service: .userData)
     }
     
     static func Update(_ newUserObj: FirebaseUserModel) {
-        if let data = Keychain.getData(key: .userData) {
+        if let data = Keychain.get(service: .userData) {
             var json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String : Any]
             json?.updateValue(newUserObj.token as Any, forKey: "token")
             let newData = (try? JSONSerialization.data(withJSONObject: json!, options: []))!
@@ -34,7 +34,7 @@ class UserSaved {
     static func GetUser() -> FirebaseUserModel? {
         var user : FirebaseUserModel?
         
-        if let data = Keychain.getData(key: .userData) {
+        if let data = Keychain.get(service: .userData) {
             user = try? JSONDecoder().decode(FirebaseUserModel.self, from: data)
         }
     
