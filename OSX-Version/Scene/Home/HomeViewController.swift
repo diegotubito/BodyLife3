@@ -9,6 +9,7 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
     var interactor: HomeBusinessLogic?
     var router: (NSObjectProtocol & HomeRoutingLogic & HomeDataPassing)?
     
+    @IBOutlet weak var newImplementation: NSButton!
     @IBOutlet weak var containerUpperBar: NSView!
     @IBOutlet weak var containerBottomBar: NSView!
     @IBOutlet weak var containerCustomerList: NSView!
@@ -64,7 +65,10 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
         
     }
     
-   
+    @IBAction func newImplentationPressed(_ sender: Any) {
+        router?.routeToNewImplementation()
+    }
+    
     @IBAction func addGenericButtob(_ sender: Any) {
         addGeneric()
     }
@@ -82,8 +86,10 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
         super.viewWillAppear()
         self.view.window?.delegate = self
         containerBottomBar.isHidden = true
+        newImplementation.isHidden = true
         #if DEBUG || INTERNAL
         containerBottomBar.isHidden = false
+        newImplementation.isHidden = false
         #endif
     }
     

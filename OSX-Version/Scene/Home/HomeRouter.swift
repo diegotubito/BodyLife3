@@ -4,6 +4,7 @@ import Cocoa
     func routeToNewCustomer()
     func routeToNewExpense()
     func routeToMoneyFlow()
+    func routeToNewImplementation()
 }
 
 protocol HomeDataPassing {
@@ -26,6 +27,16 @@ class HomeRouter: NSObject, HomeRoutingLogic, HomeDataPassing {
         let vc = storyboard.instantiateController(withIdentifier: "ExpenseViewController") as! ExpenseViewController
         navigateToSomewhere(source: viewController!, destination: vc)
         
+    }
+    
+   
+    func routeToNewImplementation()
+    {
+        let storyboard = NSStoryboard(name: "Main", bundle: nil)
+        
+        let destinationVC = storyboard.instantiateController(withIdentifier: "NewImplementationViewController") as! NewImplementationViewController
+        
+        navigateToSomewhere(source: viewController!, destination: destinationVC)
     }
     
     func routeToNewCustomer()

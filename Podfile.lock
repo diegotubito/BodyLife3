@@ -1,6 +1,7 @@
 PODS:
   - Alamofire (4.9.1)
   - BLServerManager (0.2.0)
+  - KeychainSwift (19.0.0)
   - Socket.IO-Client-Swift (15.2.0):
     - Starscream (~> 3.1)
   - Starscream (3.1.1)
@@ -8,11 +9,13 @@ PODS:
 DEPENDENCIES:
   - Alamofire (= 4.9.1)
   - BLServerManager (= 0.2.0)
+  - KeychainSwift
   - Socket.IO-Client-Swift (~> 15.2.0)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - Alamofire
+    - KeychainSwift
     - Socket.IO-Client-Swift
     - Starscream
   https://github.com/diegotubito/pods.git:
@@ -21,9 +24,10 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   BLServerManager: 241a4612d9bbdd0e07246e3f481aaa4c246277bc
+  KeychainSwift: a06190cf933ad46b1e0abc3d77d29c06331715c7
   Socket.IO-Client-Swift: 1e3e3a1f09f3312a167f0d781eb2f383d477357c
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
 
-PODFILE CHECKSUM: 3700071c75891db1893e5e72c431ebecfb1dcea0
+PODFILE CHECKSUM: 01b7dc4de3e8ab06359777f2544aa258fce0d71c
 
 COCOAPODS: 1.10.0

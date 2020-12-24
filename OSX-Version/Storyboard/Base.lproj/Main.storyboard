@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17506"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -42,6 +42,19 @@
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75" y="0.0"/>
+        </scene>
+        <!--New Implementation View Controller-->
+        <scene sceneID="dB6-s3-aXn">
+            <objects>
+                <viewController storyboardIdentifier="NewImplementationViewController" id="Y2X-sV-uhU" customClass="NewImplementationViewController" customModule="Body_Shaping" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="Eh5-6z-iQG">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="KOo-Ha-hP8" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-434" y="368"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
@@ -102,11 +115,27 @@
                                             <action selector="closeSessionPressed:" target="XfG-lQ-9wD" id="fJW-4J-wgv"/>
                                         </connections>
                                     </button>
+                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="avi-xG-IAk">
+                                        <rect key="frame" x="65" y="4" width="33" height="33"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="33" id="4sV-Oq-cW3"/>
+                                            <constraint firstAttribute="height" constant="33" id="HJ8-cK-gf5"/>
+                                        </constraints>
+                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSCaution" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="PZK-ki-XGf">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="newImplentationPressed:" target="XfG-lQ-9wD" id="yBQ-Qs-p5x"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="9AY-9h-Rjr" firstAttribute="leading" secondItem="Y6C-Pr-GNv" secondAttribute="leading" constant="16" id="28c-pc-z5b"/>
+                                    <constraint firstItem="avi-xG-IAk" firstAttribute="leading" secondItem="9AY-9h-Rjr" secondAttribute="trailing" constant="16" id="3h1-nt-z9K"/>
                                     <constraint firstAttribute="trailing" secondItem="Kec-wk-swp" secondAttribute="trailing" constant="16" id="9P1-m4-2aV"/>
                                     <constraint firstItem="9AY-9h-Rjr" firstAttribute="centerY" secondItem="Y6C-Pr-GNv" secondAttribute="centerY" id="AOL-qY-63e"/>
+                                    <constraint firstItem="avi-xG-IAk" firstAttribute="centerY" secondItem="Y6C-Pr-GNv" secondAttribute="centerY" id="dLw-hl-cbs"/>
                                     <constraint firstItem="Kec-wk-swp" firstAttribute="centerY" secondItem="Y6C-Pr-GNv" secondAttribute="centerY" id="hAy-he-GmQ"/>
                                     <constraint firstAttribute="height" constant="40" id="xBg-Mn-Ma1"/>
                                 </constraints>
@@ -184,6 +213,7 @@
                         <outlet property="containerSellRegisters" destination="Htk-LD-AMV" id="dk4-O6-HfV"/>
                         <outlet property="containerStatus" destination="0fS-Ye-Kdk" id="lvC-xI-kXo"/>
                         <outlet property="containerUpperBar" destination="Y6C-Pr-GNv" id="Sv0-Al-zIe"/>
+                        <outlet property="newImplementation" destination="avi-xG-IAk" id="zXk-qs-uQQ"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -192,6 +222,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="NSCaution" width="32" height="32"/>
         <image name="NSUser" width="32" height="32"/>
         <image name="mono-logout" width="2400" height="2400"/>
     </resources>

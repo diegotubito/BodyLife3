@@ -7,7 +7,8 @@ def shared_pods
   pod 'Alamofire', '4.9.1'
   pod 'Socket.IO-Client-Swift', '~> 15.2.0'
   pod 'BLServerManager', '0.2.0'
- end
+  pod 'KeychainSwift'
+end
 
 target 'Production-Target' do
   # Comment the next line if you don't want to use dynamic frameworks
