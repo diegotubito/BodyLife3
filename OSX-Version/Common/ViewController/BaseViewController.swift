@@ -71,7 +71,7 @@ class BaseViewController : NSViewController {
     
     func listenToNotification() {
            
-        NotificationCenter.default.addObserver(self, selector: #selector(disconnected), name: .ServerDisconnected, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(disconnected(notification:)), name: .ServerDisconnected, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(connected), name: .ServerConnected, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(GoToLogin), name: .NeedLogin, object: nil)
@@ -88,11 +88,12 @@ class BaseViewController : NSViewController {
         }
     }
     
-    @objc func disconnected() {
+    @objc func disconnected(notification: Notification) {
         DispatchQueue.main.async {
+            let message = notification.object as? String
             self.unlockBackground()
             self.deleteNoConnectionView()
-            self.showNoConnection(message: "Servidor desconectado")
+            self.showNoConnection(message: message ?? "Error Desconocido")
             
         }
     }

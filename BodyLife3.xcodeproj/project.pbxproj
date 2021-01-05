@@ -222,6 +222,8 @@
 		118773E625772974002F2635 /* NewCustomerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118773CB2577292F002F2635 /* NewCustomerPresenter.swift */; };
 		118773E725772974002F2635 /* NewCustomerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118773C82577292F002F2635 /* NewCustomerViewController.swift */; };
 		118773EA25772978002F2635 /* TextFieldValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118773D625772939002F2635 /* TextFieldValidation.swift */; };
+		1194D98125A3DEFF001D5495 /* ConfigModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1194D98025A3DEFF001D5495 /* ConfigModel.swift */; };
+		1194D98225A3DEFF001D5495 /* ConfigModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1194D98025A3DEFF001D5495 /* ConfigModel.swift */; };
 		119C68622380BDC8009E9AA0 /* NewCustomerStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 119C68612380BDC8009E9AA0 /* NewCustomerStoryboard.storyboard */; };
 		11A8B44E23BE22B8007A5251 /* GenericTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A8B44D23BE22B8007A5251 /* GenericTableView.swift */; };
 		11A8ECF423B0E74300F15B9A /* ArticleListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A8ECF323B0E74300F15B9A /* ArticleListModel.swift */; };
@@ -375,6 +377,7 @@
 		118773CC2577292F002F2635 /* NewCustomerRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCustomerRouter.swift; sourceTree = "<group>"; };
 		118773CD2577292F002F2635 /* NewCustomerWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCustomerWorker.swift; sourceTree = "<group>"; };
 		118773D625772939002F2635 /* TextFieldValidation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldValidation.swift; sourceTree = "<group>"; };
+		1194D98025A3DEFF001D5495 /* ConfigModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigModel.swift; sourceTree = "<group>"; };
 		119C68612380BDC8009E9AA0 /* NewCustomerStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewCustomerStoryboard.storyboard; sourceTree = "<group>"; };
 		11A8B44D23BE22B8007A5251 /* GenericTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericTableView.swift; sourceTree = "<group>"; };
 		11A8ECF323B0E74300F15B9A /* ArticleListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleListModel.swift; sourceTree = "<group>"; };
@@ -1005,6 +1008,7 @@
 				11D3D8842521780B0008CFD0 /* ArticleModel.swift */,
 				11D3D87625213A770008CFD0 /* ActivityModel.swift */,
 				11D3D87B25214C290008CFD0 /* PeriodModel.swift */,
+				1194D98025A3DEFF001D5495 /* ConfigModel.swift */,
 			);
 			path = Configuration;
 			sourceTree = "<group>";
@@ -1473,6 +1477,7 @@
 				115784EC252B85C0008A89DC /* ErrorMessageView.swift in Sources */,
 				115784ED252B85C0008A89DC /* MapManager.swift in Sources */,
 				115784EE252B85C0008A89DC /* importPagoArticulo.swift in Sources */,
+				1194D98225A3DEFF001D5495 /* ConfigModel.swift in Sources */,
 				115784EF252B85C0008A89DC /* ExpenseInteractor.swift in Sources */,
 				118773E725772974002F2635 /* NewCustomerViewController.swift in Sources */,
 				115784F0252B85C0008A89DC /* ActivitySaleViewModel.swift in Sources */,
@@ -1601,6 +1606,7 @@
 				110664C523775C9000DC44F3 /* ErrorMessageView.swift in Sources */,
 				11498E5B25203B9A00E4D679 /* MapManager.swift in Sources */,
 				11D3D88225216F0A0008CFD0 /* importPagoArticulo.swift in Sources */,
+				1194D98125A3DEFF001D5495 /* ConfigModel.swift in Sources */,
 				118773CE2577292F002F2635 /* NewCustomerViewController.swift in Sources */,
 				114C54192413FF66000CC75A /* ExpenseInteractor.swift in Sources */,
 				11AC546423DDE4F30033A27D /* ActivitySaleViewModel.swift in Sources */,
@@ -1725,7 +1731,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2.0.5;
+				CURRENT_PROJECT_VERSION = 2.0.6;
 				DEVELOPMENT_TEAM = S2BEC8V882;
 				ENABLE_HARDENED_RUNTIME = NO;
 				ENVIRONMENT = DEBUG;
@@ -1734,7 +1740,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 2.0.5;
+				MARKETING_VERSION = 2.0.6;
 				PRODUCT_BUNDLE_IDENTIFIER = "DDG.OSX-Version";
 				PRODUCT_NAME = "Body Shaping Internal";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1752,7 +1758,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2.0.5;
+				CURRENT_PROJECT_VERSION = 2.0.6;
 				DEVELOPMENT_TEAM = S2BEC8V882;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENVIRONMENT = RELEASE;
@@ -1761,7 +1767,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 2.0.5;
+				MARKETING_VERSION = 2.0.6;
 				PRODUCT_BUNDLE_IDENTIFIER = "DDG.OSX-Version";
 				PRODUCT_NAME = "Body Shaping Internal";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1894,7 +1900,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2.0.5;
+				CURRENT_PROJECT_VERSION = 2.0.6;
 				DEVELOPMENT_TEAM = S2BEC8V882;
 				ENABLE_HARDENED_RUNTIME = NO;
 				ENVIRONMENT = DEBUG;
@@ -1903,7 +1909,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 2.0.5;
+				MARKETING_VERSION = 2.0.6;
 				PRODUCT_BUNDLE_IDENTIFIER = "ddg.body-shaping-OSX";
 				PRODUCT_NAME = "Body Shaping";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1920,7 +1926,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2.0.5;
+				CURRENT_PROJECT_VERSION = 2.0.6;
 				DEVELOPMENT_TEAM = S2BEC8V882;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENVIRONMENT = RELEASE;
@@ -1929,7 +1935,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 2.0.5;
+				MARKETING_VERSION = 2.0.6;
 				PRODUCT_BUNDLE_IDENTIFIER = "ddg.body-shaping-OSX";
 				PRODUCT_NAME = "Body Shaping";
 				PROVISIONING_PROFILE_SPECIFIER = "";

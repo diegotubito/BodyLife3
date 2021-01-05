@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="15505" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15505"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="ErrorMessageView" customModule="OSX_Version" customModuleProvider="target">
+        <customObject id="-2" userLabel="File's Owner" customClass="ErrorMessageView" customModule="Body_Shaping" customModuleProvider="target">
             <connections>
                 <outlet property="titleLabel" destination="y1S-Cw-I9E" id="6Ko-f4-mZ0"/>
             </connections>
@@ -32,23 +33,13 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="TFh-SR-k2o">
-                    <rect key="frame" x="177" y="16" width="149" height="22"/>
-                    <textFieldCell key="cell" lineBreakMode="clipping" title="Esperando Internet..." id="cjI-ag-fKe">
-                        <font key="font" size="15" name="Didot"/>
-                        <color key="textColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
             </subviews>
             <constraints>
                 <constraint firstItem="y1S-Cw-I9E" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="16" id="8K6-ea-YWf"/>
-                <constraint firstItem="TFh-SR-k2o" firstAttribute="centerX" secondItem="c22-O7-iKe" secondAttribute="centerX" id="Bs3-Rf-RMd"/>
                 <constraint firstItem="y1S-Cw-I9E" firstAttribute="centerX" secondItem="c22-O7-iKe" secondAttribute="centerX" id="Mhu-zW-HPg"/>
                 <constraint firstAttribute="trailing" secondItem="y1S-Cw-I9E" secondAttribute="trailing" constant="16" id="Mmm-cf-g5H"/>
                 <constraint firstItem="lP4-ty-mKj" firstAttribute="centerY" secondItem="c22-O7-iKe" secondAttribute="centerY" id="RiC-VU-0Va"/>
                 <constraint firstItem="lP4-ty-mKj" firstAttribute="centerX" secondItem="c22-O7-iKe" secondAttribute="centerX" id="T75-s7-uoH"/>
-                <constraint firstAttribute="bottom" secondItem="TFh-SR-k2o" secondAttribute="bottom" constant="16" id="YnU-uV-G6O"/>
                 <constraint firstItem="y1S-Cw-I9E" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="16" id="uWv-Bj-eSB"/>
             </constraints>
             <point key="canvasLocation" x="112" y="66.5"/>

@@ -28,10 +28,10 @@ class Connect {
             if isConnected {
                 SocketHelper.shared.connect()
             } else {
-                NotificationCenter.default.post(name: .ServerDisconnected, object: nil, userInfo: nil)
+                NotificationCenter.default.post(name: .ServerDisconnected, object: "Check Server Connection fail", userInfo: nil)
             }
         } fail: { (error) in
-            NotificationCenter.default.post(name: .ServerDisconnected, object: nil, userInfo: nil)
+            NotificationCenter.default.post(name: .ServerDisconnected, object: "Check Server Connection fail", userInfo: nil)
         }
         
     }
@@ -89,6 +89,9 @@ class Connect {
                 print("Connect: Refresh token SUCCESS")
                 //Select database name
                 if let uid = userSession.uid {
+                    if !self.isAccountEnabled(uid: uid) {
+                        return
+                    }
                     let endpoint = Endpoint.Create(to: .ConnectToMongoDB(query: "?database=\(uid)"))
                     BLServerManager.ApiCall(endpoint: endpoint) { (success: Bool) in
                         print("Connect: database connection SUCCESS name = \(uid)")
@@ -108,7 +111,26 @@ class Connect {
         }
     }
     
-    
+    private func isAccountEnabled(uid: String) -> Bool {
+        let semasphoreValidAccount = DispatchSemaphore(value: 0)
+        var isDisabled = true
+        let path = "/users:\(uid):config"
+        let endpoint = Endpoint.Create(to: .Firebase(.Load(path: path)))
+        BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<[ConfigModel.AccountModel]>) in
+            isDisabled = response.data?[0].disabled ?? false
+            semasphoreValidAccount.signal()
+        } fail: { (error) in
+            isDisabled = true
+            semasphoreValidAccount.signal()
+        }
+        
+        _ = semasphoreValidAccount.wait(timeout: .distantFuture)
+        if isDisabled {
+            NotificationCenter.default.post(name: .ServerDisconnected, object: "Tu cuenta esta deshabilitada", userInfo: nil)
+            return false
+        }
+        return true
+    }
     
     private static func checkInternet(result: (Bool) -> ()) {
         if Reachability.sharedInstance.isConnectedToNetwork() {

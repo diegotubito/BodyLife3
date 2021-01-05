@@ -80,6 +80,7 @@ public enum EndpointType {
         case SighUp(body: [String: Any])
         case SendVerificationMail(body: [String: Any])
         case Save(path: String, body: [String: Any])
+        case Load(path: String)
     }
 }
 
@@ -189,6 +190,9 @@ class Endpoint {
         case .Firebase(.Save(path: let path, body: let body)):
             let url = BLServerManager.baseUrl.rawValue + "/v1/firebase/database" + path
             return BLEndpointModel(url: url, token: token, method: "POST", query: nil, body: body)
+        case .Firebase(.Load(path: let path)):
+            let url = BLServerManager.baseUrl.rawValue + "/v1/firebase/database" + path
+            return BLEndpointModel(url: url, token: token, method: "GET", query: nil, body: nil)
         case .Period(.Save(body: let body)):
             let url = "\(BLServerManager.baseUrl.rawValue)/v1/period"
             return BLEndpointModel(url: url, token: token, method: "POST", query: nil, body: body)

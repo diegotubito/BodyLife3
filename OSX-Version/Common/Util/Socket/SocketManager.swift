@@ -62,7 +62,7 @@ class SocketHelper: NSObject {
     }
 
     private func sendNotification(name: Notification.Name) {
-        NotificationCenter.default.post(name: name, object: nil)
+        NotificationCenter.default.post(name: name, object: "Servidor Desconectado")
     }
 
     func connect() {

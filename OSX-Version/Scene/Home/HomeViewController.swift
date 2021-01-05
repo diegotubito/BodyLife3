@@ -66,7 +66,7 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
     }
     
     @IBAction func newImplentationPressed(_ sender: Any) {
-        router?.routeToNewImplementation()
+        router?.routeToNewExpense()
     }
     
     @IBAction func addGenericButtob(_ sender: Any) {
