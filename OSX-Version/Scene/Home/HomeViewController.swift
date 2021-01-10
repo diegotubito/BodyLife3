@@ -109,7 +109,18 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
             NotificationCenter.default.post(.init(name: .needUpdateArticleList))
             NotificationCenter.default.post(.init(name: .needUpdateProductService))
             let user = MainUserSession.GetUser()
-            self.view.window?.title = (user?.displayName ?? "Sin Nombre") + " (\(user?.email ?? ""))"
+            
+            //Secondary Login
+            SecondaryUserSession.Remove()
+            let secondaryUser = SecondaryUserSession.GetUser()
+            SecondaryUserSession.Login(userName: secondaryUser?.userName ?? "Quique", password: secondaryUser?.password ?? "diego1234") { (result) in
+                print("Secondary User Logged in")
+                let userTitle = (user?.displayName ?? "Sin Nombre") + " (\(user?.email ?? ""))"
+                DispatchQueue.main.async {
+                    self.view.window?.title = userTitle + " User: \(SecondaryUserSession.GetUser()?.userName ?? "")"
+                    
+                }
+            }
         }
     }
     

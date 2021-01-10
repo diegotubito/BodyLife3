@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="8N1-8O-FeI">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="8N1-8O-FeI">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17506"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Login View Controller-->
         <scene sceneID="R8X-qK-Mtb">
             <objects>
-                <viewController storyboardIdentifier="LoginViewController" id="8N1-8O-FeI" customClass="LoginViewController" customModule="Internal_Target" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="8N1-8O-FeI" customClass="LoginViewController" customModule="Body_Shaping" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="BtW-Jh-UrO">
                         <rect key="frame" x="0.0" y="0.0" width="733" height="319"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -123,8 +123,8 @@
                                 </customSpacing>
                             </stackView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WIB-uY-768">
-                                <rect key="frame" x="232" y="280" width="269" height="23"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="Ingresá tu usuario y contraseña" id="hSM-G2-EvN">
+                                <rect key="frame" x="244" y="280" width="245" height="23"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Login de tu cuenta Body Life" id="hSM-G2-EvN">
                                     <font key="font" metaFont="system" size="19"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -176,7 +176,7 @@
         <!--New User View Controller-->
         <scene sceneID="oZO-h9-PVa">
             <objects>
-                <viewController storyboardIdentifier="NewUserViewController" id="uRz-R8-2gc" customClass="NewUserViewController" customModule="Internal_Target" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewUserViewController" id="uRz-R8-2gc" customClass="NewUserViewController" customModule="Body_Shaping" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="VPv-Ko-H0X">
                         <rect key="frame" x="0.0" y="0.0" width="602" height="383"/>
                         <autoresizingMask key="autoresizingMask"/>

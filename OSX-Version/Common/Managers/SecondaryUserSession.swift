@@ -7,20 +7,22 @@
 //
 
 import Foundation
+import BLServerManager
 
 struct SecondaryUserSessionModel: Codable {
     var _id : String
     var userName : String
-    var password: String
+    var password: String?
     var role : Role
     var timestamp : Double
     var isEnabled : Bool
-    var firstName : String
-    var lastName : String
-    var dni : String
-    var address : String
-    var phoneNumber : String
+    var firstName : String?
+    var lastName : String?
+    var dni : String?
+    var address : String?
+    var phoneNumber : String?
     var token : String
+    var tokenExpiration: Double
     
     enum Role: String, Codable {
         case Super = "SUPER_ROLE"
@@ -41,18 +43,6 @@ class SecondaryUserSession {
         Keychain.clear(service: .secondaryUserData)
     }
     
-    static func Update(_ newUserObj: SecondaryUserSessionModel) {
-        if let data = Keychain.get(service: .secondaryUserData) {
-            var json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String : Any]
-            json?.updateValue(newUserObj.userName as Any, forKey: "userName")
-            json?.updateValue(newUserObj.password as Any, forKey: "password")
-            let newData = (try? JSONSerialization.data(withJSONObject: json!, options: []))!
-            SecondaryUserSession.Save(userData: newData)
-            let a = Date().time
-        }
-        
-    }
-    
     static func GetUser() -> SecondaryUserSessionModel? {
         var user : SecondaryUserSessionModel?
         
@@ -71,16 +61,20 @@ class SecondaryUserSession {
         result(false)
     }
     
-    static func GetUserName() -> String {
-        let user = GetUser()
-        
-        return user?.userName ?? ""
-    }
-    
-    static func SaveUserName(value: String) {
-        var user = GetUser()
-        user?.userName = value
-        Update(user!)
-        
+    static func Login(userName: String, password: String, result: @escaping (Bool) -> Void) {
+        let endpoint = Endpoint.Create(to: .SecondaryUser(.Login(userName: userName, password: password)))
+        BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<SecondaryUserSessionModel>) in
+            guard let data = try? JSONEncoder().encode(response.data) else {
+                result(false)
+                return
+            }
+            
+            Save(userData: data)
+            result(true)
+        } fail: { (error) in
+            print(error.rawValue)
+            result(false)
+        }
+
     }
 }

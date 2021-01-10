@@ -26,6 +26,7 @@ class NetwordManager {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue(endpoint.token ?? "", forHTTPHeaderField: "x-access-token")
+        request.addValue(endpoint.tokenSecondaryUser ?? "", forHTTPHeaderField: "x-access-token-secondary-user")
         
         var session = URLSession.shared
         let sessionConfig = URLSessionConfiguration.default

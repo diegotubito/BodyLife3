@@ -29,6 +29,8 @@
 		113FA64D25A955620043E7D6 /* AccountWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113FA64B25A955620043E7D6 /* AccountWorker.swift */; };
 		113FA65525A9FDAC0043E7D6 /* SecondaryUserSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113FA65425A9FDAC0043E7D6 /* SecondaryUserSession.swift */; };
 		113FA65625A9FDAC0043E7D6 /* SecondaryUserSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113FA65425A9FDAC0043E7D6 /* SecondaryUserSession.swift */; };
+		113FA65E25AB45CE0043E7D6 /* SecondaryUser.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 113FA65D25AB45CE0043E7D6 /* SecondaryUser.storyboard */; };
+		113FA65F25AB45CE0043E7D6 /* SecondaryUser.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 113FA65D25AB45CE0043E7D6 /* SecondaryUser.storyboard */; };
 		1147AB44238364D900D19AA9 /* CustomerListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1147AB43238364D900D19AA9 /* CustomerListModel.swift */; };
 		1147AB462383652F00D19AA9 /* CustomerListViewModelContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1147AB452383652F00D19AA9 /* CustomerListViewModelContract.swift */; };
 		1147AB482383653A00D19AA9 /* CustomerListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1147AB472383653A00D19AA9 /* CustomerListViewModel.swift */; };
@@ -321,6 +323,7 @@
 		113FA64425A6A85B0043E7D6 /* AccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
 		113FA64B25A955620043E7D6 /* AccountWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountWorker.swift; sourceTree = "<group>"; };
 		113FA65425A9FDAC0043E7D6 /* SecondaryUserSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryUserSession.swift; sourceTree = "<group>"; };
+		113FA65D25AB45CE0043E7D6 /* SecondaryUser.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SecondaryUser.storyboard; sourceTree = "<group>"; };
 		1147AB43238364D900D19AA9 /* CustomerListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerListModel.swift; sourceTree = "<group>"; };
 		1147AB452383652F00D19AA9 /* CustomerListViewModelContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerListViewModelContract.swift; sourceTree = "<group>"; };
 		1147AB472383653A00D19AA9 /* CustomerListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerListViewModel.swift; sourceTree = "<group>"; };
@@ -561,6 +564,37 @@
 				1147AB7D238611C200D19AA9 /* NSViewExtension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		113FA66225AB4CEB0043E7D6 /* SecondaryUser */ = {
+			isa = PBXGroup;
+			children = (
+				113FA66525AB4D100043E7D6 /* NewUpdateUser */,
+				113FA66425AB4CFD0043E7D6 /* UserList */,
+				113FA66325AB4CF60043E7D6 /* Login */,
+			);
+			path = SecondaryUser;
+			sourceTree = "<group>";
+		};
+		113FA66325AB4CF60043E7D6 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		113FA66425AB4CFD0043E7D6 /* UserList */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UserList;
+			sourceTree = "<group>";
+		};
+		113FA66525AB4D100043E7D6 /* NewUpdateUser */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = NewUpdateUser;
 			sourceTree = "<group>";
 		};
 		1147AB3E2383648B00D19AA9 /* View */ = {
@@ -1115,6 +1149,7 @@
 				11EBD3292376499F00AB4BFF /* Main.storyboard */,
 				114AC2C325525638007A0AFD /* MoneyFlow.storyboard */,
 				11EBD39023772A4700AB4BFF /* LoginStoryboard.storyboard */,
+				113FA65D25AB45CE0043E7D6 /* SecondaryUser.storyboard */,
 				119C68612380BDC8009E9AA0 /* NewCustomerStoryboard.storyboard */,
 				114C541F241401B5000CC75A /* Expense.storyboard */,
 				111EF6B4244BDFCC003E5D61 /* Movement.storyboard */,
@@ -1125,6 +1160,7 @@
 		11EBD35323765C9800AB4BFF /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				113FA66225AB4CEB0043E7D6 /* SecondaryUser */,
 				11C3F96A2591B95300840905 /* NewImplentation */,
 				114C54082413FE19000CC75A /* Expense */,
 				11EBD3832377269100AB4BFF /* Login */,
@@ -1349,6 +1385,7 @@
 				1157855D252B85C0008A89DC /* Info.plist in Resources */,
 				1157855E252B85C0008A89DC /* PeriodListItem.xib in Resources */,
 				1177828F256C33DA006B51FD /* bodyshaping.json in Resources */,
+				113FA65F25AB45CE0043E7D6 /* SecondaryUser.storyboard in Resources */,
 				11578560252B85C0008A89DC /* ArticleViewItem.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1366,6 +1403,7 @@
 				111DE56F2389F5A3002F4216 /* SaveButtonCustomView.xib in Resources */,
 				116CEB6123A1E2D40081D356 /* RegisterListView.xib in Resources */,
 				111EF6B5244BDFCC003E5D61 /* Movement.storyboard in Resources */,
+				113FA65E25AB45CE0043E7D6 /* SecondaryUser.storyboard in Resources */,
 				11EBD32B2376499F00AB4BFF /* Main.storyboard in Resources */,
 				119C68622380BDC8009E9AA0 /* NewCustomerStoryboard.storyboard in Resources */,
 				11AC546823DDE64E0033A27D /* ActivitySaleView.xib in Resources */,
