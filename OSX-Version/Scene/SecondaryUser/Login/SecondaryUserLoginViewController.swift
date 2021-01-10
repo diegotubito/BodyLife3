@@ -35,7 +35,7 @@ class SecondaryUserLoginViewController: NSViewController {
         let endpoint = Endpoint.Create(to: .SecondaryUser(.Load))
         usersPopup.removeAllItems()
         
-        BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<[SecondaryUserSessionModel]>) in
+        BLServerManagerBeta.ApiCall(endpoint: endpoint) { (response: ResponseModel<[SecondaryUserSessionModel]>) in
             self.hideLoading()
             guard let users = response.data else {
                 self.showError(errorMessage: "no users data")
@@ -45,7 +45,7 @@ class SecondaryUserLoginViewController: NSViewController {
             self.showSuccessLoadingUsers()
         } fail: { (error) in
             self.hideLoading()
-            self.showError(errorMessage: error.rawValue)
+            self.showError(errorMessage: error)
         }
 
     }
@@ -95,7 +95,7 @@ class SecondaryUserLoginViewController: NSViewController {
         
         self.showLoading()
         let endpoint = Endpoint.Create(to: .SecondaryUser(.Login(userName: selectedUser.userName, password: passwordTF.stringValue)))
-        BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<SecondaryUserSessionModel>) in
+        BLServerManagerBeta.ApiCall(endpoint: endpoint) { (response: ResponseModel<SecondaryUserSessionModel>) in
             self.hideLoading()
             guard let data = try? JSONEncoder().encode(response.data) else {
                 return
@@ -105,9 +105,9 @@ class SecondaryUserLoginViewController: NSViewController {
             DispatchQueue.main.async {
                 self.view.window?.close()
             }
-        } fail: { (error) in
+        } fail: { (message) in
             self.hideLoading()
-            self.showError(errorMessage: error.rawValue)
+            self.showError(errorMessage: message)
         }
     }
 }

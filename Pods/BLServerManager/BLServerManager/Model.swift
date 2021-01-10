@@ -43,3 +43,9 @@ public enum BLNetworkError: String, Error {
     case badRequest = "Bad Request"
     case serializationError = "Serialization Error"
 }
+
+struct BLErrorModel : Decodable {
+    var success: Bool
+    var errorMessage: String?
+    var error: Data?
+}
