@@ -21,8 +21,8 @@ struct SecondaryUserSessionModel: Codable {
     var dni : String?
     var address : String?
     var phoneNumber : String?
-    var token : String
-    var tokenExpiration: Double
+    var token : String?
+    var tokenExpiration: Double?
     
     enum Role: String, Codable {
         case Super = "SUPER_ROLE"
@@ -61,20 +61,4 @@ class SecondaryUserSession {
         result(false)
     }
     
-    static func Login(userName: String, password: String, result: @escaping (Bool) -> Void) {
-        let endpoint = Endpoint.Create(to: .SecondaryUser(.Login(userName: userName, password: password)))
-        BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<SecondaryUserSessionModel>) in
-            guard let data = try? JSONEncoder().encode(response.data) else {
-                result(false)
-                return
-            }
-            
-            Save(userData: data)
-            result(true)
-        } fail: { (error) in
-            print(error.rawValue)
-            result(false)
-        }
-
-    }
 }

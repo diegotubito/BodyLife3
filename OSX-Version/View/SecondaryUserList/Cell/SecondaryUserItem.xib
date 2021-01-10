@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="SecondaryUserItem" customModule="Body_Shaping" customModuleProvider="target">
+            <connections>
+                <outlet property="role" destination="cO7-48-wo5" id="tAn-OB-zhl"/>
+                <outlet property="userName" destination="SKl-x2-GdM" id="Q0C-Ys-icA"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="284" height="48"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SKl-x2-GdM">
+                    <rect key="frame" x="14" y="16" width="37" height="16"/>
+                    <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="7cE-g5-xOD">
+                        <font key="font" usesAppearanceFont="YES"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cO7-48-wo5">
+                    <rect key="frame" x="233" y="16" width="37" height="16"/>
+                    <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="1ZA-A1-5Y0">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <constraints>
+                <constraint firstItem="SKl-x2-GdM" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="16" id="9p6-5Y-qgB"/>
+                <constraint firstAttribute="bottom" secondItem="SKl-x2-GdM" secondAttribute="bottom" constant="16" id="AR1-tk-GgS"/>
+                <constraint firstItem="cO7-48-wo5" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="16" id="ZPA-oj-dqA"/>
+                <constraint firstAttribute="trailing" secondItem="cO7-48-wo5" secondAttribute="trailing" constant="16" id="kId-SN-qcZ"/>
+                <constraint firstAttribute="bottom" secondItem="cO7-48-wo5" secondAttribute="bottom" constant="16" id="ksD-O2-2ZN"/>
+                <constraint firstItem="SKl-x2-GdM" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="16" id="oh1-5n-GHg"/>
+            </constraints>
+            <point key="canvasLocation" x="-3" y="29"/>
+        </customView>
+        <customObject id="9kh-V9-Tzc" customClass="SecondaryUserItem" customModule="Body_Shaping" customModuleProvider="target"/>
+    </objects>
+</document>

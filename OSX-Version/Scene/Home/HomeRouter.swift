@@ -5,6 +5,7 @@ import Cocoa
     func routeToNewExpense()
     func routeToMoneyFlow()
     func routeToNewImplementation()
+    func routeToSecondaryUserLogin()
 }
 
 protocol HomeDataPassing {
@@ -20,6 +21,13 @@ class HomeRouter: NSObject, HomeRoutingLogic, HomeDataPassing {
     
     func routeToMoneyFlow() {
         let storyboard = NSStoryboard(name: "MoneyFlow", bundle: nil)
+    }
+    
+    func routeToSecondaryUserLogin()
+    {
+        let storyboard = NSStoryboard(name: "SecondaryUser", bundle: nil)
+        let destinationVC = storyboard.instantiateController(withIdentifier: "SecondaryUserLoginViewController") as! SecondaryUserLoginViewController
+        navigateToSomewhere(source: viewController!, destination: destinationVC)
     }
     
     func routeToNewExpense() {

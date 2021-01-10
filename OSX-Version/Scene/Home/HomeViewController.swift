@@ -111,16 +111,11 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
             let user = MainUserSession.GetUser()
             
             //Secondary Login
-            SecondaryUserSession.Remove()
             let secondaryUser = SecondaryUserSession.GetUser()
-            SecondaryUserSession.Login(userName: secondaryUser?.userName ?? "Quique", password: secondaryUser?.password ?? "diego1234") { (result) in
-                print("Secondary User Logged in")
-                let userTitle = (user?.displayName ?? "Sin Nombre") + " (\(user?.email ?? ""))"
-                DispatchQueue.main.async {
-                    self.view.window?.title = userTitle + " User: \(SecondaryUserSession.GetUser()?.userName ?? "")"
-                    
-                }
-            }
+            self.router?.routeToSecondaryUserLogin()
+            let userTitle = (user?.displayName ?? "Sin Nombre") + " (\(user?.email ?? ""))"
+            self.view.window?.title = userTitle + " User: \(secondaryUser?.userName ?? "") - \(secondaryUser?.role.rawValue ?? "")"
+            
         }
     }
     
