@@ -123,17 +123,18 @@ class ArticleSellView: XibViewBlurBackground {
     }
    
     private func updateStock() {
-        let path = "product:article:\(selectedItem?._id ?? "")"
-        let uid = UserSaved.GetUser()?.uid
-        let endpoint = Endpoint.Create(to: .Transaction(uid: uid!,
-                                                                      path: path,
-                                                                      key: "stock",
-                                                                      value: -1))
+        let uid = MainUserSession.GetUID()
+        let path = "/users:\(uid):product:article:\(selectedItem?._id ?? "")"
+        let endpoint = Endpoint.Create(to: .Firebase(.Transaction(path: path,
+                                                                  key: "stock",
+                                                                  amount: -1)))
+
         BLServerManager.ApiCall(endpoint: endpoint) { (response: Bool) in
             print("stock updated", response)
         } fail: { (error) in
             print("could not update stock", error.rawValue)
         }
+        
     }
     
     private func addNullPayment(sellId: String) {

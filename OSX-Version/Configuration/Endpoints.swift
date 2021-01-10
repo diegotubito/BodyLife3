@@ -13,7 +13,6 @@ import BLServerManager
 public enum EndpointType {
     case RefreshToken(body: [String : Any])
     case CheckServerConnection
-    case Transaction(uid: String, path: String, key: String, value: Double)
     case Stock(uid: String, path: String)
     case ConnectToMongoDB(query: String)
     case DisconnectMongoDB
@@ -81,12 +80,13 @@ public enum EndpointType {
         case SendVerificationMail(body: [String: Any])
         case Save(path: String, body: [String: Any])
         case Load(path: String)
+        case Transaction(path: String, key: String, amount: Double)
     }
 }
 
 class Endpoint {
     static func Create(to: EndpointType) -> BLEndpointModel {
-        let token = UserSaved.GetToken()
+        let token = MainUserSession.GetToken()
     
         switch to {
         case .RefreshToken(body: let body):
@@ -104,10 +104,6 @@ class Endpoint {
         case .CheckServerConnection:
             let url = BLServerManager.baseUrl.rawValue + "/v1/checkServerConnection"
             return BLEndpointModel(url: url, token: token, method: "GET", query: nil, body: nil)
-        case .Transaction(uid: let uid, path: let path, key: let key, value: let value):
-            let body = ["transaction": value]
-            let url = BLServerManager.baseUrl.rawValue + "/v1/firebase/database/transaction" + "/users:\(uid):\(path):\(key)"
-            return BLEndpointModel(url: url, token: token, method: "POST", query: nil, body: body)
         case .Stock(uid: let uid, path: let path):
             let url = BLServerManager.baseUrl.rawValue + "/v1/firebase/database" + "/users:\(uid):\(path)"
             return BLEndpointModel(url: url, token: token, method: "GET", query: nil, body: nil)
@@ -193,6 +189,10 @@ class Endpoint {
         case .Firebase(.Load(path: let path)):
             let url = BLServerManager.baseUrl.rawValue + "/v1/firebase/database" + path
             return BLEndpointModel(url: url, token: token, method: "GET", query: nil, body: nil)
+        case .Firebase(.Transaction(path: let path, key: let key, amount: let amount)):
+            let body = ["transaction": amount]
+            let url = BLServerManager.baseUrl.rawValue + "/v1/firebase/database/transaction" + "\(path):\(key)"
+            return BLEndpointModel(url: url, token: token, method: "POST", query: nil, body: body)
         case .Period(.Save(body: let body)):
             let url = "\(BLServerManager.baseUrl.rawValue)/v1/period"
             return BLEndpointModel(url: url, token: token, method: "POST", query: nil, body: body)

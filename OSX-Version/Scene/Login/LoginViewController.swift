@@ -60,7 +60,7 @@ class LoginViewController: BaseViewController, LoginDisplayLogic {
         setupWindow(width: Constants.ViewControllerSizes.Login.width, height: Constants.ViewControllerSizes.Login.height)
 
         if sameUserName {
-            let user = UserSaved.GetUser()
+            let user = MainUserSession.GetUser()
             userTextField.stringValue = user?.email ?? ""
             userTextField.resignFirstResponder()
             passwordTextField.becomeFirstResponder()
@@ -102,7 +102,7 @@ class LoginViewController: BaseViewController, LoginDisplayLogic {
                     self.resultLabel.isHidden = true
                     if (viewModel.user?.emailVerified ?? false) {
                         self.didLogin?(viewModel.data!)
-                        UserSaved.Save(userData: viewModel.data!)
+                        MainUserSession.Save(userData: viewModel.data!)
                         NotificationCenter.default.post(name: .DidLogin, object: nil)
                         self.view.window?.close()
                     } else {

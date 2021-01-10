@@ -144,11 +144,11 @@
                                 <rect key="frame" x="0.0" y="0.0" width="1280" height="20"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EX2-Ss-9NK">
-                                        <rect key="frame" x="1145" y="-7" width="142" height="32"/>
+                                        <rect key="frame" x="1153" y="-7" width="134" height="32"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="128" id="Ctb-x7-BXs"/>
+                                            <constraint firstAttribute="width" constant="120" id="Ctb-x7-BXs"/>
                                         </constraints>
-                                        <buttonCell key="cell" type="push" title="Import database" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="3Vu-4F-FKI">
+                                        <buttonCell key="cell" type="push" title="Import" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="3Vu-4F-FKI">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
@@ -156,9 +156,11 @@
                                             <action selector="importData:" target="XfG-lQ-9wD" id="AWw-WC-828"/>
                                         </connections>
                                     </button>
-                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N7q-BM-eAg">
-                                        <rect key="frame" x="968" y="-7" width="145" height="32"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="N7q-BM-eAg">
+                                        <rect key="frame" x="1025" y="-7" width="134" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="120" id="Kgg-qH-OA8"/>
+                                        </constraints>
                                         <buttonCell key="cell" type="push" title="Remove Customer" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ioq-4A-DYh">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -167,12 +169,31 @@
                                             <action selector="removeCustomer:" target="XfG-lQ-9wD" id="XIM-l9-dRi"/>
                                         </connections>
                                     </button>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="W1x-U5-nxn">
+                                        <rect key="frame" x="897" y="-7" width="134" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="120" id="lBa-z5-fEP"/>
+                                        </constraints>
+                                        <buttonCell key="cell" type="push" title="Create SecUser" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="fp8-S7-o6u">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="createSecondaryUser:" target="XfG-lQ-9wD" id="3OE-cW-SFq"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="N7q-BM-eAg" firstAttribute="leading" secondItem="W1x-U5-nxn" secondAttribute="trailing" constant="8" id="0sB-4n-vRs"/>
+                                    <constraint firstAttribute="bottom" secondItem="W1x-U5-nxn" secondAttribute="bottom" id="17J-gg-FOY"/>
                                     <constraint firstAttribute="bottom" secondItem="EX2-Ss-9NK" secondAttribute="bottom" id="5JG-Na-aF4"/>
                                     <constraint firstAttribute="height" constant="20" id="6QP-Zw-s8k"/>
                                     <constraint firstItem="EX2-Ss-9NK" firstAttribute="top" secondItem="vJS-25-cay" secondAttribute="top" id="7Ep-JE-yzL"/>
                                     <constraint firstAttribute="trailing" secondItem="EX2-Ss-9NK" secondAttribute="trailing" id="7Zr-O9-G7D"/>
+                                    <constraint firstAttribute="bottom" secondItem="N7q-BM-eAg" secondAttribute="bottom" id="JoG-tW-BFc"/>
+                                    <constraint firstItem="N7q-BM-eAg" firstAttribute="top" secondItem="vJS-25-cay" secondAttribute="top" id="Nfm-FV-DBP"/>
+                                    <constraint firstItem="W1x-U5-nxn" firstAttribute="top" secondItem="vJS-25-cay" secondAttribute="top" id="hTF-Vr-qYh"/>
+                                    <constraint firstItem="EX2-Ss-9NK" firstAttribute="leading" secondItem="N7q-BM-eAg" secondAttribute="trailing" constant="8" id="pFj-h9-hVg"/>
                                 </constraints>
                             </customView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="xeN-qp-oFe">

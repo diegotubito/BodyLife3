@@ -61,16 +61,16 @@ class Connect {
     }
     
     @objc func refreshToken() {
-        let endpoint = Endpoint.Create(to: .RefreshToken(body: ["_id" : UserSaved.GetUID()]))
+        let endpoint = Endpoint.Create(to: .RefreshToken(body: ["_id" : MainUserSession.GetUID()]))
         BLServerManager.ApiCall(endpoint: endpoint) { (token: ModelRefreshToken) in
-            guard let user = UserSaved.GetUser() else {
+            guard let user = MainUserSession.GetUser() else {
                 NotificationCenter.default.post(name: .NeedLogin, object: nil, userInfo: nil)
                 return
             }
             let tokenData = token
             var userSession = user
             userSession.token = tokenData.token
-            UserSaved.Update(userSession)
+            MainUserSession.Update(userSession)
             UserSession = userSession
         } fail: { (error) in
            
@@ -78,13 +78,13 @@ class Connect {
     }
     
     func doCheck() {
-        if let user = UserSaved.GetUser() {
+        if let user = MainUserSession.GetUser() {
             print("Connect: User \(String(describing: user.displayName))")
-            let endpoint = Endpoint.Create(to: .RefreshToken(body: ["_id" : UserSaved.GetUID()]))
+            let endpoint = Endpoint.Create(to: .RefreshToken(body: ["_id" : MainUserSession.GetUID()]))
             BLServerManager.ApiCall(endpoint: endpoint) { (token:ModelRefreshToken) in
                 var userSession = user
                 userSession.token = token.token
-                UserSaved.Update(userSession)
+                MainUserSession.Update(userSession)
                 UserSession = userSession
                 print("Connect: Refresh token SUCCESS")
                 //Select database name

@@ -11,6 +11,7 @@ import BLServerManager
 import Alamofire
 
 public class CommonWorker {
+    
     public struct Image {
         static var imageCache = NSCache<AnyObject, AnyObject>()
         
@@ -50,7 +51,7 @@ public class CommonWorker {
                 return
             }
             
-            let userUID = UserSaved.GetUID()
+            let userUID = MainUserSession.GetUID()
             let endpoint = Endpoint.Create(to: .Image(.LoadBigSize(userUID: userUID, customerUID: childID)))
             BLServerManager.ApiCall(endpoint: endpoint) { (data) in
                 guard let data = data, let image = NSImage(data: data) else {
@@ -136,7 +137,7 @@ public class CommonWorker {
             let url = "\(BLServerManager.baseUrl.rawValue)/v1/uploadImage/\(path)"
             
             let headers: HTTPHeaders = ["Content-type": "multipart/form-data",
-                                        "x-access-token" : UserSaved.GetToken()]
+                                        "x-access-token" : MainUserSession.GetToken()]
             
             
             Alamofire.upload(multipartFormData: { (multipartFormData) in

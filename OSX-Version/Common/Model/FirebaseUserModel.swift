@@ -21,10 +21,3 @@ struct FirebaseUserModel: Decodable, Encodable {
     var createdAt : String?
    
 }
-
-
-struct CurrentUserModel: Decodable {
-    var token : String
-    var username : String?
-    var exp : Double?
-}

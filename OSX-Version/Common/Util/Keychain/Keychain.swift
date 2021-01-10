@@ -10,7 +10,8 @@ import Foundation
 import KeychainSwift
 
 enum KeychainService: String{
-    case userData = "userData"
+    case mainUserData = "mainUserData"
+    case secondaryUserData = "secondaryUserData"
 }
 
 class Keychain {

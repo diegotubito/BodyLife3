@@ -108,7 +108,7 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
             self.customerListView.startLoading()
             NotificationCenter.default.post(.init(name: .needUpdateArticleList))
             NotificationCenter.default.post(.init(name: .needUpdateProductService))
-            let user = UserSaved.GetUser()
+            let user = MainUserSession.GetUser()
             self.view.window?.title = (user?.displayName ?? "Sin Nombre") + " (\(user?.email ?? ""))"
         }
     }
@@ -138,7 +138,31 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
 
     }
     
+    @IBAction func createSecondaryUser(_ sender: Any) {
+        
+    }
+    
     @IBAction func importData(_ sender: Any) {
+        let primaryAccount = CashAccountModel(id: "111111111111",
+                                          description: "Caja Chica".localized,
+                                          amount: 0,
+                                          isEnabled: true,
+                                          timestamp: Date().timeIntervalSince1970,
+                                          userRole: "TRAINNER_ROLE",
+                                          isPermanent: true,
+                                          needNotification: false)
+        let secondaryAccount = CashAccountModel(id: "222222222222",
+                                          description: "Cuenta Externa".localized,
+                                          amount: 0,
+                                          isEnabled: true,
+                                          timestamp: Date().timeIntervalSince1970,
+                                          userRole: "ADMIN_ROLE",
+                                          isPermanent: true,
+                                          needNotification: false)
+        CommonWorker.CashAccount.createCashAccount(account: primaryAccount)
+        CommonWorker.CashAccount.createCashAccount(account: secondaryAccount)
+        
+    //    CommonWorker.CashAccount.transaction(accountId: "111111111111", amount: -100.50)
    //    ImportDatabase.Discount.MigrateToMongoDB()
    //     ImportDatabase.Activity.MigrateToMongoDB()
    //     ImportDatabase.Period.MigrateToMongoDB()
@@ -147,7 +171,7 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
    //     ImportDatabase.Customer.MigrateToMongoDB()
         
         //this also create thumbnail and move old bucket pictures to new
-        ImportDatabase.Thumbnail.MigrateToMongoDB()
+   //     ImportDatabase.Thumbnail.MigrateToMongoDB()
         
         //this only move old bucket photos to new bucket
 //        ImportDatabase.Storage.MovePhotosToAnotherFolder()
@@ -160,7 +184,7 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
     
     @IBAction func closeSessionPressed(_ sender: Any) {
         let endpoint = Endpoint.Create(to: .DisconnectMongoDB)
-        UserSaved.Remove()
+        MainUserSession.Remove()
         self.GoToLogin()
         BLServerManager.ApiCall(endpoint: endpoint) { (success: Bool) in
             print("MongoDB database disconnected.")

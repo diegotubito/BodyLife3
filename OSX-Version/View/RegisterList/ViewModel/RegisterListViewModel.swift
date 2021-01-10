@@ -179,12 +179,11 @@ class RegisterListViewModel: RegisterListViewModelContract {
     }
     
     private func updateStock(_ childIDArticle: String) {
-        let path = "product:article:\(childIDArticle)"
-        let uid = UserSaved.GetUser()?.uid
-        let endpoint = Endpoint.Create(to: .Transaction(uid: uid!,
-                                                                      path: path,
-                                                                      key: "stock",
-                                                                      value: 1))
+        let uid = MainUserSession.GetUID()
+        let path = "/users:\(uid):product:article:\(childIDArticle)"
+        let endpoint = Endpoint.Create(to: .Firebase(.Transaction(path: path,
+                                                                  key: "stock",
+                                                                  amount: 1)))
         BLServerManager.ApiCall(endpoint: endpoint) { (response: Bool) in
             print("stock updated")
             NotificationCenter.default.post(.init(name: .needUpdateArticleList))

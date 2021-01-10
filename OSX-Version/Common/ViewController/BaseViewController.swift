@@ -179,11 +179,11 @@ class BaseViewController : NSViewController {
     @objc func GoToLogin() {
         DispatchQueue.main.async {
             var sameUserName = false
-            if (UserSaved.GetUser()?.uid) != nil {
+            if (MainUserSession.GetUser()?.uid) != nil {
                 sameUserName = true
             }
             self.routeToLogin(sameUserName: sameUserName) { data in
-                UserSaved.Save(userData: data)
+                MainUserSession.Save(userData: data)
             }
         }
     }

@@ -24,7 +24,7 @@ class ArticleListViewModel : ArticleListViewModelContract {
     
     func loadProducts() {
         _view.showLoading()
-        let uid = UserSaved.GetUID()
+        let uid = MainUserSession.GetUID()
         let path = "product:article"
         let endpoint = Endpoint.Create(to: .Article(.Load(userUID: uid, path: path)))
         BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<[ArticleModel.NewRegister]>) in

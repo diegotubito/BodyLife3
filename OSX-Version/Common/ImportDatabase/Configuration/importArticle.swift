@@ -86,7 +86,7 @@ extension ImportDatabase {
             guard let articles = ImportDatabase.Article.getArticles() else {
                 return
             }
-            let uid = UserSaved.GetUID()
+            let uid = MainUserSession.GetUID()
             let place = "product:article"
             var notAdded = 0
             for (x,article) in articles.enumerated() {

@@ -7,26 +7,25 @@
 //
 
 import Foundation
-import Alamofire
 
-class UserSaved {
-    static let Shared = UserSaved()
+class MainUserSession {
+    static let Shared = MainUserSession()
     
     static func Save(userData: Data) {
-        Keychain.set(value: userData, service: .userData)
+        Keychain.set(value: userData, service: .mainUserData)
     }
     
     static func Remove() {
         //esto remueve todos los items en keychain
-        Keychain.clear(service: .userData)
+        Keychain.clear(service: .mainUserData)
     }
     
     static func Update(_ newUserObj: FirebaseUserModel) {
-        if let data = Keychain.get(service: .userData) {
+        if let data = Keychain.get(service: .mainUserData) {
             var json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String : Any]
             json?.updateValue(newUserObj.token as Any, forKey: "token")
             let newData = (try? JSONSerialization.data(withJSONObject: json!, options: []))!
-            UserSaved.Save(userData: newData)
+            MainUserSession.Save(userData: newData)
         }
         
     }
@@ -34,7 +33,7 @@ class UserSaved {
     static func GetUser() -> FirebaseUserModel? {
         var user : FirebaseUserModel?
         
-        if let data = Keychain.get(service: .userData) {
+        if let data = Keychain.get(service: .mainUserData) {
             user = try? JSONDecoder().decode(FirebaseUserModel.self, from: data)
         }
     
