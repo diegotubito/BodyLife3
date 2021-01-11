@@ -129,14 +129,23 @@
                                             <action selector="newImplentationPressed:" target="XfG-lQ-9wD" id="yBQ-Qs-p5x"/>
                                         </connections>
                                     </button>
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="kPf-Dq-0A9">
+                                        <rect key="frame" x="1081" y="0.0" width="150" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="150" id="baP-9q-dvI"/>
+                                        </constraints>
+                                    </customView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="9AY-9h-Rjr" firstAttribute="leading" secondItem="Y6C-Pr-GNv" secondAttribute="leading" constant="16" id="28c-pc-z5b"/>
                                     <constraint firstItem="avi-xG-IAk" firstAttribute="leading" secondItem="9AY-9h-Rjr" secondAttribute="trailing" constant="16" id="3h1-nt-z9K"/>
                                     <constraint firstAttribute="trailing" secondItem="Kec-wk-swp" secondAttribute="trailing" constant="16" id="9P1-m4-2aV"/>
                                     <constraint firstItem="9AY-9h-Rjr" firstAttribute="centerY" secondItem="Y6C-Pr-GNv" secondAttribute="centerY" id="AOL-qY-63e"/>
+                                    <constraint firstAttribute="bottom" secondItem="kPf-Dq-0A9" secondAttribute="bottom" id="Ppc-UG-fyq"/>
                                     <constraint firstItem="avi-xG-IAk" firstAttribute="centerY" secondItem="Y6C-Pr-GNv" secondAttribute="centerY" id="dLw-hl-cbs"/>
                                     <constraint firstItem="Kec-wk-swp" firstAttribute="centerY" secondItem="Y6C-Pr-GNv" secondAttribute="centerY" id="hAy-he-GmQ"/>
+                                    <constraint firstItem="kPf-Dq-0A9" firstAttribute="top" secondItem="Y6C-Pr-GNv" secondAttribute="top" id="iwy-62-kdA"/>
+                                    <constraint firstItem="Kec-wk-swp" firstAttribute="leading" secondItem="kPf-Dq-0A9" secondAttribute="trailing" id="wDw-d0-cY0"/>
                                     <constraint firstAttribute="height" constant="40" id="xBg-Mn-Ma1"/>
                                 </constraints>
                             </customView>
@@ -235,6 +244,7 @@
                         <outlet property="containerStatus" destination="0fS-Ye-Kdk" id="lvC-xI-kXo"/>
                         <outlet property="containerUpperBar" destination="Y6C-Pr-GNv" id="Sv0-Al-zIe"/>
                         <outlet property="newImplementation" destination="avi-xG-IAk" id="zXk-qs-uQQ"/>
+                        <outlet property="secondaryUserStatusViewContainer" destination="kPf-Dq-0A9" id="iPM-yp-mFS"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

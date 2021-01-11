@@ -26,7 +26,7 @@ class SecondaryUserListView : GenericCollectionView<SecondaryUserItem, Secondary
                 self.collectionView.reloadData()
             }
         } fail: { (error) in
-            print(error.rawValue)
+            print(error)
         }
 
     }

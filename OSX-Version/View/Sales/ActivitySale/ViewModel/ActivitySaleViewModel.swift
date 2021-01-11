@@ -35,7 +35,7 @@ class ActivitySaleViewModel : ActivitySaleViewModelContract {
             self.parseActivityAndDiscount(periods: periods)
         } fail: { (error) in
             self._view.hideLoading()
-            self._view.showError(error.localizedDescription)
+            self._view.showError(error)
         }
     }
     
@@ -207,7 +207,7 @@ extension ActivitySaleViewModel {
             let _id = response.data?._id
             self.addNullPayment(sellId: _id!)
         } fail: { (error) in
-            self._view.showError("No se puedo guardar venta \(error.rawValue)")
+            self._view.showError("No se puedo guardar venta \(error)")
             self._view.enableSaveButton()
             self._view.hideLoadingButton()
         }

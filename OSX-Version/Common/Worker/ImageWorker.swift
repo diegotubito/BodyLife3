@@ -40,7 +40,7 @@ public class CommonWorker {
             }
         }
         
-        static func downloadBigSize(childID: String, completion: @escaping (NSImage?, Error?) -> ()) {
+        static func downloadBigSize(childID: String, completion: @escaping (NSImage?, String?) -> ()) {
             let key = childID
             
             //if I have already loaded the image, there's no need to load it again.

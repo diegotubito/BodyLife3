@@ -17,7 +17,7 @@ extension CommonWorker {
             BLServerManager.ApiCall(endpoint: endpoint) { (data) in
                 
             } fail: { (error) in
-                print("error cash account transaction, this might cause a difference in cash balance", error.rawValue)
+                print("error cash account transaction, this might cause a difference in cash balance", error)
             }
 
         }
@@ -33,7 +33,7 @@ extension CommonWorker {
             BLServerManager.ApiCall(endpoint: endpoint) { (data) in
                 
             } fail: { (error) in
-                print("could not save cash account", error.rawValue)
+                print("could not save cash account", error)
             }
 
         }

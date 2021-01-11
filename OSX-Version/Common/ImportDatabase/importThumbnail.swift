@@ -156,7 +156,7 @@ extension ImportDatabase {
             }
         }
         
-        static func downloadImage(childID: String, completion: @escaping (String?, NSImage?, Error?) -> ()) {
+        static func downloadImage(childID: String, completion: @escaping (String?, NSImage?, String?) -> ()) {
             
             let endpoint = Endpoint.Create(to: .Image(.LoadBigSizeFromOldBucket(customerUID: childID)))
             

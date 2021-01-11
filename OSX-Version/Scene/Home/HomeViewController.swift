@@ -9,6 +9,7 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
     var interactor: HomeBusinessLogic?
     var router: (NSObjectProtocol & HomeRoutingLogic & HomeDataPassing)?
     
+    @IBOutlet weak var secondaryUserStatusViewContainer: NSView!
     @IBOutlet weak var newImplementation: NSButton!
     @IBOutlet weak var containerUpperBar: NSView!
     @IBOutlet weak var containerBottomBar: NSView!
@@ -109,13 +110,8 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
             NotificationCenter.default.post(.init(name: .needUpdateArticleList))
             NotificationCenter.default.post(.init(name: .needUpdateProductService))
             let user = MainUserSession.GetUser()
-            
-            //Secondary Login
-            let secondaryUser = SecondaryUserSession.GetUser()
-            self.router?.routeToSecondaryUserLogin()
             let userTitle = (user?.displayName ?? "Sin Nombre") + " (\(user?.email ?? ""))"
-            self.view.window?.title = userTitle + " User: \(secondaryUser?.userName ?? "") - \(secondaryUser?.role.rawValue ?? "")"
-            
+            self.view.window?.title = userTitle
         }
     }
     

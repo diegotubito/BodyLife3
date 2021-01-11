@@ -57,7 +57,7 @@ class NewUserViewController : BaseViewController {
                 }
             }
         } fail: { (error) in
-            result(error.rawValue)
+            result(error)
         }
     }
     

@@ -145,7 +145,7 @@ extension ImportDatabase {
             }
         }
         
-        static func downloadImage(childID: String, completion: @escaping (NSImage?, Error?) -> ()) {
+        static func downloadImage(childID: String, completion: @escaping (NSImage?, String?) -> ()) {
             let endpoint = Endpoint.Create(to: .Image(.LoadBigSizeFromOldBucket(customerUID: childID)))
             
             BLServerManager.ApiCall(endpoint: endpoint) { (data) in

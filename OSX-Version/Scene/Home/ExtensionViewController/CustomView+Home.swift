@@ -27,6 +27,13 @@ extension HomeViewController {
         createBottomView()
         createArticleSellView()
         createPaymentView()
+        
+        createSecondaryUserView()
+    }
+    
+    func createSecondaryUserView() {
+        let secondaryUserView = SecondaryUserStatusView(frame: CGRect(x: 0, y: 0, width: self.secondaryUserStatusViewContainer.frame.width, height: self.secondaryUserStatusViewContainer.frame.height))
+        self.secondaryUserStatusViewContainer.addSubview(secondaryUserView)
     }
     
     func createArticleSellView() {

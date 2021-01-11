@@ -31,7 +31,7 @@ class ArticleListViewModel : ArticleListViewModelContract {
             self.model.articles = response.data
             self.filterAndSort()
         } fail: { (error) in
-            print("Could not load Articles", error.rawValue)
+            print("Could not load Articles", error)
         }
     }
     

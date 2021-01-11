@@ -75,6 +75,7 @@ class BaseViewController : NSViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(connected), name: .ServerConnected, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(GoToLogin), name: .NeedLogin, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(GoToSecondaryLogin), name: .needSecondaryUserLogin, object: nil)
     }
     
     deinit {
@@ -175,6 +176,13 @@ class BaseViewController : NSViewController {
             self.presentAsSheet(destinationVC)
         }
     }
+    
+    func routeToSecondaryLogin()
+    {
+        let storyboard = NSStoryboard(name: "SecondaryUser", bundle: nil)
+        let destinationVC = storyboard.instantiateController(withIdentifier: "SecondaryUserLoginViewController") as! SecondaryUserLoginViewController
+        self.presentAsSheet(destinationVC)
+    }
    
     @objc func GoToLogin() {
         DispatchQueue.main.async {
@@ -185,6 +193,12 @@ class BaseViewController : NSViewController {
             self.routeToLogin(sameUserName: sameUserName) { data in
                 MainUserSession.Save(userData: data)
             }
+        }
+    }
+    
+    @objc func GoToSecondaryLogin() {
+        DispatchQueue.main.async {
+            self.routeToSecondaryLogin()
         }
     }
     

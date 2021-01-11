@@ -18,6 +18,8 @@
 		110CDFCB25AB5BC700898470 /* SecondaryUserLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110CDFC925AB5BC700898470 /* SecondaryUserLoginViewController.swift */; };
 		110CDFCF25AB5C0000898470 /* NewUpdateSecondaryUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110CDFCE25AB5C0000898470 /* NewUpdateSecondaryUserViewController.swift */; };
 		110CDFD025AB5C0000898470 /* NewUpdateSecondaryUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110CDFCE25AB5C0000898470 /* NewUpdateSecondaryUserViewController.swift */; };
+		110CDFED25ABB91D00898470 /* SecondaryUserStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110CDFEC25ABB91D00898470 /* SecondaryUserStatusView.swift */; };
+		110CDFEE25ABB91D00898470 /* SecondaryUserStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110CDFEC25ABB91D00898470 /* SecondaryUserStatusView.swift */; };
 		111DE5692389C623002F4216 /* CustomView+Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111DE5682389C623002F4216 /* CustomView+Home.swift */; };
 		111DE56D2389F567002F4216 /* SaveButtonCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111DE56C2389F567002F4216 /* SaveButtonCustomView.swift */; };
 		111DE56F2389F5A3002F4216 /* SaveButtonCustomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 111DE56E2389F5A3002F4216 /* SaveButtonCustomView.xib */; };
@@ -325,6 +327,7 @@
 		110CDFC425AB5B8700898470 /* SecondaryUserListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryUserListViewController.swift; sourceTree = "<group>"; };
 		110CDFC925AB5BC700898470 /* SecondaryUserLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryUserLoginViewController.swift; sourceTree = "<group>"; };
 		110CDFCE25AB5C0000898470 /* NewUpdateSecondaryUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUpdateSecondaryUserViewController.swift; sourceTree = "<group>"; };
+		110CDFEC25ABB91D00898470 /* SecondaryUserStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryUserStatusView.swift; sourceTree = "<group>"; };
 		111DE5682389C623002F4216 /* CustomView+Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomView+Home.swift"; sourceTree = "<group>"; };
 		111DE56C2389F567002F4216 /* SaveButtonCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveButtonCustomView.swift; sourceTree = "<group>"; };
 		111DE56E2389F5A3002F4216 /* SaveButtonCustomView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SaveButtonCustomView.xib; sourceTree = "<group>"; };
@@ -535,6 +538,23 @@
 			path = NewCustomer;
 			sourceTree = "<group>";
 		};
+		110CDFE825ABB90A00898470 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				113FA66E25AB54F20043E7D6 /* Cell */,
+				113FA66925AB54CB0043E7D6 /* SecondaryUserListView.swift */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
+		110CDFEB25ABB90F00898470 /* Status */ = {
+			isa = PBXGroup;
+			children = (
+				110CDFEC25ABB91D00898470 /* SecondaryUserStatusView.swift */,
+			);
+			path = Status;
+			sourceTree = "<group>";
+		};
 		111DE5672389C5F3002F4216 /* ExtensionViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -618,13 +638,13 @@
 			path = NewUpdateUser;
 			sourceTree = "<group>";
 		};
-		113FA66825AB54A40043E7D6 /* SecondaryUserList */ = {
+		113FA66825AB54A40043E7D6 /* SecondaryUser */ = {
 			isa = PBXGroup;
 			children = (
-				113FA66E25AB54F20043E7D6 /* Cell */,
-				113FA66925AB54CB0043E7D6 /* SecondaryUserListView.swift */,
+				110CDFEB25ABB90F00898470 /* Status */,
+				110CDFE825ABB90A00898470 /* List */,
 			);
-			path = SecondaryUserList;
+			path = SecondaryUser;
 			sourceTree = "<group>";
 		};
 		113FA66E25AB54F20043E7D6 /* Cell */ = {
@@ -639,7 +659,7 @@
 		1147AB3E2383648B00D19AA9 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				113FA66825AB54A40043E7D6 /* SecondaryUserList */,
+				113FA66825AB54A40043E7D6 /* SecondaryUser */,
 				116CE95C23EDCD3000688C0B /* ActivityListView */,
 				1166AF3923B295D40047C7AE /* Sales */,
 				11A8ECEF23B0E6F700F15B9A /* ArticleListView */,
@@ -1621,6 +1641,7 @@
 				11578518252B85C0008A89DC /* ExpenseModel.swift in Sources */,
 				11578519252B85C0008A89DC /* ThumbnailModel.swift in Sources */,
 				1157851A252B85C0008A89DC /* operationCategory.swift in Sources */,
+				110CDFEE25ABB91D00898470 /* SecondaryUserStatusView.swift in Sources */,
 				1157851B252B85C0008A89DC /* PeriodModel.swift in Sources */,
 				1157851C252B85C0008A89DC /* ImportCustomer.swift in Sources */,
 				1157851D252B85C0008A89DC /* importDiscount.swift in Sources */,
@@ -1758,6 +1779,7 @@
 				11D615762523F4C3005B5D81 /* ThumbnailModel.swift in Sources */,
 				1184723E2528D2BE0012D237 /* operationCategory.swift in Sources */,
 				11D3D87C25214C290008CFD0 /* PeriodModel.swift in Sources */,
+				110CDFED25ABB91D00898470 /* SecondaryUserStatusView.swift in Sources */,
 				11498E602520975000E4D679 /* ImportCustomer.swift in Sources */,
 				11D3D86B252127BD0008CFD0 /* importDiscount.swift in Sources */,
 				115786DF252FE943008A89DC /* SocketManager.swift in Sources */,

@@ -115,7 +115,7 @@ class ArticleSellView: XibViewBlurBackground {
             }
             self.addNullPayment(sellId: _id)
         } fail: { (error) in
-            print("no se pudo guardar venta de articulo", error.rawValue)
+            print("no se pudo guardar venta de articulo", error)
             self.hideLoadingButton()
             self.enableSaveButton()
         }
@@ -132,7 +132,7 @@ class ArticleSellView: XibViewBlurBackground {
         BLServerManager.ApiCall(endpoint: endpoint) { (response: Bool) in
             print("stock updated", response)
         } fail: { (error) in
-            print("could not update stock", error.rawValue)
+            print("could not update stock", error)
         }
         
     }
