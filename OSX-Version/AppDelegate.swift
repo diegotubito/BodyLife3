@@ -15,6 +15,8 @@ var UserSession : FirebaseUserModel?
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
+    var window : NSWindow!
+    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
         Reachability.sharedInstance.suscribeConnectionChanged()
@@ -25,8 +27,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         #endif
      
         Connect.StartListening()
+
     }
-    
+        
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
         let semasphore = DispatchSemaphore(value: 0)
         let endpoint = Endpoint.Create(to: .DisconnectMongoDB)

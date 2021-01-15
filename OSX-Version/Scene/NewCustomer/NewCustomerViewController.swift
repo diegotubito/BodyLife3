@@ -11,7 +11,7 @@ protocol NewCustomerDisplayLogic: class {
     func customerCouldNotBeSaved(message: String)
 }
 
-class NewCustomerViewController: BaseViewController, NewCustomerDisplayLogic {
+class NewCustomerViewController: BaseViewController, NewCustomerDisplayLogic, CommonRouterProtocol {
    
     @IBOutlet weak var guardarButtonOutlet: NSButton!
     @IBOutlet weak var CustomerIconImageView: NSImageView!
@@ -93,9 +93,18 @@ class NewCustomerViewController: BaseViewController, NewCustomerDisplayLogic {
             setValuesForEdition()
         }
         
+        NotificationCenter.default.addObserver(self, selector: #selector(GoToSecondaryLogin), name: .needSecondaryUserLogin, object: nil)
+        
     }
     
-
+    @objc func GoToSecondaryLogin() {
+        routeToSecondaryLogin(vc: self)
+    }
+    
+    override func viewWillDisappear() {
+        super .viewWillDisappear()
+        NotificationCenter.default.removeObserver(self)
+    }
     
     // MARK: Do something
     

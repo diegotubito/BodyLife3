@@ -5,7 +5,8 @@ protocol HomeDisplayLogic: class {
     func displaySomething(viewModel: Home.Something.ViewModel)
 }
 
-class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate {
+class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate, CommonRouterProtocol {
+   
     var interactor: HomeBusinessLogic?
     var router: (NSObjectProtocol & HomeRoutingLogic & HomeDataPassing)?
     
@@ -58,16 +59,19 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
         super.viewDidLoad()
         setupWindow(width: Constants.ViewControllerSizes.Home.width, height: Constants.ViewControllerSizes.Home.height)
           
-        
         NotificationCenter.default.addObserver(self, selector: #selector(StartLoading), name: .CommunicationStablished, object: nil)
         
         
         self.timerForDelayCustomerSelection = Timer.scheduledTimer(timeInterval: 0.0, target: self, selector: #selector(self.loadStatus), userInfo: nil, repeats: false)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(GoToSecondaryLogin), name: .needSecondaryUserLogin, object: nil)
+         
     }
     
-    @IBAction func newImplentationPressed(_ sender: Any) {
-        router?.routeToNewExpense()
+   
+    
+    @objc func GoToSecondaryLogin() {
+        routeToSecondaryLogin(vc: self)
     }
     
     @IBAction func addGenericButtob(_ sender: Any) {

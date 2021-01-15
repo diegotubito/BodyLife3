@@ -244,6 +244,8 @@
 		118773E625772974002F2635 /* NewCustomerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118773CB2577292F002F2635 /* NewCustomerPresenter.swift */; };
 		118773E725772974002F2635 /* NewCustomerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118773C82577292F002F2635 /* NewCustomerViewController.swift */; };
 		118773EA25772978002F2635 /* TextFieldValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118773D625772939002F2635 /* TextFieldValidation.swift */; };
+		118A526925B255FE0036DE28 /* CommonRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118A526825B255FE0036DE28 /* CommonRouter.swift */; };
+		118A526A25B255FE0036DE28 /* CommonRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118A526825B255FE0036DE28 /* CommonRouter.swift */; };
 		1194D98125A3DEFF001D5495 /* ConfigModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1194D98025A3DEFF001D5495 /* ConfigModel.swift */; };
 		1194D98225A3DEFF001D5495 /* ConfigModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1194D98025A3DEFF001D5495 /* ConfigModel.swift */; };
 		119C68622380BDC8009E9AA0 /* NewCustomerStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 119C68612380BDC8009E9AA0 /* NewCustomerStoryboard.storyboard */; };
@@ -410,6 +412,7 @@
 		118773CC2577292F002F2635 /* NewCustomerRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCustomerRouter.swift; sourceTree = "<group>"; };
 		118773CD2577292F002F2635 /* NewCustomerWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCustomerWorker.swift; sourceTree = "<group>"; };
 		118773D625772939002F2635 /* TextFieldValidation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldValidation.swift; sourceTree = "<group>"; };
+		118A526825B255FE0036DE28 /* CommonRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonRouter.swift; sourceTree = "<group>"; };
 		1194D98025A3DEFF001D5495 /* ConfigModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigModel.swift; sourceTree = "<group>"; };
 		119C68612380BDC8009E9AA0 /* NewCustomerStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewCustomerStoryboard.storyboard; sourceTree = "<group>"; };
 		11A8B44D23BE22B8007A5251 /* GenericTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericTableView.swift; sourceTree = "<group>"; };
@@ -980,6 +983,14 @@
 			path = Keychain;
 			sourceTree = "<group>";
 		};
+		118A526725B255E80036DE28 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				118A526825B255FE0036DE28 /* CommonRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
 		11A8B44C23BE228C007A5251 /* GenericTableView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1160,6 +1171,7 @@
 		11EBD34D23765BE300AB4BFF /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				118A526725B255E80036DE28 /* Router */,
 				11C3F9622591B6A500840905 /* Collapsable */,
 				114BD34E2562E895007FCEFC /* Worker */,
 				11A8B44C23BE228C007A5251 /* GenericTableView */,
@@ -1689,6 +1701,7 @@
 				113FA64D25A955620043E7D6 /* AccountWorker.swift in Sources */,
 				11578543252B85C0008A89DC /* ConnectionStatus.swift in Sources */,
 				11C3F9652591B6C100840905 /* Collapsable.swift in Sources */,
+				118A526A25B255FE0036DE28 /* CommonRouter.swift in Sources */,
 				11578544252B85C0008A89DC /* XibViewWithAnimation.swift in Sources */,
 				11578545252B85C0008A89DC /* Loader.swift in Sources */,
 				11578546252B85C0008A89DC /* Reachablility.swift in Sources */,
@@ -1827,6 +1840,7 @@
 				113FA64C25A955620043E7D6 /* AccountWorker.swift in Sources */,
 				11542D812380698F0011AB1D /* ConnectionStatus.swift in Sources */,
 				11C3F9642591B6C100840905 /* Collapsable.swift in Sources */,
+				118A526925B255FE0036DE28 /* CommonRouter.swift in Sources */,
 				11A8ECFE23B1207500F15B9A /* XibViewWithAnimation.swift in Sources */,
 				110664DC237852BD00DC44F3 /* Loader.swift in Sources */,
 				11EBD35923765F2D00AB4BFF /* Reachablility.swift in Sources */,

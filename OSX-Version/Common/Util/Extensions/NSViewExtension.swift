@@ -23,3 +23,15 @@ extension NSView {
         self.layer?.backgroundFilters?.append(blurFilter!)
     }
 }
+
+extension NSView {
+    func findViewController() -> NSViewController? {
+        if let nextResponder = self.nextResponder as? NSViewController {
+            return nextResponder
+        } else if let nextResponder = self.nextResponder as? NSView {
+            return nextResponder.findViewController()
+        } else {
+            return nil
+        }
+    }
+}
