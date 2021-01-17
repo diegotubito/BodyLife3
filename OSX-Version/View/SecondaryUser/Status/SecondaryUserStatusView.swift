@@ -13,67 +13,50 @@ extension Notification.Name {
     public static let needSecondaryUserLogin = Notification.Name(rawValue: "needSecondaryUserLogin")
 }
 
-class SecondaryUserStatusView: XibView {
-    var expirationToken: NSTextField!
-    var userNameLabel: NSTextField!
+class SecondaryUserStatusView: NSView {
+    @IBOutlet weak var subtitleLabel: NSTextField!
+    @IBOutlet weak var titleLabel: NSTextField!
+    @IBOutlet weak var roleLabel: NSTextField!
     var timer : Timer!
     
-    override func commonInit() {
-        super .commonInit()
-        self.wantsLayer = true
-        createViews()
+    override init(frame frameRect: NSRect) {
+        super .init(frame: frameRect)
+        commonInit()
+    }
+    
+    required init?(coder: NSCoder) {
+        super .init(coder: coder)
+        commonInit()
+        
+    }
+    
+    func commonInit() {
+        
+        let xibName = String(describing: type(of: self))
+        
+        var topLevelObjects: NSArray?
+        if Bundle.main.loadNibNamed(xibName, owner: self, topLevelObjects: &topLevelObjects) {
+            if let myView = topLevelObjects?.first(where: { $0 is NSView } ) as? NSView {
+                myView.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
+                addSubview(myView)
+            }
+        }
+        
+        
         NotificationCenter.default.addObserver(self, selector: #selector(secondaryUserUpdatedHandler), name: .userSecondaryUpdated, object: nil)
         updateValues()
-    }
-    
-    func createViews() {
+        self.wantsLayer = true
         self.layer?.borderWidth = 1
-        self.layer?.borderColor = .white
-        
-        let stack = NSStackView(frame: NSRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
-        stack.alignment = .leading
-        stack.distribution = .fillEqually
-        stack.spacing = 0
-        stack.orientation = .vertical
-        self.addSubview(stack)
-        
-        userNameLabel = NSTextField(frame: NSRect(x: 0, y: 0, width: self.frame.width, height: 10))
-        userNameLabel.stringValue = ""
-        userNameLabel.isEditable = false
-        userNameLabel.textColor = .darkGray
-        stack.addArrangedSubview(userNameLabel)
-        
-        expirationToken = NSTextField()
-        expirationToken.stringValue = ""
-        expirationToken.textColor = .darkGray
-        expirationToken.isEditable = false
-        
-        expirationToken.font = NSFont.systemFont(ofSize: 10)
-        
-        let revokeButton = NSButton(title: "", target: self, action: #selector(revokeDidPressed))
-        let attributedString = NSAttributedString(string: "Revocar",
-                                                  attributes: [NSAttributedString.Key.foregroundColor : NSColor.darkGray,
-                                                            NSAttributedString.Key.font: NSFont.systemFont(ofSize: 10)])
-        revokeButton.attributedTitle = attributedString
-       
-        let revokeStack = NSStackView(frame: NSRect(x: 0, y: 0, width: stack.frame.width, height: 10))
-        revokeStack.frame = NSRect(x: 0, y: 0, width: self.frame.width, height: 10)
-        revokeStack.alignment = .leading
-        revokeStack.distribution = .fillEqually
-        revokeStack.orientation = .horizontal
-        revokeStack.spacing = 0
-        revokeStack.addArrangedSubview(expirationToken)
-        revokeStack.addArrangedSubview(revokeButton)
-        
-        stack.addArrangedSubview(revokeStack)
+        self.layer?.borderColor = NSColor.lightGray.cgColor
     }
-    
-    @objc func revokeDidPressed() {
+
+    @IBAction func revokeButtonDidPressed(_ sender: Any) {
         timer.invalidate()
         SecondaryUserSession.Remove()
         NotificationCenter.default.post(name: .needSecondaryUserLogin, object: nil, userInfo: nil)
+        updateValues()
     }
-    
+   
     @objc func secondaryUserUpdatedHandler() {
         updateValues()
     }
@@ -81,7 +64,8 @@ class SecondaryUserStatusView: XibView {
     private func updateValues() {
         DispatchQueue.main.async {
             let secondaryUser = SecondaryUserSession.GetUser()
-            self.userNameLabel.stringValue = (secondaryUser?.userName ?? "") + " - " + (secondaryUser?.role.rawValue ?? "")
+            self.titleLabel.stringValue = (secondaryUser?.userName ?? "Sin usuario")
+            self.roleLabel.stringValue = (secondaryUser?.role.rawValue ?? "-")
             self.setupTimer()
         }
     }
@@ -103,7 +87,7 @@ class SecondaryUserStatusView: XibView {
             SecondaryUserSession.Remove()
             NotificationCenter.default.post(name: .needSecondaryUserLogin, object: nil, userInfo: nil)
         }
-        let secondsString = String(seconds ?? 0)
-        self.expirationToken.stringValue = "exp: \(secondsString)"
+        let secondsString = (seconds ?? 0).secondsToHoursMinutesSeconds()
+        self.subtitleLabel.stringValue = "Vto: \(secondsString)"
     }
 }

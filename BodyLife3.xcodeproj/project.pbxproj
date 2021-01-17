@@ -246,6 +246,10 @@
 		118773EA25772978002F2635 /* TextFieldValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118773D625772939002F2635 /* TextFieldValidation.swift */; };
 		118A526925B255FE0036DE28 /* CommonRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118A526825B255FE0036DE28 /* CommonRouter.swift */; };
 		118A526A25B255FE0036DE28 /* CommonRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118A526825B255FE0036DE28 /* CommonRouter.swift */; };
+		118A527225B288770036DE28 /* IntExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118A527125B288770036DE28 /* IntExtension.swift */; };
+		118A527325B288770036DE28 /* IntExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118A527125B288770036DE28 /* IntExtension.swift */; };
+		118A527725B3B1260036DE28 /* SecondaryUserStatusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 118A527625B3B1260036DE28 /* SecondaryUserStatusView.xib */; };
+		118A527825B3B1260036DE28 /* SecondaryUserStatusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 118A527625B3B1260036DE28 /* SecondaryUserStatusView.xib */; };
 		1194D98125A3DEFF001D5495 /* ConfigModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1194D98025A3DEFF001D5495 /* ConfigModel.swift */; };
 		1194D98225A3DEFF001D5495 /* ConfigModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1194D98025A3DEFF001D5495 /* ConfigModel.swift */; };
 		119C68622380BDC8009E9AA0 /* NewCustomerStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 119C68612380BDC8009E9AA0 /* NewCustomerStoryboard.storyboard */; };
@@ -413,6 +417,8 @@
 		118773CD2577292F002F2635 /* NewCustomerWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCustomerWorker.swift; sourceTree = "<group>"; };
 		118773D625772939002F2635 /* TextFieldValidation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldValidation.swift; sourceTree = "<group>"; };
 		118A526825B255FE0036DE28 /* CommonRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonRouter.swift; sourceTree = "<group>"; };
+		118A527125B288770036DE28 /* IntExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntExtension.swift; sourceTree = "<group>"; };
+		118A527625B3B1260036DE28 /* SecondaryUserStatusView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecondaryUserStatusView.xib; sourceTree = "<group>"; };
 		1194D98025A3DEFF001D5495 /* ConfigModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigModel.swift; sourceTree = "<group>"; };
 		119C68612380BDC8009E9AA0 /* NewCustomerStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewCustomerStoryboard.storyboard; sourceTree = "<group>"; };
 		11A8B44D23BE22B8007A5251 /* GenericTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericTableView.swift; sourceTree = "<group>"; };
@@ -554,6 +560,7 @@
 			isa = PBXGroup;
 			children = (
 				110CDFEC25ABB91D00898470 /* SecondaryUserStatusView.swift */,
+				118A527625B3B1260036DE28 /* SecondaryUserStatusView.xib */,
 			);
 			path = Status;
 			sourceTree = "<group>";
@@ -603,6 +610,7 @@
 				11233782237AFE9400F60078 /* stringExtension.swift */,
 				1163933B238229DE00D14B19 /* imageExtension.swift */,
 				1147AB7D238611C200D19AA9 /* NSViewExtension.swift */,
+				118A527125B288770036DE28 /* IntExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1445,6 +1453,7 @@
 				11578551252B85C0008A89DC /* Expense.storyboard in Resources */,
 				11578552252B85C0008A89DC /* AssetsOSX.xcassets in Resources */,
 				11578553252B85C0008A89DC /* CustomerListCell.xib in Resources */,
+				118A527825B3B1260036DE28 /* SecondaryUserStatusView.xib in Resources */,
 				11578554252B85C0008A89DC /* LoginStoryboard.storyboard in Resources */,
 				11578555252B85C0008A89DC /* SaveButtonCustomView.xib in Resources */,
 				11578556252B85C0008A89DC /* RegisterListView.xib in Resources */,
@@ -1468,6 +1477,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1177828E256C33DA006B51FD /* bodyshaping.json in Resources */,
+				118A527725B3B1260036DE28 /* SecondaryUserStatusView.xib in Resources */,
 				110664C723775D6000DC44F3 /* ErrorMessageView.xib in Resources */,
 				114C5420241401B5000CC75A /* Expense.storyboard in Resources */,
 				11EBD3282376499F00AB4BFF /* AssetsOSX.xcassets in Resources */,
@@ -1664,6 +1674,7 @@
 				11578521252B85C0008A89DC /* FirebaseUserModel.swift in Sources */,
 				11578522252B85C0008A89DC /* PeriodListViewModel.swift in Sources */,
 				11578523252B85C0008A89DC /* ActivitySaleViewModelContract.swift in Sources */,
+				118A527325B288770036DE28 /* IntExtension.swift in Sources */,
 				11578524252B85C0008A89DC /* HomeModels.swift in Sources */,
 				11578525252B85C0008A89DC /* HomeRouter.swift in Sources */,
 				11578526252B85C0008A89DC /* ActivitySaleModel.swift in Sources */,
@@ -1803,6 +1814,7 @@
 				116CE96323EDCDCD00688C0B /* PeriodListViewModel.swift in Sources */,
 				11AC546223DDE4E30033A27D /* ActivitySaleViewModelContract.swift in Sources */,
 				11EBD3802377130C00AB4BFF /* HomeModels.swift in Sources */,
+				118A527225B288770036DE28 /* IntExtension.swift in Sources */,
 				11EBD37F2377130C00AB4BFF /* HomeRouter.swift in Sources */,
 				11AC546023DDE4B40033A27D /* ActivitySaleModel.swift in Sources */,
 				116CE96723EDCDF800688C0B /* PeriodListView.swift in Sources */,
