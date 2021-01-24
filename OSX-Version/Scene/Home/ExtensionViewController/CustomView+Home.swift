@@ -29,11 +29,26 @@ extension HomeViewController {
         createPaymentView()
         
         createSecondaryUserView()
+        createStockTableView()
     }
     
     func createSecondaryUserView() {
         let secondaryUserView = SecondaryUserStatusView(frame: CGRect(x: 0, y: 0, width: self.secondaryUserStatusViewContainer.frame.width, height: self.secondaryUserStatusViewContainer.frame.height))
         self.secondaryUserStatusViewContainer.addSubview(secondaryUserView)
+    }
+    
+    func createStockTableView() {
+        if stockTableView != nil {
+            stockTableView.removeFromSuperview()
+        }
+        let ancho = view.frame.width * 0.45
+        let alto = view.frame.height * 0.45
+        stockTableView = StockTableView(frame: CGRect(x: -ancho + 5, y: 0, width: ancho, height: alto))
+        stockTableView.destiny = CGPoint(x: 0, y: 0)
+        stockTableView.closeWhenBackgroundIsTouch = true
+        stockTableView.layer?.cornerRadius = 10
+        view.addSubview(stockTableView)
+
     }
     
     func createArticleSellView() {

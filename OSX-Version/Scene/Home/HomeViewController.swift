@@ -23,6 +23,7 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
     var sellRegisterView : RegisterListView!
     var paymentView : PaymentView!
     var sellProductView : ArticleSellView!
+    var stockTableView : StockTableView!
     var timerForDelayCustomerSelection : Timer!
     var selectedCustomer : CustomerModel.Customer?
     // MARK: Object lifecycle
@@ -203,13 +204,13 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
     @IBAction func newExpensePressed(_ sender: Any) {
         router?.routeToNewExpense()
     }
+    @IBAction func stockPressed(_ sender: Any) {
+        stockTableView.showView()
+    }
     @IBAction func newCustomerPressed(_ sender: Any) {
         router?.routeToNewCustomer()
     }
     
-    @IBAction func moneyFlow(_ sender: Any) {
-        
-    }
     func createBackgroundGradient() {
         self.view.layer?.backgroundColor = NSColor.black.cgColor
         let gradient = CAGradientLayer()

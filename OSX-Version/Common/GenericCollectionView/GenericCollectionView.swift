@@ -40,7 +40,10 @@ class GenericCollectionItem<U>: NSCollectionViewItem {
 class GenericCollectionView<T: GenericCollectionItem<U>, U>: XibView, NSCollectionViewDataSource, NSCollectionViewDelegate, NSCollectionViewDelegateFlowLayout {
     var scrollView : NSScrollView!
     var collectionView : NSCollectionView!
+    var layout : NSCollectionViewFlowLayout!
     var numberOfVisibleItems = 6
+    var minimumLineSpacing : CGFloat = 10
+    var minimumInteritemSpacing : CGFloat = 10
     
     var items : [U] = []
     var onSelectedItem : ((U) -> ())?
@@ -60,10 +63,10 @@ class GenericCollectionView<T: GenericCollectionItem<U>, U>: XibView, NSCollecti
     }
     
     private func createCollection() {
-        let layout = NSCollectionViewFlowLayout()
+        layout = NSCollectionViewFlowLayout()
         layout.sectionInset = NSEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        layout.minimumLineSpacing = 10
-        layout.minimumInteritemSpacing = 10
+        layout.minimumLineSpacing = minimumLineSpacing
+        layout.minimumInteritemSpacing = minimumInteritemSpacing
         
         collectionView = NSCollectionView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
         collectionView.wantsLayer = true

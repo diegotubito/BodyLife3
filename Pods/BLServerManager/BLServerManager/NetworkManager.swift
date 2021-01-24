@@ -4,6 +4,15 @@
 //
 //  Created by David Diego Gomez on 07/11/2020.
 //
+
+/*
+ #if os(OSX)
+import Cocoa
+#elseif os(iOS)
+import UIKit
+#endif
+*/
+
 import Cocoa
 
 class NetwordManager {
@@ -49,23 +58,5 @@ class NetwordManager {
         })
         task.resume()
         
-    }
-    
-    private static func ErrorHandler(httpResponse: HTTPURLResponse) -> BLNetworkError? {
-        if httpResponse.statusCode == 200 {
-            return nil
-        } else if httpResponse.statusCode == 401 {
-            return BLNetworkError.invalidToken
-        } else if httpResponse.statusCode == 403 {
-            return BLNetworkError.tokenNotProvided
-        } else if httpResponse.statusCode == 404 {
-            return BLNetworkError.notFound
-        } else if httpResponse.statusCode == 500 {
-            return BLNetworkError.server_error
-        } else if httpResponse.statusCode == 400 {
-            return BLNetworkError.badRequest
-        } else {
-            return BLNetworkError.unknown_error
-        }
     }
 }
