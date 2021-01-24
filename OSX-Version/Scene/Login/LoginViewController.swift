@@ -56,7 +56,8 @@ class LoginViewController: BaseViewController, LoginDisplayLogic {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        SecondaryUserSession.Remove()
+        NotificationCenter.default.post(name: .userSecondaryUpdated, object: nil)
         setupWindow(width: Constants.ViewControllerSizes.Login.width, height: Constants.ViewControllerSizes.Login.height)
 
         if sameUserName {

@@ -42,10 +42,28 @@ class SecondaryUserLoginViewController: NSViewController {
                 return
             }
             self.users = users
-            self.showSuccessLoadingUsers()
+            if users.count == 0 {
+                //we need to create the first user
+                self.createFirstUser()
+                self.showError(errorMessage: "Creating admin user for the first time...")
+            } else {
+                self.showSuccessLoadingUsers()
+            }
         } fail: { (error) in
             self.hideLoading()
             self.showError(errorMessage: error)
+        }
+
+    }
+    
+    private func createFirstUser() {
+        let endpoint = Endpoint.Create(to: .SecondaryUser(.CreateFirstUser))
+        BLServerManager.ApiCall(endpoint: endpoint) { (data) in
+            DispatchQueue.main.async {
+                self.loadUsers()
+            }
+        } fail: { (errorMessage) in
+            self.showError(errorMessage: errorMessage)
         }
 
     }

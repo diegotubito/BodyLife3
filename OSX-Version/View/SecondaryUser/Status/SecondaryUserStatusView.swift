@@ -88,6 +88,6 @@ class SecondaryUserStatusView: NSView {
             NotificationCenter.default.post(name: .needSecondaryUserLogin, object: nil, userInfo: nil)
         }
         let secondsString = (seconds ?? 0).secondsToHoursMinutesSeconds()
-        self.subtitleLabel.stringValue = "Vto: \(secondsString)"
+        self.subtitleLabel.stringValue = "\(secondsString)"
     }
 }

@@ -131,9 +131,9 @@
                                         </connections>
                                     </button>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="kPf-Dq-0A9">
-                                        <rect key="frame" x="1081" y="0.0" width="150" height="40"/>
+                                        <rect key="frame" x="1045" y="0.0" width="170" height="40"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="150" id="baP-9q-dvI"/>
+                                            <constraint firstAttribute="width" constant="170" id="baP-9q-dvI"/>
                                         </constraints>
                                     </customView>
                                 </subviews>
@@ -146,7 +146,7 @@
                                     <constraint firstItem="avi-xG-IAk" firstAttribute="centerY" secondItem="Y6C-Pr-GNv" secondAttribute="centerY" id="dLw-hl-cbs"/>
                                     <constraint firstItem="Kec-wk-swp" firstAttribute="centerY" secondItem="Y6C-Pr-GNv" secondAttribute="centerY" id="hAy-he-GmQ"/>
                                     <constraint firstItem="kPf-Dq-0A9" firstAttribute="top" secondItem="Y6C-Pr-GNv" secondAttribute="top" id="iwy-62-kdA"/>
-                                    <constraint firstItem="Kec-wk-swp" firstAttribute="leading" secondItem="kPf-Dq-0A9" secondAttribute="trailing" id="wDw-d0-cY0"/>
+                                    <constraint firstItem="Kec-wk-swp" firstAttribute="leading" secondItem="kPf-Dq-0A9" secondAttribute="trailing" constant="16" id="wDw-d0-cY0"/>
                                     <constraint firstAttribute="height" constant="40" id="xBg-Mn-Ma1"/>
                                 </constraints>
                             </customView>
@@ -239,12 +239,12 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="StockUpdate" destination="avi-xG-IAk" id="mrF-FY-opS"/>
                         <outlet property="containerBottomBar" destination="vJS-25-cay" id="mNA-ah-rJd"/>
                         <outlet property="containerCustomerList" destination="xeN-qp-oFe" id="wWZ-Pj-sSw"/>
                         <outlet property="containerSellRegisters" destination="Htk-LD-AMV" id="dk4-O6-HfV"/>
                         <outlet property="containerStatus" destination="0fS-Ye-Kdk" id="lvC-xI-kXo"/>
                         <outlet property="containerUpperBar" destination="Y6C-Pr-GNv" id="Sv0-Al-zIe"/>
-                        <outlet property="newImplementation" destination="avi-xG-IAk" id="mrF-FY-opS"/>
                         <outlet property="secondaryUserStatusViewContainer" destination="kPf-Dq-0A9" id="iPM-yp-mFS"/>
                     </connections>
                 </viewController>

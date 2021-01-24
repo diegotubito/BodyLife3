@@ -35,6 +35,7 @@ public enum EndpointType {
         case Enable(_id: String)
         case Delete(_id: String)
         case Login(userName: String, password: String)
+        case CreateFirstUser
     }
     
     public enum ActivityType {
@@ -242,6 +243,9 @@ class Endpoint {
                         "password" : password]
             let url = "\(BLServerManager.baseUrl.rawValue)/v1/secondary_user/login"
             return BLEndpointModel(url: url, token: token, tokenSecondaryUser: secondaryToken, method: "POST", query: nil, body: body)
+        case .SecondaryUser(.CreateFirstUser):
+            let url = "\(BLServerManager.baseUrl.rawValue)/v1/secondary_user/first_user"
+            return BLEndpointModel(url: url, token: token, tokenSecondaryUser: secondaryToken, method: "POST", query: nil, body: nil)
         }
     }
 }
