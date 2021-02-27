@@ -25,7 +25,7 @@ class CustomerListCell: NSTableCellView {
         imageIndicator.isDisplayedWhenStopped = false
         fotoCell.wantsLayer = true
         fotoCell.layer?.cornerRadius = (fotoCell.layer?.frame.width)! / 2
-        
+        fotoCell.layer?.borderWidth = 2
         separateLine.wantsLayer = true
         separateLine.layer?.backgroundColor = NSColor.gray.withAlphaComponent(0.2).cgColor
     }

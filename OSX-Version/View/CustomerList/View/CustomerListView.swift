@@ -235,6 +235,16 @@ extension CustomerListView: NSTableViewDataSource, NSTableViewDelegate {
         let nombre = customers[row].firstName.capitalized
         let createdAt = customers[row].timestamp.toDate1970
         let createdAtAgo = createdAt.desdeHace(numericDates: true) + "\n\(createdAt.toString(formato: "dd-MM-yyyy"))"
+        
+        
+        cell.fotoCell.layer?.borderColor = Constants.Colors.BodyLife.man.cgColor
+        cell.primerRenglonCell.textColor = Constants.Colors.BodyLife.man
+        if customers[row].genero == "Femenino" {
+            cell.primerRenglonCell.textColor = Constants.Colors.BodyLife.woman
+            cell.fotoCell.layer?.borderColor = Constants.Colors.BodyLife.woman.cgColor
+        }
+        cell.fotoCell.needsLayout = true
+        cell.fotoCell.needsDisplay = true
         cell.primerRenglonCell.stringValue = apellido + ", " + nombre
         cell.timeAgoCell.stringValue = createdAtAgo
         cell.segundoRenglonCell.stringValue = "Cel: \(customers[row].phoneNumber)"
@@ -259,6 +269,8 @@ extension CustomerListView: NSTableViewDataSource, NSTableViewDelegate {
                 viewModel.loadCustomers(offset: count)
             }
         }
+        
+        
         
         return cell
     }

@@ -252,16 +252,10 @@
 		118A527325B288770036DE28 /* IntExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118A527125B288770036DE28 /* IntExtension.swift */; };
 		118A527725B3B1260036DE28 /* SecondaryUserStatusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 118A527625B3B1260036DE28 /* SecondaryUserStatusView.xib */; };
 		118A527825B3B1260036DE28 /* SecondaryUserStatusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 118A527625B3B1260036DE28 /* SecondaryUserStatusView.xib */; };
-		118A530525BC7C390036DE28 /* StockCrudCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118A530325BC7C390036DE28 /* StockCrudCell.swift */; };
-		118A530625BC7C390036DE28 /* StockCrudCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118A530325BC7C390036DE28 /* StockCrudCell.swift */; };
-		118A530725BC7C390036DE28 /* StockCrudCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 118A530425BC7C390036DE28 /* StockCrudCell.xib */; };
-		118A530825BC7C390036DE28 /* StockCrudCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 118A530425BC7C390036DE28 /* StockCrudCell.xib */; };
 		118A531025BC91BA0036DE28 /* StockCrudModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118A530F25BC91BA0036DE28 /* StockCrudModel.swift */; };
 		118A531125BC91BA0036DE28 /* StockCrudModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118A530F25BC91BA0036DE28 /* StockCrudModel.swift */; };
 		118A531525BC91C80036DE28 /* StockCrudViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118A531425BC91C80036DE28 /* StockCrudViewModel.swift */; };
 		118A531625BC91C80036DE28 /* StockCrudViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118A531425BC91C80036DE28 /* StockCrudViewModel.swift */; };
-		118A531E25BC9F2E0036DE28 /* ProductListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118A531D25BC9F2E0036DE28 /* ProductListView.swift */; };
-		118A531F25BC9F2E0036DE28 /* ProductListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118A531D25BC9F2E0036DE28 /* ProductListView.swift */; };
 		1194D98125A3DEFF001D5495 /* ConfigModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1194D98025A3DEFF001D5495 /* ConfigModel.swift */; };
 		1194D98225A3DEFF001D5495 /* ConfigModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1194D98025A3DEFF001D5495 /* ConfigModel.swift */; };
 		119C68622380BDC8009E9AA0 /* NewCustomerStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 119C68612380BDC8009E9AA0 /* NewCustomerStoryboard.storyboard */; };
@@ -431,11 +425,8 @@
 		118A526825B255FE0036DE28 /* CommonRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonRouter.swift; sourceTree = "<group>"; };
 		118A527125B288770036DE28 /* IntExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntExtension.swift; sourceTree = "<group>"; };
 		118A527625B3B1260036DE28 /* SecondaryUserStatusView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecondaryUserStatusView.xib; sourceTree = "<group>"; };
-		118A530325BC7C390036DE28 /* StockCrudCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockCrudCell.swift; sourceTree = "<group>"; };
-		118A530425BC7C390036DE28 /* StockCrudCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StockCrudCell.xib; sourceTree = "<group>"; };
 		118A530F25BC91BA0036DE28 /* StockCrudModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockCrudModel.swift; sourceTree = "<group>"; };
 		118A531425BC91C80036DE28 /* StockCrudViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockCrudViewModel.swift; sourceTree = "<group>"; };
-		118A531D25BC9F2E0036DE28 /* ProductListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListView.swift; sourceTree = "<group>"; };
 		1194D98025A3DEFF001D5495 /* ConfigModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigModel.swift; sourceTree = "<group>"; };
 		119C68612380BDC8009E9AA0 /* NewCustomerStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewCustomerStoryboard.storyboard; sourceTree = "<group>"; };
 		11A3678325BCE43600C99ECA /* StockTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StockTableView.xib; sourceTree = "<group>"; };
@@ -1051,27 +1042,8 @@
 			isa = PBXGroup;
 			children = (
 				1119431425BCCBC400450B94 /* StockTable */,
-				118A531C25BC9F000036DE28 /* ProductList */,
 			);
 			path = Stock;
-			sourceTree = "<group>";
-		};
-		118A530225BC7BED0036DE28 /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				118A530325BC7C390036DE28 /* StockCrudCell.swift */,
-				118A530425BC7C390036DE28 /* StockCrudCell.xib */,
-			);
-			path = Cell;
-			sourceTree = "<group>";
-		};
-		118A531C25BC9F000036DE28 /* ProductList */ = {
-			isa = PBXGroup;
-			children = (
-				118A530225BC7BED0036DE28 /* Cell */,
-				118A531D25BC9F2E0036DE28 /* ProductListView.swift */,
-			);
-			path = ProductList;
 			sourceTree = "<group>";
 		};
 		11A3677E25BCE3E900C99ECA /* View */ = {
@@ -1542,7 +1514,6 @@
 				11578555252B85C0008A89DC /* SaveButtonCustomView.xib in Resources */,
 				11578556252B85C0008A89DC /* RegisterListView.xib in Resources */,
 				11578557252B85C0008A89DC /* Movement.storyboard in Resources */,
-				118A530825BC7C390036DE28 /* StockCrudCell.xib in Resources */,
 				11578558252B85C0008A89DC /* Main.storyboard in Resources */,
 				11578559252B85C0008A89DC /* NewCustomerStoryboard.storyboard in Resources */,
 				1181F4D7256724970044083C /* CustomerStatusView.xib in Resources */,
@@ -1583,7 +1554,6 @@
 				1181F4D6256724970044083C /* CustomerStatusView.xib in Resources */,
 				116CE97023EDE94A00688C0B /* PeriodListItem.xib in Resources */,
 				114AC2C425525638007A0AFD /* MoneyFlow.storyboard in Resources */,
-				118A530725BC7C390036DE28 /* StockCrudCell.xib in Resources */,
 				1166AF3623B27F880047C7AE /* ArticleViewItem.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1774,7 +1744,6 @@
 				1157852A252B85C0008A89DC /* ArticleViewItem.swift in Sources */,
 				1157852C252B85C0008A89DC /* NewPaymentModel.swift in Sources */,
 				113FA66B25AB54CB0043E7D6 /* SecondaryUserListView.swift in Sources */,
-				118A530625BC7C390036DE28 /* StockCrudCell.swift in Sources */,
 				1157852D252B85C0008A89DC /* CustomerListModel.swift in Sources */,
 				1157852E252B85C0008A89DC /* imageExtension.swift in Sources */,
 				11E580E9254DFCC600E5A54D /* importStorage.swift in Sources */,
@@ -1784,7 +1753,6 @@
 				1119431C25BCCC0300450B94 /* StockTableView.swift in Sources */,
 				110CDFCB25AB5BC700898470 /* SecondaryUserLoginViewController.swift in Sources */,
 				11578531252B85C0008A89DC /* ArticleListViewModelContract.swift in Sources */,
-				118A531F25BC9F2E0036DE28 /* ProductListView.swift in Sources */,
 				11778280256C06A1006B51FD /* SellModel.swift in Sources */,
 				11578534252B85C0008A89DC /* BaseViewController.swift in Sources */,
 				11578535252B85C0008A89DC /* ExpenseWorker.swift in Sources */,
@@ -1919,7 +1887,6 @@
 				1147AB44238364D900D19AA9 /* CustomerListModel.swift in Sources */,
 				1163933C238229DE00D14B19 /* imageExtension.swift in Sources */,
 				113FA66A25AB54CB0043E7D6 /* SecondaryUserListView.swift in Sources */,
-				118A530525BC7C390036DE28 /* StockCrudCell.swift in Sources */,
 				11E580E8254DFCC600E5A54D /* importStorage.swift in Sources */,
 				11D3D87725213A770008CFD0 /* ActivityModel.swift in Sources */,
 				11A8ED0023B1208600F15B9A /* XibViewWithBlurBackground.swift in Sources */,
@@ -1929,7 +1896,6 @@
 				1119431B25BCCC0300450B94 /* StockTableView.swift in Sources */,
 				110CDFCA25AB5BC700898470 /* SecondaryUserLoginViewController.swift in Sources */,
 				1177827F256C06A1006B51FD /* SellModel.swift in Sources */,
-				118A531E25BC9F2E0036DE28 /* ProductListView.swift in Sources */,
 				11EBD39423773B5C00AB4BFF /* BaseViewController.swift in Sources */,
 				114C54112413FF66000CC75A /* ExpenseWorker.swift in Sources */,
 				118773D02577292F002F2635 /* NewCustomerInteractor.swift in Sources */,

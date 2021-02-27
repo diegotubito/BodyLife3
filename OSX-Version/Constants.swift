@@ -68,6 +68,10 @@ struct Constants {
 
 // MARK: COLORS
     struct Colors {
+        struct BodyLife {
+            static let woman = NSColor(hex: 0xD096D1)
+            static let man = NSColor(hex: 0x2730D1)
+        }
         
         struct Green {
             static let fern = NSColor(hex: 0x6ABB72)

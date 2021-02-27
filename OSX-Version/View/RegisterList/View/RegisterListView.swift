@@ -54,6 +54,8 @@ class RegisterListView: XibViewWithAnimation , RegisterListViewContract{
         DispatchQueue.main.async {
             self.tableView.deselectAll(nil)
             self.tableView.reloadData()
+            let indexSet = IndexSet(arrayLiteral: 0)
+            self.tableView.selectRowIndexes(indexSet, byExtendingSelection: true)
         }
     }
     

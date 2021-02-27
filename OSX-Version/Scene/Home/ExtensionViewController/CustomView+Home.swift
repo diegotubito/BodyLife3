@@ -109,7 +109,6 @@ extension HomeViewController {
         sellActivityView.layer?.cornerRadius = 10
         self.view.addSubview(sellActivityView)
         
-        
     }
     
     func createPaymentView() {
