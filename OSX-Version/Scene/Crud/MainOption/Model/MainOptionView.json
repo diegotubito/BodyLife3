@@ -1,0 +1,26 @@
+{
+    "type": "mainOptions",
+    "columns": [{
+        "name" : "description",
+        "isEditable" : true
+    }, {
+        "name" : "isEnabled",
+        "isEditable" : false
+    }],
+    "items": [{
+        "title" : "Articulos",
+        "isEnabled" : true
+    }, {
+        "title" : "Actividades",
+        "isEnabled" : true
+    }, {
+        "title" : "Gastos",
+        "isEnabled" : true
+    }, {
+        "title" : "Cuentas",
+        "isEnabled" : true
+    }, {
+        "title" : "Descuentos",
+        "isEnabled" : true
+    }]
+}

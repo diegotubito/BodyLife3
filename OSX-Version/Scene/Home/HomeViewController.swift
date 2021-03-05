@@ -75,19 +75,6 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
         routeToSecondaryLogin(vc: self)
     }
     
-    @IBAction func addGenericButtob(_ sender: Any) {
-        addGeneric()
-    }
-    func addGeneric() {
-           //text tableview generic
-               let generic = GenericTableView(frame: NSRect(x: 0, y: 0, width: 400, height: 400))
-        generic.wantsLayer = true
-        generic.layer?.backgroundColor = NSColor.white.cgColor
-               view.addSubview(generic)
-
-        
-    }
-    
     override func viewWillAppear() {
         super.viewWillAppear()
         self.view.window?.delegate = self
@@ -203,6 +190,9 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
     }
     @IBAction func newExpensePressed(_ sender: Any) {
         router?.routeToNewExpense()
+    }
+    @IBAction func Crud(_ sender: Any) {
+        router?.routeToCrud()
     }
     @IBAction func stockPressed(_ sender: Any) {
         stockTableView.showView()

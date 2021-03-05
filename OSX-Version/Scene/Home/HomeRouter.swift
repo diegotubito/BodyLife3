@@ -4,7 +4,7 @@ import Cocoa
     func routeToNewCustomer()
     func routeToNewExpense()
     func routeToMoneyFlow()
-    func routeToNewImplementation()
+    func routeToCrud()
 }
 
 protocol HomeDataPassing {
@@ -29,21 +29,20 @@ class HomeRouter: NSObject, HomeRoutingLogic, HomeDataPassing {
         
     }
     
-   
-    func routeToNewImplementation()
-    {
-        let storyboard = NSStoryboard(name: "Main", bundle: nil)
-        
-        let destinationVC = storyboard.instantiateController(withIdentifier: "NewImplementationViewController") as! NewImplementationViewController
-        
-        navigateToSomewhere(source: viewController!, destination: destinationVC)
-    }
-    
     func routeToNewCustomer()
     {
         let storyboard = NSStoryboard(name: "NewCustomerStoryboard", bundle: nil)
         
         let destinationVC = storyboard.instantiateController(withIdentifier: "NewCustomerViewController") as! NewCustomerViewController
+        
+        navigateToSomewhere(source: viewController!, destination: destinationVC)
+    }
+    
+    func routeToCrud()
+    {
+        let storyboard = NSStoryboard(name: "CrudStoryboard", bundle: nil)
+        
+        let destinationVC = storyboard.instantiateController(withIdentifier: "CrudViewController") as! CrudViewController
         
         navigateToSomewhere(source: viewController!, destination: destinationVC)
     }

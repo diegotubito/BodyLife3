@@ -210,6 +210,20 @@
 		1166AF3523B27F880047C7AE /* ArticleViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1166AF3323B27F880047C7AE /* ArticleViewItem.swift */; };
 		1166AF3623B27F880047C7AE /* ArticleViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1166AF3423B27F880047C7AE /* ArticleViewItem.xib */; };
 		1166AF3C23B296090047C7AE /* ArticleSellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1166AF3B23B296090047C7AE /* ArticleSellView.swift */; };
+		116B0E8425EAE66200CC9E3B /* CrudViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116B0E8325EAE66200CC9E3B /* CrudViewController.swift */; };
+		116B0E8525EAE66200CC9E3B /* CrudViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116B0E8325EAE66200CC9E3B /* CrudViewController.swift */; };
+		116B0E8B25EAE69100CC9E3B /* CrudStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 116B0E8A25EAE69100CC9E3B /* CrudStoryboard.storyboard */; };
+		116B0E8C25EAE69100CC9E3B /* CrudStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 116B0E8A25EAE69100CC9E3B /* CrudStoryboard.storyboard */; };
+		116B0E9625EC302900CC9E3B /* MainOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116B0E9525EC302900CC9E3B /* MainOptionsView.swift */; };
+		116B0E9725EC302900CC9E3B /* MainOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116B0E9525EC302900CC9E3B /* MainOptionsView.swift */; };
+		116B0EA725EC371000CC9E3B /* MainOptionView.json in Resources */ = {isa = PBXBuildFile; fileRef = 116B0EA625EC371000CC9E3B /* MainOptionView.json */; };
+		116B0EA825EC371000CC9E3B /* MainOptionView.json in Resources */ = {isa = PBXBuildFile; fileRef = 116B0EA625EC371000CC9E3B /* MainOptionView.json */; };
+		116B0EB425EC3A5800CC9E3B /* MainOptionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116B0EB325EC3A5800CC9E3B /* MainOptionModel.swift */; };
+		116B0EB525EC3A5800CC9E3B /* MainOptionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116B0EB325EC3A5800CC9E3B /* MainOptionModel.swift */; };
+		116B0EB925EC3A8100CC9E3B /* MainOptionViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116B0EB825EC3A8100CC9E3B /* MainOptionViewModelProtocol.swift */; };
+		116B0EBA25EC3A8100CC9E3B /* MainOptionViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116B0EB825EC3A8100CC9E3B /* MainOptionViewModelProtocol.swift */; };
+		116B0EBE25EC3A8F00CC9E3B /* MainOptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116B0EBD25EC3A8F00CC9E3B /* MainOptionViewModel.swift */; };
+		116B0EBF25EC3A8F00CC9E3B /* MainOptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116B0EBD25EC3A8F00CC9E3B /* MainOptionViewModel.swift */; };
 		116CE96123EDCDAF00688C0B /* PeriodListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CE96023EDCDAF00688C0B /* PeriodListModel.swift */; };
 		116CE96323EDCDCD00688C0B /* PeriodListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CE96223EDCDCD00688C0B /* PeriodListViewModel.swift */; };
 		116CE96523EDCDEF00688C0B /* PeriodListViewModelContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CE96423EDCDEF00688C0B /* PeriodListViewModelContract.swift */; };
@@ -274,10 +288,6 @@
 		11AC546423DDE4F30033A27D /* ActivitySaleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AC546323DDE4F30033A27D /* ActivitySaleViewModel.swift */; };
 		11AC546623DDE5250033A27D /* AcitvitySaleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AC546523DDE5250033A27D /* AcitvitySaleView.swift */; };
 		11AC546823DDE64E0033A27D /* ActivitySaleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11AC546723DDE64E0033A27D /* ActivitySaleView.xib */; };
-		11C3F9642591B6C100840905 /* Collapsable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C3F9632591B6C100840905 /* Collapsable.swift */; };
-		11C3F9652591B6C100840905 /* Collapsable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C3F9632591B6C100840905 /* Collapsable.swift */; };
-		11C3F96C2591B96600840905 /* NewImplementationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C3F96B2591B96600840905 /* NewImplementationViewController.swift */; };
-		11C3F96D2591B96600840905 /* NewImplementationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C3F96B2591B96600840905 /* NewImplementationViewController.swift */; };
 		11C62A95256091E7008F8700 /* GenericResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C62A94256091E7008F8700 /* GenericResponseModel.swift */; };
 		11C62A96256091E7008F8700 /* GenericResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C62A94256091E7008F8700 /* GenericResponseModel.swift */; };
 		11D3D86B252127BD0008CFD0 /* importDiscount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D3D86A252127BD0008CFD0 /* importDiscount.swift */; };
@@ -398,6 +408,13 @@
 		1166AF3323B27F880047C7AE /* ArticleViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewItem.swift; sourceTree = "<group>"; };
 		1166AF3423B27F880047C7AE /* ArticleViewItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticleViewItem.xib; sourceTree = "<group>"; };
 		1166AF3B23B296090047C7AE /* ArticleSellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleSellView.swift; sourceTree = "<group>"; };
+		116B0E8325EAE66200CC9E3B /* CrudViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrudViewController.swift; sourceTree = "<group>"; };
+		116B0E8A25EAE69100CC9E3B /* CrudStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CrudStoryboard.storyboard; sourceTree = "<group>"; };
+		116B0E9525EC302900CC9E3B /* MainOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainOptionsView.swift; sourceTree = "<group>"; };
+		116B0EA625EC371000CC9E3B /* MainOptionView.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MainOptionView.json; sourceTree = "<group>"; };
+		116B0EB325EC3A5800CC9E3B /* MainOptionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainOptionModel.swift; sourceTree = "<group>"; };
+		116B0EB825EC3A8100CC9E3B /* MainOptionViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainOptionViewModelProtocol.swift; sourceTree = "<group>"; };
+		116B0EBD25EC3A8F00CC9E3B /* MainOptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainOptionViewModel.swift; sourceTree = "<group>"; };
 		116CE96023EDCDAF00688C0B /* PeriodListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodListModel.swift; sourceTree = "<group>"; };
 		116CE96223EDCDCD00688C0B /* PeriodListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodListViewModel.swift; sourceTree = "<group>"; };
 		116CE96423EDCDEF00688C0B /* PeriodListViewModelContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodListViewModelContract.swift; sourceTree = "<group>"; };
@@ -443,8 +460,6 @@
 		11AC546323DDE4F30033A27D /* ActivitySaleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitySaleViewModel.swift; sourceTree = "<group>"; };
 		11AC546523DDE5250033A27D /* AcitvitySaleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcitvitySaleView.swift; sourceTree = "<group>"; };
 		11AC546723DDE64E0033A27D /* ActivitySaleView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivitySaleView.xib; sourceTree = "<group>"; };
-		11C3F9632591B6C100840905 /* Collapsable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collapsable.swift; sourceTree = "<group>"; };
-		11C3F96B2591B96600840905 /* NewImplementationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewImplementationViewController.swift; sourceTree = "<group>"; };
 		11C62A94256091E7008F8700 /* GenericResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericResponseModel.swift; sourceTree = "<group>"; };
 		11D3D86A252127BD0008CFD0 /* importDiscount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = importDiscount.swift; sourceTree = "<group>"; };
 		11D3D86F252128030008CFD0 /* DiscountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountModel.swift; sourceTree = "<group>"; };
@@ -967,6 +982,51 @@
 			path = ArticleSell;
 			sourceTree = "<group>";
 		};
+		116B0E8225EAE65200CC9E3B /* Crud */ = {
+			isa = PBXGroup;
+			children = (
+				116B0E8325EAE66200CC9E3B /* CrudViewController.swift */,
+				116B0EAB25EC3A2700CC9E3B /* MainOption */,
+			);
+			path = Crud;
+			sourceTree = "<group>";
+		};
+		116B0EAB25EC3A2700CC9E3B /* MainOption */ = {
+			isa = PBXGroup;
+			children = (
+				116B0EAF25EC3A3B00CC9E3B /* Model */,
+				116B0EB225EC3A4000CC9E3B /* ViewModel */,
+				116B0EAC25EC3A3700CC9E3B /* View */,
+			);
+			path = MainOption;
+			sourceTree = "<group>";
+		};
+		116B0EAC25EC3A3700CC9E3B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				116B0E9525EC302900CC9E3B /* MainOptionsView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		116B0EAF25EC3A3B00CC9E3B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				116B0EA625EC371000CC9E3B /* MainOptionView.json */,
+				116B0EB325EC3A5800CC9E3B /* MainOptionModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		116B0EB225EC3A4000CC9E3B /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				116B0EB825EC3A8100CC9E3B /* MainOptionViewModelProtocol.swift */,
+				116B0EBD25EC3A8F00CC9E3B /* MainOptionViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		116CE95C23EDCD3000688C0B /* ActivityListView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1153,22 +1213,6 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		11C3F9622591B6A500840905 /* Collapsable */ = {
-			isa = PBXGroup;
-			children = (
-				11C3F9632591B6C100840905 /* Collapsable.swift */,
-			);
-			path = Collapsable;
-			sourceTree = "<group>";
-		};
-		11C3F96A2591B95300840905 /* NewImplentation */ = {
-			isa = PBXGroup;
-			children = (
-				11C3F96B2591B96600840905 /* NewImplementationViewController.swift */,
-			);
-			path = NewImplentation;
-			sourceTree = "<group>";
-		};
 		11D3D869252127A30008CFD0 /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
@@ -1236,7 +1280,6 @@
 			isa = PBXGroup;
 			children = (
 				118A526725B255E80036DE28 /* Router */,
-				11C3F9622591B6A500840905 /* Collapsable */,
 				114BD34E2562E895007FCEFC /* Worker */,
 				11A8B44C23BE228C007A5251 /* GenericTableView */,
 				11A8ED0123B1440600F15B9A /* GenericCollectionView */,
@@ -1289,6 +1332,7 @@
 				119C68612380BDC8009E9AA0 /* NewCustomerStoryboard.storyboard */,
 				114C541F241401B5000CC75A /* Expense.storyboard */,
 				111EF6B4244BDFCC003E5D61 /* Movement.storyboard */,
+				116B0E8A25EAE69100CC9E3B /* CrudStoryboard.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -1296,8 +1340,8 @@
 		11EBD35323765C9800AB4BFF /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				116B0E8225EAE65200CC9E3B /* Crud */,
 				113FA66225AB4CEB0043E7D6 /* SecondaryUser */,
-				11C3F96A2591B95300840905 /* NewImplentation */,
 				114C54082413FE19000CC75A /* Expense */,
 				11EBD3832377269100AB4BFF /* Login */,
 				11EBD376237712E600AB4BFF /* Home */,
@@ -1510,6 +1554,7 @@
 				11578552252B85C0008A89DC /* AssetsOSX.xcassets in Resources */,
 				11578553252B85C0008A89DC /* CustomerListCell.xib in Resources */,
 				118A527825B3B1260036DE28 /* SecondaryUserStatusView.xib in Resources */,
+				116B0E8C25EAE69100CC9E3B /* CrudStoryboard.storyboard in Resources */,
 				11578554252B85C0008A89DC /* LoginStoryboard.storyboard in Resources */,
 				11578555252B85C0008A89DC /* SaveButtonCustomView.xib in Resources */,
 				11578556252B85C0008A89DC /* RegisterListView.xib in Resources */,
@@ -1525,6 +1570,7 @@
 				1157855E252B85C0008A89DC /* PeriodListItem.xib in Resources */,
 				1177828F256C33DA006B51FD /* bodyshaping.json in Resources */,
 				113FA65F25AB45CE0043E7D6 /* SecondaryUser.storyboard in Resources */,
+				116B0EA825EC371000CC9E3B /* MainOptionView.json in Resources */,
 				11578560252B85C0008A89DC /* ArticleViewItem.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1534,8 +1580,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				1177828E256C33DA006B51FD /* bodyshaping.json in Resources */,
+				116B0E8B25EAE69100CC9E3B /* CrudStoryboard.storyboard in Resources */,
 				118A527725B3B1260036DE28 /* SecondaryUserStatusView.xib in Resources */,
 				110664C723775D6000DC44F3 /* ErrorMessageView.xib in Resources */,
+				116B0EA725EC371000CC9E3B /* MainOptionView.json in Resources */,
 				114C5420241401B5000CC75A /* Expense.storyboard in Resources */,
 				11EBD3282376499F00AB4BFF /* AssetsOSX.xcassets in Resources */,
 				1147AB4F2383678700D19AA9 /* CustomerListCell.xib in Resources */,
@@ -1662,7 +1710,6 @@
 				113FA65625A9FDAC0043E7D6 /* SecondaryUserSession.swift in Sources */,
 				115784E6252B85C0008A89DC /* SellRegisterCell.swift in Sources */,
 				115784E7252B85C0008A89DC /* ErrorModel.swift in Sources */,
-				11C3F96D2591B96600840905 /* NewImplementationViewController.swift in Sources */,
 				115784E8252B85C0008A89DC /* PeriodListItem.swift in Sources */,
 				115784E9252B85C0008A89DC /* LoginInteractor.swift in Sources */,
 				118A531625BC91C80036DE28 /* StockCrudViewModel.swift in Sources */,
@@ -1694,6 +1741,7 @@
 				115784FF252B85C0008A89DC /* XibView.swift in Sources */,
 				11578501252B85C0008A89DC /* HomeInteractor.swift in Sources */,
 				118773E625772974002F2635 /* NewCustomerPresenter.swift in Sources */,
+				116B0EBF25EC3A8F00CC9E3B /* MainOptionViewModel.swift in Sources */,
 				11578502252B85C0008A89DC /* ConsoleCommand.swift in Sources */,
 				11578503252B85C0008A89DC /* MainUserSession.swift in Sources */,
 				113FA64625A6A85B0043E7D6 /* AccountModel.swift in Sources */,
@@ -1711,6 +1759,7 @@
 				1157850B252B85C0008A89DC /* PaymentView.swift in Sources */,
 				1157850C252B85C0008A89DC /* CustomerListView.swift in Sources */,
 				1157850D252B85C0008A89DC /* ArticleListViewModel.swift in Sources */,
+				116B0E8525EAE66200CC9E3B /* CrudViewController.swift in Sources */,
 				1157850E252B85C0008A89DC /* GenericCollectionView.swift in Sources */,
 				1157850F252B85C0008A89DC /* ArticleListModel.swift in Sources */,
 				11578510252B85C0008A89DC /* HomeViewController.swift in Sources */,
@@ -1740,6 +1789,7 @@
 				11578527252B85C0008A89DC /* PeriodListView.swift in Sources */,
 				118773E525772974002F2635 /* NewCustomerInteractor.swift in Sources */,
 				11578528252B85C0008A89DC /* extensions.swift in Sources */,
+				116B0EBA25EC3A8100CC9E3B /* MainOptionViewModelProtocol.swift in Sources */,
 				11578529252B85C0008A89DC /* importDatabase.swift in Sources */,
 				1157852A252B85C0008A89DC /* ArticleViewItem.swift in Sources */,
 				1157852C252B85C0008A89DC /* NewPaymentModel.swift in Sources */,
@@ -1754,6 +1804,7 @@
 				110CDFCB25AB5BC700898470 /* SecondaryUserLoginViewController.swift in Sources */,
 				11578531252B85C0008A89DC /* ArticleListViewModelContract.swift in Sources */,
 				11778280256C06A1006B51FD /* SellModel.swift in Sources */,
+				116B0E9725EC302900CC9E3B /* MainOptionsView.swift in Sources */,
 				11578534252B85C0008A89DC /* BaseViewController.swift in Sources */,
 				11578535252B85C0008A89DC /* ExpenseWorker.swift in Sources */,
 				11578536252B85C0008A89DC /* AppDelegate.swift in Sources */,
@@ -1765,13 +1816,13 @@
 				1157853C252B85C0008A89DC /* LoginModels.swift in Sources */,
 				1157853D252B85C0008A89DC /* ArticleListView.swift in Sources */,
 				1157853E252B85C0008A89DC /* OSX_Version.xcdatamodeld in Sources */,
+				116B0EB525EC3A5800CC9E3B /* MainOptionModel.swift in Sources */,
 				1157853F252B85C0008A89DC /* ArticleSellView.swift in Sources */,
 				11578540252B85C0008A89DC /* importActivity.swift in Sources */,
 				11578541252B85C0008A89DC /* LoginRouter.swift in Sources */,
 				11578542252B85C0008A89DC /* NSViewExtension.swift in Sources */,
 				113FA64D25A955620043E7D6 /* AccountWorker.swift in Sources */,
 				11578543252B85C0008A89DC /* ConnectionStatus.swift in Sources */,
-				11C3F9652591B6C100840905 /* Collapsable.swift in Sources */,
 				118A526A25B255FE0036DE28 /* CommonRouter.swift in Sources */,
 				11578544252B85C0008A89DC /* XibViewWithAnimation.swift in Sources */,
 				11578545252B85C0008A89DC /* Loader.swift in Sources */,
@@ -1805,7 +1856,6 @@
 				113FA65525A9FDAC0043E7D6 /* SecondaryUserSession.swift in Sources */,
 				116CEB6623A3115E0081D356 /* SellRegisterCell.swift in Sources */,
 				11EBD36623766D2500AB4BFF /* ErrorModel.swift in Sources */,
-				11C3F96C2591B96600840905 /* NewImplementationViewController.swift in Sources */,
 				116CE96F23EDE94A00688C0B /* PeriodListItem.swift in Sources */,
 				11EBD38F237726A800AB4BFF /* LoginInteractor.swift in Sources */,
 				118A531525BC91C80036DE28 /* StockCrudViewModel.swift in Sources */,
@@ -1837,6 +1887,7 @@
 				11542D842380703F0011AB1D /* ConsoleCommand.swift in Sources */,
 				11EBD36223766BF400AB4BFF /* MainUserSession.swift in Sources */,
 				118773D32577292F002F2635 /* NewCustomerWorker.swift in Sources */,
+				116B0EBE25EC3A8F00CC9E3B /* MainOptionViewModel.swift in Sources */,
 				11AC546623DDE5250033A27D /* AcitvitySaleView.swift in Sources */,
 				11498E632520979000E4D679 /* ImportVentaCarnet.swift in Sources */,
 				113FA64525A6A85B0043E7D6 /* AccountModel.swift in Sources */,
@@ -1854,6 +1905,7 @@
 				1147AB4A2383654C00D19AA9 /* CustomerListView.swift in Sources */,
 				11A8ECF823B0E76E00F15B9A /* ArticleListViewModel.swift in Sources */,
 				11A8ED0323B1442700F15B9A /* GenericCollectionView.swift in Sources */,
+				116B0E8425EAE66200CC9E3B /* CrudViewController.swift in Sources */,
 				11A8ECF423B0E74300F15B9A /* ArticleListModel.swift in Sources */,
 				11EBD3812377130C00AB4BFF /* HomeViewController.swift in Sources */,
 				11D3D870252128030008CFD0 /* DiscountModel.swift in Sources */,
@@ -1883,6 +1935,7 @@
 				110664D82377ACBF00DC44F3 /* extensions.swift in Sources */,
 				11498E582520069700E4D679 /* importDatabase.swift in Sources */,
 				1166AF3523B27F880047C7AE /* ArticleViewItem.swift in Sources */,
+				116B0EB925EC3A8100CC9E3B /* MainOptionViewModelProtocol.swift in Sources */,
 				11EEF0F8239D4AA1007C9821 /* NewPaymentModel.swift in Sources */,
 				1147AB44238364D900D19AA9 /* CustomerListModel.swift in Sources */,
 				1163933C238229DE00D14B19 /* imageExtension.swift in Sources */,
@@ -1897,6 +1950,7 @@
 				110CDFCA25AB5BC700898470 /* SecondaryUserLoginViewController.swift in Sources */,
 				1177827F256C06A1006B51FD /* SellModel.swift in Sources */,
 				11EBD39423773B5C00AB4BFF /* BaseViewController.swift in Sources */,
+				116B0E9625EC302900CC9E3B /* MainOptionsView.swift in Sources */,
 				114C54112413FF66000CC75A /* ExpenseWorker.swift in Sources */,
 				118773D02577292F002F2635 /* NewCustomerInteractor.swift in Sources */,
 				11EBD3212376499F00AB4BFF /* AppDelegate.swift in Sources */,
@@ -1908,13 +1962,13 @@
 				11EBD38D237726A800AB4BFF /* LoginModels.swift in Sources */,
 				11A8ECFA23B0E77A00F15B9A /* ArticleListView.swift in Sources */,
 				11EBD3262376499F00AB4BFF /* OSX_Version.xcdatamodeld in Sources */,
+				116B0EB425EC3A5800CC9E3B /* MainOptionModel.swift in Sources */,
 				1166AF3C23B296090047C7AE /* ArticleSellView.swift in Sources */,
 				11D3D874252139FA0008CFD0 /* importActivity.swift in Sources */,
 				11EBD38C237726A800AB4BFF /* LoginRouter.swift in Sources */,
 				1147AB7E238611C200D19AA9 /* NSViewExtension.swift in Sources */,
 				113FA64C25A955620043E7D6 /* AccountWorker.swift in Sources */,
 				11542D812380698F0011AB1D /* ConnectionStatus.swift in Sources */,
-				11C3F9642591B6C100840905 /* Collapsable.swift in Sources */,
 				118A526925B255FE0036DE28 /* CommonRouter.swift in Sources */,
 				11A8ECFE23B1207500F15B9A /* XibViewWithAnimation.swift in Sources */,
 				110664DC237852BD00DC44F3 /* Loader.swift in Sources */,

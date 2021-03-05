@@ -136,6 +136,20 @@
                                             <constraint firstAttribute="width" constant="170" id="baP-9q-dvI"/>
                                         </constraints>
                                     </customView>
+                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="rpB-t6-BpD">
+                                        <rect key="frame" x="114" y="2" width="33" height="37"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="Efo-pv-yZG"/>
+                                            <constraint firstAttribute="width" constant="33" id="nYJ-Bq-zV7"/>
+                                        </constraints>
+                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="cylinder" catalog="system" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="xX2-qO-2a4">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="Crud:" target="XfG-lQ-9wD" id="X8O-58-80E"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="9AY-9h-Rjr" firstAttribute="leading" secondItem="Y6C-Pr-GNv" secondAttribute="leading" constant="16" id="28c-pc-z5b"/>
@@ -143,9 +157,11 @@
                                     <constraint firstAttribute="trailing" secondItem="Kec-wk-swp" secondAttribute="trailing" constant="16" id="9P1-m4-2aV"/>
                                     <constraint firstItem="9AY-9h-Rjr" firstAttribute="centerY" secondItem="Y6C-Pr-GNv" secondAttribute="centerY" id="AOL-qY-63e"/>
                                     <constraint firstAttribute="bottom" secondItem="kPf-Dq-0A9" secondAttribute="bottom" id="Ppc-UG-fyq"/>
+                                    <constraint firstItem="rpB-t6-BpD" firstAttribute="centerY" secondItem="Y6C-Pr-GNv" secondAttribute="centerY" id="YUT-C0-g0h"/>
                                     <constraint firstItem="avi-xG-IAk" firstAttribute="centerY" secondItem="Y6C-Pr-GNv" secondAttribute="centerY" id="dLw-hl-cbs"/>
                                     <constraint firstItem="Kec-wk-swp" firstAttribute="centerY" secondItem="Y6C-Pr-GNv" secondAttribute="centerY" id="hAy-he-GmQ"/>
                                     <constraint firstItem="kPf-Dq-0A9" firstAttribute="top" secondItem="Y6C-Pr-GNv" secondAttribute="top" id="iwy-62-kdA"/>
+                                    <constraint firstItem="rpB-t6-BpD" firstAttribute="leading" secondItem="avi-xG-IAk" secondAttribute="trailing" constant="16" id="nF9-rV-ulI"/>
                                     <constraint firstItem="Kec-wk-swp" firstAttribute="leading" secondItem="kPf-Dq-0A9" secondAttribute="trailing" constant="16" id="wDw-d0-cY0"/>
                                     <constraint firstAttribute="height" constant="40" id="xBg-Mn-Ma1"/>
                                 </constraints>
@@ -256,6 +272,7 @@
     <resources>
         <image name="NSUser" width="32" height="32"/>
         <image name="box" width="600" height="400"/>
+        <image name="cylinder" catalog="system" width="14" height="16"/>
         <image name="mono-logout" width="2400" height="2400"/>
     </resources>
 </document>

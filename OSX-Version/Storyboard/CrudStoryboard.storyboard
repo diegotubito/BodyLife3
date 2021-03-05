@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Crud View Controller-->
+        <scene sceneID="hep-85-xwd">
+            <objects>
+                <viewController storyboardIdentifier="CrudViewController" id="ABI-Pt-Gwg" customClass="CrudViewController" customModule="Body_Shaping" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" translatesAutoresizingMaskIntoConstraints="NO" id="d5c-3P-FUw">
+                        <rect key="frame" x="0.0" y="0.0" width="989" height="596"/>
+                        <subviews>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="OEo-ZV-qhR">
+                                <rect key="frame" x="16" y="16" width="300" height="500"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="500" id="I5A-34-7D6"/>
+                                    <constraint firstAttribute="width" constant="300" id="mQr-eX-zc7"/>
+                                </constraints>
+                            </customView>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="57N-Id-CLZ">
+                                <rect key="frame" x="18" y="548" width="372" height="28"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Configuración de entradas y salidas" id="Z7M-77-Nux">
+                                    <font key="font" metaFont="system" size="24"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="j1D-3h-fDv">
+                                <rect key="frame" x="332" y="16" width="641" height="500"/>
+                            </customView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="j1D-3h-fDv" secondAttribute="bottom" constant="16" id="EZC-IS-ohW"/>
+                            <constraint firstItem="j1D-3h-fDv" firstAttribute="top" secondItem="57N-Id-CLZ" secondAttribute="bottom" constant="32" id="GxD-bz-jn7"/>
+                            <constraint firstAttribute="trailing" secondItem="j1D-3h-fDv" secondAttribute="trailing" constant="16" id="PW3-2L-3Rn"/>
+                            <constraint firstAttribute="bottom" secondItem="OEo-ZV-qhR" secondAttribute="bottom" constant="16" id="Xxj-Jz-kzd"/>
+                            <constraint firstItem="OEo-ZV-qhR" firstAttribute="top" secondItem="57N-Id-CLZ" secondAttribute="bottom" constant="32" id="ZQ5-G1-BER"/>
+                            <constraint firstItem="OEo-ZV-qhR" firstAttribute="leading" secondItem="d5c-3P-FUw" secondAttribute="leading" constant="16" id="ZVJ-N6-oJf"/>
+                            <constraint firstItem="57N-Id-CLZ" firstAttribute="top" secondItem="d5c-3P-FUw" secondAttribute="top" constant="20" symbolic="YES" id="Zic-fq-DaL"/>
+                            <constraint firstItem="j1D-3h-fDv" firstAttribute="leading" secondItem="OEo-ZV-qhR" secondAttribute="trailing" constant="16" id="a2w-yn-OQ5"/>
+                            <constraint firstItem="57N-Id-CLZ" firstAttribute="leading" secondItem="d5c-3P-FUw" secondAttribute="leading" constant="20" symbolic="YES" id="baW-Hr-XoH"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="leftContainer" destination="OEo-ZV-qhR" id="U1d-NV-IFn"/>
+                    </connections>
+                </viewController>
+                <customObject id="fk4-ZY-6AL" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="169.5" y="320"/>
+        </scene>
+    </scenes>
+</document>
