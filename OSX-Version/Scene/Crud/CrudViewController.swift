@@ -9,25 +9,21 @@
 import Cocoa
 
 class CrudViewController : NSViewController {
-    @IBOutlet weak var leftContainer: NSView!
     var mainOptionView : MainOptionView!
     
     override func viewDidLoad() {
         super .viewDidLoad()
+        createOptionView()
+      
+    }
+    
+    override func viewWillLayout() {
+        super .viewWillLayout()
        
-        self.createOptionView()
-        
     }
     
     private func createOptionView() {
-        mainOptionView = MainOptionView(frame: leftContainer.frame)
-        leftContainer.addSubview(mainOptionView)
-      
-        
-        mainOptionView.translatesAutoresizingMaskIntoConstraints = false
-        mainOptionView.leftAnchor.constraint(equalTo: leftContainer.leftAnchor, constant: 0).isActive = true
-        mainOptionView.rightAnchor.constraint(equalTo: leftContainer.rightAnchor, constant: 0).isActive = true
-        mainOptionView.bottomAnchor.constraint(equalTo: leftContainer.bottomAnchor, constant: 0).isActive = true
-        mainOptionView.topAnchor.constraint(equalTo: leftContainer.topAnchor, constant: 0).isActive = true
+        mainOptionView = MainOptionView(frame: CGRect(x: 16, y: 16, width: 600, height: self.view.frame.height - 100))
+        view.addSubview(mainOptionView)
     }
 }

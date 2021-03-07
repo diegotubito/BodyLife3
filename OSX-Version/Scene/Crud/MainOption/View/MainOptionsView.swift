@@ -20,6 +20,10 @@ class MainOptionView: GenericTableView {
 
 extension MainOptionView : MainOptionViewProtocol{
     func showSuccess(data: MainOptionModel.DataModel) {
-        print(data)
+        DispatchQueue.main.async {
+            self.items = data.items
+            self.columns = data.columns
+            self.tableView.reloadData()
+        }
     }
 }

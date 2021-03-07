@@ -11,17 +11,25 @@ import Foundation
 struct MainOptionModel {
     var data : DataModel!
     
-    struct DataModel : Decodable {
+    struct DataModel : Codable {
         var type : String
         var columns : [Column] = []
         var items : [Item] = []
     }
     
-    struct Item : Decodable {
+    struct Item : Codable {
         var title : String?
+        var isEnabled : Bool
+        var aux : String?
+        var doubleValue : Double?
     }
     
-    struct Column : Decodable {
+    struct Column : Codable {
         var name : String?
+        var isEditable : Bool
+        var width: Double?
+        var maxWidth: Double?
+        var minWidth: Double?
+        var fieldName: String?
     }
 }

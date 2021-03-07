@@ -9,8 +9,13 @@ import Cocoa
 
 class GenericTableView : NSView {
     var scrollView : NSScrollView!
-    var defaultColumn : NSTableColumn!
     var tableView : NSTableView!
+    var items = [MainOptionModel.Item]()
+    var columns = [MainOptionModel.Column]() {
+        didSet {
+          addConstraint()
+        }
+    }
     
     override init(frame frameRect: NSRect) {
         super .init(frame: frameRect)
@@ -24,13 +29,14 @@ class GenericTableView : NSView {
     func commonInit() {
         setupScrollView()
         setupTableView()
-        setupColumn()
-        addConstraint()
     }
    
     private func setupScrollView() {
         scrollView = NSScrollView()
-        scrollView.frame = self.bounds
+        scrollView.frame = .zero
+        self.wantsLayer = true
+        self.layer?.borderWidth = 2
+        self.layer?.borderColor = NSColor.white.cgColor
         self.addSubview(scrollView)
     }
     
@@ -41,14 +47,17 @@ class GenericTableView : NSView {
         tableView.allowsColumnResizing = false
         tableView.allowsColumnSelection = false
         tableView.allowsColumnReordering = false
-        
         scrollView.documentView = tableView
     }
     
     func setupColumn() {
-        defaultColumn = NSTableColumn(identifier: NSUserInterfaceItemIdentifier(rawValue: "defaultColumn"))
-        defaultColumn.title = "Opciones"
-        tableView.addTableColumn(defaultColumn)
+        columns.forEach({column in
+            let newColumn = NSTableColumn(identifier: NSUserInterfaceItemIdentifier(rawValue: column.name ?? ""))
+            newColumn.title = column.name ?? ""
+            newColumn.width = CGFloat(column.width ?? 0) * (self.frame.width - 66)
+            newColumn.headerCell.alignment = .left
+            tableView.addTableColumn(newColumn)
+        })
     }
     
     func addConstraint() {
@@ -59,7 +68,12 @@ class GenericTableView : NSView {
         scrollView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
         scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
         
-        defaultColumn.minWidth = self.bounds.width * 0.89
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 0).isActive = true
+        tableView.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: 0).isActive = true
+        tableView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 0).isActive = true
+      //  tableView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 0).isActive = true
+        self.setupColumn()
         
     }
     
@@ -67,33 +81,68 @@ class GenericTableView : NSView {
 
 extension GenericTableView: NSTableViewDelegate, NSTableViewDataSource {
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return 20
+        return items.count
     }
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         guard let column = tableColumn?.identifier.rawValue else {
             fatalError("Error in table view column identifiers")
         }
         
-        switch column {
-        case "defaultColumn":
-            
-            let cell = GenericTableViewItem(frame: .zero)
-            cell.titleLabel.stringValue = "Estamos probando con un texto muy largo"
-            
-            return cell
-        default:
-            return NSView()
+        
+        let cell = GenericTableViewItem(frame: .zero)
+        for col in columns {
+            if column == col.name {
+                guard let fieldName = col.fieldName else { return NSView() }
+                cell.titleLabel.stringValue = getTitle(item: items[row], fieldName: fieldName)
+                if col.isEditable {
+                    cell.titleLabel.isEditable = true
+                } else {
+                    cell.titleLabel.isEditable = false
+                }
+                return cell
+            }
         }
+        
+        return NSView()
+    }
+    
+    private func getTitle(item: MainOptionModel.Item, fieldName: String) -> String {
+        guard let data = try? JSONEncoder().encode(item),
+              let dictionary = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+        else { return "not parsed" }
+        
+        let result = dictionary[fieldName]
+        
+        if result is String {
+            return result as! String
+        }
+        if result is Bool {
+            let stringBool = result as! Bool
+            return String(stringBool)
+        }
+        if result is Double {
+            let resultDouble = result as! Double
+            return String(resultDouble)
+        }
+        
+        return ""
     }
     
     func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
-        return 50
+        return 20
     }
 }
 
 
 class GenericTableViewItem: NSView {
     var titleLabel : NSTextField!
+    
+    var item : MainOptionModel.Item? {
+        didSet {
+            guard let item = item else { return }
+            titleLabel.stringValue = item.title ?? ""
+        }
+    }
     
     override init(frame frameRect: NSRect) {
         super .init(frame: frameRect)
