@@ -7,11 +7,20 @@
 //
 import Cocoa
 
-class GenericTableView : NSView {
+struct GenericTableViewColumnModel : Codable {
+    var name : String?
+    var isEditable : Bool
+    var width: Double?
+    var maxWidth: Double?
+    var minWidth: Double?
+    var fieldName: String?
+}
+
+class GenericTableView<U: GenericTableViewItem<T>, T> : NSView, NSTableViewDelegate, NSTableViewDataSource {
     var scrollView : NSScrollView!
     var tableView : NSTableView!
-    var items = [MainOptionModel.Item]()
-    var columns = [MainOptionModel.Column]() {
+    var items = [T]()
+    var columns = [GenericTableViewColumnModel]() {
         didSet {
           addConstraint()
         }
@@ -77,9 +86,6 @@ class GenericTableView : NSView {
         
     }
     
-}
-
-extension GenericTableView: NSTableViewDelegate, NSTableViewDataSource {
     func numberOfRows(in tableView: NSTableView) -> Int {
         return items.count
     }
@@ -88,26 +94,62 @@ extension GenericTableView: NSTableViewDelegate, NSTableViewDataSource {
             fatalError("Error in table view column identifiers")
         }
         
-        
-        let cell = GenericTableViewItem(frame: .zero)
+        let cell = U(frame: .zero)
         for col in columns {
             if column == col.name {
                 guard let fieldName = col.fieldName else { return NSView() }
-                cell.titleLabel.stringValue = getTitle(item: items[row], fieldName: fieldName)
-                if col.isEditable {
-                    cell.titleLabel.isEditable = true
-                } else {
-                    cell.titleLabel.isEditable = false
-                }
+                cell.fieldName = fieldName
+                cell.item = items[row]
                 return cell
             }
         }
         
         return NSView()
     }
+   
+    func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
+        return 20
+    }
+}
+
+
+class GenericTableViewItem<T: Encodable>: NSView {
+    var titleLabel : NSTextField!
     
-    private func getTitle(item: MainOptionModel.Item, fieldName: String) -> String {
-        guard let data = try? JSONEncoder().encode(item),
+    var item : T?
+    var fieldName: String!
+    
+    override required init(frame frameRect: NSRect) {
+        super .init(frame: frameRect)
+        commonInit()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("xib file not implemented")
+    }
+    
+    func commonInit() {
+        addTitle()
+        addContraints()
+    }
+    
+    private func addTitle() {
+        titleLabel = NSTextField(frame: CGRect.zero)
+        titleLabel.lineBreakMode = .byTruncatingTail
+        titleLabel.maximumNumberOfLines = 0
+        self.addSubview(titleLabel)
+    }
+    
+    private func addContraints() {
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0).isActive = true
+        titleLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
+        titleLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant:0).isActive = true
+    }
+    
+    func getTitle() -> String {
+        guard
+              let data = try? JSONEncoder().encode(item),
               let dictionary = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
         else { return "not parsed" }
         
@@ -126,49 +168,5 @@ extension GenericTableView: NSTableViewDelegate, NSTableViewDataSource {
         }
         
         return ""
-    }
-    
-    func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
-        return 20
-    }
-}
-
-
-class GenericTableViewItem: NSView {
-    var titleLabel : NSTextField!
-    
-    var item : MainOptionModel.Item? {
-        didSet {
-            guard let item = item else { return }
-            titleLabel.stringValue = item.title ?? ""
-        }
-    }
-    
-    override init(frame frameRect: NSRect) {
-        super .init(frame: frameRect)
-        commonInit()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("xib file not implemented")
-    }
-    
-    private func commonInit() {
-        addTitle()
-        addContraints()
-    }
-    
-    private func addTitle() {
-        titleLabel = NSTextField(frame: CGRect.zero)
-        titleLabel.lineBreakMode = .byTruncatingTail
-        titleLabel.maximumNumberOfLines = 0
-        self.addSubview(titleLabel)
-    }
-    
-    private func addContraints() {
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0).isActive = true
-        titleLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
-        titleLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant:0).isActive = true
     }
 }

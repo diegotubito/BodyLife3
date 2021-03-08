@@ -8,41 +8,32 @@
 
 import Cocoa
 
-//class MainOptionsViewCell: GenericCollectionItem {
-//    var titleLabel : NSTextField!
-//    
-//    var item : MainOptionModel.Item? {
-//        didSet {
-//            guard let item = item else { return }
-//            titleLabel.stringValue = item.title ?? ""
-//        }
-//    }
-//    
-//    override init(frame frameRect: NSRect) {
-//        super .init(frame: frameRect)
-//        commonInit()
-//    }
-//    
-//    required init?(coder: NSCoder) {
-//        fatalError("xib file not implemented")
-//    }
-//    
-//    private func commonInit() {
-//        addTitle()
-//        addContraints()
-//    }
-//    
-//    private func addTitle() {
-//        titleLabel = NSTextField(frame: CGRect.zero)
-//        titleLabel.lineBreakMode = .byTruncatingTail
-//        titleLabel.maximumNumberOfLines = 0
-//        self.addSubview(titleLabel)
-//    }
-//    
-//    private func addContraints() {
-//        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-//        titleLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0).isActive = true
-//        titleLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
-//        titleLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant:0).isActive = true
-//    }
-//}
+class MainOptionsViewCell: GenericTableViewItem<MainOptionModel.Item> {
+    var myLabel : NSTextField!
+    
+    override var item: MainOptionModel.Item? {
+        didSet {
+            myLabel.stringValue = getTitle()
+        }
+    }
+    
+    override func commonInit() {
+        addTitle()
+        addContraints()
+    }
+    
+    private func addTitle() {
+        myLabel = NSTextField(frame: CGRect.zero)
+        myLabel.lineBreakMode = .byTruncatingTail
+        myLabel.maximumNumberOfLines = 0
+        myLabel.textColor = .red
+        self.addSubview(myLabel)
+    }
+    
+    private func addContraints() {
+        myLabel.translatesAutoresizingMaskIntoConstraints = false
+        myLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0).isActive = true
+        myLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
+        myLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant:0).isActive = true
+    }
+}

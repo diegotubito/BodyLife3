@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class MainOptionView: GenericTableView {
+class MainOptionView: GenericTableView<MainOptionsViewCell, MainOptionModel.Item>, MainOptionViewProtocol {
     var viewmodel : MainOptionViewModelProtocol!
     
     override func commonInit() {
@@ -16,9 +16,7 @@ class MainOptionView: GenericTableView {
         viewmodel = MainOptionViewModel(withView: self)
         viewmodel.loadData()
     }
-}
-
-extension MainOptionView : MainOptionViewProtocol{
+    
     func showSuccess(data: MainOptionModel.DataModel) {
         DispatchQueue.main.async {
             self.items = data.items
@@ -27,3 +25,4 @@ extension MainOptionView : MainOptionViewProtocol{
         }
     }
 }
+

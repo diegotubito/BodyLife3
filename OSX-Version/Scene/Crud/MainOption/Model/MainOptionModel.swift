@@ -13,7 +13,7 @@ struct MainOptionModel {
     
     struct DataModel : Codable {
         var type : String
-        var columns : [Column] = []
+        var columns : [GenericTableViewColumnModel] = []
         var items : [Item] = []
     }
     
@@ -23,13 +23,5 @@ struct MainOptionModel {
         var aux : String?
         var doubleValue : Double?
     }
-    
-    struct Column : Codable {
-        var name : String?
-        var isEditable : Bool
-        var width: Double?
-        var maxWidth: Double?
-        var minWidth: Double?
-        var fieldName: String?
-    }
+   
 }
