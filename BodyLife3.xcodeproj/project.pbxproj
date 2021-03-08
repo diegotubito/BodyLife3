@@ -336,8 +336,8 @@
 		11EEF0F8239D4AA1007C9821 /* NewPaymentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EEF0F7239D4AA1007C9821 /* NewPaymentModel.swift */; };
 		1C350FE16C3535707D238A35 /* Pods_Production_Target.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4A64E9248541272205FC04A /* Pods_Production_Target.framework */; };
 		A4A7B01B69DBFE2B4F86EEC1 /* Pods_Internal_Target.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F8C8DF41312F49763D976F4 /* Pods_Internal_Target.framework */; };
-		F1D5DFDF25F5981200828702 /* MainOptionsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D5DFDE25F5981200828702 /* MainOptionsViewCell.swift */; };
-		F1D5DFE025F5981200828702 /* MainOptionsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D5DFDE25F5981200828702 /* MainOptionsViewCell.swift */; };
+		F1D5DFDF25F5981200828702 /* SingleLabelItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D5DFDE25F5981200828702 /* SingleLabelItem.swift */; };
+		F1D5DFE025F5981200828702 /* SingleLabelItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D5DFDE25F5981200828702 /* SingleLabelItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -515,7 +515,7 @@
 		A9C908432990D6193F271FB1 /* Pods-Internal-Target.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Internal-Target.debug.xcconfig"; path = "Target Support Files/Pods-Internal-Target/Pods-Internal-Target.debug.xcconfig"; sourceTree = "<group>"; };
 		B4A64E9248541272205FC04A /* Pods_Production_Target.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Production_Target.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC690DF307085962570C4E82 /* Pods-Production-Target.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Production-Target.release.xcconfig"; path = "Target Support Files/Pods-Production-Target/Pods-Production-Target.release.xcconfig"; sourceTree = "<group>"; };
-		F1D5DFDE25F5981200828702 /* MainOptionsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainOptionsViewCell.swift; sourceTree = "<group>"; };
+		F1D5DFDE25F5981200828702 /* SingleLabelItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleLabelItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -726,6 +726,7 @@
 		1147AB3E2383648B00D19AA9 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F1D5DFEA25F5CBB300828702 /* Items */,
 				118A52F525BC75630036DE28 /* Stock */,
 				113FA66825AB54A40043E7D6 /* SecondaryUser */,
 				116CE95C23EDCD3000688C0B /* ActivityListView */,
@@ -1008,7 +1009,6 @@
 			isa = PBXGroup;
 			children = (
 				116B0E9525EC302900CC9E3B /* MainOptionsView.swift */,
-				F1D5DFDE25F5981200828702 /* MainOptionsViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1471,6 +1471,22 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		F1D5DFEA25F5CBB300828702 /* Items */ = {
+			isa = PBXGroup;
+			children = (
+				F1D5DFEB25F5CBB600828702 /* SingleLabel */,
+			);
+			path = Items;
+			sourceTree = "<group>";
+		};
+		F1D5DFEB25F5CBB600828702 /* SingleLabel */ = {
+			isa = PBXGroup;
+			children = (
+				F1D5DFDE25F5981200828702 /* SingleLabelItem.swift */,
+			);
+			path = SingleLabel;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1750,7 +1766,7 @@
 				11578503252B85C0008A89DC /* MainUserSession.swift in Sources */,
 				113FA64625A6A85B0043E7D6 /* AccountModel.swift in Sources */,
 				11578505252B85C0008A89DC /* AcitvitySaleView.swift in Sources */,
-				F1D5DFE025F5981200828702 /* MainOptionsViewCell.swift in Sources */,
+				F1D5DFE025F5981200828702 /* SingleLabelItem.swift in Sources */,
 				11578507252B85C0008A89DC /* ImportVentaCarnet.swift in Sources */,
 				11578508252B85C0008A89DC /* CustomerStatusViewModel.swift in Sources */,
 				11578509252B85C0008A89DC /* ArticleModel.swift in Sources */,
@@ -1897,7 +1913,7 @@
 				11498E632520979000E4D679 /* ImportVentaCarnet.swift in Sources */,
 				113FA64525A6A85B0043E7D6 /* AccountModel.swift in Sources */,
 				1147AB7C2384D49E00D19AA9 /* CustomerStatusViewModel.swift in Sources */,
-				F1D5DFDF25F5981200828702 /* MainOptionsViewCell.swift in Sources */,
+				F1D5DFDF25F5981200828702 /* SingleLabelItem.swift in Sources */,
 				11D3D8852521780B0008CFD0 /* ArticleModel.swift in Sources */,
 				118472432528D6D20012D237 /* ImportVentaArticulo.swift in Sources */,
 				11578587252E7E57008A89DC /* AuthManager.swift in Sources */,

@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class MainOptionView: GenericTableView<MainOptionsViewCell, MainOptionModel.Item>, MainOptionViewProtocol {
+class MainOptionView: GenericTableView<SingleLabelItem, MainOptionModel.Item>, MainOptionViewProtocol {
     var viewmodel : MainOptionViewModelProtocol!
     
     override func commonInit() {

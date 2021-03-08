@@ -97,8 +97,7 @@ class GenericTableView<U: GenericTableViewItem<T>, T> : NSView, NSTableViewDeleg
         let cell = U(frame: .zero)
         for col in columns {
             if column == col.name {
-                guard let fieldName = col.fieldName else { return NSView() }
-                cell.fieldName = fieldName
+                cell.column = col
                 cell.item = items[row]
                 return cell
             }
@@ -108,16 +107,14 @@ class GenericTableView<U: GenericTableViewItem<T>, T> : NSView, NSTableViewDeleg
     }
    
     func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
-        return 20
+        return 25
     }
 }
 
 
 class GenericTableViewItem<T: Encodable>: NSView {
-    var titleLabel : NSTextField!
-    
     var item : T?
-    var fieldName: String!
+    var column: GenericTableViewColumnModel!
     
     override required init(frame frameRect: NSRect) {
         super .init(frame: frameRect)
@@ -129,28 +126,13 @@ class GenericTableViewItem<T: Encodable>: NSView {
     }
     
     func commonInit() {
-        addTitle()
-        addContraints()
     }
-    
-    private func addTitle() {
-        titleLabel = NSTextField(frame: CGRect.zero)
-        titleLabel.lineBreakMode = .byTruncatingTail
-        titleLabel.maximumNumberOfLines = 0
-        self.addSubview(titleLabel)
-    }
-    
-    private func addContraints() {
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0).isActive = true
-        titleLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
-        titleLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant:0).isActive = true
-    }
-    
+   
     func getTitle() -> String {
         guard
               let data = try? JSONEncoder().encode(item),
-              let dictionary = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+              let dictionary = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+              let fieldName = column.fieldName
         else { return "not parsed" }
         
         let result = dictionary[fieldName]
@@ -168,5 +150,10 @@ class GenericTableViewItem<T: Encodable>: NSView {
         }
         
         return ""
+    }
+    
+    func setStatus(label: NSTextField) {
+        label.isEditable = column.isEditable
+        label.isBezeled = column.isEditable
     }
 }

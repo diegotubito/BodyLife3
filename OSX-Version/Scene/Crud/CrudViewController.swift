@@ -17,11 +17,6 @@ class CrudViewController : NSViewController {
       
     }
     
-    override func viewWillLayout() {
-        super .viewWillLayout()
-       
-    }
-    
     private func createOptionView() {
         mainOptionView = MainOptionView(frame: CGRect(x: 16, y: 16, width: 600, height: self.view.frame.height - 100))
         view.addSubview(mainOptionView)

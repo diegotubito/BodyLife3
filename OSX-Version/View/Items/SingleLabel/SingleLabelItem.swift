@@ -8,12 +8,13 @@
 
 import Cocoa
 
-class MainOptionsViewCell: GenericTableViewItem<MainOptionModel.Item> {
+class SingleLabelItem: GenericTableViewItem<MainOptionModel.Item> {
     var myLabel : NSTextField!
     
     override var item: MainOptionModel.Item? {
         didSet {
             myLabel.stringValue = getTitle()
+            setStatus(label: myLabel)
         }
     }
     
@@ -26,7 +27,9 @@ class MainOptionsViewCell: GenericTableViewItem<MainOptionModel.Item> {
         myLabel = NSTextField(frame: CGRect.zero)
         myLabel.lineBreakMode = .byTruncatingTail
         myLabel.maximumNumberOfLines = 0
-        myLabel.textColor = .red
+        myLabel.wantsLayer = true
+        myLabel.backgroundColor = .clear
+        myLabel.isBezeled = false
         self.addSubview(myLabel)
     }
     
