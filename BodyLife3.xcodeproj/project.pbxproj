@@ -336,6 +336,8 @@
 		11EEF0F8239D4AA1007C9821 /* NewPaymentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EEF0F7239D4AA1007C9821 /* NewPaymentModel.swift */; };
 		1C350FE16C3535707D238A35 /* Pods_Production_Target.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4A64E9248541272205FC04A /* Pods_Production_Target.framework */; };
 		A4A7B01B69DBFE2B4F86EEC1 /* Pods_Internal_Target.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F8C8DF41312F49763D976F4 /* Pods_Internal_Target.framework */; };
+		F186F78B25F72E0B002D493B /* PipMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F186F78A25F72E0B002D493B /* PipMessage.swift */; };
+		F186F78C25F72E0B002D493B /* PipMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F186F78A25F72E0B002D493B /* PipMessage.swift */; };
 		F1D5DFDF25F5981200828702 /* SingleLabelItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D5DFDE25F5981200828702 /* SingleLabelItem.swift */; };
 		F1D5DFE025F5981200828702 /* SingleLabelItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D5DFDE25F5981200828702 /* SingleLabelItem.swift */; };
 /* End PBXBuildFile section */
@@ -515,6 +517,7 @@
 		A9C908432990D6193F271FB1 /* Pods-Internal-Target.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Internal-Target.debug.xcconfig"; path = "Target Support Files/Pods-Internal-Target/Pods-Internal-Target.debug.xcconfig"; sourceTree = "<group>"; };
 		B4A64E9248541272205FC04A /* Pods_Production_Target.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Production_Target.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC690DF307085962570C4E82 /* Pods-Production-Target.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Production-Target.release.xcconfig"; path = "Target Support Files/Pods-Production-Target/Pods-Production-Target.release.xcconfig"; sourceTree = "<group>"; };
+		F186F78A25F72E0B002D493B /* PipMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipMessage.swift; sourceTree = "<group>"; };
 		F1D5DFDE25F5981200828702 /* SingleLabelItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleLabelItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1283,6 +1286,7 @@
 		11EBD34D23765BE300AB4BFF /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				F186F78925F72DEC002D493B /* PipMessege */,
 				118A526725B255E80036DE28 /* Router */,
 				114BD34E2562E895007FCEFC /* Worker */,
 				11A8B44C23BE228C007A5251 /* GenericTableView */,
@@ -1469,6 +1473,14 @@
 				B4A64E9248541272205FC04A /* Pods_Production_Target.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F186F78925F72DEC002D493B /* PipMessege */ = {
+			isa = PBXGroup;
+			children = (
+				F186F78A25F72E0B002D493B /* PipMessage.swift */,
+			);
+			path = PipMessege;
 			sourceTree = "<group>";
 		};
 		F1D5DFEA25F5CBB300828702 /* Items */ = {
@@ -1729,6 +1741,7 @@
 				115784E4252B85C0008A89DC /* RegisterListView.swift in Sources */,
 				113FA65625A9FDAC0043E7D6 /* SecondaryUserSession.swift in Sources */,
 				115784E6252B85C0008A89DC /* SellRegisterCell.swift in Sources */,
+				F186F78C25F72E0B002D493B /* PipMessage.swift in Sources */,
 				115784E7252B85C0008A89DC /* ErrorModel.swift in Sources */,
 				115784E8252B85C0008A89DC /* PeriodListItem.swift in Sources */,
 				115784E9252B85C0008A89DC /* LoginInteractor.swift in Sources */,
@@ -1876,6 +1889,7 @@
 				116CEB6323A1E2F30081D356 /* RegisterListView.swift in Sources */,
 				113FA65525A9FDAC0043E7D6 /* SecondaryUserSession.swift in Sources */,
 				116CEB6623A3115E0081D356 /* SellRegisterCell.swift in Sources */,
+				F186F78B25F72E0B002D493B /* PipMessage.swift in Sources */,
 				11EBD36623766D2500AB4BFF /* ErrorModel.swift in Sources */,
 				116CE96F23EDE94A00688C0B /* PeriodListItem.swift in Sources */,
 				11EBD38F237726A800AB4BFF /* LoginInteractor.swift in Sources */,
@@ -2027,7 +2041,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2.0.6;
+				CURRENT_PROJECT_VERSION = 2.0.7;
 				DEVELOPMENT_TEAM = S2BEC8V882;
 				ENABLE_HARDENED_RUNTIME = NO;
 				ENVIRONMENT = DEBUG;
@@ -2036,7 +2050,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 2.0.6;
+				MARKETING_VERSION = 2.0.7;
 				PRODUCT_BUNDLE_IDENTIFIER = "DDG.OSX-Version";
 				PRODUCT_NAME = "Body Shaping Internal";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2054,7 +2068,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2.0.6;
+				CURRENT_PROJECT_VERSION = 2.0.7;
 				DEVELOPMENT_TEAM = S2BEC8V882;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENVIRONMENT = RELEASE;
@@ -2063,7 +2077,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 2.0.6;
+				MARKETING_VERSION = 2.0.7;
 				PRODUCT_BUNDLE_IDENTIFIER = "DDG.OSX-Version";
 				PRODUCT_NAME = "Body Shaping Internal";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2196,7 +2210,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2.0.6;
+				CURRENT_PROJECT_VERSION = 2.0.7;
 				DEVELOPMENT_TEAM = S2BEC8V882;
 				ENABLE_HARDENED_RUNTIME = NO;
 				ENVIRONMENT = DEBUG;
@@ -2205,7 +2219,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 2.0.6;
+				MARKETING_VERSION = 2.0.7;
 				PRODUCT_BUNDLE_IDENTIFIER = "ddg.body-shaping-OSX";
 				PRODUCT_NAME = "Body Shaping";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2222,7 +2236,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2.0.6;
+				CURRENT_PROJECT_VERSION = 2.0.7;
 				DEVELOPMENT_TEAM = S2BEC8V882;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENVIRONMENT = RELEASE;
@@ -2231,7 +2245,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 2.0.6;
+				MARKETING_VERSION = 2.0.7;
 				PRODUCT_BUNDLE_IDENTIFIER = "ddg.body-shaping-OSX";
 				PRODUCT_NAME = "Body Shaping";
 				PROVISIONING_PROFILE_SPECIFIER = "";

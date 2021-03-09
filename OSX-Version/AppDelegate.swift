@@ -26,6 +26,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             BLServerManager.baseUrl = BLServer.Production
         #endif
      
+        WakeMessageToServer.sendWakeupPip()
         Connect.StartListening()
 
     }
