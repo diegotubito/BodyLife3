@@ -261,6 +261,7 @@
                         <outlet property="containerSellRegisters" destination="Htk-LD-AMV" id="dk4-O6-HfV"/>
                         <outlet property="containerStatus" destination="0fS-Ye-Kdk" id="lvC-xI-kXo"/>
                         <outlet property="containerUpperBar" destination="Y6C-Pr-GNv" id="Sv0-Al-zIe"/>
+                        <outlet property="crudOutlet" destination="rpB-t6-BpD" id="hRP-gb-T3B"/>
                         <outlet property="secondaryUserStatusViewContainer" destination="kPf-Dq-0A9" id="iPM-yp-mFS"/>
                     </connections>
                 </viewController>

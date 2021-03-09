@@ -7,6 +7,7 @@ protocol HomeDisplayLogic: class {
 
 class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate, CommonRouterProtocol {
    
+    @IBOutlet weak var crudOutlet: NSButton!
     var interactor: HomeBusinessLogic?
     var router: (NSObjectProtocol & HomeRoutingLogic & HomeDataPassing)?
     
@@ -80,9 +81,11 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
         self.view.window?.delegate = self
         containerBottomBar.isHidden = true
         StockUpdate.isHidden = true
+        crudOutlet.isHidden = true
         #if DEBUG || INTERNAL
         containerBottomBar.isHidden = false
         StockUpdate.isHidden = false
+        crudOutlet.isHidden = false
         #endif
     }
     
