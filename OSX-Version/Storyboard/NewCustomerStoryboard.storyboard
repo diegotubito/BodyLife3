@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="kB3-nJ-svr">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="kB3-nJ-svr">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17506"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--New Customer View Controller-->
         <scene sceneID="enq-yv-DFC">
             <objects>
-                <viewController storyboardIdentifier="NewCustomerViewController" id="kB3-nJ-svr" customClass="NewCustomerViewController" customModule="Internal_Target" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewCustomerViewController" id="kB3-nJ-svr" customClass="NewCustomerViewController" customModule="Body_Shaping" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="lCM-vi-YvS">
                         <rect key="frame" x="0.0" y="0.0" width="782" height="511"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -516,6 +516,9 @@
                                                                                         </items>
                                                                                     </menu>
                                                                                 </popUpButtonCell>
+                                                                                <connections>
+                                                                                    <action selector="genreDidChanged:" target="kB3-nJ-svr" id="jUt-on-ndp"/>
+                                                                                </connections>
                                                                             </popUpButton>
                                                                         </subviews>
                                                                         <visibilityPriorities>
@@ -803,7 +806,7 @@
         <!--Camera View Controller-->
         <scene sceneID="BQl-TW-PkN">
             <objects>
-                <viewController storyboardIdentifier="CameraViewController" id="gqG-oQ-aQf" customClass="CameraViewController" customModule="Internal_Target" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CameraViewController" id="gqG-oQ-aQf" customClass="CameraViewController" customModule="Body_Shaping" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="KIS-gs-WJr">
                         <rect key="frame" x="0.0" y="0.0" width="611" height="496"/>
                         <autoresizingMask key="autoresizingMask"/>

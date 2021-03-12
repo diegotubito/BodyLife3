@@ -121,7 +121,6 @@ class NewCustomerViewController: BaseViewController, NewCustomerDisplayLogic, Co
             interactor?.doSaveNewCustomer(request: requestFullInfo)
         } else {
             //use same timestime for update profile
-            print(customer?.timestamp)
             let requestFullInfo = createRequestFullInfo(withDate: customer?.timestamp.toDate1970 ?? Date())
             interactor?.doUpdateNewCustomer(request: requestFullInfo, previousDNI: customer?.dni ?? "")
         }
@@ -217,6 +216,12 @@ class NewCustomerViewController: BaseViewController, NewCustomerDisplayLogic, Co
             subtitle: customer.lastName + ", " + customer.firstName,
             informativeText: "Sigamos sumando.")
         }
+    }
+    
+    @IBAction func genreDidChanged(_ sender: Any) {
+        guard (customerReceived?.genero) != nil else { return }
+        //only enabled if is edition mode
+        guardarButtonOutlet.isEnabled = true
     }
     
     @IBAction func saveNewCustomerPressed(_ sender: Any) {
