@@ -32,10 +32,10 @@ extension GenericTableViewDelegate {
     }
 }
 
-class GenericTableView<U: GenericTableViewItem<T>, T> : NSView, NSTableViewDelegate, NSTableViewDataSource {
+class GenericTableView<U: GenericTableViewItem> : NSView, NSTableViewDelegate, NSTableViewDataSource {
     var scrollView : NSScrollView!
     var tableView : NSTableView!
-    var items = [T]()
+    var items = [[String: Any]]()
     var column = GenericTableViewColumnModel() {
         didSet {
           addConstraint()
@@ -112,7 +112,6 @@ class GenericTableView<U: GenericTableViewItem<T>, T> : NSView, NSTableViewDeleg
             fatalError("Error in table view column identifiers")
         }
         
-        
         for col in self.column.columns {
             if columnName == col.name {
                 let cell = U(frame: .zero, column: col)
@@ -132,8 +131,8 @@ class GenericTableView<U: GenericTableViewItem<T>, T> : NSView, NSTableViewDeleg
     }
 }
 
-class GenericTableViewItem<T: Encodable>: NSView {
-    var item : T!
+class GenericTableViewItem: NSView {
+    var item : [String: Any]!
     var column: GenericTableViewColumnModel.Column!
     var textFieldDidChangedObserver : ((String, String) -> ())?
     
@@ -152,12 +151,10 @@ class GenericTableViewItem<T: Encodable>: NSView {
    
     func getTitle() -> String {
         guard
-              let data = try? JSONEncoder().encode(item),
-              let dictionary = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
             let fieldName = column.fieldName
         else { return "not parsed" }
         
-        let result = dictionary[fieldName]
+        let result = item[fieldName]
         
         if result is String {
             return result as! String

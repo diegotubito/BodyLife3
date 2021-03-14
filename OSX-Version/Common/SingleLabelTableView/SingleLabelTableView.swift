@@ -8,26 +8,28 @@
 
 import Cocoa
 
-class MainOptionView: GenericTableView<SingleLabelItem, MainOptionModel.Item>, MainOptionViewProtocol {
-    var viewmodel : MainOptionViewModelProtocol!
+class SingleLabelTableView: GenericTableView<SingleLabelTableViewItem> {
     
     override func commonInit() {
         super .commonInit()
         self.delegate = self
-        viewmodel = MainOptionViewModel(withView: self)
-        viewmodel.loadData()
+        showItems()
     }
     
-    func showSuccess(data: MainOptionModel.DataModel) {
+    func setValues(items: [[String: Any]], column: GenericTableViewColumnModel) {
+        self.items = items
+        self.column = column
+        showItems()
+    }
+    
+    func showItems() {
         DispatchQueue.main.async {
-            self.items = data.items
-            self.column = data.column
             self.tableView.reloadData()
         }
     }
 }
 
-extension MainOptionView: GenericTableViewDelegate {
+extension SingleLabelTableView: GenericTableViewDelegate {
     func textFieldDidChanged(columnIdentifier: String, stringValue: String) {
         print("heeeey \(stringValue)")
         print(tableView.selectedRow)

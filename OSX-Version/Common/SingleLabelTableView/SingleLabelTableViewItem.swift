@@ -8,10 +8,10 @@
 
 import Cocoa
 
-class SingleLabelItem: GenericTableViewItem<MainOptionModel.Item>, NSTextFieldDelegate {
+class SingleLabelTableViewItem: GenericTableViewItem, NSTextFieldDelegate {
     var myLabel : NSTextField!
   
-    override var item: MainOptionModel.Item? {
+    override var item: [String: Any]? {
         didSet {
             myLabel.stringValue = getTitle()
             myLabel.delegate = self

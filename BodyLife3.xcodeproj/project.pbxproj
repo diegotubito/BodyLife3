@@ -214,16 +214,10 @@
 		116B0E8525EAE66200CC9E3B /* CrudViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116B0E8325EAE66200CC9E3B /* CrudViewController.swift */; };
 		116B0E8B25EAE69100CC9E3B /* CrudStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 116B0E8A25EAE69100CC9E3B /* CrudStoryboard.storyboard */; };
 		116B0E8C25EAE69100CC9E3B /* CrudStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 116B0E8A25EAE69100CC9E3B /* CrudStoryboard.storyboard */; };
-		116B0E9625EC302900CC9E3B /* MainOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116B0E9525EC302900CC9E3B /* MainOptionsView.swift */; };
-		116B0E9725EC302900CC9E3B /* MainOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116B0E9525EC302900CC9E3B /* MainOptionsView.swift */; };
+		116B0E9625EC302900CC9E3B /* SingleLabelTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116B0E9525EC302900CC9E3B /* SingleLabelTableView.swift */; };
+		116B0E9725EC302900CC9E3B /* SingleLabelTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116B0E9525EC302900CC9E3B /* SingleLabelTableView.swift */; };
 		116B0EA725EC371000CC9E3B /* MainOptionViewUIConfig.json in Resources */ = {isa = PBXBuildFile; fileRef = 116B0EA625EC371000CC9E3B /* MainOptionViewUIConfig.json */; };
 		116B0EA825EC371000CC9E3B /* MainOptionViewUIConfig.json in Resources */ = {isa = PBXBuildFile; fileRef = 116B0EA625EC371000CC9E3B /* MainOptionViewUIConfig.json */; };
-		116B0EB425EC3A5800CC9E3B /* MainOptionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116B0EB325EC3A5800CC9E3B /* MainOptionModel.swift */; };
-		116B0EB525EC3A5800CC9E3B /* MainOptionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116B0EB325EC3A5800CC9E3B /* MainOptionModel.swift */; };
-		116B0EB925EC3A8100CC9E3B /* MainOptionViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116B0EB825EC3A8100CC9E3B /* MainOptionViewModelProtocol.swift */; };
-		116B0EBA25EC3A8100CC9E3B /* MainOptionViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116B0EB825EC3A8100CC9E3B /* MainOptionViewModelProtocol.swift */; };
-		116B0EBE25EC3A8F00CC9E3B /* MainOptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116B0EBD25EC3A8F00CC9E3B /* MainOptionViewModel.swift */; };
-		116B0EBF25EC3A8F00CC9E3B /* MainOptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116B0EBD25EC3A8F00CC9E3B /* MainOptionViewModel.swift */; };
 		116CE96123EDCDAF00688C0B /* PeriodListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CE96023EDCDAF00688C0B /* PeriodListModel.swift */; };
 		116CE96323EDCDCD00688C0B /* PeriodListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CE96223EDCDCD00688C0B /* PeriodListViewModel.swift */; };
 		116CE96523EDCDEF00688C0B /* PeriodListViewModelContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CE96423EDCDEF00688C0B /* PeriodListViewModelContract.swift */; };
@@ -340,8 +334,8 @@
 		F164B0CC25FD23FE00229A76 /* MainOptionItems.json in Resources */ = {isa = PBXBuildFile; fileRef = F164B0CA25FD23FE00229A76 /* MainOptionItems.json */; };
 		F186F78B25F72E0B002D493B /* PipMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F186F78A25F72E0B002D493B /* PipMessage.swift */; };
 		F186F78C25F72E0B002D493B /* PipMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F186F78A25F72E0B002D493B /* PipMessage.swift */; };
-		F1D5DFDF25F5981200828702 /* SingleLabelItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D5DFDE25F5981200828702 /* SingleLabelItem.swift */; };
-		F1D5DFE025F5981200828702 /* SingleLabelItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D5DFDE25F5981200828702 /* SingleLabelItem.swift */; };
+		F1D5DFDF25F5981200828702 /* SingleLabelTableViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D5DFDE25F5981200828702 /* SingleLabelTableViewItem.swift */; };
+		F1D5DFE025F5981200828702 /* SingleLabelTableViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D5DFDE25F5981200828702 /* SingleLabelTableViewItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -416,11 +410,8 @@
 		1166AF3B23B296090047C7AE /* ArticleSellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleSellView.swift; sourceTree = "<group>"; };
 		116B0E8325EAE66200CC9E3B /* CrudViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrudViewController.swift; sourceTree = "<group>"; };
 		116B0E8A25EAE69100CC9E3B /* CrudStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CrudStoryboard.storyboard; sourceTree = "<group>"; };
-		116B0E9525EC302900CC9E3B /* MainOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainOptionsView.swift; sourceTree = "<group>"; };
+		116B0E9525EC302900CC9E3B /* SingleLabelTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleLabelTableView.swift; sourceTree = "<group>"; };
 		116B0EA625EC371000CC9E3B /* MainOptionViewUIConfig.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MainOptionViewUIConfig.json; sourceTree = "<group>"; };
-		116B0EB325EC3A5800CC9E3B /* MainOptionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainOptionModel.swift; sourceTree = "<group>"; };
-		116B0EB825EC3A8100CC9E3B /* MainOptionViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainOptionViewModelProtocol.swift; sourceTree = "<group>"; };
-		116B0EBD25EC3A8F00CC9E3B /* MainOptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainOptionViewModel.swift; sourceTree = "<group>"; };
 		116CE96023EDCDAF00688C0B /* PeriodListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodListModel.swift; sourceTree = "<group>"; };
 		116CE96223EDCDCD00688C0B /* PeriodListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodListViewModel.swift; sourceTree = "<group>"; };
 		116CE96423EDCDEF00688C0B /* PeriodListViewModelContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodListViewModelContract.swift; sourceTree = "<group>"; };
@@ -521,7 +512,7 @@
 		BC690DF307085962570C4E82 /* Pods-Production-Target.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Production-Target.release.xcconfig"; path = "Target Support Files/Pods-Production-Target/Pods-Production-Target.release.xcconfig"; sourceTree = "<group>"; };
 		F164B0CA25FD23FE00229A76 /* MainOptionItems.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MainOptionItems.json; sourceTree = "<group>"; };
 		F186F78A25F72E0B002D493B /* PipMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipMessage.swift; sourceTree = "<group>"; };
-		F1D5DFDE25F5981200828702 /* SingleLabelItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleLabelItem.swift; sourceTree = "<group>"; };
+		F1D5DFDE25F5981200828702 /* SingleLabelTableViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleLabelTableViewItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -994,48 +985,20 @@
 		116B0E8225EAE65200CC9E3B /* Crud */ = {
 			isa = PBXGroup;
 			children = (
+				116B0EA625EC371000CC9E3B /* MainOptionViewUIConfig.json */,
+				F164B0CA25FD23FE00229A76 /* MainOptionItems.json */,
 				116B0E8325EAE66200CC9E3B /* CrudViewController.swift */,
-				116B0EAB25EC3A2700CC9E3B /* MainOption */,
 			);
 			path = Crud;
 			sourceTree = "<group>";
 		};
-		116B0EAB25EC3A2700CC9E3B /* MainOption */ = {
+		116B0EAB25EC3A2700CC9E3B /* SingleLabelTableView */ = {
 			isa = PBXGroup;
 			children = (
-				116B0EAF25EC3A3B00CC9E3B /* Model */,
-				116B0EB225EC3A4000CC9E3B /* ViewModel */,
-				116B0EAC25EC3A3700CC9E3B /* View */,
+				116B0E9525EC302900CC9E3B /* SingleLabelTableView.swift */,
+				F1D5DFDE25F5981200828702 /* SingleLabelTableViewItem.swift */,
 			);
-			path = MainOption;
-			sourceTree = "<group>";
-		};
-		116B0EAC25EC3A3700CC9E3B /* View */ = {
-			isa = PBXGroup;
-			children = (
-				116B0E9525EC302900CC9E3B /* MainOptionsView.swift */,
-				F1D5DFDE25F5981200828702 /* SingleLabelItem.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		116B0EAF25EC3A3B00CC9E3B /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				116B0EA625EC371000CC9E3B /* MainOptionViewUIConfig.json */,
-				F164B0CA25FD23FE00229A76 /* MainOptionItems.json */,
-				116B0EB325EC3A5800CC9E3B /* MainOptionModel.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		116B0EB225EC3A4000CC9E3B /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				116B0EB825EC3A8100CC9E3B /* MainOptionViewModelProtocol.swift */,
-				116B0EBD25EC3A8F00CC9E3B /* MainOptionViewModel.swift */,
-			);
-			path = ViewModel;
+			path = SingleLabelTableView;
 			sourceTree = "<group>";
 		};
 		116CE95C23EDCD3000688C0B /* ActivityListView */ = {
@@ -1294,6 +1257,7 @@
 				118A526725B255E80036DE28 /* Router */,
 				114BD34E2562E895007FCEFC /* Worker */,
 				11A8B44C23BE228C007A5251 /* GenericTableView */,
+				116B0EAB25EC3A2700CC9E3B /* SingleLabelTableView */,
 				11A8ED0123B1440600F15B9A /* GenericCollectionView */,
 				11A8ECFC23B1205D00F15B9A /* XibView */,
 				110664DD2378717A00DC44F3 /* ErrorHandler */,
@@ -1764,12 +1728,11 @@
 				115784FF252B85C0008A89DC /* XibView.swift in Sources */,
 				11578501252B85C0008A89DC /* HomeInteractor.swift in Sources */,
 				118773E625772974002F2635 /* NewCustomerPresenter.swift in Sources */,
-				116B0EBF25EC3A8F00CC9E3B /* MainOptionViewModel.swift in Sources */,
 				11578502252B85C0008A89DC /* ConsoleCommand.swift in Sources */,
 				11578503252B85C0008A89DC /* MainUserSession.swift in Sources */,
 				113FA64625A6A85B0043E7D6 /* AccountModel.swift in Sources */,
 				11578505252B85C0008A89DC /* AcitvitySaleView.swift in Sources */,
-				F1D5DFE025F5981200828702 /* SingleLabelItem.swift in Sources */,
+				F1D5DFE025F5981200828702 /* SingleLabelTableViewItem.swift in Sources */,
 				11578507252B85C0008A89DC /* ImportVentaCarnet.swift in Sources */,
 				11578508252B85C0008A89DC /* CustomerStatusViewModel.swift in Sources */,
 				11578509252B85C0008A89DC /* ArticleModel.swift in Sources */,
@@ -1813,7 +1776,6 @@
 				11578527252B85C0008A89DC /* PeriodListView.swift in Sources */,
 				118773E525772974002F2635 /* NewCustomerInteractor.swift in Sources */,
 				11578528252B85C0008A89DC /* extensions.swift in Sources */,
-				116B0EBA25EC3A8100CC9E3B /* MainOptionViewModelProtocol.swift in Sources */,
 				11578529252B85C0008A89DC /* importDatabase.swift in Sources */,
 				1157852A252B85C0008A89DC /* ArticleViewItem.swift in Sources */,
 				1157852C252B85C0008A89DC /* NewPaymentModel.swift in Sources */,
@@ -1828,7 +1790,7 @@
 				110CDFCB25AB5BC700898470 /* SecondaryUserLoginViewController.swift in Sources */,
 				11578531252B85C0008A89DC /* ArticleListViewModelContract.swift in Sources */,
 				11778280256C06A1006B51FD /* SellModel.swift in Sources */,
-				116B0E9725EC302900CC9E3B /* MainOptionsView.swift in Sources */,
+				116B0E9725EC302900CC9E3B /* SingleLabelTableView.swift in Sources */,
 				11578534252B85C0008A89DC /* BaseViewController.swift in Sources */,
 				11578535252B85C0008A89DC /* ExpenseWorker.swift in Sources */,
 				11578536252B85C0008A89DC /* AppDelegate.swift in Sources */,
@@ -1840,7 +1802,6 @@
 				1157853C252B85C0008A89DC /* LoginModels.swift in Sources */,
 				1157853D252B85C0008A89DC /* ArticleListView.swift in Sources */,
 				1157853E252B85C0008A89DC /* OSX_Version.xcdatamodeld in Sources */,
-				116B0EB525EC3A5800CC9E3B /* MainOptionModel.swift in Sources */,
 				1157853F252B85C0008A89DC /* ArticleSellView.swift in Sources */,
 				11578540252B85C0008A89DC /* importActivity.swift in Sources */,
 				11578541252B85C0008A89DC /* LoginRouter.swift in Sources */,
@@ -1912,12 +1873,11 @@
 				11542D842380703F0011AB1D /* ConsoleCommand.swift in Sources */,
 				11EBD36223766BF400AB4BFF /* MainUserSession.swift in Sources */,
 				118773D32577292F002F2635 /* NewCustomerWorker.swift in Sources */,
-				116B0EBE25EC3A8F00CC9E3B /* MainOptionViewModel.swift in Sources */,
 				11AC546623DDE5250033A27D /* AcitvitySaleView.swift in Sources */,
 				11498E632520979000E4D679 /* ImportVentaCarnet.swift in Sources */,
 				113FA64525A6A85B0043E7D6 /* AccountModel.swift in Sources */,
 				1147AB7C2384D49E00D19AA9 /* CustomerStatusViewModel.swift in Sources */,
-				F1D5DFDF25F5981200828702 /* SingleLabelItem.swift in Sources */,
+				F1D5DFDF25F5981200828702 /* SingleLabelTableViewItem.swift in Sources */,
 				11D3D8852521780B0008CFD0 /* ArticleModel.swift in Sources */,
 				118472432528D6D20012D237 /* ImportVentaArticulo.swift in Sources */,
 				11578587252E7E57008A89DC /* AuthManager.swift in Sources */,
@@ -1961,7 +1921,6 @@
 				110664D82377ACBF00DC44F3 /* extensions.swift in Sources */,
 				11498E582520069700E4D679 /* importDatabase.swift in Sources */,
 				1166AF3523B27F880047C7AE /* ArticleViewItem.swift in Sources */,
-				116B0EB925EC3A8100CC9E3B /* MainOptionViewModelProtocol.swift in Sources */,
 				11EEF0F8239D4AA1007C9821 /* NewPaymentModel.swift in Sources */,
 				1147AB44238364D900D19AA9 /* CustomerListModel.swift in Sources */,
 				1163933C238229DE00D14B19 /* imageExtension.swift in Sources */,
@@ -1976,7 +1935,7 @@
 				110CDFCA25AB5BC700898470 /* SecondaryUserLoginViewController.swift in Sources */,
 				1177827F256C06A1006B51FD /* SellModel.swift in Sources */,
 				11EBD39423773B5C00AB4BFF /* BaseViewController.swift in Sources */,
-				116B0E9625EC302900CC9E3B /* MainOptionsView.swift in Sources */,
+				116B0E9625EC302900CC9E3B /* SingleLabelTableView.swift in Sources */,
 				114C54112413FF66000CC75A /* ExpenseWorker.swift in Sources */,
 				118773D02577292F002F2635 /* NewCustomerInteractor.swift in Sources */,
 				11EBD3212376499F00AB4BFF /* AppDelegate.swift in Sources */,
@@ -1988,7 +1947,6 @@
 				11EBD38D237726A800AB4BFF /* LoginModels.swift in Sources */,
 				11A8ECFA23B0E77A00F15B9A /* ArticleListView.swift in Sources */,
 				11EBD3262376499F00AB4BFF /* OSX_Version.xcdatamodeld in Sources */,
-				116B0EB425EC3A5800CC9E3B /* MainOptionModel.swift in Sources */,
 				1166AF3C23B296090047C7AE /* ArticleSellView.swift in Sources */,
 				11D3D874252139FA0008CFD0 /* importActivity.swift in Sources */,
 				11EBD38C237726A800AB4BFF /* LoginRouter.swift in Sources */,
