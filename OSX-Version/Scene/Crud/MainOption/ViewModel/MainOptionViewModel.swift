@@ -17,31 +17,34 @@ class MainOptionViewModel: MainOptionViewModelProtocol {
         model = MainOptionModel()
     }
     
+    private func loadUIConfiguration() -> GenericTableViewColumnModel? {
+        guard let data = readLocalFile(forName: "MainOptionViewUIConfig"),
+              let column = try? JSONDecoder().decode(GenericTableViewColumnModel.self, from: data) else {
+            return nil
+        }
+        return column
+    }
+    
     func loadData() {
-        guard let data = readLocalFile(forName: "MainOptionView"),
-              let value = try? JSONDecoder().decode(MainOptionModel.DataModel.self, from: data) else {
+        guard let column = loadUIConfiguration() else { return }
+        
+        guard let data = readLocalFile(forName: "MainOptionItems"),
+              let items = try? JSONDecoder().decode([MainOptionModel.Item].self, from: data) else {
             return
         }
-        
-        model.data = value
-        _view.showSuccess(data: value)
+        model.data = MainOptionModel.DataModel(column: column,
+                                               items: items)
+        _view.showSuccess(data: model.data)
     }
     
     private func readLocalFile(forName name: String) -> Data? {
-        do {
-            let bundle = Bundle(for: MainOptionViewModel.self)
-            if let bundlePath = Bundle.main.path(forResource: name,
-                                            ofType: "json"),
-               let jsonData = try String(contentsOfFile: bundlePath).data(using: .utf8) {
-                let json = try? JSONSerialization.jsonObject(with: jsonData, options: [])
-                print(json)
-                return jsonData
-            }
-        } catch {
-            print(error)
-        }
+        let bundle = Bundle(for: MainOptionViewModel.self)
+        guard
+            let bundlePath = bundle.path(forResource: name, ofType: "json"),
+            let jsonData = try? String(contentsOfFile: bundlePath).data(using: .utf8)
+        else { return nil }
         
-        return nil
+        return jsonData
     }
     
 }

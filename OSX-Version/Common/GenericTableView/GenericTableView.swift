@@ -8,23 +8,41 @@
 import Cocoa
 
 struct GenericTableViewColumnModel : Codable {
-    var name : String?
-    var isEditable : Bool
-    var width: Double?
-    var maxWidth: Double?
-    var minWidth: Double?
-    var fieldName: String?
+    var type: String?
+    var rowHeight: CGFloat?
+    var columns: [Column] = []
+    
+    struct Column: Codable {
+        var name: String?
+        var isEditable: Bool
+        var width: Double?
+        var maxWidth: Double?
+        var minWidth: Double?
+        var fieldName: String?
+    }
+}
+
+protocol GenericTableViewDelegate: class {
+    func textFieldDidChanged(columnIdentifier: String, stringValue: String)
+}
+
+extension GenericTableViewDelegate {
+    func textFieldDidChanged(columnIdentifier: String, stringValue: String) {
+        // Optional
+    }
 }
 
 class GenericTableView<U: GenericTableViewItem<T>, T> : NSView, NSTableViewDelegate, NSTableViewDataSource {
     var scrollView : NSScrollView!
     var tableView : NSTableView!
     var items = [T]()
-    var columns = [GenericTableViewColumnModel]() {
+    var column = GenericTableViewColumnModel() {
         didSet {
           addConstraint()
         }
     }
+    
+    weak var delegate: GenericTableViewDelegate?
     
     override init(frame frameRect: NSRect) {
         super .init(frame: frameRect)
@@ -60,7 +78,7 @@ class GenericTableView<U: GenericTableViewItem<T>, T> : NSView, NSTableViewDeleg
     }
     
     func setupColumn() {
-        columns.forEach({column in
+        column.columns.forEach({column in
             let newColumn = NSTableColumn(identifier: NSUserInterfaceItemIdentifier(rawValue: column.name ?? ""))
             newColumn.title = column.name ?? ""
             newColumn.width = CGFloat(column.width ?? 0) * (self.frame.width - 66)
@@ -90,14 +108,17 @@ class GenericTableView<U: GenericTableViewItem<T>, T> : NSView, NSTableViewDeleg
         return items.count
     }
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        guard let column = tableColumn?.identifier.rawValue else {
+        guard let columnName = tableColumn?.identifier.rawValue else {
             fatalError("Error in table view column identifiers")
         }
         
-        let cell = U(frame: .zero)
-        for col in columns {
-            if column == col.name {
-                cell.column = col
+        
+        for col in self.column.columns {
+            if columnName == col.name {
+                let cell = U(frame: .zero, column: col)
+                cell.textFieldDidChangedObserver = { [weak self] columnIdentifier, stringValue in
+                    self?.delegate?.textFieldDidChanged(columnIdentifier: columnIdentifier, stringValue: stringValue)
+                }
                 cell.item = items[row]
                 return cell
             }
@@ -107,17 +128,18 @@ class GenericTableView<U: GenericTableViewItem<T>, T> : NSView, NSTableViewDeleg
     }
    
     func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
-        return 25
+        return column.rowHeight ?? 0.0
     }
 }
 
-
 class GenericTableViewItem<T: Encodable>: NSView {
-    var item : T?
-    var column: GenericTableViewColumnModel!
+    var item : T!
+    var column: GenericTableViewColumnModel.Column!
+    var textFieldDidChangedObserver : ((String, String) -> ())?
     
-    override required init(frame frameRect: NSRect) {
+    required init(frame frameRect: NSRect, column: GenericTableViewColumnModel.Column) {
         super .init(frame: frameRect)
+        self.column = column
         commonInit()
     }
     
@@ -132,7 +154,7 @@ class GenericTableViewItem<T: Encodable>: NSView {
         guard
               let data = try? JSONEncoder().encode(item),
               let dictionary = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
-              let fieldName = column.fieldName
+            let fieldName = column.fieldName
         else { return "not parsed" }
         
         let result = dictionary[fieldName]
@@ -155,5 +177,9 @@ class GenericTableViewItem<T: Encodable>: NSView {
     func setStatus(label: NSTextField) {
         label.isEditable = column.isEditable
         label.isBezeled = column.isEditable
+    }
+    
+    func textFieldDidChanged(columnIdentifier: String, stringValue: String) {
+        textFieldDidChangedObserver?(columnIdentifier, stringValue)
     }
 }

@@ -12,8 +12,7 @@ struct MainOptionModel {
     var data : DataModel!
     
     struct DataModel : Codable {
-        var type : String
-        var columns : [GenericTableViewColumnModel] = []
+        var column: GenericTableViewColumnModel
         var items : [Item] = []
     }
     
@@ -23,5 +22,4 @@ struct MainOptionModel {
         var aux : String?
         var doubleValue : Double?
     }
-   
 }

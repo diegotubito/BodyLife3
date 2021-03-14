@@ -13,6 +13,7 @@ class MainOptionView: GenericTableView<SingleLabelItem, MainOptionModel.Item>, M
     
     override func commonInit() {
         super .commonInit()
+        self.delegate = self
         viewmodel = MainOptionViewModel(withView: self)
         viewmodel.loadData()
     }
@@ -20,9 +21,17 @@ class MainOptionView: GenericTableView<SingleLabelItem, MainOptionModel.Item>, M
     func showSuccess(data: MainOptionModel.DataModel) {
         DispatchQueue.main.async {
             self.items = data.items
-            self.columns = data.columns
+            self.column = data.column
             self.tableView.reloadData()
         }
     }
 }
 
+extension MainOptionView: GenericTableViewDelegate {
+    func textFieldDidChanged(columnIdentifier: String, stringValue: String) {
+        print("heeeey \(stringValue)")
+        print(tableView.selectedRow)
+        print(tableView.column(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: columnIdentifier)))
+        print(columnIdentifier)
+    }
+}

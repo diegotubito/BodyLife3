@@ -14,11 +14,11 @@ class CrudViewController : NSViewController {
     override func viewDidLoad() {
         super .viewDidLoad()
         createOptionView()
-      
     }
     
     private func createOptionView() {
-        mainOptionView = MainOptionView(frame: CGRect(x: 16, y: 16, width: 600, height: self.view.frame.height - 100))
+        mainOptionView = MainOptionView(frame: CGRect(x: 16, y: 16, width: 500, height: self.view.frame.height - 100))
         view.addSubview(mainOptionView)
     }
 }
+

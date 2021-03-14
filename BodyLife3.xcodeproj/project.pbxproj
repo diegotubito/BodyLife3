@@ -216,8 +216,8 @@
 		116B0E8C25EAE69100CC9E3B /* CrudStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 116B0E8A25EAE69100CC9E3B /* CrudStoryboard.storyboard */; };
 		116B0E9625EC302900CC9E3B /* MainOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116B0E9525EC302900CC9E3B /* MainOptionsView.swift */; };
 		116B0E9725EC302900CC9E3B /* MainOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116B0E9525EC302900CC9E3B /* MainOptionsView.swift */; };
-		116B0EA725EC371000CC9E3B /* MainOptionView.json in Resources */ = {isa = PBXBuildFile; fileRef = 116B0EA625EC371000CC9E3B /* MainOptionView.json */; };
-		116B0EA825EC371000CC9E3B /* MainOptionView.json in Resources */ = {isa = PBXBuildFile; fileRef = 116B0EA625EC371000CC9E3B /* MainOptionView.json */; };
+		116B0EA725EC371000CC9E3B /* MainOptionViewUIConfig.json in Resources */ = {isa = PBXBuildFile; fileRef = 116B0EA625EC371000CC9E3B /* MainOptionViewUIConfig.json */; };
+		116B0EA825EC371000CC9E3B /* MainOptionViewUIConfig.json in Resources */ = {isa = PBXBuildFile; fileRef = 116B0EA625EC371000CC9E3B /* MainOptionViewUIConfig.json */; };
 		116B0EB425EC3A5800CC9E3B /* MainOptionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116B0EB325EC3A5800CC9E3B /* MainOptionModel.swift */; };
 		116B0EB525EC3A5800CC9E3B /* MainOptionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116B0EB325EC3A5800CC9E3B /* MainOptionModel.swift */; };
 		116B0EB925EC3A8100CC9E3B /* MainOptionViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116B0EB825EC3A8100CC9E3B /* MainOptionViewModelProtocol.swift */; };
@@ -336,6 +336,8 @@
 		11EEF0F8239D4AA1007C9821 /* NewPaymentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EEF0F7239D4AA1007C9821 /* NewPaymentModel.swift */; };
 		1C350FE16C3535707D238A35 /* Pods_Production_Target.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4A64E9248541272205FC04A /* Pods_Production_Target.framework */; };
 		A4A7B01B69DBFE2B4F86EEC1 /* Pods_Internal_Target.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F8C8DF41312F49763D976F4 /* Pods_Internal_Target.framework */; };
+		F164B0CB25FD23FE00229A76 /* MainOptionItems.json in Resources */ = {isa = PBXBuildFile; fileRef = F164B0CA25FD23FE00229A76 /* MainOptionItems.json */; };
+		F164B0CC25FD23FE00229A76 /* MainOptionItems.json in Resources */ = {isa = PBXBuildFile; fileRef = F164B0CA25FD23FE00229A76 /* MainOptionItems.json */; };
 		F186F78B25F72E0B002D493B /* PipMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F186F78A25F72E0B002D493B /* PipMessage.swift */; };
 		F186F78C25F72E0B002D493B /* PipMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F186F78A25F72E0B002D493B /* PipMessage.swift */; };
 		F1D5DFDF25F5981200828702 /* SingleLabelItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D5DFDE25F5981200828702 /* SingleLabelItem.swift */; };
@@ -415,7 +417,7 @@
 		116B0E8325EAE66200CC9E3B /* CrudViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrudViewController.swift; sourceTree = "<group>"; };
 		116B0E8A25EAE69100CC9E3B /* CrudStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CrudStoryboard.storyboard; sourceTree = "<group>"; };
 		116B0E9525EC302900CC9E3B /* MainOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainOptionsView.swift; sourceTree = "<group>"; };
-		116B0EA625EC371000CC9E3B /* MainOptionView.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MainOptionView.json; sourceTree = "<group>"; };
+		116B0EA625EC371000CC9E3B /* MainOptionViewUIConfig.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MainOptionViewUIConfig.json; sourceTree = "<group>"; };
 		116B0EB325EC3A5800CC9E3B /* MainOptionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainOptionModel.swift; sourceTree = "<group>"; };
 		116B0EB825EC3A8100CC9E3B /* MainOptionViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainOptionViewModelProtocol.swift; sourceTree = "<group>"; };
 		116B0EBD25EC3A8F00CC9E3B /* MainOptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainOptionViewModel.swift; sourceTree = "<group>"; };
@@ -517,6 +519,7 @@
 		A9C908432990D6193F271FB1 /* Pods-Internal-Target.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Internal-Target.debug.xcconfig"; path = "Target Support Files/Pods-Internal-Target/Pods-Internal-Target.debug.xcconfig"; sourceTree = "<group>"; };
 		B4A64E9248541272205FC04A /* Pods_Production_Target.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Production_Target.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC690DF307085962570C4E82 /* Pods-Production-Target.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Production-Target.release.xcconfig"; path = "Target Support Files/Pods-Production-Target/Pods-Production-Target.release.xcconfig"; sourceTree = "<group>"; };
+		F164B0CA25FD23FE00229A76 /* MainOptionItems.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MainOptionItems.json; sourceTree = "<group>"; };
 		F186F78A25F72E0B002D493B /* PipMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipMessage.swift; sourceTree = "<group>"; };
 		F1D5DFDE25F5981200828702 /* SingleLabelItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleLabelItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -729,7 +732,6 @@
 		1147AB3E2383648B00D19AA9 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				F1D5DFEA25F5CBB300828702 /* Items */,
 				118A52F525BC75630036DE28 /* Stock */,
 				113FA66825AB54A40043E7D6 /* SecondaryUser */,
 				116CE95C23EDCD3000688C0B /* ActivityListView */,
@@ -1012,6 +1014,7 @@
 			isa = PBXGroup;
 			children = (
 				116B0E9525EC302900CC9E3B /* MainOptionsView.swift */,
+				F1D5DFDE25F5981200828702 /* SingleLabelItem.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1019,7 +1022,8 @@
 		116B0EAF25EC3A3B00CC9E3B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				116B0EA625EC371000CC9E3B /* MainOptionView.json */,
+				116B0EA625EC371000CC9E3B /* MainOptionViewUIConfig.json */,
+				F164B0CA25FD23FE00229A76 /* MainOptionItems.json */,
 				116B0EB325EC3A5800CC9E3B /* MainOptionModel.swift */,
 			);
 			path = Model;
@@ -1483,22 +1487,6 @@
 			path = PipMessege;
 			sourceTree = "<group>";
 		};
-		F1D5DFEA25F5CBB300828702 /* Items */ = {
-			isa = PBXGroup;
-			children = (
-				F1D5DFEB25F5CBB600828702 /* SingleLabel */,
-			);
-			path = Items;
-			sourceTree = "<group>";
-		};
-		F1D5DFEB25F5CBB600828702 /* SingleLabel */ = {
-			isa = PBXGroup;
-			children = (
-				F1D5DFDE25F5981200828702 /* SingleLabelItem.swift */,
-			);
-			path = SingleLabel;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1581,6 +1569,7 @@
 			files = (
 				114AC2C525525638007A0AFD /* MoneyFlow.storyboard in Resources */,
 				113FA67425AB55F10043E7D6 /* SecondaryUserItem.xib in Resources */,
+				F164B0CC25FD23FE00229A76 /* MainOptionItems.json in Resources */,
 				11578550252B85C0008A89DC /* ErrorMessageView.xib in Resources */,
 				11578551252B85C0008A89DC /* Expense.storyboard in Resources */,
 				11578552252B85C0008A89DC /* AssetsOSX.xcassets in Resources */,
@@ -1602,7 +1591,7 @@
 				1157855E252B85C0008A89DC /* PeriodListItem.xib in Resources */,
 				1177828F256C33DA006B51FD /* bodyshaping.json in Resources */,
 				113FA65F25AB45CE0043E7D6 /* SecondaryUser.storyboard in Resources */,
-				116B0EA825EC371000CC9E3B /* MainOptionView.json in Resources */,
+				116B0EA825EC371000CC9E3B /* MainOptionViewUIConfig.json in Resources */,
 				11578560252B85C0008A89DC /* ArticleViewItem.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1615,7 +1604,7 @@
 				116B0E8B25EAE69100CC9E3B /* CrudStoryboard.storyboard in Resources */,
 				118A527725B3B1260036DE28 /* SecondaryUserStatusView.xib in Resources */,
 				110664C723775D6000DC44F3 /* ErrorMessageView.xib in Resources */,
-				116B0EA725EC371000CC9E3B /* MainOptionView.json in Resources */,
+				116B0EA725EC371000CC9E3B /* MainOptionViewUIConfig.json in Resources */,
 				114C5420241401B5000CC75A /* Expense.storyboard in Resources */,
 				11EBD3282376499F00AB4BFF /* AssetsOSX.xcassets in Resources */,
 				1147AB4F2383678700D19AA9 /* CustomerListCell.xib in Resources */,
@@ -1628,6 +1617,7 @@
 				113FA65E25AB45CE0043E7D6 /* SecondaryUser.storyboard in Resources */,
 				11EBD32B2376499F00AB4BFF /* Main.storyboard in Resources */,
 				119C68622380BDC8009E9AA0 /* NewCustomerStoryboard.storyboard in Resources */,
+				F164B0CB25FD23FE00229A76 /* MainOptionItems.json in Resources */,
 				11AC546823DDE64E0033A27D /* ActivitySaleView.xib in Resources */,
 				111DE572238A01BF002F4216 /* XButtonCustomView.xib in Resources */,
 				11EEF0F0239D4A42007C9821 /* PaymentView.xib in Resources */,

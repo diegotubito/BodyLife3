@@ -8,12 +8,13 @@
 
 import Cocoa
 
-class SingleLabelItem: GenericTableViewItem<MainOptionModel.Item> {
+class SingleLabelItem: GenericTableViewItem<MainOptionModel.Item>, NSTextFieldDelegate {
     var myLabel : NSTextField!
-    
+  
     override var item: MainOptionModel.Item? {
         didSet {
             myLabel.stringValue = getTitle()
+            myLabel.delegate = self
             setStatus(label: myLabel)
         }
     }
@@ -38,5 +39,17 @@ class SingleLabelItem: GenericTableViewItem<MainOptionModel.Item> {
         myLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0).isActive = true
         myLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
         myLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant:0).isActive = true
+    }
+    
+//    func controlTextDidEndEditing(_ obj: Notification) {
+//        guard let textField = obj.object as? NSTextField else {return}
+//        print(textField.stringValue)
+//        self.delegate?.textFieldDidChanged(textField: textField)
+//    }
+    
+    func control(_ control: NSControl, textShouldEndEditing fieldEditor: NSText) -> Bool {
+        let stringValue = fieldEditor.string
+        textFieldDidChanged(columnIdentifier: column.name ?? "", stringValue: stringValue)
+        return true
     }
 }
