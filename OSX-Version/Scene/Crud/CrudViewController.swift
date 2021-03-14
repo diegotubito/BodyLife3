@@ -40,32 +40,24 @@ class CrudViewController : NSViewController {
     
     
     private func loadUIConfiguration() -> GenericTableViewColumnModel? {
-        guard let data = readLocalFile(forName: "MainOptionViewUIConfig"),
-              let column = try? JSONDecoder().decode(GenericTableViewColumnModel.self, from: data) else {
-            return nil
-        }
+        guard
+            let data = CommonWorker.GeneralPurpose.readLocalFile(bundle: Bundle(for: CrudViewController.self), forName: "MainOptionViewUIConfig"),
+            let column = try? JSONDecoder().decode(GenericTableViewColumnModel.self, from: data)
+        else { return nil }
+        
         return column
     }
     
     func loadItems() -> [[String: Any]] {
-        
-        guard let data = readLocalFile(forName: "MainOptionItems"),
-              let items = try? JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]] else {
-            return []
-        }
+        guard
+            let data = CommonWorker.GeneralPurpose.readLocalFile(bundle: Bundle(for: CrudViewController.self), forName: "MainOptionItems"),
+            let items = try? JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]]
+        else { return [] }
         
         return items
     }
     
-    private func readLocalFile(forName name: String) -> Data? {
-        let bundle = Bundle(for: CrudViewController.self)
-        guard
-            let bundlePath = bundle.path(forResource: name, ofType: "json"),
-            let jsonData = try? String(contentsOfFile: bundlePath).data(using: .utf8)
-        else { return nil }
-        
-        return jsonData
-    }
+   
     
 }
 

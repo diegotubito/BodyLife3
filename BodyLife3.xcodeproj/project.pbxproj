@@ -330,6 +330,8 @@
 		11EEF0F8239D4AA1007C9821 /* NewPaymentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EEF0F7239D4AA1007C9821 /* NewPaymentModel.swift */; };
 		1C350FE16C3535707D238A35 /* Pods_Production_Target.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4A64E9248541272205FC04A /* Pods_Production_Target.framework */; };
 		A4A7B01B69DBFE2B4F86EEC1 /* Pods_Internal_Target.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F8C8DF41312F49763D976F4 /* Pods_Internal_Target.framework */; };
+		F15EBBE725FE7119009CED69 /* GeneralPurpose.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15EBBE625FE7119009CED69 /* GeneralPurpose.swift */; };
+		F15EBBE825FE7119009CED69 /* GeneralPurpose.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15EBBE625FE7119009CED69 /* GeneralPurpose.swift */; };
 		F164B0CB25FD23FE00229A76 /* MainOptionItems.json in Resources */ = {isa = PBXBuildFile; fileRef = F164B0CA25FD23FE00229A76 /* MainOptionItems.json */; };
 		F164B0CC25FD23FE00229A76 /* MainOptionItems.json in Resources */ = {isa = PBXBuildFile; fileRef = F164B0CA25FD23FE00229A76 /* MainOptionItems.json */; };
 		F186F78B25F72E0B002D493B /* PipMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F186F78A25F72E0B002D493B /* PipMessage.swift */; };
@@ -510,6 +512,7 @@
 		A9C908432990D6193F271FB1 /* Pods-Internal-Target.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Internal-Target.debug.xcconfig"; path = "Target Support Files/Pods-Internal-Target/Pods-Internal-Target.debug.xcconfig"; sourceTree = "<group>"; };
 		B4A64E9248541272205FC04A /* Pods_Production_Target.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Production_Target.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC690DF307085962570C4E82 /* Pods-Production-Target.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Production-Target.release.xcconfig"; path = "Target Support Files/Pods-Production-Target/Pods-Production-Target.release.xcconfig"; sourceTree = "<group>"; };
+		F15EBBE625FE7119009CED69 /* GeneralPurpose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralPurpose.swift; sourceTree = "<group>"; };
 		F164B0CA25FD23FE00229A76 /* MainOptionItems.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MainOptionItems.json; sourceTree = "<group>"; };
 		F186F78A25F72E0B002D493B /* PipMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipMessage.swift; sourceTree = "<group>"; };
 		F1D5DFDE25F5981200828702 /* SingleLabelTableViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleLabelTableViewItem.swift; sourceTree = "<group>"; };
@@ -867,6 +870,7 @@
 			children = (
 				114BD34F2562E8B5007FCEFC /* ImageWorker.swift */,
 				113FA64B25A955620043E7D6 /* AccountWorker.swift */,
+				F15EBBE625FE7119009CED69 /* GeneralPurpose.swift */,
 			);
 			path = Worker;
 			sourceTree = "<group>";
@@ -1695,6 +1699,7 @@
 				115784E4252B85C0008A89DC /* RegisterListView.swift in Sources */,
 				113FA65625A9FDAC0043E7D6 /* SecondaryUserSession.swift in Sources */,
 				115784E6252B85C0008A89DC /* SellRegisterCell.swift in Sources */,
+				F15EBBE825FE7119009CED69 /* GeneralPurpose.swift in Sources */,
 				F186F78C25F72E0B002D493B /* PipMessage.swift in Sources */,
 				115784E7252B85C0008A89DC /* ErrorModel.swift in Sources */,
 				115784E8252B85C0008A89DC /* PeriodListItem.swift in Sources */,
@@ -1840,6 +1845,7 @@
 				116CEB6323A1E2F30081D356 /* RegisterListView.swift in Sources */,
 				113FA65525A9FDAC0043E7D6 /* SecondaryUserSession.swift in Sources */,
 				116CEB6623A3115E0081D356 /* SellRegisterCell.swift in Sources */,
+				F15EBBE725FE7119009CED69 /* GeneralPurpose.swift in Sources */,
 				F186F78B25F72E0B002D493B /* PipMessage.swift in Sources */,
 				11EBD36623766D2500AB4BFF /* ErrorModel.swift in Sources */,
 				116CE96F23EDE94A00688C0B /* PeriodListItem.swift in Sources */,
