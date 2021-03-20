@@ -9,55 +9,25 @@
 import Cocoa
 
 class CrudViewController : NSViewController {
-    var mainOptionView : SingleLabelTableView!
-    var secondaryOptionView: SingleLabelTableView!
+    var mainOptionView : CrudMainMenuView!
+    var crudExpenseView: CrudExpenseView!
     
     override func viewDidLoad() {
         super .viewDidLoad()
         createOptionView()
-        createSecondaryView()
+        createExpenseView()
     }
     
     private func createOptionView() {
         let frame = CGRect(x: 16, y: 16, width: 200, height: self.view.frame.height - 100)
-        let column = loadUIConfiguration()
-        let items = loadItems()
-        
-        mainOptionView = SingleLabelTableView(frame: frame)
-        mainOptionView.setValues(items: items, column: column!)
+        mainOptionView = CrudMainMenuView(frame: frame)
         view.addSubview(mainOptionView)
     }
     
-    private func createSecondaryView() {
-        let frame = CGRect(x: 216, y: 16, width: 400, height: self.view.frame.height - 100)
-        let column = loadUIConfiguration()
-        let items = loadItems()
-
-        secondaryOptionView = SingleLabelTableView(frame: frame)
-        secondaryOptionView.setValues(items: items, column: column!)
-        view.addSubview(secondaryOptionView)
+    private func createExpenseView() {
+        let frame = CGRect(x: 216, y: 16, width: 200, height: self.view.frame.height - 100)
+        crudExpenseView = CrudExpenseView(frame: frame)
+        view.addSubview(crudExpenseView)
     }
-    
-    
-    private func loadUIConfiguration() -> GenericTableViewColumnModel? {
-        guard
-            let data = CommonWorker.GeneralPurpose.readLocalFile(bundle: Bundle(for: CrudViewController.self), forName: "MainOptionViewUIConfig"),
-            let column = try? JSONDecoder().decode(GenericTableViewColumnModel.self, from: data)
-        else { return nil }
-        
-        return column
-    }
-    
-    func loadItems() -> [[String: Any]] {
-        guard
-            let data = CommonWorker.GeneralPurpose.readLocalFile(bundle: Bundle(for: CrudViewController.self), forName: "MainOptionItems"),
-            let items = try? JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]]
-        else { return [] }
-        
-        return items
-    }
-    
-   
-    
 }
 

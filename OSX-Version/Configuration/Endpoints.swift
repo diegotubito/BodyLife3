@@ -26,6 +26,17 @@ public enum EndpointType {
     case Discount(DiscountType)
     case Activity(ActivityType)
     case SecondaryUser(SecondaryUserType)
+    case Expense(ExpenseType)
+    case ExpenseCategory(ExpenseCategoryType)
+    
+    public enum ExpenseCategoryType {
+        case Load
+    }
+    
+    public enum ExpenseType {
+        case Load(fromDate: Double, toDate: Double)
+        case Save(body: [String: Any])
+    }
     
     public enum SecondaryUserType {
         case Load
@@ -246,6 +257,15 @@ class Endpoint {
         case .SecondaryUser(.CreateFirstUser):
             let url = "\(BLServerManager.baseUrl.rawValue)/v1/secondary_user/first_user"
             return BLEndpointModel(url: url, token: token, tokenSecondaryUser: secondaryToken, method: "POST", query: nil, body: nil)
+        case .Expense(.Load(fromDate: let from, toDate: let to)):
+            let url = "\(BLServerManager.baseUrl.rawValue)/v1/expense"
+            return BLEndpointModel(url: url, token: token, tokenSecondaryUser: secondaryToken, method: "GET", query: nil, body: nil)
+        case .Expense(.Save(body: let body)):
+            let url = "\(BLServerManager.baseUrl.rawValue)/v1/expense"
+            return BLEndpointModel(url: url, token: token, tokenSecondaryUser: secondaryToken, method: "POST", query: nil, body: body)
+        case .ExpenseCategory(.Load):
+            let url = "\(BLServerManager.baseUrl.rawValue)/v1/expense_category"
+            return BLEndpointModel(url: url, token: token, tokenSecondaryUser: secondaryToken, method: "GET", query: nil, body: nil)
         }
     }
 }

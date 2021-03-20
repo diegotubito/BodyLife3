@@ -1,206 +1,173 @@
 import Cocoa
+import BLServerManager
 
-protocol ExpenseDisplayLogic: class {
-    func displayTypes(viewModel: Expense.Types.ViewModel)
-    func displayNewExpenseSavedSuccess()
-    func displayNewExpenseSavedError(message: String?)
-}
-
-class ExpenseViewController: BaseViewController, ExpenseDisplayLogic {
+class ExpenseViewController: BaseViewController {
    
-    var interactor: ExpenseBusinessLogic?
-    var router: (NSObjectProtocol & ExpenseRoutingLogic & ExpenseDataPassing)?
-    
-    var baseTypes = [ExpenseType]()
-    var secondaryTypes = [ExpenseType]()
-    
+    @IBOutlet weak var expenseDate: NSDatePicker!
     @IBOutlet weak var typePopup: NSPopUpButton!
-    @IBOutlet weak var secondaryTypePopup: NSPopUpButton!
-    @IBOutlet weak var descriptionTextfield: NSTextField!
-    @IBOutlet weak var amountTextField: NSTextField!
-    @IBOutlet weak var saveOutlet: NSButton!
+    @IBOutlet weak var descriptionTextField: NSTextField!
+    @IBOutlet weak var totalTextField: NSTextField!
+    @IBOutlet weak var saveButtonOutlet: NSButton!
+    @IBOutlet weak var deleteButtonOutlet: NSButton!
+    @IBOutlet weak var fromDate: NSDatePicker!
+    @IBOutlet weak var toDate: NSDatePicker!
     
-    // MARK: Object lifecycle
+    var expenseListView: ExpenseListView!
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        setup()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setup()
-    }
-    
-    // MARK: Setup
-    
-    private func setup() {
-        let viewController = self
-        let interactor = ExpenseInteractor()
-        let presenter = ExpensePresenter()
-        let router = ExpenseRouter()
-        viewController.interactor = interactor
-        viewController.router = router
-        interactor.presenter = presenter
-        presenter.viewController = viewController
-        router.viewController = viewController
-        router.dataStore = interactor
-    }
-    
-    // MARK: Routing
-    
-    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-        if let scene = segue.identifier {
-            let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-            if let router = router, router.responds(to: selector) {
-                router.perform(selector, with: segue)
-            }
-        }
-    }
-    
-    // MARK: View lifecycle
+    var expenseCategories: [ExpenseCategoryModel.Register]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadTypes()
-
+        createExpenseListView()
+        loadExpenseCategories()
+        resetValues()
+        
     }
     
     override func viewDidAppear() {
         super .viewDidAppear()
-        resetAmountTextField()
-        validate()
-        amountTextField.becomeFirstResponder()
         
     }
     
-    // MARK: Do something
-    
-    @IBAction func baseTypePopupChanged(_ sender: NSPopUpButton) {
-        descriptionTextfield.stringValue = ""
-        resetAmountTextField()
-        updateSecondaryPopupTitles()
-        validate()
+    private func createExpenseListView() {
+        expenseListView = ExpenseListView(frame: CGRect(x: 0, y: 50, width: view.frame.width, height: 200))
+        view.addSubview(expenseListView)
     }
     
-    @IBAction func secondaryTypePopupChanged(_ sender: NSPopUpButton) {
-        descriptionTextfield.stringValue = ""
-        resetAmountTextField()
+    @IBAction func baseTypePopupChanged(_ sender: NSPopUpButton) {
+        descriptionTextField.stringValue = ""
+        resetValues()
         validate()
     }
     
     @IBAction func amountDidChaned(_ sender: NSTextField) {
         validate()
     }
-    private func addBaseTypePopup() {
-        let baseTitles = baseTypes.filter({$0.level == 0 && $0.isEnabled}).map({$0.name})
+    @IBAction func expenseDateDidChanged(_ sender: Any) {
+        validate()
+    }
+    
+    private func populateTypePopup(registers: [ExpenseCategoryModel.Register]) {
+        let baseTitles = registers.filter({$0.isEnabled}).map({$0.description})
         typePopup.removeAllItems()
         typePopup.addItems(withTitles: baseTitles)
     }
     
-    private func resetAmountTextField() {
-        amountTextField.stringValue = "0,0"
+    private func resetValues() {
+        totalTextField.stringValue = "0"
+        descriptionTextField.stringValue = ""
+        expenseDate.dateValue = Date()
+        validate()
     }
-    
-    private func updateSecondaryPopupTitles() {
         
-        let baseIndex = typePopup.indexOfSelectedItem
-        let selectedBaseChildIDType = baseTypes[baseIndex].childID
-        let secondaryTitle = secondaryTypes.filter({$0.level == 1 && $0.isEnabled && $0.childIDType == selectedBaseChildIDType}).map({$0.name})
-        secondaryTypePopup.removeAllItems()
-        secondaryTypePopup.addItems(withTitles: secondaryTitle)
-        print(secondaryTypePopup.indexOfSelectedItem)
-       
-    }
-    
-    func loadTypes() {
-        let request = Expense.Types.Request()
-        interactor?.loadTypes(request: request)
-    }
-    
-    func displayTypes(viewModel: Expense.Types.ViewModel) {
-        DispatchQueue.main.async {
-            if viewModel.errorMessage != nil {
-                print("error loading types")
-            }
-            self.baseTypes = viewModel.baseTypeTitles ?? []
-            self.secondaryTypes = viewModel.secondaryTypeTitles ?? []
-            
-            self.addBaseTypePopup()
-            self.updateSecondaryPopupTitles()
-        }
-         //nameTextField.text = viewModel.name
-    }
-    
-    func displayNewExpenseSavedSuccess() {
-        DispatchQueue.main.async {
-            DDBarLoader.hideLoading()
-            self.view.window?.close()
-            print("guardo bien")
-            
-        }
-    }
-    
     func displayNewExpenseSavedError(message: String?) {
         DispatchQueue.main.async {
-            DDBarLoader.hideLoading()
             self.ShowSheetAlert(title: "Error al guardar nuevo gasto", message: message ?? "unknown error", buttons: [.ok])
-            
         }
     }
-    
     
     @IBAction func cancelPressed(_ sender: Any) {
         view.window?.close()
     }
     
     @IBAction func savePressed(_ sender: Any) {
-        DDBarLoader.showLoading(controller: self, message: "Agregando nuevo gasto")
+        if validateFields() {
+            saveNewExpense()
+        }
+    }
+    
+    @IBAction func deletePressed(_ sender: Any) {
+    }
+    
+    private func saveNewExpense() {
+        DDBarLoader.showLoading(controller: self, message: "")
+        let categoryList = expenseCategories.filter({$0.description == typePopup.titleOfSelectedItem})
+        if categoryList.count == 0 { return }
+        guard let expenseCategory = categoryList.first,
+              let total = Double(totalTextField.stringValue) else { return }
+        let createdAt = Date().timeIntervalSince1970
+        let body = ["description": descriptionTextField.stringValue,
+                    "isEnabled": true,
+                    "total":  total,
+                    "timestamp": createdAt,
+                    "expense_date": expenseDate.dateValue.timeIntervalSince1970,
+                    "expense_category": expenseCategory._id] as [String : Any]
+        
+        
+        let endpoint = Endpoint.Create(to: .Expense(.Save(body: body)))
+        BLServerManager.ApiCall(endpoint: endpoint) { (data) in
+            DispatchQueue.main.async {
+                DDBarLoader.hideLoading()
+                self.expenseListView.loadExpenses()
+                self.resetValues()
+            }
+        } fail: { (errorMessage) in
+            DispatchQueue.main.async {
+                DDBarLoader.hideLoading()
+                self.resetValues()
+                self.ShowSheetAlert(title: "Error al guardar nuevo gasto", message: errorMessage, buttons: [.ok])
+            }
+        }
+
     }
 }
 
 extension ExpenseViewController {
     fileprivate func validate() {
         if validateFields() {
-            enableSabeButton()
+            enableSaveButton()
         } else {
-            disableSabeButton()
+            disableSaveButton()
         }
     }
     
     private func validateFields() -> Bool {
-        var result = true
+        if expenseDate.dateValue > Date() {
+            return false
+        }
         
         if typePopup.indexOfSelectedItem == -1 {
-            result = false
-        }
-        if secondaryTypePopup.indexOfSelectedItem == -1 {
-            result = false
-        }
-        if amountTextField.stringValue.count == 0 {
-            result = false
-        }
-        if let value = Double(amountTextField.stringValue), value <= 0 {
-            result = false
-        }
-        if let value = Double(amountTextField.stringValue), value > Constants.Max.inputAmountNumber {
-            result = false
+            return false
         }
         
-        return result
+        if let value = Double(totalTextField.stringValue), value <= 0 {
+            return false
+        }
+        if let value = Double(totalTextField.stringValue), value > Constants.Max.inputAmountNumber {
+            return false
+        }
+        
+        return true
     }
     
-    private func enableSabeButton() {
-        saveOutlet.isEnabled = true
-        saveOutlet.alphaValue = 1
+    private func enableSaveButton() {
+        saveButtonOutlet.isEnabled = true
+        saveButtonOutlet.alphaValue = 1
     }
-    private func disableSabeButton() {
-        saveOutlet.isEnabled = false
-        saveOutlet.alphaValue = 0.3
+    private func disableSaveButton() {
+        saveButtonOutlet.isEnabled = false
+        saveButtonOutlet.alphaValue = 0.3
     }
 }
 
 
-extension ExpenseViewController : NSTextFieldDelegate {
+extension ExpenseViewController  {
     
+    func loadExpenseCategories() {
+        let endpoint = Endpoint.Create(to: .ExpenseCategory(.Load))
+        
+        BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<[ExpenseCategoryModel.Register]>) in
+            guard let data = response.data else { return }
+            self.expenseCategories = response.data
+            DispatchQueue.main.async {
+                self.populateTypePopup(registers: data)
+            }
+        } fail: { (errorMessage) in
+            DispatchQueue.main.async {
+                self.ShowSheetAlert(title: "Error al cargar las categorias de los gastos", message: errorMessage, buttons: [.ok])
+            }
+        }
+
+        
+    }
 }

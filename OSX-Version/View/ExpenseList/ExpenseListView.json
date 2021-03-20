@@ -1,0 +1,23 @@
+
+{
+    "type": "tableview",
+    "rowHeight": 30,
+    "columns": [{
+        "name" : "Fecha",
+        "isEditable" : false,
+        "width": 0.1,
+        "fieldName" : "expense_date",
+        "dateFormat": "dd-MM-yyyy"
+    },
+    {
+        "name" : "Descripción",
+        "isEditable" : false,
+        "width": 0.8,
+        "fieldName" : "description"
+    }, {
+        "name" : "Total",
+        "isEditable" : false,
+        "width": 0.1,
+        "fieldName" : "total"
+    }]
+}

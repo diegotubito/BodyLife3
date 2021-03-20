@@ -13,12 +13,7 @@ class SingleLabelTableView: GenericTableView<SingleLabelTableViewItem> {
     override func commonInit() {
         super .commonInit()
         self.delegate = self
-        showItems()
-    }
-    
-    func setValues(items: [[String: Any]], column: GenericTableViewColumnModel) {
-        self.items = items
-        self.column = column
+        column = loadColumn()!
         showItems()
     }
     
@@ -26,6 +21,18 @@ class SingleLabelTableView: GenericTableView<SingleLabelTableViewItem> {
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
+    }
+    
+    
+    private func loadColumn() -> GenericTableViewColumnModel? {
+        let className = String(describing: type(of: self))
+        let bundle = Bundle(for: type(of: self))
+        guard
+            let data = CommonWorker.GeneralPurpose.readLocalFile(bundle: bundle, forName: className),
+            let column = try? JSONDecoder().decode(GenericTableViewColumnModel.self, from: data)
+        else { return nil }
+        
+        return column
     }
 }
 

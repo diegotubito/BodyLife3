@@ -8,18 +8,34 @@
 
 import Foundation
 
-struct ExpenseModel : Decodable {
-    var childIDBaseType : String
-    var childIDSecondaryType : String
-    var childID : String
-    var createdAt : Double
-    var isEnabled : Bool
-    var operationCategory : String
-    var displayName : String
-    var displayTypeName : String
-    var amount : Double
-    var queryByY : String
-    var queryByMY : String
-    var queryByDMY : String
-    var optionalDescription : String?
+struct ExpenseModel {
+    struct Populated: Codable {
+        var _id: String
+        var description: String
+        var isEnabled: Bool
+        var total: Double
+        var timestamp: Double
+        var expense_date: Double
+        var expense_category: ExpenseCategoryModel.Register
+    }
+    
+    struct Register: Codable {
+        var _id: String
+        var description: String
+        var isEnabled: Bool
+        var total: Double
+        var timestamp: Double
+        var expense_date: Double
+        var expense_category: String
+    }
+}
+
+
+struct ExpenseCategoryModel {
+    struct Register: Codable {
+        var _id: String
+        var isEnabled: Bool
+        var timestamp: Double
+        var description: String
+    }
 }

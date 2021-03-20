@@ -19,6 +19,7 @@ struct GenericTableViewColumnModel : Codable {
         var maxWidth: Double?
         var minWidth: Double?
         var fieldName: String?
+        var dateFormat: String?
     }
 }
 
@@ -154,8 +155,17 @@ class GenericTableViewItem: NSView {
             let fieldName = column.fieldName
         else { return "not parsed" }
         
-        let result = item[fieldName]
         
+        let result = item[fieldName]
+     
+        if let dateFormat = column.dateFormat,
+           result is Double {
+            
+            let resultDouble = result as! Double
+            let date = resultDouble.toDate1970
+            let stringDate = date.toString(formato: dateFormat)
+            return stringDate
+        }
         if result is String {
             return result as! String
         }
