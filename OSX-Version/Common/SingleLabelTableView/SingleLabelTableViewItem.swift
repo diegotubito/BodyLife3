@@ -13,7 +13,13 @@ class SingleLabelTableViewItem: GenericTableViewItem, NSTextFieldDelegate {
   
     override var item: [String: Any]? {
         didSet {
-            myLabel.stringValue = getTitle()
+            guard let item = item,
+                  let fieldName = column.fieldName
+            else { return }
+            if let isEnabled = item["isEnabled"] as? Bool, !isEnabled {
+                myLabel.textColor = .darkGray
+            }
+            myLabel.stringValue = getTitle(dictionary: item, fieldName: fieldName)
             myLabel.delegate = self
             setStatus(label: myLabel)
         }
@@ -40,12 +46,6 @@ class SingleLabelTableViewItem: GenericTableViewItem, NSTextFieldDelegate {
         myLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
         myLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant:0).isActive = true
     }
-    
-//    func controlTextDidEndEditing(_ obj: Notification) {
-//        guard let textField = obj.object as? NSTextField else {return}
-//        print(textField.stringValue)
-//        self.delegate?.textFieldDidChanged(textField: textField)
-//    }
     
     func control(_ control: NSControl, textShouldEndEditing fieldEditor: NSText) -> Bool {
         let stringValue = fieldEditor.string

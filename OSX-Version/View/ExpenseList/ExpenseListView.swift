@@ -9,14 +9,28 @@
 import Cocoa
 import BLServerManager
 
+protocol ExpenseListViewDelegate: class {
+    func selectedRow(row: Int)
+}
+
 class ExpenseListView: SingleLabelTableView {
+    var fromDate: Date!
+    var toDate: Date!
+    
+    var expenseDelegate: ExpenseListViewDelegate?
+    
     override func commonInit() {
         super .commonInit()
+    }
+   
+    func setDates(fromDate: Date, toDate: Date) {
+        self.fromDate = fromDate
+        self.toDate = toDate
         loadExpenses()
     }
     
     func loadExpenses() {
-        let endpoint = Endpoint.Create(to: .Expense(.Load(fromDate: 0, toDate: 0)))
+        let endpoint = Endpoint.Create(to: .Expense(.Load(fromDate: fromDate.timeIntervalSince1970, toDate: toDate.timeIntervalSince1970)))
         BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<[ExpenseModel.Populated]>) in
             guard
                 let data = response.data,
@@ -26,10 +40,18 @@ class ExpenseListView: SingleLabelTableView {
             self.items = jsonArray
             DispatchQueue.main.async {
                 self.tableView.reloadData()
+                self.tableView.deselectAll(self)
             }
         } fail: { (errorMessage) in
             print(errorMessage)
         }
     }
     
+}
+
+
+extension ExpenseListView {
+    override func selectedRow(row: Int) {
+        expenseDelegate?.selectedRow(row: row)
+    }
 }

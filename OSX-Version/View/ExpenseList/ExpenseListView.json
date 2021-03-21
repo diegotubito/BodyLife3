@@ -3,18 +3,26 @@
     "type": "tableview",
     "rowHeight": 30,
     "columns": [{
-        "name" : "Fecha",
+        "name" : "Gasto del",
         "isEditable" : false,
         "width": 0.1,
         "fieldName" : "expense_date",
         "dateFormat": "dd-MM-yyyy"
     },
     {
+        "name" : "Creado",
+        "isEditable" : false,
+        "width": 0.1,
+        "fieldName" : "timestamp",
+        "dateFormat": "dd-MM-yyyy"
+    },
+    {
         "name" : "Descripción",
         "isEditable" : false,
-        "width": 0.8,
+        "width": 0.65,
         "fieldName" : "description"
-    }, {
+    },
+    {
         "name" : "Total",
         "isEditable" : false,
         "width": 0.1,

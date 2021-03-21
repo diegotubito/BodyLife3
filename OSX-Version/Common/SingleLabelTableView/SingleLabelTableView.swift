@@ -23,7 +23,6 @@ class SingleLabelTableView: GenericTableView<SingleLabelTableViewItem> {
         }
     }
     
-    
     private func loadColumn() -> GenericTableViewColumnModel? {
         let className = String(describing: type(of: self))
         let bundle = Bundle(for: type(of: self))
@@ -37,6 +36,9 @@ class SingleLabelTableView: GenericTableView<SingleLabelTableViewItem> {
 }
 
 extension SingleLabelTableView: GenericTableViewDelegate {
+    @objc func selectedRow(row: Int) {
+    }
+    
     func textFieldDidChanged(columnIdentifier: String, stringValue: String) {
         print("heeeey \(stringValue)")
         print(tableView.selectedRow)

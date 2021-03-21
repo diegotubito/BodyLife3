@@ -151,12 +151,12 @@
                                         </connections>
                                     </button>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="aN0-QK-j7Y">
-                                        <rect key="frame" x="163" y="5" width="33" height="30"/>
+                                        <rect key="frame" x="996" y="2" width="33" height="36"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="2Cv-3R-dpn"/>
                                             <constraint firstAttribute="width" constant="33" id="Mxe-St-pi0"/>
                                         </constraints>
-                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSFolderSmart" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="EE8-eE-lH8">
+                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSTouchBarDownloadTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="EE8-eE-lH8">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
@@ -168,7 +168,7 @@
                                 <constraints>
                                     <constraint firstItem="9AY-9h-Rjr" firstAttribute="leading" secondItem="Y6C-Pr-GNv" secondAttribute="leading" constant="16" id="28c-pc-z5b"/>
                                     <constraint firstItem="avi-xG-IAk" firstAttribute="leading" secondItem="9AY-9h-Rjr" secondAttribute="trailing" constant="16" id="3h1-nt-z9K"/>
-                                    <constraint firstItem="aN0-QK-j7Y" firstAttribute="leading" secondItem="rpB-t6-BpD" secondAttribute="trailing" constant="16" id="4ot-7C-Hpx"/>
+                                    <constraint firstItem="kPf-Dq-0A9" firstAttribute="leading" secondItem="aN0-QK-j7Y" secondAttribute="trailing" constant="16" id="7wQ-bz-YkJ"/>
                                     <constraint firstAttribute="trailing" secondItem="Kec-wk-swp" secondAttribute="trailing" constant="16" id="9P1-m4-2aV"/>
                                     <constraint firstItem="9AY-9h-Rjr" firstAttribute="centerY" secondItem="Y6C-Pr-GNv" secondAttribute="centerY" id="AOL-qY-63e"/>
                                     <constraint firstAttribute="bottom" secondItem="kPf-Dq-0A9" secondAttribute="bottom" id="Ppc-UG-fyq"/>
@@ -287,7 +287,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="NSFolderSmart" width="32" height="32"/>
+        <image name="NSTouchBarDownloadTemplate" width="15" height="15"/>
         <image name="NSUser" width="32" height="32"/>
         <image name="box" width="600" height="400"/>
         <image name="cylinder" catalog="system" width="14" height="16"/>

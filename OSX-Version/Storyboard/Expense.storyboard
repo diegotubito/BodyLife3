@@ -11,10 +11,10 @@
             <objects>
                 <viewController storyboardIdentifier="ExpenseViewController" id="TKk-Fw-LR3" customClass="ExpenseViewController" customModule="Body_Shaping" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" translatesAutoresizingMaskIntoConstraints="NO" id="S2v-aE-iqn">
-                        <rect key="frame" x="0.0" y="0.0" width="859" height="556"/>
+                        <rect key="frame" x="0.0" y="0.0" width="859" height="652"/>
                         <subviews>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="Qfx-T9-SK4">
-                                <rect key="frame" x="0.0" y="506" width="859" height="50"/>
+                                <rect key="frame" x="0.0" y="602" width="859" height="50"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="TdW-9x-r2i">
                                         <rect key="frame" x="398" y="14" width="64" height="23"/>
@@ -35,7 +35,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="859" height="50"/>
                                 <subviews>
                                     <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="32" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gfo-s8-eYy">
-                                        <rect key="frame" x="314" y="15" width="232" height="20"/>
+                                        <rect key="frame" x="248" y="15" width="364" height="20"/>
                                         <subviews>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nFM-Ba-GY4">
                                                 <rect key="frame" x="-7" y="-7" width="114" height="32"/>
@@ -50,12 +50,25 @@
                                                     <action selector="cancelPressed:" target="TKk-Fw-LR3" id="4JR-Ev-maF"/>
                                                 </connections>
                                             </button>
-                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="z5p-9g-Owi">
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lJU-4O-ocC">
                                                 <rect key="frame" x="125" y="-7" width="114" height="32"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="100" id="Whd-4Y-Yy6"/>
+                                                </constraints>
+                                                <buttonCell key="cell" type="push" title="Borrar" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ABl-8B-mXw">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="disableDidPressed:" target="TKk-Fw-LR3" id="Bc0-pM-NYV"/>
+                                                </connections>
+                                            </button>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="z5p-9g-Owi">
+                                                <rect key="frame" x="257" y="-7" width="114" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="100" id="1ue-sh-X1S"/>
                                                 </constraints>
-                                                <buttonCell key="cell" type="push" title="Borrar" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="bXX-Eq-A60">
+                                                <buttonCell key="cell" type="push" title="Borrar Definitivo" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="bXX-Eq-A60">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
@@ -67,8 +80,10 @@
                                         <visibilityPriorities>
                                             <integer value="1000"/>
                                             <integer value="1000"/>
+                                            <integer value="1000"/>
                                         </visibilityPriorities>
                                         <customSpacing>
+                                            <real value="3.4028234663852886e+38"/>
                                             <real value="3.4028234663852886e+38"/>
                                             <real value="3.4028234663852886e+38"/>
                                         </customSpacing>
@@ -82,15 +97,15 @@
                                 </constraints>
                             </customView>
                             <stackView distribution="fill" orientation="horizontal" alignment="bottom" spacing="16" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KOi-fH-TYR">
-                                <rect key="frame" x="16" y="413" width="811" height="38"/>
+                                <rect key="frame" x="16" y="509" width="811" height="38"/>
                                 <subviews>
                                     <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sx8-3D-qxp">
                                         <rect key="frame" x="0.0" y="0.0" width="100" height="38"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="osi-cu-Izd">
-                                                <rect key="frame" x="-2" y="24" width="85" height="14"/>
-                                                <textFieldCell key="cell" lineBreakMode="clipping" title="Fecha de gasto" id="LMn-l7-Cmb">
-                                                    <font key="font" metaFont="system" size="11"/>
+                                                <rect key="frame" x="-2" y="24" width="54" height="14"/>
+                                                <textFieldCell key="cell" lineBreakMode="clipping" title="Gasto del" id="LMn-l7-Cmb">
+                                                    <font key="font" metaFont="smallSystem"/>
                                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
@@ -99,8 +114,8 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="97" height="28"/>
                                                 <datePickerCell key="cell" borderStyle="bezel" alignment="left" useCurrentDate="YES" id="ezG-T5-Wua">
                                                     <font key="font" metaFont="system"/>
-                                                    <date key="date" timeIntervalSinceReferenceDate="637956677.459571">
-                                                        <!--2021-03-20 18:11:17 +0000-->
+                                                    <date key="date" timeIntervalSinceReferenceDate="637982072.31967604">
+                                                        <!--2021-03-21 01:14:32 +0000-->
                                                     </date>
                                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -128,7 +143,7 @@
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4hl-Dd-NXl">
                                                 <rect key="frame" x="-2" y="22" width="28" height="14"/>
                                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Tipo" id="ydc-cd-5Kz">
-                                                    <font key="font" metaFont="system" size="11"/>
+                                                    <font key="font" metaFont="smallSystem"/>
                                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
@@ -165,18 +180,21 @@
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Zhk-JD-Ibk">
                                                 <rect key="frame" x="-2" y="21" width="67" height="14"/>
                                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Descripción" id="CSh-CX-s6q">
-                                                    <font key="font" metaFont="system" size="11"/>
+                                                    <font key="font" metaFont="smallSystem"/>
                                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
                                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Gtg-QP-Yeg">
                                                 <rect key="frame" x="0.0" y="0.0" width="250" height="21"/>
-                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Opcional" drawsBackground="YES" id="Tne-OU-aEl">
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="Tne-OU-aEl">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
+                                                <connections>
+                                                    <action selector="descriptionDidChanged:" target="TKk-Fw-LR3" id="y2H-dR-NBN"/>
+                                                </connections>
                                             </textField>
                                         </subviews>
                                         <constraints>
@@ -197,7 +215,7 @@
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XeE-QZ-pB5">
                                                 <rect key="frame" x="-2" y="21" width="104" height="14"/>
                                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Importe" id="F6T-dH-1Al">
-                                                    <font key="font" metaFont="system" size="11"/>
+                                                    <font key="font" metaFont="smallSystem"/>
                                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
@@ -257,7 +275,7 @@
                                 </customSpacing>
                             </stackView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IVs-uJ-1gV">
-                                <rect key="frame" x="14" y="374" width="154" height="23"/>
+                                <rect key="frame" x="14" y="470" width="154" height="23"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Listado de gastos" id="o6C-hP-1Rc">
                                     <font key="font" metaFont="system" size="19"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -265,7 +283,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MAZ-o4-5FU">
-                                <rect key="frame" x="14" y="467" width="113" height="23"/>
+                                <rect key="frame" x="14" y="563" width="113" height="23"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Nuevo Gasto" id="YbQ-Id-SjX">
                                     <font key="font" metaFont="system" size="19"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -273,7 +291,7 @@
                                 </textFieldCell>
                             </textField>
                             <stackView distribution="fillEqually" orientation="horizontal" alignment="top" spacing="27" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PwW-Ds-jIj">
-                                <rect key="frame" x="16" y="318" width="215" height="40"/>
+                                <rect key="frame" x="16" y="414" width="215" height="40"/>
                                 <subviews>
                                     <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="2" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hU1-Bc-tLO">
                                         <rect key="frame" x="0.0" y="0.0" width="94" height="40"/>
@@ -281,7 +299,7 @@
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aPP-3f-fdT">
                                                 <rect key="frame" x="-2" y="26" width="38" height="14"/>
                                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Desde" id="Hqe-ca-CqP">
-                                                    <font key="font" metaFont="system" size="11"/>
+                                                    <font key="font" metaFont="smallSystem"/>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
@@ -290,12 +308,15 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="97" height="28"/>
                                                 <datePickerCell key="cell" borderStyle="bezel" alignment="left" useCurrentDate="YES" id="NXA-0u-IWv">
                                                     <font key="font" metaFont="system"/>
-                                                    <date key="date" timeIntervalSinceReferenceDate="637958109.46973801">
-                                                        <!--2021-03-20 18:35:09 +0000-->
+                                                    <date key="date" timeIntervalSinceReferenceDate="637982072.33891106">
+                                                        <!--2021-03-21 01:14:32 +0000-->
                                                     </date>
                                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 </datePickerCell>
+                                                <connections>
+                                                    <action selector="fromDateDidChanged:" target="TKk-Fw-LR3" id="SO2-bm-egH"/>
+                                                </connections>
                                             </datePicker>
                                         </subviews>
                                         <visibilityPriorities>
@@ -313,7 +334,7 @@
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Vio-mA-Nwd">
                                                 <rect key="frame" x="-2" y="26" width="35" height="14"/>
                                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Hasta" id="f0I-7e-O5U">
-                                                    <font key="font" metaFont="system" size="11"/>
+                                                    <font key="font" metaFont="smallSystem"/>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
@@ -322,12 +343,15 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="97" height="28"/>
                                                 <datePickerCell key="cell" borderStyle="bezel" alignment="left" useCurrentDate="YES" id="ilc-zS-8ms">
                                                     <font key="font" metaFont="system"/>
-                                                    <date key="date" timeIntervalSinceReferenceDate="637958109.47541595">
-                                                        <!--2021-03-20 18:35:09 +0000-->
+                                                    <date key="date" timeIntervalSinceReferenceDate="637982072.343768">
+                                                        <!--2021-03-21 01:14:32 +0000-->
                                                     </date>
                                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 </datePickerCell>
+                                                <connections>
+                                                    <action selector="toDateDidChanged:" target="TKk-Fw-LR3" id="Swb-S4-fPm"/>
+                                                </connections>
                                             </datePicker>
                                         </subviews>
                                         <visibilityPriorities>
@@ -371,7 +395,9 @@
                     <connections>
                         <outlet property="deleteButtonOutlet" destination="z5p-9g-Owi" id="DbE-xp-4Og"/>
                         <outlet property="descriptionTextField" destination="Gtg-QP-Yeg" id="MxP-W4-FjR"/>
+                        <outlet property="disableButtonOutlet" destination="lJU-4O-ocC" id="3mI-HD-QH0"/>
                         <outlet property="expenseDate" destination="hjX-iy-vUo" id="TWg-J2-GXb"/>
+                        <outlet property="footerView" destination="QOy-2c-ZJb" id="RsH-4s-t80"/>
                         <outlet property="fromDate" destination="MJ9-ZP-F9l" id="Kph-R7-boa"/>
                         <outlet property="saveButtonOutlet" destination="g1h-mr-3CT" id="H4H-lW-efY"/>
                         <outlet property="toDate" destination="U70-f6-P9z" id="Pqf-qi-Bgf"/>
@@ -381,7 +407,7 @@
                 </viewController>
                 <customObject id="Mxc-OP-LAg" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="300.5" y="285"/>
+            <point key="canvasLocation" x="300.5" y="333"/>
         </scene>
     </scenes>
 </document>

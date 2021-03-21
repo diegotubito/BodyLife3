@@ -25,6 +25,7 @@ struct GenericTableViewColumnModel : Codable {
 
 protocol GenericTableViewDelegate: class {
     func textFieldDidChanged(columnIdentifier: String, stringValue: String)
+    func selectedRow(row: Int)
 }
 
 extension GenericTableViewDelegate {
@@ -130,6 +131,10 @@ class GenericTableView<U: GenericTableViewItem> : NSView, NSTableViewDelegate, N
     func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
         return column.rowHeight ?? 0.0
     }
+    
+    func tableViewSelectionDidChange(_ notification: Notification) {
+        self.delegate?.selectedRow(row: tableView.selectedRow)
+    }
 }
 
 class GenericTableViewItem: NSView {
@@ -150,34 +155,23 @@ class GenericTableViewItem: NSView {
     func commonInit() {
     }
    
-    func getTitle() -> String {
-        guard
-            let fieldName = column.fieldName
-        else { return "not parsed" }
-        
-        
-        let result = item[fieldName]
-     
-        if let dateFormat = column.dateFormat,
-           result is Double {
-            
-            let resultDouble = result as! Double
-            let date = resultDouble.toDate1970
+    func getTitle(dictionary: [String: Any], fieldName: String) -> String {
+        let value = dictionary[fieldName]
+        if let dateFormat = column.dateFormat, let doubleValue = value as? Double {
+            let date = doubleValue.toDate1970
             let stringDate = date.toString(formato: dateFormat)
             return stringDate
         }
-        if result is String {
-            return result as! String
+        if let stringValue = value as? String {
+            return stringValue
         }
-        if result is Bool {
-            let stringBool = result as! Bool
-            return String(stringBool)
+        if let boolValue = value as? Bool {
+            return String(boolValue)
         }
-        if result is Double {
-            let resultDouble = result as! Double
-            return String(resultDouble)
+        if let doubleValue = value as? Double {
+            return String(doubleValue)
         }
-        
+     
         return ""
     }
     

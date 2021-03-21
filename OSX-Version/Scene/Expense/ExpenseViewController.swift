@@ -9,29 +9,68 @@ class ExpenseViewController: BaseViewController {
     @IBOutlet weak var totalTextField: NSTextField!
     @IBOutlet weak var saveButtonOutlet: NSButton!
     @IBOutlet weak var deleteButtonOutlet: NSButton!
+    @IBOutlet weak var disableButtonOutlet: NSButton!
     @IBOutlet weak var fromDate: NSDatePicker!
     @IBOutlet weak var toDate: NSDatePicker!
+    @IBOutlet weak var footerView: NSView!
     
     var expenseListView: ExpenseListView!
-    
     var expenseCategories: [ExpenseCategoryModel.Register]!
+    var selectedExpense: ExpenseModel.Populated? {
+        didSet {
+            //here we enable delete button, as it is only available for DEBUG and INTERNAL environments
+            deleteButtonOutlet.isEnabled = true
+            
+            guard let register = selectedExpense,
+                  register.isEnabled else {
+                disableButtonOutlet.isEnabled = false
+                return
+            }
+
+            let currentDate = Date().toString(formato: "dd-MM-yyyy")
+            let expenseDate = register.timestamp.toDate1970.toString(formato: "dd-MM-yyyy")
+            if currentDate != expenseDate {
+                disableButtonOutlet.isEnabled = false
+            } else {
+                disableButtonOutlet.isEnabled = true
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        createExpenseListView()
-        loadExpenseCategories()
-        resetValues()
+        descriptionTextField.delegate = self
+        totalTextField.delegate = self
+        setFilterDates()
         
+        #if DEBUG || INTERNAL
+        deleteButtonOutlet.isHidden = false
+        #endif
     }
     
     override func viewDidAppear() {
         super .viewDidAppear()
-        
+        createExpenseListView()
+        loadExpenseCategories()
+        resetValues()
     }
     
     private func createExpenseListView() {
         expenseListView = ExpenseListView(frame: CGRect(x: 0, y: 50, width: view.frame.width, height: 200))
+        setDates()
+        expenseListView.expenseDelegate = self
         view.addSubview(expenseListView)
+        setExpenseListConstraints()
+    }
+    
+    private func setExpenseListConstraints() {
+        expenseListView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            expenseListView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0),
+            expenseListView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0),
+            expenseListView.topAnchor.constraint(equalTo: fromDate.bottomAnchor, constant: 16),
+            expenseListView.bottomAnchor.constraint(equalTo: footerView.topAnchor, constant: -16)
+        ])
     }
     
     @IBAction func baseTypePopupChanged(_ sender: NSPopUpButton) {
@@ -43,8 +82,43 @@ class ExpenseViewController: BaseViewController {
     @IBAction func amountDidChaned(_ sender: NSTextField) {
         validate()
     }
+    
     @IBAction func expenseDateDidChanged(_ sender: Any) {
+        if expenseDate.dateValue > Date() {
+            expenseDate.dateValue = Date()
+        }
         validate()
+    }
+    
+    @IBAction func fromDateDidChanged(_ sender: Any) {
+        if fromDate.dateValue > toDate.dateValue {
+            fromDate.dateValue = toDate.dateValue
+        }
+        guard let beginDayDate = setHour(date: fromDate.dateValue, hour: "00:00:00") else { return }
+        fromDate.dateValue = beginDayDate
+        setDates()
+    }
+    
+    @IBAction func toDateDidChanged(_ sender: Any?) {
+        if toDate.dateValue > Date() {
+            toDate.dateValue = Date()
+        }
+        guard let endDayDate = setHour(date: toDate.dateValue, hour: "23:59:59") else { return }
+        toDate.dateValue = endDayDate
+        setDates()
+    }
+    
+    private func setDates() {
+        expenseListView.setDates(fromDate: fromDate.dateValue, toDate: toDate.dateValue)
+        selectedExpense = nil
+    }
+    
+    private func setHour(date: Date, hour: String) -> Date? {
+        let day = date.day
+        let month = date.month
+        let year = date.year
+        let resultDate = "\(day)-\(month)-\(year) \(hour)".toDate(formato: "dd-MM-yyyy HH:mm:ss")
+        return resultDate
     }
     
     private func populateTypePopup(registers: [ExpenseCategoryModel.Register]) {
@@ -54,16 +128,28 @@ class ExpenseViewController: BaseViewController {
     }
     
     private func resetValues() {
+        selectedExpense = nil
         totalTextField.stringValue = "0"
         descriptionTextField.stringValue = ""
         expenseDate.dateValue = Date()
         validate()
+    }
+    
+    private func setFilterDates() {
+        let month = Date().month
+        let year = Date().year
+        let from = "01-\(month)-\(year) 00:00:00".toDate(formato: "dd-MM-yyyy HH:mm:ss")
+        fromDate.dateValue = from!
+        toDate.dateValue = Date()
     }
         
     func displayNewExpenseSavedError(message: String?) {
         DispatchQueue.main.async {
             self.ShowSheetAlert(title: "Error al guardar nuevo gasto", message: message ?? "unknown error", buttons: [.ok])
         }
+    }
+    @IBAction func descriptionDidChanged(_ sender: Any) {
+        validate()
     }
     
     @IBAction func cancelPressed(_ sender: Any) {
@@ -76,7 +162,40 @@ class ExpenseViewController: BaseViewController {
         }
     }
     
+    @IBAction func disableDidPressed(_ sender: Any) {
+        guard let register = selectedExpense else { return }
+        DDBarLoader.showLoading(controller: self, message: "")
+        let endpoint = Endpoint.Create(to: .Expense(.Disable(_id: register._id)))
+        BLServerManager.ApiCall(endpoint: endpoint) { (data) in
+            DispatchQueue.main.async {
+                DDBarLoader.hideLoading()
+                //llamo a este metodo para que actualice el listado, el nombre no es muy descriptivo
+                self.toDateDidChanged(nil)
+            }
+        } fail: { (errorMessage) in
+            DispatchQueue.main.async {
+                DDBarLoader.hideLoading()
+                self.ShowSheetAlert(title: "Error al eliminar gasto", message: errorMessage, buttons: [.ok])
+            }
+        }
+    }
+    
     @IBAction func deletePressed(_ sender: Any) {
+        guard let register = selectedExpense else { return }
+        DDBarLoader.showLoading(controller: self, message: "")
+        let endpoint = Endpoint.Create(to: .Expense(.Delete(_id: register._id)))
+        BLServerManager.ApiCall(endpoint: endpoint) { (data) in
+            DispatchQueue.main.async {
+                DDBarLoader.hideLoading()
+                //llamo a este metodo para que actualice el listado, el nombre no es muy descriptivo
+                self.toDateDidChanged(nil)
+            }
+        } fail: { (errorMessage) in
+            DispatchQueue.main.async {
+                DDBarLoader.hideLoading()
+                self.ShowSheetAlert(title: "Error al eliminar gasto", message: errorMessage, buttons: [.ok])
+            }
+        }
     }
     
     private func saveNewExpense() {
@@ -86,7 +205,7 @@ class ExpenseViewController: BaseViewController {
         guard let expenseCategory = categoryList.first,
               let total = Double(totalTextField.stringValue) else { return }
         let createdAt = Date().timeIntervalSince1970
-        let body = ["description": descriptionTextField.stringValue,
+        let body = ["description": expenseCategory.description + ": " + descriptionTextField.stringValue,
                     "isEnabled": true,
                     "total":  total,
                     "timestamp": createdAt,
@@ -112,6 +231,12 @@ class ExpenseViewController: BaseViewController {
     }
 }
 
+extension ExpenseViewController: NSTextFieldDelegate {
+    func controlTextDidChange(_ obj: Notification) {
+        validate()
+    }
+}
+
 extension ExpenseViewController {
     fileprivate func validate() {
         if validateFields() {
@@ -129,7 +254,12 @@ extension ExpenseViewController {
         if typePopup.indexOfSelectedItem == -1 {
             return false
         }
-        
+        if descriptionTextField.stringValue.count == 0 {
+            return false
+        }
+        if Double(totalTextField.stringValue) == nil {
+            return false
+        }
         if let value = Double(totalTextField.stringValue), value <= 0 {
             return false
         }
@@ -150,9 +280,7 @@ extension ExpenseViewController {
     }
 }
 
-
 extension ExpenseViewController  {
-    
     func loadExpenseCategories() {
         let endpoint = Endpoint.Create(to: .ExpenseCategory(.Load))
         
@@ -167,7 +295,20 @@ extension ExpenseViewController  {
                 self.ShowSheetAlert(title: "Error al cargar las categorias de los gastos", message: errorMessage, buttons: [.ok])
             }
         }
-
-        
     }
+}
+
+extension ExpenseViewController: ExpenseListViewDelegate {
+    func selectedRow(row: Int) {
+        let json = expenseListView.items[row]
+        guard let data = try? JSONSerialization.data(withJSONObject: json, options: []),
+              let register = try? JSONDecoder().decode(ExpenseModel.Populated.self, from: data)
+        else {
+            selectedExpense = nil
+            return
+        }
+        selectedExpense = register
+    }
+    
+    
 }
