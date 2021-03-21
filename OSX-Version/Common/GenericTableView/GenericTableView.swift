@@ -20,6 +20,7 @@ struct GenericTableViewColumnModel : Codable {
         var minWidth: Double?
         var fieldName: String?
         var dateFormat: String?
+        var type: String?
     }
 }
 
@@ -156,22 +157,30 @@ class GenericTableViewItem: NSView {
     }
    
     func getTitle(dictionary: [String: Any], fieldName: String) -> String {
-        let value = dictionary[fieldName]
-        if let dateFormat = column.dateFormat, let doubleValue = value as? Double {
-            let date = doubleValue.toDate1970
-            let stringDate = date.toString(formato: dateFormat)
-            return stringDate
-        }
-        if let stringValue = value as? String {
-            return stringValue
-        }
-        if let boolValue = value as? Bool {
+        guard let format = column.type else { return "" }
+        switch ColumnType(rawValue: format) {
+        case .bool:
+            guard let boolValue = dictionary[fieldName] as? Bool else {return ""}
             return String(boolValue)
-        }
-        if let doubleValue = value as? Double {
+        case .double:
+            guard let doubleValue = dictionary[fieldName] as? Double else {return ""}
             return String(doubleValue)
+        case .string:
+            let stringValue = dictionary[fieldName] as? String
+            return stringValue ?? ""
+        case .date:
+            let dateFormat = column.dateFormat
+            let doubleValue =  dictionary[fieldName] as? Double
+            let date = doubleValue?.toDate1970
+            let stringDate = date?.toString(formato: dateFormat ?? "dd-MM-yyyy")
+            return stringDate ?? ""
+        case .currency:
+            guard let doubleValue = dictionary[fieldName] as? Double else {return ""}
+            return doubleValue.currencyFormat(decimal: 2)
+        case .none:
+            break
         }
-     
+        
         return ""
     }
     
@@ -183,4 +192,13 @@ class GenericTableViewItem: NSView {
     func textFieldDidChanged(columnIdentifier: String, stringValue: String) {
         textFieldDidChangedObserver?(columnIdentifier, stringValue)
     }
+}
+
+
+enum ColumnType: String {
+    case string = "string"
+    case bool = "bool"
+    case double = "double"
+    case date = "date"
+    case currency = "currency"
 }
