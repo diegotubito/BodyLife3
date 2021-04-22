@@ -37,8 +37,8 @@ class ExpenseListView: SingleLabelTableView {
                 let jsonArrayData = try? JSONEncoder().encode(data),
                 let jsonArray = try? JSONSerialization.jsonObject(with: jsonArrayData, options: []) as? [[String: Any]]
             else { return }
-            self.items = jsonArray
             DispatchQueue.main.async {
+                self.items = jsonArray
                 self.tableView.reloadData()
                 self.tableView.deselectAll(self)
             }
@@ -46,9 +46,7 @@ class ExpenseListView: SingleLabelTableView {
             print(errorMessage)
         }
     }
-    
 }
-
 
 extension ExpenseListView {
     override func selectedRow(row: Int) {
