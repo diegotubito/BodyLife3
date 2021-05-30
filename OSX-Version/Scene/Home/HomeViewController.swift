@@ -87,6 +87,7 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
         StockUpdate.isHidden = false
         crudOutlet.isHidden = false
         #endif
+        showLoading()
     }
     
     override func viewDidAppear() {
@@ -97,6 +98,7 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
     @objc func StartLoading() {
        print("Start Loading")
         DispatchQueue.main.async {
+            self.hideLoading()
             self.createBackgroundGradient()
             self.createCustomViews()
             self.addObservers()

@@ -18,22 +18,14 @@ class ExpenseViewController: BaseViewController {
     var expenseCategories: [ExpenseCategoryModel.Register]!
     var selectedExpense: ExpenseModel.Populated? {
         didSet {
-            //here we enable delete button, as it is only available for DEBUG and INTERNAL environments
-            deleteButtonOutlet.isEnabled = true
-            
+            enablePersistentDeleteButton()
             guard let register = selectedExpense,
-                  register.isEnabled else {
+                  register.isEnabled
+            else {
                 disableButtonOutlet.isEnabled = false
                 return
             }
-
-            let currentDate = Date().toString(formato: "dd-MM-yyyy")
-            let expenseDate = register.timestamp.toDate1970.toString(formato: "dd-MM-yyyy")
-            if currentDate != expenseDate {
-                disableButtonOutlet.isEnabled = false
-            } else {
-                disableButtonOutlet.isEnabled = true
-            }
+            enableDeleteButton()
         }
     }
     
@@ -42,10 +34,6 @@ class ExpenseViewController: BaseViewController {
         descriptionTextField.delegate = self
         totalTextField.delegate = self
         setFilterDates()
-        
-        #if DEBUG || INTERNAL
-        deleteButtonOutlet.isHidden = false
-        #endif
     }
     
     override func viewDidAppear() {
@@ -53,6 +41,26 @@ class ExpenseViewController: BaseViewController {
         createExpenseListView()
         loadExpenseCategories()
         resetValues()
+    }
+    
+    private func enablePersistentDeleteButton() {
+        #if DEBUG || INTERNAL
+            deleteButtonOutlet.isHidden = false
+            deleteButtonOutlet.isEnabled = true
+        #else
+            deleteButtonOutlet.isHidden = true
+            deleteButtonOutlet.isEnabled = false
+        #endif
+    }
+    
+    private func enableDeleteButton() {
+        let currentDate = Date().toString(formato: "dd-MM-yyyy")
+        let expenseDate = selectedExpense?.timestamp.toDate1970.toString(formato: "dd-MM-yyyy")
+        if currentDate != expenseDate {
+            disableButtonOutlet.isEnabled = false
+        } else {
+            disableButtonOutlet.isEnabled = true
+        }
     }
     
     private func createExpenseListView() {
@@ -138,9 +146,13 @@ class ExpenseViewController: BaseViewController {
     private func setFilterDates() {
         let month = Date().month
         let year = Date().year
-        let from = "01-\(month)-\(year) 00:00:00".toDate(formato: "dd-MM-yyyy HH:mm:ss")
-        fromDate.dateValue = from!
-        toDate.dateValue = Date()
+        
+        guard let from = "01-\(month)-\(year) 00:00:00".toDate(formato: "dd-MM-yyyy HH:mm:ss"),
+              let endDayDate = setHour(date: toDate.dateValue, hour: "23:59:59")
+        else { return }
+        
+        fromDate.dateValue = from
+        toDate.dateValue = endDayDate
     }
         
     func displayNewExpenseSavedError(message: String?) {
@@ -211,8 +223,6 @@ class ExpenseViewController: BaseViewController {
                     "timestamp": createdAt,
                     "expense_date": expenseDate.dateValue.timeIntervalSince1970,
                     "expense_category": expenseCategory._id] as [String : Any]
-        
-        
         let endpoint = Endpoint.Create(to: .Expense(.Save(body: body)))
         BLServerManager.ApiCall(endpoint: endpoint) { (data) in
             DispatchQueue.main.async {
@@ -227,7 +237,6 @@ class ExpenseViewController: BaseViewController {
                 self.ShowSheetAlert(title: "Error al guardar nuevo gasto", message: errorMessage, buttons: [.ok])
             }
         }
-
     }
 }
 
@@ -250,7 +259,6 @@ extension ExpenseViewController {
         if expenseDate.dateValue > Date() {
             return false
         }
-        
         if typePopup.indexOfSelectedItem == -1 {
             return false
         }
@@ -300,6 +308,10 @@ extension ExpenseViewController  {
 
 extension ExpenseViewController: ExpenseListViewDelegate {
     func selectedRow(row: Int) {
+        guard row != -1 else {
+            selectedExpense = nil
+            return
+        }
         let json = expenseListView.items[row]
         guard let data = try? JSONSerialization.data(withJSONObject: json, options: []),
               let register = try? JSONDecoder().decode(ExpenseModel.Populated.self, from: data)
@@ -309,6 +321,4 @@ extension ExpenseViewController: ExpenseListViewDelegate {
         }
         selectedExpense = register
     }
-    
-    
 }
