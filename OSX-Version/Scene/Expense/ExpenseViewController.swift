@@ -146,6 +146,7 @@ class ExpenseViewController: BaseViewController {
     private func setFilterDates() {
         let month = Date().month
         let year = Date().year
+        toDate.dateValue = Date()
         
         guard let from = "01-\(month)-\(year) 00:00:00".toDate(formato: "dd-MM-yyyy HH:mm:ss"),
               let endDayDate = setHour(date: toDate.dateValue, hour: "23:59:59")
