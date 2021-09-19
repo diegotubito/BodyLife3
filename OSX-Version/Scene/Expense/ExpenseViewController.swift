@@ -64,9 +64,9 @@ class ExpenseViewController: BaseViewController {
     }
     
     private func createExpenseListView() {
-        expenseListView = ExpenseListView(frame: CGRect(x: 0, y: 50, width: view.frame.width, height: 200))
+        expenseListView = ExpenseListView(frame: CGRect(x: 0, y: 50, width: view.frame.width, height: 200), columns: nil)
         setDates()
-        expenseListView.expenseDelegate = self
+        expenseListView.delegate = self
         view.addSubview(expenseListView)
         setExpenseListConstraints()
     }
@@ -307,7 +307,7 @@ extension ExpenseViewController  {
     }
 }
 
-extension ExpenseViewController: ExpenseListViewDelegate {
+extension ExpenseViewController: GenericTableViewDelegate {
     func selectedRow(row: Int) {
         guard row != -1 else {
             selectedExpense = nil

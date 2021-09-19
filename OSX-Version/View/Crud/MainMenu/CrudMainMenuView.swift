@@ -12,24 +12,12 @@ class CrudMainMenuView: SingleLabelTableView {
     
     override func commonInit() {
         super .commonInit()
-        column = loadColumn()!
         items = loadItems()
-    }
-    
-    private func loadColumn() -> GenericTableViewColumnModel? {
-        let className = String(describing: type(of: self))
-        let bundle = Bundle(for: type(of: self))
-        guard
-            let data = CommonWorker.GeneralPurpose.readLocalFile(bundle: bundle, forName: className),
-            let column = try? JSONDecoder().decode(GenericTableViewColumnModel.self, from: data)
-        else { return nil }
-        
-        return column
     }
     
     func loadItems() -> [[String: Any]] {
         guard
-            let data = CommonWorker.GeneralPurpose.readLocalFile(bundle: Bundle(for: CrudViewController.self), forName: "MainOptionItems"),
+            let data = CommonWorker.GeneralPurpose.readLocalFile(bundle: Bundle(for: SettingsViewController.self), forName: "MainOptionItems"),
             let items = try? JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]]
         else { return [] }
         

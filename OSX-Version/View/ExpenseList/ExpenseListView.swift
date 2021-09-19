@@ -9,15 +9,9 @@
 import Cocoa
 import BLServerManager
 
-protocol ExpenseListViewDelegate: class {
-    func selectedRow(row: Int)
-}
-
 class ExpenseListView: SingleLabelTableView {
     var fromDate: Date!
     var toDate: Date!
-    
-    var expenseDelegate: ExpenseListViewDelegate?
     
     override func commonInit() {
         super .commonInit()
@@ -37,19 +31,11 @@ class ExpenseListView: SingleLabelTableView {
                 let jsonArrayData = try? JSONEncoder().encode(data),
                 let jsonArray = try? JSONSerialization.jsonObject(with: jsonArrayData, options: []) as? [[String: Any]]
             else { return }
-            DispatchQueue.main.async {
-                self.items = jsonArray
-                self.tableView.reloadData()
-                self.tableView.deselectAll(self)
-            }
+         
+            self.items = jsonArray
+            self.showItems()
         } fail: { (errorMessage) in
             print(errorMessage)
         }
-    }
-}
-
-extension ExpenseListView {
-    override func selectedRow(row: Int) {
-        expenseDelegate?.selectedRow(row: row)
     }
 }

@@ -200,10 +200,8 @@
 		1166AF3523B27F880047C7AE /* ArticleViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1166AF3323B27F880047C7AE /* ArticleViewItem.swift */; };
 		1166AF3623B27F880047C7AE /* ArticleViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1166AF3423B27F880047C7AE /* ArticleViewItem.xib */; };
 		1166AF3C23B296090047C7AE /* ArticleSellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1166AF3B23B296090047C7AE /* ArticleSellView.swift */; };
-		116B0E8425EAE66200CC9E3B /* CrudViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116B0E8325EAE66200CC9E3B /* CrudViewController.swift */; };
-		116B0E8525EAE66200CC9E3B /* CrudViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116B0E8325EAE66200CC9E3B /* CrudViewController.swift */; };
-		116B0E8B25EAE69100CC9E3B /* CrudStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 116B0E8A25EAE69100CC9E3B /* CrudStoryboard.storyboard */; };
-		116B0E8C25EAE69100CC9E3B /* CrudStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 116B0E8A25EAE69100CC9E3B /* CrudStoryboard.storyboard */; };
+		116B0E8425EAE66200CC9E3B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116B0E8325EAE66200CC9E3B /* SettingsViewController.swift */; };
+		116B0E8525EAE66200CC9E3B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116B0E8325EAE66200CC9E3B /* SettingsViewController.swift */; };
 		116B0E9625EC302900CC9E3B /* SingleLabelTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116B0E9525EC302900CC9E3B /* SingleLabelTableView.swift */; };
 		116B0E9725EC302900CC9E3B /* SingleLabelTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116B0E9525EC302900CC9E3B /* SingleLabelTableView.swift */; };
 		116B0EA725EC371000CC9E3B /* CrudMainMenuView.json in Resources */ = {isa = PBXBuildFile; fileRef = 116B0EA625EC371000CC9E3B /* CrudMainMenuView.json */; };
@@ -328,12 +326,20 @@
 		F116FB7C2606614A001990FD /* CrudExpenseView.json in Resources */ = {isa = PBXBuildFile; fileRef = F116FB7A2606614A001990FD /* CrudExpenseView.json */; };
 		F116FB8026066166001990FD /* CrudExpenseViewItem.json in Resources */ = {isa = PBXBuildFile; fileRef = F116FB7F26066166001990FD /* CrudExpenseViewItem.json */; };
 		F116FB8126066166001990FD /* CrudExpenseViewItem.json in Resources */ = {isa = PBXBuildFile; fileRef = F116FB7F26066166001990FD /* CrudExpenseViewItem.json */; };
+		F127F01C26ED0B4500F17586 /* CashAccount.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F127F01B26ED0B4500F17586 /* CashAccount.storyboard */; };
+		F127F01D26ED0B4500F17586 /* CashAccount.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F127F01B26ED0B4500F17586 /* CashAccount.storyboard */; };
 		F15EBBE725FE7119009CED69 /* GeneralPurpose.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15EBBE625FE7119009CED69 /* GeneralPurpose.swift */; };
 		F15EBBE825FE7119009CED69 /* GeneralPurpose.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15EBBE625FE7119009CED69 /* GeneralPurpose.swift */; };
 		F164B0CB25FD23FE00229A76 /* MainOptionItems.json in Resources */ = {isa = PBXBuildFile; fileRef = F164B0CA25FD23FE00229A76 /* MainOptionItems.json */; };
 		F164B0CC25FD23FE00229A76 /* MainOptionItems.json in Resources */ = {isa = PBXBuildFile; fileRef = F164B0CA25FD23FE00229A76 /* MainOptionItems.json */; };
 		F186F78B25F72E0B002D493B /* PipMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F186F78A25F72E0B002D493B /* PipMessage.swift */; };
 		F186F78C25F72E0B002D493B /* PipMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F186F78A25F72E0B002D493B /* PipMessage.swift */; };
+		F192865B26F78CE50000CA55 /* Settings.json in Resources */ = {isa = PBXBuildFile; fileRef = F192865A26F78CE50000CA55 /* Settings.json */; };
+		F192865C26F78CE50000CA55 /* Settings.json in Resources */ = {isa = PBXBuildFile; fileRef = F192865A26F78CE50000CA55 /* Settings.json */; };
+		F192866126F7997F0000CA55 /* color+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F192866026F7997F0000CA55 /* color+extension.swift */; };
+		F192866226F7997F0000CA55 /* color+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F192866026F7997F0000CA55 /* color+extension.swift */; };
+		F192866926F7BC620000CA55 /* SettingsGeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F192866726F7BC620000CA55 /* SettingsGeneralViewController.swift */; };
+		F192866A26F7BC620000CA55 /* SettingsGeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F192866726F7BC620000CA55 /* SettingsGeneralViewController.swift */; };
 		F1D5DFDF25F5981200828702 /* SingleLabelTableViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D5DFDE25F5981200828702 /* SingleLabelTableViewItem.swift */; };
 		F1D5DFE025F5981200828702 /* SingleLabelTableViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D5DFDE25F5981200828702 /* SingleLabelTableViewItem.swift */; };
 		F1D95E702606A143004A3B3D /* ExpenseListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D95E6F2606A143004A3B3D /* ExpenseListView.swift */; };
@@ -407,8 +413,7 @@
 		1166AF3323B27F880047C7AE /* ArticleViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewItem.swift; sourceTree = "<group>"; };
 		1166AF3423B27F880047C7AE /* ArticleViewItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticleViewItem.xib; sourceTree = "<group>"; };
 		1166AF3B23B296090047C7AE /* ArticleSellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleSellView.swift; sourceTree = "<group>"; };
-		116B0E8325EAE66200CC9E3B /* CrudViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrudViewController.swift; sourceTree = "<group>"; };
-		116B0E8A25EAE69100CC9E3B /* CrudStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CrudStoryboard.storyboard; sourceTree = "<group>"; };
+		116B0E8325EAE66200CC9E3B /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		116B0E9525EC302900CC9E3B /* SingleLabelTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleLabelTableView.swift; sourceTree = "<group>"; };
 		116B0EA625EC371000CC9E3B /* CrudMainMenuView.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CrudMainMenuView.json; sourceTree = "<group>"; };
 		116CE96023EDCDAF00688C0B /* PeriodListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodListModel.swift; sourceTree = "<group>"; };
@@ -513,9 +518,13 @@
 		F116FB6C26066099001990FD /* CrudExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrudExpenseView.swift; sourceTree = "<group>"; };
 		F116FB7A2606614A001990FD /* CrudExpenseView.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CrudExpenseView.json; sourceTree = "<group>"; };
 		F116FB7F26066166001990FD /* CrudExpenseViewItem.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CrudExpenseViewItem.json; sourceTree = "<group>"; };
+		F127F01B26ED0B4500F17586 /* CashAccount.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CashAccount.storyboard; sourceTree = "<group>"; };
 		F15EBBE625FE7119009CED69 /* GeneralPurpose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralPurpose.swift; sourceTree = "<group>"; };
 		F164B0CA25FD23FE00229A76 /* MainOptionItems.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MainOptionItems.json; sourceTree = "<group>"; };
 		F186F78A25F72E0B002D493B /* PipMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipMessage.swift; sourceTree = "<group>"; };
+		F192865A26F78CE50000CA55 /* Settings.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Settings.json; sourceTree = "<group>"; };
+		F192866026F7997F0000CA55 /* color+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "color+extension.swift"; sourceTree = "<group>"; };
+		F192866726F7BC620000CA55 /* SettingsGeneralViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsGeneralViewController.swift; sourceTree = "<group>"; };
 		F1D5DFDE25F5981200828702 /* SingleLabelTableViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleLabelTableViewItem.swift; sourceTree = "<group>"; };
 		F1D95E6F2606A143004A3B3D /* ExpenseListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseListView.swift; sourceTree = "<group>"; };
 		F1D95E762606A1D2004A3B3D /* ExpenseListView.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ExpenseListView.json; sourceTree = "<group>"; };
@@ -654,6 +663,7 @@
 				1163933B238229DE00D14B19 /* imageExtension.swift */,
 				1147AB7D238611C200D19AA9 /* NSViewExtension.swift */,
 				118A527125B288770036DE28 /* IntExtension.swift */,
+				F192866026F7997F0000CA55 /* color+extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -986,12 +996,14 @@
 			path = ArticleSell;
 			sourceTree = "<group>";
 		};
-		116B0E8225EAE65200CC9E3B /* Crud */ = {
+		116B0E8225EAE65200CC9E3B /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				116B0E8325EAE66200CC9E3B /* CrudViewController.swift */,
+				F192866326F7BC240000CA55 /* General */,
+				116B0E8325EAE66200CC9E3B /* SettingsViewController.swift */,
+				F192865A26F78CE50000CA55 /* Settings.json */,
 			);
-			path = Crud;
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		116B0EAB25EC3A2700CC9E3B /* SingleLabelTableView */ = {
@@ -1309,8 +1321,8 @@
 				113FA65D25AB45CE0043E7D6 /* SecondaryUser.storyboard */,
 				119C68612380BDC8009E9AA0 /* NewCustomerStoryboard.storyboard */,
 				114C541F241401B5000CC75A /* Expense.storyboard */,
+				F127F01B26ED0B4500F17586 /* CashAccount.storyboard */,
 				111EF6B4244BDFCC003E5D61 /* Movement.storyboard */,
-				116B0E8A25EAE69100CC9E3B /* CrudStoryboard.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -1318,7 +1330,7 @@
 		11EBD35323765C9800AB4BFF /* Scene */ = {
 			isa = PBXGroup;
 			children = (
-				116B0E8225EAE65200CC9E3B /* Crud */,
+				116B0E8225EAE65200CC9E3B /* Settings */,
 				113FA66225AB4CEB0043E7D6 /* SecondaryUser */,
 				114C54082413FE19000CC75A /* Expense */,
 				11EBD3832377269100AB4BFF /* Login */,
@@ -1457,8 +1469,8 @@
 		F116FB5F26065B12001990FD /* MainMenu */ = {
 			isa = PBXGroup;
 			children = (
-				F164B0CA25FD23FE00229A76 /* MainOptionItems.json */,
 				116B0EA625EC371000CC9E3B /* CrudMainMenuView.json */,
+				F164B0CA25FD23FE00229A76 /* MainOptionItems.json */,
 				F116FB6026065B29001990FD /* CrudMainMenuView.swift */,
 			);
 			path = MainMenu;
@@ -1467,9 +1479,9 @@
 		F116FB6B2606607B001990FD /* Expenses */ = {
 			isa = PBXGroup;
 			children = (
-				F116FB6C26066099001990FD /* CrudExpenseView.swift */,
 				F116FB7A2606614A001990FD /* CrudExpenseView.json */,
 				F116FB7F26066166001990FD /* CrudExpenseViewItem.json */,
+				F116FB6C26066099001990FD /* CrudExpenseView.swift */,
 			);
 			path = Expenses;
 			sourceTree = "<group>";
@@ -1480,6 +1492,14 @@
 				F186F78A25F72E0B002D493B /* PipMessage.swift */,
 			);
 			path = PipMessege;
+			sourceTree = "<group>";
+		};
+		F192866326F7BC240000CA55 /* General */ = {
+			isa = PBXGroup;
+			children = (
+				F192866726F7BC620000CA55 /* SettingsGeneralViewController.swift */,
+			);
+			path = General;
 			sourceTree = "<group>";
 		};
 		F1D95E6E2606A130004A3B3D /* ExpenseList */ = {
@@ -1573,6 +1593,8 @@
 			files = (
 				F1D95E782606A1D2004A3B3D /* ExpenseListView.json in Resources */,
 				114AC2C525525638007A0AFD /* MoneyFlow.storyboard in Resources */,
+				F192865C26F78CE50000CA55 /* Settings.json in Resources */,
+				F127F01D26ED0B4500F17586 /* CashAccount.storyboard in Resources */,
 				113FA67425AB55F10043E7D6 /* SecondaryUserItem.xib in Resources */,
 				F164B0CC25FD23FE00229A76 /* MainOptionItems.json in Resources */,
 				11578550252B85C0008A89DC /* ErrorMessageView.xib in Resources */,
@@ -1580,7 +1602,6 @@
 				11578552252B85C0008A89DC /* AssetsOSX.xcassets in Resources */,
 				11578553252B85C0008A89DC /* CustomerListCell.xib in Resources */,
 				118A527825B3B1260036DE28 /* SecondaryUserStatusView.xib in Resources */,
-				116B0E8C25EAE69100CC9E3B /* CrudStoryboard.storyboard in Resources */,
 				11578554252B85C0008A89DC /* LoginStoryboard.storyboard in Resources */,
 				11578555252B85C0008A89DC /* SaveButtonCustomView.xib in Resources */,
 				11578556252B85C0008A89DC /* RegisterListView.xib in Resources */,
@@ -1608,13 +1629,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				1177828E256C33DA006B51FD /* bodyshaping.json in Resources */,
-				116B0E8B25EAE69100CC9E3B /* CrudStoryboard.storyboard in Resources */,
 				118A527725B3B1260036DE28 /* SecondaryUserStatusView.xib in Resources */,
 				F1D95E772606A1D2004A3B3D /* ExpenseListView.json in Resources */,
 				110664C723775D6000DC44F3 /* ErrorMessageView.xib in Resources */,
 				116B0EA725EC371000CC9E3B /* CrudMainMenuView.json in Resources */,
 				114C5420241401B5000CC75A /* Expense.storyboard in Resources */,
 				11EBD3282376499F00AB4BFF /* AssetsOSX.xcassets in Resources */,
+				F127F01C26ED0B4500F17586 /* CashAccount.storyboard in Resources */,
 				1147AB4F2383678700D19AA9 /* CustomerListCell.xib in Resources */,
 				11EBD39123772A4700AB4BFF /* LoginStoryboard.storyboard in Resources */,
 				111DE56F2389F5A3002F4216 /* SaveButtonCustomView.xib in Resources */,
@@ -1625,6 +1646,7 @@
 				113FA65E25AB45CE0043E7D6 /* SecondaryUser.storyboard in Resources */,
 				11EBD32B2376499F00AB4BFF /* Main.storyboard in Resources */,
 				F116FB8026066166001990FD /* CrudExpenseViewItem.json in Resources */,
+				F192865B26F78CE50000CA55 /* Settings.json in Resources */,
 				119C68622380BDC8009E9AA0 /* NewCustomerStoryboard.storyboard in Resources */,
 				F164B0CB25FD23FE00229A76 /* MainOptionItems.json in Resources */,
 				11AC546823DDE64E0033A27D /* ActivitySaleView.xib in Resources */,
@@ -1792,7 +1814,7 @@
 				1157850B252B85C0008A89DC /* PaymentView.swift in Sources */,
 				1157850C252B85C0008A89DC /* CustomerListView.swift in Sources */,
 				1157850D252B85C0008A89DC /* ArticleListViewModel.swift in Sources */,
-				116B0E8525EAE66200CC9E3B /* CrudViewController.swift in Sources */,
+				116B0E8525EAE66200CC9E3B /* SettingsViewController.swift in Sources */,
 				1157850E252B85C0008A89DC /* GenericCollectionView.swift in Sources */,
 				1157850F252B85C0008A89DC /* ArticleListModel.swift in Sources */,
 				11578510252B85C0008A89DC /* HomeViewController.swift in Sources */,
@@ -1800,6 +1822,7 @@
 				11578512252B85C0008A89DC /* CustomerStatusModel.swift in Sources */,
 				11578514252B85C0008A89DC /* LoginViewController.swift in Sources */,
 				11578516252B85C0008A89DC /* PeriodListModel.swift in Sources */,
+				F192866A26F7BC620000CA55 /* SettingsGeneralViewController.swift in Sources */,
 				11578517252B85C0008A89DC /* GenericTableView.swift in Sources */,
 				11578518252B85C0008A89DC /* ExpenseModel.swift in Sources */,
 				11578519252B85C0008A89DC /* ThumbnailModel.swift in Sources */,
@@ -1819,6 +1842,7 @@
 				11578525252B85C0008A89DC /* HomeRouter.swift in Sources */,
 				F116FB6226065B29001990FD /* CrudMainMenuView.swift in Sources */,
 				11578526252B85C0008A89DC /* ActivitySaleModel.swift in Sources */,
+				F192866226F7997F0000CA55 /* color+extension.swift in Sources */,
 				11578527252B85C0008A89DC /* PeriodListView.swift in Sources */,
 				118773E525772974002F2635 /* NewCustomerInteractor.swift in Sources */,
 				11578528252B85C0008A89DC /* extensions.swift in Sources */,
@@ -1936,7 +1960,7 @@
 				1147AB4A2383654C00D19AA9 /* CustomerListView.swift in Sources */,
 				11A8ECF823B0E76E00F15B9A /* ArticleListViewModel.swift in Sources */,
 				11A8ED0323B1442700F15B9A /* GenericCollectionView.swift in Sources */,
-				116B0E8425EAE66200CC9E3B /* CrudViewController.swift in Sources */,
+				116B0E8425EAE66200CC9E3B /* SettingsViewController.swift in Sources */,
 				11A8ECF423B0E74300F15B9A /* ArticleListModel.swift in Sources */,
 				11EBD3812377130C00AB4BFF /* HomeViewController.swift in Sources */,
 				11D3D870252128030008CFD0 /* DiscountModel.swift in Sources */,
@@ -1944,6 +1968,7 @@
 				11EBD38E237726A800AB4BFF /* LoginViewController.swift in Sources */,
 				116CE96123EDCDAF00688C0B /* PeriodListModel.swift in Sources */,
 				11A8B44E23BE22B8007A5251 /* GenericTableView.swift in Sources */,
+				F192866926F7BC620000CA55 /* SettingsGeneralViewController.swift in Sources */,
 				114C54222415822A000CC75A /* ExpenseModel.swift in Sources */,
 				11D615762523F4C3005B5D81 /* ThumbnailModel.swift in Sources */,
 				1184723E2528D2BE0012D237 /* operationCategory.swift in Sources */,
@@ -1963,6 +1988,7 @@
 				11AC546023DDE4B40033A27D /* ActivitySaleModel.swift in Sources */,
 				F116FB6126065B29001990FD /* CrudMainMenuView.swift in Sources */,
 				116CE96723EDCDF800688C0B /* PeriodListView.swift in Sources */,
+				F192866126F7997F0000CA55 /* color+extension.swift in Sources */,
 				110664D82377ACBF00DC44F3 /* extensions.swift in Sources */,
 				11498E582520069700E4D679 /* importDatabase.swift in Sources */,
 				1166AF3523B27F880047C7AE /* ArticleViewItem.swift in Sources */,

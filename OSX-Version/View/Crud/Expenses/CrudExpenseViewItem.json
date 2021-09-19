@@ -2,25 +2,4 @@
 [{
     "title" : "Articulos",
     "isEnabled" : true,
-    "aux" : "prueba1",
-    "doubleValue": 23.3
-}, {
-    "title" : "Actividades",
-    "isEnabled" : true,
-    "aux" : "prueba2",
-    "doubleValue": 23.3
-}, {
-    "title" : "Gastos",
-    "isEnabled" : true,
-    "aux" : "prueba3",
-}, {
-    "title" : "Cuentas",
-    "isEnabled" : true,
-    "aux" : "prueba4",
-    "doubleValue": 23.3
-}, {
-    "title" : "Descuentos",
-    "isEnabled" : true,
-    "aux" : "prueba5",
-    "doubleValue": 23.3
 }]

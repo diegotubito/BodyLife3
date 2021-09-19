@@ -12,12 +12,11 @@ class CrudExpenseView: SingleLabelTableView {
     override func commonInit() {
         super .commonInit()
         items = loadItems()
-        
     }
     
     func loadItems() -> [[String: Any]] {
         guard
-            let data = CommonWorker.GeneralPurpose.readLocalFile(bundle: Bundle(for: CrudViewController.self), forName: "MainOptionItems"),
+            let data = CommonWorker.GeneralPurpose.readLocalFile(bundle: Bundle(for: SettingsViewController.self), forName: "CrudExpenseViewItem"),
             let items = try? JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]]
         else { return [] }
         

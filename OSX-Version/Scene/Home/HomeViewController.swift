@@ -197,7 +197,7 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
         router?.routeToNewExpense()
     }
     @IBAction func Crud(_ sender: Any) {
-        router?.routeToCrud()
+        router?.routeToSettings()
     }
     @IBAction func stockPressed(_ sender: Any) {
         stockTableView.showView()

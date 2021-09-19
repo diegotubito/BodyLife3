@@ -9,19 +9,20 @@
 import Cocoa
 
 class SingleLabelTableViewItem: GenericTableViewItem, NSTextFieldDelegate {
-    var myLabel : NSTextField!
+    var singleLabel : NSTextField!
   
     override var item: [String: Any]? {
         didSet {
             guard let item = item,
                   let fieldName = column.fieldName
             else { return }
+            
             if let isEnabled = item["isEnabled"] as? Bool, !isEnabled {
-                myLabel.textColor = .darkGray
+                singleLabel.textColor = .darkGray
             }
-            myLabel.stringValue = getTitle(dictionary: item, fieldName: fieldName)
-            myLabel.delegate = self
-            setStatus(label: myLabel)
+            singleLabel.stringValue = getTitle(dictionary: item, fieldName: fieldName)
+            singleLabel.delegate = self
+            setStatus(label: singleLabel)
         }
     }
     
@@ -31,20 +32,20 @@ class SingleLabelTableViewItem: GenericTableViewItem, NSTextFieldDelegate {
     }
     
     private func addTitle() {
-        myLabel = NSTextField(frame: CGRect.zero)
-        myLabel.lineBreakMode = .byTruncatingTail
-        myLabel.maximumNumberOfLines = 0
-        myLabel.wantsLayer = true
-        myLabel.backgroundColor = .clear
-        myLabel.isBezeled = false
-        self.addSubview(myLabel)
+        singleLabel = NSTextField(frame: CGRect.zero)
+        singleLabel.lineBreakMode = .byTruncatingTail
+        singleLabel.maximumNumberOfLines = 0
+        singleLabel.wantsLayer = true
+        singleLabel.backgroundColor = .clear
+        singleLabel.isBezeled = false
+        self.addSubview(singleLabel)
     }
     
     private func addContraints() {
-        myLabel.translatesAutoresizingMaskIntoConstraints = false
-        myLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0).isActive = true
-        myLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
-        myLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant:0).isActive = true
+        singleLabel.translatesAutoresizingMaskIntoConstraints = false
+        singleLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0).isActive = true
+        singleLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
+        singleLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant:0).isActive = true
     }
     
     func control(_ control: NSControl, textShouldEndEditing fieldEditor: NSText) -> Bool {

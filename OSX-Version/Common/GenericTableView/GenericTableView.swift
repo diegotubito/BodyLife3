@@ -24,7 +24,7 @@ struct GenericTableViewColumnModel : Codable {
     }
 }
 
-protocol GenericTableViewDelegate: class {
+protocol GenericTableViewDelegate: AnyObject {
     func textFieldDidChanged(columnIdentifier: String, stringValue: String)
     func selectedRow(row: Int)
 }
@@ -136,6 +136,10 @@ class GenericTableView<U: GenericTableViewItem> : NSView, NSTableViewDelegate, N
     func tableViewSelectionDidChange(_ notification: Notification) {
         self.delegate?.selectedRow(row: tableView.selectedRow)
     }
+    
+    func tableView(_ tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
+        return true
+    }
 }
 
 class GenericTableViewItem: NSView {
@@ -157,8 +161,11 @@ class GenericTableViewItem: NSView {
     }
    
     func getTitle(dictionary: [String: Any], fieldName: String) -> String {
-        guard let format = column.type else { return "" }
+        guard let format = column.type else { return "no econtro type" }
         switch ColumnType(rawValue: format) {
+        case .int:
+            guard let intValue = dictionary[fieldName] as? Int else {return ""}
+            return String(intValue)
         case .bool:
             guard let boolValue = dictionary[fieldName] as? Bool else {return ""}
             return String(boolValue)
@@ -201,4 +208,5 @@ enum ColumnType: String {
     case double = "double"
     case date = "date"
     case currency = "currency"
+    case int = "int"
 }

@@ -2,19 +2,11 @@
     "type": "tableview",
     "rowHeight": 30,
     "columns": [{
-        "name" : "description",
+        "name" : "Gasto del",
         "isEditable" : true,
-        "width": 0.7,
-        "fieldName" : "title"
-    }, {
-        "name" : "isEnabled",
-        "isEditable" : true,
-        "width": 0.15,
-        "fieldName" : "doubleValue"
-    }, {
-        "name" : "color",
-        "isEditable" : true,
-        "width": 0.15,
-        "fieldName" : "aux"
+        "width": 1.0,
+        "fieldName" : "title",
+        "dateFormat": "dd-MM-yyyy",
+        "type": "string"
     }]
 }

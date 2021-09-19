@@ -20,7 +20,7 @@ class PeriodModel {
         var days : Int
     }
     
-    struct Populated : Decodable {
+    struct Populated : Codable {
         var _id : String
         var description : String
         var isEnabled : Bool
