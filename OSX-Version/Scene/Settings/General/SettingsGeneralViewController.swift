@@ -11,7 +11,7 @@ import BLServerManager
 
 class SettingsGeneralViewController: NSViewController {
     struct Input {
-        let jsonInfo: [String: Any]
+        let info: SettingModel.ViewControllerModel
     }
     
     struct Constants {
@@ -32,17 +32,18 @@ class SettingsGeneralViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
-        let color = input.jsonInfo[Constants.Parameters.backgroundColor] as? String ?? Constants.defaultBackgroundColor
+        let color = input.info.backgroundColor
         view.layer?.backgroundColor = NSColor(hexString: color).cgColor
         
-       // loadItems()
-        loadCarnets()
+       loadData()
     }
     
     private func drawCustomTableView() {
         let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
-        let column = input.jsonInfo["column"] as! [String: Any]
-        singleLabelTableView = SingleLabelTableView(frame: frame, columns: column)
+        guard let encodedData = try? JSONEncoder().encode(input.info.column),
+              let jsonString = try? JSONSerialization.jsonObject(with: encodedData, options: []) as? [String: Any]
+        else { return }
+        singleLabelTableView = SingleLabelTableView(frame: frame, columns: jsonString)
         singleLabelTableView.delegate = self
         view.addSubview(singleLabelTableView)
     }
@@ -52,6 +53,7 @@ class SettingsGeneralViewController: NSViewController {
         let path = "product:article"
         
         let endpoint = Endpoint.Create(to: .Article(.Load(userUID: uid, path: path)))
+        
         BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<[ArticleModel.NewRegister]>) in
             guard
                 let data = response.data,
@@ -76,33 +78,43 @@ class SettingsGeneralViewController: NSViewController {
         }
     }
     
-    func loadCarnets() {
+    func loadData() {
         let uid = MainUserSession.GetUID()
-        let path = "product:article"
+        let path = input.info.request?.path ?? "need path"
         
-        let request = Endpoint.Create(to: .Period(.LoadAll))
-        BLServerManager.ApiCall(endpoint: request) { (response:ResponseModel<[PeriodModel.Populated]>) in
+        var finalPath = ""
+        if let firebasePath = input.info.request?.firebasePath {
+            finalPath = "\(BLServerManager.baseUrl.rawValue)\(firebasePath):\(uid):\(path)"
+        } else {
+            finalPath = "\(BLServerManager.baseUrl.rawValue)\(input.info.request?.path ?? "no path")"
+        }
+        let request = BLEndpointModel(url: finalPath,
+                                token: MainUserSession.GetToken(),
+                                tokenSecondaryUser: SecondaryUserSession.GetUser()?.token,
+                                method: input.info.request?.method ?? "need method",
+                                query: nil,
+                                body: nil)
+        
+        BLServerManager.ApiCall(endpoint: request) { response in
             guard
-                let data = response.data,
-                let jsonArrayData = try? JSONEncoder().encode(data),
-                let jsonArray = try? JSONSerialization.jsonObject(with: jsonArrayData, options: []) as? [[String: Any]]
+                let data = response,
+                let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+                let jsonArray = json["data"] as? [[String: Any]]
             else { return }
-            for key in jsonArray {
-                print("\(key.keys)")
-            }
             DispatchQueue.main.async {
                 self.drawCustomTableView()
                 self.singleLabelTableView.items = jsonArray
                 self.singleLabelTableView.showItems()
             }
         } fail: { (error) in
-            print("Could not load Articles", error)
             DispatchQueue.main.async {
                 if self.singleLabelTableView != nil {
                     self.singleLabelTableView.removeFromSuperview()
                 }
             }
         }
+        
+       
         
        
     }
@@ -118,5 +130,39 @@ extension SettingsGeneralViewController: GenericTableViewDelegate {
         print(singleLabelTableView.tableView.selectedRow)
         print(singleLabelTableView.tableView.column(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: columnIdentifier)))
         print(columnIdentifier)
+    }
+}
+
+
+struct SettingModel: Codable {
+    var type: String
+    var viewcontroller: [ViewControllerModel]
+    
+    struct ViewControllerModel: Codable {
+        var title: String
+        var backgroundColor: String
+        var column: Column
+        var request: RequestData?
+    }
+    
+    struct RequestData: Codable {
+        var path: String
+        var firebasePath: String?
+        var method: String
+        var query: String?
+        var body: String?
+    }
+    
+    struct Column: Codable {
+        var rowHeight: Double
+        var columns: [ColumnData]
+        
+        struct ColumnData: Codable {
+            var name: String
+            var isEditable: Bool
+            var width: Double
+            var fieldName: String
+            var type: String
+        }
     }
 }

@@ -68,7 +68,12 @@ class SettingsViewController : NSTabViewController {
         viewcontrollers.forEach({ vc in
             //creamos un viewcontroller de forma programatica
             let generalViewController = SettingsGeneralViewController()
-            generalViewController.input = SettingsGeneralViewController.Input(jsonInfo: vc)
+            
+            guard
+                let vcData = try? JSONSerialization.data(withJSONObject: vc, options: []),
+                let info = try? JSONDecoder().decode(SettingModel.ViewControllerModel.self, from: vcData) else { return }
+            
+            generalViewController.input = SettingsGeneralViewController.Input(info: info)
             generalViewController.title = ((vc[Constants.Parameters.title] as? String) ?? Constants.defaultTitle).localized
             let imageName = vc[Constants.Parameters.imageName] as? String ?? Constants.imageName
             let image = NSImage(named: imageName)

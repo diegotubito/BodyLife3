@@ -9,6 +9,12 @@
             "title": "Articulos",
             "backgroundColor": "#00ffff",
             "imageName": "carrito",
+            "request": {
+                "path": "/v1/period",
+                "method": "GET",
+                "query": null,
+                "body": null,
+            },
             "column": {
                 "rowHeight": 30,
                 "columns": [
@@ -83,6 +89,13 @@
             "title": "Carnets",
             "backgroundColor": "#ffff00",
             "imageName": "box",
+            "request": {
+                "firebasePath": "/v1/firebase/database/users",
+                "path": "product:article",
+                "method": "GET",
+                "query": null,
+                "body": null,
+            },
             "column": {
                 "rowHeight": 30,
                 "columns": [
