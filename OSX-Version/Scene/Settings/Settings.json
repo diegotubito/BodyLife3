@@ -6,6 +6,7 @@
     "viewControllers": 
     [
         {
+            "type": "general",
             "title": "Articulos",
             "backgroundColor": "#00ffff",
             "imageName": "carrito",
@@ -19,14 +20,12 @@
                 "rowHeight": 30,
                 "columns": [
                     {
-                        "name" : "ID",
                         "isEditable" : false,
                         "width": 0.15,
                         "fieldName" : "_id",
                         "type": "string"
                     },
                     {
-                        "name" : "Fecha",
                         "isEditable" : false,
                         "width": 0.1,
                         "fieldName" : "timestamp",
@@ -34,49 +33,42 @@
                         "type": "date"
                     },
                     {
-                        "name" : "Descripción",
                         "isEditable" : true,
                         "width": 0.30,
                         "fieldName" : "description",
                         "type": "string"
                     },
                     {
-                        "name" : "Max Stock",
                         "isEditable" : true,
                         "width": 0.05,
                         "fieldName" : "maxStock",
                         "type": "int"
                     },
                     {
-                        "name" : "Min Stock",
                         "isEditable" : true,
                         "width": 0.05,
                         "fieldName" : "minStock",
                         "type": "int"
                     },
                     {
-                        "name" : "Stock",
                         "isEditable" : true,
                         "width": 0.05,
                         "fieldName" : "stock",
                         "type": "int"
                     },
                     {
-                        "name" : "Costo",
                         "isEditable" : true,
                         "width": 0.05,
                         "fieldName" : "priceCost",
                         "type": "double"
                     },
                     {
-                        "name" : "Precio",
                         "isEditable" : true,
                         "width": 0.05,
                         "fieldName" : "price",
                         "type": "double"
                     },
                     {
-                        "name" : "Habilitado",
                         "isEditable" : true,
                         "width": 0.05,
                         "fieldName" : "isEnabled",
@@ -86,11 +78,12 @@
             }
         },
         {
+            "type": "general",
             "title": "Carnets",
             "backgroundColor": "#ffff00",
             "imageName": "box",
             "request": {
-                "firebasePath": "/v1/firebase/database/users",
+                "subpath": "/v1/firebase/database/users",
                 "path": "product:article",
                 "method": "GET",
                 "query": null,
@@ -100,14 +93,12 @@
                 "rowHeight": 30,
                 "columns": [
                     {
-                        "name" : "ID",
                         "isEditable" : false,
                         "width": 0.1,
                         "fieldName" : "_id",
                         "type": "string"
                     },
                     {
-                        "name" : "Fecha",
                         "isEditable" : false,
                         "width": 0.1,
                         "fieldName" : "timestamp",
@@ -115,28 +106,24 @@
                         "type": "date"
                     },
                     {
-                        "name" : "Descripción",
                         "isEditable" : true,
                         "width": 0.4,
                         "fieldName" : "description",
                         "type": "string"
                     },
                     {
-                        "name" : "Actividad",
                         "isEditable" : true,
                         "width": 0.1,
                         "fieldName" : "activity",
                         "type": "string"
                     },
                     {
-                        "name" : "Dias",
                         "isEditable" : true,
                         "width": 0.1,
                         "fieldName" : "days",
                         "type": "int"
                     },
                     {
-                        "name" : "Habilitado",
                         "isEditable" : true,
                         "width": 0.1,
                         "fieldName" : "isEnabled",

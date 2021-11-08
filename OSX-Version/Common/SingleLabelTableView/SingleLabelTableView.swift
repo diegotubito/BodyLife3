@@ -23,8 +23,6 @@ class SingleLabelTableView: GenericTableView<SingleLabelTableViewItem> {
             loadColumn()
         }
         showItems()
-        
-        
     }
     
     required init?(coder: NSCoder) {
@@ -46,7 +44,7 @@ class SingleLabelTableView: GenericTableView<SingleLabelTableViewItem> {
         
         self.column = column
     }
-    
+   
     public func loadColumn() {
         let className = String(describing: type(of: self))
         let bundle = Bundle(for: type(of: self))

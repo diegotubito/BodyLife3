@@ -19,6 +19,7 @@ class SettingsViewController : NSTabViewController {
             static let width = "width"
             static let height = "height"
             static let viewControllers = "viewControllers"
+            static let vcType = "type"
             static let title = "title"
             static let imageName = "imageName"
         }
@@ -31,22 +32,12 @@ class SettingsViewController : NSTabViewController {
         setupTabViewController(dictionary: tabbarInfo)
         setupViewControllers(dictionary: tabbarInfo)
     }
-    
  
     func loadDataFromJsonFile() -> [String: Any] {
         guard
             let data = CommonWorker.GeneralPurpose.readLocalFile(bundle: Bundle(for: SettingsViewController.self), forName: "Settings"),
             let dictionary = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
         else { return [:] }
-        
-        return dictionary
-    }
-    
-    func loadViewControllersFromJsonFile(name: String) -> [[String: Any]] {
-        guard
-            let data = CommonWorker.GeneralPurpose.readLocalFile(bundle: Bundle(for: SettingsViewController.self), forName: name),
-            let dictionary = try? JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]]
-        else { return [] }
         
         return dictionary
     }
@@ -62,24 +53,29 @@ class SettingsViewController : NSTabViewController {
         tabStyle = .toolbar
     }
     
-    
     private func setupViewControllers(dictionary: [String: Any]) {
-        let viewcontrollers = dictionary[Constants.Parameters.viewControllers] as? [[String: Any]] ?? []
-        viewcontrollers.forEach({ vc in
-            //creamos un viewcontroller de forma programatica
-            let generalViewController = SettingsGeneralViewController()
-            
+        let viewcontrollersDictionaryArray = dictionary[Constants.Parameters.viewControllers] as? [[String: Any]] ?? []
+        viewcontrollersDictionaryArray.forEach({ vcDictionary in
             guard
-                let vcData = try? JSONSerialization.data(withJSONObject: vc, options: []),
-                let info = try? JSONDecoder().decode(SettingModel.ViewControllerModel.self, from: vcData) else { return }
+                let vcData = try? JSONSerialization.data(withJSONObject: vcDictionary, options: []),
+                let vcInfo = try? JSONDecoder().decode(SettingModel.ViewControllerModel.self, from: vcData)
+            else {
+                print("could not decode: \n\(vcDictionary)")
+                return
+            }
             
-            generalViewController.input = SettingsGeneralViewController.Input(info: info)
-            generalViewController.title = ((vc[Constants.Parameters.title] as? String) ?? Constants.defaultTitle).localized
-            let imageName = vc[Constants.Parameters.imageName] as? String ?? Constants.imageName
-            let image = NSImage(named: imageName)
-            let newItem = NSTabViewItem(viewController: generalViewController)
-            newItem.image = image
-            addTabViewItem(newItem)
+            switch vcInfo.type {
+            case .general:
+                let viewcontrollerType = SettingsGeneralViewController()
+                viewcontrollerType.input = SettingsGeneralViewController.Input(info: vcInfo)
+                viewcontrollerType.title = ((vcDictionary[Constants.Parameters.title] as? String) ?? Constants.defaultTitle).localized
+                let imageName = vcDictionary[Constants.Parameters.imageName] as? String ?? Constants.imageName
+                let image = NSImage(named: imageName)
+                let newItem = NSTabViewItem(viewController: viewcontrollerType)
+                newItem.image = image
+                addTabViewItem(newItem)
+                break
+            }
         })
     }
 }

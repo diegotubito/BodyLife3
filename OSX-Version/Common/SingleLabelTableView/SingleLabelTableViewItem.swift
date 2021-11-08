@@ -50,7 +50,7 @@ class SingleLabelTableViewItem: GenericTableViewItem, NSTextFieldDelegate {
     
     func control(_ control: NSControl, textShouldEndEditing fieldEditor: NSText) -> Bool {
         let stringValue = fieldEditor.string
-        textFieldDidChanged(columnIdentifier: column.name ?? "", stringValue: stringValue)
+        textFieldDidChanged(columnIdentifier: column.fieldName ?? "", stringValue: stringValue)
         return true
     }
 }

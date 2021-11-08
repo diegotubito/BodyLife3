@@ -13,7 +13,6 @@ struct GenericTableViewColumnModel : Codable {
     var columns: [Column] = []
     
     struct Column: Codable {
-        var name: String?
         var isEditable: Bool
         var width: Double?
         var maxWidth: Double?
@@ -22,15 +21,27 @@ struct GenericTableViewColumnModel : Codable {
         var dateFormat: String?
         var type: String?
     }
+    
+    struct RequestData: Codable {
+        var path: String
+        var subpath: String?
+        var method: String
+        var query: String?
+        var body: String?
+    }
+
+    enum ViewcontrollerType: String, Codable {
+        case general = "general"
+    }
 }
 
 protocol GenericTableViewDelegate: AnyObject {
-    func textFieldDidChanged(columnIdentifier: String, stringValue: String)
+    func textFieldDidChanged(row: Int, columnIdentifier: String, stringValue: String)
     func selectedRow(row: Int)
 }
 
 extension GenericTableViewDelegate {
-    func textFieldDidChanged(columnIdentifier: String, stringValue: String) {
+    func textFieldDidChanged(row: Int, columnIdentifier: String, stringValue: String) {
         // Optional
     }
 }
@@ -82,8 +93,8 @@ class GenericTableView<U: GenericTableViewItem> : NSView, NSTableViewDelegate, N
     
     func setupColumn() {
         column.columns.forEach({column in
-            let newColumn = NSTableColumn(identifier: NSUserInterfaceItemIdentifier(rawValue: column.name ?? ""))
-            newColumn.title = column.name ?? ""
+            let newColumn = NSTableColumn(identifier: NSUserInterfaceItemIdentifier(rawValue: column.fieldName ?? ""))
+            newColumn.title = column.fieldName ?? ""
             newColumn.width = CGFloat(column.width ?? 0) * (self.frame.width - 66)
             newColumn.headerCell.alignment = .left
             tableView.addTableColumn(newColumn)
@@ -116,10 +127,10 @@ class GenericTableView<U: GenericTableViewItem> : NSView, NSTableViewDelegate, N
         }
         
         for col in self.column.columns {
-            if columnName == col.name {
+            if columnName == col.fieldName {
                 let cell = U(frame: .zero, column: col)
                 cell.textFieldDidChangedObserver = { [weak self] columnIdentifier, stringValue in
-                    self?.delegate?.textFieldDidChanged(columnIdentifier: columnIdentifier, stringValue: stringValue)
+                    self?.delegate?.textFieldDidChanged(row: row, columnIdentifier: columnIdentifier, stringValue: stringValue)
                 }
                 cell.item = items[row]
                 return cell
