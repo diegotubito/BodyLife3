@@ -65,14 +65,6 @@ class CustomerListViewModel: CustomerListViewModelContract {
         let endpoint = Endpoint.Create(to: .Customer(.LoadPage(query: query)))
         
         BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<[CustomerModel.Customer]>) in
-            guard response.success == nil else {
-                self._view.hideLoading()
-                self.loading = false
-                print("could load customers")
-                self._view.showError()
-                return
-            }
-            
             self._view.hideLoading()
             self.loading = false
             self.model.customersbyPages.append(contentsOf: response.data!)
