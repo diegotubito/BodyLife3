@@ -27,7 +27,7 @@ struct SecondaryUserSessionModel: Codable {
     enum Role: String, Codable {
         case Super = "SUPER_ROLE"
         case Admin = "ADMIN_ROLE"
-        case Basic = "BASIC_ROLE"
+        case Basic = "COMMON_ROLE"
     }
 }
 

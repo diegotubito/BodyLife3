@@ -85,39 +85,39 @@ class SettingsGeneralViewController: NSViewController {
         }
     }
     
-    func updateData(newValue: String, column: Int, columnIdentifier: String) {
+    func updateData(newValue: [String: Any], row: Int) {
         let uid = MainUserSession.GetUID()
         let path = input.info.request?.path ?? "need path"
+        guard let _id = newValue["_id"] as? String else {
+            print("could not update value")
+            return
+        }
         
         var url = ""
+        var query: String?
         if let subpath = input.info.request?.subpath {
-            url = "\(BLServerManager.baseUrl.rawValue)\(subpath):\(uid):\(path)"
+            url = "\(BLServerManager.baseUrl.rawValue)\(subpath):\(uid):\(path):\(_id)"
         } else {
-            url = "\(BLServerManager.baseUrl.rawValue)\(input.info.request?.path ?? "no path")"
+            url = "\(BLServerManager.baseUrl.rawValue)\(input.info.request?.path ?? "no path")/"
+            query = "?_id=\(_id)"
         }
         let request = BLEndpointModel(url: url,
                                 token: MainUserSession.GetToken(),
                                 tokenSecondaryUser: SecondaryUserSession.GetUser()?.token,
-                                method: input.info.request?.method ?? "need method",
-                                query: nil,
-                                body: nil)
+                                method: "PUT",
+                                query: query,
+                                body: newValue)
+        
         
         BLServerManager.ApiCall(endpoint: request) { response in
-            guard
-                let data = response,
-                let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
-                let jsonArray = json["data"] as? [[String: Any]]
-            else { return }
             DispatchQueue.main.async {
-                self.drawCustomTableView()
-                self.singleLabelTableView.items = jsonArray
-                self.singleLabelTableView.showItems()
+        
+                self.singleLabelTableView.items.removeAll()
+                self.loadData()
             }
         } fail: { (error) in
             DispatchQueue.main.async {
-                if self.singleLabelTableView != nil {
-                    self.singleLabelTableView.removeFromSuperview()
-                }
+                self.singleLabelTableView.showItems()
             }
         }
     }
@@ -129,12 +129,62 @@ extension SettingsGeneralViewController: GenericTableViewDelegate {
     }
     
     func textFieldDidChanged(row: Int, columnIdentifier: String, stringValue: String) {
+        guard
+            let columIndex = input.info.column.columns.firstIndex(where: {$0.fieldName == columnIdentifier}),
+            let type = input.info.column.columns[columIndex].type,
+            let castedValue = castValue(type: type, stringValue: stringValue)
+        else {
+            singleLabelTableView.showItems()
+            return
+        }
+        
         singleLabelTableView.tableView.deselectAll(nil)
         let index = IndexSet(integer: row)
         singleLabelTableView.tableView.selectRowIndexes(index, byExtendingSelection: true)
-        print(singleLabelTableView.items[row])
-        //        updateData(newValue: stringValue, column: singleLabelTableView.tableView.selectedRow, columnIdentifier: "")
+   
+        var newValue = singleLabelTableView.items[row]
+        newValue.updateValue(castedValue, forKey: columnIdentifier)
+        updateData(newValue: newValue, row: row)
     }
+    
+    private func castValue(type: String, stringValue: String) -> Any? {
+        var castedValue: Any?
+           
+        switch type {
+        case "string":
+            castedValue = String(stringValue)
+            break
+        case "bool":
+            if let boolValue = Bool(stringValue) {
+                castedValue =  boolValue
+            }
+            break
+        case "double":
+            if let doubleValue = Double(stringValue) {
+                castedValue = doubleValue
+            }
+            break
+        case "int":
+            if let intValue = Int(stringValue) {
+                castedValue = intValue
+            }
+            break
+        case "date":
+            
+            if let dateValue = stringValue.toDate(formato: "dd-MM-yyyy HH:mm:ss")?.timeIntervalSince1970 {
+                castedValue = Double(dateValue)
+            } else
+            if let dateValue = stringValue.toDate(formato: "dd-MM-yyyy")?.timeIntervalSince1970 {
+                castedValue = Double(dateValue)
+            }
+            break
+        default: break
+            
+        }
+        
+        return castedValue
+    }
+    
 }
 
 struct SettingModel: Codable {

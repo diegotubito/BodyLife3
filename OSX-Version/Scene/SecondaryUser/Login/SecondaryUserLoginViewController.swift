@@ -38,20 +38,28 @@ class SecondaryUserLoginViewController: NSViewController {
         BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<[SecondaryUserSessionModel]>) in
             self.hideLoading()
             guard let users = response.data else {
-                self.showError(errorMessage: "no users data")
+                DispatchQueue.main.async {
+                    self.showError(errorMessage: "no users data")
+                    self.view.window?.close()
+                }
                 return
             }
             self.users = users
             if users.count == 0 {
                 //we need to create the first user
-                self.createFirstUser()
+                DispatchQueue.main.async {
+                    self.createFirstUser()
+                }
                 self.showError(errorMessage: "Creating admin user for the first time...")
             } else {
                 self.showSuccessLoadingUsers()
             }
         } fail: { (error) in
-            self.hideLoading()
-            self.showError(errorMessage: error)
+            DispatchQueue.main.async {
+                self.hideLoading()
+                self.showError(errorMessage: error)
+                self.view.window?.close()
+            }
         }
 
     }

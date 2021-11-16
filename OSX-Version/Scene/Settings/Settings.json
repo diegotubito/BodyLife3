@@ -11,7 +11,8 @@
             "backgroundColor": "#00ffff",
             "imageName": "carrito",
             "request": {
-                "path": "/v1/period",
+                "subpath": "/v1/firebase/database/users",
+                "path": "product:article",
                 "method": "GET",
                 "query": null,
                 "body": null,
@@ -83,8 +84,7 @@
             "backgroundColor": "#ffff00",
             "imageName": "box",
             "request": {
-                "subpath": "/v1/firebase/database/users",
-                "path": "product:article",
+                "path": "/v1/period",
                 "method": "GET",
                 "query": null,
                 "body": null,
@@ -102,7 +102,7 @@
                         "isEditable" : false,
                         "width": 0.1,
                         "fieldName" : "timestamp",
-                        "dateFormat": "dd-MM-yyyy",
+                        "dateFormat": "dd-MM-yyyy HH:mm:ss",
                         "type": "date"
                     },
                     {
@@ -112,10 +112,10 @@
                         "type": "string"
                     },
                     {
-                        "isEditable" : true,
+                        "isEditable": true,
                         "width": 0.1,
-                        "fieldName" : "activity",
-                        "type": "string"
+                        "fieldName": "price",
+                        "type": "double"
                     },
                     {
                         "isEditable" : true,
