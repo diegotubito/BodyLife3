@@ -16,7 +16,7 @@ class SecondaryUserItem: GenericCollectionItem<SecondaryUserSessionModel> {
     override var item: SecondaryUserSessionModel! {
         didSet {
             userName.stringValue = item.userName
-            role.stringValue = item.role.rawValue
+            role.stringValue = item.role
         }
     }
 

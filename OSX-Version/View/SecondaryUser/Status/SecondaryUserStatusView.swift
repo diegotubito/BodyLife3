@@ -65,7 +65,7 @@ class SecondaryUserStatusView: NSView {
         DispatchQueue.main.async {
             let secondaryUser = SecondaryUserSession.GetUser()
             self.titleLabel.stringValue = (secondaryUser?.userName ?? "Sin usuario")
-            self.roleLabel.stringValue = (secondaryUser?.role.rawValue ?? "-")
+            self.roleLabel.stringValue = (secondaryUser?.role ?? "-")
             self.setupTimer()
         }
     }

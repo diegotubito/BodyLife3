@@ -13,7 +13,7 @@ struct SecondaryUserSessionModel: Codable {
     var _id : String
     var userName : String
     var password: String?
-    var role : Role
+    var role : String
     var timestamp : Double
     var isEnabled : Bool
     var firstName : String?
@@ -23,12 +23,6 @@ struct SecondaryUserSessionModel: Codable {
     var phoneNumber : String?
     var token : String?
     var tokenExpiration: Double?
-    
-    enum Role: String, Codable {
-        case Super = "SUPER_ROLE"
-        case Admin = "ADMIN_ROLE"
-        case Basic = "COMMON_ROLE"
-    }
 }
 
 class SecondaryUserSession {

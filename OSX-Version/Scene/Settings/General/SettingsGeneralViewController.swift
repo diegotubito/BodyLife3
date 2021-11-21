@@ -151,25 +151,25 @@ extension SettingsGeneralViewController: GenericTableViewDelegate {
         var castedValue: Any?
            
         switch type {
-        case "string":
+        case GenericTableViewColumnModel.ColumnType.string.rawValue, GenericTableViewColumnModel.ColumnType.popup_secondary_user.rawValue:
             castedValue = String(stringValue)
             break
-        case "bool":
+        case GenericTableViewColumnModel.ColumnType.bool.rawValue, GenericTableViewColumnModel.ColumnType.popup_bool.rawValue:
             if let boolValue = Bool(stringValue) {
                 castedValue =  boolValue
             }
             break
-        case "double":
+        case GenericTableViewColumnModel.ColumnType.double.rawValue:
             if let doubleValue = Double(stringValue) {
                 castedValue = doubleValue
             }
             break
-        case "int":
+        case GenericTableViewColumnModel.ColumnType.int.rawValue:
             if let intValue = Int(stringValue) {
                 castedValue = intValue
             }
             break
-        case "date":
+        case GenericTableViewColumnModel.ColumnType.date.rawValue:
             
             if let dateValue = stringValue.toDate(formato: "dd-MM-yyyy HH:mm:ss")?.timeIntervalSince1970 {
                 castedValue = Double(dateValue)

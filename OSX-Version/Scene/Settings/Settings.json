@@ -73,7 +73,7 @@
                         "isEditable" : true,
                         "width": 0.05,
                         "fieldName" : "isEnabled",
-                        "type": "bool"
+                        "type": "popup_bool"
                     },
                 ]
             }
@@ -127,8 +127,87 @@
                         "isEditable" : true,
                         "width": 0.1,
                         "fieldName" : "isEnabled",
-                        "type": "bool"
+                        "type": "popup_bool"
                     },
+                ]
+            }
+        },
+        
+        {
+            "type": "general",
+            "title": "Secondary User",
+            "backgroundColor": "#ff0000",
+            "imageName": "box",
+            "request": {
+                "path": "/v1/secondary_user",
+                "method": "GET",
+                "query": null,
+                "body": null,
+            },
+            "column": {
+                "rowHeight": 30,
+                "columns": [
+                    {
+                        "isEditable" : false,
+                        "width": 0.1,
+                        "fieldName" : "_id",
+                        "type": "string"
+                    },
+                    {
+                        "isEditable" : false,
+                        "width": 0.05,
+                        "fieldName" : "timestamp",
+                        "dateFormat": "dd-MM-yyyy HH:mm:ss",
+                        "type": "date"
+                    },
+                    {
+                        "isEditable" : true,
+                        "width": 0.05,
+                        "fieldName" : "isEnabled",
+                        "type": "popup_bool"
+                    },
+                    {
+                        "isEditable" : true,
+                        "width": 0.1,
+                        "fieldName" : "userName",
+                        "type": "string"
+                    },
+                    {
+                        "isEditable": true,
+                        "width": 0.1,
+                        "fieldName": "role",
+                        "type": "popup_secondary_user",
+                    },
+                    {
+                        "isEditable" : true,
+                        "width": 0.1,
+                        "fieldName" : "firstName",
+                        "type": "string"
+                    },
+                    {
+                        "isEditable" : true,
+                        "width": 0.1,
+                        "fieldName" : "dni",
+                        "type": "string"
+                    },
+                    {
+                        "isEditable" : true,
+                        "width": 0.1,
+                        "fieldName" : "address",
+                        "type": "string"
+                    },
+                    {
+                        "isEditable" : true,
+                        "width": 0.1,
+                        "fieldName" : "phoneNumber",
+                        "type": "string"
+                    },
+                    {
+                        "isEditable" : true,
+                        "width": 0.1,
+                        "fieldName" : "tokenExpiration",
+                        "type": "string"
+                    }
                 ]
             }
         }

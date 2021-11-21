@@ -29,7 +29,18 @@ struct GenericTableViewColumnModel : Codable {
         var query: String?
         var body: String?
     }
-
+    
+    enum ColumnType: String {
+        case string = "string"
+        case bool = "bool"
+        case double = "double"
+        case date = "date"
+        case currency = "currency"
+        case int = "int"
+        case popup_secondary_user = "popup_secondary_user"
+        case popup_bool = "popup_bool"
+    }
+    
     enum ViewcontrollerType: String, Codable {
         case general = "general"
     }
@@ -173,7 +184,7 @@ class GenericTableViewItem: NSView {
    
     func getTitle(dictionary: [String: Any], fieldName: String) -> String {
         guard let format = column.type else { return "no econtro type" }
-        switch ColumnType(rawValue: format) {
+        switch GenericTableViewColumnModel.ColumnType(rawValue: format) {
         case .int:
             guard let intValue = dictionary[fieldName] as? Int else {return ""}
             return String(intValue)
@@ -197,9 +208,28 @@ class GenericTableViewItem: NSView {
             return doubleValue.currencyFormat(decimal: 2)
         case .none:
             break
+        case .popup_secondary_user:
+            guard let title = dictionary[fieldName] as? String else { return "" }
+            return title
+        case .popup_bool:
+            guard let title = dictionary[fieldName] as? Bool else { return "true" }
+            return String(title)
         }
         
         return ""
+    }
+    
+    func getType() -> String {
+        return column.type ?? "no type"
+    }
+    
+    func isPopUp() -> Bool {
+        switch getType() {
+        case GenericTableViewColumnModel.ColumnType.popup_secondary_user.rawValue, GenericTableViewColumnModel.ColumnType.popup_bool.rawValue:
+            return true
+        default:
+            return false
+        }
     }
     
     func setStatus(label: NSTextField) {
@@ -212,12 +242,3 @@ class GenericTableViewItem: NSView {
     }
 }
 
-
-enum ColumnType: String {
-    case string = "string"
-    case bool = "bool"
-    case double = "double"
-    case date = "date"
-    case currency = "currency"
-    case int = "int"
-}
