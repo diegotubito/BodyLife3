@@ -2,7 +2,7 @@
 {
     "type": "TabViewController",
     "width": 0.5,
-    "height": 0.2,
+    "height": 0.5,
     "viewControllers": 
     [
         {
@@ -167,6 +167,12 @@
                         "type": "string"
                     },
                     {
+                        "isEditable" : true,
+                        "width": 0.1,
+                        "fieldName" : "password",
+                        "type": "string"
+                    },
+                    {
                         "isEditable": true,
                         "width": 0.1,
                         "fieldName": "role",
@@ -186,13 +192,13 @@
                     },
                     {
                         "isEditable" : true,
-                        "width": 0.15,
+                        "width": 0.1,
                         "fieldName" : "address",
                         "type": "string"
                     },
                     {
                         "isEditable" : true,
-                        "width": 0.1,
+                        "width": 0.05,
                         "fieldName" : "phoneNumber",
                         "type": "string"
                     },
@@ -242,8 +248,7 @@
                         "isEditable" : true,
                         "width": 0.8,
                         "fieldName" : "description",
-                        "dateFormat": "dd-MM-yyyy HH:mm:ss",
-                        "type": "date"
+                        "type": "string"
                     },
                     {
                         "isEditable" : true,

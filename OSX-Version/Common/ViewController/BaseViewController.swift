@@ -201,20 +201,23 @@ class BaseViewController : NSViewController {
             
             self.AlertSheet.alertStyle = .informational
             
-            let result = self.AlertSheet.runModal()
-            switch result {
-            case NSApplication.ModalResponse.alertFirstButtonReturn:
-                self.alertFirstButton()
-                break
-            case NSApplication.ModalResponse.alertSecondButtonReturn:
-                self.alertSecondButton()
-                break
-            case NSApplication.ModalResponse.alertThirdButtonReturn:
-                self.alertThirdButton()
-                break
-            default:
-                print("There is no provision for further buttons")
+            self.AlertSheet.beginSheetModal(for: self.view.window!) { result in
+                switch result {
+                case NSApplication.ModalResponse.alertFirstButtonReturn:
+                    self.alertFirstButton()
+                    break
+                case NSApplication.ModalResponse.alertSecondButtonReturn:
+                    self.alertSecondButton()
+                    break
+                case NSApplication.ModalResponse.alertThirdButtonReturn:
+                    self.alertThirdButton()
+                    break
+                default:
+                    print("There is no provision for further buttons")
+                }
             }
+            
+            
         }
         
     }

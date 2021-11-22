@@ -9,7 +9,7 @@
 import Cocoa
 import BLServerManager
 
-class SettingsGeneralViewController: NSViewController {
+class SettingsGeneralViewController: BaseViewController {
     struct Input {
         let info: SettingModel.ViewControllerModel
     }
@@ -23,6 +23,7 @@ class SettingsGeneralViewController: NSViewController {
     
     var input: Input!
     var singleLabelTableView: SingleLabelTableView!
+    var button: NSButton!
     
     override func loadView() {
         view = NSView()
@@ -35,9 +36,37 @@ class SettingsGeneralViewController: NSViewController {
         let color = input.info.backgroundColor
         view.layer?.backgroundColor = NSColor(hexString: color).cgColor
         
-       loadData()
+       
     }
-   
+    
+    override func viewWillAppear() {
+        super .viewWillAppear()
+        loadData()
+    }
+    
+    private func drawButton() {
+        button = NSButton(title: "Agregar", target: self, action: #selector(addNewRegisterButton))
+        button.wantsLayer = true
+        button.layer?.backgroundColor = NSColor.red.cgColor
+        view.addSubview(button)
+        
+        button.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            button.topAnchor.constraint(equalTo: singleLabelTableView.bottomAnchor, constant: 24),
+            button.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -24),
+            button.widthAnchor.constraint(equalToConstant: 200),
+            button.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0),
+        ])
+    }
+    
+    @objc func addNewRegisterButton() {
+        newData()
+    }
+
+    @objc func removeRegisterButton() {
+        
+    }
+
     private func drawCustomTableView(items: [[String: Any]]) {
          guard let encodedData = try? JSONEncoder().encode(input.info.column),
               let jsonString = try? JSONSerialization.jsonObject(with: encodedData, options: []) as? [String: Any]
@@ -52,7 +81,6 @@ class SettingsGeneralViewController: NSViewController {
             singleLabelTableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 24),
             singleLabelTableView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -24),
             singleLabelTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 24),
-            singleLabelTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -24),
         ])
     }
     
@@ -73,22 +101,31 @@ class SettingsGeneralViewController: NSViewController {
                                 query: nil,
                                 body: nil)
         
+        showLoading()
         BLServerManager.ApiCall(endpoint: request) { response in
+           
             guard
                 let data = response,
                 let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
                 let jsonArray = json["data"] as? [[String: Any]]
-            else { return }
+            else {
+                DispatchQueue.main.async {
+                    self.hideLoading()
+                    self.showErrorMessage(message: "indeterminado")
+                }
+                return
+            }
+            
             DispatchQueue.main.async {
-                self.drawCustomTableView(items: jsonArray)
                 
+                self.drawCustomTableView(items: jsonArray)
+                self.drawButton()
                 self.singleLabelTableView.showItems()
             }
         } fail: { (error) in
             DispatchQueue.main.async {
-                if self.singleLabelTableView != nil {
-                    self.singleLabelTableView.removeFromSuperview()
-                }
+                self.hideLoading()
+                self.showErrorMessage(message: error.description)
             }
         }
     }
@@ -116,18 +153,50 @@ class SettingsGeneralViewController: NSViewController {
                                 query: query,
                                 body: newValue)
         
-        
+        showLoading()
         BLServerManager.ApiCall(endpoint: request) { response in
             DispatchQueue.main.async {
-        
+                self.hideLoading()
                 self.singleLabelTableView.items.removeAll()
                 self.loadData()
             }
         } fail: { (error) in
             DispatchQueue.main.async {
+                self.hideLoading()
                 self.singleLabelTableView.showItems()
+                self.showErrorMessage(message: error.description)
             }
         }
+    }
+    
+    func newData() {
+        let path = input.info.request?.path ?? "need path"
+        let url = "\(BLServerManager.baseUrl.rawValue)\(path)/new_register/"
+        let request = BLEndpointModel(url: url,
+                                      token: MainUserSession.GetToken(),
+                                      tokenSecondaryUser: SecondaryUserSession.GetUser()?.token,
+                                      method: "POST",
+                                      query: nil,
+                                      body: nil)
+        
+        showLoading()
+        BLServerManager.ApiCall(endpoint: request) { response in
+            DispatchQueue.main.async {
+                self.hideLoading()
+                self.singleLabelTableView.items.removeAll()
+                self.loadData()
+            }
+        } fail: { (error) in
+            DispatchQueue.main.async {
+                self.hideLoading()
+                self.singleLabelTableView.showItems()
+                self.showErrorMessage(message: error.description)
+            }
+        }
+    }
+    
+    func showErrorMessage(message: String) {
+        self.ShowSheetAlert(title: "Algo salió mal", message: message, buttons: [.ok])
     }
 }
 

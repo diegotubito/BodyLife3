@@ -19,11 +19,12 @@ class NetwordManager {
     var imageCache = NSCache<AnyObject, AnyObject>()
     
     private init() {}
+    typealias DataTaskResult = ((Data?, String?))
     
-    static func request(endpoint: BLEndpointModel, completion: @escaping (Result<Data, BLNetworkError>) -> ()) {
+    static func request(endpoint: BLEndpointModel, completion: @escaping (DataTaskResult) -> ()) {
         
         guard let url = URL(string: endpoint.url + (endpoint.query ?? "")) else {
-            completion(.failure(BLNetworkError.wrongUrl))
+            completion((nil, "wrong URL format = \(endpoint.url)"))
             return
         }
         
@@ -43,18 +44,30 @@ class NetwordManager {
         sessionConfig.timeoutIntervalForResource = 40
         session = URLSession(configuration: sessionConfig)
         let task = session.dataTask(with: request, completionHandler: { data, res, error in
-            
+         
             guard error == nil else {
-                completion(.failure(error as? BLNetworkError ?? .unknown_error))
+                completion((nil, error?.localizedDescription))
                 return
             }
             
             guard let data = data else {
-                completion(.failure(.unknown_error))
+                completion((nil, "empty data"))
                 return
             }
             
-            completion(.success(data))
+            let response = res as! HTTPURLResponse
+            let status = response.statusCode
+            guard (200...299).contains(status) else {
+                let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+                let message : String = (json?["errorMessage"] as? String) ?? "error code \(status)"
+                completion((nil, message))
+                return
+            }
+            
+            let json = try? JSONSerialization.jsonObject(with: data, options: [])
+            print(json)
+            
+            completion((data, nil))
         })
         task.resume()
         

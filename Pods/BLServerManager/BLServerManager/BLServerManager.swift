@@ -38,20 +38,13 @@ public class BLServerManager {
     
     private static func ApiRequest(endpoint: BLEndpointModel, success: @escaping (Data) -> (), fail: @escaping (String) -> ()) {
         NetwordManager.request(endpoint: endpoint) { (result) in
-            switch result {
-            case .failure(let error):
-                fail(error.localizedDescription)
-                break
-            case .success(let data):
-                let errorModel = try? JSONDecoder().decode(BLErrorModel.self, from: data)
-                if let message = errorModel?.errorMessage {
-                    fail(message)
-                    return
-                }
-                
-                success(data)
-                break
+            
+            guard let data = result.0 else {
+                fail(result.1 ?? "missing error")
+                return
             }
+            
+            success(data)
         }
     }
 }

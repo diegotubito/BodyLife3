@@ -44,7 +44,7 @@ class SecondaryUserLoginViewController: NSViewController {
                 }
                 return
             }
-            self.users = users
+            self.users = users.filter({$0.isEnabled})
             if users.count == 0 {
                 //we need to create the first user
                 DispatchQueue.main.async {
