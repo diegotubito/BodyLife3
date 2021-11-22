@@ -6,6 +6,7 @@
 //  Copyright © 2020 David Diego Gomez. All rights reserved.
 //
 import Cocoa
+import Foundation
 
 struct GenericTableViewColumnModel : Codable {
     var type: String?
@@ -60,10 +61,16 @@ extension GenericTableViewDelegate {
 class GenericTableView<U: GenericTableViewItem> : NSView, NSTableViewDelegate, NSTableViewDataSource {
     var scrollView : NSScrollView!
     var tableView : NSTableView!
-    var items = [[String: Any]]()
+    var items = [[String: Any]]() {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     var column = GenericTableViewColumnModel() {
         didSet {
-          addConstraint()
+            DispatchQueue.main.async {
+                self.setupColumn()
+            }
         }
     }
     
@@ -77,28 +84,40 @@ class GenericTableView<U: GenericTableViewItem> : NSView, NSTableViewDelegate, N
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+  
     func commonInit() {
         setupScrollView()
         setupTableView()
     }
-   
+    
     private func setupScrollView() {
         scrollView = NSScrollView()
-        scrollView.frame = .zero
+        scrollView.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
         self.wantsLayer = true
         self.layer?.borderWidth = 2
         self.layer?.borderColor = NSColor.white.cgColor
+        self.layer?.backgroundColor = NSColor.lightGray.cgColor
         self.addSubview(scrollView)
+        
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            scrollView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0),
+            scrollView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0),
+            scrollView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0),
+            scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0),
+        ])
+    
     }
     
     private func setupTableView() {
-        tableView = NSTableView(frame: .zero)
+        tableView = NSTableView()
+        tableView.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
         tableView.delegate = self
         tableView.dataSource  = self
         tableView.allowsColumnResizing = false
         tableView.allowsColumnSelection = false
         tableView.allowsColumnReordering = false
+        tableView.appearance = NSAppearance(named: NSAppearance.Name.darkAqua)
         scrollView.documentView = tableView
     }
     
@@ -106,27 +125,11 @@ class GenericTableView<U: GenericTableViewItem> : NSView, NSTableViewDelegate, N
         column.columns.forEach({column in
             let newColumn = NSTableColumn(identifier: NSUserInterfaceItemIdentifier(rawValue: column.fieldName ?? ""))
             newColumn.title = column.fieldName ?? ""
-            newColumn.width = CGFloat(column.width ?? 0) * (self.frame.width - 66)
+            newColumn.width = CGFloat(column.width ?? 0) * (self.frame.width - CGFloat(self.column.columns.count) * 20)
             newColumn.headerCell.alignment = .left
+            
             tableView.addTableColumn(newColumn)
         })
-    }
-    
-    func addConstraint() {
-        
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
-        scrollView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
-        scrollView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
-        scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
-        
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 0).isActive = true
-        tableView.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: 0).isActive = true
-        tableView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 0).isActive = true
-      //  tableView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 0).isActive = true
-        self.setupColumn()
-        
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {

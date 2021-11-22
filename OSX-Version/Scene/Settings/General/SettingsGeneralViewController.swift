@@ -37,15 +37,23 @@ class SettingsGeneralViewController: NSViewController {
         
        loadData()
     }
-    
-    private func drawCustomTableView() {
-        let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
-        guard let encodedData = try? JSONEncoder().encode(input.info.column),
+   
+    private func drawCustomTableView(items: [[String: Any]]) {
+         guard let encodedData = try? JSONEncoder().encode(input.info.column),
               let jsonString = try? JSONSerialization.jsonObject(with: encodedData, options: []) as? [String: Any]
         else { return }
-        singleLabelTableView = SingleLabelTableView(frame: frame, columns: jsonString)
+        singleLabelTableView = SingleLabelTableView(frame: CGRect(x: 24, y: 24, width: view.frame.width - 48, height: view.frame.height - 48), columns: jsonString)
         singleLabelTableView.delegate = self
+        singleLabelTableView.items = items
         view.addSubview(singleLabelTableView)
+        
+        singleLabelTableView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            singleLabelTableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 24),
+            singleLabelTableView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -24),
+            singleLabelTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 24),
+            singleLabelTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -24),
+        ])
     }
     
     func loadData() {
@@ -72,8 +80,8 @@ class SettingsGeneralViewController: NSViewController {
                 let jsonArray = json["data"] as? [[String: Any]]
             else { return }
             DispatchQueue.main.async {
-                self.drawCustomTableView()
-                self.singleLabelTableView.items = jsonArray
+                self.drawCustomTableView(items: jsonArray)
+                
                 self.singleLabelTableView.showItems()
             }
         } fail: { (error) in

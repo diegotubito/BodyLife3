@@ -11,8 +11,6 @@ import Cocoa
 class SingleLabelTableView: GenericTableView<SingleLabelTableViewItem> {
     override func commonInit() {
         super .commonInit()
-     
-        showItems()
     }
     
     init(frame: CGRect, columns: [String: Any]?) {
