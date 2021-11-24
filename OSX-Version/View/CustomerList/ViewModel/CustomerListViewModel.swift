@@ -83,6 +83,7 @@ class CustomerListViewModel: CustomerListViewModelContract {
     func loadImages() {
         let customers = model.bySearch ? model.customersbySearch : model.customersbyPages
 
+        //race condition issue
         for (x,customer) in customers.enumerated() {
             
             self.loadImage(row: x, customer: customer)
@@ -97,6 +98,7 @@ class CustomerListViewModel: CustomerListViewModelContract {
             if self.model.bySearch {
                 self.model.imagesBySearch.append(newImage)
             } else {
+                //sometimes it crashes here
                 self.model.imagesByPages.append(newImage)
             }
             self._view.reloadCell(row: row)

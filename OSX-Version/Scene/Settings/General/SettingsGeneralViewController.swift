@@ -36,14 +36,9 @@ class SettingsGeneralViewController: BaseViewController {
         let color = input.info.backgroundColor
         view.layer?.backgroundColor = NSColor(hexString: color).cgColor
         
-       
-    }
-    
-    override func viewWillAppear() {
-        super .viewWillAppear()
         loadData()
     }
-    
+        
     private func drawButton() {
         button = NSButton(title: "Agregar", target: self, action: #selector(addNewRegisterButton))
         button.wantsLayer = true
@@ -111,7 +106,7 @@ class SettingsGeneralViewController: BaseViewController {
             else {
                 DispatchQueue.main.async {
                     self.hideLoading()
-                    self.showErrorMessage(message: "indeterminado")
+                    self.showErrorMessage(message: "there's no data parameter")
                 }
                 return
             }

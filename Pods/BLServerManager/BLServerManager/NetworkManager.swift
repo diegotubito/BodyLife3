@@ -46,11 +46,13 @@ class NetwordManager {
         let task = session.dataTask(with: request, completionHandler: { data, res, error in
          
             guard error == nil else {
+                debugLog(error?.localizedDescription ?? "unknown error")
                 completion((nil, error?.localizedDescription))
                 return
             }
             
             guard let data = data else {
+                debugLog("Empty data")
                 completion((nil, "empty data"))
                 return
             }
@@ -60,16 +62,21 @@ class NetwordManager {
             guard (200...299).contains(status) else {
                 let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
                 let message : String = (json?["errorMessage"] as? String) ?? "error code \(status)"
+                debugLog(message)
                 completion((nil, message))
                 return
             }
-            
-            let json = try? JSONSerialization.jsonObject(with: data, options: [])
-            print(json)
-            
+   
             completion((data, nil))
         })
         task.resume()
         
     }
+}
+
+
+func debugLog(_ message: String) {
+    print("💔💔💔💔💔💔💔")
+    print(message)
+    print("---------------")
 }
