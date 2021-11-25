@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="v6w-2i-BEZ">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="v6w-2i-BEZ">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19455"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -38,16 +38,10 @@
                                             </textField>
                                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Yo1-Va-TGD">
                                                 <rect key="frame" x="-3" y="-4" width="257" height="25"/>
-                                                <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="6Pz-4D-mE7" id="vy9-jQ-gXq">
+                                                <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="vy9-jQ-gXq">
                                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="menu"/>
-                                                    <menu key="menu" id="HBN-Db-yHF">
-                                                        <items>
-                                                            <menuItem title="Item 1" state="on" id="6Pz-4D-mE7"/>
-                                                            <menuItem title="Item 2" id="jPh-Fv-Pcd"/>
-                                                            <menuItem title="Item 3" id="Lfc-Le-r63"/>
-                                                        </items>
-                                                    </menu>
+                                                    <menu key="menu" id="HBN-Db-yHF"/>
                                                 </popUpButtonCell>
                                             </popUpButton>
                                         </subviews>
@@ -77,7 +71,7 @@
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
-                                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="luG-jw-xL4">
+                                            <textField verticalHuggingPriority="750" contentType="password" translatesAutoresizingMaskIntoConstraints="NO" id="luG-jw-xL4" customClass="NSSecureTextField">
                                                 <rect key="frame" x="0.0" y="0.0" width="250" height="21"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="Q1r-bW-Y3W">
                                                     <font key="font" metaFont="system"/>
@@ -119,7 +113,7 @@
                                 </customSpacing>
                             </stackView>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="B9p-s2-iHr">
-                                <rect key="frame" x="168" y="25" width="115" height="32"/>
+                                <rect key="frame" x="167" y="25" width="116" height="32"/>
                                 <buttonCell key="cell" type="push" title="Iniciar Sesión" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ykZ-gK-0i8">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -136,13 +130,25 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZaI-83-HgE">
+                                <rect key="frame" x="1" y="25" width="62" height="32"/>
+                                <buttonCell key="cell" type="push" title="Salir" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="UBd-aq-QzE">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="exitButton:" target="v6w-2i-BEZ" id="Gja-xb-0CC"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="B9p-s2-iHr" firstAttribute="centerX" secondItem="icl-Ue-hTs" secondAttribute="centerX" id="2fv-lG-Qdh"/>
+                            <constraint firstItem="ZaI-83-HgE" firstAttribute="centerY" secondItem="B9p-s2-iHr" secondAttribute="centerY" id="3SI-B8-6d2"/>
                             <constraint firstItem="Aqf-Tm-ojH" firstAttribute="centerX" secondItem="icl-Ue-hTs" secondAttribute="centerX" id="5bA-3M-ZSo"/>
                             <constraint firstAttribute="bottom" secondItem="B9p-s2-iHr" secondAttribute="bottom" constant="32" id="Sz3-nY-wSz"/>
                             <constraint firstItem="B9p-s2-iHr" firstAttribute="top" secondItem="CmH-K4-zwo" secondAttribute="bottom" constant="32" id="X3v-8F-UXr"/>
                             <constraint firstItem="Aqf-Tm-ojH" firstAttribute="top" secondItem="icl-Ue-hTs" secondAttribute="top" constant="8" id="abo-kh-LIb"/>
+                            <constraint firstItem="ZaI-83-HgE" firstAttribute="leading" secondItem="icl-Ue-hTs" secondAttribute="leading" constant="8" id="c0w-wT-QH0"/>
                             <constraint firstItem="yW4-hD-dJo" firstAttribute="leading" secondItem="icl-Ue-hTs" secondAttribute="leading" constant="8" id="c57-wE-rfA"/>
                             <constraint firstAttribute="trailing" secondItem="yW4-hD-dJo" secondAttribute="trailing" constant="8" id="hnD-NK-9Sv"/>
                             <constraint firstItem="CmH-K4-zwo" firstAttribute="centerX" secondItem="icl-Ue-hTs" secondAttribute="centerX" id="oAM-cS-L84"/>
@@ -153,7 +159,7 @@
                     <connections>
                         <outlet property="errorLabel" destination="yW4-hD-dJo" id="r4Q-EV-sNj"/>
                         <outlet property="loginButtonOutlet" destination="B9p-s2-iHr" id="vOw-HE-UfK"/>
-                        <outlet property="passwordTF" destination="luG-jw-xL4" id="V95-T0-DPY"/>
+                        <outlet property="passwordTF" destination="luG-jw-xL4" id="1Hn-Xl-Ift"/>
                         <outlet property="usersPopup" destination="Yo1-Va-TGD" id="vbT-uy-b1J"/>
                     </connections>
                 </viewController>

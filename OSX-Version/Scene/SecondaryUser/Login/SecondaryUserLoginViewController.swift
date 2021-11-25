@@ -9,24 +9,34 @@
 import Cocoa
 import BLServerManager
 
+protocol SecondaryUserLoginDelegate: AnyObject {
+    func didPressExit()
+}
+
 class SecondaryUserLoginViewController: NSViewController {
     @IBOutlet weak var usersPopup: NSPopUpButton!
     @IBOutlet weak var loginButtonOutlet: NSButton!
     @IBOutlet weak var errorLabel: NSTextField!
-    @IBOutlet weak var passwordTF: NSTextField!
+    @IBOutlet weak var passwordTF: NSSecureTextField!
+    
+    weak var delegate: SecondaryUserLoginDelegate?
     
     var users = [SecondaryUserSessionModel]() {
         didSet {
-            let titleArray = users.map({$0.userName})
             DispatchQueue.main.async {
+                let filteredArray = self.users.filter({$0.isEnabled})
+                let titleArray = filteredArray.map({$0.userName})
                 self.usersPopup.removeAllItems()
                 self.usersPopup.addItems(withTitles: titleArray)
+                self.passwordTF.isEnabled = true
+                self.passwordTF.becomeFirstResponder()
             }
         }
     }
     
     override func viewDidLoad() {
         super .viewDidLoad()
+        passwordTF.isEnabled = false
         loadUsers()
     }
     
@@ -44,7 +54,7 @@ class SecondaryUserLoginViewController: NSViewController {
                 }
                 return
             }
-            self.users = users.filter({$0.isEnabled})
+            self.users = users
             if users.count == 0 {
                 //we need to create the first user
                 DispatchQueue.main.async {
@@ -107,8 +117,17 @@ class SecondaryUserLoginViewController: NSViewController {
             self.view.window?.close()
         }
     }
+    
+    @IBAction func exitButton(_ sender: Any) {
+        view.window?.close()
+        delegate?.didPressExit()
+    }
+    
     @IBAction func loginDidPress(_ sender: Any) {
-
+        if users.isEmpty {
+            loadUsers()
+            return
+        }
        
         let index = usersPopup.indexOfSelectedItem
         if index == -1 {return}

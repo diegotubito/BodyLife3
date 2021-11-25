@@ -17,6 +17,7 @@ extension CommonRouterProtocol {
     func routeToSecondaryLogin(vc: NSViewController) {
         let storyboard = NSStoryboard(name: "SecondaryUser", bundle: nil)
         let destinationVC = storyboard.instantiateController(withIdentifier: "SecondaryUserLoginViewController") as! SecondaryUserLoginViewController
+        destinationVC.delegate = vc as? SecondaryUserLoginDelegate
         vc.presentAsSheet(destinationVC)
     }
 }

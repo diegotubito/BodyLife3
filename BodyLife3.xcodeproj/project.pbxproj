@@ -2059,7 +2059,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 23;
+				CURRENT_PROJECT_VERSION = 24;
 				DEVELOPMENT_TEAM = S2BEC8V882;
 				ENABLE_HARDENED_RUNTIME = NO;
 				ENVIRONMENT = DEBUG;
@@ -2068,7 +2068,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 2.0.12;
+				MARKETING_VERSION = 2.0.13;
 				PRODUCT_BUNDLE_IDENTIFIER = "DDG.OSX-Version";
 				PRODUCT_NAME = "Body Shaping Internal";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2086,7 +2086,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 23;
+				CURRENT_PROJECT_VERSION = 24;
 				DEVELOPMENT_TEAM = S2BEC8V882;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENVIRONMENT = RELEASE;
@@ -2095,7 +2095,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 2.0.12;
+				MARKETING_VERSION = 2.0.13;
 				PRODUCT_BUNDLE_IDENTIFIER = "DDG.OSX-Version";
 				PRODUCT_NAME = "Body Shaping Internal";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2228,7 +2228,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 23;
+				CURRENT_PROJECT_VERSION = 24;
 				DEVELOPMENT_TEAM = S2BEC8V882;
 				ENABLE_HARDENED_RUNTIME = NO;
 				ENVIRONMENT = DEBUG;
@@ -2237,7 +2237,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 2.0.12;
+				MARKETING_VERSION = 2.0.13;
 				PRODUCT_BUNDLE_IDENTIFIER = "ddg.body-shaping-OSX";
 				PRODUCT_NAME = "Body Shaping";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2254,7 +2254,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 23;
+				CURRENT_PROJECT_VERSION = 24;
 				DEVELOPMENT_TEAM = S2BEC8V882;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENVIRONMENT = RELEASE;
@@ -2263,7 +2263,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 2.0.12;
+				MARKETING_VERSION = 2.0.13;
 				PRODUCT_BUNDLE_IDENTIFIER = "ddg.body-shaping-OSX";
 				PRODUCT_NAME = "Body Shaping";
 				PROVISIONING_PROFILE_SPECIFIER = "";

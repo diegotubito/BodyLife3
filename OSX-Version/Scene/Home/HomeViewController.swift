@@ -28,7 +28,7 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
     var timerForDelayCustomerSelection : Timer!
     var selectedCustomer : CustomerModel.Customer?
     // MARK: Object lifecycle
-    
+      
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         setup()
@@ -225,4 +225,10 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
 struct CustomerModel2: Decodable {
     var childID : String
     var createdAt : Double
+}
+
+extension HomeViewController: SecondaryUserLoginDelegate {
+    func didPressExit() {
+        view.window?.close()
+    }
 }
