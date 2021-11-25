@@ -15,6 +15,7 @@ class ExpenseListView: SingleLabelTableView {
     
     override func commonInit() {
         super .commonInit()
+        setActivityIndicator(true)
     }
    
     func setDates(fromDate: Date, toDate: Date) {
@@ -24,6 +25,7 @@ class ExpenseListView: SingleLabelTableView {
     }
     
     func loadExpenses() {
+        activityIndicator.startAnimation(self)
         let endpoint = Endpoint.Create(to: .Expense(.Load(fromDate: fromDate.timeIntervalSince1970, toDate: toDate.timeIntervalSince1970)))
         BLServerManager.ApiCall(endpoint: endpoint) { (response: ResponseModel<[ExpenseModel.Populated]>) in
             guard
@@ -32,10 +34,16 @@ class ExpenseListView: SingleLabelTableView {
                 let jsonArray = try? JSONSerialization.jsonObject(with: jsonArrayData, options: []) as? [[String: Any]]
             else { return }
          
-            self.items = jsonArray
-            self.showItems()
+            DispatchQueue.main.async {
+                self.activityIndicator.stopAnimation(self)
+                self.items = jsonArray
+                self.showItems()
+            }
         } fail: { (errorMessage) in
-            print(errorMessage)
+            DispatchQueue.main.async {
+                self.activityIndicator.stopAnimation(self)
+                print(errorMessage)
+            }
         }
     }
 }

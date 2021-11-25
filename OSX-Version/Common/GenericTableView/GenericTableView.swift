@@ -73,6 +73,7 @@ class GenericTableView<U: GenericTableViewItem> : NSView, NSTableViewDelegate, N
             }
         }
     }
+    var activityIndicator: NSProgressIndicator!
     
     weak var delegate: GenericTableViewDelegate?
     
@@ -88,6 +89,24 @@ class GenericTableView<U: GenericTableViewItem> : NSView, NSTableViewDelegate, N
     func commonInit() {
         setupScrollView()
         setupTableView()
+        setupActivityIndicator()
+    }
+    
+    func setActivityIndicator(_ value: Bool) {
+        activityIndicator.isHidden = !value
+    }
+    
+    private func setupActivityIndicator() {
+        activityIndicator = NSProgressIndicator(frame: CGRect.zero)
+        activityIndicator.isDisplayedWhenStopped = false
+        activityIndicator.style = .spinning
+        addSubview(activityIndicator)
+        
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0),
+            activityIndicator.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0),
+        ])
     }
     
     private func setupScrollView() {
@@ -106,7 +125,6 @@ class GenericTableView<U: GenericTableViewItem> : NSView, NSTableViewDelegate, N
             scrollView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0),
             scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0),
         ])
-    
     }
     
     private func setupTableView() {

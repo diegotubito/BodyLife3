@@ -251,6 +251,7 @@ extension CustomerListView: NSTableViewDataSource, NSTableViewDelegate {
         
         cell.fotoCell.image = nil
         cell.showLoading()
+        // crush reported: images.count = 3 customers.count = 50 row = 5, seems to be out of range
         let loadedImage = images.filter({$0._id == customers[row]._id})
         if loadedImage.count > 0 {
             cell.hideLoading()
