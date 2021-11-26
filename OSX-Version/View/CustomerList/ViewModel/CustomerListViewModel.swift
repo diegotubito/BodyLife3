@@ -68,7 +68,6 @@ class CustomerListViewModel: CustomerListViewModelContract {
             self._view.hideLoading()
             self.loading = false
             self.model.customersbyPages.append(contentsOf: response.data!)
-            self.loadImages()
             self._view.showSuccess()
             if response.data!.count < self.model.limit {
                 self.model.stopLoading = true
@@ -94,14 +93,17 @@ class CustomerListViewModel: CustomerListViewModelContract {
     func loadImage(row: Int, customer: CustomerModel.Customer) {
       
         CommonWorker.Image.loadThumbnail(row: row, customer: customer) { (image, correctRow) in
-            let newImage = CustomerListModel.Images(image: image, _id: customer._id!)
-            if self.model.bySearch {
-                self.model.imagesBySearch.append(newImage)
-            } else {
-                //sometimes it crashes here
-                self.model.imagesByPages.append(newImage)
+            DispatchQueue.main.async {
+                let newImage = CustomerListModel.Images(image: image, _id: customer._id!)
+                if self.model.bySearch {
+                    self.model.imagesBySearch.append(newImage)
+                } else {
+                    //sometimes it crashes here
+                    self.model.imagesByPages.append(newImage)
+                }
+                self._view.reloadCell(row: row)
+     
             }
-            self._view.reloadCell(row: row)
         }
     }
   

@@ -15,6 +15,7 @@ protocol CustomerListViewModelContract {
     func loadCustomers(bySearch: String, offset: Int)
     func loadCustomers(offset: Int)
     func setImageForCustomer(_id: String, thumbnail: String)
+    func loadImages()
   
 }
 

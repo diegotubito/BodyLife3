@@ -194,6 +194,7 @@ extension CustomerListView: CustomerListViewContract {
             self.tableViewSocio.reloadData()
             self.tableViewSocio.endUpdates()
             self.selectCustomerInTableView()
+            self.viewModel.loadImages()
         }
     }
     
