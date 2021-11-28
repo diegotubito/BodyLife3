@@ -76,4 +76,12 @@ class SocketHelper: NSObject {
             socket.disconnect()
         }
     }
+    
+    func sendMessage() {
+        socket.on("messages") { [weak self](data, ack) in
+            print("socket: received - \(data)")
+            if data.count > 0 {
+            }
+        }
+    }
 }

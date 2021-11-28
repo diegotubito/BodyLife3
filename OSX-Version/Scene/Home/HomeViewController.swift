@@ -1,7 +1,7 @@
 import Cocoa
 import BLServerManager
 
-protocol HomeDisplayLogic: class {
+protocol HomeDisplayLogic: AnyObject {
     func displaySomething(viewModel: Home.Something.ViewModel)
 }
 
@@ -59,15 +59,10 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupWindow(width: Constants.ViewControllerSizes.Home.width, height: Constants.ViewControllerSizes.Home.height)
-          
+        setupWindow(proportionalWidth: Constants.ViewControllerSizes.Home.width, proportionalHeight: Constants.ViewControllerSizes.Home.height)
         NotificationCenter.default.addObserver(self, selector: #selector(StartLoading), name: .CommunicationStablished, object: nil)
-        
-        
         self.timerForDelayCustomerSelection = Timer.scheduledTimer(timeInterval: 0.0, target: self, selector: #selector(self.loadStatus), userInfo: nil, repeats: false)
-        
         NotificationCenter.default.addObserver(self, selector: #selector(GoToSecondaryLogin), name: .needSecondaryUserLogin, object: nil)
-         
     }
     
    

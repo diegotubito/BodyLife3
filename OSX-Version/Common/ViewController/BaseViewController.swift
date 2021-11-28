@@ -19,8 +19,7 @@ class BaseViewController : NSViewController {
     var AlertSheet : NSAlert!
     var lockBackgroundView : NSView!
     var noConnectionView : ErrorMessageView!
-    var proportional : Proportion = Proportion()
- 
+  
     override func viewDidLoad() {
         super .viewDidLoad()
         DDBarLoader.color = Constants.Colors.Blue.saturatedBlue
@@ -28,54 +27,16 @@ class BaseViewController : NSViewController {
         listenToNotification()
     }
     
-    struct Proportion {
-        var width : CGFloat!
-        var height : CGFloat!
-    }
-    
-    func setupWindow(width: CGFloat, height: CGFloat) {
-        proportional.width = width
-        proportional.height = height
-        adjustWindowSize()
-        
-        view.window?.contentView?.wantsLayer = true
-        view.wantsLayer = true
-        view.window?.isOpaque = false
-        //    view.window?.hasShadow = false
-        view.window?.backgroundColor = NSColor.black
-        // view.window?.titlebarAppearsTransparent = true
-    }
-    
-    private func adjustWindowSize() {
-//        let (screenWidth, screenHeight) = getScreenSize()
-//        let windowWidth : CGFloat = screenWidth * proportional.width
-//        let windowHeight : CGFloat = screenHeight * proportional.height
-//
-//        let newRect = NSRect(x: screenWidth/2 - windowWidth/2, y: screenHeight/2 - windowHeight/2, width: windowWidth, height: windowHeight)
-//        let newSize = NSSize(width: windowWidth, height: windowHeight)
-//
-//        view.setFrameSize(newSize)
-//        view.window?.setFrame(newRect, display: false)
-    }
-    
-    func getScreenSize() -> (CGFloat, CGFloat){
-        if let screen = NSScreen.main {
-            let rect = screen.frame
-            let height = rect.size.height
-            let width = rect.size.width
-            
-            return (width, height)
-        }
-        return (0, 0)
+    func setupWindow(proportionalWidth: CGFloat, proportionalHeight: CGFloat) {
+        let width = (NSScreen.main?.frame.size.width ?? 0.0) * proportionalWidth
+        let height = (NSScreen.main?.frame.size.height ?? 0.0) * proportionalHeight
+        view.frame = CGRect(origin: self.view.frame.origin, size: CGSize(width: width, height: height))
     }
     
     func listenToNotification() {
-           
         NotificationCenter.default.addObserver(self, selector: #selector(disconnected(notification:)), name: .ServerDisconnected, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(connected), name: .ServerConnected, object: nil)
-        
         NotificationCenter.default.addObserver(self, selector: #selector(GoToLogin), name: .NeedLogin, object: nil)
-       
     }
     
     deinit {
@@ -95,14 +56,11 @@ class BaseViewController : NSViewController {
             self.unlockBackground()
             self.deleteNoConnectionView()
             self.showNoConnection(message: message ?? "Error Desconocido")
-            
         }
     }
     
     func showNoConnection(message: String) {
-        
         lockBackground()
-        
         noConnectionView = ErrorMessageView(frame: CGRect.zero)
         noConnectionView.title = message
         view.addSubview(noConnectionView)
@@ -117,9 +75,10 @@ class BaseViewController : NSViewController {
     }
    
     func lockBackground() {
-        let (screenWidth, screenHeight) = getScreenSize()
+        let width = (NSScreen.main?.frame.size.width ?? 0.0)
+        let height = (NSScreen.main?.frame.size.height ?? 0.0)
        
-        let backgroundView = NSView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight))
+        let backgroundView = NSView(frame: CGRect(x: 0, y: 0, width: width, height: height))
         backgroundView.wantsLayer = true
          
         backgroundView.Blur()
@@ -216,10 +175,7 @@ class BaseViewController : NSViewController {
                     print("There is no provision for further buttons")
                 }
             }
-            
-            
         }
-        
     }
     
     @objc func alertFirstButton() {
