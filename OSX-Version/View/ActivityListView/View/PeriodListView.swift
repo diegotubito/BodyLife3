@@ -23,12 +23,18 @@ class PeriodListView : GenericCollectionView<PeriodListItem, PeriodModel.Populat
             self.didSelectPeriod?(item)
         }
         
-        
+        numberOfVisibleItems = Int(Constants.numberOfVisibleItems)
     }
     
     override func collectionView(_ collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> NSSize {
-        
-        return NSSize(width: (self.frame.width - (3 * 10)) / 3, height: 50)
+
+        return NSSize(width: (self.frame.width - (Constants.numbersOfElementsPerColumn * minimumLineSpacing)) / Constants.numbersOfElementsPerColumn, height: Constants.rowHeight)
+    }
+
+    struct Constants {
+        static let rowHeight: CGFloat = 60
+        static let numberOfVisibleItems: CGFloat = 6
+        static let numbersOfElementsPerColumn: CGFloat = 1
     }
     
 }

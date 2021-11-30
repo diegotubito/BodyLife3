@@ -21,8 +21,7 @@ class ActivitySaleView : XibViewBlurBackground {
     @IBOutlet weak var priceLabel: NSTextField!
     @IBOutlet weak var discountLabel: NSTextField!
     @IBOutlet weak var totalLabel: NSTextField!
-    @IBOutlet weak var periodViewContainer: NSView!
-    var periodListView : PeriodListView!
+    weak var periodListView: PeriodListView!
     @IBOutlet weak var popupActivity: NSPopUpButton!
     
     @IBOutlet weak var popupDiscount: NSPopUpButton!
@@ -38,7 +37,6 @@ class ActivitySaleView : XibViewBlurBackground {
         
         disableDates()
         viewModel = ActivitySaleViewModel(withView: self)
-        createProductListView()
         viewModel.loadPeriods()
         viewModel.loadDiscounts()
         
@@ -101,13 +99,6 @@ class ActivitySaleView : XibViewBlurBackground {
         print("touched")
     }
     
-    func createProductListView() {
-      
-        periodListView = PeriodListView(frame: CGRect(x: 0, y: 0, width: periodViewContainer.frame.width, height: periodViewContainer.frame.height))
-        periodListView.collectionView.layer?.backgroundColor = NSColor.clear.cgColor
-        periodViewContainer.addSubview(periodListView)
-        periodViewContainer.layer?.backgroundColor = NSColor.red.cgColor
-    }
     @IBAction func typePopupDidChanged(_ sender: NSPopUpButton) {
         viewModel.selectActivity(sender.indexOfSelectedItem)
         viewModel.setSelectedPeriod(nil)

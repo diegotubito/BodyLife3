@@ -57,9 +57,18 @@ class GenericCollectionView<T: GenericCollectionItem<U>, U>: XibView, NSCollecti
     func createScrollView() {
         createCollection()
       
-        scrollView = NSScrollView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
+        scrollView = NSScrollView(frame: CGRect(x: 0, y: 0, width: self.bounds.width, height: self.bounds.height))
         scrollView.documentView = collectionView
         self.addSubview(scrollView)
+        
+        
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            scrollView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0),
+            scrollView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0),
+            scrollView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0),
+            scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0),
+        ])
     }
     
     private func createCollection() {

@@ -57,7 +57,7 @@ struct Constants {
     
     struct ViewControllerSizes {
         struct Home {
-            static let width : CGFloat = 0.8
+            static let width : CGFloat = 0.5
             static let height : CGFloat = 0.7
         }
         struct Login {
