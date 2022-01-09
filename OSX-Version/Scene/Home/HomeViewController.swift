@@ -176,7 +176,7 @@ class HomeViewController: BaseViewController, HomeDisplayLogic, NSWindowDelegate
      //   ImportDatabase.PagoArticulo.MigrateToMongoDB()
     }
     
-    @IBAction func closeSessionPressed(_ sender: Any) {
+    @IBAction func closeSessionPressed(_ sender: Any?) {
         let endpoint = Endpoint.Create(to: .DisconnectMongoDB)
         MainUserSession.Remove()
         self.GoToLogin()

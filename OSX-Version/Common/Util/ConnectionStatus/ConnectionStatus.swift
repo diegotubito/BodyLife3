@@ -97,7 +97,8 @@ class Connect {
                         print("Connect: database connection SUCCESS name = \(uid)")
                         NotificationCenter.default.post(name: .CommunicationStablished, object: nil, userInfo: nil)
                     } fail: { (error) in
-                        print("Connect: database connection FAIL name = \(uid)")
+                        print("Connect: database connection FAIL name = \(uid) - will excecute again do check...")
+                        self.doCheck()
                     }
                 } else {
                     print("Connect: database connection FAIL name = NIL")
