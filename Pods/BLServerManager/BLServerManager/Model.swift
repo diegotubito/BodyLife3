@@ -8,7 +8,7 @@
 import Foundation
 
 public enum BLServer: String {
-    case Develop = "http://127.0.0.1:2999"
+    case Develop = "https://bodyshaping-heroku-dev.herokuapp.com"
     case Production = "https://bodyshaping-heroku.herokuapp.com"
 }
 
