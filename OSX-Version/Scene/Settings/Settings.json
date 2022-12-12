@@ -3,8 +3,57 @@
     "type": "TabViewController",
     "width": 0.5,
     "height": 0.5,
-    "viewControllers": 
-    [
+    "viewControllers":
+    [    {
+        "type": "general",
+        "title": "Cuentas",
+        "backgroundColor": "#00ffff",
+        "imageName": "carrito",
+        "request": {
+            "subpath": "/v1/firebase/database/users",
+            "path": "accounts",
+            "method": "GET",
+            "query": null,
+            "body": null,
+        },
+        "column": {
+            "rowHeight": 30,
+            "columns": [
+                {
+                    "isEditable" : false,
+                    "width": 0.15,
+                    "fieldName" : "_id",
+                    "type": "string"
+                },
+                {
+                    "isEditable" : false,
+                    "width": 0.1,
+                    "fieldName" : "timestamp",
+                    "dateFormat": "dd-MM-yyyy",
+                    "type": "date"
+                },
+                {
+                    "isEditable" : true,
+                    "width": 0.45,
+                    "fieldName" : "description",
+                    "type": "string"
+                },
+                {
+                    "isEditable" : true,
+                    "width": 0.05,
+                    "fieldName" : "amount",
+                    "type": "double"
+                },
+                {
+                    "isEditable" : true,
+                    "width": 0.05,
+                    "fieldName" : "isEnabled",
+                    "type": "popup_bool"
+                },
+            ]
+        }
+    },
+        
         {
             "type": "general",
             "title": "Articulos",

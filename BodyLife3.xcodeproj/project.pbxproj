@@ -332,6 +332,8 @@
 		F15EBBE825FE7119009CED69 /* GeneralPurpose.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15EBBE625FE7119009CED69 /* GeneralPurpose.swift */; };
 		F164B0CB25FD23FE00229A76 /* MainOptionItems.json in Resources */ = {isa = PBXBuildFile; fileRef = F164B0CA25FD23FE00229A76 /* MainOptionItems.json */; };
 		F164B0CC25FD23FE00229A76 /* MainOptionItems.json in Resources */ = {isa = PBXBuildFile; fileRef = F164B0CA25FD23FE00229A76 /* MainOptionItems.json */; };
+		F177A7AA28650CAC00D4A795 /* PhotoUpload.swift in Sources */ = {isa = PBXBuildFile; fileRef = F177A7A928650CAC00D4A795 /* PhotoUpload.swift */; };
+		F177A7AB28650CAC00D4A795 /* PhotoUpload.swift in Sources */ = {isa = PBXBuildFile; fileRef = F177A7A928650CAC00D4A795 /* PhotoUpload.swift */; };
 		F186F78B25F72E0B002D493B /* PipMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F186F78A25F72E0B002D493B /* PipMessage.swift */; };
 		F186F78C25F72E0B002D493B /* PipMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F186F78A25F72E0B002D493B /* PipMessage.swift */; };
 		F192865B26F78CE50000CA55 /* Settings.json in Resources */ = {isa = PBXBuildFile; fileRef = F192865A26F78CE50000CA55 /* Settings.json */; };
@@ -521,6 +523,7 @@
 		F127F01B26ED0B4500F17586 /* CashAccount.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CashAccount.storyboard; sourceTree = "<group>"; };
 		F15EBBE625FE7119009CED69 /* GeneralPurpose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralPurpose.swift; sourceTree = "<group>"; };
 		F164B0CA25FD23FE00229A76 /* MainOptionItems.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MainOptionItems.json; sourceTree = "<group>"; };
+		F177A7A928650CAC00D4A795 /* PhotoUpload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoUpload.swift; sourceTree = "<group>"; };
 		F186F78A25F72E0B002D493B /* PipMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipMessage.swift; sourceTree = "<group>"; };
 		F192865A26F78CE50000CA55 /* Settings.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Settings.json; sourceTree = "<group>"; };
 		F192866026F7997F0000CA55 /* color+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "color+extension.swift"; sourceTree = "<group>"; };
@@ -884,6 +887,7 @@
 			isa = PBXGroup;
 			children = (
 				114BD34F2562E8B5007FCEFC /* ImageWorker.swift */,
+				F177A7A928650CAC00D4A795 /* PhotoUpload.swift */,
 				113FA64B25A955620043E7D6 /* AccountWorker.swift */,
 				F15EBBE625FE7119009CED69 /* GeneralPurpose.swift */,
 			);
@@ -1807,6 +1811,7 @@
 				1157850A252B85C0008A89DC /* ImportVentaArticulo.swift in Sources */,
 				118773EA25772978002F2635 /* TextFieldValidation.swift in Sources */,
 				110CDFD025AB5C0000898470 /* NewUpdateSecondaryUserViewController.swift in Sources */,
+				F177A7AB28650CAC00D4A795 /* PhotoUpload.swift in Sources */,
 				11578588252E7E57008A89DC /* AuthManager.swift in Sources */,
 				11578579252CE411008A89DC /* NewUserViewController.swift in Sources */,
 				11C62A96256091E7008F8700 /* GenericResponseModel.swift in Sources */,
@@ -1953,6 +1958,7 @@
 				11578578252CE411008A89DC /* NewUserViewController.swift in Sources */,
 				118773D725772939002F2635 /* TextFieldValidation.swift in Sources */,
 				110CDFCF25AB5C0000898470 /* NewUpdateSecondaryUserViewController.swift in Sources */,
+				F177A7AA28650CAC00D4A795 /* PhotoUpload.swift in Sources */,
 				11C62A95256091E7008F8700 /* GenericResponseModel.swift in Sources */,
 				11EEF0F2239D4A83007C9821 /* PaymentView.swift in Sources */,
 				118773D22577292F002F2635 /* NewCustomerRouter.swift in Sources */,

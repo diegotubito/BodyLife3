@@ -6,7 +6,7 @@
 //  Copyright © 2020 David Diego Gomez. All rights reserved.
 //
 
-import Foundation
+import Cocoa
 import BLServerManager
 import Alamofire
 
@@ -119,18 +119,26 @@ public class CommonWorker {
         static func uploadImage(uid: String, image: NSImage, success: @escaping (Bool) -> ()) {
             let userId = UserSession?.uid ?? ""
             let pathImage = "\(userId):customer"
-            if let imageData = image.tiffRepresentation {
-                uploadPhoto(path: pathImage, imageData: imageData, nombre: uid, tipo: "jpeg") { (jsonResponse, error) in
-                    if jsonResponse != nil {
-                        self.imageCache.setObject(image, forKey: uid as AnyObject)
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                            success(true)
-                        }
-                    } else {
-                        success(false)
+            guard let imageData = image.tiffRepresentation else { return }
+            
+            // we don't need a third party for multi part form data anymore 😀
+            UploadPhotoAPI.uploadPhoto(path: pathImage,
+                                       imageData: imageData,
+                                       nombre: uid,
+                                       tipo: "jpeg") { res, err in
+                
+                if res != nil {
+                    self.imageCache.setObject(image, forKey: uid as AnyObject)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        success(true)
                     }
+                } else {
+                    success(false)
                 }
+                
             }
+                
+            
         }
         
         static func uploadPhoto(path: String, imageData: Data, nombre: String, tipo: String, completion:@escaping ([String : Any]?, ServerError?) -> Void ) {
@@ -177,8 +185,6 @@ public class CommonWorker {
                 
             }
         }
-        
-        
         
         
     }
